@@ -46,7 +46,23 @@ const sources = {
 
 export const CONTENT_IS_FIXTURE = containsFixture(sources)
 
+/**
+ * `typeof window === 'undefined'` is load-bearing, not defensive noise.
+ *
+ * This guard took the live site down. A client component imported `@/content`,
+ * which dragged this module into the browser bundle, where Next inlines
+ * `NODE_ENV` as 'production' but does NOT inline `ALLOW_FIXTURES` — only
+ * `NEXT_PUBLIC_*` variables reach the client. So the condition read as
+ * "production, and the flag is absent", and every visitor got a thrown error
+ * instead of a page, on a build that had passed.
+ *
+ * The real fix is architectural and is applied too: no client component imports
+ * `@/content` any more, and a unit test pins that. This check is the second
+ * line, so the same mistake can never again turn a content-safety feature into
+ * an outage.
+ */
 if (
+  typeof window === 'undefined' &&
   CONTENT_IS_FIXTURE &&
   process.env.NODE_ENV === 'production' &&
   process.env.ALLOW_FIXTURES !== '1'

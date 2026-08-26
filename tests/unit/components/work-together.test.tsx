@@ -42,11 +42,15 @@ describe('WorkTogether', () => {
     // head; two sections shipping one Vietnamese string is the translation
     // saying they were the same section.
     const { CapabilityMatrix } = await import('@/components/capability-matrix')
+    // Content is a prop now, not an import: pulling `@/content` into a client
+    // component dragged the build-time fixture guard into the browser bundle
+    // and threw on every page load.
+    const { capabilities } = await import('@/content')
     const work = render(<WorkTogether locale="vi" />)
     const workText = work.container.textContent ?? ''
     work.unmount()
 
-    const matrix = render(<CapabilityMatrix locale="vi" />)
+    const matrix = render(<CapabilityMatrix locale="vi" capabilities={capabilities} />)
     const matrixText = matrix.container.textContent ?? ''
 
     expect(workText).toContain('ĐÚNG LÚC BẠN')

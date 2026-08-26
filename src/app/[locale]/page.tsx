@@ -11,6 +11,7 @@ import { Faq } from '@/components/faq'
 import { SiteFooter } from '@/components/site-footer'
 import { SheetBreak } from '@/components/motion/sheet-break'
 import { buildGraph } from '@/lib/structured-data'
+import { capabilities } from '@/content'
 
 export default async function HomePage({
   params,
@@ -43,7 +44,7 @@ export default async function HomePage({
         <SheetBreak zone="B" />
         <SelectedWork locale={locale} />
         <SheetBreak zone="C" />
-        <CapabilityMatrix locale={locale} />
+        <CapabilityMatrix locale={locale} capabilities={capabilities} />
         <WorkTogether locale={locale} />
         <Faq locale={locale} />
       </main>

@@ -2,8 +2,7 @@
 
 import { m, useReducedMotion } from 'motion/react'
 import { useState } from 'react'
-import { capabilities } from '@/content'
-import type { Locale } from '@/content/types'
+import type { Capability, Locale } from '@/content/types'
 import { t } from '@/lib/text'
 import { duration, ease } from '@/lib/motion'
 import { SectionHead } from '@/components/motion/section-head'
@@ -28,7 +27,21 @@ const COPY = {
  * and a drawing sheet can show all twelve at once. Selecting a column raises it
  * rather than revealing it — nothing is hidden behind interaction.
  */
-export function CapabilityMatrix({ locale }: { locale: Locale }) {
+/**
+ * `capabilities` arrives as a prop rather than being imported.
+ *
+ * This is a client component, so importing `@/content` pulled the whole content
+ * module — including its build-time fixture guard — into the browser bundle,
+ * where the guard threw on every page load. Content belongs to the server; a
+ * client component receives it.
+ */
+export function CapabilityMatrix({
+  locale,
+  capabilities,
+}: {
+  locale: Locale
+  capabilities: Capability[]
+}) {
   const [active, setActive] = useState(capabilities[0]?.id ?? '')
   const reduced = useReducedMotion()
 

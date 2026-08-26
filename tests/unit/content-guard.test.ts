@@ -1,3 +1,14 @@
+/**
+ * @vitest-environment node
+ *
+ * The guard only runs on the server — it is skipped when `window` exists, because
+ * a client bundle can never see `ALLOW_FIXTURES` (Next inlines only NEXT_PUBLIC_*
+ * variables) and a guard that throws in a browser is an outage, not a safety net.
+ *
+ * The rest of this suite runs in jsdom, where `window` is defined and the guard
+ * would therefore never fire. Testing it there would have asserted nothing while
+ * looking green.
+ */
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
 /**
