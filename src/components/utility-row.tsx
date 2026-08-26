@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { socialByNetwork } from '@/content'
 import type { Locale } from '@/content/types'
 import { t } from '@/lib/text'
-import { GitHubIcon, LinkedInIcon } from './icons'
+import { GitHubIcon, XIcon } from './icons'
 
 /**
  * These were hardcoded English on both routes. An accessible name is content:
@@ -17,9 +17,7 @@ const COPY = {
 /** Deliberately not a navbar and deliberately not sticky. */
 export function UtilityRow({ locale }: { locale: Locale }) {
   const github = socialByNetwork('github')
-  // Was X. That handle 404s, so it is out of the content set entirely and this
-  // slot would have rendered nothing.
-  const linkedin = socialByNetwork('linkedin')
+  const x = socialByNetwork('x')
 
   return (
     <div className="container-sheet">
@@ -67,15 +65,15 @@ export function UtilityRow({ locale }: { locale: Locale }) {
               <GitHubIcon />
             </a>
           ) : null}
-          {linkedin ? (
+          {x ? (
             <a
-              href={linkedin.url}
+              href={x.url}
               target="_blank"
               rel="noreferrer noopener"
-              aria-label={`LinkedIn (${t(COPY.newTab, locale)})`}
+              aria-label={`X (${t(COPY.newTab, locale)})`}
               className="grid h-11 w-11 place-items-center text-graphite transition-colors duration-150 hover:text-ink"
             >
-              <LinkedInIcon />
+              <XIcon />
             </a>
           ) : null}
         </div>
