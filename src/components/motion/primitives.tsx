@@ -136,13 +136,16 @@ export function RevealList({
   const reduced = useReducedMotion()
   const on = reduced || inView
   const MotionAs = (As === 'ul' ? m.ul : As === 'dl' ? m.dl : m.div) as typeof m.div
+  // `ul > div > li` and `dl > div > dt` are invalid and break list semantics for
+  // assistive technology, so the wrapper takes the element the parent requires.
+  const MotionItem = (As === 'ul' ? m.li : m.div) as typeof m.div
 
   return (
     <MotionAs ref={ref} className={className}>
       {children.map((child, i) => (
         // A real wrapper, not `display: contents` — transforms and opacity do not
         // apply to a box that has been removed from the layout tree.
-        <m.div
+        <MotionItem
           key={i}
           className={itemClassName}
           initial={false}
@@ -154,7 +157,7 @@ export function RevealList({
           }}
         >
           {child}
-        </m.div>
+        </MotionItem>
       ))}
     </MotionAs>
   )

@@ -22,7 +22,7 @@ export function statusTone(status: BuildStatus): string {
     case 'live':
       return 'text-live'
     case 'shipped':
-      return 'text-live'
+      return 'text-graphite'
     case 'building':
       return 'text-plan'
     default:

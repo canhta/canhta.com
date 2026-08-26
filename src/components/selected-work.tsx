@@ -53,7 +53,7 @@ function Story({ build, index, locale }: { build: Build; index: number; locale: 
         <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
           {build.proof ? (
             <p className="flex items-baseline gap-2">
-              <span className="font-mono text-[22px] font-medium text-live">
+              <span className="font-mono text-[44px] leading-none font-medium text-live">
                 {build.proof.value}
               </span>
               <span className="annot">{t(build.proof.label, locale).toUpperCase()}</span>
@@ -78,7 +78,7 @@ function Story({ build, index, locale }: { build: Build; index: number; locale: 
           alt={`${build.name} interface`}
           width={1200}
           height={750}
-          className="w-full rounded-xs border border-rule-strong"
+          className="w-full rounded-none border border-rule-strong"
         />
       </div>
     </article>

@@ -90,7 +90,7 @@ export function SignatureSystem({ locale }: { locale: Locale }) {
           y={n.y}
           width={n.w}
           height={n.h}
-          rx={3}
+          rx={0}
           className={
             isSelected ? 'fill-paper stroke-live' : on ? 'fill-paper stroke-ink' : 'fill-surface stroke-rule'
           }
@@ -137,7 +137,7 @@ export function SignatureSystem({ locale }: { locale: Locale }) {
 
       <div
         ref={ref}
-        className="relative mt-8 overflow-hidden rounded-xs border border-rule-strong bg-surface"
+        className="relative mt-8 overflow-hidden rounded-none border border-rule-strong bg-surface"
       >
         {/* Dimensions reserved by aspect-ratio: the panel never shifts layout. */}
         <div className="relative w-full" style={{ aspectRatio: `${VIEW.w} / ${VIEW.h}` }}>
@@ -230,7 +230,7 @@ export function SignatureSystem({ locale }: { locale: Locale }) {
             <button
               type="button"
               onClick={() => setRunId((n) => n + 1)}
-              className="h-9 shrink-0 rounded-xs border border-rule-strong px-4 font-mono text-[12px] tracking-[0.1em] uppercase text-graphite transition-colors duration-150 hover:border-ink hover:text-ink"
+              className="h-9 shrink-0 rounded-none border border-rule-strong px-4 font-mono text-[12px] tracking-[0.1em] uppercase text-graphite transition-colors duration-150 hover:border-ink hover:text-ink"
             >
               {t(COPY.replay, locale)}
             </button>

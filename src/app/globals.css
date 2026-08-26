@@ -18,7 +18,7 @@
   --font-sans: var(--font-bvp), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, SFMono-Regular, monospace;
 
-  --radius-card: 4px;
+  --radius-card: 0px;
 
   --duration-feedback: 150ms;
   --duration-state: 280ms;
@@ -39,6 +39,15 @@ html {
 
 body {
   background-color: var(--color-paper);
+  /* The sheet runs edge to edge behind the whole document. It was previously
+     applied to the hero alone, which left every section below floating on flat
+     paper and made the conceit read as decoration. */
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--color-rule) 30%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--color-rule) 30%, transparent) 1px, transparent 1px);
+  background-size: var(--grid) var(--grid);
+  background-position: center top;
+  background-attachment: fixed;
   color: var(--color-ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
@@ -59,7 +68,7 @@ body {
 :focus-visible {
   outline: 2px solid var(--color-plan);
   outline-offset: 3px;
-  border-radius: 2px;
+  border-radius: 0;
 }
 :focus:not(:focus-visible) {
   outline: none;

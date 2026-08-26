@@ -5,7 +5,7 @@ import { GitHubIcon, LinkedInIcon, XIcon } from './icons'
 
 const COPY = {
   closing: {
-    en: 'Have a problem worth automating? Let us talk.',
+    en: "Have a problem worth automating? Let's talk.",
     vi: 'Có việc đáng để tự động hoá? Nói chuyện nhé.',
   },
   origin: { en: 'Built in Vietnam, shipped worldwide', vi: 'Làm tại Việt Nam, ship đi khắp nơi' },
@@ -36,7 +36,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
             </p>
             <a
               href={profile.ctaHref}
-              className="mt-8 inline-flex h-12 items-center justify-between gap-6 rounded-xs bg-ink px-5 text-paper transition-colors duration-150 hover:bg-plan"
+              className="mt-8 inline-flex h-12 items-center justify-between gap-6 rounded-none bg-ink px-5 text-paper transition-colors duration-150 hover:bg-live"
             >
               <span className="font-mono text-[13px] tracking-[0.12em] uppercase">
                 {t(profile.ctaLabel, locale)}
@@ -58,7 +58,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
                       target="_blank"
                       rel="noreferrer noopener"
                       aria-label={s.network}
-                      className="grid h-11 w-11 place-items-center rounded-xs border border-rule text-graphite transition-colors duration-150 hover:border-ink hover:text-ink"
+                      className="grid h-11 w-11 place-items-center rounded-none border border-rule text-graphite transition-colors duration-150 hover:border-ink hover:text-ink"
                     >
                       <Icon />
                     </a>

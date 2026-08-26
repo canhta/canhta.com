@@ -30,7 +30,6 @@ export function HeroEvidence({ builds, locale }: { builds: Build[]; locale: Loca
     >
       {stack.map((build, i) => {
         const restY = i * STEP
-        const rotate = [-1.6, 0.9, -0.4][i] ?? 0
         const isHovered = hovered === build.slug
         const isDimmed = hovered !== null && !isHovered
         const hoveredIndex = stack.findIndex((b) => b.slug === hovered)
@@ -41,12 +40,11 @@ export function HeroEvidence({ builds, locale }: { builds: Build[]; locale: Loca
         return (
           <m.article
             key={build.slug}
-            initial={{ opacity: 0, y: restY + 22, rotate }}
+            initial={{ opacity: 0, y: restY + 22 }}
             animate={{
               opacity: isDimmed ? 0.62 : 1,
               y: isHovered ? restY - 10 : restY + pushed,
-              rotate: isHovered ? 0 : rotate,
-              scale: isHovered ? 1.02 : 1,
+              x: isHovered ? 6 : 0,
             }}
             transition={{
               opacity: { duration: duration.state, ease: ease.out },
@@ -54,16 +52,12 @@ export function HeroEvidence({ builds, locale }: { builds: Build[]; locale: Loca
             }}
             style={{ zIndex: isHovered ? 30 : i + 1 }}
             onMouseEnter={() => setHovered(build.slug)}
-            className="absolute inset-x-0 top-0 overflow-hidden rounded-xs border border-rule-strong bg-surface shadow-[0_10px_24px_-14px_rgba(22,32,42,0.35)]"
+            className="absolute inset-x-0 top-0 overflow-hidden rounded-none border border-rule-strong bg-surface shadow-[0_10px_24px_-14px_rgba(22,32,42,0.35)]"
           >
             <div className="flex items-center justify-between gap-3 border-b border-rule px-4 py-2.5">
-              <span className="flex items-center gap-2.5 text-[13px] font-semibold tracking-tight">
-                <span aria-hidden="true" className="flex gap-1">
-                  <span className="h-1.5 w-1.5 rounded-full bg-rule-strong" />
-                  <span className="h-1.5 w-1.5 rounded-full bg-rule-strong" />
-                  <span className="h-1.5 w-1.5 rounded-full bg-rule-strong" />
-                </span>
-                {build.name}
+              <span className="font-mono text-[11px] tracking-[0.1em] uppercase">
+                <span className="text-graphite">PART {String(i + 1).padStart(2, '0')} — </span>
+                <span className="font-medium">{build.name}</span>
               </span>
               <span className={`font-mono text-[11px] tracking-[0.08em] uppercase ${statusTone(build.status)}`}>
                 {statusLabel(build.status, locale)}

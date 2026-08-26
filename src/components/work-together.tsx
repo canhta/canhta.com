@@ -22,7 +22,7 @@ export function WorkTogether({ locale }: { locale: Locale }) {
 
       <RevealList as="ul" className="mt-10" stagger={0.08}>
         {services.map((service, i) => (
-          <li
+          <div
             key={service.id}
             className="group relative grid gap-6 border-b border-rule py-7 transition-[padding] duration-150 ease-out hover:pl-3 lg:grid-cols-12 lg:gap-10"
           >
@@ -46,14 +46,14 @@ export function WorkTogether({ locale }: { locale: Locale }) {
                 {t(service.suitedTo, locale)}
               </p>
             </div>
-          </li>
+          </div>
         ))}
       </RevealList>
 
       <div className="mt-10 flex flex-wrap items-center gap-6">
         <a
           href={profile.ctaHref}
-          className="group inline-flex h-12 items-center justify-between gap-6 rounded-xs bg-ink px-5 text-paper transition-colors duration-150 hover:bg-plan"
+          className="group inline-flex h-12 items-center justify-between gap-6 rounded-none bg-ink px-5 text-paper transition-colors duration-150 hover:bg-live"
         >
           <span className="font-mono text-[13px] tracking-[0.12em] uppercase">
             {t(profile.ctaLabel, locale)}
