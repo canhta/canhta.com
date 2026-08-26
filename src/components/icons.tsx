@@ -26,6 +26,21 @@ export const LinkedInIcon = (props: SVGProps<SVGSVGElement>) => (
   </svg>
 )
 
+/**
+ * Zalo. The wordmark is a registered logo, so this is the generic speech-bubble
+ * form with the letter rather than a trace of the brand mark — the icon has to
+ * sit in a row of monochrome `currentColor` glyphs, and a colour logo would not.
+ */
+export const ZaloIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg {...base} {...props}>
+    <path d="M12 3C6.9 3 2.75 6.4 2.75 10.6c0 2.35 1.3 4.45 3.35 5.85-.1.85-.5 2.2-1.35 3.35-.15.2 0 .5.25.45 2.05-.4 3.5-1.35 4.2-1.9.85.2 1.8.3 2.8.3 5.1 0 9.25-3.4 9.25-7.6S17.1 3 12 3Z" />
+    <path
+      d="M8.15 8.35h3.4v.95L9.2 12.6h2.4v1H7.9v-.95l2.35-3.3H8.15v-1Zm5.1 0h1.05v5.25h-1.05V8.35Zm2.35 1.4c.95 0 1.6.6 1.6 1.55v2.3h-.95v-.45c-.25.35-.65.55-1.15.55-.8 0-1.35-.5-1.35-1.2 0-.75.6-1.2 1.55-1.2h.9v-.1c0-.4-.25-.65-.7-.65-.35 0-.65.15-.85.4l-.6-.6c.35-.4.9-.6 1.55-.6Z"
+      fill="var(--color-surface)"
+    />
+  </svg>
+)
+
 export const ArrowIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg {...base} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" {...props}>
     <path d="M5 12h14M13 6l6 6-6 6" />

@@ -1,7 +1,7 @@
 import { profile, social } from '@/content'
 import type { Locale, SocialLink } from '@/content/types'
 import { t } from '@/lib/text'
-import { GitHubIcon, LinkedInIcon, XIcon } from './icons'
+import { GitHubIcon, LinkedInIcon, XIcon, ZaloIcon } from './icons'
 
 const COPY = {
   closing: {
@@ -17,6 +17,7 @@ const ICONS = {
   github: GitHubIcon,
   x: XIcon,
   linkedin: LinkedInIcon,
+  zalo: ZaloIcon,
 } as const
 
 /** An icon button's only name is its label, so it says the destination, not the key. */
@@ -24,6 +25,7 @@ const NETWORK_LABELS: Record<keyof typeof ICONS, string> = {
   github: 'GitHub',
   x: 'X',
   linkedin: 'LinkedIn',
+  zalo: 'Zalo',
 }
 
 function isIconNetwork(n: SocialLink['network']): n is keyof typeof ICONS {

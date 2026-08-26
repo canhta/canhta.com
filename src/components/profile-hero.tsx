@@ -4,6 +4,7 @@ import type { Locale } from '@/content/types'
 import { t } from '@/lib/text'
 import { HeroEvidence } from './hero-evidence'
 import { TitleBlock } from './title-block'
+import { ContactActions } from './contact-actions'
 
 const COPY = {
   role: { en: 'Agentic product builder', vi: 'Người xây sản phẩm agentic' },
@@ -66,17 +67,7 @@ export function ProfileHero({ locale }: { locale: Locale }) {
             </p>
 
             <div className="rise rise-3 mt-10">
-              <a
-                href={profile.ctaHref}
-                className="group inline-flex h-12 w-full items-center justify-between gap-6 rounded-none bg-ink px-5 text-paper transition-colors duration-150 hover:bg-live sm:w-auto"
-              >
-                <span className="font-mono text-[11px] tracking-[0.12em] uppercase">
-                  {t(profile.ctaLabel, locale)}
-                </span>
-                <span aria-hidden="true" className="font-mono text-[11px]">
-                  →
-                </span>
-              </a>
+              <ContactActions locale={locale} />
             </div>
           </div>
 

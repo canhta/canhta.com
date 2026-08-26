@@ -76,7 +76,7 @@ export interface Faq {
 }
 
 export interface SocialLink {
-  network: 'github' | 'x' | 'linkedin' | 'email'
+  network: 'github' | 'x' | 'linkedin' | 'email' | 'zalo'
   url: string
 }
 

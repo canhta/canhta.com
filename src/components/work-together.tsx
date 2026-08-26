@@ -2,6 +2,7 @@ import { profile, services } from '@/content'
 import type { Locale } from '@/content/types'
 import { t } from '@/lib/text'
 import { SectionHead } from '@/components/motion/section-head'
+import { ContactActions } from '@/components/contact-actions'
 
 /**
  * `suited.vi` was 'Hợp khi', the identical string FIG. 3 shipped for its own
@@ -60,17 +61,7 @@ export function WorkTogether({ locale }: { locale: Locale }) {
       </ul>
 
       <div className="mt-10 flex flex-wrap items-center gap-6">
-        <a
-          href={profile.ctaHref}
-          className="group inline-flex h-12 items-center justify-between gap-6 rounded-none bg-ink px-5 text-paper transition-colors duration-150 hover:bg-live"
-        >
-          <span className="font-mono text-[11px] tracking-[0.12em] uppercase">
-            {t(profile.ctaLabel, locale)}
-          </span>
-          <span aria-hidden="true" className="font-mono text-[11px]">
-            →
-          </span>
-        </a>
+        <ContactActions locale={locale} />
         <p className="annot max-w-[34ch] normal-case">{t(COPY.startValue, locale)}</p>
       </div>
     </section>
