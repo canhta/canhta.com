@@ -5,7 +5,7 @@ import { t } from '@/lib/text'
 import { statusLabel, statusTone } from '@/lib/status'
 import { kindLabel, linkLabel } from '@/lib/build-meta'
 import { SectionHead } from '@/components/motion/section-head'
-import { RevealList } from '@/components/motion/primitives'
+import { ProofStamp } from '@/components/proof-stamp'
 
 /**
  * Detail drawings plus a schedule — the way a real drawing sheet handles a set
@@ -21,8 +21,8 @@ import { RevealList } from '@/components/motion/primitives'
 const COPY = {
   heading: { en: 'What I have built', vi: 'Tôi đã xây gì' },
   sub: {
-    en: 'Two shown in full. Everything else is in the schedule.',
-    vi: 'Hai cái xem chi tiết. Phần còn lại nằm trong bảng kê.',
+    en: 'One shown in full. Everything else is in the schedule.',
+    vi: 'Một cái xem chi tiết. Phần còn lại nằm trong bảng kê.',
   },
   problem: { en: 'The problem', vi: 'Vấn đề' },
   built: { en: 'What I built', vi: 'Đã xây gì' },
@@ -35,7 +35,26 @@ const COPY = {
   colYear: { en: 'Year', vi: 'Năm' },
   colStatus: { en: 'Status', vi: 'Trạng thái' },
   colResult: { en: 'Result', vi: 'Kết quả' },
+  caption: {
+    en: 'Every product, one row each: reference, name, kind, result, year and status.',
+    vi: 'Mỗi sản phẩm một dòng: mã, tên, loại, kết quả, năm và trạng thái.',
+  },
+  itemOne: { en: 'item', vi: 'mục' },
+  itemMany: { en: 'items', vi: 'mục' },
 } as const
+
+/**
+ * The count was previously `${n} ITEM(S)` in English on both routes. Digits go
+ * through `Intl.NumberFormat` so a locale that groups them differently gets its
+ * own grouping, and the noun goes through `Intl.PluralRules` rather than an
+ * `=== 1` check, which is only ever right for English.
+ */
+function itemCount(n: number, locale: Locale): string {
+  const tag = locale === 'vi' ? 'vi-VN' : 'en-US'
+  const digits = new Intl.NumberFormat(tag).format(n)
+  const plural = new Intl.PluralRules(tag).select(n)
+  return `${digits} ${t(plural === 'one' ? COPY.itemOne : COPY.itemMany, locale)}`
+}
 
 function Row({ label, value }: { label: string; value: string }) {
   return (
@@ -58,18 +77,20 @@ function Detail({ build, index, locale }: { build: Build; index: number; locale:
             {statusLabel(build.status, locale)}
           </span>
         </div>
-        <h3 className="mt-3 text-[26px] font-extrabold tracking-[-0.03em]">{build.name}</h3>
-        <p className="mt-2 max-w-[38ch] text-[16px] leading-snug text-graphite">
+        <h3 className="mt-3 text-[20px] font-extrabold tracking-[-0.03em]" translate="no">
+          {build.name}
+        </h3>
+        <p className="mt-2 max-w-[38ch] text-[15px] leading-snug text-graphite">
           {t(build.tagline, locale)}
         </p>
 
+        {/* `ease.stamp` used to be spent on 11px figure references, where a
+            110ms attack and a 0.8px blur are imperceptible. This is the only
+            place on the page where "running for real" appears at a size a person
+            can actually see, so the stamp belongs here — once, on the one detail.
+            `tnum` is already set, so nothing reflows. */}
         {build.proof ? (
-          <p className="mt-6 flex items-baseline gap-3">
-            <span className="font-mono text-[44px] leading-none font-medium text-live">
-              {build.proof.value}
-            </span>
-            <span className="annot">{t(build.proof.label, locale).toUpperCase()}</span>
-          </p>
+          <ProofStamp value={build.proof.value} label={t(build.proof.label, locale)} />
         ) : null}
 
         <dl className="mt-6">
@@ -86,7 +107,7 @@ function Detail({ build, index, locale }: { build: Build; index: number; locale:
                   href={link.url}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="inline-flex h-11 items-center gap-2 border border-rule px-3 font-mono text-[12px] tracking-[0.1em] uppercase transition-colors duration-150 hover:border-ink"
+                  className="inline-flex h-11 items-center gap-2 border border-rule px-3 font-mono text-[11px] tracking-[0.1em] uppercase transition-colors duration-150 hover:border-ink"
                 >
                   {linkLabel(link.kind, locale)} <span aria-hidden="true">↗</span>
                 </a>
@@ -112,30 +133,52 @@ function Detail({ build, index, locale }: { build: Build; index: number; locale:
 export function SelectedWork({ locale }: { locale: Locale }) {
   if (builds.length === 0) return null
 
-  const details = featuredBuilds.length > 0 ? featuredBuilds : builds.slice(0, 2)
+  /**
+   * One full detail, not two. Two is a false plural — it is not a portfolio, and
+   * the second detail is always the weaker one. One drawing plus the register is
+   * the honest structure for a handful of products, and it is what this section
+   * already claims to be.
+   */
+  const details = (featuredBuilds.length > 0 ? featuredBuilds : builds).slice(0, 1)
+
+  /**
+   * The schedule lists what is NOT shown in full. It used to iterate every build,
+   * so each featured product's `result` string rendered twice on the page — once
+   * in its detail and again three hundred pixels below in the table.
+   */
+  const detailSlugs = new Set(details.map((b) => b.slug))
+  const scheduled = builds.filter((b) => !detailSlugs.has(b.slug))
 
   return (
-    <section className="container-sheet py-20 md:py-24">
+    <section className="container-sheet figure-primary">
       <SectionHead fig="FIG. 2" title={t(COPY.heading, locale)} sub={t(COPY.sub, locale)} />
 
-      <RevealList className="mt-12 space-y-16" stagger={0.09}>
+      <div className="mt-12">
         {details.map((build, i) => (
           <Detail key={build.slug} build={build} index={i} locale={locale} />
         ))}
-      </RevealList>
+      </div>
 
       {/* One row per product, whatever the count. This is the part that scales. */}
       <div className="mt-20">
         <div className="flex items-baseline gap-4 border-b border-ink pb-3">
           <span className="fig-label shrink-0">{t(COPY.schedule, locale).toUpperCase()}</span>
-          <span className="annot">
-            {builds.length} {builds.length === 1 ? 'ITEM' : 'ITEMS'}
-          </span>
+          <span className="annot uppercase">{itemCount(scheduled.length, locale)}</span>
         </div>
 
-        <table className="w-full border-collapse text-left">
-          <thead>
-            <tr className="border-b border-rule">
+        {/* The table is the one element on the sheet that legitimately outgrows a
+            360px viewport, so it scrolls inside its own box rather than making the
+            whole document scroll sideways. */}
+        <div
+          role="region"
+          aria-label={t(COPY.schedule, locale)}
+          tabIndex={0}
+          className="overflow-x-auto"
+        >
+          <table className="w-full min-w-[520px] border-collapse text-left">
+            <caption className="sr-only">{t(COPY.caption, locale)}</caption>
+            <thead>
+              <tr className="border-b border-rule">
               <th scope="col" className="annot py-2 pr-4 font-normal">
                 {t(COPY.colRef, locale).toUpperCase()}
               </th>
@@ -157,12 +200,12 @@ export function SelectedWork({ locale }: { locale: Locale }) {
             </tr>
           </thead>
           <tbody>
-            {builds.map((build, i) => (
+            {scheduled.map((build, i) => (
               <tr key={build.slug} className="group border-b border-rule">
                 <td className="annot py-3 pr-4 align-top">
-                  {String(i + 1).padStart(2, '0')}
+                  {String(i + 1 + details.length).padStart(2, '0')}
                 </td>
-                <td className="py-3 pr-4 align-top text-[15px] font-semibold tracking-tight">
+                <td className="py-3 pr-4 align-top text-[15px] tracking-tight break-words">
                   {build.links[0] ? (
                     <a
                       href={build.links[0].url}
@@ -170,7 +213,8 @@ export function SelectedWork({ locale }: { locale: Locale }) {
                       rel="noreferrer noopener"
                       className="underline decoration-rule-strong underline-offset-4 transition-colors duration-150 hover:decoration-ink"
                     >
-                      {build.name} <span aria-hidden="true">↗</span>
+                      <span translate="no">{build.name}</span>{' '}
+                      <span aria-hidden="true">↗</span>
                     </a>
                   ) : (
                     build.name
@@ -181,10 +225,10 @@ export function SelectedWork({ locale }: { locale: Locale }) {
                     </span>
                   ) : null}
                 </td>
-                <td className="hidden py-3 pr-4 align-top text-[14px] text-graphite sm:table-cell">
+                <td className="hidden py-3 pr-4 align-top text-[15px] text-graphite sm:table-cell">
                   {kindLabel(build.kind, locale)}
                 </td>
-                <td className="hidden max-w-[36ch] py-3 pr-4 align-top text-[14px] text-graphite md:table-cell">
+                <td className="hidden max-w-[36ch] py-3 pr-4 align-top text-[15px] text-graphite md:table-cell">
                   {t(build.result, locale)}
                 </td>
                 <td className="annot py-3 pr-4 align-top">{build.year}</td>
@@ -195,8 +239,9 @@ export function SelectedWork({ locale }: { locale: Locale }) {
                 </td>
               </tr>
             ))}
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       </div>
     </section>
   )

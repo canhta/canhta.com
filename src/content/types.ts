@@ -58,7 +58,6 @@ export interface Capability {
   name: LocalizedText
   bestFor: LocalizedText
   canDeliver: LocalizedText
-  engagement: LocalizedText
 }
 
 export interface Service {

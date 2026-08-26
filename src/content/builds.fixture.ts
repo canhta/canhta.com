@@ -77,7 +77,7 @@ export const buildsFixture: (Build & FixtureMarked)[] = [
       vi: 'Một mini-SaaS làm đúng một việc và thu tiền cho việc đó',
     },
     problem: {
-      en: 'A workflow everyone solved badly with spreadsheets.',
+      en: 'A workflow that had outgrown the spreadsheet holding it.',
       vi: 'Một quy trình ai cũng đang xử lý tạm bằng bảng tính.',
     },
     built: {

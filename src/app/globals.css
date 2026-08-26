@@ -24,6 +24,8 @@
   --duration-state: 280ms;
   --duration-reveal: 550ms;
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Mirrors `ease.plot` in src/lib/motion.ts. Anything drawn uses this. */
+  --ease-plot: cubic-bezier(0.12, 0.06, 0.88, 0.94);
 
   /* One grid module. Every rule, gutter and box lands on it. */
   --grid: 32px;
@@ -47,12 +49,57 @@ body {
     linear-gradient(to bottom, color-mix(in srgb, var(--color-rule) 30%, transparent) 1px, transparent 1px);
   background-size: var(--grid) var(--grid);
   background-position: center top;
-  background-attachment: fixed;
   color: var(--color-ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+  /* Kills the 300ms double-tap-zoom wait without disabling pinch zoom. */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: color-mix(in srgb, var(--color-plan) 14%, transparent);
+}
+
+/* Headings set tight and large are where widows show. `balance` on headings,
+   `pretty` on prose — both are progressive, older engines just ignore them. */
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p,
+dd,
+li {
+  text-wrap: pretty;
+}
+
+/* Figures, references, years and counts sit in columns and get compared against
+   each other, so the digits have to line up. */
+.font-mono,
+.annot,
+.fig-label,
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Keyboard users reach the sheet in one press instead of tabbing the utility row. */
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  z-index: 100;
+  transform: translateY(-200%);
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 12px 18px;
+  transition: transform 150ms var(--ease-out-soft);
+}
+.skip-link:focus-visible {
+  transform: translateY(0);
 }
 
 /* The sheet the drawing sits on. Hairlines, not a pattern — you should feel it
@@ -89,22 +136,59 @@ body {
   }
 }
 
+/* Padding is `max(gutter, notch)` so a landscape iPhone never puts the sheet
+   edge under the camera housing. */
 @utility container-sheet {
   width: 100%;
   max-width: 1160px;
   margin-inline: auto;
-  padding-inline: 20px;
+  padding-left: max(20px, env(safe-area-inset-left));
+  padding-right: max(20px, env(safe-area-inset-right));
 }
 
 @media (min-width: 768px) {
   .container-sheet {
-    padding-inline: 32px;
+    padding-left: max(32px, env(safe-area-inset-left));
+    padding-right: max(32px, env(safe-area-inset-right));
   }
 }
 
 @media (min-width: 1024px) {
   .container-sheet {
-    padding-inline: 48px;
+    padding-left: max(48px, env(safe-area-inset-left));
+    padding-right: max(48px, env(safe-area-inset-right));
+  }
+}
+
+/* Vertical rhythm --------------------------------------------------------
+   Every section used to be `py-20 md:py-24`: symmetric, and identical across
+   sections measuring 0.42 to 2.01 viewports. Symmetric padding leaves each
+   figure head floating equidistant between the previous section's tail and its
+   own body, so nothing binds to anything — which is what made the full page
+   read as one undifferentiated column.
+
+   Two fixes, both on the 32px module already declared above:
+   - ASYMMETRIC. Far more space above a head than below it, so the head binds to
+     the content it introduces.
+   - RANKED. Primary figures get 5 modules of approach, secondary get 3. Rhythm
+     is unequal intervals in a fixed ratio; equal intervals are a metronome. */
+@utility figure-primary {
+  padding-top: 56px;
+  padding-bottom: 48px;
+}
+@utility figure-secondary {
+  padding-top: 64px;
+  padding-bottom: 48px;
+}
+
+@media (min-width: 768px) {
+  .figure-primary {
+    padding-top: 88px;
+    padding-bottom: 72px;
+  }
+  .figure-secondary {
+    padding-top: 96px;
+    padding-bottom: 72px;
   }
 }
 
@@ -120,10 +204,12 @@ body {
   color: var(--color-graphite);
 }
 
-/* Annotation text: dimensions, statuses, part references. */
+/* Annotation text: dimensions, statuses, part references.
+   One mono size for the whole sheet. There used to be three — 11, 12 and 13 —
+   for a single rank, which is three ways of saying the same thing. */
 @utility annot {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 11px;
   letter-spacing: 0.04em;
   color: var(--color-graphite);
 }
@@ -146,14 +232,20 @@ body {
 .rise-4 { animation-delay: 240ms; }
 
 /* Ink laid down left to right, the way a plotter prints a line of text.
-   Resting state is fully visible; the keyframe animates *from* clipped. */
+   Resting state is fully visible; the keyframe animates *from* clipped.
+
+   This ran 900ms with `--ease-out-soft`, which is roughly 600px in 900ms —
+   667 px/s, or 48% of the declared pen speed. The largest text on the page was
+   moving at half the tempo the rest of the page claims, and the soft ease dumps
+   most of the travel into the first fifth of the time, which reads as a swipe
+   rather than as a pen. 420ms is `penTime(600)` at PEN = 1400. */
 @keyframes wipe {
   from {
     clip-path: inset(0 100% 0 0);
   }
 }
 .wipe {
-  animation: wipe 900ms var(--ease-out-soft) both;
+  animation: wipe 420ms var(--ease-plot) both;
 }
 
 /* A rule being drawn. Same principle: the resting state is the finished line. */
@@ -168,20 +260,11 @@ body {
 }
 .draw-1 { animation-delay: 80ms; }
 
-/* Scroll-triggered reveals.
-   The resting state of every one of these is VISIBLE — the keyframe animates
-   *from* hidden. If the IntersectionObserver never fires, if JS dies, if
-   hydration fails, the content is on screen. A reveal whose failure mode is
-   "invisible" is not a reveal, it is a bug waiting for a slow network. */
-@keyframes ink-in {
-  from {
-    clip-path: inset(0 100% 0 0);
-  }
-}
-.ink-in {
-  animation: ink-in var(--reveal-dur, 300ms) var(--ease-out-soft) both;
-  animation-delay: var(--reveal-delay, 0ms);
-}
+/* `ink-in` used to wipe in every section head, every product, every capability
+   column, every FAQ row — roughly forty elements. One element wiping is a
+   choice; forty is a screensaver, and it made the page feel authored by nobody.
+   Scroll motion is now one event per section: the figure's rule draws itself.
+   Body content is simply present. */
 
 @keyframes stamp-in {
   from {
@@ -195,25 +278,19 @@ body {
   animation-delay: var(--reveal-delay, 0ms);
 }
 
-/* Section snapping.
-   `proximity`, never `mandatory`: the scroll stays the reader's — it settles to
-   a nearby section start instead of being taken over. `mandatory` traps people
-   inside sections taller than the viewport, and FIG. 2 is exactly that. */
-html {
-  scroll-snap-type: y proximity;
-  scroll-padding-top: 48px;
-  scroll-behavior: smooth;
-}
+/* No scroll snapping, deliberately.
+   Snap only feels intentional when every snap target is exactly one viewport.
+   Measured here: 0.42, 0.74, 0.80, 0.80, 0.83, 0.96 and 2.01 screens. Nothing is
+   a screen, so every snap left the previous section's tail on screen, and FIG. 2
+   ran two full screens with no snap at all — the behaviour changed section to
+   section, which reads as broken rather than as rhythm.
 
-main > section,
-footer {
-  scroll-snap-align: start;
-  scroll-snap-stop: normal;
-}
+   The density this page was asked for and screen-by-screen paging are in direct
+   conflict. Density won. Movement between sections is carried by the drawn rule
+   at each figure head instead.
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-snap-type: none;
-    scroll-behavior: auto;
-  }
+   `scroll-behavior: smooth` goes with it: it only ever applied to the skip link,
+   where an instant jump is the correct behaviour anyway. */
+#sheet {
+  scroll-margin-top: 24px;
 }

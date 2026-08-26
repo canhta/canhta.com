@@ -9,6 +9,8 @@ import { CapabilityMatrix } from '@/components/capability-matrix'
 import { WorkTogether } from '@/components/work-together'
 import { Faq } from '@/components/faq'
 import { SiteFooter } from '@/components/site-footer'
+import { SheetBreak } from '@/components/motion/sheet-break'
+import { buildGraph } from '@/lib/structured-data'
 
 export default async function HomePage({
   params,
@@ -20,12 +22,22 @@ export default async function HomePage({
 
   return (
     <>
+      {/* The machine-readable half of the page. Everything in it derives from
+          `src/content`, so it can never drift from what a human reads. */}
+      <script
+        type="application/ld+json"
+        // The payload is built from our own typed content, never from user input.
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildGraph(locale)) }}
+      />
       <FixtureBanner />
       <UtilityRow locale={locale} />
-      <main>
+      <main id="sheet">
         <ProfileHero locale={locale} />
+        <SheetBreak zone="A" />
         <SignatureSystem locale={locale} />
+        <SheetBreak zone="B" />
         <SelectedWork locale={locale} />
+        <SheetBreak zone="C" />
         <CapabilityMatrix locale={locale} />
         <WorkTogether locale={locale} />
         <Faq locale={locale} />

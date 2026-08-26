@@ -13,7 +13,7 @@ export function TitleBlock({ locale }: { locale: Locale }) {
       {profile.spec.map((row) => (
         <div key={row.label.en} className="border-r border-b border-rule px-4 py-3">
           <dt className="annot">{t(row.label, locale).toUpperCase()}</dt>
-          <dd className="mt-1.5 text-[14px] leading-snug font-medium tracking-tight">
+          <dd className="mt-1.5 text-[15px] leading-snug font-medium tracking-tight">
             {t(row.value, locale)}
           </dd>
         </div>

@@ -7,10 +7,15 @@
  * duration from how far the pen has to travel.
  */
 
-/** Horizontal pen travel, px per second. */
+/**
+ * Horizontal pen travel, px per second.
+ *
+ * There was a `PEN_V = 2600` here for "vertical carriage travel". It changed
+ * zero pixels on the page: the only strokes ever flagged vertical were 28 units
+ * long, and 28 / 2600 clamps to the same 0.16s floor as 28 / 1400. A constant
+ * that cannot affect output is a comment pretending to be code.
+ */
 export const PEN = 1400
-/** Vertical carriage travel — faster, as on a real plotter. */
-export const PEN_V = 2600
 
 /** Seconds for the pen to cover `px`, clamped so nothing crawls or blinks. */
 export function penTime(px: number, speed: number = PEN): number {
@@ -18,8 +23,6 @@ export function penTime(px: number, speed: number = PEN): number {
 }
 
 export const duration = {
-  /** hover, press, focus — must feel instant */
-  feedback: 0.15,
   /** a mechanism engaging */
   state: 0.28,
   /** an annotation landing */

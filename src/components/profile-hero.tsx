@@ -2,7 +2,6 @@ import Image from 'next/image'
 import { builds, profile } from '@/content'
 import type { Locale } from '@/content/types'
 import { t } from '@/lib/text'
-import { HeroShader } from './hero-shader'
 import { HeroEvidence } from './hero-evidence'
 import { TitleBlock } from './title-block'
 
@@ -23,7 +22,6 @@ const COPY = {
 export function ProfileHero({ locale }: { locale: Locale }) {
   return (
     <section className="relative isolate overflow-hidden">
-      <HeroShader />
       <div aria-hidden="true" className="sheet absolute inset-0 opacity-60" />
 
       <div className="container-sheet relative pt-10 pb-14 md:pt-14">
@@ -37,7 +35,10 @@ export function ProfileHero({ locale }: { locale: Locale }) {
                 width={44}
                 height={44}
                 priority
-                className="h-11 w-11 shrink-0 rounded-full ring-1 ring-rule"
+                /* `rounded-full` + a ring, in a system whose radius token is 0.
+                   A circular portrait with a halo is the most templated object
+                   there is; on a drawing sheet a portrait sits in a ruled box. */
+                className="h-11 w-11 shrink-0 border border-rule-strong"
               />
               <div className="min-w-0 flex-1">
                 <p className="font-mono text-[15px] font-medium tracking-[0.2em] uppercase">
@@ -49,7 +50,7 @@ export function ProfileHero({ locale }: { locale: Locale }) {
               </div>
               {profile.available ? (
                 <p className="annot flex shrink-0 items-center gap-1.5 text-live">
-                  <span aria-hidden="true" className="inline-block h-1.5 w-1.5 rounded-full bg-live" />
+                  <span aria-hidden="true" className="inline-block h-1.5 w-1.5 bg-live" />
                   {t(profile.availabilityLabel, locale).toUpperCase()}
                 </p>
               ) : null}
@@ -60,7 +61,7 @@ export function ProfileHero({ locale }: { locale: Locale }) {
               {t(profile.hook, locale)}
             </h1>
 
-            <p className="rise rise-2 mt-6 max-w-[44ch] text-[17px] leading-relaxed text-graphite">
+            <p className="rise rise-2 mt-6 max-w-[44ch] text-[20px] leading-relaxed text-graphite">
               {t(profile.supporting, locale)}
             </p>
 
@@ -69,10 +70,10 @@ export function ProfileHero({ locale }: { locale: Locale }) {
                 href={profile.ctaHref}
                 className="group inline-flex h-12 w-full items-center justify-between gap-6 rounded-none bg-ink px-5 text-paper transition-colors duration-150 hover:bg-live sm:w-auto"
               >
-                <span className="font-mono text-[13px] tracking-[0.12em] uppercase">
+                <span className="font-mono text-[11px] tracking-[0.12em] uppercase">
                   {t(profile.ctaLabel, locale)}
                 </span>
-                <span aria-hidden="true" className="font-mono text-[13px]">
+                <span aria-hidden="true" className="font-mono text-[11px]">
                   →
                 </span>
               </a>

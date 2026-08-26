@@ -8,15 +8,29 @@ export const profileFixture: Profile & FixtureMarked = {
     en: 'I build agentic systems, mobile apps and mini-SaaS — and I ship them.',
     vi: 'Tôi xây hệ thống agentic, app mobile và mini-SaaS — và tôi ship chúng.',
   },
+  /**
+   * This used to open "Bring me a messy process" / "Đưa tôi một quy trình lộn
+   * xộn". It reads as calling the visitor's own operation sloppy before they
+   * have said a word — the reader is the person who built that process. The
+   * barrier being removed is the same one ("you don't need this worked out
+   * already"), but the subject is now the situation, not their competence.
+   */
   supporting: {
-    en: 'Bring me a messy process. I turn it into a system that runs itself, and a product people use.',
-    vi: 'Đưa tôi một quy trình lộn xộn. Tôi biến nó thành hệ thống tự chạy, và một sản phẩm có người dùng.',
+    en: 'You do not need a spec. Tell me where the work is stuck, and I turn it into a system that runs itself — and a product people use.',
+    vi: 'Bạn không cần có sẵn spec. Cứ nói chỗ công việc đang vướng, tôi biến nó thành hệ thống tự chạy — và một sản phẩm có người dùng.',
   },
   ctaLabel: { en: 'Book a conversation', vi: 'Đặt lịch nói chuyện' },
   ctaHref: 'mailto:hello@canhta.com?subject=Project%20inquiry%20from%20canhta.com',
-  avatar: '/avatar.svg',
+  avatar: '/avatar.jpg',
   available: true,
   availabilityLabel: { en: 'Taking projects', vi: 'Đang nhận dự án' },
+  /**
+   * Four facts, not six. `Builds` was a fourth wording of the same taxonomy that
+   * FIG. 3 and the schedule's KIND column already name, and `Engagements` was a
+   * teaser for FIG. 4 sitting two screens above it. What is left is the four
+   * things a stranger in another timezone actually needs and cannot get anywhere
+   * else on the page.
+   */
   spec: [
     {
       label: { en: 'Based in', vi: 'Làm việc tại' },
@@ -29,14 +43,6 @@ export const profileFixture: Profile & FixtureMarked = {
     {
       label: { en: 'Replies within', vi: 'Phản hồi trong' },
       value: { en: 'One working day', vi: 'Một ngày làm việc' },
-    },
-    {
-      label: { en: 'Engagements', vi: 'Hình thức' },
-      value: { en: 'Advisory · Sprint · Full build', vi: 'Tư vấn · Sprint · Trọn gói' },
-    },
-    {
-      label: { en: 'Builds', vi: 'Xây' },
-      value: { en: 'Agents · Mobile · Web · SaaS', vi: 'Agent · Mobile · Web · SaaS' },
     },
     {
       label: { en: 'Now building', vi: 'Đang xây' },

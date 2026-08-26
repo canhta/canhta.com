@@ -58,11 +58,18 @@ export function HeroEvidence({ builds, locale }: { builds: Build[]; locale: Loca
             className="absolute inset-x-0 top-0 block overflow-hidden rounded-none border border-rule-strong bg-surface shadow-[0_10px_24px_-14px_rgba(22,32,42,0.35)]"
           >
             <div className="flex items-center justify-between gap-3 border-b border-rule px-4 py-2.5">
-              <span className="font-mono text-[11px] tracking-[0.1em] uppercase">
+              {/* min-w-0 is what actually lets the truncate fire: without it the
+                  flex child refuses to shrink below its content and a long
+                  product name pushes the status label off the card. */}
+              <span className="min-w-0 flex-1 truncate font-mono text-[11px] tracking-[0.1em] uppercase">
                 <span className="text-graphite">PART {String(i + 1).padStart(2, '0')} — </span>
-                <span className="font-medium">{build.name}</span>
+                <span className="font-medium" translate="no">
+                  {build.name}
+                </span>
               </span>
-              <span className={`font-mono text-[11px] tracking-[0.08em] uppercase ${statusTone(build.status)}`}>
+              <span
+                className={`shrink-0 font-mono text-[11px] tracking-[0.08em] uppercase ${statusTone(build.status)}`}
+              >
                 {statusLabel(build.status, locale)}
               </span>
             </div>

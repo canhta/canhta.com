@@ -7,13 +7,20 @@ import type { Locale } from '@/content/types'
 import { t } from '@/lib/text'
 import { duration, ease } from '@/lib/motion'
 import { SectionHead } from '@/components/motion/section-head'
-import { RevealList } from '@/components/motion/primitives'
 
+/**
+ * `bestFor.vi` used to be 'Hợp khi' — the identical string `work-together.tsx`
+ * shipped for its own column head. Two different English labels collapsing to
+ * one Vietnamese label is the translation telling you the two sections were
+ * saying the same thing. Both were renamed apart.
+ *
+ * The heading no longer opens with "What": three of four section headings did,
+ * which left nothing in the heading rhythm to tell a scanner which one matters.
+ */
 const COPY = {
-  heading: { en: 'What I can build with you', vi: 'Tôi có thể cùng bạn xây gì' },
-  bestFor: { en: 'Best for', vi: 'Hợp khi' },
+  heading: { en: 'Where I can help', vi: 'Tôi giúp được gì' },
+  bestFor: { en: 'Best for', vi: 'Hợp với việc' },
   canDeliver: { en: 'You get', vi: 'Bạn nhận' },
-  engagement: { en: 'How it runs', vi: 'Chạy thế nào' },
 } as const
 
 /**
@@ -28,18 +35,13 @@ export function CapabilityMatrix({ locale }: { locale: Locale }) {
   const rows = [
     { key: 'bestFor', label: COPY.bestFor },
     { key: 'canDeliver', label: COPY.canDeliver },
-    { key: 'engagement', label: COPY.engagement },
   ] as const
 
   return (
-    <section className="container-sheet py-20 md:py-24">
+    <section className="container-sheet figure-secondary">
       <SectionHead fig="FIG. 3" title={t(COPY.heading, locale)} />
 
-      <RevealList
-        className="mt-10 grid gap-px border border-rule-strong bg-rule-strong sm:grid-cols-2 lg:grid-cols-4"
-        itemClassName="flex"
-        stagger={0.06}
-      >
+      <div className="mt-10 grid gap-px border border-rule-strong bg-rule-strong sm:grid-cols-2 lg:grid-cols-4">
         {capabilities.map((cap) => {
           const isActive = active === cap.id
           return (
@@ -49,22 +51,28 @@ export function CapabilityMatrix({ locale }: { locale: Locale }) {
               className="relative flex flex-1 flex-col bg-surface p-5"
             >
               {/* A drawn rule marks the active column. A drawing does not change
-                  its fill to show selection; the pen marks it. */}
+                  its fill to show selection; the pen marks it.
+
+                  It used to sit on the column's top edge — roughly 300px above
+                  where the reader's eye actually is, since they are reading the
+                  text at the bottom. On the left edge it runs alongside the text
+                  for the column's whole height, which is also the leader-tick
+                  vernacular the rest of the sheet uses. */}
               <m.span
                 aria-hidden="true"
-                className="absolute inset-x-0 top-0 h-0.5 origin-left bg-ink"
+                className="absolute inset-y-0 left-0 w-0.5 origin-top bg-ink"
                 initial={false}
-                animate={{ scaleX: isActive ? 1 : 0 }}
-                transition={{ duration: reduced ? 0 : 0.2, ease: ease.plot }}
+                animate={{ scaleY: isActive ? 1 : 0 }}
+                transition={{ duration: reduced ? 0 : duration.state, ease: ease.plot }}
               />
               <div className="flex items-baseline justify-between gap-3 border-b border-ink pb-3">
-                <h3 className="text-[17px] font-extrabold tracking-[-0.02em]">
+                <h3 className="text-[20px] font-extrabold tracking-[-0.02em]">
                   <button
                     type="button"
                     onFocus={() => setActive(cap.id)}
                     onClick={() => setActive(cap.id)}
                     aria-pressed={isActive}
-                    className="text-left"
+                    className="text-left underline decoration-transparent decoration-1 underline-offset-4 transition-[text-decoration-color] duration-150 hover:decoration-ink"
                   >
                     {t(cap.name, locale)}
                   </button>
@@ -74,15 +82,19 @@ export function CapabilityMatrix({ locale }: { locale: Locale }) {
               <dl className="flex-1">
                 {rows.map((row) => (
                   <div key={row.key} className="border-b border-rule py-3 last:border-b-0">
-                    <dt className="annot">{t(row.label, locale).toUpperCase()}</dt>
-                    <dd className="mt-1 text-[14px] leading-snug">{t(cap[row.key], locale)}</dd>
+                    <dt
+                      className={`annot transition-colors duration-150 ${isActive ? 'text-ink' : ''}`}
+                    >
+                      {t(row.label, locale).toUpperCase()}
+                    </dt>
+                    <dd className="mt-1 text-[15px] leading-snug">{t(cap[row.key], locale)}</dd>
                   </div>
                 ))}
               </dl>
             </m.div>
           )
         })}
-      </RevealList>
+      </div>
     </section>
   )
 }

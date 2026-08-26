@@ -2,13 +2,18 @@ import { profile, services } from '@/content'
 import type { Locale } from '@/content/types'
 import { t } from '@/lib/text'
 import { SectionHead } from '@/components/motion/section-head'
-import { RevealList } from '@/components/motion/primitives'
 
+/**
+ * `suited.vi` was 'Hợp khi', the identical string FIG. 3 shipped for its own
+ * column head, and `output` was a third wording of "what you receive". Both are
+ * now distinct from FIG. 3's.
+ *
+ * `start` was defined and never rendered.
+ */
 const COPY = {
-  heading: { en: 'Ways to work together', vi: 'Cách chúng ta có thể hợp tác' },
-  output: { en: 'You end up with', vi: 'Bạn nhận được' },
-  suited: { en: 'Right when', vi: 'Hợp khi' },
-  start: { en: 'Starts with', vi: 'Bắt đầu bằng' },
+  heading: { en: 'Ways to work together', vi: 'Cách hợp tác' },
+  output: { en: 'You get', vi: 'Bạn nhận' },
+  suited: { en: 'Right when', vi: 'Đúng lúc bạn' },
   startValue: {
     en: 'One conversation about the actual problem.',
     vi: 'Một buổi nói chuyện về đúng vấn đề của bạn.',
@@ -17,14 +22,18 @@ const COPY = {
 
 export function WorkTogether({ locale }: { locale: Locale }) {
   return (
-    <section className="container-sheet py-20 md:py-24">
+    <section className="container-sheet figure-secondary">
       <SectionHead fig="FIG. 4" title={t(COPY.heading, locale)} />
 
-      <RevealList as="ul" className="mt-10" stagger={0.08}>
+      <ul className="mt-10">
         {services.map((service, i) => (
-          <div
+          <li
             key={service.id}
-            className="group relative grid gap-6 border-b border-rule py-7 transition-transform duration-150 ease-out hover:translate-x-3 lg:grid-cols-12 lg:gap-10"
+            /* `hover:translate-x-3` was removed: 12px of horizontal travel on a
+               row that is not a link, promising an interaction that never
+               arrives — and it dragged body text sideways against
+               `text-wrap: pretty`. The rule below carries the hover alone. */
+            className="group relative grid gap-6 border-b border-rule py-7 lg:grid-cols-12 lg:gap-10"
           >
             <span
               aria-hidden="true"
@@ -46,19 +55,19 @@ export function WorkTogether({ locale }: { locale: Locale }) {
                 {t(service.suitedTo, locale)}
               </p>
             </div>
-          </div>
+          </li>
         ))}
-      </RevealList>
+      </ul>
 
       <div className="mt-10 flex flex-wrap items-center gap-6">
         <a
           href={profile.ctaHref}
           className="group inline-flex h-12 items-center justify-between gap-6 rounded-none bg-ink px-5 text-paper transition-colors duration-150 hover:bg-live"
         >
-          <span className="font-mono text-[13px] tracking-[0.12em] uppercase">
+          <span className="font-mono text-[11px] tracking-[0.12em] uppercase">
             {t(profile.ctaLabel, locale)}
           </span>
-          <span aria-hidden="true" className="font-mono text-[13px]">
+          <span aria-hidden="true" className="font-mono text-[11px]">
             →
           </span>
         </a>

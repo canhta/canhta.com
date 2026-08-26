@@ -5,7 +5,7 @@ import { GitHubIcon, LinkedInIcon, XIcon } from './icons'
 
 const COPY = {
   closing: {
-    en: "Have a problem worth automating? Let's talk.",
+    en: 'Have a problem worth automating? Let’s talk.',
     vi: 'Có việc đáng để tự động hoá? Nói chuyện nhé.',
   },
   origin: { en: 'Built in Vietnam, shipped worldwide', vi: 'Làm tại Việt Nam, ship đi khắp nơi' },
@@ -17,6 +17,13 @@ const ICONS = {
   x: XIcon,
   linkedin: LinkedInIcon,
 } as const
+
+/** An icon button's only name is its label, so it says the destination, not the key. */
+const NETWORK_LABELS: Record<keyof typeof ICONS, string> = {
+  github: 'GitHub',
+  x: 'X',
+  linkedin: 'LinkedIn',
+}
 
 function isIconNetwork(n: SocialLink['network']): n is keyof typeof ICONS {
   return n in ICONS
@@ -31,20 +38,13 @@ export function SiteFooter({ locale }: { locale: Locale }) {
       <div className="container-sheet py-16">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-7">
-            <p className="max-w-[20ch] text-[clamp(1.6rem,3.2vw,2.2rem)] leading-[1.1] font-extrabold tracking-[-0.035em]">
+            <p className="max-w-[20ch] text-[clamp(1.4rem,2.6vw,1.85rem)] leading-[1.1] font-extrabold tracking-[-0.035em]">
               {t(COPY.closing, locale)}
             </p>
-            <a
-              href={profile.ctaHref}
-              className="mt-8 inline-flex h-12 items-center justify-between gap-6 rounded-none bg-ink px-5 text-paper transition-colors duration-150 hover:bg-live"
-            >
-              <span className="font-mono text-[13px] tracking-[0.12em] uppercase">
-                {t(profile.ctaLabel, locale)}
-              </span>
-              <span aria-hidden="true" className="font-mono text-[13px]">
-                →
-              </span>
-            </a>
+            {/* The third CTA was here, identical to FIG. 4's and about 250px
+                below it, and the footer was already offering the plain address
+                forty pixels away — two doors to one inbox. The address is the
+                different affordance, so it is the one that stays. */}
           </div>
 
           <div className="lg:col-span-5 lg:justify-self-end">
@@ -57,7 +57,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
                       href={s.url}
                       target="_blank"
                       rel="noreferrer noopener"
-                      aria-label={s.network}
+                      aria-label={`${NETWORK_LABELS[s.network as keyof typeof ICONS]} (opens in a new tab)`}
                       className="grid h-11 w-11 place-items-center rounded-none border border-rule text-graphite transition-colors duration-150 hover:border-ink hover:text-ink"
                     >
                       <Icon />
@@ -69,7 +69,8 @@ export function SiteFooter({ locale }: { locale: Locale }) {
             {email ? (
               <a
                 href={email.url}
-                className="mt-4 inline-block font-mono text-[13px] underline decoration-rule-strong underline-offset-4 transition-colors duration-150 hover:decoration-ink"
+                className="mt-4 inline-block font-mono text-[11px] underline decoration-rule-strong underline-offset-4 transition-colors duration-150 hover:decoration-ink"
+                translate="no"
               >
                 {email.url.replace('mailto:', '')}
               </a>

@@ -13,16 +13,16 @@ export function UtilityRow({ locale }: { locale: Locale }) {
       <div className="flex h-11 items-center justify-between">
         <Link
           href={locale === 'en' ? '/' : '/vi'}
-          className="font-mono text-[13px] tracking-tight text-graphite transition-colors duration-150 hover:text-ink"
+          className="font-mono text-[11px] tracking-tight text-graphite transition-colors duration-150 hover:text-ink"
         >
-          canhta.com
+          <span translate="no">canhta.com</span>
         </Link>
 
         <div className="flex items-center gap-1">
-          <nav aria-label="Language" className="flex items-center font-mono text-[13px]">
+          <nav aria-label="Language" className="flex items-center font-mono text-[11px]">
             <Link
               href="/"
-              aria-current={locale === 'en' ? 'true' : undefined}
+              aria-current={locale === 'en' ? 'page' : undefined}
               className={`grid h-11 min-w-11 place-items-center transition-colors duration-150 ${
                 locale === 'en' ? 'text-ink' : 'text-graphite hover:text-ink'
               }`}
@@ -34,7 +34,7 @@ export function UtilityRow({ locale }: { locale: Locale }) {
             </span>
             <Link
               href="/vi"
-              aria-current={locale === 'vi' ? 'true' : undefined}
+              aria-current={locale === 'vi' ? 'page' : undefined}
               className={`grid h-11 min-w-11 place-items-center transition-colors duration-150 ${
                 locale === 'vi' ? 'text-ink' : 'text-graphite hover:text-ink'
               }`}
@@ -48,7 +48,7 @@ export function UtilityRow({ locale }: { locale: Locale }) {
               href={github.url}
               target="_blank"
               rel="noreferrer noopener"
-              aria-label="GitHub"
+              aria-label="GitHub (opens in a new tab)"
               className="grid h-11 w-11 place-items-center text-graphite transition-colors duration-150 hover:text-ink"
             >
               <GitHubIcon />
@@ -59,7 +59,7 @@ export function UtilityRow({ locale }: { locale: Locale }) {
               href={x.url}
               target="_blank"
               rel="noreferrer noopener"
-              aria-label="X"
+              aria-label="X (opens in a new tab)"
               className="grid h-11 w-11 place-items-center text-graphite transition-colors duration-150 hover:text-ink"
             >
               <XIcon />

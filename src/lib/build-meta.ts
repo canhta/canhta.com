@@ -1,8 +1,14 @@
 import type { BuildKind, BuildLinkKind, Locale, LocalizedText } from '@/content/types'
 
-/** Said the way a client would say it, not the way a stack would. */
+/**
+ * Said the way a client would say it, not the way a stack would — and worded
+ * identically to the FIG. 3 column heads in `content/capabilities.fixture.ts`.
+ * These two lists and `signature/nodes.ts` name the same four buckets; they
+ * previously used four different wordings, two of which differed only by an
+ * article.
+ */
 const KIND_LABELS: Record<BuildKind, LocalizedText> = {
-  agent: { en: 'Runs itself', vi: 'Tự nó chạy' },
+  agent: { en: 'Runs itself', vi: 'Việc tự nó chạy' },
   skill: { en: 'Agent skill', vi: 'Kỹ năng agent' },
   mobile: { en: 'Phone app', vi: 'App điện thoại' },
   web: { en: 'Web product', vi: 'Sản phẩm web' },
