@@ -67,8 +67,8 @@ export const buildsFixture: (Build & Partial<FixtureMarked>)[] = [
       vi: 'Nghi thức hằng ngày: chưa ai trả lời xong thì chưa ai thấy gì.',
     },
     result: {
-      en: 'In build. Domain model, sync protocol and release gates are settled.',
-      vi: 'Đang xây. Mô hình miền, giao thức đồng bộ và cổng phát hành đã chốt.',
+      en: 'In build for the App Store. Domain model and release gates are settled.',
+      vi: 'Đang xây để lên App Store. Mô hình miền và cổng phát hành đã chốt.',
     },
     links: [],
   },
@@ -101,6 +101,16 @@ export const buildsFixture: (Build & Partial<FixtureMarked>)[] = [
       en: 'In build, for fun. Original idea: outbid.lol.',
       vi: 'Đang xây, làm cho vui. Ý tưởng gốc: outbid.lol.',
     },
-    links: [],
+    /**
+     * The domain is registered and pointed at Cloudflare but nothing is deployed
+     * behind it yet — as of writing it serves the registrar's parking page over
+     * HTTP, and HTTPS has no certificate. Linked at Canh's explicit request; the
+     * `building` status is what tells a visitor not to expect a product.
+     *
+     * `https` on purpose, never `http`: linking plain HTTP from an HTTPS page
+     * hands the visitor a "Not secure" warning. This link starts working the
+     * moment the deploy lands, and not before.
+     */
+    links: [{ kind: 'web', url: 'https://pixelbid.lol' }],
   },
 ]
