@@ -8,9 +8,19 @@ import { t } from '@/lib/text'
 
 const DETAIL_COUNT = 1
 
+/**
+ * `SelectedWork` is an async Server Component — it awaits the GitHub star counts
+ * at build time — so it cannot be handed to `render()` as JSX. Calling it and
+ * rendering what it returns is the supported way to test one, and it keeps the
+ * network out of the test: `fetchStars` is stubbed below.
+ */
+async function renderWork(locale: 'en' | 'vi' = 'en') {
+  return render(await SelectedWork({ locale }))
+}
+
 describe('SelectedWork', () => {
-  it('gives exactly one product a full detail drawing', () => {
-    const { container } = render(<SelectedWork locale="en" />)
+  it('gives exactly one product a full detail drawing', async () => {
+    const { container } = await renderWork('en')
     const details = container.querySelectorAll('article')
     expect(details).toHaveLength(DETAIL_COUNT)
 
@@ -22,8 +32,8 @@ describe('SelectedWork', () => {
     }
   })
 
-  it('describes the schedule with a caption', () => {
-    render(<SelectedWork locale="en" />)
+  it('describes the schedule with a caption', async () => {
+    await renderWork('en')
     const table = screen.getByRole('table')
     const caption = table.querySelector('caption')
     expect(caption).not.toBeNull()
@@ -33,17 +43,17 @@ describe('SelectedWork', () => {
     expect((caption as HTMLElement).className).toContain('sr-only')
   })
 
-  it('lists every product that is not shown in full, one row each', () => {
-    render(<SelectedWork locale="en" />)
+  it('lists every product that is not shown in full, one row each', async () => {
+    await renderWork('en')
     const rows = within(screen.getByRole('table')).getAllByRole('row')
     // One header row plus one row per scheduled product.
     expect(rows).toHaveLength(builds.length - DETAIL_COUNT + 1)
   })
 
-  it('does not repeat the featured product in the schedule', () => {
+  it('does not repeat the featured product in the schedule', async () => {
     // The schedule used to iterate every build, so the featured product's
     // `result` string rendered twice on the same page.
-    render(<SelectedWork locale="en" />)
+    await renderWork('en')
     const featured = featuredBuilds[0]
     expect(featured).toBeDefined()
     if (featured) {
@@ -51,23 +61,23 @@ describe('SelectedWork', () => {
     }
   })
 
-  it('scrolls the wide table inside its own keyboard-reachable region', () => {
-    render(<SelectedWork locale="en" />)
+  it('scrolls the wide table inside its own keyboard-reachable region', async () => {
+    await renderWork('en')
     // A scrollable box that cannot be focused cannot be scrolled by keyboard.
     const region = screen.getByRole('region', { name: 'Schedule' })
     expect(region).toHaveAttribute('tabindex', '0')
     expect(region.className).toContain('overflow-x-auto')
   })
 
-  it('gives every column a scoped header', () => {
-    render(<SelectedWork locale="en" />)
+  it('gives every column a scoped header', async () => {
+    await renderWork('en')
     const headers = within(screen.getByRole('table')).getAllByRole('columnheader')
     expect(headers).toHaveLength(6)
     for (const header of headers) expect(header).toHaveAttribute('scope', 'col')
   })
 
-  it('opens every product link in a new tab without leaking the referrer or opener', () => {
-    const { container } = render(<SelectedWork locale="en" />)
+  it('opens every product link in a new tab without leaking the referrer or opener', async () => {
+    const { container } = await renderWork('en')
     const external = Array.from(container.querySelectorAll('a[target="_blank"]'))
     expect(external.length).toBeGreaterThan(0)
 
@@ -78,8 +88,8 @@ describe('SelectedWork', () => {
     }
   })
 
-  it('labels each detail link by where it goes, not by "Open"', () => {
-    const { container } = render(<SelectedWork locale="en" />)
+  it('labels each detail link by where it goes, not by "Open"', async () => {
+    const { container } = await renderWork('en')
     const featured = featuredBuilds[0]
     expect(featured).toBeDefined()
     if (!featured) return
@@ -91,8 +101,8 @@ describe('SelectedWork', () => {
     }
   })
 
-  it('states status and kind as text in every row', () => {
-    render(<SelectedWork locale="en" />)
+  it('states status and kind as text in every row', async () => {
+    await renderWork('en')
     const table = screen.getByRole('table')
     const scheduled = builds.filter((b) => b.slug !== featuredBuilds[0]?.slug)
 
@@ -103,19 +113,19 @@ describe('SelectedWork', () => {
     }
   })
 
-  it('counts the schedule with locale-aware plural rules', () => {
-    const en = render(<SelectedWork locale="en" />)
+  it('counts the schedule with locale-aware plural rules', async () => {
+    const en = await renderWork('en')
     expect(en.container.textContent).toContain(`${builds.length - DETAIL_COUNT} items`)
     en.unmount()
 
     // Vietnamese has one plural form; an `=== 1` check is only ever right for
     // English.
-    const vi = render(<SelectedWork locale="vi" />)
+    const vi = await renderWork('vi')
     expect(vi.container.textContent).toContain(`${builds.length - DETAIL_COUNT} mục`)
   })
 
-  it('shows a real screenshot with real alt text, or says none exists yet', () => {
-    render(<SelectedWork locale="en" />)
+  it('shows a real screenshot with real alt text, or says none exists yet', async () => {
+    await renderWork('en')
     const featured = featuredBuilds[0]
     if (!featured) return
 
@@ -129,8 +139,8 @@ describe('SelectedWork', () => {
     }
   })
 
-  it('renders the Vietnamese schedule on the Vietnamese route', () => {
-    render(<SelectedWork locale="vi" />)
+  it('renders the Vietnamese schedule on the Vietnamese route', async () => {
+    await renderWork('vi')
     expect(screen.getByRole('heading', { name: 'Tôi đã xây gì' })).toBeInTheDocument()
     expect(screen.getByRole('region', { name: 'Bảng kê' })).toBeInTheDocument()
   })

@@ -1,7 +1,7 @@
 import { profile, social } from '@/content'
 import type { Locale, SocialLink } from '@/content/types'
 import { t } from '@/lib/text'
-import { GitHubIcon, LinkedInIcon, XIcon, ZaloIcon } from './icons'
+import { GitHubIcon, LinkedInIcon, XIcon, ZaloWordmark } from './icons'
 
 const COPY = {
   closing: {
@@ -17,7 +17,7 @@ const ICONS = {
   github: GitHubIcon,
   x: XIcon,
   linkedin: LinkedInIcon,
-  zalo: ZaloIcon,
+  zalo: ZaloWordmark,
 } as const
 
 /** An icon button's only name is its label, so it says the destination, not the key. */
@@ -61,7 +61,13 @@ export function SiteFooter({ locale }: { locale: Locale }) {
                       target="_blank"
                       rel="noreferrer noopener"
                       aria-label={`${NETWORK_LABELS[s.network as keyof typeof ICONS]} (${t(COPY.newTab, locale)})`}
-                      className="grid h-11 w-11 place-items-center rounded-none border border-rule text-graphite transition-colors duration-150 hover:border-ink hover:text-ink"
+                      /* Zalo's mark is a wordmark, not a glyph — 77x28. Forcing
+                         it into the same 44x44 square as the letterform icons
+                         either crops it or shrinks it below legibility, so it
+                         gets a wider cell and keeps the shared height. */
+                      className={`grid h-11 place-items-center rounded-none border border-rule text-graphite transition-colors duration-150 hover:border-ink hover:text-ink ${
+                        s.network === 'zalo' ? 'px-3' : 'w-11'
+                      }`}
                     >
                       <Icon />
                     </a>

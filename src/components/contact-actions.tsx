@@ -1,7 +1,7 @@
 import { profile, socialByNetwork } from '@/content'
 import type { Locale } from '@/content/types'
 import { t } from '@/lib/text'
-import { ZaloIcon } from './icons'
+import { ZaloWordmark } from './icons'
 
 /**
  * The contact pair, in one place.
@@ -39,10 +39,12 @@ export function ContactActions({ locale }: { locale: Locale }) {
           rel="noreferrer noopener"
           className="inline-flex h-12 items-center gap-2.5 border border-rule-strong px-5 text-graphite transition-colors duration-150 hover:border-ink hover:text-ink"
         >
-          <ZaloIcon aria-hidden="true" />
+          {/* The wordmark carries the brand name, so the label says the verb
+              rather than repeating it. */}
           <span className="font-mono text-[11px] tracking-[0.12em] uppercase">
-            {t({ en: 'Chat on Zalo', vi: 'Nhắn Zalo' }, locale)}
+            {t({ en: 'Chat on', vi: 'Nhắn qua' }, locale)}
           </span>
+          <ZaloWordmark />
           <span className="sr-only">{t({ en: 'opens in a new tab', vi: 'mở trong tab mới' }, locale)}</span>
         </a>
       ) : null}

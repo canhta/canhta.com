@@ -3,10 +3,12 @@ import { builds, featuredBuilds } from '@/content'
 import type { Build, Locale } from '@/content/types'
 import { t } from '@/lib/text'
 import { statusLabel, statusTone } from '@/lib/status'
-import { kindLabel, linkLabel } from '@/lib/build-meta'
+import { kindLabel } from '@/lib/build-meta'
 import { SectionHead } from '@/components/motion/section-head'
 import { ProofStamp } from '@/components/proof-stamp'
 import { PendingDrawing } from '@/components/pending-drawing'
+import { BuildLinkButton } from '@/components/build-link'
+import { fetchStars, type Stars } from '@/lib/github'
 
 /**
  * Detail drawings plus a schedule — the way a real drawing sheet handles a set
@@ -66,7 +68,17 @@ function Row({ label, value }: { label: string; value: string }) {
   )
 }
 
-function Detail({ build, index, locale }: { build: Build; index: number; locale: Locale }) {
+function Detail({
+  build,
+  index,
+  locale,
+  stars,
+}: {
+  build: Build
+  index: number
+  locale: Locale
+  stars: Stars
+}) {
   return (
     <article className="grid gap-8 border-t border-ink pt-6 lg:grid-cols-12 lg:gap-10">
       <div className="lg:col-span-5">
@@ -104,14 +116,7 @@ function Detail({ build, index, locale }: { build: Build; index: number; locale:
           <ul className="mt-5 flex flex-wrap gap-2">
             {build.links.map((link) => (
               <li key={link.kind}>
-                <a
-                  href={link.url}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="inline-flex h-11 items-center gap-2 border border-rule px-3 font-mono text-[11px] tracking-[0.1em] uppercase transition-colors duration-150 hover:border-ink"
-                >
-                  {linkLabel(link.kind, locale)} <span aria-hidden="true">↗</span>
-                </a>
+                <BuildLinkButton link={link} locale={locale} stars={stars} />
               </li>
             ))}
           </ul>
@@ -135,8 +140,11 @@ function Detail({ build, index, locale }: { build: Build; index: number; locale:
   )
 }
 
-export function SelectedWork({ locale }: { locale: Locale }) {
+export async function SelectedWork({ locale }: { locale: Locale }) {
   if (builds.length === 0) return null
+
+  // Fetched once at build; fails soft to an empty map.
+  const stars = await fetchStars(builds)
 
   /**
    * One full detail, not two. Two is a false plural — it is not a portfolio, and
@@ -160,7 +168,7 @@ export function SelectedWork({ locale }: { locale: Locale }) {
 
       <div className="mt-12">
         {details.map((build, i) => (
-          <Detail key={build.slug} build={build} index={i} locale={locale} />
+          <Detail key={build.slug} build={build} index={i} locale={locale} stars={stars} />
         ))}
       </div>
 
