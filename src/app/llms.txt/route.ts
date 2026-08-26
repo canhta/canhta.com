@@ -1,4 +1,4 @@
-import { builds, capabilities, faq, profile, services, social, CONTENT_IS_FIXTURE } from '@/content'
+import { builds, capabilities, faq, profile, services, social } from '@/content'
 import { t } from '@/lib/text'
 import { kindLabel } from '@/lib/build-meta'
 
@@ -8,18 +8,15 @@ import { kindLabel } from '@/lib/build-meta'
  *
  * Generated from `src/content` rather than hand-written, because a hand-written
  * one goes stale the first time a product ships and nobody remembers this file
- * exists. Same guard as robots: while the content is placeholder, this serves
- * nothing rather than serving fabrications in the most quotable format there is.
+ * exists.
+ *
+ * It served a stub while the content was placeholder. That came out with the
+ * robots.txt block, for consistency: a site that is open to crawlers has no
+ * reason to withhold the one file that tells them what it is.
  */
 export const dynamic = 'force-static'
 
 export function GET() {
-  if (CONTENT_IS_FIXTURE) {
-    return new Response('# Not available\n\nThis site is not ready to be indexed.\n', {
-      headers: { 'content-type': 'text/plain; charset=utf-8' },
-    })
-  }
-
   const l = 'en' as const
   const email = social.find((s) => s.network === 'email')?.url.replace('mailto:', '')
   const links = social.filter((s) => s.network !== 'email')

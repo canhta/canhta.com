@@ -45,8 +45,10 @@ export const profileFixture: Profile & FixtureMarked = {
       value: { en: 'One working day', vi: 'Một ngày làm việc' },
     },
     {
+      // Was "Kite — private beta". Kite was a fixture product that has since been
+      // deleted, so the title block was naming a product that does not exist.
       label: { en: 'Now building', vi: 'Đang xây' },
-      value: { en: 'Kite — private beta', vi: 'Kite — beta kín' },
+      value: { en: 'inluv · PixelBid', vi: 'inluv · PixelBid' },
     },
   ],
 }

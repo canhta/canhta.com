@@ -1,5 +1,4 @@
 import type { MetadataRoute } from 'next'
-import { CONTENT_IS_FIXTURE } from '@/content'
 
 /**
  * AI crawlers are named explicitly rather than left to `*`.
@@ -9,11 +8,14 @@ import { CONTENT_IS_FIXTURE } from '@/content'
  * the difference between being available as a source and being invisible to the
  * tools people now ask for recommendations.
  *
- * The fixture guard matters more here than anywhere else on the site: while the
- * content is placeholder, every product name and number is invented, and letting
- * a crawler ingest that would put fabrications into someone's index — and into
- * answers attributed to this domain. So fixtures mean a blanket disallow, not a
- * banner.
+ * This used to serve a blanket `Disallow: /` while the content was placeholder,
+ * on the reasoning that letting a crawler ingest invented product names puts
+ * fabrications into someone else's index attributed to this domain. Canh
+ * overruled it: the site should be indexable now. That is his domain and his
+ * call, and the consequence is stated plainly in the README.
+ *
+ * The human-facing signal stays — the fixture banner is on every page — and the
+ * build guard is untouched.
  */
 const AI_CRAWLERS = [
   'GPTBot', // OpenAI, training
@@ -33,10 +35,6 @@ const AI_CRAWLERS = [
 ]
 
 export default function robots(): MetadataRoute.Robots {
-  if (CONTENT_IS_FIXTURE) {
-    return { rules: { userAgent: '*', disallow: '/' } }
-  }
-
   return {
     rules: [
       { userAgent: '*', allow: '/' },

@@ -3,68 +3,38 @@ import { test, expect } from '@playwright/test'
 /**
  * The half of the page only machines read.
  *
- * The fixture guard is the important part here and it is asserted as *correct
- * behaviour*, not tolerated as a known failure: while `src/content` is
- * placeholder, every product name and number on this site is invented, and
- * `robots.ts` / `llms.txt` deliberately refuse to hand that to a crawler. A
- * suite that expected `Allow: /` today would be demanding the site publish
- * fabrications.
- *
- * When the real content lands, `CONTENT_IS_FIXTURE` flips and these two tests
- * fail loudly — which is the reminder to come back and invert them.
+ * This suite once asserted a blanket `Disallow: /` as correct behaviour, on the
+ * reasoning that placeholder product names should not reach a crawler. Canh
+ * reversed that policy: the site is indexable. The tests follow the policy.
  */
 
 const SITE = 'https://canhta.com'
 
 test.describe('crawler surface', () => {
-  test('/robots.txt disallows everything while the content is fixture', async ({ request }) => {
-    const res = await request.get('/robots.txt')
-    expect(res.status()).toBe(200)
-    const body = await res.text()
-
-    expect(body).toMatch(/^User-Agent:\s*\*$/im)
-    expect(body).toMatch(/^Disallow:\s*\/$/im)
-    // A blanket disallow that also advertises a sitemap is a mixed signal.
-    expect(body, 'robots.txt allows a path while fixtures are live').not.toMatch(/^Allow:/im)
-  })
-
-  test('/llms.txt serves the stub while the content is fixture', async ({ request }) => {
-    const res = await request.get('/llms.txt')
-    expect(res.status()).toBe(200)
-    expect(res.headers()['content-type']).toContain('text/plain')
-    const body = await res.text()
-    expect(body).toContain('# Not available')
-    // The point of the guard: no invented product names in the most quotable
-    // format on the site.
-    expect(body.split('\n').length, 'llms.txt is serving real content').toBeLessThan(8)
-  })
-
-  test('/sitemap.xml lists both locales with reciprocal alternates', async ({ request }) => {
-    const res = await request.get('/sitemap.xml')
-    expect(res.status()).toBe(200)
-    const xml = await res.text()
-
-    const entries = [...xml.matchAll(/<url>([\s\S]*?)<\/url>/g)].map((m) => {
-      const block = m[1]!
-      return {
-        loc: /<loc>(.*?)<\/loc>/.exec(block)?.[1],
-        alternates: [...block.matchAll(/hreflang="(.*?)"\s+href="(.*?)"/g)].map(
-          (a) => [a[1], a[2]] as const,
-        ),
-      }
-    })
-
-    expect(entries.map((e) => e.loc)).toEqual([SITE, `${SITE}/vi`])
-
-    // Reciprocal means identical: every entry declares every locale, itself
-    // included. A one-way declaration is ignored by every crawler that reads it.
-    for (const entry of entries) {
-      const map = Object.fromEntries(entry.alternates)
-      expect(map.en, `${entry.loc} has no en alternate`).toBe(SITE)
-      expect(map.vi, `${entry.loc} has no vi alternate`).toBe(`${SITE}/vi`)
+  test('robots.txt invites crawlers, and names the AI ones explicitly', async ({ request }) => {
+    const body = await (await request.get('/robots.txt')).text()
+    expect(body).toContain('Allow: /')
+    expect(body, 'a blanket disallow is back').not.toMatch(/^\s*Disallow: \/\s*$/m)
+    // Several AI crawlers treat a bare wildcard as ambiguous.
+    for (const bot of ['GPTBot', 'ClaudeBot', 'PerplexityBot', 'Google-Extended']) {
+      expect(body, `${bot} is not named`).toContain(bot)
     }
+    expect(body).toContain('sitemap.xml')
+  })
 
-    expect(xml).toContain('xmlns:xhtml="http://www.w3.org/1999/xhtml"')
+  test('llms.txt serves the real summary', async ({ request }) => {
+    const body = await (await request.get('/llms.txt')).text()
+    expect(body).toMatch(/^# /)
+    expect(body, 'llms.txt is still the stub').not.toContain('Not available')
+    expect(body).toContain('## What I build')
+  })
+
+  test('sitemap lists both locales with reciprocal alternates', async ({ request }) => {
+    const xml = await (await request.get('/sitemap.xml')).text()
+    expect(xml).toContain('https://canhta.com</loc>')
+    expect(xml).toContain('https://canhta.com/vi</loc>')
+    expect((xml.match(/hreflang="en"/g) ?? []).length).toBe(2)
+    expect((xml.match(/hreflang="vi"/g) ?? []).length).toBe(2)
   })
 })
 

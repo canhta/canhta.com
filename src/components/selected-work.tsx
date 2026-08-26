@@ -6,6 +6,7 @@ import { statusLabel, statusTone } from '@/lib/status'
 import { kindLabel, linkLabel } from '@/lib/build-meta'
 import { SectionHead } from '@/components/motion/section-head'
 import { ProofStamp } from '@/components/proof-stamp'
+import { PendingDrawing } from '@/components/pending-drawing'
 
 /**
  * Detail drawings plus a schedule — the way a real drawing sheet handles a set
@@ -118,13 +119,17 @@ function Detail({ build, index, locale }: { build: Build; index: number; locale:
       </div>
 
       <div className="lg:col-span-7">
-        <Image
-          src={build.cover}
-          alt={`${build.name} interface`}
-          width={1200}
-          height={750}
-          className="w-full rounded-none border border-rule-strong"
-        />
+        {build.cover ? (
+          <Image
+            src={build.cover}
+            alt={`${build.name} interface`}
+            width={1200}
+            height={750}
+            className="w-full rounded-none border border-rule-strong"
+          />
+        ) : (
+          <PendingDrawing locale={locale} />
+        )}
       </div>
     </article>
   )

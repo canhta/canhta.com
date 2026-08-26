@@ -6,6 +6,7 @@ import { useState } from 'react'
 import type { Build, Locale } from '@/content/types'
 import { ease } from '@/lib/motion'
 import { statusLabel, statusTone } from '@/lib/status'
+import { PendingDrawing } from '@/components/pending-drawing'
 
 /**
  * Frame-zero proof: real product surfaces sitting where a marketing page would
@@ -73,14 +74,20 @@ export function HeroEvidence({ builds, locale }: { builds: Build[]; locale: Loca
                 {statusLabel(build.status, locale)}
               </span>
             </div>
-            <Image
-              src={build.cover}
-              alt=""
-              width={1200}
-              height={750}
-              priority={i === 0}
-              className="h-[188px] w-full object-cover object-top"
-            />
+            {build.cover ? (
+              <Image
+                src={build.cover}
+                alt=""
+                width={1200}
+                height={750}
+                priority={i === 0}
+                className="h-[188px] w-full object-cover object-top"
+              />
+            ) : (
+              <div className="h-[188px] w-full">
+                <PendingDrawing locale={locale} ratio="auto" />
+              </div>
+            )}
           </Card>
         )
       })}

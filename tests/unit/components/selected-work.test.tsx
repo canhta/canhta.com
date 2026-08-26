@@ -114,11 +114,18 @@ describe('SelectedWork', () => {
     expect(vi.container.textContent).toContain(`${builds.length - DETAIL_COUNT} mục`)
   })
 
-  it('gives the detail image a real alternative text', () => {
+  it('shows a real screenshot with real alt text, or says none exists yet', () => {
     render(<SelectedWork locale="en" />)
     const featured = featuredBuilds[0]
-    if (featured) {
+    if (!featured) return
+
+    if (featured.cover) {
       expect(screen.getByAltText(`${featured.name} interface`)).toBeInTheDocument()
+    } else {
+      // No real screenshot exists yet. The panel says so rather than borrowing a
+      // generic wireframe, which a visitor reads as the actual interface.
+      expect(screen.getByText(/drawing to follow/i)).toBeInTheDocument()
+      expect(screen.queryByAltText(`${featured.name} interface`)).toBeNull()
     }
   })
 

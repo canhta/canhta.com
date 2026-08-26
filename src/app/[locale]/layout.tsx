@@ -16,7 +16,10 @@ import '../globals.css'
 // Full diacritic coverage, and a real choice rather than the default sans.
 const bvp = Be_Vietnam_Pro({
   subsets: ['latin', 'vietnamese'],
-  weight: ['400', '500', '600', '800'],
+  // 600 was declared and never used — grep finds no `font-semibold` in src/.
+  // Each declared weight is two more font files (latin + vietnamese) fetched on
+  // a page whose LCP element is text, so a dead weight is pure LCP cost.
+  weight: ['400', '500', '800'],
   variable: '--font-bvp',
   display: 'swap',
 })

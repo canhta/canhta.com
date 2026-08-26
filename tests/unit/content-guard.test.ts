@@ -78,14 +78,20 @@ describe('fixture guard', () => {
     const { builds, capabilities, services, faq, social } = await importContent()
 
     // The guard's deep scan is only worth as much as the markers it can find.
-    // Every collection member carries one, so dropping a single fixture module
-    // in isolation still leaves the build refused.
-    const collections = [builds, capabilities, services, faq, social]
-    for (const collection of collections) {
+    // `builds` is deliberately excluded: those three projects are real, so they
+    // carry no marker. That is the point of a per-item marker rather than a
+    // single global flag — content can go real one module at a time, and the
+    // guard stays armed until the last placeholder is gone.
+    for (const collection of [capabilities, services, faq, social]) {
       expect(collection.length).toBeGreaterThan(0)
       for (const item of collection) {
         expect(item).toHaveProperty('__fixture', true)
       }
+    }
+
+    expect(builds.length).toBeGreaterThan(0)
+    for (const build of builds) {
+      expect(build, 'a real project reintroduced a fixture marker').not.toHaveProperty('__fixture')
     }
   })
 })

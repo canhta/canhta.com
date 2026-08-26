@@ -17,7 +17,7 @@ export function FixtureBanner() {
   if (!CONTENT_IS_FIXTURE) return null
   return (
     <div className="bg-live-text px-4 py-1.5 text-center font-mono text-[11px] tracking-wide text-on-accent">
-      FIXTURE CONTENT — every name, claim and number on this page is placeholder
+      DRAFT — the projects are real; the profile, services and FAQ are still placeholder
     </div>
   )
 }

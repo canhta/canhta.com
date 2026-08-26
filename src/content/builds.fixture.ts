@@ -1,148 +1,106 @@
 import type { Build, FixtureMarked } from './types'
 
-export const buildsFixture: (Build & FixtureMarked)[] = [
+/**
+ * REAL PROJECTS. Every line here is taken from the repositories themselves —
+ * their CONTEXT.md glossaries, their docs, and the GitHub API — not written to
+ * sound good.
+ *
+ * Two are still private and have no public destination, so they carry no links
+ * and status `building`. Linking a private repo gives every visitor a 404, and
+ * describing an unshipped product in the past tense is the kind of claim this
+ * project refuses to make.
+ *
+ * `cover` is absent throughout: no real screenshots exist yet. The detail and
+ * the hero deck render a "drawing to follow" panel instead of borrowing a
+ * generic wireframe and presenting it as a product shot.
+ *
+ * `proof` is absent throughout for the same reason — there is no number here
+ * that anyone could check.
+ */
+export const buildsFixture: (Build & Partial<FixtureMarked>)[] = [
   {
-    __fixture: true,
-    slug: 'atlas',
+    slug: 'copycat-skills',
     order: 1,
-    name: 'Atlas',
-    status: 'live',
-    year: '2026',
-    kind: 'agent',
-    featured: true,
-    tagline: {
-      en: 'An agent that clears the ticket queue before anyone opens it',
-      vi: 'Một agent dọn sạch hàng đợi ticket trước khi có ai kịp mở',
-    },
-    problem: {
-      en: 'Support drowned in repetitive tickets nobody had time to triage.',
-      vi: 'Đội hỗ trợ chìm trong ticket lặp lại, không ai kịp phân loại.',
-    },
-    built: {
-      en: 'An agent loop that reads, reasons, acts, and escalates to a human.',
-      vi: 'Vòng lặp agent đọc, suy luận, hành động, và chuyển người thật khi cần.',
-    },
-    result: {
-      en: 'Runs unattended overnight; the morning queue starts near empty.',
-      vi: 'Chạy không người trực qua đêm; sáng ra hàng đợi gần như trống.',
-    },
-    cover: '/builds/atlas.svg',
-    links: [
-      { kind: 'web', url: 'https://example.com' },
-      { kind: 'docs', url: 'https://example.com/docs' },
-    ],
-    proof: { label: { en: 'tickets/day', vi: 'ticket/ngày' }, value: '1.2k' },
-  },
-  {
-    __fixture: true,
-    slug: 'lumen',
-    order: 2,
-    name: 'Lumen',
-    status: 'shipped',
-    year: '2025',
-    kind: 'mobile',
-    featured: true,
-    tagline: {
-      en: 'A mobile app people actually open on day thirty',
-      vi: 'Một app mobile mà người ta vẫn mở vào ngày thứ ba mươi',
-    },
-    problem: {
-      en: 'A useful service nobody could reach without a laptop.',
-      vi: 'Một dịch vụ hữu ích nhưng không ai dùng được nếu thiếu laptop.',
-    },
-    built: {
-      en: 'A native-feeling cross-platform app with offline-first sync.',
-      vi: 'App đa nền tảng cảm giác native, đồng bộ ưu tiên offline.',
-    },
-    result: {
-      en: 'Shipped to both stores and maintained through four releases.',
-      vi: 'Đã lên cả hai store và duy trì qua bốn bản phát hành.',
-    },
-    cover: '/builds/lumen.svg',
-    links: [
-      { kind: 'appstore', url: 'https://apps.apple.com/app/id000000000' },
-      { kind: 'playstore', url: 'https://play.google.com/store/apps/details?id=com.example' },
-    ],
-  },
-  {
-    __fixture: true,
-    slug: 'kite',
-    order: 3,
-    name: 'Kite',
-    status: 'building',
-    year: '2026',
-    kind: 'saas',
-    tagline: {
-      en: 'A mini-SaaS that does one job and bills for it',
-      vi: 'Một mini-SaaS làm đúng một việc và thu tiền cho việc đó',
-    },
-    problem: {
-      en: 'A workflow that had outgrown the spreadsheet holding it.',
-      vi: 'Một quy trình ai cũng đang xử lý tạm bằng bảng tính.',
-    },
-    built: {
-      en: 'A focused product: one screen, one job, billing from day one.',
-      vi: 'Sản phẩm gọn: một màn hình, một việc, thu tiền từ ngày đầu.',
-    },
-    result: {
-      en: 'In private beta with its first paying users.',
-      vi: 'Đang beta kín với những người dùng trả tiền đầu tiên.',
-    },
-    cover: '/builds/kite.svg',
-    links: [{ kind: 'web', url: 'https://example.com' }],
-  },
-  {
-    __fixture: true,
-    slug: 'ledger-skill',
-    order: 4,
-    name: 'Ledger',
-    status: 'live',
+    name: 'copycat-skills',
     year: '2026',
     kind: 'skill',
+    status: 'shipped',
+    featured: true,
     tagline: {
-      en: 'An agent skill that reconciles books without being asked twice',
-      vi: 'Kỹ năng agent đối soát sổ sách mà không phải nhắc hai lần',
+      en: 'Turns an app idea into an evidence-backed decision, not an opinion.',
+      vi: 'Biến một ý tưởng app thành quyết định có bằng chứng, không phải cảm tính.',
     },
     problem: {
-      en: 'Month-end reconciliation ate two days of a finance lead.',
-      vi: 'Đối soát cuối tháng ngốn hai ngày của trưởng phòng tài chính.',
+      en: 'Deciding what to build from a product link usually ends in a hunch.',
+      vi: 'Quyết định xây gì từ một link sản phẩm thường kết thúc bằng linh cảm.',
     },
     built: {
-      en: 'A skill an agent loads on demand, with a human sign-off step.',
-      vi: 'Một kỹ năng agent nạp khi cần, có bước người xác nhận.',
+      en: 'An agent skill that reads the market and returns a differentiated call.',
+      vi: 'Một agent skill đọc thị trường và trả về một hướng đi khác biệt.',
     },
     result: {
-      en: 'Reconciliation now finishes before the finance lead arrives.',
-      vi: 'Đối soát xong trước khi trưởng phòng tới văn phòng.',
+      en: 'Published and installable from the public skills registry.',
+      vi: 'Đã xuất bản, cài được từ registry skills công khai.',
     },
-    cover: '/builds/atlas.svg',
-    links: [{ kind: 'github', url: 'https://github.com/canhta' }],
+    links: [
+      { kind: 'docs', url: 'https://skills.sh/canhta/copycat-skills' },
+      { kind: 'github', url: 'https://github.com/canhta/copycat-skills' },
+    ],
   },
   {
-    __fixture: true,
-    slug: 'plumb',
-    order: 5,
-    name: 'Plumb',
-    status: 'shipped',
-    year: '2025',
-    kind: 'tool',
+    slug: 'inluv',
+    order: 2,
+    name: 'inluv',
+    year: '2026',
+    kind: 'mobile',
+    status: 'building',
     tagline: {
-      en: 'A small tool that makes a slow build observable',
-      vi: 'Công cụ nhỏ giúp nhìn thấy vì sao build chậm',
+      en: 'An iPhone app for two people, built around rituals rather than a feed.',
+      vi: 'App iPhone cho hai người, xoay quanh nghi thức chứ không phải bảng tin.',
     },
     problem: {
-      en: 'Nobody could say which step made the pipeline slow.',
-      vi: 'Không ai chỉ ra được bước nào làm pipeline chậm.',
+      en: 'Apps for couples turn a relationship into a feed to scroll.',
+      vi: 'App cho các cặp đôi biến mối quan hệ thành một bảng tin để lướt.',
     },
     built: {
-      en: 'A CLI that traces each step and prints where the time went.',
-      vi: 'Một CLI theo dấu từng bước và in ra thời gian đi đâu.',
+      en: 'Daily rituals where neither answer is revealed until both are in.',
+      vi: 'Nghi thức hằng ngày: chưa ai trả lời xong thì chưa ai thấy gì.',
     },
     result: {
-      en: 'Used on every project since, including this one.',
-      vi: 'Dùng cho mọi dự án từ đó, kể cả trang này.',
+      en: 'In build. Domain model, sync protocol and release gates are settled.',
+      vi: 'Đang xây. Mô hình miền, giao thức đồng bộ và cổng phát hành đã chốt.',
     },
-    cover: '/builds/kite.svg',
-    links: [{ kind: 'github', url: 'https://github.com/canhta' }],
+    links: [],
+  },
+  {
+    slug: 'pixelbid',
+    order: 3,
+    name: 'PixelBid',
+    year: '2026',
+    kind: 'web',
+    status: 'building',
+    /**
+     * Described as what it is. It is a rebuild of outbid.lol, which was trending
+     * on X, done for fun — so it is not presented as a market product I run. The
+     * honest version is also the better one for this page: the interesting claim
+     * is not the idea, it is how fast the working thing existed.
+     */
+    tagline: {
+      en: 'Saw a bidding game trending on X, rebuilt it working.',
+      vi: 'Thấy một trò đấu giá đang trend trên X, dựng lại thành bản chạy được.',
+    },
+    problem: {
+      en: 'The fastest way to learn a mechanic is to make it work yourself.',
+      vi: 'Cách nhanh nhất để hiểu một cơ chế là tự làm cho nó chạy.',
+    },
+    built: {
+      en: 'A credit-backed attention market: a qualified open burns one credit.',
+      vi: 'Thị trường chú ý bằng credit: một lượt mở hợp lệ đốt đúng một credit.',
+    },
+    result: {
+      en: 'In build, for fun. Original idea: outbid.lol.',
+      vi: 'Đang xây, làm cho vui. Ý tưởng gốc: outbid.lol.',
+    },
+    links: [],
   },
 ]

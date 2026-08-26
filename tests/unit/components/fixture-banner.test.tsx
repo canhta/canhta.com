@@ -30,17 +30,20 @@ describe('FixtureBanner', () => {
 
     await renderBanner()
 
-    expect(screen.getByText(/FIXTURE CONTENT/)).toBeInTheDocument()
+    expect(screen.getByText(/DRAFT/)).toBeInTheDocument()
   })
 
-  it('says plainly that every name, claim and number is placeholder', async () => {
+  it('names exactly which parts are still placeholder', async () => {
     vi.stubEnv('NODE_ENV', 'production')
     vi.stubEnv('ALLOW_FIXTURES', '1')
 
     await renderBanner()
 
     // The wording is the whole point: a bare "FIXTURE" tells a visitor nothing.
-    expect(screen.getByText(/every name, claim and number on this page is placeholder/i))
+    // The wording used to claim EVERY name was invented. The projects are real
+    // now, so that had become a false statement in the other direction — the
+    // banner has to be as accurate as the page it is warning about.
+    expect(screen.getByText(/the projects are real; the profile, services and FAQ are still placeholder/i))
       .toBeInTheDocument()
   })
 
@@ -50,7 +53,7 @@ describe('FixtureBanner', () => {
 
     await renderBanner()
 
-    const banner = screen.getByText(/FIXTURE CONTENT/)
+    const banner = screen.getByText(/DRAFT/)
     expect(banner).not.toHaveAttribute('aria-hidden')
     expect(banner.className).not.toContain('sr-only')
     expect(banner.className).not.toContain('hidden')
@@ -62,7 +65,7 @@ describe('FixtureBanner', () => {
 
     await renderBanner()
 
-    expect(screen.getByText(/FIXTURE CONTENT/)).toBeInTheDocument()
+    expect(screen.getByText(/DRAFT/)).toBeInTheDocument()
   })
 
   it('disappears once the content is real', async () => {

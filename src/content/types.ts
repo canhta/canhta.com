@@ -46,7 +46,8 @@ export interface Build {
   problem: LocalizedText
   built: LocalizedText
   result: LocalizedText
-  cover: string
+  /** Optional: absent means no real screenshot exists yet. Never fake one. */
+  cover?: string
   logo?: string
   links: BuildLink[]
   proof?: Proof
