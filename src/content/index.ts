@@ -1,0 +1,64 @@
+import { profileFixture } from './profile.fixture'
+import { buildsFixture } from './builds.fixture'
+import { capabilitiesFixture } from './capabilities.fixture'
+import { servicesFixture } from './services.fixture'
+import { socialFixture } from './social.fixture'
+import { faqFixture } from './faq.fixture'
+import type { Build, Capability, Faq, Profile, Service, SocialLink } from './types'
+
+/**
+ * PRODUCTION GUARD
+ *
+ * This repository is public. Fixture content is written to look plausible so the
+ * design can be evaluated — which is exactly why it must never reach production.
+ * Anything carrying `__fixture` fails the build unless explicitly allowed.
+ *
+ * Escape hatch (preview deploys only): ALLOW_FIXTURES=1
+ */
+function containsFixture(value: unknown, seen = new Set<unknown>()): boolean {
+  if (value === null || typeof value !== 'object') return false
+  if (seen.has(value)) return false
+  seen.add(value)
+  if (Array.isArray(value)) return value.some((item) => containsFixture(item, seen))
+  if ('__fixture' in value && (value as { __fixture?: unknown }).__fixture === true) return true
+  return Object.values(value).some((item) => containsFixture(item, seen))
+}
+
+const sources = {
+  profile: profileFixture,
+  builds: buildsFixture,
+  capabilities: capabilitiesFixture,
+  services: servicesFixture,
+  social: socialFixture,
+  faq: faqFixture,
+}
+
+export const CONTENT_IS_FIXTURE = containsFixture(sources)
+
+if (
+  CONTENT_IS_FIXTURE &&
+  process.env.NODE_ENV === 'production' &&
+  process.env.ALLOW_FIXTURES !== '1'
+) {
+  throw new Error(
+    [
+      'Refusing to build: fixture content is still reachable from a rendered route.',
+      '',
+      'Every claim on canhta.com must be real. Replace the *.fixture.ts modules in',
+      'src/content/ with approved content, or set ALLOW_FIXTURES=1 for a preview',
+      'deploy that is never linked publicly.',
+    ].join('\n'),
+  )
+}
+
+export const profile: Profile = profileFixture
+export const builds: Build[] = [...buildsFixture].sort((a, b) => a.order - b.order)
+export const capabilities: Capability[] = [...capabilitiesFixture].sort((a, b) => a.order - b.order)
+export const services: Service[] = [...servicesFixture].sort((a, b) => a.order - b.order)
+export const faq: Faq[] = [...faqFixture].sort((a, b) => a.order - b.order)
+export const social: SocialLink[] = socialFixture
+
+export const socialByNetwork = (network: SocialLink['network']) =>
+  social.find((s) => s.network === network)
+
+export * from './types'

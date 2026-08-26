@@ -1,0 +1,6 @@
+# Build scripts reviewed and approved:
+#   @swc/core       — Next.js's Rust compiler, required to build at all
+#   @parcel/watcher — native file watcher used by dev mode
+allowBuilds:
+  '@parcel/watcher': true
+  '@swc/core': true
