@@ -46,23 +46,29 @@ export function CapabilityMatrix({ locale }: { locale: Locale }) {
             <m.div
               key={cap.id}
               onMouseEnter={() => setActive(cap.id)}
-              onFocusCapture={() => setActive(cap.id)}
-              initial={false}
-              animate={{ backgroundColor: isActive ? '#e8eae7' : '#eff0ee' }}
-              transition={{ duration: reduced ? 0 : duration.state, ease: ease.out }}
-              className="flex flex-1 flex-col p-5"
+              className="relative flex flex-1 flex-col bg-surface p-5"
             >
+              {/* A drawn rule marks the active column. A drawing does not change
+                  its fill to show selection; the pen marks it. */}
+              <m.span
+                aria-hidden="true"
+                className="absolute inset-x-0 top-0 h-0.5 origin-left bg-ink"
+                initial={false}
+                animate={{ scaleX: isActive ? 1 : 0 }}
+                transition={{ duration: reduced ? 0 : 0.2, ease: ease.plot }}
+              />
               <div className="flex items-baseline justify-between gap-3 border-b border-ink pb-3">
                 <h3 className="text-[17px] font-extrabold tracking-[-0.02em]">
-                  {t(cap.name, locale)}
+                  <button
+                    type="button"
+                    onFocus={() => setActive(cap.id)}
+                    onClick={() => setActive(cap.id)}
+                    aria-pressed={isActive}
+                    className="text-left"
+                  >
+                    {t(cap.name, locale)}
+                  </button>
                 </h3>
-                <m.span
-                  aria-hidden="true"
-                  initial={false}
-                  animate={{ opacity: isActive ? 1 : 0 }}
-                  transition={{ duration: reduced ? 0 : duration.feedback }}
-                  className="h-1.5 w-1.5 shrink-0 rounded-full bg-live"
-                />
               </div>
 
               <dl className="flex-1">

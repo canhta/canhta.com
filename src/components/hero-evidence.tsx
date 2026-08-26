@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { m } from 'motion/react'
 import { useState } from 'react'
 import type { Build, Locale } from '@/content/types'
-import { duration, ease } from '@/lib/motion'
+import { ease } from '@/lib/motion'
 import { statusLabel, statusTone } from '@/lib/status'
 
 /**
@@ -31,28 +31,31 @@ export function HeroEvidence({ builds, locale }: { builds: Build[]; locale: Loca
       {stack.map((build, i) => {
         const restY = i * STEP
         const isHovered = hovered === build.slug
-        const isDimmed = hovered !== null && !isHovered
         const hoveredIndex = stack.findIndex((b) => b.slug === hovered)
 
         // Cards below the hovered one slide down to open a gap for it.
         const pushed = hoveredIndex !== -1 && i > hoveredIndex ? 26 : 0
 
+        const primary = build.links[0]
+        const Card = primary ? m.a : m.div
+
         return (
-          <m.article
+          <Card
             key={build.slug}
-            initial={{ opacity: 0, y: restY + 22 }}
+            {...(primary ? { href: primary.url, target: '_blank', rel: 'noreferrer noopener' } : {})}
+            onFocus={() => setHovered(build.slug)}
+            onBlur={() => setHovered(null)}
+            // No opacity in `initial`: this card carries the priority image, and
+            // starting it hidden would gate LCP on the JS bundle and hydration.
+            initial={false}
             animate={{
-              opacity: isDimmed ? 0.62 : 1,
               y: isHovered ? restY - 10 : restY + pushed,
               x: isHovered ? 6 : 0,
             }}
-            transition={{
-              opacity: { duration: duration.state, ease: ease.out },
-              default: { ...ease.spring },
-            }}
+            transition={{ ...ease.spring }}
             style={{ zIndex: isHovered ? 30 : i + 1 }}
             onMouseEnter={() => setHovered(build.slug)}
-            className="absolute inset-x-0 top-0 overflow-hidden rounded-none border border-rule-strong bg-surface shadow-[0_10px_24px_-14px_rgba(22,32,42,0.35)]"
+            className="absolute inset-x-0 top-0 block overflow-hidden rounded-none border border-rule-strong bg-surface shadow-[0_10px_24px_-14px_rgba(22,32,42,0.35)]"
           >
             <div className="flex items-center justify-between gap-3 border-b border-rule px-4 py-2.5">
               <span className="font-mono text-[11px] tracking-[0.1em] uppercase">
@@ -71,7 +74,7 @@ export function HeroEvidence({ builds, locale }: { builds: Build[]; locale: Loca
               priority={i === 0}
               className="h-[188px] w-full object-cover object-top"
             />
-          </m.article>
+          </Card>
         )
       })}
     </div>

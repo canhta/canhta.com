@@ -1,8 +1,19 @@
 'use client'
 
 import { m, useInView, useReducedMotion, useScroll, useSpring } from 'motion/react'
-import { useRef, type ReactNode } from 'react'
-import { duration, ease } from '@/lib/motion'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { PEN, duration, ease, penTime } from '@/lib/motion'
+
+/**
+ * Server-rendered content paints visible, so a component that starts hidden must
+ * not flip to hidden the instant it hydrates. Nothing animates until mounted, and
+ * before that every primitive renders in its finished state.
+ */
+function useMounted() {
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+  return mounted
+}
 
 /**
  * The page's motion vocabulary, in one place.
@@ -22,14 +33,34 @@ export function DrawRule({
   className = '',
   delay = 0,
   weight = 'rule',
+  onLength,
 }: {
   className?: string
   delay?: number
   weight?: 'rule' | 'ink'
+  /** Reports the pen's travel time so callers can sequence against it. */
+  onLength?: (seconds: number) => void
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, VIEWPORT)
   const reduced = useReducedMotion()
+  const mounted = useMounted()
+  const [span, setSpan] = useState(0)
+
+  // A plotter has a speed, not a duration — measure the rule and derive the time.
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const ro = new ResizeObserver(([entry]) => {
+      const w = entry?.contentRect.width ?? 0
+      setSpan(w)
+      onLength?.(penTime(w, PEN))
+    })
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [onLength])
+
+  const drawn = reduced || !mounted || inView
 
   return (
     <m.div
@@ -37,9 +68,12 @@ export function DrawRule({
       aria-hidden="true"
       className={`h-px origin-left ${weight === 'ink' ? 'bg-ink' : 'bg-rule'} ${className}`}
       initial={false}
-      animate={{ scaleX: reduced || inView ? 1 : 0 }}
-      transition={{ duration: reduced ? 0 : 0.62, ease: ease.out, delay: reduced ? 0 : delay }}
-      style={{ scaleX: reduced ? 1 : undefined }}
+      animate={{ scaleX: drawn ? 1 : 0 }}
+      transition={{
+        duration: reduced ? 0 : penTime(span || 600, PEN),
+        ease: ease.plot,
+        delay: reduced ? 0 : delay,
+      }}
     />
   )
 }
@@ -60,22 +94,17 @@ export function Stamp({
   const ref = useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, VIEWPORT)
   const reduced = useReducedMotion()
-  const on = reduced || inView
+  const mounted = useMounted()
+  const play = mounted && !reduced && inView
 
   return (
-    <m.span
+    <span
       ref={ref}
-      className={className}
-      initial={false}
-      animate={{ opacity: on ? 1 : 0, scale: on ? 1 : 0.94 }}
-      transition={{
-        duration: reduced ? 0 : duration.feedback,
-        ease: ease.out,
-        delay: reduced ? 0 : delay,
-      }}
+      className={`${className} ${play ? 'stamp-in' : ''}`}
+      style={{ ['--reveal-delay' as string]: `${delay * 1000}ms` }}
     >
       {children}
-    </m.span>
+    </span>
   )
 }
 
@@ -88,28 +117,27 @@ export function Reveal({
 }: {
   children: ReactNode
   delay?: number
+  /** Retained for callers; used to scale the pen's travel time. */
   y?: number
   className?: string
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, VIEWPORT)
   const reduced = useReducedMotion()
-  const on = reduced || inView
+  const mounted = useMounted()
+  const play = mounted && !reduced && inView
 
   return (
-    <m.div
+    <div
       ref={ref}
-      className={className}
-      initial={false}
-      animate={{ opacity: on ? 1 : 0, y: on ? 0 : y }}
-      transition={{
-        duration: reduced ? 0 : duration.reveal,
-        ease: ease.out,
-        delay: reduced ? 0 : delay,
+      className={`${className} ${play ? 'ink-in' : ''}`}
+      style={{
+        ['--reveal-dur' as string]: `${Math.round(penTime(y * 30, PEN) * 1000)}ms`,
+        ['--reveal-delay' as string]: `${delay * 1000}ms`,
       }}
     >
       {children}
-    </m.div>
+    </div>
   )
 }
 
@@ -134,32 +162,28 @@ export function RevealList({
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, VIEWPORT)
   const reduced = useReducedMotion()
-  const on = reduced || inView
-  const MotionAs = (As === 'ul' ? m.ul : As === 'dl' ? m.dl : m.div) as typeof m.div
+  const mounted = useMounted()
+  const play = mounted && !reduced && inView
+  const Wrap = As as 'div'
   // `ul > div > li` and `dl > div > dt` are invalid and break list semantics for
   // assistive technology, so the wrapper takes the element the parent requires.
-  const MotionItem = (As === 'ul' ? m.li : m.div) as typeof m.div
+  const Item = (As === 'ul' ? 'li' : 'div') as 'div'
 
   return (
-    <MotionAs ref={ref} className={className}>
+    <Wrap ref={ref} className={className}>
       {children.map((child, i) => (
-        // A real wrapper, not `display: contents` — transforms and opacity do not
-        // apply to a box that has been removed from the layout tree.
-        <MotionItem
+        <Item
           key={i}
-          className={itemClassName}
-          initial={false}
-          animate={{ opacity: on ? 1 : 0, y: on ? 0 : 12 }}
-          transition={{
-            duration: reduced ? 0 : duration.reveal,
-            ease: ease.out,
-            delay: reduced ? 0 : i * stagger,
+          className={`${itemClassName} ${play ? 'ink-in' : ''}`}
+          style={{
+            ['--reveal-dur' as string]: '380ms',
+            ['--reveal-delay' as string]: `${Math.round(i * stagger * 1000)}ms`,
           }}
         >
           {child}
-        </MotionItem>
+        </Item>
       ))}
-    </MotionAs>
+    </Wrap>
   )
 }
 
@@ -179,7 +203,7 @@ export function MarginProgress() {
       aria-hidden="true"
       className="pointer-events-none fixed top-0 left-0 z-50 hidden h-full w-px bg-rule lg:block"
     >
-      <m.div className="h-full w-px origin-top bg-live" style={{ scaleY }} />
+      <m.div className="h-full w-px origin-top bg-ink/40" style={{ scaleY }} />
     </div>
   )
 }

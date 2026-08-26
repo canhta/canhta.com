@@ -63,7 +63,6 @@ export default function PixiSignals({ activePhase }: { activePhase: number }) {
 
       const paths = LINKS.map((l: Link) => samplePath(l.curve))
       const layer = new pixi.Container()
-      layer.blendMode = 'add'
       app.stage.addChild(layer)
 
       // One reusable sprite texture beats a Graphics object per particle.
@@ -90,14 +89,16 @@ export default function PixiSignals({ activePhase }: { activePhase: number }) {
 
       let sinceSpawn = 0
 
-      const tick = () => {
+      const tick = (ticker: import('pixi.js').Ticker) => {
         const phase = phaseRef.current
-        sinceSpawn += 1
+        // deltaTime is in frames-at-60fps, so this is refresh-rate independent.
+        const dt = Math.min(ticker.deltaTime, 3)
+        sinceSpawn += dt
 
         // Only links whose phase has been reached carry signal.
         const live = LINKS.map((l, i) => (l.phase <= phase ? i : -1)).filter((i) => i >= 0)
 
-        if (live.length > 0 && sinceSpawn > 5 && particles.length < 120) {
+        if (live.length > 0 && sinceSpawn > 5 && particles.length < 90) {
           const pick = live[Math.floor(Math.random() * live.length)]
           if (pick !== undefined) spawn(pick)
           sinceSpawn = 0
@@ -107,7 +108,7 @@ export default function PixiSignals({ activePhase }: { activePhase: number }) {
           const p = particles[i]
           const sprite = sprites[i]
           if (!p || !sprite) continue
-          p.t += p.speed
+          p.t += p.speed * dt
           if (p.t >= 1) {
             sprite.destroy()
             particles.splice(i, 1)
@@ -129,7 +130,17 @@ export default function PixiSignals({ activePhase }: { activePhase: number }) {
 
       app.ticker.add(tick)
 
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry?.isIntersecting) app.ticker.start()
+          else app.ticker.stop()
+        },
+        { threshold: 0 },
+      )
+      observer.observe(canvas)
+
       cleanup = () => {
+        observer.disconnect()
         app.ticker.remove(tick)
         texture.destroy(true)
         app.destroy(true, { children: true })

@@ -122,21 +122,27 @@ export function HeroShader() {
     const pointer = { x: 0.5, y: 0.62 }
     const target = { x: 0.5, y: 0.62 }
 
+    // Layout is read on resize only, never inside the frame loop.
+    let rect = canvas.getBoundingClientRect()
     const resize = () => {
+      rect = canvas.getBoundingClientRect()
       // Half-resolution: the field is low-frequency, nobody can tell, and it
       // roughly quarters the fragment cost on high-DPI screens.
       const dpr = Math.min(window.devicePixelRatio || 1, 2) * 0.5
-      const w = Math.max(1, Math.floor(canvas.clientWidth * dpr))
-      const h = Math.max(1, Math.floor(canvas.clientHeight * dpr))
+      const w = Math.max(1, Math.floor(rect.width * dpr))
+      const h = Math.max(1, Math.floor(rect.height * dpr))
       if (canvas.width !== w || canvas.height !== h) {
         canvas.width = w
         canvas.height = h
         gl.viewport(0, 0, w, h)
       }
     }
+    const ro = new ResizeObserver(resize)
+    ro.observe(canvas)
+    resize()
 
     const onPointer = (e: PointerEvent) => {
-      const rect = canvas.getBoundingClientRect()
+      if (!running) return
       target.x = (e.clientX - rect.left) / rect.width
       target.y = 1 - (e.clientY - rect.top) / rect.height
     }
@@ -145,11 +151,15 @@ export function HeroShader() {
     let running = true
     const start = performance.now()
 
+    let last = performance.now()
     const frame = (now: number) => {
       if (!running) return
-      resize()
-      pointer.x += (target.x - pointer.x) * 0.045
-      pointer.y += (target.y - pointer.y) * 0.045
+      const dt = Math.min(now - last, 50)
+      last = now
+      // Frame-rate independent smoothing.
+      const k = 1 - Math.pow(0.955, dt / 16.67)
+      pointer.x += (target.x - pointer.x) * k
+      pointer.y += (target.y - pointer.y) * k
       gl.uniform2f(uRes, canvas.width, canvas.height)
       gl.uniform1f(uTime, (now - start) / 1000)
       gl.uniform2f(uPointer, pointer.x, pointer.y)
@@ -179,14 +189,22 @@ export function HeroShader() {
       running = false
       cancelAnimationFrame(raf)
     }
+    const onContextRestored = () => {
+      running = true
+      last = performance.now()
+      raf = requestAnimationFrame(frame)
+    }
     canvas.addEventListener('webglcontextlost', onContextLost)
+    canvas.addEventListener('webglcontextrestored', onContextRestored)
     window.addEventListener('pointermove', onPointer, { passive: true })
 
     return () => {
       running = false
       cancelAnimationFrame(raf)
       observer.disconnect()
+      ro.disconnect()
       canvas.removeEventListener('webglcontextlost', onContextLost)
+      canvas.removeEventListener('webglcontextrestored', onContextRestored)
       window.removeEventListener('pointermove', onPointer)
       gl.deleteProgram(program)
       gl.deleteShader(vs)

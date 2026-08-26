@@ -167,3 +167,53 @@ body {
   animation: draw 700ms var(--ease-out-soft) both;
 }
 .draw-1 { animation-delay: 80ms; }
+
+/* Scroll-triggered reveals.
+   The resting state of every one of these is VISIBLE — the keyframe animates
+   *from* hidden. If the IntersectionObserver never fires, if JS dies, if
+   hydration fails, the content is on screen. A reveal whose failure mode is
+   "invisible" is not a reveal, it is a bug waiting for a slow network. */
+@keyframes ink-in {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+}
+.ink-in {
+  animation: ink-in var(--reveal-dur, 300ms) var(--ease-out-soft) both;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+
+@keyframes stamp-in {
+  from {
+    opacity: 0;
+    transform: scale(1.06);
+    filter: blur(0.8px);
+  }
+}
+.stamp-in {
+  animation: stamp-in 110ms cubic-bezier(0.2, 0, 0, 1) both;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+
+/* Section snapping.
+   `proximity`, never `mandatory`: the scroll stays the reader's — it settles to
+   a nearby section start instead of being taken over. `mandatory` traps people
+   inside sections taller than the viewport, and FIG. 2 is exactly that. */
+html {
+  scroll-snap-type: y proximity;
+  scroll-padding-top: 48px;
+  scroll-behavior: smooth;
+}
+
+main > section,
+footer {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-snap-type: none;
+    scroll-behavior: auto;
+  }
+}

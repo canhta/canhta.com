@@ -191,4 +191,4 @@ export const LINKS: Link[] = [
 /** The improvement loop, drawn above the row so it reads as a return. */
 export const LOOP_PATH = `M ${cx(LIVE)} ${LIVE.y} C ${cx(LIVE)} ${LIVE.y - 62}, ${cx(STAGES[2] as Node)} ${LIVE.y - 62}, ${cx(STAGES[2] as Node)} ${LIVE.y}`
 
-export const LAST_PHASE = 6
+export const LAST_PHASE = 8

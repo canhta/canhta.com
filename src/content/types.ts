@@ -2,6 +2,21 @@ export type Locale = 'en' | 'vi'
 
 export type LocalizedText = Record<Locale, string>
 
+/**
+ * What kind of thing it is. A typed set rather than free text, because the
+ * schedule groups and filters on it and the set will grow well past web apps —
+ * store apps, agent skills, developer tools.
+ */
+export type BuildKind = 'agent' | 'skill' | 'mobile' | 'web' | 'saas' | 'tool'
+
+/** Where a build can be opened. A build often has more than one. */
+export type BuildLinkKind = 'appstore' | 'playstore' | 'web' | 'github' | 'docs'
+
+export interface BuildLink {
+  kind: BuildLinkKind
+  url: string
+}
+
 export type BuildStatus = 'live' | 'shipped' | 'building' | 'acquired' | 'sunset'
 
 export interface Proof {
@@ -16,6 +31,15 @@ export interface Build {
   order: number
   name: string
   status: BuildStatus
+  /** Year shipped or started — the schedule table sorts and shows this. */
+  year: string
+  kind: BuildKind
+  /**
+   * Only a couple of builds get a full detail drawing. Everything else lives in
+   * the schedule table, so the section stays the same height whether there are
+   * three products or thirty.
+   */
+  featured?: boolean
   /** Outcome-oriented. English must stay under 72 characters. */
   tagline: LocalizedText
   /** Each of these must stay under 100 characters in English. */
@@ -24,7 +48,7 @@ export interface Build {
   result: LocalizedText
   cover: string
   logo?: string
-  url?: string
+  links: BuildLink[]
   proof?: Proof
 }
 

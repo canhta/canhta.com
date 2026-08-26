@@ -24,7 +24,7 @@ export function WorkTogether({ locale }: { locale: Locale }) {
         {services.map((service, i) => (
           <div
             key={service.id}
-            className="group relative grid gap-6 border-b border-rule py-7 transition-[padding] duration-150 ease-out hover:pl-3 lg:grid-cols-12 lg:gap-10"
+            className="group relative grid gap-6 border-b border-rule py-7 transition-transform duration-150 ease-out hover:translate-x-3 lg:grid-cols-12 lg:gap-10"
           >
             <span
               aria-hidden="true"
