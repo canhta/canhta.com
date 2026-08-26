@@ -3,6 +3,8 @@ import { builds } from '@/content'
 import type { Build, Locale } from '@/content/types'
 import { t } from '@/lib/text'
 import { statusLabel, statusTone } from '@/lib/status'
+import { SectionHead } from '@/components/motion/section-head'
+import { RevealList } from '@/components/motion/primitives'
 
 const COPY = {
   heading: { en: 'What I have built', vi: 'Tôi đã xây gì' },
@@ -88,19 +90,13 @@ export function SelectedWork({ locale }: { locale: Locale }) {
 
   return (
     <section className="container-sheet py-20 md:py-24">
-      <div className="flex items-baseline gap-4 border-b border-ink pb-3">
-        <span className="fig-label shrink-0">FIG. 2</span>
-        <h2 className="text-[clamp(1.4rem,2.6vw,1.85rem)] font-extrabold tracking-[-0.03em]">
-          {t(COPY.heading, locale)}
-        </h2>
-      </div>
-      <p className="mt-4 max-w-[48ch] text-[16px] text-graphite">{t(COPY.sub, locale)}</p>
+      <SectionHead fig="FIG. 2" title={t(COPY.heading, locale)} sub={t(COPY.sub, locale)} />
 
-      <div className="mt-12 space-y-16">
+      <RevealList className="mt-12 space-y-16" itemClassName="" stagger={0.09}>
         {builds.map((build, i) => (
           <Story key={build.slug} build={build} index={i} locale={locale} />
         ))}
-      </div>
+      </RevealList>
     </section>
   )
 }

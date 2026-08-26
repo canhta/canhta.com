@@ -1,6 +1,8 @@
 import { profile, services } from '@/content'
 import type { Locale } from '@/content/types'
 import { t } from '@/lib/text'
+import { SectionHead } from '@/components/motion/section-head'
+import { RevealList } from '@/components/motion/primitives'
 
 const COPY = {
   heading: { en: 'Ways to work together', vi: 'Cách chúng ta có thể hợp tác' },
@@ -16,19 +18,18 @@ const COPY = {
 export function WorkTogether({ locale }: { locale: Locale }) {
   return (
     <section className="container-sheet py-20 md:py-24">
-      <div className="flex items-baseline gap-4 border-b border-ink pb-3">
-        <span className="fig-label shrink-0">FIG. 4</span>
-        <h2 className="text-[clamp(1.4rem,2.6vw,1.85rem)] font-extrabold tracking-[-0.03em]">
-          {t(COPY.heading, locale)}
-        </h2>
-      </div>
+      <SectionHead fig="FIG. 4" title={t(COPY.heading, locale)} />
 
-      <ul className="mt-10">
+      <RevealList as="ul" className="mt-10" stagger={0.08}>
         {services.map((service, i) => (
           <li
             key={service.id}
-            className="grid gap-6 border-b border-rule py-7 lg:grid-cols-12 lg:gap-10"
+            className="group relative grid gap-6 border-b border-rule py-7 transition-[padding] duration-150 ease-out hover:pl-3 lg:grid-cols-12 lg:gap-10"
           >
+            <span
+              aria-hidden="true"
+              className="absolute top-7 bottom-7 left-0 w-0.5 origin-top scale-y-0 bg-live transition-transform duration-200 ease-out group-hover:scale-y-100"
+            />
             <div className="lg:col-span-4">
               <span className="fig-label">{String(i + 1).padStart(2, '0')}</span>
               <h3 className="mt-2 text-[20px] font-extrabold tracking-[-0.025em]">
@@ -47,7 +48,7 @@ export function WorkTogether({ locale }: { locale: Locale }) {
             </div>
           </li>
         ))}
-      </ul>
+      </RevealList>
 
       <div className="mt-10 flex flex-wrap items-center gap-6">
         <a

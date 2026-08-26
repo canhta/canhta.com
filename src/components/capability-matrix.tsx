@@ -6,6 +6,8 @@ import { capabilities } from '@/content'
 import type { Locale } from '@/content/types'
 import { t } from '@/lib/text'
 import { duration, ease } from '@/lib/motion'
+import { SectionHead } from '@/components/motion/section-head'
+import { RevealList } from '@/components/motion/primitives'
 
 const COPY = {
   heading: { en: 'What I can build with you', vi: 'Tôi có thể cùng bạn xây gì' },
@@ -31,14 +33,13 @@ export function CapabilityMatrix({ locale }: { locale: Locale }) {
 
   return (
     <section className="container-sheet py-20 md:py-24">
-      <div className="flex items-baseline gap-4 border-b border-ink pb-3">
-        <span className="fig-label shrink-0">FIG. 3</span>
-        <h2 className="text-[clamp(1.4rem,2.6vw,1.85rem)] font-extrabold tracking-[-0.03em]">
-          {t(COPY.heading, locale)}
-        </h2>
-      </div>
+      <SectionHead fig="FIG. 3" title={t(COPY.heading, locale)} />
 
-      <div className="mt-10 grid gap-px border border-rule-strong bg-rule-strong sm:grid-cols-2 lg:grid-cols-4">
+      <RevealList
+        className="mt-10 grid gap-px border border-rule-strong bg-rule-strong sm:grid-cols-2 lg:grid-cols-4"
+        itemClassName="flex"
+        stagger={0.06}
+      >
         {capabilities.map((cap) => {
           const isActive = active === cap.id
           return (
@@ -49,7 +50,7 @@ export function CapabilityMatrix({ locale }: { locale: Locale }) {
               initial={false}
               animate={{ backgroundColor: isActive ? '#e8eae7' : '#eff0ee' }}
               transition={{ duration: reduced ? 0 : duration.state, ease: ease.out }}
-              className="flex flex-col p-5"
+              className="flex flex-1 flex-col p-5"
             >
               <div className="flex items-baseline justify-between gap-3 border-b border-ink pb-3">
                 <h3 className="text-[17px] font-extrabold tracking-[-0.02em]">
@@ -75,7 +76,7 @@ export function CapabilityMatrix({ locale }: { locale: Locale }) {
             </m.div>
           )
         })}
-      </div>
+      </RevealList>
     </section>
   )
 }

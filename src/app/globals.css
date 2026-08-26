@@ -135,3 +135,26 @@ body {
 .rise-2 { animation-delay: 120ms; }
 .rise-3 { animation-delay: 180ms; }
 .rise-4 { animation-delay: 240ms; }
+
+/* Ink laid down left to right, the way a plotter prints a line of text.
+   Resting state is fully visible; the keyframe animates *from* clipped. */
+@keyframes wipe {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+}
+.wipe {
+  animation: wipe 900ms var(--ease-out-soft) both;
+}
+
+/* A rule being drawn. Same principle: the resting state is the finished line. */
+@keyframes draw {
+  from {
+    transform: scaleX(0);
+  }
+}
+.draw {
+  transform-origin: left;
+  animation: draw 700ms var(--ease-out-soft) both;
+}
+.draw-1 { animation-delay: 80ms; }

@@ -18,6 +18,7 @@ import {
   cx,
   type Node,
 } from './nodes'
+import { SectionHead } from '@/components/motion/section-head'
 
 const PixiSignals = dynamic(() => import('./pixi-signals'), { ssr: false })
 
@@ -132,13 +133,7 @@ export function SignatureSystem({ locale }: { locale: Locale }) {
 
   return (
     <section className="container-sheet py-20 md:py-28">
-      <div className="flex items-baseline gap-4 border-b border-ink pb-3">
-        <span className="fig-label shrink-0">FIG. 1</span>
-        <h2 className="text-[clamp(1.4rem,2.6vw,1.85rem)] font-extrabold tracking-[-0.03em]">
-          {t(COPY.heading, locale)}
-        </h2>
-      </div>
-      <p className="mt-4 max-w-[48ch] text-[16px] text-graphite">{t(COPY.sub, locale)}</p>
+      <SectionHead fig="FIG. 1" title={t(COPY.heading, locale)} sub={t(COPY.sub, locale)} />
 
       <div
         ref={ref}

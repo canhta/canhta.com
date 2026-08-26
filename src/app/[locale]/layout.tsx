@@ -5,6 +5,7 @@ import { NextIntlClientProvider, hasLocale } from 'next-intl'
 import { setRequestLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
 import { MotionProvider } from '@/components/motion-provider'
+import { MarginProgress } from '@/components/motion/primitives'
 import '../globals.css'
 
 // A Vietnamese-designed typeface for a Vietnamese builder's bilingual site.
@@ -50,7 +51,10 @@ export default async function LocaleLayout({
     <html lang={locale} className={`${bvp.variable} ${plexMono.variable}`}>
       <body>
         <NextIntlClientProvider>
-          <MotionProvider>{children}</MotionProvider>
+          <MotionProvider>
+            <MarginProgress />
+            {children}
+          </MotionProvider>
         </NextIntlClientProvider>
       </body>
     </html>

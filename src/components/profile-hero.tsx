@@ -28,7 +28,7 @@ export function ProfileHero({ locale }: { locale: Locale }) {
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-7">
             {/* Sheet header: who drew this. */}
-            <div className="rise flex items-center gap-4 border-b border-ink pb-3">
+            <div className="rise flex items-center gap-4 pb-3">
               <Image
                 src={profile.avatar}
                 alt={`${profile.name}, portrait`}
@@ -50,8 +50,9 @@ export function ProfileHero({ locale }: { locale: Locale }) {
                 </p>
               ) : null}
             </div>
+            <div aria-hidden="true" className="draw draw-1 h-px bg-ink" />
 
-            <h1 className="rise rise-1 mt-10 text-[clamp(2.3rem,4.6vw,3.4rem)] leading-[1.02] font-extrabold tracking-[-0.035em] text-balance">
+            <h1 className="wipe mt-10 text-[clamp(2.3rem,4.6vw,3.4rem)] leading-[1.02] font-extrabold tracking-[-0.035em] text-balance">
               {t(profile.hook, locale)}
             </h1>
 

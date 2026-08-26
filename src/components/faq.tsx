@@ -1,6 +1,8 @@
 import { faq } from '@/content'
 import type { Locale } from '@/content/types'
 import { t } from '@/lib/text'
+import { SectionHead } from '@/components/motion/section-head'
+import { RevealList } from '@/components/motion/primitives'
 
 const COPY = {
   heading: { en: 'Before you write to me', vi: 'Trước khi bạn nhắn cho tôi' },
@@ -20,15 +22,9 @@ export function Faq({ locale }: { locale: Locale }) {
 
   return (
     <section className="container-sheet py-20 md:py-24">
-      <div className="flex items-baseline gap-4 border-b border-ink pb-3">
-        <span className="fig-label shrink-0">NOTES</span>
-        <h2 className="text-[clamp(1.4rem,2.6vw,1.85rem)] font-extrabold tracking-[-0.03em]">
-          {t(COPY.heading, locale)}
-        </h2>
-      </div>
-      <p className="mt-4 max-w-[48ch] text-[16px] text-graphite">{t(COPY.sub, locale)}</p>
+      <SectionHead fig="NOTES" title={t(COPY.heading, locale)} sub={t(COPY.sub, locale)} />
 
-      <dl className="mt-10 grid gap-x-10 md:grid-cols-2">
+      <RevealList as="dl" className="mt-10 grid gap-x-10 md:grid-cols-2" stagger={0.05}>
         {faq.map((item, i) => (
           <div key={item.id} className="border-t border-rule py-6">
             <dt className="flex gap-3">
@@ -42,7 +38,7 @@ export function Faq({ locale }: { locale: Locale }) {
             </dd>
           </div>
         ))}
-      </dl>
+      </RevealList>
     </section>
   )
 }
