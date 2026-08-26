@@ -31,7 +31,12 @@ export default async function HomePage({
       />
       <FixtureBanner />
       <UtilityRow locale={locale} />
-      <main id="sheet">
+      {/* `tabIndex={-1}` is what makes the skip link work. Without it the
+          target is not focusable, `document.activeElement` stays on `body`, and
+          only Chromium's sequential-focus fallback carries the next Tab into
+          `main` — Safari has not implemented that, so there the link silently
+          returns the user to the utility row. */}
+      <main id="sheet" tabIndex={-1}>
         <ProfileHero locale={locale} />
         <SheetBreak zone="A" />
         <SignatureSystem locale={locale} />

@@ -20,7 +20,8 @@ export function statusLabel(status: BuildStatus, locale: Locale): string {
 export function statusTone(status: BuildStatus): string {
   switch (status) {
     case 'live':
-      return 'text-live'
+      // The text variant, not the stroke variant — see --color-live-text.
+      return 'text-live-text'
     case 'shipped':
       return 'text-graphite'
     case 'building':

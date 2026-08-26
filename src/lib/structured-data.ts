@@ -138,7 +138,13 @@ export function buildGraph(locale: Locale) {
       url: (b.links[0] as { url: string }).url,
       description: t(b.tagline, locale),
       applicationCategory: appCategory(b),
-      operatingSystem: b.kind === 'mobile' ? 'iOS, Android' : 'Web',
+      // Only stated where the kind actually implies a platform. This used to
+      // emit 'Web' for everything non-mobile, which asserted that an agent skill
+      // and a CLI run in a browser — an unverifiable claim, placed in the one
+      // part of the page no human reviewer reads. That is the same failure this
+      // file's header forbids for ratings and prices.
+      ...(b.kind === 'mobile' ? { operatingSystem: 'iOS, Android' } : {}),
+      ...(b.kind === 'web' || b.kind === 'saas' ? { operatingSystem: 'Web' } : {}),
       datePublished: b.year,
       author: { '@id': personId },
       ...(b.links.length > 1 ? { sameAs: b.links.slice(1).map((l) => l.url) } : {}),

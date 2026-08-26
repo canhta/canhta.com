@@ -22,11 +22,19 @@ No CMS, database, auth, admin panel, newsletter backend, chatbot, or additional 
 No invented metrics, testimonials, clients, logos, outcomes, or biography details.
 No scroll-jacking, parallax, carousels, marquees, custom cursors, or mobile autoplay video.
 
-**Three deliberate exceptions to the original constraints:**
+**No exceptions to the original constraints remain.**
 
-1. `/api/demo` exists, overriding "no API routes" — rationale in §9.
-2. A hand-written WebGL shader paints behind the hero, overriding "no canvas backgrounds" — §8.1.
-3. A GPU particle layer renders inside the signature panel, overriding "no particles / no 3D" — §10.
+Three were granted during design and all three were later withdrawn:
+
+1. `/api/demo`, overriding "no API routes" — **cut, never built**. See §9.
+2. A hand-written WebGL shader behind the hero, overriding "no canvas backgrounds" — **cut**. The
+   luminance range was 0.005–0.045; nobody could see it, and it cost a WebGL context.
+3. A GPU particle layer in the signature panel, overriding "no particles / no 3D" — **cut**. Glowing
+   dots travelling curves is the most generic possible "something technical is happening" visual, it
+   put PixiJS in the bundle, and it was decorative enough to need its own WCAG pause control.
+
+The original constraints turned out to be right. The site ships with no API route, no canvas
+background and no particle system.
 
 Both graphics layers are visual only, sit beneath an accessible DOM layer, and degrade to a complete
 static composition.
@@ -73,9 +81,8 @@ Motion in the hero is **response**, never **reveal**.
 
 ```
 hero              identity + claim + CTA, static at frame 0
-live demo         the strongest proof; runs on demand
-signature         Idea → System → Product, 8–10s, once, replayable
-selected work     2–3 products, depth over breadth
+signature         FIG. 1 — a section line the visitor drags; no playback
+selected work     one full detail plus a schedule that scales
 capabilities      four areas, one panel, state-driven
 ways to work      three engagements — the conversion section
 footer            closing line, CTA repeat, socials
@@ -100,7 +107,6 @@ the page.
 | Unit / component | Vitest + React Testing Library |
 | E2E / a11y | Playwright + `@axe-core/playwright` |
 | Package manager | pnpm 11 |
-| LLM | `@anthropic-ai/sdk` |
 
 Verified locally: Node v26.1.0, pnpm 11.23.0.
 
@@ -108,24 +114,23 @@ Verified locally: Node v26.1.0, pnpm 11.23.0.
 
 ## 5. Architecture
 
-Fully static except one route.
+Fully static. There is no server function.
 
 - `/` and `/vi` are prerendered at build time via `generateStaticParams` + `setRequestLocale`.
-- `/api/demo` is the only server function (Node runtime).
 - Server Components by default. **Client boundaries are limited to four components:**
-  `hero-shader`, `live-demo`, `signature-system`, `capability-map`. Everything else ships zero
-  component JS.
+  `signature-system`, `capability-matrix`, `hero-evidence`, `proof-stamp`. Everything else ships
+  zero component JS.
 
 ```
 src/
   app/
-    [locale]/{layout,page,not-found}.tsx
-    api/demo/route.ts
-    {icon.svg,opengraph-image.tsx,robots.ts,sitemap.ts,globals.css}
+    [locale]/{layout,page,not-found,opengraph-image}.tsx
+    llms.txt/route.ts
+    {icon.svg,robots.ts,sitemap.ts,globals.css}
   components/
   content/
   i18n/{routing.ts,request.ts}
-  lib/{motion.ts,analytics.ts,demo-schema.ts}
+  lib/{motion.ts,analytics.ts,structured-data.ts,build-meta.ts,status.ts,text.ts}
   proxy.ts
 messages/{en,vi}.json
 public/{avatar.webp,builds/}
@@ -239,60 +244,36 @@ Two GPU layers, both additive, both removable at any moment:
 
 ---
 
-## 9. Live demo endpoint
+## 9. Live demo endpoint — CUT
 
-The site's strongest differentiator, and its largest risk.
+**Status: rejected by Canh, never built. Do not revive without re-reading this section.**
 
-### 9.1 Behaviour
+The design originally ranked a public `/api/demo` as the site's strongest differentiator: a visitor
+submits a messy real request, a model returns a schema-constrained plan, and the UI stages it. Four
+hardening layers were specified as mandatory before it could ship — per-IP rate limiting, a hard
+global spend ceiling, prompt-injection resistance, and a scripted fallback so it could never appear
+broken in front of a prospective client.
 
-Visitor submits a messy, real-world request. The system returns a structured plan — its reading of
-the problem, the steps it would take, the tool calls involved, the human checkpoint, and the shape
-of the output — which the UI reveals as a staged animation feeding directly into the site's
-Idea → System → Product visual language.
+### Why it was cut
 
-**Structured output, not free text.** The response is constrained by a JSON schema
-(`understanding`, `steps[]`, `humanCheckpoint`, `output`), giving a deterministic, safely renderable
-shape and full client-side control over the reveal animation — which matters because the animation
-is itself a deliverable.
+**It proves the model is good, not that Canh is.** A sceptical buyer reads a live LLM call and
+concludes "that is Claude, not him" — and technically they are right. The part that is genuinely his
+is invisible in the output: where the human checkpoint goes, how the scope gets cut. That is a thin
+thread to hang the page's strongest proof on.
 
-**The demo has no real tools and no side effects.** It describes the system it would build; it does
-not execute anything.
+**Verifiable artifacts beat a performance.** A store listing carries a developer name, a version
+history and a last-updated date that a third party vouches for. A demo is a show. When the page has
+real products with real links, the demo is competing with better evidence for the same attention.
 
-### 9.2 Model and cost
+**A public unauthenticated endpoint calling a paid model is an open wallet.** Bots find them. The
+four hardening layers were not optional, and they are a permanent operational burden — a monthly
+spend decision, a rate limiter, and a fallback recording to keep current — carried by one person.
 
-Default: **`claude-opus-5`** with `thinking: {type: "adaptive"}` and `output_config: {effort: "low"}`.
+### What replaced it
 
-Per-run estimate (~720 input tokens, ~800 output tokens including thinking):
-
-| Model | Input $/1M | Output $/1M | ≈ per run | 5,000 runs/mo |
-|---|---|---|---|---|
-| `claude-opus-5` | $5 | $25 | **~$0.024** | ~$120 |
-| `claude-sonnet-5` | $2 | $10 | ~$0.009 | ~$45 |
-| `claude-haiku-4-5` | $1 | $5 | ~$0.005 | ~$25 |
-
-> **Open decision for Canh.** Opus 5 is the default and gives the best demo quality. Haiku 4.5 cuts
-> cost roughly 5×. This is a spending decision, not an engineering one — Canh chooses before launch.
-
-Implementation notes: `@anthropic-ai/sdk`; server-side fallbacks enabled
-(`betas: ["server-side-fallback-2026-07-01"]`, `fallbacks: "default"`); `stop_reason === "refusal"`
-handled explicitly before reading content; no assistant prefill (removed on current models);
-`max_tokens` deliberately capped low for cost control.
-
-### 9.3 Hardening — all four required before the endpoint ships
-
-A public, unauthenticated endpoint calling a paid model is an open wallet. Bots will find it.
-
-1. **Rate limiting** — Vercel WAF, per IP. Target ≈ 5/minute, 30/day.
-2. **Global daily ceiling** — a hard cap independent of per-IP limits, sized against §9.2. Once
-   exceeded the endpoint stops calling the model entirely.
-3. **Injection resistance** — visitor input is data, never instruction: delimited, never concatenated
-   into the instruction body. The system prompt scopes the task narrowly and declines anything
-   off-task. Model output is rendered as text only, never as HTML.
-4. **Scripted fallback** — on rate limit, cap breach, refusal, timeout or network error the section
-   plays a pre-recorded run. **The demo never appears broken**, and never surfaces an error state to
-   a prospective client.
-
-Requests and responses carry no personal data and are not persisted.
+Nothing. The proof load moved to FIG. 1's draggable section line (§10) and to shipped products with
+third-party-verifiable links (§7). Both are static, cost nothing to run, and cannot be rate-limited
+or drained by a bot.
 
 ---
 
@@ -399,7 +380,7 @@ renders with motion disabled.
 content; signature comprehensible before animation, no layout shift, replay exposed; capability map
 via pointer, keyboard and touch; build links; CTA analytics; keyboard order; no horizontal scroll at
 320/375/768/1440px; reduced-motion disables autoplay, path travel, stagger and demo playback;
-no animation blocks first paint or CTA interaction; demo endpoint fallback path.
+no animation blocks first paint or CTA interaction.
 
 **Lighthouse mobile** — revised for the WebGL decision (§18 #9). A heavier page has been explicitly
 accepted in exchange for visual impact, so exactly one metric relaxes and the rest hold:
@@ -441,7 +422,8 @@ Nothing in this section runs without explicit per-step authorization from Canh.
 5. Requires `wrangler` installed plus a Cloudflare API token. Neither is present on the machine
    today (`cloudflared` is installed, but that is a tunnel daemon, not DNS management).
 6. Production verification: both locales, metadata, sitemap, robots, OG image, structured data,
-   analytics, reduced motion, signature playback, demo endpoint and its rate limits.
+   analytics, reduced motion, and the FIG. 1 threshold control across pointer, keyboard and
+   reduced-motion paths.
 
 ---
 
@@ -456,7 +438,6 @@ Development proceeds on fixtures; **none of these block engineering, all of them
 - One factual example per capability (agentic, mobile, web, mini-SaaS)
 - Current public build, if any
 - Availability status
-- Demo model choice: Opus 5 (default) vs Sonnet 5 vs Haiku 4.5 (§9.2)
 
 ---
 
@@ -466,6 +447,7 @@ Development proceeds on fixtures; **none of these block engineering, all of them
 |---|---|---|
 | 1 | Signature sequence moved below the first viewport | Time-based reveal cannot serve a 3-second hook |
 | 2 | `/api/demo` added, breaking "no API routes" | Canh required real numbers; demonstration is the strongest available proof |
+| 2a | `/api/demo` **cut before implementation** | It proves the model, not the builder; verifiable store listings are better evidence; and a public unauthenticated endpoint calling a paid model is an open wallet with a permanent operational cost — §9 |
 | 3 | Demonstration and method placed above portfolio | 2–3 products is the weakest asset; it should not carry the page |
 | 4 | Fixture-first with a hard production guard | Unblocks engineering without risking false claims in a public repo |
 | 5 | next-intl proxy retained | The no-proxy path forces `/en` prefixes and breaks the route contract |

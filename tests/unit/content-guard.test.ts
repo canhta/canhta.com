@@ -1,0 +1,80 @@
+import { afterEach, describe, expect, it, vi } from 'vitest'
+
+/**
+ * The production guard in `src/content/index.ts` is the last thing standing
+ * between placeholder product names and a public deploy, and it runs exactly
+ * once — at module evaluation. Every case therefore has to drop the module from
+ * the registry and re-import it dynamically; a top-level `import` would be
+ * evaluated once, under whichever environment happened to load first, and every
+ * assertion after that would be theatre.
+ */
+async function importContent(): Promise<typeof import('@/content')> {
+  vi.resetModules()
+  return import('@/content')
+}
+
+afterEach(() => {
+  vi.unstubAllEnvs()
+  vi.resetModules()
+})
+
+describe('fixture guard', () => {
+  it('refuses a production build when ALLOW_FIXTURES is absent', async () => {
+    vi.stubEnv('NODE_ENV', 'production')
+    vi.stubEnv('ALLOW_FIXTURES', undefined)
+
+    await expect(importContent()).rejects.toThrow(/Refusing to build/)
+  })
+
+  it('names the escape hatch in the failure, so the fix is not a guess', async () => {
+    vi.stubEnv('NODE_ENV', 'production')
+    vi.stubEnv('ALLOW_FIXTURES', undefined)
+
+    await expect(importContent()).rejects.toThrow(/ALLOW_FIXTURES=1/)
+  })
+
+  it('refuses any value other than exactly "1"', async () => {
+    vi.stubEnv('NODE_ENV', 'production')
+
+    for (const value of ['0', 'true', 'yes', '']) {
+      vi.stubEnv('ALLOW_FIXTURES', value)
+      await expect(importContent()).rejects.toThrow(/Refusing to build/)
+    }
+  })
+
+  it('allows a production build once ALLOW_FIXTURES=1 is set', async () => {
+    vi.stubEnv('NODE_ENV', 'production')
+    vi.stubEnv('ALLOW_FIXTURES', '1')
+
+    const content = await importContent()
+    expect(content.CONTENT_IS_FIXTURE).toBe(true)
+    expect(content.profile.name).toBe('Canh Ta')
+  })
+
+  it('does not obstruct development or test runs', async () => {
+    vi.stubEnv('NODE_ENV', 'development')
+    vi.stubEnv('ALLOW_FIXTURES', undefined)
+
+    await expect(importContent()).resolves.toBeDefined()
+  })
+
+  it('reports the content as fixture, which is what arms both the guard and the banner', async () => {
+    const { CONTENT_IS_FIXTURE } = await importContent()
+    expect(CONTENT_IS_FIXTURE).toBe(true)
+  })
+
+  it('finds markers nested inside arrays, not just on the top-level objects', async () => {
+    const { builds, capabilities, services, faq, social } = await importContent()
+
+    // The guard's deep scan is only worth as much as the markers it can find.
+    // Every collection member carries one, so dropping a single fixture module
+    // in isolation still leaves the build refused.
+    const collections = [builds, capabilities, services, faq, social]
+    for (const collection of collections) {
+      expect(collection.length).toBeGreaterThan(0)
+      for (const item of collection) {
+        expect(item).toHaveProperty('__fixture', true)
+      }
+    }
+  })
+})

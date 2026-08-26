@@ -11,9 +11,20 @@ import type { Build, Capability, Faq, Profile, Service, SocialLink } from './typ
  *
  * This repository is public. Fixture content is written to look plausible so the
  * design can be evaluated — which is exactly why it must never reach production.
- * Anything carrying `__fixture` fails the build unless explicitly allowed.
  *
- * Escape hatch (preview deploys only): ALLOW_FIXTURES=1
+ * SCOPE, precisely: anything carrying `__fixture` throws when
+ * `NODE_ENV === 'production'` and `ALLOW_FIXTURES !== '1'`. `next build` sets
+ * that, so the real build path is covered. It is deliberately NOT thrown in dev
+ * or test — the fixtures exist to be worked with there.
+ *
+ * The comment previously read "fails the build unless explicitly allowed", which
+ * invited more trust than the condition earns: any consumer importing this
+ * module outside a production build gets fixture content silently. If a codegen
+ * or export script is ever added, it must check `CONTENT_IS_FIXTURE` itself.
+ *
+ * Escape hatch (preview deploys only): ALLOW_FIXTURES=1. When it is used, the
+ * fixture banner renders and robots.txt serves a blanket disallow, so the bypass
+ * is never silent.
  */
 function containsFixture(value: unknown, seen = new Set<unknown>()): boolean {
   if (value === null || typeof value !== 'object') return false

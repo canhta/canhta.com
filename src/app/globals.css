@@ -13,6 +13,16 @@
   --color-rule-strong: #a8b0aa;
   --color-plan: #1b4fd8;
   --color-live: #e2412a;
+  /**
+   * The same red, darkened, for anything set as TEXT.
+   *
+   * `--color-live` is tuned as a 1.25–1.75px stroke on a drawing, where it is
+   * correct. As 11px type it is not: 3.66:1 on surface and 3.45:1 on paper,
+   * both under the 4.5:1 that WCAG 1.4.3 requires for small text — and white on
+   * it reached only 4.18:1, which is what the fixture banner was using. Line
+   * work keeps the bright red; letters get this one, at 4.85 / 4.58 / 5.55.
+   */
+  --color-live-text: #c2331d;
   --color-on-accent: #ffffff;
 
   --font-sans: var(--font-bvp), ui-sans-serif, system-ui, sans-serif;

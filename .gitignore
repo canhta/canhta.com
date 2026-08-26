@@ -11,4 +11,15 @@ playwright-report/
 # Local review artefacts
 review-shots/
 og-*.png
-.playwright-mcp/
+*-fig1-*.png
+hero-*.png
+
+# Vendored agent tooling. 2MB / 302 files authored by Vercel, installed locally
+# by a plugin. It is not source for this site, and republishing someone else's
+# skill library under this repo's name is noise at best.
+.agents/
+
+# Build artefact
+tsconfig.tsbuildinfo
+test-results/
+playwright-report/

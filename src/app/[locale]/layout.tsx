@@ -3,8 +3,10 @@ import { Be_Vietnam_Pro, IBM_Plex_Mono } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider, hasLocale } from 'next-intl'
 import { setRequestLocale } from 'next-intl/server'
+import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { routing } from '@/i18n/routing'
-import { profile } from '@/content'
+import { CONTENT_IS_FIXTURE, profile } from '@/content'
 import type { Locale } from '@/content/types'
 import { t } from '@/lib/text'
 import { MotionProvider } from '@/components/motion-provider'
@@ -30,6 +32,25 @@ const plexMono = IBM_Plex_Mono({
 const COPY = {
   role: { en: 'Agentic product builder', vi: 'Người xây sản phẩm agentic' },
 } as const
+
+/**
+ * Measurement is off unless the numbers would mean something.
+ *
+ * Two conditions, both load-bearing:
+ * - Not in development. A local session is one person reloading; both packages
+ *   would otherwise pull their debug scripts and narrate to the console.
+ * - Not while the content is fixture. `ALLOW_FIXTURES=1` makes a *real* deploy
+ *   serving invented product names and invented numbers. Pageviews and Core Web
+ *   Vitals collected against placeholder copy become the baseline the finished
+ *   site is later compared against, and Vercel gives you no way to subtract
+ *   them afterwards — so the guard has to be before the first datapoint, not a
+ *   filter after it.
+ *
+ * Both are read once at module scope: this is a decision about the deployment,
+ * not about the request, and re-evaluating it per render would only suggest
+ * otherwise.
+ */
+const MEASURE = process.env.NODE_ENV === 'production' && !CONTENT_IS_FIXTURE
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
@@ -109,6 +130,18 @@ export default async function LocaleLayout({
             {children}
           </MotionProvider>
         </NextIntlClientProvider>
+        {/* The `/next` entry point, not the bare package: it reads the App
+            Router's own `useParams`/`usePathname`, so a visit is reported
+            against the route `/[locale]` instead of splitting one page into two
+            unrelated URLs. Both render `null` and append a `<script defer>`
+            from an effect after hydration, so neither is on the path to first
+            paint — they cannot be, there is no element to paint. */}
+        {MEASURE ? (
+          <>
+            <Analytics />
+            <SpeedInsights />
+          </>
+        ) : null}
       </body>
     </html>
   )

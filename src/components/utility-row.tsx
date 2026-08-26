@@ -1,7 +1,18 @@
 import Link from 'next/link'
 import { socialByNetwork } from '@/content'
 import type { Locale } from '@/content/types'
+import { t } from '@/lib/text'
 import { GitHubIcon, XIcon } from './icons'
+
+/**
+ * These were hardcoded English on both routes. An accessible name is content:
+ * a Vietnamese screen-reader user was getting an English landmark name and
+ * English link names on a page that is otherwise fully translated.
+ */
+const COPY = {
+  language: { en: 'Language', vi: 'Ngôn ngữ' },
+  newTab: { en: 'opens in a new tab', vi: 'mở trong tab mới' },
+} as const
 
 /** Deliberately not a navbar and deliberately not sticky. */
 export function UtilityRow({ locale }: { locale: Locale }) {
@@ -19,7 +30,7 @@ export function UtilityRow({ locale }: { locale: Locale }) {
         </Link>
 
         <div className="flex items-center gap-1">
-          <nav aria-label="Language" className="flex items-center font-mono text-[11px]">
+          <nav aria-label={t(COPY.language, locale)} className="flex items-center font-mono text-[11px]">
             <Link
               href="/"
               aria-current={locale === 'en' ? 'page' : undefined}
@@ -48,7 +59,7 @@ export function UtilityRow({ locale }: { locale: Locale }) {
               href={github.url}
               target="_blank"
               rel="noreferrer noopener"
-              aria-label="GitHub (opens in a new tab)"
+              aria-label={`GitHub (${t(COPY.newTab, locale)})`}
               className="grid h-11 w-11 place-items-center text-graphite transition-colors duration-150 hover:text-ink"
             >
               <GitHubIcon />
@@ -59,7 +70,7 @@ export function UtilityRow({ locale }: { locale: Locale }) {
               href={x.url}
               target="_blank"
               rel="noreferrer noopener"
-              aria-label="X (opens in a new tab)"
+              aria-label={`X (${t(COPY.newTab, locale)})`}
               className="grid h-11 w-11 place-items-center text-graphite transition-colors duration-150 hover:text-ink"
             >
               <XIcon />

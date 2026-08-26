@@ -10,6 +10,7 @@ const COPY = {
   },
   origin: { en: 'Built in Vietnam, shipped worldwide', vi: 'Làm tại Việt Nam, ship đi khắp nơi' },
   sheet: { en: 'Sheet 1 of 1', vi: 'Bản 1 / 1' },
+  newTab: { en: 'opens in a new tab', vi: 'mở trong tab mới' },
 } as const
 
 const ICONS = {
@@ -57,7 +58,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
                       href={s.url}
                       target="_blank"
                       rel="noreferrer noopener"
-                      aria-label={`${NETWORK_LABELS[s.network as keyof typeof ICONS]} (opens in a new tab)`}
+                      aria-label={`${NETWORK_LABELS[s.network as keyof typeof ICONS]} (${t(COPY.newTab, locale)})`}
                       className="grid h-11 w-11 place-items-center rounded-none border border-rule text-graphite transition-colors duration-150 hover:border-ink hover:text-ink"
                     >
                       <Icon />
