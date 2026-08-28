@@ -29,12 +29,12 @@ const SECTION_HEADINGS = {
     'Tell me what you are trying to build.',
   ],
   vi: [
-    'Tôi đã xây gì',
-    'Tôi nhận làm gì',
+    'Tôi đã làm gì',
+    'Tôi nhận việc gì',
     'Một dự án diễn ra thế nào',
-    'Ba cách thuê tôi',
+    'Ba cách làm việc cùng tôi',
     'Trước khi bạn nhắn cho tôi',
-    'Kể tôi nghe bạn đang muốn xây gì.',
+    'Cho tôi biết bạn đang muốn làm gì.',
   ],
 } as const
 

@@ -18,7 +18,7 @@ import { GitHubIcon, XIcon } from './icons'
 const COPY = {
   language: { en: 'Language', vi: 'Ngôn ngữ' },
   newTab: { en: 'opens in a new tab', vi: 'mở trong tab mới' },
-  role: { en: 'Independent software developer', vi: 'Lập trình viên phần mềm độc lập' },
+  role: { en: 'Independent software developer', vi: 'Lập trình viên tự do' },
 } as const
 
 export function SiteHeader({ locale }: { locale: Locale }) {

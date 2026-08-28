@@ -23,7 +23,7 @@ export const alt = 'Canh Ta'
  * and Vietnamese diacritics are exactly what a fallback font gets wrong.
  */
 const COPY = {
-  role: { en: 'Independent software developer', vi: 'Lập trình viên phần mềm độc lập' },
+  role: { en: 'Independent software developer', vi: 'Lập trình viên tự do' },
 } as const
 
 const BG = '#fbf9f5'

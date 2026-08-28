@@ -92,6 +92,6 @@ describe('Approach', () => {
   it('renders the Vietnamese copy on the Vietnamese route', () => {
     render(<Approach locale="vi" />)
     expect(screen.getByRole('heading', { name: 'Một dự án diễn ra thế nào' })).toBeInTheDocument()
-    expect(screen.getByRole('radio', { name: 'Khi xây xong' })).toBeInTheDocument()
+    expect(screen.getByRole('radio', { name: 'Khi làm xong' })).toBeInTheDocument()
   })
 })

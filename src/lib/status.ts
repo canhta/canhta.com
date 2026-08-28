@@ -4,7 +4,7 @@ import type { BuildStatus, Locale, LocalizedText } from '@/content/types'
 const LABELS: Record<BuildStatus, LocalizedText> = {
   live: { en: 'Live', vi: 'Đang chạy' },
   shipped: { en: 'Shipped', vi: 'Đã ship' },
-  building: { en: 'Building', vi: 'Đang xây' },
+  building: { en: 'Building', vi: 'Đang làm' },
   acquired: { en: 'Acquired', vi: 'Đã bán' },
   sunset: { en: 'Sunset', vi: 'Đã dừng' },
 }

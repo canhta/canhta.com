@@ -40,7 +40,7 @@ const newsreader = Newsreader({
 })
 
 const COPY = {
-  role: { en: 'Independent software developer', vi: 'Lập trình viên phần mềm độc lập' },
+  role: { en: 'Independent software developer', vi: 'Lập trình viên tự do' },
 } as const
 
 /**

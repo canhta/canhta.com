@@ -6,7 +6,7 @@ export const profileFixture: Profile & FixtureMarked = {
   location: { en: 'Vietnam', vi: 'Việt Nam' },
   hook: {
     en: 'I build agent systems, mobile apps and small SaaS products.',
-    vi: 'Tôi xây hệ thống agent, app mobile và sản phẩm SaaS nhỏ.',
+    vi: 'Tôi làm hệ thống agent, app mobile và SaaS nhỏ.',
   },
   /**
    * This used to open "Bring me a messy process" / "Đưa tôi một quy trình lộn
@@ -22,7 +22,7 @@ export const profileFixture: Profile & FixtureMarked = {
    */
   supporting: {
     en: 'You do not need a spec to start. Tell me which part of your work is slow or still done by hand, and I will design it, build it and run it in production.',
-    vi: 'Bạn không cần có sẵn spec. Cứ nói phần việc nào đang chậm hoặc còn làm tay, tôi sẽ thiết kế, xây và đưa nó lên chạy thật.',
+    vi: 'Bạn không cần có sẵn spec. Cứ nói phần việc nào đang chậm hoặc còn làm tay, tôi lo từ thiết kế, code cho tới lúc lên production.',
   },
   ctaLabel: { en: 'Email me', vi: 'Gửi email cho tôi' },
   ctaHref: 'mailto:hello@canhta.com?subject=Project%20inquiry%20from%20canhta.com',
@@ -42,17 +42,17 @@ export const profileFixture: Profile & FixtureMarked = {
       value: { en: 'Vietnam · GMT+7', vi: 'Việt Nam · GMT+7' },
     },
     {
-      label: { en: 'Works in', vi: 'Ngôn ngữ' },
+      label: { en: 'Works in', vi: 'Làm việc bằng' },
       value: { en: 'English · Tiếng Việt', vi: 'Tiếng Việt · English' },
     },
     {
-      label: { en: 'Replies within', vi: 'Phản hồi trong' },
-      value: { en: 'One working day', vi: 'Một ngày làm việc' },
+      label: { en: 'Replies within', vi: 'Trả lời trong' },
+      value: { en: 'One working day', vi: '1 ngày làm việc' },
     },
     {
       // Was "Kite — private beta". Kite was a fixture product that has since
       // been deleted, so this was naming a product that does not exist.
-      label: { en: 'Now building', vi: 'Đang xây' },
+      label: { en: 'Now building', vi: 'Đang làm' },
       value: { en: 'inluv · PixelBid', vi: 'inluv · PixelBid' },
     },
   ],

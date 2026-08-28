@@ -48,13 +48,13 @@ describe('Engagements', () => {
     const scope = render(<Capabilities locale="vi" capabilities={capabilities} />)
     const scopeText = scope.container.textContent ?? ''
 
-    expect(engagementsText).toContain('Đúng lúc bạn')
+    expect(engagementsText).toContain('Chọn khi')
     expect(scopeText).toContain('Hợp với việc')
     expect(engagementsText).not.toContain('Hợp với việc')
   })
 
   it('renders the Vietnamese copy on the Vietnamese route', () => {
     render(<Engagements locale="vi" />)
-    expect(screen.getByRole('heading', { name: 'Ba cách thuê tôi' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Ba cách làm việc cùng tôi' })).toBeInTheDocument()
   })
 })

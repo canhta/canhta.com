@@ -122,6 +122,6 @@ describe('Work', () => {
 
   it('renders the Vietnamese copy on the Vietnamese route', async () => {
     await renderWork('vi')
-    expect(screen.getByRole('heading', { name: 'Tôi đã xây gì' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Tôi đã làm gì' })).toBeInTheDocument()
   })
 })

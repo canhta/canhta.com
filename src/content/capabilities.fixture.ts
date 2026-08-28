@@ -16,14 +16,14 @@ export const capabilitiesFixture: (Capability & FixtureMarked)[] = [
     __fixture: true,
     id: 'agentic',
     order: 1,
-    name: { en: 'Work that runs itself', vi: 'Việc tự nó chạy' },
+    name: { en: 'Work that runs itself', vi: 'Việc tự chạy' },
     bestFor: {
       en: 'Repetitive work that still needs a judgement call.',
-      vi: 'Việc lặp đi lặp lại nhưng vẫn cần phán đoán.',
+      vi: 'Việc lặp đi lặp lại mà vẫn cần người cân nhắc.',
     },
     canDeliver: {
       en: 'An agent that uses your existing tools and asks a person when it is unsure.',
-      vi: 'Một agent dùng đúng tool sẵn có của bạn và hỏi người khi không chắc.',
+      vi: 'Một agent chạy ngay trên tool bạn đang dùng, chỗ nào không chắc thì hỏi lại người.',
     },
   },
   {
@@ -33,7 +33,7 @@ export const capabilitiesFixture: (Capability & FixtureMarked)[] = [
     name: { en: 'Phone apps', vi: 'App điện thoại' },
     bestFor: {
       en: 'Users who are away from a desk when they need it.',
-      vi: 'Người dùng không ngồi trước máy tính khi cần đến nó.',
+      vi: 'Người dùng cần đến nó lúc không ngồi trước máy tính.',
     },
     canDeliver: {
       en: 'An app on the App Store and Google Play that works on a weak connection.',
@@ -47,11 +47,11 @@ export const capabilitiesFixture: (Capability & FixtureMarked)[] = [
     name: { en: 'Web products', vi: 'Sản phẩm web' },
     bestFor: {
       en: 'The interface your team uses every day.',
-      vi: 'Giao diện đội của bạn dùng mỗi ngày.',
+      vi: 'Giao diện team bạn dùng mỗi ngày.',
     },
     canDeliver: {
       en: 'A fast, accessible interface that stays easy to change.',
-      vi: 'Giao diện nhanh, dễ tiếp cận, và vẫn dễ sửa về sau.',
+      vi: 'Giao diện nhanh, ai cũng dùng được, và về sau vẫn dễ sửa.',
     },
   },
   {
@@ -61,11 +61,11 @@ export const capabilitiesFixture: (Capability & FixtureMarked)[] = [
     name: { en: 'Paid products', vi: 'Sản phẩm thu phí' },
     bestFor: {
       en: 'An idea you want in front of paying users early.',
-      vi: 'Ý tưởng bạn muốn đưa tới người dùng trả tiền sớm.',
+      vi: 'Ý tưởng bạn muốn sớm đưa đến tay người dùng trả tiền.',
     },
     canDeliver: {
       en: 'A small product with sign-in, billing and analytics from the start.',
-      vi: 'Sản phẩm nhỏ, có đăng nhập, thanh toán và số liệu ngay từ đầu.',
+      vi: 'Sản phẩm nhỏ, có sẵn đăng nhập, thanh toán và số liệu ngay từ đầu.',
     },
   },
 ]

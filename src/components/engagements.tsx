@@ -14,14 +14,14 @@ import { SectionHeading, Fact } from './section'
  * were saying the same thing.
  */
 const COPY = {
-  kicker: { en: 'Engagements', vi: 'Hình thức' },
-  heading: { en: 'Three ways to hire me', vi: 'Ba cách thuê tôi' },
+  kicker: { en: 'Engagements', vi: 'Hợp tác' },
+  heading: { en: 'Three ways to hire me', vi: 'Ba cách làm việc cùng tôi' },
   sub: {
     en: 'All three begin with a conversation. Pick the first one if you are not sure.',
-    vi: 'Cả ba đều bắt đầu bằng một buổi nói chuyện. Chưa chắc thì chọn cái đầu tiên.',
+    vi: 'Cả ba đều bắt đầu bằng một buổi nói chuyện. Chưa rõ thì cứ chọn cái đầu tiên.',
   },
-  output: { en: 'You get', vi: 'Bạn nhận' },
-  suited: { en: 'Right when', vi: 'Đúng lúc bạn' },
+  output: { en: 'You get', vi: 'Bạn nhận được' },
+  suited: { en: 'Right when', vi: 'Chọn khi' },
 } as const
 
 export function Engagements({ locale }: { locale: Locale }) {

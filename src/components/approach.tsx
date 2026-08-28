@@ -42,8 +42,8 @@ interface Stage {
 const STAGES: Stage[] = [
   {
     id: 'problem',
-    label: { en: 'You bring a problem', vi: 'Bạn kể vấn đề' },
-    detail: { en: 'In your own words.', vi: 'Bằng lời của bạn.' },
+    label: { en: 'You bring a problem', vi: 'Bạn nêu vấn đề' },
+    detail: { en: 'In your own words.', vi: 'Nói sao cũng được.' },
   },
   {
     id: 'agree',
@@ -52,8 +52,8 @@ const STAGES: Stage[] = [
   },
   {
     id: 'build',
-    label: { en: 'I build, you check', vi: 'Tôi xây, bạn duyệt' },
-    detail: { en: 'You see it as it grows.', vi: 'Bạn xem từng phần một.' },
+    label: { en: 'I build, you check', vi: 'Tôi làm, bạn kiểm tra' },
+    detail: { en: 'You see it as it grows.', vi: 'Làm tới đâu bạn thấy tới đó.' },
   },
   {
     id: 'live',
@@ -75,23 +75,23 @@ const STOPS: { id: string; choice: LocalizedText; consequence: LocalizedText }[]
     choice: { en: 'As soon as we agree', vi: 'Ngay khi chốt xong' },
     consequence: {
       en: 'Live as soon as we agree what to build. Everything after that improves something already running.',
-      vi: 'Chạy thật ngay khi chốt xong việc cần làm. Sau đó là cải tiến trên thứ đang chạy.',
+      vi: 'Chạy thật ngay khi chốt xong việc cần làm. Từ đó trở đi, mọi thứ đều là cải tiến cái đang chạy.',
     },
   },
   {
     id: 'building',
-    choice: { en: 'While I am building', vi: 'Khi tôi đang xây' },
+    choice: { en: 'While I am building', vi: 'Khi tôi đang làm' },
     consequence: {
       en: 'Live while I am still building it. You see it work before it is finished.',
-      vi: 'Chạy thật khi tôi còn đang xây. Bạn thấy nó hoạt động trước khi nó xong.',
+      vi: 'Chạy thật khi tôi còn đang làm. Bạn thấy nó chạy trước cả khi nó xong.',
     },
   },
   {
     id: 'built',
-    choice: { en: 'When it is built', vi: 'Khi xây xong' },
+    choice: { en: 'When it is built', vi: 'Khi làm xong' },
     consequence: {
       en: 'Live when it is built. This is where I put the line.',
-      vi: 'Chạy thật khi xây xong. Đây là chỗ tôi đặt đường này.',
+      vi: 'Chạy thật khi làm xong. Tôi đặt vạch ở chỗ này.',
     },
   },
   {
@@ -99,24 +99,42 @@ const STOPS: { id: string; choice: LocalizedText; consequence: LocalizedText }[]
     choice: { en: 'Never', vi: 'Không bao giờ' },
     consequence: {
       en: 'Nothing goes live. The work stays a plan and nobody ever uses it.',
-      vi: 'Không có gì chạy thật. Công việc dừng ở kế hoạch và không ai dùng được.',
+      vi: 'Không có gì chạy thật. Mọi thứ dừng ở bản kế hoạch, không ai dùng được.',
     },
   },
 ]
 
 const DEFAULT_STOP = 2
 
+/**
+ * `chạy thật` is kept here on purpose, and it is not the calque it looks like.
+ *
+ * It is the second half of a pair Vietnamese already has — `chạy thử` (trial
+ * run) / `chạy thật` (the real one) — which is how Vietnamese teams talk about
+ * go-live without reaching for English. That is the test `xây` failed: nobody
+ * says `xây phần mềm`, so `xây` was English "build" wearing a Vietnamese word,
+ * while `chạy thật` stands up in Vietnamese with no English behind it.
+ *
+ * It also has to work against `còn trên giấy` — the whole section is that one
+ * opposition, and `Đang chạy thật` / `Còn trên giấy` is a contrast a business
+ * owner reads at a glance. `Đang trên production` is developer shop-talk and
+ * loses the reader this section is written for; `chạy chính thức` is correct but
+ * formal, and it breaks the echo with `Người thật, việc thật.` two lines above.
+ *
+ * The hero line does use `lên production`, because that sentence already carries
+ * `spec` and `code` and is addressed to someone who will recognise all three.
+ */
 const COPY = {
   kicker: { en: 'Process', vi: 'Cách làm' },
   heading: { en: 'How a project goes', vi: 'Một dự án diễn ra thế nào' },
   sub: {
     en: 'Choose when the work goes live. Everything before that point is still on paper.',
-    vi: 'Chọn lúc công việc bắt đầu chạy thật. Mọi thứ trước điểm đó vẫn còn trên giấy.',
+    vi: 'Chọn lúc công việc bắt đầu chạy thật. Trước lúc đó, mọi thứ vẫn nằm trên giấy.',
   },
-  lineName: { en: 'It goes live', vi: 'Nó chạy thật' },
+  lineName: { en: 'It goes live', vi: 'Khi nào chạy thật' },
   running: { en: 'Running for real', vi: 'Đang chạy thật' },
   planned: { en: 'Still on paper', vi: 'Còn trên giấy' },
-  loop: { en: 'After that, we keep improving it.', vi: 'Sau đó chúng ta tiếp tục cải tiến.' },
+  loop: { en: 'After that, we keep improving it.', vi: 'Sau đó, chúng ta cải tiến tiếp.' },
 } as const
 
 export function Approach({ locale }: { locale: Locale }) {

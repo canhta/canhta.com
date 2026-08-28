@@ -18,11 +18,11 @@ import { ContactActions } from './contact-actions'
 const COPY = {
   heading: {
     en: 'Tell me what you are trying to build.',
-    vi: 'Kể tôi nghe bạn đang muốn xây gì.',
+    vi: 'Cho tôi biết bạn đang muốn làm gì.',
   },
   reassure: {
     en: 'A few sentences about the problem is enough to start. I reply within one working day.',
-    vi: 'Vài dòng về vấn đề của bạn là đủ để bắt đầu. Tôi trả lời trong một ngày làm việc.',
+    vi: 'Vài dòng về vấn đề là đủ để bắt đầu. Tôi trả lời trong 1 ngày làm việc.',
   },
 } as const
 

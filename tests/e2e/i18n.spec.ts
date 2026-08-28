@@ -32,7 +32,7 @@ test.describe('locale routing', () => {
     await page.goto('/vi')
     await expect(page.locator('html')).toHaveAttribute('lang', 'vi')
     // Diacritics are the cheapest proof that Vietnamese copy actually rendered.
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('Tôi xây')
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Tôi làm')
   })
 
   /**

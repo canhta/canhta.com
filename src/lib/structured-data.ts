@@ -104,7 +104,7 @@ export function buildGraph(locale: Locale) {
     // needs in order to answer "who can build me X".
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
-      name: t({ en: 'Three ways to hire me', vi: 'Ba cách thuê tôi' }, locale),
+      name: t({ en: 'Three ways to hire me', vi: 'Ba cách làm việc cùng tôi' }, locale),
       itemListElement: services.map((s) => ({
         '@type': 'Offer',
         itemOffered: {
@@ -191,7 +191,7 @@ export function buildGraph(locale: Locale) {
             {
               '@type': 'ItemList',
               '@id': `${page}#work`,
-              name: t({ en: 'What I have built', vi: 'Tôi đã xây gì' }, locale),
+              name: t({ en: 'What I have built', vi: 'Tôi đã làm gì' }, locale),
               itemListElement: works.map((w, i) => ({
                 '@type': 'ListItem',
                 position: i + 1,

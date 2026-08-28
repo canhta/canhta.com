@@ -12,12 +12,12 @@ import type { BuildKind, BuildLinkKind, Locale, LocalizedText } from '@/content/
  * A unit test now pins all four against the other list.
  */
 const KIND_LABELS: Record<BuildKind, LocalizedText> = {
-  agent: { en: 'Work that runs itself', vi: 'Việc tự nó chạy' },
-  skill: { en: 'Agent skill', vi: 'Kỹ năng agent' },
+  agent: { en: 'Work that runs itself', vi: 'Việc tự chạy' },
+  skill: { en: 'Agent skill', vi: 'Agent skill' },
   mobile: { en: 'Phone app', vi: 'App điện thoại' },
   web: { en: 'Web product', vi: 'Sản phẩm web' },
   saas: { en: 'Paid product', vi: 'Sản phẩm thu phí' },
-  tool: { en: 'Developer tool', vi: 'Công cụ lập trình' },
+  tool: { en: 'Developer tool', vi: 'Công cụ cho dev' },
 }
 
 /** "Open ↗" is wrong for a store listing, so each destination says where it goes. */

@@ -10,8 +10,8 @@ import { GitHubIcon, LinkedInIcon, XIcon, ZaloWordmark } from './icons'
  */
 const COPY = {
   newTab: { en: 'opens in a new tab', vi: 'mở trong tab mới' },
-  write: { en: 'Or write directly', vi: 'Hoặc viết thẳng' },
-  elsewhere: { en: 'Elsewhere', vi: 'Nơi khác' },
+  write: { en: 'Or write directly', vi: 'Hoặc email thẳng' },
+  elsewhere: { en: 'Elsewhere', vi: 'Kênh khác' },
 } as const
 
 const ICONS = {

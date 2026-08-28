@@ -10,12 +10,12 @@ const LINK_KINDS: BuildLinkKind[] = ['appstore', 'playstore', 'web', 'github', '
 describe('kindLabel', () => {
   it('has an exact wording for every BuildKind in both locales', () => {
     const expected: Record<BuildKind, Record<Locale, string>> = {
-      agent: { en: 'Work that runs itself', vi: 'Việc tự nó chạy' },
-      skill: { en: 'Agent skill', vi: 'Kỹ năng agent' },
+      agent: { en: 'Work that runs itself', vi: 'Việc tự chạy' },
+      skill: { en: 'Agent skill', vi: 'Agent skill' },
       mobile: { en: 'Phone app', vi: 'App điện thoại' },
       web: { en: 'Web product', vi: 'Sản phẩm web' },
       saas: { en: 'Paid product', vi: 'Sản phẩm thu phí' },
-      tool: { en: 'Developer tool', vi: 'Công cụ lập trình' },
+      tool: { en: 'Developer tool', vi: 'Công cụ cho dev' },
     }
 
     for (const kind of KIND_ORDER) {

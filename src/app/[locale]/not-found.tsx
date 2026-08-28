@@ -20,8 +20,8 @@ const COPY = {
     vi: 'Không có trang nào ở địa chỉ này.',
   },
   body: {
-    en: 'Check it for a typo, or start from the front page — this site is one page, so everything on it is a single scroll away.',
-    vi: 'Kiểm tra xem có gõ nhầm không, hoặc bắt đầu lại từ trang chính — cả site chỉ có một trang, cuộn một lượt là hết.',
+    en: 'Check it for a typo, or start from the front page. This site is one page, so everything on it is a single scroll away.',
+    vi: 'Kiểm tra xem có gõ nhầm không, hoặc quay về trang chính. Cả site chỉ có một trang, cuộn một lượt là hết.',
   },
   home: { en: 'Go to the front page', vi: 'Về trang chính' },
 } as const

@@ -31,17 +31,17 @@ import { BuildLinkButton } from './build-link'
  */
 const COPY = {
   kicker: { en: 'Work', vi: 'Sản phẩm' },
-  heading: { en: 'What I have built', vi: 'Tôi đã xây gì' },
+  heading: { en: 'What I have built', vi: 'Tôi đã làm gì' },
   problem: { en: 'The problem', vi: 'Vấn đề' },
-  built: { en: 'What I built', vi: 'Đã xây gì' },
+  built: { en: 'What I built', vi: 'Đã làm gì' },
   result: { en: 'Where it stands', vi: 'Hiện tại ra sao' },
   subOne: {
     en: 'One project. The ones with links are public; the rest are still being built.',
-    vi: 'Một dự án. Cái nào có liên kết là đã công khai, còn lại vẫn đang xây.',
+    vi: 'Một dự án. Cái nào có link là đã công khai, còn lại vẫn đang làm.',
   },
   subMany: {
     en: 'projects. The ones with links are public; the rest are still being built.',
-    vi: 'dự án. Cái nào có liên kết là đã công khai, còn lại vẫn đang xây.',
+    vi: 'dự án. Cái nào có link là đã công khai, còn lại vẫn đang làm.',
   },
 } as const
 

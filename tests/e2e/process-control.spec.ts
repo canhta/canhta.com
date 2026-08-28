@@ -35,14 +35,14 @@ const COPY = {
   },
   vi: {
     path: '/vi',
-    group: /nó chạy thật/i,
+    group: /khi nào chạy thật/i,
     running: 'Đang chạy thật',
     planned: 'Còn trên giấy',
-    choices: [/ngay khi chốt xong/i, /khi tôi đang xây/i, /khi xây xong/i, /không bao giờ/i],
+    choices: [/ngay khi chốt xong/i, /khi tôi đang làm/i, /khi làm xong/i, /không bao giờ/i],
     consequences: [
       /^Chạy thật ngay khi chốt xong/,
-      /^Chạy thật khi tôi còn đang xây/,
-      /^Chạy thật khi xây xong/,
+      /^Chạy thật khi tôi còn đang làm/,
+      /^Chạy thật khi làm xong/,
       /^Không có gì chạy thật/,
     ],
   },

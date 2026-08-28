@@ -8,39 +8,39 @@ export const servicesFixture: (Service & FixtureMarked)[] = [
     name: { en: 'Solution advisory', vi: 'Tư vấn giải pháp' },
     output: {
       en: 'A written architecture and a build order you can hand to any developer.',
-      vi: 'Bản kiến trúc viết ra và thứ tự thi công, đưa cho lập trình viên nào cũng làm được.',
+      vi: 'Tài liệu kiến trúc và thứ tự làm, đưa cho dev nào cũng theo được.',
     },
     suitedTo: {
       en: 'You know the problem but not how to build the answer.',
-      vi: 'Bạn biết vấn đề nhưng chưa biết xây lời giải thế nào.',
+      vi: 'Bạn biết vấn đề nhưng chưa biết giải thế nào.',
     },
   },
   {
     __fixture: true,
     id: 'sprint',
     order: 2,
-    name: { en: 'Focused build sprint', vi: 'Sprint xây tập trung' },
+    name: { en: 'Focused build sprint', vi: 'Sprint tập trung' },
     output: {
       en: 'One working piece of the product, running in production.',
-      vi: 'Một phần của sản phẩm, chạy thật trên production.',
+      vi: 'Một phần sản phẩm chạy được, đã lên production.',
     },
     suitedTo: {
       en: 'You want to see it work before committing to the whole build.',
-      vi: 'Bạn muốn thấy nó chạy được trước khi cam kết làm trọn gói.',
+      vi: 'Bạn muốn thấy nó chạy được rồi mới quyết làm trọn gói.',
     },
   },
   {
     __fixture: true,
     id: 'endToEnd',
     order: 3,
-    name: { en: 'End-to-end product build', vi: 'Xây sản phẩm trọn gói' },
+    name: { en: 'End-to-end product build', vi: 'Làm sản phẩm trọn gói' },
     output: {
       en: 'The finished product, released to users and maintained after launch.',
-      vi: 'Sản phẩm hoàn chỉnh, phát hành tới người dùng và duy trì sau khi ra mắt.',
+      vi: 'Sản phẩm hoàn chỉnh, đưa ra cho người dùng và bảo trì sau khi ra mắt.',
     },
     suitedTo: {
       en: 'You want one person responsible from the first idea to launch.',
-      vi: 'Bạn muốn một người chịu trách nhiệm từ ý tưởng đầu tới lúc ra mắt.',
+      vi: 'Bạn muốn một người chịu trách nhiệm từ ý tưởng đầu tiên đến lúc ra mắt.',
     },
   },
 ]
