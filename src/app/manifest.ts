@@ -23,8 +23,8 @@ export default function manifest(): MetadataRoute.Manifest {
     /**
      * `browser`, not `standalone`.
      *
-     * Every affordance on this site leaves it: the CTA is a `mailto:`, the
-     * schedule links out to app stores and GitHub. `standalone` strips the URL
+     * Every affordance on this site leaves it: the CTA is a `mailto:`, and every
+     * project links out to app stores, docs and GitHub. `standalone` strips the URL
      * bar and the back button, so each of those either dead-ends the window or
      * hands off to a second browser with no way back. There is also nothing to
      * return *to* — one page, no state — which is the thing an app shell exists
@@ -33,13 +33,13 @@ export default function manifest(): MetadataRoute.Manifest {
     display: 'browser',
 
     /**
-     * Both are the paper the sheet is drawn on. `theme_color` must stay equal to
-     * the `themeColor` in `src/app/[locale]/layout.tsx`, which is in turn
-     * `--color-paper` in `globals.css`: a mismatch is not a config detail, it is
-     * a visible seam between the address bar and the page on Android.
+     * Both are the page ground. `theme_color` must stay equal to the `themeColor`
+     * in `src/app/[locale]/layout.tsx`, which is in turn `--color-bg` in
+     * `globals.css`: a mismatch is not a config detail, it is a visible seam
+     * between the address bar and the page on Android.
      */
-    background_color: '#e8eae7',
-    theme_color: '#e8eae7',
+    background_color: '#fbf9f5',
+    theme_color: '#fbf9f5',
 
     lang: 'en',
     dir: 'ltr',

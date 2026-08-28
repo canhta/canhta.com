@@ -20,7 +20,7 @@ for (const locale of ['en', 'vi'] as const) {
 
     /**
      * It is in the DOM from the start — `translateY(-200%)` parks it off the
-     * sheet — so "hidden" here means positioned out of view, not `display:none`.
+     * page — so "hidden" here means positioned out of view, not `display:none`.
      * Playwright reports an off-screen but rendered element as visible, so the
      * meaningful assertion is where its box actually is.
      */
@@ -30,7 +30,7 @@ for (const locale of ['en', 'vi'] as const) {
     await page.keyboard.press('Tab')
     await expect(link).toBeFocused()
     await expect(link).toBeVisible()
-    await expect(link).toHaveAttribute('href', '#sheet')
+    await expect(link).toHaveAttribute('href', '#main')
 
     /**
      * `:focus-visible` swaps `translateY(-200%)` for `translateY(0)` over 150ms,
@@ -57,25 +57,25 @@ for (const locale of ['en', 'vi'] as const) {
     await expect(page.getByRole('link', { name: label })).toBeFocused()
 
     await page.keyboard.press('Enter')
-    await expect(page).toHaveURL(new RegExp(`${path === '/' ? '' : path}#sheet$`))
+    await expect(page).toHaveURL(new RegExp(`${path === '/' ? '' : path}#main$`))
 
-    const main = page.locator('main#sheet')
+    const main = page.locator('main#main')
     await expect(main).toBeVisible()
 
     /**
-     * `<main id="sheet">` carries no `tabindex="-1"`, so activating the link does
-     * not move `document.activeElement` — it only moves the sequential focus
-     * navigation starting point. That is enough in Chromium (the next Tab lands
-     * inside `<main>`, asserted below) but it is the browser doing the work, not
-     * the page. See the handover notes: adding `tabIndex={-1}` to `<main>` would
-     * make this deterministic everywhere. Asserted here as the behaviour that
-     * actually matters to a keyboard user.
+     * `<main id="main">` carries `tabindex="-1"`, so activating the link moves
+     * `document.activeElement` onto the landmark itself. Without it the browser
+     * only moves the sequential-focus starting point, which Chromium honours and
+     * Safari does not — there the link silently returned the visitor to the
+     * header. Both halves are asserted: focus lands on `<main>`, and the next
+     * Tab goes forward from inside it.
      */
+    await expect(main).toBeFocused()
     await page.keyboard.press('Tab')
     const landed = await page.evaluate(() => {
       const el = document.activeElement as HTMLElement | null
       return {
-        inMain: !!el?.closest('main#sheet'),
+        inMain: !!el?.closest('main#main'),
         tag: el?.tagName ?? null,
         text: el?.textContent?.trim().slice(0, 40) ?? null,
       }

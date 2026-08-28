@@ -80,8 +80,6 @@ if (
 
 export const profile: Profile = profileFixture
 export const builds: Build[] = [...buildsFixture].sort((a, b) => a.order - b.order)
-/** Gets a full detail drawing. Everything else appears only in the schedule. */
-export const featuredBuilds: Build[] = builds.filter((b) => b.featured)
 export const capabilities: Capability[] = [...capabilitiesFixture].sort((a, b) => a.order - b.order)
 export const services: Service[] = [...servicesFixture].sort((a, b) => a.order - b.order)
 export const faq: Faq[] = [...faqFixture].sort((a, b) => a.order - b.order)

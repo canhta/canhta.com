@@ -10,12 +10,13 @@ export const contentType = 'image/png'
 export const alt = 'Canh Ta'
 
 /**
- * The shared-link card, drawn in the same vernacular as the sheet.
+ * The shared-link card, set in the same two voices as the page: Newsreader
+ * argues, Be Vietnam Pro labels.
  *
  * The portrait is deliberately not in it. It is an illustration rather than a
  * photograph, and at 1200x630 the lettering on the shirt is legible — a card is
  * the one place an asset gets blown up in front of strangers, so this uses type
- * and rules instead.
+ * and a rule instead.
  *
  * Fonts are read from disk, not fetched. Building an image that requires a live
  * request to fonts.gstatic.com means a network blip becomes a failed deploy —
@@ -23,15 +24,13 @@ export const alt = 'Canh Ta'
  */
 const COPY = {
   role: { en: 'Agentic product builder', vi: 'Người xây sản phẩm agentic' },
-  key: { en: 'Running · On paper', vi: 'Đang chạy · Còn trên giấy' },
 } as const
 
-const PAPER = '#e8eae7'
-const INK = '#16202a'
-const GRAPHITE = '#5a6672'
-const RULE = '#a8b0aa'
-const LIVE = '#e2412a'
-const PLAN = '#1b4fd8'
+const BG = '#fbf9f5'
+const INK = '#17140f'
+const MUTED = '#6e655a'
+const LINE = '#cfc4b2'
+const ACCENT = '#b4401e'
 
 async function font(file: string) {
   return readFile(join(process.cwd(), 'src/assets/fonts', file))
@@ -40,9 +39,9 @@ async function font(file: string) {
 export default async function Image({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   const l: Locale = locale === 'vi' ? 'vi' : 'en'
-  const [display, mono] = await Promise.all([
-    font('BeVietnamPro-ExtraBold.ttf'),
-    font('IBMPlexMono-Regular.ttf'),
+  const [display, sans] = await Promise.all([
+    font('Newsreader-SemiBold.ttf'),
+    font('BeVietnamPro-Medium.ttf'),
   ])
 
   return new ImageResponse(
@@ -54,65 +53,64 @@ export default async function Image({ params }: { params: Promise<{ locale: stri
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          background: PAPER,
+          background: BG,
           padding: '64px 72px',
-          fontFamily: 'display',
+          fontFamily: 'sans',
         }}
       >
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              fontFamily: 'mono',
-              fontSize: 22,
-              letterSpacing: '0.2em',
-              color: INK,
-              paddingBottom: 18,
-            }}
-          >
-            <span>{profile.name.toUpperCase()}</span>
-            <span style={{ color: GRAPHITE }}>{t(COPY.role, l).toUpperCase()}</span>
-          </div>
-          <div style={{ display: 'flex', height: 2, background: INK }} />
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            fontSize: 22,
+            letterSpacing: '0.13em',
+            textTransform: 'uppercase',
+            color: MUTED,
+          }}
+        >
+          <span style={{ color: INK }}>{profile.name}</span>
+          <span>{t(COPY.role, l)}</span>
         </div>
 
         <div
           style={{
             display: 'flex',
-            fontSize: 74,
+            fontFamily: 'display',
+            fontSize: 72,
             /**
              * 1.04 clipped the below-marks. Vietnamese stacks a mark under the
              * base as well as over it — `ệ` lost its dot while `ố`, whose two
              * marks both sit above, rendered fine. A line box tuned on Latin
              * copy silently truncates a whole diacritic class.
              */
-            lineHeight: 1.3,
-            letterSpacing: '-0.035em',
+            lineHeight: 1.28,
+            letterSpacing: '-0.021em',
             color: INK,
-            maxWidth: 1000,
+            maxWidth: 980,
           }}
         >
           {t(profile.hook, l)}
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <div style={{ display: 'flex', height: 1, background: RULE, marginBottom: 18 }} />
+          <div style={{ display: 'flex', height: 1, background: LINE, marginBottom: 20 }} />
           <div
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: 16,
-              fontFamily: 'mono',
+              gap: 14,
               fontSize: 22,
-              letterSpacing: '0.14em',
-              color: GRAPHITE,
+              letterSpacing: '0.13em',
+              textTransform: 'uppercase',
+              color: MUTED,
             }}
           >
-            <div style={{ display: 'flex', width: 16, height: 16, background: LIVE }} />
-            <div style={{ display: 'flex', width: 16, height: 16, background: PLAN }} />
-            <span>{t(COPY.key, l).toUpperCase()}</span>
-            <span style={{ marginLeft: 'auto' }}>CANHTA.COM</span>
+            <div
+              style={{ display: 'flex', width: 12, height: 12, borderRadius: 6, background: ACCENT }}
+            />
+            <span style={{ color: ACCENT }}>{t(profile.availabilityLabel, l)}</span>
+            <span style={{ marginLeft: 'auto' }}>canhta.com</span>
           </div>
         </div>
       </div>
@@ -120,8 +118,8 @@ export default async function Image({ params }: { params: Promise<{ locale: stri
     {
       ...size,
       fonts: [
-        { name: 'display', data: display, style: 'normal', weight: 800 },
-        { name: 'mono', data: mono, style: 'normal', weight: 400 },
+        { name: 'display', data: display, style: 'normal', weight: 600 },
+        { name: 'sans', data: sans, style: 'normal', weight: 500 },
       ],
     },
   )

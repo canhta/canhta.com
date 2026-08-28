@@ -45,19 +45,20 @@ describe('statusLabel', () => {
 })
 
 describe('statusTone', () => {
-  it('maps the two semantic accents to the two states they mean', () => {
-    // LIVE red means running for real; PLAN blue means still on paper.
-    // `text-live-text`, not `text-live`: the bright stroke red is only 3.66:1
-    // as 11px type. Line work keeps --color-live; letters use the darker
-    // --color-live-text. See the token comment in globals.css.
-    expect(statusTone('live')).toBe('text-live-text')
-    expect(statusTone('building')).toBe('text-plan')
+  it('gives the one accent to the one thing it means', () => {
+    // The accent means: it exists for real and you can go look at it. The
+    // palette that preceded this had three tokens for the same binary — a blue
+    // for "on paper", a red for "running", and a darkened copy of that red
+    // because the bright one was only 3.66:1 as 11px type. One value that
+    // passes contrast as text and as a button ground replaced all three.
+    expect(statusTone('live')).toBe('text-accent')
+    expect(statusTone('shipped')).toBe('text-accent')
   })
 
-  it('leaves everything else neutral rather than inventing a third accent', () => {
-    expect(statusTone('shipped')).toBe('text-graphite')
-    expect(statusTone('acquired')).toBe('text-graphite')
-    expect(statusTone('sunset')).toBe('text-graphite')
+  it('leaves everything else as ordinary secondary text, not a second accent', () => {
+    expect(statusTone('building')).toBe('text-muted')
+    expect(statusTone('acquired')).toBe('text-muted')
+    expect(statusTone('sunset')).toBe('text-muted')
   })
 
   it('never conveys status by colour alone', () => {

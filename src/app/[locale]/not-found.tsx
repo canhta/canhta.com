@@ -4,25 +4,24 @@ import { getLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
 import type { Locale } from '@/content/types'
 import { t } from '@/lib/text'
-import { UtilityRow } from '@/components/utility-row'
+import { ArrowIcon } from '@/components/icons'
+import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 
 /**
- * A drawing sheet cross-references views by number. Asking for one that was
- * never drawn is not a failure of the person asking, and it is not an occasion
- * for a joke — it is a note on the sheet saying which view is missing and where
- * the drawing that does exist is. Hence: what happened, then what to do, in the
- * second person, with no apology.
+ * A missing page is not a failure of the person asking, and it is not an
+ * occasion for a joke. What happened, then what to do, in the second person,
+ * with no apology.
  */
 const COPY = {
-  label: { en: 'Missing view', vi: 'Không có bản vẽ này' },
+  label: { en: 'Not found', vi: 'Không tìm thấy' },
   heading: {
-    en: 'This page is not on the sheet.',
-    vi: 'Trang này không có trên bản vẽ.',
+    en: 'There is no page at this address.',
+    vi: 'Không có trang nào ở địa chỉ này.',
   },
   body: {
-    en: 'The address you opened does not exist here. Check it for a typo, or start from the front page — this site is one page, so everything on it is a single scroll away.',
-    vi: 'Địa chỉ bạn vừa mở không tồn tại ở đây. Kiểm tra xem có gõ nhầm không, hoặc bắt đầu lại từ trang chính — cả site chỉ có một trang, cuộn một lượt là hết.',
+    en: 'Check it for a typo, or start from the front page — this site is one page, so everything on it is a single scroll away.',
+    vi: 'Kiểm tra xem có gõ nhầm không, hoặc bắt đầu lại từ trang chính — cả site chỉ có một trang, cuộn một lượt là hết.',
   },
   home: { en: 'Go to the front page', vi: 'Về trang chính' },
 } as const
@@ -74,42 +73,25 @@ export default async function NotFound() {
 
   return (
     <>
-      <UtilityRow locale={locale} />
+      <SiteHeader locale={locale} />
 
-      {/* The layout's skip link targets `#sheet` on every route it wraps, this
+      {/* The layout's skip link targets `#main` on every route it wraps, this
           one included. Without the id here, the first thing a keyboard user
           reaches on a 404 is a link to nowhere. */}
-      <main id="sheet" className="container-sheet figure-primary">
-        {/* The sheet's one number, in the 44px slot the proof stamp uses on the
-            front page. There is exactly one number on this page, so it gets it. */}
-        <p className="flex items-baseline gap-4">
-          <span className="tnum font-mono text-[44px] leading-none font-medium text-live">
-            404
-          </span>
-          <span className="annot">{t(COPY.label, locale).toUpperCase()}</span>
+      <main id="main" className="shell band-1">
+        <p className="label">{t(COPY.label, locale)}</p>
+        <p className="tnum mt-2 font-display text-[64px] leading-none font-semibold text-accent">
+          404
         </p>
 
-        <div aria-hidden="true" className="draw draw-1 mt-5 h-px bg-ink" />
+        <h1 className="title mt-8 max-w-[20ch]">{t(COPY.heading, locale)}</h1>
 
-        <h1 className="rise rise-2 mt-10 max-w-[22ch] text-[clamp(1.4rem,2.6vw,1.85rem)] leading-[1.1] font-extrabold tracking-[-0.03em]">
-          {t(COPY.heading, locale)}
-        </h1>
+        <p className="lead mt-5 max-w-[52ch]">{t(COPY.body, locale)}</p>
 
-        <p className="rise rise-3 mt-5 max-w-[52ch] text-[15px] leading-relaxed text-graphite">
-          {t(COPY.body, locale)}
-        </p>
-
-        <div className="rise rise-4 mt-10">
-          <Link
-            href={home}
-            className="group inline-flex h-12 w-full items-center justify-between gap-6 rounded-none bg-ink px-5 text-paper transition-colors duration-150 hover:bg-live sm:w-auto"
-          >
-            <span className="font-mono text-[11px] tracking-[0.12em] uppercase">
-              {t(COPY.home, locale)}
-            </span>
-            <span aria-hidden="true" className="font-mono text-[11px]">
-              →
-            </span>
+        <div className="mt-9">
+          <Link href={home} className="btn-primary">
+            {t(COPY.home, locale)}
+            <ArrowIcon width={16} height={16} />
           </Link>
         </div>
       </main>

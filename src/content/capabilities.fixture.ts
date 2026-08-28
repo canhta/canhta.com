@@ -2,14 +2,14 @@ import type { Capability, FixtureMarked } from './types'
 
 /**
  * The `engagement` row was cut. It answered "how does this run", which is the
- * exact question FIG. 4 exists to answer — and on the Vietnamese page both
- * sections were shipping the identical column header, which is the translator's
- * own verdict that they were the same thing.
+ * exact question the engagements section exists to answer — and on the
+ * Vietnamese page both sections were shipping the identical column header, which
+ * is the translator's own verdict that they were the same thing.
  *
  * Names are aligned to the one surviving taxonomy: the same four buckets are
- * also named in `lib/build-meta.ts` (the schedule's KIND column) and in
- * `signature/nodes.ts` (the callout list). They used to be worded four
- * different ways.
+ * also named in `lib/build-meta.ts`, as each project's KIND label. They used to
+ * be worded four different ways across three lists; the third list was a callout
+ * hanging off the old FIG. 1 drawing, and it went with the drawing.
  */
 export const capabilitiesFixture: (Capability & FixtureMarked)[] = [
   {

@@ -2,14 +2,14 @@ import type { BuildKind, BuildLinkKind, Locale, LocalizedText } from '@/content/
 
 /**
  * Said the way a client would say it, not the way a stack would — and worded
- * identically to the FIG. 3 column heads in `content/capabilities.fixture.ts`.
- * These two lists and `signature/nodes.ts` name the same four buckets. They once
- * used four different wordings; the only differences that survive are singular
- * here versus plural in a column head, which a table cell requires.
+ * identically to the scope column heads in `content/capabilities.fixture.ts`.
+ * Both lists name the same four buckets. They once used four different wordings
+ * across three lists; the only difference that survives is singular here versus
+ * plural in a column head.
  *
- * `agent` was the last holdout — it read 'Runs itself' while the other two lists
+ * `agent` was the last holdout — it read 'Runs itself' while the column head
  * said 'Work that runs itself', dropping the noun rather than just the plural.
- * A unit test now pins all four against the other lists.
+ * A unit test now pins all four against the other list.
  */
 const KIND_LABELS: Record<BuildKind, LocalizedText> = {
   agent: { en: 'Work that runs itself', vi: 'Việc tự nó chạy' },
@@ -39,5 +39,5 @@ export function linkLabel(kind: BuildLinkKind, locale: Locale): string {
   return text[locale] || text.en
 }
 
-/** Stable display order for grouping the schedule. */
+/** Stable display order for grouping by kind. */
 export const KIND_ORDER: BuildKind[] = ['agent', 'skill', 'mobile', 'web', 'saas', 'tool']

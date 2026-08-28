@@ -22,7 +22,7 @@ export type BuildStatus = 'live' | 'shipped' | 'building' | 'acquired' | 'sunset
 export interface Proof {
   /** Short factual label, e.g. "active users". Never a claim we cannot verify. */
   label: LocalizedText
-  /** The number itself, rendered in mono. */
+  /** The number itself. */
   value: string
 }
 
@@ -31,22 +31,24 @@ export interface Build {
   order: number
   name: string
   status: BuildStatus
-  /** Year shipped or started — the schedule table sorts and shows this. */
+  /** Year shipped or started, shown on the entry's meta line. */
   year: string
   kind: BuildKind
-  /**
-   * Only a couple of builds get a full detail drawing. Everything else lives in
-   * the schedule table, so the section stays the same height whether there are
-   * three products or thirty.
-   */
-  featured?: boolean
   /** Outcome-oriented. English must stay under 72 characters. */
   tagline: LocalizedText
   /** Each of these must stay under 100 characters in English. */
   problem: LocalizedText
   built: LocalizedText
   result: LocalizedText
-  /** Optional: absent means no real screenshot exists yet. Never fake one. */
+  /**
+   * Optional, and currently unused by any surface.
+   *
+   * The work section deliberately has no image slot: no real screenshot exists
+   * for any project, and a layout with a hole shaped like one spends its best
+   * space on a placeholder. The field stays because a real screenshot is a real
+   * possibility — but adding one is a design decision about where it goes, not a
+   * field that fills itself in. Never fake one.
+   */
   cover?: string
   logo?: string
   links: BuildLink[]
@@ -81,7 +83,7 @@ export interface SocialLink {
   url: string
 }
 
-/** One row of the drawing's title block: a label and a fact. */
+/** One of the reachability facts under the opening statement. */
 export interface SpecRow {
   label: LocalizedText
   value: LocalizedText
@@ -97,7 +99,10 @@ export interface Profile {
   avatar: string
   available: boolean
   availabilityLabel: LocalizedText
-  /** Dense, factual metadata — the title block on the sheet. */
+  /**
+   * The facts a stranger in another timezone needs and cannot get anywhere else
+   * on the page. Rendered as a wrapping row, so the count is free to change.
+   */
   spec: SpecRow[]
 }
 

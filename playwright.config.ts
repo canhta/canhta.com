@@ -34,9 +34,11 @@ export default defineConfig({
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     /**
-     * The desktop breakpoint. FIG. 1's drawing is `hidden lg:block`, so below
-     * 1024px the suite would be testing the stacked fallback by accident.
-     * Specs that care about a narrower viewport override this with `test.use`.
+     * The desktop breakpoint. Nothing on the page swaps component at a
+     * breakpoint any more — the process panel used to hide its drawing below
+     * 1024px and substitute a different control — but the layout still reflows,
+     * and this is the width most of the suite reasons about. Specs that care
+     * about a narrower viewport override it with `setViewportSize`.
      */
     viewport: { width: 1440, height: 900 },
   },

@@ -1,34 +1,41 @@
 import type { Metadata, Viewport } from 'next'
-import { Be_Vietnam_Pro, IBM_Plex_Mono } from 'next/font/google'
+import { Be_Vietnam_Pro, Newsreader } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider, hasLocale } from 'next-intl'
 import { setRequestLocale } from 'next-intl/server'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { routing } from '@/i18n/routing'
-import { CONTENT_IS_FIXTURE, profile } from '@/content'
+import { profile } from '@/content'
 import type { Locale } from '@/content/types'
 import { t } from '@/lib/text'
-import { MotionProvider } from '@/components/motion-provider'
 import '../globals.css'
 
-// A Vietnamese-designed typeface for a Vietnamese builder's bilingual site.
-// Full diacritic coverage, and a real choice rather than the default sans.
+// The organising voice: labels, controls, metadata, body copy.
+// A Vietnamese-designed typeface for a Vietnamese builder's bilingual site —
+// full diacritic coverage, and a real choice rather than the default sans.
+// Two weights only. Every declared weight is two more font files (latin +
+// vietnamese) on a page whose LCP element is text, so an unused weight is pure
+// LCP cost — 800 went with the old display face that no longer sets anything.
 const bvp = Be_Vietnam_Pro({
   subsets: ['latin', 'vietnamese'],
-  // 600 was declared and never used — grep finds no `font-semibold` in src/.
-  // Each declared weight is two more font files (latin + vietnamese) fetched on
-  // a page whose LCP element is text, so a dead weight is pure LCP cost.
-  weight: ['400', '500', '800'],
+  weight: ['400', '500'],
   variable: '--font-bvp',
   display: 'swap',
 })
 
-// The annotation face: dimensions, statuses, part references.
-const plexMono = IBM_Plex_Mono({
+// The arguing voice: the hook, every section title, every product name.
+//
+// There are no screenshots on this site and no metrics anyone could check, so
+// the sentences are the product demo. A serif is what makes a page read as
+// written rather than assembled — and Newsreader is one of the few editorial
+// faces with a real Vietnamese subset, which is not optional here.
+//
+// Declared without `weight`: this is a variable font, so one file covers the
+// whole range and next/font refuses a weight list for it.
+const newsreader = Newsreader({
   subsets: ['latin', 'vietnamese'],
-  weight: ['400', '500'],
-  variable: '--font-plex-mono',
+  variable: '--font-newsreader',
   display: 'swap',
 })
 
@@ -37,35 +44,43 @@ const COPY = {
 } as const
 
 /**
- * Measurement is off unless the numbers would mean something.
+ * Measurement is on for every deployment, and off in development.
  *
- * Two conditions, both load-bearing:
- * - Not in development. A local session is one person reloading; both packages
- *   would otherwise pull their debug scripts and narrate to the console.
- * - Not while the content is fixture. `ALLOW_FIXTURES=1` makes a *real* deploy
- *   serving invented product names and invented numbers. Pageviews and Core Web
- *   Vitals collected against placeholder copy become the baseline the finished
- *   site is later compared against, and Vercel gives you no way to subtract
- *   them afterwards — so the guard has to be before the first datapoint, not a
- *   filter after it.
+ * This used to carry a second condition — `&& !CONTENT_IS_FIXTURE` — on the
+ * reasoning that pageviews and Core Web Vitals collected while the profile and
+ * the answers are placeholder become the baseline the finished site is later
+ * compared against, and Vercel gives you no way to subtract them afterwards.
+ * That reasoning is still true, and it is not what Canh wants: the effect was
+ * that the live site shipped both scripts and reported nothing, for as long as
+ * any placeholder remained. A measurement setup that silently measures nothing
+ * is worse than a slightly dirty baseline, because you find out about it late.
  *
- * Both are read once at module scope: this is a decision about the deployment,
- * not about the request, and re-evaluating it per render would only suggest
- * otherwise.
+ * So: real traffic is recorded from the first visit. The early datapoints are
+ * against draft copy — which is what the draft notice on the page says too.
+ *
+ * The development exclusion stays. A local session is one person reloading, and
+ * both packages would otherwise pull their debug scripts and narrate to the
+ * console.
+ *
+ * Read once at module scope: this is a decision about the deployment, not about
+ * the request, and re-evaluating it per render would only suggest otherwise.
  */
-const MEASURE = process.env.NODE_ENV === 'production' && !CONTENT_IS_FIXTURE
+const MEASURE = process.env.NODE_ENV === 'production'
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
 }
 
 /**
- * The browser chrome matches the paper the sheet is drawn on, so the address bar
- * does not sit on the page as a foreign band. `maximumScale` is deliberately
- * absent — capping zoom is an accessibility failure, not a polish detail.
+ * The browser chrome matches the page ground, so the address bar does not sit
+ * above the page as a foreign band. Must stay equal to `--color-bg` in
+ * globals.css and to `theme_color` in `src/app/manifest.ts`.
+ *
+ * `maximumScale` is deliberately absent — capping zoom is an accessibility
+ * failure, not a polish detail.
  */
 export const viewport: Viewport = {
-  themeColor: '#e8eae7',
+  themeColor: '#fbf9f5',
   colorScheme: 'light',
 }
 
@@ -123,16 +138,12 @@ export default async function LocaleLayout({
   setRequestLocale(locale)
 
   return (
-    <html lang={locale} className={`${bvp.variable} ${plexMono.variable}`}>
+    <html lang={locale} className={`${bvp.variable} ${newsreader.variable}`}>
       <body>
-        <a href="#sheet" className="skip-link">
+        <a href="#main" className="skip-link">
           {locale === 'vi' ? 'Tới nội dung chính' : 'Skip to content'}
         </a>
-        <NextIntlClientProvider>
-          <MotionProvider>
-            {children}
-          </MotionProvider>
-        </NextIntlClientProvider>
+        <NextIntlClientProvider>{children}</NextIntlClientProvider>
         {/* The `/next` entry point, not the bare package: it reads the App
             Router's own `useParams`/`usePathname`, so a visit is reported
             against the route `/[locale]` instead of splitting one page into two

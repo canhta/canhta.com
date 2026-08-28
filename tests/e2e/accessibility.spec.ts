@@ -22,12 +22,12 @@ interface AxeViolation {
  * WCAG 2.0/2.1 A and AA across both locales at the two widths the layout is
  * actually designed for.
  *
- * NOTE ON THE CURRENT STATE OF THIS SPEC. It fails, and it is supposed to. Two
- * real colour-contrast defects are live on the page (see the failure output, and
- * the report handed over with this suite). The rule is not excluded and the
- * offending nodes are not allow-listed, because an a11y suite whose baseline
- * encodes today's defects stops being a gate and becomes a record of them. Fix
- * the source and this goes green with no edit here.
+ * This spec used to fail on purpose: two real colour-contrast defects were live
+ * on the page, the rule was not excluded and the offending nodes were not
+ * allow-listed, because an a11y suite whose baseline encodes today's defects
+ * stops being a gate and becomes a record of them. The palette that produced
+ * them is gone — every foreground in the current system was chosen against the
+ * ground it actually sits on — so this is green, and it is a gate again.
  */
 
 const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']
@@ -98,62 +98,69 @@ for (const viewport of VIEWPORTS) {
 }
 
 /**
- * FIG. 1 is the one custom widget on the page, so it gets its own pass with the
- * line moved: a slider that is only accessible in its default position is not
- * an accessible slider.
+ * The process control is the one stateful widget on the page, so it gets its own
+ * pass with the line in every position: a control that is only accessible in its
+ * default state is not an accessible control.
  */
-test('[en] FIG. 1 stays accessible at every stop', async ({ page }) => {
+test('[en] the process control stays accessible at every choice', async ({ page }) => {
   await page.goto('/')
   await page.waitForLoadState('networkidle')
-  const slider = page.getByRole('slider')
-  await slider.focus()
-  await page.keyboard.press('Home')
+  const options = page.getByRole('radio')
 
   for (let stop = 0; stop < 4; stop++) {
-    await expect(slider).toHaveAttribute('aria-valuenow', String(stop))
+    await options.nth(stop).check()
+    await expect(options.nth(stop)).toBeChecked()
+
+    /**
+     * Let the 200ms colour transition finish before axe samples.
+     *
+     * Without this the scan catches the previously-selected chip halfway
+     * between ink and paper and reports a 2.33:1 foreground that exists for a
+     * fifth of a second and is nobody's resting state. A transient frame of a
+     * transition is not a WCAG failure; asserting on one produces a test that
+     * fails for a reason no visitor can experience.
+     */
+    await page.waitForFunction(() =>
+      document.getAnimations().every((a) => a.playState !== 'running'),
+    )
+
     const results = await new AxeBuilder({ page })
       .withTags(TAGS)
-      // The two `figure-primary` sections — FIG. 1 and FIG. 2. Scoping keeps the
-      // page-level defects out of this test so a regression in the widget itself
-      // is not lost among them.
-      .include('.figure-primary')
+      // Scoped to the panel so a regression in the widget itself is not lost
+      // among anything happening elsewhere on the page.
+      .include('fieldset')
       .analyze()
     const violations = results.violations as unknown as AxeViolation[]
     expect(
       summarise(violations),
-      `axe found violations inside FIG. 1 at stop ${stop}:\n\n${report(violations)}\n`,
+      `axe found violations inside the process control at choice ${stop}:\n\n${report(violations)}\n`,
     ).toEqual([])
-    if (stop < 3) await page.keyboard.press('ArrowRight')
   }
 })
 
 /**
  * A guard on the axe run itself. `incomplete` results are checks axe could not
- * decide — on this page that is overwhelmingly colour-contrast against the
- * sheet's background-image grid, which axe cannot sample. They are not failures,
- * but a sudden change in how many there are means the page's colour model moved
- * somewhere a machine can no longer verify.
+ * decide, and an undecidable check is a coverage hole: the rule is not passing,
+ * it is unmeasured.
+ *
+ * This used to be pinned to `['color-contrast']`, because `body {
+ * background-image: … }` painted a hairline grid across the whole page and axe
+ * cannot sample a gradient — so it declined to judge roughly 144 text nodes
+ * rather than guessing. Every one of those was a contrast check nobody was
+ * running.
+ *
+ * The grid is gone and every ground on the page is now a flat colour, so axe can
+ * decide all of them. The assertion is the strong one: nothing undecidable.
  */
-test('[en] contrast remains machine-checkable', async ({ page }) => {
+test('[en] every contrast check is machine-decidable', async ({ page }) => {
   await page.goto('/')
   await page.waitForLoadState('networkidle')
   const results = await scan(page)
   const incomplete = results.incomplete as unknown as AxeViolation[]
   const byRule = incomplete.map((r) => `${r.id} (${r.nodes.length})`).sort()
 
-  /**
-   * Today the only undecidable rule is `color-contrast`, and the reason is
-   * `body { background-image: … }` in globals.css — the sheet grid. axe cannot
-   * sample a gradient, so it declines to judge roughly 144 text nodes rather
-   * than guessing. That is a real coverage hole (see the handover notes), but it
-   * is a *known* one.
-   *
-   * Asserting on the rule identity rather than the node count means a new kind
-   * of uncheckable failure shows up here, while reflowing the page does not.
-   */
-  const rules = new Set(incomplete.map((r) => r.id))
   expect(
-    [...rules].sort(),
-    `axe became unable to decide a new rule. Full breakdown: ${byRule.join(', ')}`,
-  ).toEqual(['color-contrast'])
+    byRule,
+    'axe cannot decide a check — something is being drawn on a ground it cannot sample',
+  ).toEqual([])
 })

@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
-  <!-- Palette tokens only, and no corner radius: --radius-card is 0px, so a
-       rounded icon was the one object in the system breaking its own rule.
-       The mark is the page's actual idea rather than a monogram — a sheet with
-       the section line down it, PLAN blue to the left of the line and LIVE red
-       to the right. It survives 16px because it is three flat shapes. -->
-  <rect width="32" height="32" fill="#16202a"/>
-  <rect x="6" y="8" width="7" height="16" fill="#1b4fd8"/>
-  <rect x="19" y="8" width="7" height="16" fill="#e2412a"/>
-  <rect x="15.5" y="4" width="1" height="24" fill="#e8eae7"/>
+  <!-- Palette tokens only. The mark is the page's argument rather than a
+       monogram: four steps, and the point where the work starts running for
+       real. Two steps still on paper, two in accent. It survives 16px because
+       it is four flat rectangles. -->
+  <rect width="32" height="32" fill="#17140f"/>
+  <rect x="5" y="14" width="5" height="4" fill="#cfc4b2"/>
+  <rect x="12" y="14" width="5" height="4" fill="#cfc4b2"/>
+  <rect x="19" y="12" width="5" height="8" fill="#b4401e"/>
+  <rect x="26" y="12" width="1" height="8" fill="#b4401e"/>
 </svg>

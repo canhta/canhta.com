@@ -1,48 +1,76 @@
 @import 'tailwindcss';
 
+/* =========================================================================
+   canhta.com — design system
+
+   The direction: an argued page, not a brochure.
+
+   There are no product screenshots and no metrics anybody could check, so the
+   thing being sold IS the writing and the reachability. A system built around
+   images would spend its best space on empty boxes; this one spends it on
+   sentences, and treats every claim's evidence link as the illustration.
+
+   Three rules the whole system obeys:
+
+   1. ONE ACCENT. Vermilion means "this is real and running", and it also means
+      "this is the action". Nothing else is coloured. A second hue would have to
+      mean something, and there is nothing left for it to mean — status is
+      carried by words, which is also what a screen reader gets.
+   2. SERIF ARGUES, SANS ORGANISES. Newsreader sets everything a visitor is meant
+      to read and believe. Be Vietnam Pro sets labels, controls and metadata.
+      Two voices, one job each.
+   3. NOTHING WAITS ON JAVASCRIPT TO BECOME LEGIBLE. Every resting state is the
+      visible one; motion is feedback on an action, never a reveal.
+   ========================================================================= */
+
 @theme {
-  /* Draughting palette. Two accents, each carrying meaning:
-     PLAN (blue) = designed, still on paper.
-     LIVE (red)  = running for real.
-     Nothing here is decorative. */
-  --color-paper: #e8eae7;
-  --color-surface: #eff0ee;
-  --color-ink: #16202a;
-  --color-graphite: #5a6672;
-  --color-rule: #c7ccc8;
-  --color-rule-strong: #a8b0aa;
-  --color-plan: #1b4fd8;
-  --color-live: #e2412a;
-  /**
-   * The same red, darkened, for anything set as TEXT.
-   *
-   * `--color-live` is tuned as a 1.25–1.75px stroke on a drawing, where it is
-   * correct. As 11px type it is not: 3.66:1 on surface and 3.45:1 on paper,
-   * both under the 4.5:1 that WCAG 1.4.3 requires for small text — and white on
-   * it reached only 4.18:1, which is what the fixture banner was using. Line
-   * work keeps the bright red; letters get this one, at 4.85 / 4.58 / 5.55.
-   */
-  --color-live-text: #c2331d;
+  /* Warm bone rather than a cool grey. A hire-me page reads as a letter, and
+     letters are not printed on screen-grey. */
+  --color-bg: #fbf9f5;
+  --color-raised: #f3efe7;
+  --color-ink: #17140f;
+  /* 5.44:1 on --color-bg, 4.99:1 on --color-raised. Body-text safe, which is
+     what it is used for — this is not a "subtle" grey, it is the second voice. */
+  --color-muted: #6e655a;
+  --color-line: #e5ddd1;
+  --color-line-strong: #cfc4b2;
+  /* 5.41:1 as text on --color-bg, and 5.69:1 with white on it as a button.
+     One value that passes in both directions, so there is no darkened text
+     variant to keep in sync. */
+  --color-accent: #b4401e;
+  --color-accent-tint: #f6e7e0;
   --color-on-accent: #ffffff;
 
+  --font-display: var(--font-newsreader), ui-serif, Georgia, serif;
   --font-sans: var(--font-bvp), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-plex-mono), ui-monospace, SFMono-Regular, monospace;
 
-  --radius-card: 0px;
+  --radius-card: 2px;
 
-  --duration-feedback: 150ms;
-  --duration-state: 280ms;
-  --duration-reveal: 550ms;
+  --duration-feedback: 140ms;
+  --duration-state: 220ms;
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
-  /* Mirrors `ease.plot` in src/lib/motion.ts. Anything drawn uses this. */
-  --ease-plot: cubic-bezier(0.12, 0.06, 0.88, 0.94);
-
-  /* One grid module. Every rule, gutter and box lands on it. */
-  --grid: 32px;
 }
 
 :root {
   color-scheme: light;
+  /* The page measure and the rhythm between sections, in one place. Sections do
+     not each invent their own padding — they pick a rank. */
+  --measure: 1080px;
+  --gutter: 20px;
+  --rank-1: clamp(80px, 10vw, 132px);
+  --rank-2: clamp(64px, 7.5vw, 100px);
+  --rank-3: clamp(52px, 6vw, 80px);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: 40px;
+  }
+}
+@media (min-width: 1024px) {
+  :root {
+    --gutter: 56px;
+  }
 }
 
 html {
@@ -50,27 +78,20 @@ html {
 }
 
 body {
-  background-color: var(--color-paper);
-  /* The sheet runs edge to edge behind the whole document. It was previously
-     applied to the hero alone, which left every section below floating on flat
-     paper and made the conceit read as decoration. */
-  background-image:
-    linear-gradient(to right, color-mix(in srgb, var(--color-rule) 30%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in srgb, var(--color-rule) 30%, transparent) 1px, transparent 1px);
-  background-size: var(--grid) var(--grid);
-  background-position: center top;
+  background-color: var(--color-bg);
   color: var(--color-ink);
   font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
   /* Kills the 300ms double-tap-zoom wait without disabling pinch zoom. */
   touch-action: manipulation;
-  -webkit-tap-highlight-color: color-mix(in srgb, var(--color-plan) 14%, transparent);
+  -webkit-tap-highlight-color: color-mix(in srgb, var(--color-accent) 14%, transparent);
 }
 
-/* Headings set tight and large are where widows show. `balance` on headings,
-   `pretty` on prose — both are progressive, older engines just ignore them. */
+/* Set large and tight is where widows show. Both properties are progressive —
+   an engine that does not know them simply ignores them. */
 h1,
 h2,
 h3 {
@@ -83,16 +104,188 @@ li {
   text-wrap: pretty;
 }
 
-/* Figures, references, years and counts sit in columns and get compared against
-   each other, so the digits have to line up. */
-.font-mono,
-.annot,
-.fig-label,
+/* Years, counts and star totals sit in columns and get compared, so the digits
+   have to line up. */
 .tnum {
   font-variant-numeric: tabular-nums;
 }
 
-/* Keyboard users reach the sheet in one press instead of tabbing the utility row. */
+/* --- Layout -------------------------------------------------------------
+   `max(gutter, notch)` so a landscape iPhone never puts text under the camera
+   housing. */
+@utility shell {
+  width: 100%;
+  max-width: var(--measure);
+  margin-inline: auto;
+  padding-left: max(var(--gutter), env(safe-area-inset-left));
+  padding-right: max(var(--gutter), env(safe-area-inset-right));
+}
+
+/* Rank, not padding. Six sections with identical spacing is what makes a page
+   read as an undifferentiated column: if everything is equally important, a
+   scanner has nothing to aim at. Each block declares which of three ranks it
+   holds, and the space follows from that.
+
+   APPROACH SPACE ONLY — padding-top, never padding-block. Two adjacent sections
+   each holding rank 1 would otherwise put 132px of their own below the first and
+   132px above the second: 264px of nothing, which is what the previous system
+   did and why the page read as a column of islands. The space between two
+   sections belongs to the second one. The two blocks that paint their own ground
+   (the closing band, the footer) add their bottom padding explicitly, because
+   there the space is inside a shape rather than between two. */
+@utility band-1 {
+  padding-top: var(--rank-1);
+}
+@utility band-2 {
+  padding-top: var(--rank-2);
+}
+@utility band-3 {
+  padding-top: var(--rank-3);
+}
+
+/* --- Type ---------------------------------------------------------------
+   Vietnamese stacks a mark above AND below the base (ệ, ộ), so every line-height
+   here is set for the taller of the two languages, not the shorter. 1.02 leading
+   is a Latin-only luxury. */
+@utility display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.4rem, 5.4vw, 4rem);
+  line-height: 1.1;
+  letter-spacing: -0.021em;
+}
+
+@utility title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.7rem, 3.1vw, 2.35rem);
+  line-height: 1.2;
+  letter-spacing: -0.016em;
+}
+
+@utility subtitle {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.2rem, 1.9vw, 1.45rem);
+  line-height: 1.3;
+  letter-spacing: -0.011em;
+}
+
+@utility lead {
+  font-size: clamp(1.0625rem, 1.35vw, 1.25rem);
+  line-height: 1.6;
+  color: var(--color-muted);
+}
+
+/* The organising voice: section kickers, column heads, statuses, metadata. */
+@utility label {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.6875rem;
+  line-height: 1.5;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+/* --- Controls ----------------------------------------------------------- */
+
+/* One primary action exists on this page. It appears twice — where a visitor
+   arrives and where they finish — and both are the same component; this is its
+   skin. */
+@utility btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 48px;
+  padding-inline: 1.25rem;
+  border-radius: var(--radius-card);
+  background: var(--color-ink);
+  color: var(--color-bg);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  transition:
+    background-color var(--duration-feedback) var(--ease-out-soft),
+    transform var(--duration-feedback) var(--ease-out-soft);
+}
+.btn-primary:hover {
+  background: var(--color-accent);
+}
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+@utility btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  min-height: 48px;
+  padding-inline: 1.125rem;
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius-card);
+  color: var(--color-muted);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  transition:
+    border-color var(--duration-feedback) var(--ease-out-soft),
+    color var(--duration-feedback) var(--ease-out-soft);
+}
+.btn-secondary:hover {
+  border-color: var(--color-ink);
+  color: var(--color-ink);
+}
+
+/* Every outbound link that proves something wears this: a bordered chip with the
+   destination's own mark. It is the page's only "image", and it is one a visitor
+   can click to check. */
+@utility chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 40px;
+  padding-inline: 0.75rem;
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius-card);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-ink);
+  transition:
+    border-color var(--duration-feedback) var(--ease-out-soft),
+    background-color var(--duration-feedback) var(--ease-out-soft);
+}
+.chip:hover {
+  border-color: var(--color-ink);
+  background: var(--color-raised);
+}
+
+/* An inline link inside prose. Underlined always — colour alone is not a link. */
+@utility link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--color-line-strong);
+  text-underline-offset: 0.2em;
+  transition: text-decoration-color var(--duration-feedback) var(--ease-out-soft);
+}
+.link:hover {
+  text-decoration-color: var(--color-accent);
+}
+
+/* --- Focus, selection, skip -------------------------------------------- */
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-accent) 18%, transparent);
+}
+
+/* Keyboard visitors reach the content in one press instead of tabbing the
+   header. */
 .skip-link {
   position: absolute;
   left: 12px;
@@ -100,11 +293,10 @@ li {
   z-index: 100;
   transform: translateY(-200%);
   background: var(--color-ink);
-  color: var(--color-paper);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  color: var(--color-bg);
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: var(--radius-card);
   padding: 12px 18px;
   transition: transform 150ms var(--ease-out-soft);
 }
@@ -112,29 +304,16 @@ li {
   transform: translateY(0);
 }
 
-/* The sheet the drawing sits on. Hairlines, not a pattern — you should feel it
-   before you notice it. */
-@utility sheet {
-  background-image:
-    linear-gradient(to right, color-mix(in srgb, var(--color-rule) 42%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in srgb, var(--color-rule) 42%, transparent) 1px, transparent 1px);
-  background-size: var(--grid) var(--grid);
-  background-position: center top;
+#main {
+  scroll-margin-top: 16px;
 }
 
-:focus-visible {
-  outline: 2px solid var(--color-plan);
-  outline-offset: 3px;
-  border-radius: 0;
-}
-:focus:not(:focus-visible) {
-  outline: none;
-}
-
-::selection {
-  background: color-mix(in srgb, var(--color-plan) 20%, transparent);
-}
-
+/* --- Motion -------------------------------------------------------------
+   The entire vocabulary. There is no reveal-on-scroll anywhere on this site:
+   an effect applied to forty elements carries no information, and a resting
+   state that is the hidden one is how a page ships blank. What is left is
+   transition feedback on things a person just touched — declared inline on the
+   components that own them — and this one global override. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -144,163 +323,4 @@ li {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-}
-
-/* Padding is `max(gutter, notch)` so a landscape iPhone never puts the sheet
-   edge under the camera housing. */
-@utility container-sheet {
-  width: 100%;
-  max-width: 1160px;
-  margin-inline: auto;
-  padding-left: max(20px, env(safe-area-inset-left));
-  padding-right: max(20px, env(safe-area-inset-right));
-}
-
-@media (min-width: 768px) {
-  .container-sheet {
-    padding-left: max(32px, env(safe-area-inset-left));
-    padding-right: max(32px, env(safe-area-inset-right));
-  }
-}
-
-@media (min-width: 1024px) {
-  .container-sheet {
-    padding-left: max(48px, env(safe-area-inset-left));
-    padding-right: max(48px, env(safe-area-inset-right));
-  }
-}
-
-/* Vertical rhythm --------------------------------------------------------
-   Every section used to be `py-20 md:py-24`: symmetric, and identical across
-   sections measuring 0.42 to 2.01 viewports. Symmetric padding leaves each
-   figure head floating equidistant between the previous section's tail and its
-   own body, so nothing binds to anything — which is what made the full page
-   read as one undifferentiated column.
-
-   Two fixes, both on the 32px module already declared above:
-   - ASYMMETRIC. Far more space above a head than below it, so the head binds to
-     the content it introduces.
-   - RANKED. Primary figures get 5 modules of approach, secondary get 3. Rhythm
-     is unequal intervals in a fixed ratio; equal intervals are a metronome. */
-@utility figure-primary {
-  padding-top: 56px;
-  padding-bottom: 48px;
-}
-@utility figure-secondary {
-  padding-top: 64px;
-  padding-bottom: 48px;
-}
-
-@media (min-width: 768px) {
-  .figure-primary {
-    padding-top: 88px;
-    padding-bottom: 72px;
-  }
-  .figure-secondary {
-    padding-top: 96px;
-    padding-bottom: 72px;
-  }
-}
-
-/* Drawing vernacular ----------------------------------------------------- */
-
-/* A figure caption: "FIG. 2 — SELECTED WORK". The number is real; these are
-   genuinely numbered figures, not decorative 01/02/03 markers. */
-@utility fig-label {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--color-graphite);
-}
-
-/* Annotation text: dimensions, statuses, part references.
-   One mono size for the whole sheet. There used to be three — 11, 12 and 13 —
-   for a single rank, which is three ways of saying the same thing. */
-@utility annot {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.04em;
-  color: var(--color-graphite);
-}
-
-@keyframes rise {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-}
-
-/* Resting state is visible; the keyframe animates *from* hidden, so a failed
-   stylesheet leaves content readable rather than blank. */
-.rise {
-  animation: rise var(--duration-reveal) var(--ease-out-soft) both;
-}
-.rise-1 { animation-delay: 60ms; }
-.rise-2 { animation-delay: 120ms; }
-.rise-3 { animation-delay: 180ms; }
-.rise-4 { animation-delay: 240ms; }
-
-/* Ink laid down left to right, the way a plotter prints a line of text.
-   Resting state is fully visible; the keyframe animates *from* clipped.
-
-   This ran 900ms with `--ease-out-soft`, which is roughly 600px in 900ms —
-   667 px/s, or 48% of the declared pen speed. The largest text on the page was
-   moving at half the tempo the rest of the page claims, and the soft ease dumps
-   most of the travel into the first fifth of the time, which reads as a swipe
-   rather than as a pen. 420ms is `penTime(600)` at PEN = 1400. */
-@keyframes wipe {
-  from {
-    clip-path: inset(0 100% 0 0);
-  }
-}
-.wipe {
-  animation: wipe 420ms var(--ease-plot) both;
-}
-
-/* A rule being drawn. Same principle: the resting state is the finished line. */
-@keyframes draw {
-  from {
-    transform: scaleX(0);
-  }
-}
-.draw {
-  transform-origin: left;
-  animation: draw 700ms var(--ease-out-soft) both;
-}
-.draw-1 { animation-delay: 80ms; }
-
-/* `ink-in` used to wipe in every section head, every product, every capability
-   column, every FAQ row — roughly forty elements. One element wiping is a
-   choice; forty is a screensaver, and it made the page feel authored by nobody.
-   Scroll motion is now one event per section: the figure's rule draws itself.
-   Body content is simply present. */
-
-@keyframes stamp-in {
-  from {
-    opacity: 0;
-    transform: scale(1.06);
-    filter: blur(0.8px);
-  }
-}
-.stamp-in {
-  animation: stamp-in 110ms cubic-bezier(0.2, 0, 0, 1) both;
-  animation-delay: var(--reveal-delay, 0ms);
-}
-
-/* No scroll snapping, deliberately.
-   Snap only feels intentional when every snap target is exactly one viewport.
-   Measured here: 0.42, 0.74, 0.80, 0.80, 0.83, 0.96 and 2.01 screens. Nothing is
-   a screen, so every snap left the previous section's tail on screen, and FIG. 2
-   ran two full screens with no snap at all — the behaviour changed section to
-   section, which reads as broken rather than as rhythm.
-
-   The density this page was asked for and screen-by-screen paging are in direct
-   conflict. Density won. Movement between sections is carried by the drawn rule
-   at each figure head instead.
-
-   `scroll-behavior: smooth` goes with it: it only ever applied to the skip link,
-   where an instant jump is the correct behaviour anyway. */
-#sheet {
-  scroll-margin-top: 24px;
 }

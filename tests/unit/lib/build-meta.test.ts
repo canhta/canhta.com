@@ -2,7 +2,6 @@ import { describe, expect, it } from 'vitest'
 import { builds, capabilities } from '@/content'
 import type { BuildKind, BuildLinkKind, Locale } from '@/content/types'
 import { KIND_ORDER, kindLabel, linkLabel } from '@/lib/build-meta'
-import { OUTPUTS } from '@/components/signature/nodes'
 import { t } from '@/lib/text'
 
 const LOCALES: Locale[] = ['en', 'vi']
@@ -43,11 +42,13 @@ describe('kindLabel', () => {
 })
 
 /**
- * The same four buckets are named in three places: FIG. 3's column heads
- * (`capabilities`), the schedule's KIND column (`kindLabel`) and FIG. 1's
- * callout list (`OUTPUTS`). They previously carried four different wordings,
- * two of which differed only by an article. Divergence here is the exact
- * regression that was just fixed, so it is pinned from both sides.
+ * The same four buckets are named in two places: the scope section's column
+ * heads (`capabilities`) and each project's KIND label (`kindLabel`). They once
+ * carried four different wordings across three lists, two of which differed only
+ * by an article. The third list — the callout hanging off FIG. 1's drawing — was
+ * deleted with the drawing, because it was naming the same four buckets a third
+ * time two sections below the first. Divergence between the two that remain is
+ * the exact regression that was fixed, so it is pinned from both sides.
  */
 describe('the four shared buckets stay one taxonomy', () => {
   const BUCKETS = [
@@ -57,7 +58,7 @@ describe('the four shared buckets stay one taxonomy', () => {
     { capability: 'saas', kind: 'saas' },
   ] as const
 
-  /** English pluralises the column head and takes an article in the callout. */
+  /** English pluralises the column head. */
   const normalize = (value: string) =>
     value
       .toLowerCase()
@@ -70,31 +71,15 @@ describe('the four shared buckets stay one taxonomy', () => {
     return t(cap.name, locale)
   }
 
-  const calloutLabel = (id: string, locale: Locale) => {
-    const out = OUTPUTS.find((o) => o.id === id)
-    if (!out) throw new Error(`no output ${id}`)
-    return t(out.label, locale)
-  }
-
-  it('uses one identical Vietnamese wording across all three lists', () => {
+  it('uses one identical Vietnamese wording across both lists', () => {
     for (const bucket of BUCKETS) {
-      const head = capabilityHead(bucket.capability, 'vi')
-      expect(kindLabel(bucket.kind, 'vi')).toBe(head)
-      expect(calloutLabel(bucket.kind, 'vi')).toBe(head)
+      expect(kindLabel(bucket.kind, 'vi')).toBe(capabilityHead(bucket.capability, 'vi'))
     }
   })
 
-  it('uses one English wording across the column heads and the callout list', () => {
-    for (const bucket of BUCKETS) {
-      expect(normalize(calloutLabel(bucket.kind, 'en'))).toBe(
-        normalize(capabilityHead(bucket.capability, 'en')),
-      )
-    }
-  })
-
-  it('uses the column head wording for the KIND column', () => {
-    // Every bucket is compared strictly now. `agent` used to be excluded here:
-    // its English label read 'Runs itself' where the column head said 'Work that
+  it('uses the column head wording for the KIND label', () => {
+    // Every bucket is compared strictly. `agent` used to be excluded here: its
+    // English label read 'Runs itself' where the column head said 'Work that
     // runs itself', dropping the noun rather than just the plural. That was a
     // real gap and it has been closed in src/lib/build-meta.ts, so the exclusion
     // is gone — a future rename on either side fails this test.

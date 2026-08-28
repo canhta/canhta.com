@@ -3,14 +3,16 @@ import type { Locale, SocialLink } from '@/content/types'
 import { t } from '@/lib/text'
 import { GitHubIcon, LinkedInIcon, XIcon, ZaloWordmark } from './icons'
 
+/**
+ * The colophon. Everything persuasive already happened in the block above this
+ * one, so the footer's whole job is the plain email address and the four places
+ * a visitor can go check that the person is real.
+ */
 const COPY = {
-  closing: {
-    en: 'Have a problem worth automating? Let’s talk.',
-    vi: 'Có việc đáng để tự động hoá? Nói chuyện nhé.',
-  },
   origin: { en: 'Built in Vietnam, shipped worldwide', vi: 'Làm tại Việt Nam, ship đi khắp nơi' },
-  sheet: { en: 'Sheet 1 of 1', vi: 'Bản 1 / 1' },
   newTab: { en: 'opens in a new tab', vi: 'mở trong tab mới' },
+  write: { en: 'Or write directly', vi: 'Hoặc viết thẳng' },
+  elsewhere: { en: 'Elsewhere', vi: 'Nơi khác' },
 } as const
 
 const ICONS = {
@@ -20,7 +22,7 @@ const ICONS = {
   zalo: ZaloWordmark,
 } as const
 
-/** An icon button's only name is its label, so it says the destination, not the key. */
+/** An icon button's only name is its label, so it says the destination. */
 const NETWORK_LABELS: Record<keyof typeof ICONS, string> = {
   github: 'GitHub',
   x: 'X',
@@ -37,63 +39,55 @@ export function SiteFooter({ locale }: { locale: Locale }) {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="border-t border-ink">
-      <div className="container-sheet py-16">
-        <div className="grid gap-10 lg:grid-cols-12">
-          <div className="lg:col-span-7">
-            <p className="max-w-[20ch] text-[clamp(1.4rem,2.6vw,1.85rem)] leading-[1.1] font-extrabold tracking-[-0.035em]">
-              {t(COPY.closing, locale)}
-            </p>
-            {/* The third CTA was here, identical to FIG. 4's and about 250px
-                below it, and the footer was already offering the plain address
-                forty pixels away — two doors to one inbox. The address is the
-                different affordance, so it is the one that stays. */}
+    <footer className="shell band-3 pb-[var(--rank-3)]">
+      <div className="grid gap-10 sm:grid-cols-2">
+        {email ? (
+          <div>
+            <p className="label">{t(COPY.write, locale)}</p>
+            <a
+              href={email.url}
+              className="link mt-2 inline-block text-[17px] font-medium"
+              translate="no"
+            >
+              {email.url.replace('mailto:', '')}
+            </a>
           </div>
+        ) : null}
 
-          <div className="lg:col-span-5 lg:justify-self-end">
-            <ul className="flex flex-wrap items-center gap-2">
-              {social.filter((s) => isIconNetwork(s.network)).map((s) => {
-                const Icon = ICONS[s.network as keyof typeof ICONS]
-                return (
-                  <li key={s.network}>
-                    <a
-                      href={s.url}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      aria-label={`${NETWORK_LABELS[s.network as keyof typeof ICONS]} (${t(COPY.newTab, locale)})`}
-                      /* Zalo's mark is a wordmark, not a glyph — 77x28. Forcing
-                         it into the same 44x44 square as the letterform icons
-                         either crops it or shrinks it below legibility, so it
-                         gets a wider cell and keeps the shared height. */
-                      className={`grid h-11 place-items-center rounded-none border border-rule text-graphite transition-colors duration-150 hover:border-ink hover:text-ink ${
-                        s.network === 'zalo' ? 'px-3' : 'w-11'
-                      }`}
-                    >
-                      <Icon />
-                    </a>
-                  </li>
-                )
-              })}
-            </ul>
-            {email ? (
-              <a
-                href={email.url}
-                className="mt-4 inline-block font-mono text-[11px] underline decoration-rule-strong underline-offset-4 transition-colors duration-150 hover:decoration-ink"
-                translate="no"
-              >
-                {email.url.replace('mailto:', '')}
-              </a>
-            ) : null}
-          </div>
+        <div className="sm:justify-self-end">
+          <p className="label">{t(COPY.elsewhere, locale)}</p>
+          <ul className="mt-2 flex flex-wrap items-center gap-2">
+            {social.filter((s) => isIconNetwork(s.network)).map((s) => {
+              const Icon = ICONS[s.network as keyof typeof ICONS]
+              return (
+                <li key={s.network}>
+                  <a
+                    href={s.url}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    aria-label={`${NETWORK_LABELS[s.network as keyof typeof ICONS]} (${t(COPY.newTab, locale)})`}
+                    /* Zalo's mark is a wordmark, not a glyph — 77x28. Forcing it
+                       into the same 44x44 square as the letterform icons either
+                       crops it or shrinks it below legibility, so it gets a
+                       wider cell and keeps the shared height. */
+                    className={`grid h-11 place-items-center rounded-[2px] border border-line text-muted transition-colors duration-150 hover:border-ink hover:text-ink ${
+                      s.network === 'zalo' ? 'px-3' : 'w-11'
+                    }`}
+                  >
+                    <Icon />
+                  </a>
+                </li>
+              )
+            })}
+          </ul>
         </div>
+      </div>
 
-        <div className="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-rule pt-5">
-          <p className="annot">
-            © {year} {profile.name.toUpperCase()}
-          </p>
-          <p className="annot">{t(COPY.origin, locale).toUpperCase()}</p>
-          <p className="annot">{t(COPY.sheet, locale).toUpperCase()}</p>
-        </div>
+      <div className="mt-12 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-line pt-5">
+        <p className="label">
+          © {year} <span translate="no">{profile.name}</span>
+        </p>
+        <p className="label">{t(COPY.origin, locale)}</p>
       </div>
     </footer>
   )

@@ -6,44 +6,40 @@ import { test, expect, type Page } from '@playwright/test'
  * This site has shipped a blank-content regression three separate times, always
  * the same shape: a reveal whose *resting* state is the hidden one. Server HTML
  * paints, then either a keyframe's `from` sticks, or an IntersectionObserver
- * never fires, or hydration flips a Motion element back to `initial` — and the
- * page renders as empty paper. Every one of those failures reproduces with
+ * never fires, or hydration flips an animated element back to `initial` — and
+ * the page renders as empty paper. Every one of those failures reproduces with
  * JavaScript switched off, which is why that is the environment here.
  *
  * The rule the whole site is held to: content is present at frame zero, and
  * motion may only animate *away from* a hidden state, never into one.
+ *
+ * The current design removes the class of bug outright — there is no
+ * reveal-on-scroll, no motion library and no intro animation anywhere — so this
+ * spec is now a guard against reintroducing one rather than a check on
+ * something delicate. It stays for exactly that reason.
  */
 
 const SECTION_HEADINGS = {
   en: [
-    'From problem to running',
     'What I have built',
     'Where I can help',
+    'From problem to running',
     'Ways to work together',
     'Before you write to me',
+    'Have a problem worth automating? Let’s talk.',
   ],
   vi: [
-    'Từ vấn đề đến chạy thật',
     'Tôi đã xây gì',
     'Tôi giúp được gì',
+    'Từ vấn đề đến chạy thật',
     'Cách hợp tác',
     'Trước khi bạn nhắn cho tôi',
+    'Có việc đáng để tự động hoá? Nói chuyện nhé.',
   ],
 } as const
 
-const FIG1_LABEL = {
-  en: /^From problem to running\./,
-  vi: /^Từ vấn đề đến chạy thật\./,
-} as const
-
-/** `inset(0px 100%)` is the `wipe` keyframe's `from`. Seeing it at rest means
- *  the animation never ran and the text is clipped to nothing. */
-function assertNotClipped(clipPath: string, opacity: string, what: string) {
-  expect(clipPath, `${what} is clipped away (clip-path: ${clipPath})`).not.toMatch(
-    /inset\(\s*0px\s+100%/,
-  )
-  expect(opacity, `${what} is transparent`).not.toBe('0')
-}
+/** The steps of the process panel, which used to be an SVG that had to be drawn. */
+const STEP_COUNT = 4
 
 async function paintedState(page: Page, selector: string) {
   return page.locator(selector).evaluateAll((els) =>
@@ -70,8 +66,6 @@ for (const [locale, path] of [
   test(`[${locale}] renders fully with JavaScript disabled`, async ({ browser }) => {
     const context = await browser.newContext({
       javaScriptEnabled: false,
-      // 1440 keeps FIG. 1's drawing above the `lg` breakpoint, so the SVG this
-      // test is about is the thing actually on screen.
       viewport: { width: 1440, height: 900 },
     })
     const page = await context.newPage()
@@ -80,25 +74,15 @@ for (const [locale, path] of [
       await page.goto(path)
 
       /**
-       * Let the CSS intro finish before measuring.
-       *
-       * "Fail-visible" is a claim about the RESTING state: if an observer never
-       * fires, if hydration dies, if JS is off, the content must still be on
-       * screen. It is not a claim that nothing may animate — the hook carries a
-       * deliberate 420ms `clip-path` wipe, and CSS animations run with JS
-       * disabled, so sampling at t=0 caught that intro mid-flight and read it as
-       * a permanently clipped heading.
-       *
-       * Waiting on the animations themselves rather than a fixed timeout keeps
-       * this honest: an animation that never completes still fails the test,
-       * which is the bug class this file exists to catch.
+       * Wait on the animations themselves rather than a fixed timeout. There
+       * should be none at load — that is half the point of this spec — but an
+       * animation that never completes must still fail rather than be sampled
+       * mid-flight and pass by luck.
        */
       await page.evaluate(
         () =>
           Promise.all(
-            document
-              .getAnimations()
-              .map((a) => a.finished.catch(() => undefined)),
+            document.getAnimations().map((a) => a.finished.catch(() => undefined)),
           ) as Promise<unknown>,
       )
 
@@ -107,7 +91,8 @@ for (const [locale, path] of [
       await expect(h1).toHaveCount(1)
       await expect(h1).toBeVisible()
       const [hook] = await paintedState(page, 'h1')
-      assertNotClipped(hook!.clipPath, hook!.opacity, 'h1')
+      expect(hook!.opacity, 'h1 is transparent').not.toBe('0')
+      expect(hook!.clipPath, 'h1 is clipped away').not.toMatch(/inset\(\s*0px\s+100%/)
       expect(hook!.text.length, 'h1 rendered empty').toBeGreaterThan(0)
       expect(hook!.width, 'h1 has no painted width').toBeGreaterThan(0)
 
@@ -119,7 +104,7 @@ for (const [locale, path] of [
       for (const [i, expected] of SECTION_HEADINGS[locale].entries()) {
         const h = painted[i]!
         expect(h.text, `section heading ${i + 1} text`).toBe(expected)
-        assertNotClipped(h.clipPath, h.opacity, `h2 "${expected}"`)
+        expect(h.opacity, `h2 "${expected}" is transparent`).not.toBe('0')
         expect(h.visibility, `h2 "${expected}" visibility`).toBe('visible')
         expect(h.display, `h2 "${expected}" display`).not.toBe('none')
         expect(h.height, `h2 "${expected}" has no painted height`).toBeGreaterThan(0)
@@ -128,45 +113,36 @@ for (const [locale, path] of [
         await expect(headings.nth(i)).toBeVisible()
       }
 
-      // ---- FIG. 1 is drawn, not half-plotted ---------------------------
-      const svg = page.getByRole('img', { name: FIG1_LABEL[locale] })
-      await expect(svg).toBeVisible()
+      /**
+       * The process panel is the one piece of state on the page. Without
+       * JavaScript the radios cannot move, but the panel must still render its
+       * default position as readable content — the four steps, the four
+       * choices, and the sentence saying what the current choice means.
+       */
+      const steps = page.locator('ol li')
+      await expect(steps).toHaveCount(STEP_COUNT)
+      for (let i = 0; i < STEP_COUNT; i++) await expect(steps.nth(i)).toBeVisible()
 
-      const ink = await svg.evaluate((el) =>
-        Array.from(el.querySelectorAll('path, rect, line')).map((node) => {
-          const s = getComputedStyle(node)
-          return {
-            tag: node.tagName,
-            d: node.getAttribute('d')?.slice(0, 40) ?? node.getAttribute('x') ?? '',
-            dashOffset: s.strokeDashoffset,
-            opacity: s.opacity,
-          }
-        }),
+      const options = page.getByRole('radio')
+      await expect(options).toHaveCount(4)
+      const checked = await options.evaluateAll((els) =>
+        els.filter((el) => (el as HTMLInputElement).checked).length,
       )
+      expect(checked, 'no option is selected without JavaScript').toBe(1)
 
-      expect(ink.length, 'FIG. 1 drew no strokes at all').toBeGreaterThan(8)
-      for (const stroke of ink) {
-        // A stroke parked at a non-zero dash offset is a plotter animation that
-        // never got its start signal: the line exists but no ink is on paper.
-        expect(
-          parseFloat(stroke.dashOffset) || 0,
-          `FIG. 1 ${stroke.tag} "${stroke.d}" is undrawn (stroke-dashoffset: ${stroke.dashOffset})`,
-        ).toBe(0)
-      }
-
-      // The two groups that animate opacity must rest at their visible state.
-      const groupOpacities = await svg.evaluate((el) =>
-        Array.from(el.querySelectorAll('g')).map((g) => getComputedStyle(g).opacity),
-      )
-      expect(groupOpacities.every((o) => o === '1'), 'a FIG. 1 group rests invisible').toBe(true)
-
-      // ---- Nothing else on the sheet resting at zero -------------------
+      // ---- Nothing anywhere resting at zero ----------------------------
       const invisible = await page.evaluate(() =>
         Array.from(document.querySelectorAll('main *'))
           .filter((el) => {
             const s = getComputedStyle(el)
             if (s.display === 'none' || s.visibility === 'hidden') return false // deliberate
             if (el.closest('[aria-hidden="true"]')) return false // decoration
+            if (el.className.toString().includes('sr-only')) return false // deliberate
+            // A radio input stretched transparent over its own label: the
+            // control a person sees IS the label, and the input is invisible on
+            // purpose so the whole chip is the hit target. It is a control, not
+            // content, so it is not what this walk is looking for.
+            if (el instanceof HTMLInputElement) return false
             return s.opacity === '0' || /inset\(\s*0px\s+100%/.test(s.clipPath)
           })
           .slice(0, 10)
@@ -178,3 +154,24 @@ for (const [locale, path] of [
     }
   })
 }
+
+/**
+ * The structural guarantee behind all of the above: no scroll-triggered reveal
+ * exists to break. Asserted on the shipped DOM rather than on the source, so it
+ * also catches one arriving through a dependency.
+ */
+test('[en] nothing on the page waits for a scroll observer', async ({ page }) => {
+  await page.goto('/')
+  await page.waitForLoadState('networkidle')
+
+  const animated = await page.evaluate(() =>
+    Array.from(document.querySelectorAll('main *'))
+      .filter((el) => {
+        const name = getComputedStyle(el).animationName
+        return name !== 'none' && name !== ''
+      })
+      .slice(0, 10)
+      .map((el) => `${el.tagName}.${(el.className || '').toString().slice(0, 60)}`),
+  )
+  expect(animated, 'an element is running a load animation again').toEqual([])
+})

@@ -25,9 +25,9 @@ export const profileFixture: Profile & FixtureMarked = {
   available: true,
   availabilityLabel: { en: 'Taking projects', vi: 'Đang nhận dự án' },
   /**
-   * Four facts, not six. `Builds` was a fourth wording of the same taxonomy that
-   * FIG. 3 and the schedule's KIND column already name, and `Engagements` was a
-   * teaser for FIG. 4 sitting two screens above it. What is left is the four
+   * Four facts, not six. `Builds` was a fourth wording of the same taxonomy the
+   * scope section and each project's KIND label already name, and `Engagements`
+   * was a teaser for a section two screens below it. What is left is the four
    * things a stranger in another timezone actually needs and cannot get anywhere
    * else on the page.
    */
@@ -45,8 +45,8 @@ export const profileFixture: Profile & FixtureMarked = {
       value: { en: 'One working day', vi: 'Một ngày làm việc' },
     },
     {
-      // Was "Kite — private beta". Kite was a fixture product that has since been
-      // deleted, so the title block was naming a product that does not exist.
+      // Was "Kite — private beta". Kite was a fixture product that has since
+      // been deleted, so this was naming a product that does not exist.
       label: { en: 'Now building', vi: 'Đang xây' },
       value: { en: 'inluv · PixelBid', vi: 'inluv · PixelBid' },
     },

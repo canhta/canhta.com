@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 import { faq } from '@/content'
-import { Faq } from '@/components/faq'
+import { Answers } from '@/components/answers'
 import { t } from '@/lib/text'
 
 /**
@@ -10,9 +10,9 @@ import { t } from '@/lib/text'
  * breaks the pairing a screen reader announces. It is pinned rather than
  * described, because it looks correct on screen either way.
  */
-describe('Faq', () => {
+describe('Answers', () => {
   it('wraps every question and answer in one legal grouping div', () => {
-    const { container } = render(<Faq locale="en" />)
+    const { container } = render(<Answers locale="en" />)
     const list = container.querySelector('dl')
     expect(list).not.toBeNull()
 
@@ -27,7 +27,7 @@ describe('Faq', () => {
   })
 
   it('answers every question in the open, with no disclosure widget', () => {
-    const { container } = render(<Faq locale="en" />)
+    const { container } = render(<Answers locale="en" />)
 
     for (const item of faq) {
       expect(screen.getByText(t(item.question, 'en'))).toBeInTheDocument()
@@ -42,13 +42,13 @@ describe('Faq', () => {
     expect(container.querySelector('[hidden]')).toBeNull()
   })
 
-  it('sits in a landmark section under its own heading', () => {
-    render(<Faq locale="en" />)
+  it('sits under its own heading', () => {
+    render(<Answers locale="en" />)
     expect(screen.getByRole('heading', { name: 'Before you write to me' })).toBeInTheDocument()
   })
 
   it('renders the Vietnamese answers on the Vietnamese route', () => {
-    render(<Faq locale="vi" />)
+    render(<Answers locale="vi" />)
     for (const item of faq) {
       expect(screen.getByText(t(item.answer, 'vi'))).toBeInTheDocument()
     }

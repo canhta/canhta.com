@@ -10,9 +10,8 @@ import type { Build, FixtureMarked } from './types'
  * describing an unshipped product in the past tense is the kind of claim this
  * project refuses to make.
  *
- * `cover` is absent throughout: no real screenshots exist yet. The detail and
- * the hero deck render a "drawing to follow" panel instead of borrowing a
- * generic wireframe and presenting it as a product shot.
+ * `cover` is absent throughout: no real screenshots exist yet, and the work
+ * section has no image slot to fill with a placeholder while that is true.
  *
  * `proof` is absent throughout for the same reason — there is no number here
  * that anyone could check.
@@ -25,7 +24,6 @@ export const buildsFixture: (Build & Partial<FixtureMarked>)[] = [
     year: '2026',
     kind: 'skill',
     status: 'shipped',
-    featured: true,
     tagline: {
       en: 'Turns an app idea into an evidence-backed decision, not an opinion.',
       vi: 'Biến một ý tưởng app thành quyết định có bằng chứng, không phải cảm tính.',
