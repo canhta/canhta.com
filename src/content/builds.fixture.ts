@@ -25,16 +25,16 @@ export const buildsFixture: (Build & Partial<FixtureMarked>)[] = [
     kind: 'skill',
     status: 'shipped',
     tagline: {
-      en: 'Turns an app idea into an evidence-backed decision, not an opinion.',
-      vi: 'Biến một ý tưởng app thành quyết định có bằng chứng, không phải cảm tính.',
+      en: 'Turns an app idea into a decision backed by market evidence.',
+      vi: 'Biến một ý tưởng app thành quyết định dựa trên bằng chứng thị trường.',
     },
     problem: {
       en: 'Deciding what to build from a product link usually ends in a hunch.',
       vi: 'Quyết định xây gì từ một link sản phẩm thường kết thúc bằng linh cảm.',
     },
     built: {
-      en: 'An agent skill that reads the market and returns a differentiated call.',
-      vi: 'Một agent skill đọc thị trường và trả về một hướng đi khác biệt.',
+      en: 'An agent skill that researches the market and recommends a direction.',
+      vi: 'Một agent skill nghiên cứu thị trường và đề xuất một hướng đi.',
     },
     result: {
       en: 'Published and installable from the public skills registry.',
@@ -53,8 +53,8 @@ export const buildsFixture: (Build & Partial<FixtureMarked>)[] = [
     kind: 'mobile',
     status: 'building',
     tagline: {
-      en: 'An iPhone app for two people, built around rituals rather than a feed.',
-      vi: 'App iPhone cho hai người, xoay quanh nghi thức chứ không phải bảng tin.',
+      en: 'An iPhone app for two people, built around daily rituals instead of a feed.',
+      vi: 'App iPhone cho hai người, xoay quanh nghi thức hằng ngày thay vì bảng tin.',
     },
     problem: {
       en: 'Apps for couples turn a relationship into a feed to scroll.',
@@ -65,8 +65,8 @@ export const buildsFixture: (Build & Partial<FixtureMarked>)[] = [
       vi: 'Nghi thức hằng ngày: chưa ai trả lời xong thì chưa ai thấy gì.',
     },
     result: {
-      en: 'In build for the App Store. Domain model and release gates are settled.',
-      vi: 'Đang xây để lên App Store. Mô hình miền và cổng phát hành đã chốt.',
+      en: 'In build for the App Store.',
+      vi: 'Đang xây để lên App Store.',
     },
     links: [],
   },
@@ -84,20 +84,20 @@ export const buildsFixture: (Build & Partial<FixtureMarked>)[] = [
      * is not the idea, it is how fast the working thing existed.
      */
     tagline: {
-      en: 'Saw a bidding game trending on X, rebuilt it working.',
-      vi: 'Thấy một trò đấu giá đang trend trên X, dựng lại thành bản chạy được.',
+      en: 'A working rebuild of a bidding game that was trending on X.',
+      vi: 'Bản dựng lại chạy được của một trò đấu giá từng trend trên X.',
     },
     problem: {
-      en: 'The fastest way to learn a mechanic is to make it work yourself.',
-      vi: 'Cách nhanh nhất để hiểu một cơ chế là tự làm cho nó chạy.',
+      en: 'I wanted to understand how the bidding mechanic actually worked.',
+      vi: 'Tôi muốn hiểu cơ chế đấu giá đó thật sự hoạt động thế nào.',
     },
     built: {
       en: 'A credit-backed attention market: a qualified open burns one credit.',
       vi: 'Thị trường chú ý bằng credit: một lượt mở hợp lệ đốt đúng một credit.',
     },
     result: {
-      en: 'In build, for fun. Original idea: outbid.lol.',
-      vi: 'Đang xây, làm cho vui. Ý tưởng gốc: outbid.lol.',
+      en: 'In build, as a side project. Original idea: outbid.lol.',
+      vi: 'Đang xây, làm ngoài giờ. Ý tưởng gốc: outbid.lol.',
     },
     /**
      * The domain is registered and pointed at Cloudflare but nothing is deployed

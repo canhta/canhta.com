@@ -36,12 +36,12 @@ const COPY = {
   built: { en: 'What I built', vi: 'Đã xây gì' },
   result: { en: 'Where it stands', vi: 'Hiện tại ra sao' },
   subOne: {
-    en: 'One project. Every link below opens the real thing — there are no mock-ups on this page.',
-    vi: 'Một dự án. Mọi liên kết bên dưới đều mở đúng thứ thật — trang này không có bản dựng giả.',
+    en: 'One project. The ones with links are public; the rest are still being built.',
+    vi: 'Một dự án. Cái nào có liên kết là đã công khai, còn lại vẫn đang xây.',
   },
   subMany: {
-    en: 'projects. Every link below opens the real thing — there are no mock-ups on this page.',
-    vi: 'dự án. Mọi liên kết bên dưới đều mở đúng thứ thật — trang này không có bản dựng giả.',
+    en: 'projects. The ones with links are public; the rest are still being built.',
+    vi: 'dự án. Cái nào có liên kết là đã công khai, còn lại vẫn đang xây.',
   },
 } as const
 

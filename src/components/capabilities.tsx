@@ -20,7 +20,7 @@ import { SectionHeading, Fact } from './section'
  */
 const COPY = {
   kicker: { en: 'Scope', vi: 'Phạm vi' },
-  heading: { en: 'Where I can help', vi: 'Tôi giúp được gì' },
+  heading: { en: 'What I take on', vi: 'Tôi nhận làm gì' },
   bestFor: { en: 'Best for', vi: 'Hợp với việc' },
   canDeliver: { en: 'You get', vi: 'Bạn nhận' },
 } as const

@@ -42,7 +42,8 @@ notice clears itself.
 ```bash
 pnpm dev:fixtures   # develop against current content
 pnpm build          # production build; the guard applies
-pnpm test           # Vitest + RTL          (99)
+pnpm lint           # ESLint (flat config)
+pnpm test           # Vitest + RTL          (102)
 pnpm test:e2e       # Playwright + axe      (51)
 pnpm test:all       # typecheck + both
 ```
@@ -54,5 +55,7 @@ pnpm test:all       # typecheck + both
 - The one interaction is the process panel: choose where the work goes live and
   the steps past that point are marked running. It is a native radio group, so
   one layout serves every width and the keyboard support is the platform's.
-- No claim ships without a link that proves it — no invented metrics, no
+- No claim ships without a link that proves it: no invented metrics, no
   testimonials, no screenshots that are not real screenshots.
+- Copy is written plainly and in the first person. No em-dash codas, no
+  "not X, but Y", no sentences about the page itself.

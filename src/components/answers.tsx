@@ -16,8 +16,8 @@ const COPY = {
   kicker: { en: 'Questions', vi: 'Câu hỏi' },
   heading: { en: 'Before you write to me', vi: 'Trước khi bạn nhắn cho tôi' },
   sub: {
-    en: 'The things people ask first, answered without the hedging.',
-    vi: 'Những câu người ta hỏi đầu tiên, trả lời thẳng.',
+    en: 'The questions I get asked most often.',
+    vi: 'Những câu tôi hay được hỏi nhất.',
   },
 } as const
 

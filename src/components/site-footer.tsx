@@ -9,7 +9,6 @@ import { GitHubIcon, LinkedInIcon, XIcon, ZaloWordmark } from './icons'
  * a visitor can go check that the person is real.
  */
 const COPY = {
-  origin: { en: 'Built in Vietnam, shipped worldwide', vi: 'Làm tại Việt Nam, ship đi khắp nơi' },
   newTab: { en: 'opens in a new tab', vi: 'mở trong tab mới' },
   write: { en: 'Or write directly', vi: 'Hoặc viết thẳng' },
   elsewhere: { en: 'Elsewhere', vi: 'Nơi khác' },
@@ -83,12 +82,13 @@ export function SiteFooter({ locale }: { locale: Locale }) {
         </div>
       </div>
 
-      <div className="mt-12 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-line pt-5">
-        <p className="label">
-          © {year} <span translate="no">{profile.name}</span>
-        </p>
-        <p className="label">{t(COPY.origin, locale)}</p>
-      </div>
+      {/* "Built in Vietnam, shipped worldwide" used to sit on the right of this
+          row. It was a tagline rather than a fact, and the statement's fact row
+          already says where he works and in which timezone. What is left is the
+          one line a footer actually owes you. */}
+      <p className="label mt-12 border-t border-line pt-5">
+        © {year} <span translate="no">{profile.name}</span>
+      </p>
     </footer>
   )
 }

@@ -1,6 +1,10 @@
 # Build scripts reviewed and approved:
 #   @swc/core       — Next.js's Rust compiler, required to build at all
 #   @parcel/watcher — native file watcher used by dev mode
+#   unrs-resolver   — native import resolver behind eslint-plugin-import-x, which
+#                     `eslint-config-next` pulls in. Its postinstall links the
+#                     platform binding; without it ESLint cannot resolve imports.
 allowBuilds:
   '@parcel/watcher': true
   '@swc/core': true
+  unrs-resolver: true

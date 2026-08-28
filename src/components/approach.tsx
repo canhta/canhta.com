@@ -74,8 +74,8 @@ const STOPS: { id: string; choice: LocalizedText; consequence: LocalizedText }[]
     id: 'agree',
     choice: { en: 'As soon as we agree', vi: 'Ngay khi chốt xong' },
     consequence: {
-      en: 'Live as soon as we agree what to build. Everything after that is improvement on a running thing.',
-      vi: 'Chạy thật ngay khi chốt xong việc cần làm. Sau đó chỉ là cải tiến trên thứ đang chạy.',
+      en: 'Live as soon as we agree what to build. Everything after that improves something already running.',
+      vi: 'Chạy thật ngay khi chốt xong việc cần làm. Sau đó là cải tiến trên thứ đang chạy.',
     },
   },
   {
@@ -98,8 +98,8 @@ const STOPS: { id: string; choice: LocalizedText; consequence: LocalizedText }[]
     id: 'never',
     choice: { en: 'Never', vi: 'Không bao giờ' },
     consequence: {
-      en: 'Nothing goes live. This is the version where the work stays a plan — and nothing comes out of it.',
-      vi: 'Không có gì chạy thật. Đây là kịch bản mọi thứ dừng lại ở kế hoạch — và không ra được gì.',
+      en: 'Nothing goes live. The work stays a plan and nobody ever uses it.',
+      vi: 'Không có gì chạy thật. Công việc dừng ở kế hoạch và không ai dùng được.',
     },
   },
 ]
@@ -108,15 +108,15 @@ const DEFAULT_STOP = 2
 
 const COPY = {
   kicker: { en: 'Process', vi: 'Cách làm' },
-  heading: { en: 'From problem to running', vi: 'Từ vấn đề đến chạy thật' },
+  heading: { en: 'How a project goes', vi: 'Một dự án diễn ra thế nào' },
   sub: {
-    en: 'Most of the risk in a build is how long it stays a plan. Move the line and see what changes.',
-    vi: 'Rủi ro lớn nhất của một dự án là nó nằm trên giấy quá lâu. Đổi vị trí đường này để thấy khác biệt.',
+    en: 'Choose when the work goes live. Everything before that point is still on paper.',
+    vi: 'Chọn lúc công việc bắt đầu chạy thật. Mọi thứ trước điểm đó vẫn còn trên giấy.',
   },
   lineName: { en: 'It goes live', vi: 'Nó chạy thật' },
   running: { en: 'Running for real', vi: 'Đang chạy thật' },
   planned: { en: 'Still on paper', vi: 'Còn trên giấy' },
-  loop: { en: 'then we keep improving it', vi: 'rồi tiếp tục cải tiến' },
+  loop: { en: 'After that, we keep improving it.', vi: 'Sau đó chúng ta tiếp tục cải tiến.' },
 } as const
 
 export function Approach({ locale }: { locale: Locale }) {
@@ -233,9 +233,7 @@ export function Approach({ locale }: { locale: Locale }) {
           className="min-h-[76px] border-t border-line p-5 text-[15px] leading-relaxed text-muted lg:p-6"
         >
           {t(STOPS[stop]?.consequence ?? STOPS[DEFAULT_STOP]!.consequence, locale)}
-          {anythingLive ? (
-            <span className="text-ink"> — {t(COPY.loop, locale)}.</span>
-          ) : null}
+          {anythingLive ? <span className="text-ink"> {t(COPY.loop, locale)}</span> : null}
         </p>
       </div>
     </section>

@@ -7,12 +7,12 @@ export const servicesFixture: (Service & FixtureMarked)[] = [
     order: 1,
     name: { en: 'Solution advisory', vi: 'Tư vấn giải pháp' },
     output: {
-      en: 'A written architecture and a build sequence you could hand to anyone.',
-      vi: 'Một bản kiến trúc viết ra và trình tự thi công đưa cho ai cũng làm được.',
+      en: 'A written architecture and a build order you can hand to any developer.',
+      vi: 'Bản kiến trúc viết ra và thứ tự thi công, đưa cho lập trình viên nào cũng làm được.',
     },
     suitedTo: {
-      en: 'You know the problem, not yet the shape of the answer.',
-      vi: 'Bạn biết vấn đề, chưa biết hình dạng lời giải.',
+      en: 'You know the problem but not how to build the answer.',
+      vi: 'Bạn biết vấn đề nhưng chưa biết xây lời giải thế nào.',
     },
   },
   {
@@ -21,12 +21,12 @@ export const servicesFixture: (Service & FixtureMarked)[] = [
     order: 2,
     name: { en: 'Focused build sprint', vi: 'Sprint xây tập trung' },
     output: {
-      en: 'One working piece in production — not a prototype, not a deck.',
-      vi: 'Một mảnh chạy thật trên production — không phải prototype, không phải slide.',
+      en: 'One working piece of the product, running in production.',
+      vi: 'Một phần của sản phẩm, chạy thật trên production.',
     },
     suitedTo: {
-      en: 'You need proof it works before you commit further.',
-      vi: 'Bạn cần bằng chứng nó chạy được trước khi cam kết thêm.',
+      en: 'You want to see it work before committing to the whole build.',
+      vi: 'Bạn muốn thấy nó chạy được trước khi cam kết làm trọn gói.',
     },
   },
   {
@@ -35,12 +35,12 @@ export const servicesFixture: (Service & FixtureMarked)[] = [
     order: 3,
     name: { en: 'End-to-end product build', vi: 'Xây sản phẩm trọn gói' },
     output: {
-      en: 'A product with users, shipped and maintained through real releases.',
-      vi: 'Một sản phẩm có người dùng, đã ship và duy trì qua các bản phát hành thật.',
+      en: 'The finished product, released to users and maintained after launch.',
+      vi: 'Sản phẩm hoàn chỉnh, phát hành tới người dùng và duy trì sau khi ra mắt.',
     },
     suitedTo: {
-      en: 'You want one person accountable from idea to launch.',
-      vi: 'Bạn muốn một người chịu trách nhiệm từ ý tưởng tới lúc ra mắt.',
+      en: 'You want one person responsible from the first idea to launch.',
+      vi: 'Bạn muốn một người chịu trách nhiệm từ ý tưởng đầu tới lúc ra mắt.',
     },
   },
 ]

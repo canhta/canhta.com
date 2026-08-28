@@ -72,7 +72,7 @@ describe('Approach', () => {
     await user.click(screen.getByRole('radio', { name: /^never$/i }))
 
     expect(screen.queryByText('Running for real')).toBeNull()
-    expect(screen.getByText(/nothing comes out of it/)).toBeInTheDocument()
+    expect(screen.getByText(/nobody ever uses it/)).toBeInTheDocument()
   })
 
   it('announces the consequence, which happens away from the control', () => {
@@ -91,7 +91,7 @@ describe('Approach', () => {
 
   it('renders the Vietnamese copy on the Vietnamese route', () => {
     render(<Approach locale="vi" />)
-    expect(screen.getByRole('heading', { name: 'Từ vấn đề đến chạy thật' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Một dự án diễn ra thế nào' })).toBeInTheDocument()
     expect(screen.getByRole('radio', { name: 'Khi xây xong' })).toBeInTheDocument()
   })
 })

@@ -15,10 +15,10 @@ import { SectionHeading, Fact } from './section'
  */
 const COPY = {
   kicker: { en: 'Engagements', vi: 'Hình thức' },
-  heading: { en: 'Ways to work together', vi: 'Cách hợp tác' },
+  heading: { en: 'Three ways to hire me', vi: 'Ba cách thuê tôi' },
   sub: {
-    en: 'Three shapes, and the first one is a conversation about the actual problem.',
-    vi: 'Ba hình thức, và bước đầu tiên là một buổi nói chuyện về đúng vấn đề của bạn.',
+    en: 'All three begin with a conversation. Pick the first one if you are not sure.',
+    vi: 'Cả ba đều bắt đầu bằng một buổi nói chuyện. Chưa chắc thì chọn cái đầu tiên.',
   },
   output: { en: 'You get', vi: 'Bạn nhận' },
   suited: { en: 'Right when', vi: 'Đúng lúc bạn' },

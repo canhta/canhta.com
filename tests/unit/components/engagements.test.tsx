@@ -1,6 +1,6 @@
 import { render, screen, within } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
-import { services } from '@/content'
+import { profile, services } from '@/content'
 import { Engagements } from '@/components/engagements'
 import { t } from '@/lib/text'
 
@@ -26,7 +26,9 @@ describe('Engagements', () => {
     // how they drift apart. It now appears twice, both times from
     // `ContactActions`, and neither of them is here.
     render(<Engagements locale="en" />)
-    expect(screen.queryByRole('link', { name: /book a conversation/i })).toBeNull()
+    expect(
+      screen.queryByRole('link', { name: new RegExp(t(profile.ctaLabel, 'en'), 'i') }),
+    ).toBeNull()
   })
 
   it('gives its column labels wording distinct from the scope section', async () => {
@@ -53,6 +55,6 @@ describe('Engagements', () => {
 
   it('renders the Vietnamese copy on the Vietnamese route', () => {
     render(<Engagements locale="vi" />)
-    expect(screen.getByRole('heading', { name: 'Cách hợp tác' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Ba cách thuê tôi' })).toBeInTheDocument()
   })
 })

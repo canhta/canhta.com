@@ -5,8 +5,8 @@ export const profileFixture: Profile & FixtureMarked = {
   name: 'Canh Ta',
   location: { en: 'Vietnam', vi: 'Việt Nam' },
   hook: {
-    en: 'I build agentic systems, mobile apps and mini-SaaS — and I ship them.',
-    vi: 'Tôi xây hệ thống agentic, app mobile và mini-SaaS — và tôi ship chúng.',
+    en: 'I build agent systems, mobile apps and small SaaS products.',
+    vi: 'Tôi xây hệ thống agent, app mobile và sản phẩm SaaS nhỏ.',
   },
   /**
    * This used to open "Bring me a messy process" / "Đưa tôi một quy trình lộn
@@ -14,16 +14,21 @@ export const profileFixture: Profile & FixtureMarked = {
    * have said a word — the reader is the person who built that process. The
    * barrier being removed is the same one ("you don't need this worked out
    * already"), but the subject is now the situation, not their competence.
+   *
+   * The second half used to read "...and I turn it into a system that runs
+   * itself — and a product people use". Two abstractions joined by a dash,
+   * neither of which a reader could picture. It says the three things that
+   * actually happen instead.
    */
   supporting: {
-    en: 'You do not need a spec. Tell me where the work is stuck, and I turn it into a system that runs itself — and a product people use.',
-    vi: 'Bạn không cần có sẵn spec. Cứ nói chỗ công việc đang vướng, tôi biến nó thành hệ thống tự chạy — và một sản phẩm có người dùng.',
+    en: 'You do not need a spec to start. Tell me which part of your work is slow or still done by hand, and I will design it, build it and run it in production.',
+    vi: 'Bạn không cần có sẵn spec. Cứ nói phần việc nào đang chậm hoặc còn làm tay, tôi sẽ thiết kế, xây và đưa nó lên chạy thật.',
   },
-  ctaLabel: { en: 'Book a conversation', vi: 'Đặt lịch nói chuyện' },
+  ctaLabel: { en: 'Email me', vi: 'Gửi email cho tôi' },
   ctaHref: 'mailto:hello@canhta.com?subject=Project%20inquiry%20from%20canhta.com',
   avatar: '/avatar.jpg',
   available: true,
-  availabilityLabel: { en: 'Taking projects', vi: 'Đang nhận dự án' },
+  availabilityLabel: { en: 'Available for work', vi: 'Đang nhận dự án' },
   /**
    * Four facts, not six. `Builds` was a fourth wording of the same taxonomy the
    * scope section and each project's KIND label already name, and `Engagements`

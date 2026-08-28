@@ -18,12 +18,12 @@ export const capabilitiesFixture: (Capability & FixtureMarked)[] = [
     order: 1,
     name: { en: 'Work that runs itself', vi: 'Việc tự nó chạy' },
     bestFor: {
-      en: 'Work that repeats, has judgement in it, and nobody wants to do.',
-      vi: 'Việc lặp lại, có phán đoán bên trong, và không ai muốn làm.',
+      en: 'Repetitive work that still needs a judgement call.',
+      vi: 'Việc lặp đi lặp lại nhưng vẫn cần phán đoán.',
     },
     canDeliver: {
-      en: 'An agent that reasons, calls your tools, and knows when to ask a human.',
-      vi: 'Một agent biết suy luận, gọi tool của bạn, và biết lúc nào phải hỏi người.',
+      en: 'An agent that uses your existing tools and asks a person when it is unsure.',
+      vi: 'Một agent dùng đúng tool sẵn có của bạn và hỏi người khi không chắc.',
     },
   },
   {
@@ -32,12 +32,12 @@ export const capabilitiesFixture: (Capability & FixtureMarked)[] = [
     order: 2,
     name: { en: 'Phone apps', vi: 'App điện thoại' },
     bestFor: {
-      en: 'Products whose users are standing up, not sitting at a desk.',
-      vi: 'Sản phẩm mà người dùng đang đứng, không ngồi trước bàn.',
+      en: 'Users who are away from a desk when they need it.',
+      vi: 'Người dùng không ngồi trước máy tính khi cần đến nó.',
     },
     canDeliver: {
-      en: 'A shipped app on both stores that survives a bad network.',
-      vi: 'App đã lên cả hai store và sống sót qua mạng yếu.',
+      en: 'An app on the App Store and Google Play that works on a weak connection.',
+      vi: 'App trên App Store và Google Play, chạy được cả khi mạng yếu.',
     },
   },
   {
@@ -46,11 +46,11 @@ export const capabilitiesFixture: (Capability & FixtureMarked)[] = [
     order: 3,
     name: { en: 'Web products', vi: 'Sản phẩm web' },
     bestFor: {
-      en: 'The interface your business actually runs on.',
-      vi: 'Giao diện mà công việc kinh doanh của bạn thật sự chạy trên đó.',
+      en: 'The interface your team uses every day.',
+      vi: 'Giao diện đội của bạn dùng mỗi ngày.',
     },
     canDeliver: {
-      en: 'Fast, accessible interfaces that stay easy to change later.',
+      en: 'A fast, accessible interface that stays easy to change.',
       vi: 'Giao diện nhanh, dễ tiếp cận, và vẫn dễ sửa về sau.',
     },
   },
@@ -60,12 +60,12 @@ export const capabilitiesFixture: (Capability & FixtureMarked)[] = [
     order: 4,
     name: { en: 'Paid products', vi: 'Sản phẩm thu phí' },
     bestFor: {
-      en: 'An idea that needs to meet real users before it needs a team.',
-      vi: 'Một ý tưởng cần gặp người dùng thật trước khi cần một đội.',
+      en: 'An idea you want in front of paying users early.',
+      vi: 'Ý tưởng bạn muốn đưa tới người dùng trả tiền sớm.',
     },
     canDeliver: {
-      en: 'A narrow product with billing, auth and analytics from day one.',
-      vi: 'Sản phẩm hẹp, có thanh toán, đăng nhập và số liệu ngay từ ngày đầu.',
+      en: 'A small product with sign-in, billing and analytics from the start.',
+      vi: 'Sản phẩm nhỏ, có đăng nhập, thanh toán và số liệu ngay từ đầu.',
     },
   },
 ]

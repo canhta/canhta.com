@@ -25,7 +25,9 @@ test.describe('locale routing', () => {
   test('/ serves lang="en" and /vi serves lang="vi"', async ({ page }) => {
     await page.goto('/')
     await expect(page.locator('html')).toHaveAttribute('lang', 'en')
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('agentic')
+    // "I build" is the English hook's opening and has no Vietnamese homograph,
+    // so it proves the English copy rendered rather than the fallback.
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('I build')
 
     await page.goto('/vi')
     await expect(page.locator('html')).toHaveAttribute('lang', 'vi')

@@ -22,19 +22,19 @@ import { test, expect, type Page } from '@playwright/test'
 const SECTION_HEADINGS = {
   en: [
     'What I have built',
-    'Where I can help',
-    'From problem to running',
-    'Ways to work together',
+    'What I take on',
+    'How a project goes',
+    'Three ways to hire me',
     'Before you write to me',
-    'Have a problem worth automating? Let’s talk.',
+    'Tell me what you are trying to build.',
   ],
   vi: [
     'Tôi đã xây gì',
-    'Tôi giúp được gì',
-    'Từ vấn đề đến chạy thật',
-    'Cách hợp tác',
+    'Tôi nhận làm gì',
+    'Một dự án diễn ra thế nào',
+    'Ba cách thuê tôi',
     'Trước khi bạn nhắn cho tôi',
-    'Có việc đáng để tự động hoá? Nói chuyện nhé.',
+    'Kể tôi nghe bạn đang muốn xây gì.',
   ],
 } as const
 

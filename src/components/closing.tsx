@@ -17,12 +17,12 @@ import { ContactActions } from './contact-actions'
  */
 const COPY = {
   heading: {
-    en: 'Have a problem worth automating? Let’s talk.',
-    vi: 'Có việc đáng để tự động hoá? Nói chuyện nhé.',
+    en: 'Tell me what you are trying to build.',
+    vi: 'Kể tôi nghe bạn đang muốn xây gì.',
   },
   reassure: {
-    en: 'No spec needed, no sales call. Tell me where the work is stuck and you get a reply within one working day.',
-    vi: 'Không cần spec, không phải cuộc gọi bán hàng. Cứ nói chỗ công việc đang vướng, bạn sẽ có phản hồi trong một ngày làm việc.',
+    en: 'A few sentences about the problem is enough to start. I reply within one working day.',
+    vi: 'Vài dòng về vấn đề của bạn là đủ để bắt đầu. Tôi trả lời trong một ngày làm việc.',
   },
 } as const
 
