@@ -18,6 +18,9 @@ hero-*.png
 # by a plugin. It is not source for this site, and republishing someone else's
 # skill library under this repo's name is noise at best.
 .agents/
+# Symlinks into .agents/ created by the same plugin. Committing them commits
+# links that dangle on every machine but the one that made them.
+.claude/skills/
 
 # Build artefact
 tsconfig.tsbuildinfo
