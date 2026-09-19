@@ -29,13 +29,12 @@ answers. The space between two sections belongs to the second one.
 
 ## Status
 
-The three projects are real. The profile, engagements and answers are still
-placeholder, so a draft notice shows on every page.
+The projects are real. The profile, engagements and answers are still
+placeholder.
 
 A guard in `src/content/index.ts` refuses a production build while any
 `__fixture` marker is reachable. `vercel.json` holds `ALLOW_FIXTURES=1` to keep
-the deploy green — **delete that block when the last placeholder goes.** The
-notice clears itself.
+the deploy green — **delete that block when the last placeholder goes.**
 
 ## Commands
 

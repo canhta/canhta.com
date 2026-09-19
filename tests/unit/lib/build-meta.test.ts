@@ -16,6 +16,7 @@ describe('kindLabel', () => {
       web: { en: 'Web product', vi: 'Sản phẩm web' },
       saas: { en: 'Paid product', vi: 'Sản phẩm thu phí' },
       tool: { en: 'Developer tool', vi: 'Công cụ cho dev' },
+      desktop: { en: 'Desktop app', vi: 'App máy tính' },
     }
 
     for (const kind of KIND_ORDER) {
@@ -139,7 +140,7 @@ describe('linkLabel', () => {
 
 describe('KIND_ORDER', () => {
   it('lists every BuildKind exactly once', () => {
-    const all: BuildKind[] = ['agent', 'skill', 'mobile', 'web', 'saas', 'tool']
+    const all: BuildKind[] = ['agent', 'skill', 'mobile', 'web', 'saas', 'tool', 'desktop']
     expect([...KIND_ORDER].sort()).toEqual([...all].sort())
     expect(new Set(KIND_ORDER).size).toBe(KIND_ORDER.length)
   })

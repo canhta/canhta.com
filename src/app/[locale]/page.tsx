@@ -1,6 +1,5 @@
 import { setRequestLocale } from 'next-intl/server'
 import type { Locale } from '@/content/types'
-import { DraftNotice } from '@/components/draft-notice'
 import { SiteHeader } from '@/components/site-header'
 import { Statement } from '@/components/statement'
 import { Work } from '@/components/work'
@@ -46,7 +45,6 @@ export default async function HomePage({
         // The payload is built from our own typed content, never from user input.
         dangerouslySetInnerHTML={{ __html: JSON.stringify(buildGraph(locale)) }}
       />
-      <DraftNotice locale={locale} />
       <SiteHeader locale={locale} />
       {/* `tabIndex={-1}` is what makes the skip link work. Without it the target
           is not focusable, `document.activeElement` stays on `body`, and only

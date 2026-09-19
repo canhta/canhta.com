@@ -56,7 +56,7 @@ const COPY = {
  * is worse than a slightly dirty baseline, because you find out about it late.
  *
  * So: real traffic is recorded from the first visit. The early datapoints are
- * against draft copy — which is what the draft notice on the page says too.
+ * against draft copy.
  *
  * The development exclusion stays. A local session is one person reloading, and
  * both packages would otherwise pull their debug scripts and narrate to the

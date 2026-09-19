@@ -5,8 +5,9 @@ import type { Build, FixtureMarked } from './types'
  * their CONTEXT.md glossaries, their docs, and the GitHub API — not written to
  * sound good.
  *
- * Two are still private and have no public destination, so they carry no links
- * and status `building`. Linking a private repo gives every visitor a 404, and
+ * The Reupmatic repository is private and its site is public, so it links the
+ * site and not the source. PixelBid links a domain that is registered but not
+ * deployed behind yet. Linking a private repo gives every visitor a 404, and
  * describing an unshipped product in the past tense is the kind of claim this
  * project refuses to make.
  *
@@ -18,8 +19,38 @@ import type { Build, FixtureMarked } from './types'
  */
 export const buildsFixture: (Build & Partial<FixtureMarked>)[] = [
   {
-    slug: 'copycat-skills',
+    slug: 'reupmatic',
     order: 1,
+    name: 'Reupmatic',
+    year: '2026',
+    kind: 'desktop',
+    /**
+     * An Alpha people can already download, so the status stays `building`: the
+     * intake, local processing and affiliate drafts work, while direct social
+     * publishing is still being built. The site says the same thing.
+     */
+    status: 'building',
+    tagline: {
+      en: 'A desktop app that preps batches of Douyin reuploads on your machine.',
+      vi: 'App desktop chuẩn bị cả loạt video Douyin ngay trên máy.',
+    },
+    problem: {
+      en: 'Reuploading Douyin videos means repeating the same edit, subtitle and voice steps per video.',
+      vi: 'Mỗi video reup lại phải làm lại đúng các bước chỉnh sửa, phụ đề và giọng đọc.',
+    },
+    built: {
+      en: 'A queue that downloads, subtitles, translates and voices a batch on your computer.',
+      vi: 'Một hàng đợi tự tải, làm phụ đề, dịch và tạo giọng cho cả loạt video trên máy.',
+    },
+    result: {
+      en: 'Alpha builds are downloadable for macOS and Windows; direct publishing is still in progress.',
+      vi: 'Bản Alpha đã tải được cho macOS và Windows; phần đăng thẳng vẫn đang làm.',
+    },
+    links: [{ kind: 'web', url: 'https://reupmatic.canhta.com' }],
+  },
+  {
+    slug: 'copycat-skills',
+    order: 2,
     name: 'copycat-skills',
     year: '2026',
     kind: 'skill',
@@ -44,31 +75,6 @@ export const buildsFixture: (Build & Partial<FixtureMarked>)[] = [
       { kind: 'docs', url: 'https://skills.sh/canhta/copycat-skills' },
       { kind: 'github', url: 'https://github.com/canhta/copycat-skills' },
     ],
-  },
-  {
-    slug: 'inluv',
-    order: 2,
-    name: 'inluv',
-    year: '2026',
-    kind: 'mobile',
-    status: 'building',
-    tagline: {
-      en: 'An iPhone app for two people, built around daily rituals instead of a feed.',
-      vi: 'App iPhone cho hai người, xoay quanh thói quen mỗi ngày thay vì bảng tin.',
-    },
-    problem: {
-      en: 'Apps for couples turn a relationship into a feed to scroll.',
-      vi: 'App cho cặp đôi biến mối quan hệ thành một bảng tin để lướt.',
-    },
-    built: {
-      en: 'Daily rituals where neither answer is revealed until both are in.',
-      vi: 'Thói quen mỗi ngày: chưa đủ hai câu trả lời thì chưa ai thấy của ai.',
-    },
-    result: {
-      en: 'In build for the App Store.',
-      vi: 'Đang làm để lên App Store.',
-    },
-    links: [],
   },
   {
     slug: 'pixelbid',

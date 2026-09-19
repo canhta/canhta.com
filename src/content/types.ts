@@ -7,7 +7,7 @@ export type LocalizedText = Record<Locale, string>
  * schedule groups and filters on it and the set will grow well past web apps —
  * store apps, agent skills, developer tools.
  */
-export type BuildKind = 'agent' | 'skill' | 'mobile' | 'web' | 'saas' | 'tool'
+export type BuildKind = 'agent' | 'skill' | 'mobile' | 'web' | 'saas' | 'tool' | 'desktop'
 
 /** Where a build can be opened. A build often has more than one. */
 export type BuildLinkKind = 'appstore' | 'playstore' | 'web' | 'github' | 'docs'

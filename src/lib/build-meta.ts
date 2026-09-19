@@ -18,6 +18,7 @@ const KIND_LABELS: Record<BuildKind, LocalizedText> = {
   web: { en: 'Web product', vi: 'Sản phẩm web' },
   saas: { en: 'Paid product', vi: 'Sản phẩm thu phí' },
   tool: { en: 'Developer tool', vi: 'Công cụ cho dev' },
+  desktop: { en: 'Desktop app', vi: 'App máy tính' },
 }
 
 /** "Open ↗" is wrong for a store listing, so each destination says where it goes. */
@@ -40,4 +41,4 @@ export function linkLabel(kind: BuildLinkKind, locale: Locale): string {
 }
 
 /** Stable display order for grouping by kind. */
-export const KIND_ORDER: BuildKind[] = ['agent', 'skill', 'mobile', 'web', 'saas', 'tool']
+export const KIND_ORDER: BuildKind[] = ['agent', 'skill', 'mobile', 'web', 'saas', 'tool', 'desktop']
