@@ -71,7 +71,7 @@ export const faqFixture: (Faq & FixtureMarked)[] = [
     __fixture: true,
     id: 'agency',
     order: 6,
-    question: { en: 'Why you and not an agency?', vi: 'Tại sao không phải là agency?' },
+    question: { en: 'Why you and not an agency?', vi: 'Sao không thuê agency?' },
     answer: {
       en: 'You talk to the person writing the code, not to an account manager.',
       vi: 'Bạn nói chuyện thẳng với người viết code, không qua account manager.',

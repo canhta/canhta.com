@@ -53,7 +53,7 @@ export const profileFixture: Profile & FixtureMarked = {
       // Was "Kite — private beta". Kite was a fixture product that has since
       // been deleted, so this was naming a product that does not exist.
       label: { en: 'Now building', vi: 'Đang làm' },
-      value: { en: 'inluv · PixelBid', vi: 'inluv · PixelBid' },
+      value: { en: 'Reupmatic · PixelBid', vi: 'Reupmatic · PixelBid' },
     },
   ],
 }

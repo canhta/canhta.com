@@ -6,8 +6,9 @@ import type { Build, FixtureMarked } from './types'
  * sound good.
  *
  * The Reupmatic repository is private and its site is public, so it links the
- * site and not the source. PixelBid links a domain that is registered but not
- * deployed behind yet. Linking a private repo gives every visitor a 404, and
+ * site and not the source. AI Engineering Atlas is public on both sides, so it
+ * links the site and the source. PixelBid links a domain that is registered but
+ * not deployed behind yet. Linking a private repo gives every visitor a 404, and
  * describing an unshipped product in the past tense is the kind of claim this
  * project refuses to make.
  *
@@ -49,8 +50,43 @@ export const buildsFixture: (Build & Partial<FixtureMarked>)[] = [
     links: [{ kind: 'web', url: 'https://reupmatic.canhta.com' }],
   },
   {
-    slug: 'copycat-skills',
+    slug: 'ai-engineering-atlas',
     order: 2,
+    name: 'AI Engineering Atlas',
+    year: '2026',
+    kind: 'web',
+    /**
+     * The repository and the site are both public, so this entry links both. Its
+     * own README calls it a learning journey in public: coverage and ready routes
+     * are deliberately separate, and a topic is not presented as finished merely
+     * because it appears on the roadmap. That is why the result says the coverage
+     * grows rather than claiming a finished curriculum.
+     */
+    status: 'live',
+    tagline: {
+      en: 'A roadmap for AI engineering that starts at your gap, not from zero.',
+      vi: 'Roadmap AI engineering, bắt đầu từ đúng chỗ bạn còn thiếu.',
+    },
+    problem: {
+      en: 'Experienced engineers know AI unevenly, but most roadmaps treat everyone as a beginner.',
+      vi: 'Người đi làm lâu thì biết AI chỗ được chỗ không, mà hầu hết roadmap cứ dạy lại từ đầu.',
+    },
+    built: {
+      en: 'A gap-driven curriculum: diagnose first, learn the smallest route, produce evidence.',
+      vi: 'Kiểm tra trước để biết gap của mình, chỉ học đúng phần đó, rồi tự làm ra evidence.',
+    },
+    result: {
+      en: 'Public on GitHub and live at ai-eng.canhta.com; coverage grows, routes get ready.',
+      vi: 'Public trên GitHub, site live ở ai-eng.canhta.com; coverage ngày càng nhiều, các route cũng dần xong.',
+    },
+    links: [
+      { kind: 'web', url: 'https://ai-eng.canhta.com' },
+      { kind: 'github', url: 'https://github.com/canhta/ai-engineering-atlas' },
+    ],
+  },
+  {
+    slug: 'copycat-skills',
+    order: 3,
     name: 'copycat-skills',
     year: '2026',
     kind: 'skill',
@@ -69,7 +105,7 @@ export const buildsFixture: (Build & Partial<FixtureMarked>)[] = [
     },
     result: {
       en: 'Published and installable from the public skills registry.',
-      vi: 'Đã publish, cài được từ registry skills công khai.',
+      vi: 'Đã publish, ai cũng cài được từ registry skills.',
     },
     links: [
       { kind: 'docs', url: 'https://skills.sh/canhta/copycat-skills' },
@@ -78,7 +114,7 @@ export const buildsFixture: (Build & Partial<FixtureMarked>)[] = [
   },
   {
     slug: 'pixelbid',
-    order: 3,
+    order: 4,
     name: 'PixelBid',
     year: '2026',
     kind: 'web',

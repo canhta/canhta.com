@@ -20,14 +20,14 @@ import { BuildLinkButton } from './build-link'
  * - The table was built to scale to thirty products and had two rows in it. A
  *   table with two rows is not a register, it is a layout apologising for
  *   content it does not have.
- * - Splitting three projects into "the good one" and "the others" tells a
+ * - Splitting four projects into "the good one" and "the others" tells a
  *   visitor which two you are not proud of.
  *
- * Three projects fit as three equal entries, and the shape scales the way a
+ * Four projects fit as four equal entries, and the shape scales the way a
  * written list scales: the tenth entry costs the same as the second, and nothing
  * has to be demoted to a row to make room. The status word does the ranking that
- * the split used to do, honestly — one is shipped, two are being built, and it
- * says so.
+ * the split used to do, honestly — one is shipped, one is live, two are being
+ * built, and it says so.
  */
 const COPY = {
   kicker: { en: 'Work', vi: 'Sản phẩm' },
@@ -37,11 +37,11 @@ const COPY = {
   result: { en: 'Where it stands', vi: 'Hiện tại ra sao' },
   subOne: {
     en: 'One project. The ones with links are public; the rest are still being built.',
-    vi: 'Một dự án. Cái nào có link là đã công khai, còn lại vẫn đang làm.',
+    vi: 'Một dự án. Cái nào có link là đã public, còn lại vẫn đang làm.',
   },
   subMany: {
     en: 'projects. The ones with links are public; the rest are still being built.',
-    vi: 'dự án. Cái nào có link là đã công khai, còn lại vẫn đang làm.',
+    vi: 'dự án. Cái nào có link là đã public, còn lại vẫn đang làm.',
   },
 } as const
 
