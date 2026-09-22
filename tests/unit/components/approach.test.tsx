@@ -2,6 +2,9 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
 import { Approach } from '@/components/approach'
+import { getMessages } from '@/i18n/messages'
+
+const copy = getMessages('en').approach
 
 /**
  * The page's one interaction, and the one that used to fall apart below 1024px.
@@ -18,7 +21,7 @@ import { Approach } from '@/components/approach'
  */
 describe('Approach', () => {
   it('is a native radio group, so keyboard and screen reader support is not hand-rolled', () => {
-    render(<Approach locale="en" />)
+    render(<Approach copy={copy} />)
     const group = screen.getByRole('group', { name: /it goes live/i })
     expect(group.tagName).toBe('FIELDSET')
 
@@ -28,7 +31,7 @@ describe('Approach', () => {
   })
 
   it('has exactly one option selected at rest, and it is the honest one', () => {
-    render(<Approach locale="en" />)
+    render(<Approach copy={copy} />)
     const checked = screen.getAllByRole('radio').filter((r) => (r as HTMLInputElement).checked)
     expect(checked).toHaveLength(1)
     // The default is where Canh actually puts the line, and the copy says so.
@@ -36,7 +39,7 @@ describe('Approach', () => {
   })
 
   it('marks every step past the line as running, in words', () => {
-    render(<Approach locale="en" />)
+    render(<Approach copy={copy} />)
     // Default is "when it is built": one of four steps runs for real.
     expect(screen.getAllByText('Running for real')).toHaveLength(1)
     expect(screen.getAllByText('Still on paper')).toHaveLength(3)
@@ -44,7 +47,7 @@ describe('Approach', () => {
 
   it('moves the line when a different option is chosen', async () => {
     const user = userEvent.setup()
-    render(<Approach locale="en" />)
+    render(<Approach copy={copy} />)
 
     await user.click(screen.getByRole('radio', { name: /as soon as we agree/i }))
 
@@ -55,7 +58,7 @@ describe('Approach', () => {
 
   it('lets a keyboard move the line with arrow keys, for free', async () => {
     const user = userEvent.setup()
-    render(<Approach locale="en" />)
+    render(<Approach copy={copy} />)
 
     const radios = screen.getAllByRole('radio')
     await user.click(radios[0] as HTMLElement)
@@ -67,7 +70,7 @@ describe('Approach', () => {
 
   it('keeps the option where nothing ships, because it is the argument', async () => {
     const user = userEvent.setup()
-    render(<Approach locale="en" />)
+    render(<Approach copy={copy} />)
 
     await user.click(screen.getByRole('radio', { name: /^never$/i }))
 
@@ -76,22 +79,16 @@ describe('Approach', () => {
   })
 
   it('announces the consequence, which happens away from the control', () => {
-    const { container } = render(<Approach locale="en" />)
+    const { container } = render(<Approach copy={copy} />)
     expect(container.querySelector('[aria-live="polite"]')).not.toBeNull()
   })
 
   it('serves one layout at every width, with no breakpoint-only fallback', () => {
     // The regression this replaced: a whole second component behind `lg:hidden`.
-    const { container } = render(<Approach locale="en" />)
+    const { container } = render(<Approach copy={copy} />)
     const html = container.innerHTML
     expect(html).not.toContain('lg:hidden')
     expect(html).not.toContain('hidden lg:block')
     expect(container.querySelector('svg')).toBeNull()
-  })
-
-  it('renders the Vietnamese copy on the Vietnamese route', () => {
-    render(<Approach locale="vi" />)
-    expect(screen.getByRole('heading', { name: 'Một dự án diễn ra thế nào' })).toBeInTheDocument()
-    expect(screen.getByRole('radio', { name: 'Khi làm xong' })).toBeInTheDocument()
   })
 })

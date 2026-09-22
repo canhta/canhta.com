@@ -1,4 +1,5 @@
 import type { BuildLink, Locale } from '@/content/types'
+import { getMessages } from '@/i18n/messages'
 import { linkLabel } from '@/lib/build-meta'
 import { repoKey, type Stars } from '@/lib/github'
 import { AppleIcon, DocsIcon, GitHubIcon, GlobeIcon, PlayStoreIcon } from './icons'
@@ -37,6 +38,7 @@ export function BuildLinkButton({
   const Icon = ICONS[link.kind]
   const key = link.kind === 'github' ? repoKey(link.url) : null
   const count = key ? stars[key] : undefined
+  const starsLabel = getMessages(locale).buildMeta.githubStars
 
   return (
     <a href={link.url} target="_blank" rel="noreferrer noopener" className="chip">
@@ -54,9 +56,7 @@ export function BuildLinkButton({
             </svg>
             {count}
           </span>
-          <span className="sr-only">
-            {locale === 'vi' ? 'sao trên GitHub' : 'stars on GitHub'}
-          </span>
+          <span className="sr-only">{starsLabel}</span>
         </>
       ) : null}
       <span aria-hidden="true" className="text-muted">

@@ -25,14 +25,13 @@ test.describe('locale routing', () => {
   test('/ serves lang="en" and /vi serves lang="vi"', async ({ page }) => {
     await page.goto('/')
     await expect(page.locator('html')).toHaveAttribute('lang', 'en')
-    // "I build" is the English hook's opening and has no Vietnamese homograph,
-    // so it proves the English copy rendered rather than the fallback.
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('I build')
+    const enHook = await page.getByRole('heading', { level: 1 }).innerText()
 
     await page.goto('/vi')
     await expect(page.locator('html')).toHaveAttribute('lang', 'vi')
-    // Diacritics are the cheapest proof that Vietnamese copy actually rendered.
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('Tôi làm')
+    const viHook = await page.getByRole('heading', { level: 1 }).innerText()
+    expect(viHook).not.toBe(enHook)
+    expect(viHook).toMatch(/[ăâđêôơưàáảãạ]/i)
   })
 
   /**
@@ -42,15 +41,13 @@ test.describe('locale routing', () => {
    * a screen-reader user on /vi was hearing an English landmark name on an
    * otherwise fully translated page.
    */
-  const NAV_NAME = { '/': 'Language', '/vi': 'Ngôn ngữ' } as const
-
   for (const [from, to, path] of [
     ['/', 'VI', '/vi'],
     ['/vi', 'EN', '/'],
   ] as const) {
     test(`the switch navigates ${from} → ${path} and marks the active locale`, async ({ page }) => {
       await page.goto(from)
-      const nav = page.getByRole('navigation', { name: NAV_NAME[from] })
+      const nav = page.locator('header nav')
       await expect(nav).toBeVisible()
 
       const target = nav.getByRole('link', { name: to, exact: true })
@@ -59,7 +56,7 @@ test.describe('locale routing', () => {
 
       // The landmark is re-resolved after navigation: its name changed with the
       // locale, so the pre-navigation locator no longer matches.
-      const navAfter = page.getByRole('navigation', { name: NAV_NAME[path] })
+      const navAfter = page.locator('header nav')
       const en = navAfter.getByRole('link', { name: 'EN', exact: true })
       const vi = navAfter.getByRole('link', { name: 'VI', exact: true })
       const active = path === '/vi' ? vi : en

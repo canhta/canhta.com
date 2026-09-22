@@ -1,6 +1,6 @@
-import { faq } from '@/content'
+import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
-import { t } from '@/lib/text'
+import { getMessages } from '@/i18n/messages'
 import { SectionHeading } from './section'
 
 /**
@@ -12,32 +12,25 @@ import { SectionHeading } from './section'
  * make an illegal `dl` nesting look identical on screen while breaking the
  * pairing a screen reader announces, which is why a test pins the structure.
  */
-const COPY = {
-  kicker: { en: 'Questions', vi: 'Câu hỏi' },
-  heading: { en: 'Before you write to me', vi: 'Trước khi bạn nhắn cho tôi' },
-  sub: {
-    en: 'The questions I get asked most often.',
-    vi: 'Những câu tôi hay được hỏi nhất.',
-  },
-} as const
-
 export function Answers({ locale }: { locale: Locale }) {
+  const { faq } = getSiteContent(locale)
   if (faq.length === 0) return null
+  const copy = getMessages(locale).answers
 
   return (
     <section className="shell band-3">
       <SectionHeading
-        kicker={t(COPY.kicker, locale)}
-        title={t(COPY.heading, locale)}
-        sub={t(COPY.sub, locale)}
+        kicker={copy.kicker}
+        title={copy.heading}
+        sub={copy.sub}
       />
 
       <dl className="mt-10 grid gap-x-12 md:grid-cols-2">
         {faq.map((item) => (
           <div key={item.id} className="border-t border-line py-6">
-            <dt className="subtitle max-w-[30ch]">{t(item.question, locale)}</dt>
+            <dt className="subtitle max-w-[30ch]">{item.question}</dt>
             <dd className="mt-2 max-w-[48ch] text-[15px] leading-relaxed text-muted">
-              {t(item.answer, locale)}
+              {item.answer}
             </dd>
           </div>
         ))}

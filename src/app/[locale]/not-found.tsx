@@ -3,7 +3,7 @@ import { hasLocale } from 'next-intl'
 import { getLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
 import type { Locale } from '@/content/types'
-import { t } from '@/lib/text'
+import { getMessages } from '@/i18n/messages'
 import { ArrowIcon } from '@/components/icons'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
@@ -13,19 +13,6 @@ import { SiteFooter } from '@/components/site-footer'
  * occasion for a joke. What happened, then what to do, in the second person,
  * with no apology.
  */
-const COPY = {
-  label: { en: 'Not found', vi: 'Không tìm thấy' },
-  heading: {
-    en: 'There is no page at this address.',
-    vi: 'Không có trang nào ở địa chỉ này.',
-  },
-  body: {
-    en: 'Check it for a typo, or start from the front page. This site is one page, so everything on it is a single scroll away.',
-    vi: 'Kiểm tra xem có gõ nhầm không, hoặc quay về trang chính. Cả site chỉ có một trang, cuộn một lượt là hết.',
-  },
-  home: { en: 'Go to the front page', vi: 'Về trang chính' },
-} as const
-
 /**
  * `not-found.tsx` is passed no props, and it renders outside
  * `NextIntlClientProvider`, so neither `params` nor `useTranslations` can tell
@@ -45,8 +32,7 @@ const COPY = {
  * something the layout already knows.
  *
  * `hasLocale` narrows the string to our own `Locale` union rather than asserting
- * it; on anything unexpected `t()` falls back to English, which is a readable
- * 404 rather than a blank one.
+ * it; anything unexpected uses the English catalog rather than a partial locale.
  */
 /**
  * KNOWN LIMITATION — this page is not server-rendered.
@@ -70,6 +56,7 @@ export default async function NotFound() {
   const requested = await getLocale()
   const locale: Locale = hasLocale(routing.locales, requested) ? requested : 'en'
   const home = locale === 'en' ? '/' : '/vi'
+  const copy = getMessages(locale).notFound
 
   return (
     <>
@@ -79,18 +66,18 @@ export default async function NotFound() {
           one included. Without the id here, the first thing a keyboard user
           reaches on a 404 is a link to nowhere. */}
       <main id="main" className="shell band-1">
-        <p className="label">{t(COPY.label, locale)}</p>
+        <p className="label">{copy.label}</p>
         <p className="tnum mt-2 font-display text-[64px] leading-none font-semibold text-accent">
           404
         </p>
 
-        <h1 className="title mt-8 max-w-[20ch]">{t(COPY.heading, locale)}</h1>
+        <h1 className="title mt-8 max-w-[20ch]">{copy.heading}</h1>
 
-        <p className="lead mt-5 max-w-[52ch]">{t(COPY.body, locale)}</p>
+        <p className="lead mt-5 max-w-[52ch]">{copy.body}</p>
 
         <div className="mt-9">
           <Link href={home} className="btn-primary">
-            {t(COPY.home, locale)}
+            {copy.home}
             <ArrowIcon width={16} height={16} />
           </Link>
         </div>

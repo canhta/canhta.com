@@ -1,8 +1,7 @@
 'use client'
 
 import { useId, useState } from 'react'
-import type { Locale, LocalizedText } from '@/content/types'
-import { t } from '@/lib/text'
+import type { ApproachMessages } from '@/i18n/messages'
 import { SectionHeading } from './section'
 
 /**
@@ -28,40 +27,6 @@ import { SectionHeading } from './section'
  * The interaction survives; the fragile mechanism does not.
  */
 
-interface Stage {
-  id: string
-  label: LocalizedText
-  detail: LocalizedText
-}
-
-/**
- * Written for someone who does not build software. "In your own words" rather
- * than "messy is fine" — the second one names the visitor's problem as the mess,
- * and the reader is the person who built that process.
- */
-const STAGES: Stage[] = [
-  {
-    id: 'problem',
-    label: { en: 'You bring a problem', vi: 'Bạn nêu vấn đề' },
-    detail: { en: 'In your own words.', vi: 'Nói sao cũng được.' },
-  },
-  {
-    id: 'agree',
-    label: { en: 'We agree what to build', vi: 'Chốt việc cần làm' },
-    detail: { en: 'Small and specific.', vi: 'Nhỏ và cụ thể.' },
-  },
-  {
-    id: 'build',
-    label: { en: 'I build, you check', vi: 'Tôi làm, bạn kiểm tra' },
-    detail: { en: 'You see it as it grows.', vi: 'Làm tới đâu bạn thấy tới đó.' },
-  },
-  {
-    id: 'live',
-    label: { en: 'It goes live', vi: 'Đưa vào chạy thật' },
-    detail: { en: 'Real users, real work.', vi: 'Người thật, việc thật.' },
-  },
-]
-
 /**
  * Four positions for the line. Choosing option `i` makes every stage from index
  * `i + 1` onward run for real, which is why the last option — the line pushed
@@ -69,94 +34,28 @@ const STAGES: Stage[] = [
  * deliberately: it is the version of the engagement where the work stays a plan,
  * and it is the one this whole page exists to argue against.
  */
-const STOPS: { id: string; choice: LocalizedText; consequence: LocalizedText }[] = [
-  {
-    id: 'agree',
-    choice: { en: 'As soon as we agree', vi: 'Ngay khi chốt xong' },
-    consequence: {
-      en: 'Live as soon as we agree what to build. Everything after that improves something already running.',
-      vi: 'Chạy thật ngay khi chốt xong việc cần làm. Từ đó trở đi, mọi thứ đều là cải tiến cái đang chạy.',
-    },
-  },
-  {
-    id: 'building',
-    choice: { en: 'While I am building', vi: 'Khi tôi đang làm' },
-    consequence: {
-      en: 'Live while I am still building it. You see it work before it is finished.',
-      vi: 'Chạy thật khi tôi còn đang làm. Bạn thấy nó chạy trước cả khi nó xong.',
-    },
-  },
-  {
-    id: 'built',
-    choice: { en: 'When it is built', vi: 'Khi làm xong' },
-    consequence: {
-      en: 'Live when it is built. This is where I put the line.',
-      vi: 'Chạy thật khi làm xong. Tôi đặt vạch ở chỗ này.',
-    },
-  },
-  {
-    id: 'never',
-    choice: { en: 'Never', vi: 'Không bao giờ' },
-    consequence: {
-      en: 'Nothing goes live. The work stays a plan and nobody ever uses it.',
-      vi: 'Không có gì chạy thật. Mọi thứ dừng ở bản kế hoạch, không ai dùng được.',
-    },
-  },
-]
-
 const DEFAULT_STOP = 2
 
-/**
- * `chạy thật` is kept here on purpose, and it is not the calque it looks like.
- *
- * It is the second half of a pair Vietnamese already has — `chạy thử` (trial
- * run) / `chạy thật` (the real one) — which is how Vietnamese teams talk about
- * go-live without reaching for English. That is the test `xây` failed: nobody
- * says `xây phần mềm`, so `xây` was English "build" wearing a Vietnamese word,
- * while `chạy thật` stands up in Vietnamese with no English behind it.
- *
- * It also has to work against `còn trên giấy` — the whole section is that one
- * opposition, and `Đang chạy thật` / `Còn trên giấy` is a contrast a business
- * owner reads at a glance. `Đang trên production` is developer shop-talk and
- * loses the reader this section is written for; `chạy chính thức` is correct but
- * formal, and it breaks the echo with `Người thật, việc thật.` two lines above.
- *
- * The hero line does use `lên production`, because that sentence already carries
- * `spec` and `code` and is addressed to someone who will recognise all three.
- */
-const COPY = {
-  kicker: { en: 'Process', vi: 'Cách làm' },
-  heading: { en: 'How a project goes', vi: 'Một dự án diễn ra thế nào' },
-  sub: {
-    en: 'Choose when the work goes live. Everything before that point is still on paper.',
-    vi: 'Chọn lúc công việc bắt đầu chạy thật. Trước lúc đó, mọi thứ vẫn nằm trên giấy.',
-  },
-  lineName: { en: 'It goes live', vi: 'Khi nào chạy thật' },
-  running: { en: 'Running for real', vi: 'Đang chạy thật' },
-  planned: { en: 'Still on paper', vi: 'Còn trên giấy' },
-  loop: { en: 'After that, we keep improving it.', vi: 'Sau đó, chúng ta cải tiến tiếp.' },
-} as const
-
-export function Approach({ locale }: { locale: Locale }) {
+export function Approach({ copy }: { copy: ApproachMessages }) {
   const [stop, setStop] = useState(DEFAULT_STOP)
   const name = useId()
 
   const liveFrom = stop + 1
-  const anythingLive = liveFrom < STAGES.length
+  const anythingLive = liveFrom < copy.stages.length
 
   return (
     <section className="shell band-2">
       <SectionHeading
-        kicker={t(COPY.kicker, locale)}
-        title={t(COPY.heading, locale)}
-        sub={t(COPY.sub, locale)}
+        kicker={copy.kicker}
+        title={copy.heading}
+        sub={copy.sub}
       />
 
       <div className="mt-10 rounded-[2px] border border-line bg-raised">
         {/* One layout at every width: the steps wrap from a column into a row
             instead of being replaced by a different component. */}
         <ol className="grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-4">
-          {STAGES.map((stage, i) => {
+          {copy.stages.map((stage, i) => {
             const live = i >= liveFrom
             return (
               <li key={stage.id} className="bg-raised p-5 lg:p-6">
@@ -168,10 +67,10 @@ export function Approach({ locale }: { locale: Locale }) {
                 />
                 <p className="mt-4 flex items-baseline gap-2 text-[15px] leading-snug font-medium">
                   <span className="label tnum shrink-0">{i + 1}</span>
-                  <span>{t(stage.label, locale)}</span>
+                  <span>{stage.label}</span>
                 </p>
                 <p className="mt-1.5 pl-6 text-[14px] leading-snug text-muted">
-                  {t(stage.detail, locale)}
+                  {stage.detail}
                 </p>
                 {/* State as text, not as colour alone. Visible for the running
                     steps because that is the thing being demonstrated; the
@@ -179,10 +78,10 @@ export function Approach({ locale }: { locale: Locale }) {
                     does not repeat "still on paper" three times on screen. */}
                 {live ? (
                   <p className="mt-3 pl-6 text-[13px] font-medium text-accent">
-                    {t(COPY.running, locale)}
+                    {copy.running}
                   </p>
                 ) : (
-                  <span className="sr-only">{t(COPY.planned, locale)}</span>
+                  <span className="sr-only">{copy.planned}</span>
                 )}
               </li>
             )
@@ -204,11 +103,11 @@ export function Approach({ locale }: { locale: Locale }) {
             to the right edge. */}
         <div className="border-t border-line p-5 lg:p-6">
           <fieldset className="min-w-0">
-            <legend className="label mb-3">{t(COPY.lineName, locale)}</legend>
+            <legend className="label mb-3">{copy.lineName}</legend>
             {/* A real radio group: arrow-key navigation, grouped announcement and
                 44px targets all come for free and are all correct. */}
             <div className="flex flex-wrap gap-2">
-              {STOPS.map((option, i) => {
+              {copy.stops.map((option, i) => {
                 const selected = stop === i
                 return (
                   /**
@@ -235,7 +134,7 @@ export function Approach({ locale }: { locale: Locale }) {
                       checked={selected}
                       onChange={() => setStop(i)}
                     />
-                    {t(option.choice, locale)}
+                    {option.choice}
                   </label>
                 )
               })}
@@ -250,8 +149,8 @@ export function Approach({ locale }: { locale: Locale }) {
           aria-live="polite"
           className="min-h-[76px] border-t border-line p-5 text-[15px] leading-relaxed text-muted lg:p-6"
         >
-          {t(STOPS[stop]?.consequence ?? STOPS[DEFAULT_STOP]!.consequence, locale)}
-          {anythingLive ? <span className="text-ink"> {t(COPY.loop, locale)}</span> : null}
+          {copy.stops[stop]?.consequence ?? copy.stops[DEFAULT_STOP]!.consequence}
+          {anythingLive ? <span className="text-ink"> {copy.loop}</span> : null}
         </p>
       </div>
     </section>

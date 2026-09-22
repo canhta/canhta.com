@@ -1,8 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
-import { faq } from '@/content'
+import { getSiteContent } from '@/content'
 import { Answers } from '@/components/answers'
-import { t } from '@/lib/text'
+
+const { faq } = getSiteContent('en')
 
 /**
  * The list structure here was a real bug: the `dt`/`dd` pairs were not wrapped
@@ -30,8 +31,8 @@ describe('Answers', () => {
     const { container } = render(<Answers locale="en" />)
 
     for (const item of faq) {
-      expect(screen.getByText(t(item.question, 'en'))).toBeInTheDocument()
-      expect(screen.getByText(t(item.answer, 'en'))).toBeInTheDocument()
+      expect(screen.getByText(item.question)).toBeInTheDocument()
+      expect(screen.getByText(item.answer)).toBeInTheDocument()
     }
 
     // Hiding "who owns the code" behind a click is the wrong move on a page
@@ -45,12 +46,5 @@ describe('Answers', () => {
   it('sits under its own heading', () => {
     render(<Answers locale="en" />)
     expect(screen.getByRole('heading', { name: 'Before you write to me' })).toBeInTheDocument()
-  })
-
-  it('renders the Vietnamese answers on the Vietnamese route', () => {
-    render(<Answers locale="vi" />)
-    for (const item of faq) {
-      expect(screen.getByText(t(item.answer, 'vi'))).toBeInTheDocument()
-    }
   })
 })

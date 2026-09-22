@@ -1,31 +1,26 @@
-import { profileFixture } from './profile.fixture'
-import { buildsFixture } from './builds.fixture'
-import { capabilitiesFixture } from './capabilities.fixture'
-import { servicesFixture } from './services.fixture'
-import { socialFixture } from './social.fixture'
-import { faqFixture } from './faq.fixture'
-import type { Build, Capability, Faq, Profile, Service, SocialLink } from './types'
+import {
+  buildFacts,
+  capabilityFacts,
+  faqFacts,
+  profileFacts,
+  serviceFacts,
+  socialFacts,
+} from './facts.fixture'
+import { enContent } from './locales/en.fixture'
+import { viContent } from './locales/vi.fixture'
+import type {
+  Build,
+  Capability,
+  ContentCopy,
+  Faq,
+  Locale,
+  Service,
+  SiteContent,
+  SocialLink,
+} from './types'
 
-/**
- * PRODUCTION GUARD
- *
- * This repository is public. Fixture content is written to look plausible so the
- * design can be evaluated — which is exactly why it must never reach production.
- *
- * SCOPE, precisely: anything carrying `__fixture` throws when
- * `NODE_ENV === 'production'` and `ALLOW_FIXTURES !== '1'`. `next build` sets
- * that, so the real build path is covered. It is deliberately NOT thrown in dev
- * or test — the fixtures exist to be worked with there.
- *
- * The comment previously read "fails the build unless explicitly allowed", which
- * invited more trust than the condition earns: any consumer importing this
- * module outside a production build gets fixture content silently. If a codegen
- * or export script is ever added, it must check `CONTENT_IS_FIXTURE` itself.
- *
- * Escape hatch (preview deploys only): ALLOW_FIXTURES=1. When it is used, the
- * fixture banner renders and robots.txt serves a blanket disallow, so the bypass
- * is never silent.
- */
+const copies: Record<Locale, ContentCopy> = { en: enContent, vi: viContent }
+
 function containsFixture(value: unknown, seen = new Set<unknown>()): boolean {
   if (value === null || typeof value !== 'object') return false
   if (seen.has(value)) return false
@@ -35,32 +30,133 @@ function containsFixture(value: unknown, seen = new Set<unknown>()): boolean {
   return Object.values(value).some((item) => containsFixture(item, seen))
 }
 
-const sources = {
-  profile: profileFixture,
-  builds: buildsFixture,
-  capabilities: capabilitiesFixture,
-  services: servicesFixture,
-  social: socialFixture,
-  faq: faqFixture,
+function assertNaturalStrings(value: unknown, path: string): void {
+  if (typeof value === 'string') {
+    if (value.trim().length === 0) throw new Error(`Empty localized content: ${path}`)
+    if (value !== value.normalize('NFC')) throw new Error(`Content is not Unicode NFC: ${path}`)
+    return
+  }
+  if (Array.isArray(value)) {
+    value.forEach((item, index) => assertNaturalStrings(item, `${path}.${index}`))
+    return
+  }
+  if (value !== null && typeof value === 'object') {
+    for (const [key, child] of Object.entries(value)) {
+      assertNaturalStrings(child, `${path}.${key}`)
+    }
+  }
 }
 
-export const CONTENT_IS_FIXTURE = containsFixture(sources)
+function assertIds(
+  locale: Locale,
+  label: string,
+  expectedIds: string[],
+  localizedIds: string[],
+): void {
+  const expected = expectedIds.toSorted()
+  const actual = localizedIds.toSorted()
+  if (expected.join('\n') !== actual.join('\n')) {
+    throw new Error(`${locale} ${label} IDs do not match locale-neutral facts`)
+  }
+}
 
-/**
- * `typeof window === 'undefined'` is load-bearing, not defensive noise.
- *
- * This guard took the live site down. A client component imported `@/content`,
- * which dragged this module into the browser bundle, where Next inlines
- * `NODE_ENV` as 'production' but does NOT inline `ALLOW_FIXTURES` — only
- * `NEXT_PUBLIC_*` variables reach the client. So the condition read as
- * "production, and the flag is absent", and every visitor got a thrown error
- * instead of a page, on a build that had passed.
- *
- * The real fix is architectural and is applied too: no client component imports
- * `@/content` any more, and a unit test pins that. This check is the second
- * line, so the same mistake can never again turn a content-safety feature into
- * an outage.
- */
+for (const locale of ['en', 'vi'] as const) {
+  const copy = copies[locale]
+  assertNaturalStrings(copy, locale)
+  assertIds(
+    locale,
+    'build',
+    buildFacts.map((item) => item.slug),
+    copy.builds.map((item) => item.slug),
+  )
+  assertIds(
+    locale,
+    'capability',
+    capabilityFacts.map((item) => item.id),
+    copy.capabilities.map((item) => item.id),
+  )
+  assertIds(
+    locale,
+    'service',
+    serviceFacts.map((item) => item.id),
+    copy.services.map((item) => item.id),
+  )
+  assertIds(
+    locale,
+    'FAQ',
+    faqFacts.map((item) => item.id),
+    copy.faq.map((item) => item.id),
+  )
+}
+
+function byId<T extends { id: string }>(items: T[]): Map<string, T> {
+  return new Map(items.map((item) => [item.id, item]))
+}
+
+function resolve(locale: Locale): SiteContent {
+  const copy = copies[locale]
+  const buildsBySlug = new Map(copy.builds.map((item) => [item.slug, item]))
+  const capabilitiesById = byId(copy.capabilities)
+  const servicesById = byId(copy.services)
+  const faqById = byId(copy.faq)
+
+  const builds: Build[] = buildFacts
+    .map((facts) => {
+      const localized = buildsBySlug.get(facts.slug)
+      if (!localized) throw new Error(`Missing ${locale} build copy: ${facts.slug}`)
+      const { slug: _, ...words } = localized
+      return { ...facts, ...words }
+    })
+    .sort((a, b) => a.order - b.order)
+
+  const capabilities: Capability[] = capabilityFacts
+    .map((facts) => {
+      const localized = capabilitiesById.get(facts.id)
+      if (!localized) throw new Error(`Missing ${locale} capability copy: ${facts.id}`)
+      const { id: _, ...words } = localized
+      return { ...facts, ...words }
+    })
+    .sort((a, b) => a.order - b.order)
+
+  const services: Service[] = serviceFacts
+    .map((facts) => {
+      const localized = servicesById.get(facts.id)
+      if (!localized) throw new Error(`Missing ${locale} service copy: ${facts.id}`)
+      const { id: _, ...words } = localized
+      return { ...facts, ...words }
+    })
+    .sort((a, b) => a.order - b.order)
+
+  const faq: Faq[] = faqFacts
+    .map((facts) => {
+      const localized = faqById.get(facts.id)
+      if (!localized) throw new Error(`Missing ${locale} FAQ copy: ${facts.id}`)
+      const { id: _, ...words } = localized
+      return { ...facts, ...words }
+    })
+    .sort((a, b) => a.order - b.order)
+
+  return {
+    profile: { ...profileFacts, ...copy.profile },
+    builds,
+    capabilities,
+    services,
+    faq,
+    social: socialFacts,
+  }
+}
+
+const resolved: Record<Locale, SiteContent> = { en: resolve('en'), vi: resolve('vi') }
+
+export const CONTENT_IS_FIXTURE = containsFixture({
+  profileFacts,
+  buildFacts,
+  capabilityFacts,
+  serviceFacts,
+  faqFacts,
+  socialFacts,
+})
+
 if (
   typeof window === 'undefined' &&
   CONTENT_IS_FIXTURE &&
@@ -78,14 +174,12 @@ if (
   )
 }
 
-export const profile: Profile = profileFixture
-export const builds: Build[] = [...buildsFixture].sort((a, b) => a.order - b.order)
-export const capabilities: Capability[] = [...capabilitiesFixture].sort((a, b) => a.order - b.order)
-export const services: Service[] = [...servicesFixture].sort((a, b) => a.order - b.order)
-export const faq: Faq[] = [...faqFixture].sort((a, b) => a.order - b.order)
-export const social: SocialLink[] = socialFixture
+export function getSiteContent(locale: Locale): SiteContent {
+  return resolved[locale]
+}
 
-export const socialByNetwork = (network: SocialLink['network']) =>
-  social.find((s) => s.network === network)
+export function socialByNetwork(network: SocialLink['network']): SocialLink | undefined {
+  return socialFacts.find((item) => item.network === network)
+}
 
 export * from './types'

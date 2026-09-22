@@ -1,6 +1,6 @@
-import { services } from '@/content'
+import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
-import { t } from '@/lib/text'
+import { getMessages } from '@/i18n/messages'
 import { SectionHeading, Fact } from './section'
 
 /**
@@ -13,26 +13,17 @@ import { SectionHeading, Fact } from './section'
  * their own column heads, which was the translation telling us the two sections
  * were saying the same thing.
  */
-const COPY = {
-  kicker: { en: 'Engagements', vi: 'Hợp tác' },
-  heading: { en: 'Three ways to hire me', vi: 'Ba cách làm việc cùng tôi' },
-  sub: {
-    en: 'All three begin with a conversation. Pick the first one if you are not sure.',
-    vi: 'Cả ba đều bắt đầu bằng một buổi nói chuyện. Chưa rõ thì cứ chọn cái đầu tiên.',
-  },
-  output: { en: 'You get', vi: 'Bạn nhận được' },
-  suited: { en: 'Right when', vi: 'Chọn khi' },
-} as const
-
 export function Engagements({ locale }: { locale: Locale }) {
+  const { services } = getSiteContent(locale)
   if (services.length === 0) return null
+  const copy = getMessages(locale).engagements
 
   return (
     <section className="shell band-2">
       <SectionHeading
-        kicker={t(COPY.kicker, locale)}
-        title={t(COPY.heading, locale)}
-        sub={t(COPY.sub, locale)}
+        kicker={copy.kicker}
+        title={copy.heading}
+        sub={copy.sub}
       />
 
       <ul className="mt-10">
@@ -44,13 +35,13 @@ export function Engagements({ locale }: { locale: Locale }) {
             <div className="lg:col-span-5">
               <div className="flex items-baseline gap-3">
                 <span className="label tnum">{String(i + 1).padStart(2, '0')}</span>
-                <h3 className="subtitle">{t(service.name, locale)}</h3>
+                <h3 className="subtitle">{service.name}</h3>
               </div>
             </div>
             <dl className="grid gap-5 text-[15px] leading-snug sm:grid-cols-2 lg:col-span-7 lg:gap-8">
-              <Fact label={t(COPY.output, locale)}>{t(service.output, locale)}</Fact>
-              <Fact label={t(COPY.suited, locale)}>
-                <span className="text-muted">{t(service.suitedTo, locale)}</span>
+              <Fact label={copy.output}>{service.output}</Fact>
+              <Fact label={copy.suited}>
+                <span className="text-muted">{service.suitedTo}</span>
               </Fact>
             </dl>
           </li>

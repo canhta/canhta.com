@@ -1,5 +1,5 @@
 import type { Locale } from '@/content/types'
-import { t } from '@/lib/text'
+import { getMessages } from '@/i18n/messages'
 import { ContactActions } from './contact-actions'
 
 /**
@@ -15,24 +15,15 @@ import { ContactActions } from './contact-actions'
  * The address is a genuinely different affordance (copy it, write later, from
  * somewhere else), so it stays — in the footer, alone.
  */
-const COPY = {
-  heading: {
-    en: 'Tell me what you are trying to build.',
-    vi: 'Cho tôi biết bạn đang muốn làm gì.',
-  },
-  reassure: {
-    en: 'A few sentences about the problem is enough to start. I reply within one working day.',
-    vi: 'Vài dòng về vấn đề là đủ để bắt đầu. Tôi trả lời trong 1 ngày làm việc.',
-  },
-} as const
-
 export function Closing({ locale }: { locale: Locale }) {
+  const copy = getMessages(locale).closing
+
   return (
     <section className="bg-ink text-bg">
       <div className="shell band-1 pb-[var(--rank-1)]">
-        <h2 className="title max-w-[20ch]">{t(COPY.heading, locale)}</h2>
+        <h2 className="title max-w-[20ch]">{copy.heading}</h2>
         <p className="mt-5 max-w-[52ch] text-[15px] leading-relaxed text-bg/70">
-          {t(COPY.reassure, locale)}
+          {copy.reassure}
         </p>
         <div className="mt-9">
           <ContactActions locale={locale} invert />

@@ -1,1 +1,124 @@
-{}
+{
+  "common": {
+    "newTab": "mở trong tab mới",
+    "skipToContent": "Tới nội dung chính"
+  },
+  "header": {
+    "language": "Ngôn ngữ",
+    "role": "Phần mềm cho doanh nghiệp nhỏ"
+  },
+  "contact": {
+    "chatOn": "Nhắn qua"
+  },
+  "work": {
+    "kicker": "Sản phẩm",
+    "heading": "Sản phẩm tôi đã làm",
+    "problem": "Bài toán",
+    "built": "Tôi đã làm",
+    "result": "Hiện tại",
+    "summaryOne": "Một dự án. Có link để mở xem ngay.",
+    "summaryMany": "{count} dự án. Có link để mở xem ngay."
+  },
+  "capabilities": {
+    "kicker": "Chuyển đổi số trong vận hành",
+    "heading": "Khi nào đáng làm phần mềm riêng?",
+    "bestFor": "Dấu hiệu",
+    "deliverable": "Hướng xử lý"
+  },
+  "approach": {
+    "kicker": "Từ bài toán đến vận hành",
+    "heading": "Plan chỉ có giá trị khi thành thứ team dùng được.",
+    "sub": "Thử từng mốc để xem dự án bắt đầu tạo ra giá trị từ đâu.",
+    "lineName": "Đưa vào dùng ở mốc nào",
+    "running": "Đang chạy thật",
+    "planned": "Chưa chạy thật",
+    "loop": "Từ đó tiếp tục đo, sửa và cải tiến.",
+    "stages": [
+      { "id": "problem", "label": "Chỉ đúng chỗ đang kẹt", "detail": "Ai đang làm, kẹt ở đâu, tốn bao nhiêu." },
+      { "id": "agree", "label": "Chọn cách giải vừa đủ", "detail": "Sửa quy trình, nối tool hay code mới." },
+      { "id": "build", "label": "Có bản chạy sớm", "detail": "Team thật dùng và phản hồi." },
+      { "id": "live", "label": "Đưa vào vận hành", "detail": "Đo, sửa và bàn giao." }
+    ],
+    "stops": [
+      {
+        "id": "agree",
+        "choice": "Bản nhỏ sau khi chốt",
+        "consequence": "Chỉ làm luồng cốt lõi và đưa cho team dùng trước."
+      },
+      {
+        "id": "building",
+        "choice": "Ngay trong lúc build",
+        "consequence": "Phần nào xong, team dùng thử phần đó."
+      },
+      {
+        "id": "built",
+        "choice": "Sau khi nghiệm thu",
+        "consequence": "Hoàn thiện luồng đã chốt rồi mới đưa vào vận hành."
+      },
+      {
+        "id": "never",
+        "choice": "Không đưa vào dùng",
+        "consequence": "Dự án nằm trên tài liệu và không thay đổi được công việc nào."
+      }
+    ]
+  },
+  "engagements": {
+    "kicker": "Phạm vi hợp tác",
+    "heading": "Bắt đầu nhỏ. Đưa vào chạy thật.",
+    "sub": "Tùy bài toán, chúng ta có thể chỉ chốt hướng, thử một luồng hoặc làm trọn tới lúc vận hành.",
+    "output": "Đầu ra",
+    "suited": "Phù hợp khi"
+  },
+  "answers": {
+    "kicker": "Trước khi bắt đầu",
+    "heading": "Những điều cần rõ trước khi làm",
+    "sub": "Chi phí, quyền sở hữu và cách chọn giải pháp."
+  },
+  "closing": {
+    "heading": "Đừng bắt đầu bằng “cần làm app gì”.",
+    "reassure": "Hãy gửi cho tôi khâu đang chậm, dễ sai hoặc tốn người nhất. Tôi sẽ cùng bạn bóc tách quy trình, chốt plan và báo giá. Nếu chưa cần code, tôi cũng nói thẳng."
+  },
+  "footer": {
+    "write": "Hoặc gửi email trực tiếp",
+    "elsewhere": "Các kênh khác"
+  },
+  "notFound": {
+    "label": "Không tìm thấy",
+    "heading": "Không có trang nào ở địa chỉ này.",
+    "body": "Kiểm tra xem có gõ nhầm không, hoặc quay về trang chính. Cả site chỉ có một trang.",
+    "home": "Về trang chính"
+  },
+  "buildMeta": {
+    "kinds": {
+      "agent": "Agent tự chạy",
+      "skill": "Agent skill",
+      "mobile": "App mobile",
+      "web": "Sản phẩm web",
+      "saas": "Sản phẩm thu phí",
+      "tool": "Tool cho dev",
+      "desktop": "Desktop app"
+    },
+    "links": {
+      "appstore": "App Store",
+      "playstore": "Google Play",
+      "web": "Mở trang",
+      "github": "Mã nguồn",
+      "docs": "Tài liệu"
+    },
+    "githubStars": "sao trên GitHub"
+  },
+  "statuses": {
+    "live": "Đang chạy",
+    "shipped": "Đã ship",
+    "building": "Đang làm",
+    "acquired": "Đã bán",
+    "sunset": "Đã dừng"
+  },
+  "metadata": {
+    "pageTitle": "Phần mềm theo yêu cầu cho doanh nghiệp nhỏ | Canh Ta",
+    "pageDescription": "Chuyển đổi số cho doanh nghiệp nhỏ: bóc tách quy trình, kết nối hệ thống, làm phần mềm theo yêu cầu và ứng dụng AI. Có báo giá trước khi code.",
+    "jobTitle": "Kỹ sư phần mềm cho doanh nghiệp nhỏ",
+    "offerCatalog": "Phạm vi hợp tác",
+    "workList": "Sản phẩm tôi đã làm"
+  }
+}

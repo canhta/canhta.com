@@ -1,16 +1,9 @@
-import type { BuildStatus, Locale, LocalizedText } from '@/content/types'
+import type { BuildStatus, Locale } from '@/content/types'
+import { getMessages } from '@/i18n/messages'
 
 /** Status is communicated as text, never by colour alone. */
-const LABELS: Record<BuildStatus, LocalizedText> = {
-  live: { en: 'Live', vi: 'Đang chạy' },
-  shipped: { en: 'Shipped', vi: 'Đã ship' },
-  building: { en: 'Building', vi: 'Đang làm' },
-  acquired: { en: 'Acquired', vi: 'Đã bán' },
-  sunset: { en: 'Sunset', vi: 'Đã dừng' },
-}
-
 export function statusLabel(status: BuildStatus, locale: Locale): string {
-  return LABELS[status][locale] || LABELS[status].en
+  return getMessages(locale).statuses[status]
 }
 
 /**

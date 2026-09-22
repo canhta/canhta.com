@@ -1,1 +1,124 @@
-{}
+{
+  "common": {
+    "newTab": "opens in a new tab",
+    "skipToContent": "Skip to content"
+  },
+  "header": {
+    "language": "Language",
+    "role": "Independent software developer"
+  },
+  "contact": {
+    "chatOn": "Chat on"
+  },
+  "work": {
+    "kicker": "Work",
+    "heading": "What I have built",
+    "problem": "The problem",
+    "built": "What I built",
+    "result": "Where it stands",
+    "summaryOne": "One project. The ones with links are public; the rest are still being built.",
+    "summaryMany": "{count} projects. The ones with links are public; the rest are still being built."
+  },
+  "capabilities": {
+    "kicker": "Scope",
+    "heading": "What I take on",
+    "bestFor": "Best for",
+    "deliverable": "You get"
+  },
+  "approach": {
+    "kicker": "Process",
+    "heading": "How a project goes",
+    "sub": "Choose when the work goes live. Everything before that point is still on paper.",
+    "lineName": "It goes live",
+    "running": "Running for real",
+    "planned": "Still on paper",
+    "loop": "After that, we keep improving it.",
+    "stages": [
+      { "id": "problem", "label": "You bring a problem", "detail": "In your own words." },
+      { "id": "agree", "label": "We agree what to build", "detail": "Small and specific." },
+      { "id": "build", "label": "I build, you check", "detail": "You see it as it grows." },
+      { "id": "live", "label": "It goes live", "detail": "Real users, real work." }
+    ],
+    "stops": [
+      {
+        "id": "agree",
+        "choice": "As soon as we agree",
+        "consequence": "Live as soon as we agree what to build. Everything after that improves something already running."
+      },
+      {
+        "id": "building",
+        "choice": "While I am building",
+        "consequence": "Live while I am still building it. You see it work before it is finished."
+      },
+      {
+        "id": "built",
+        "choice": "When it is built",
+        "consequence": "Live when it is built. This is where I put the line."
+      },
+      {
+        "id": "never",
+        "choice": "Never",
+        "consequence": "Nothing goes live. The work stays a plan and nobody ever uses it."
+      }
+    ]
+  },
+  "engagements": {
+    "kicker": "Engagements",
+    "heading": "Three ways to hire me",
+    "sub": "All three begin with a conversation. Pick the first one if you are not sure.",
+    "output": "You get",
+    "suited": "Right when"
+  },
+  "answers": {
+    "kicker": "Questions",
+    "heading": "Before you write to me",
+    "sub": "The questions I get asked most often."
+  },
+  "closing": {
+    "heading": "Tell me what you are trying to build.",
+    "reassure": "A few sentences about the problem is enough to start. I reply within one working day."
+  },
+  "footer": {
+    "write": "Or write directly",
+    "elsewhere": "Elsewhere"
+  },
+  "notFound": {
+    "label": "Not found",
+    "heading": "There is no page at this address.",
+    "body": "Check it for a typo, or start from the front page. This site is one page, so everything on it is a single scroll away.",
+    "home": "Go to the front page"
+  },
+  "buildMeta": {
+    "kinds": {
+      "agent": "Work that runs itself",
+      "skill": "Agent skill",
+      "mobile": "Phone app",
+      "web": "Web product",
+      "saas": "Paid product",
+      "tool": "Developer tool",
+      "desktop": "Desktop app"
+    },
+    "links": {
+      "appstore": "App Store",
+      "playstore": "Google Play",
+      "web": "Visit site",
+      "github": "Source",
+      "docs": "Docs"
+    },
+    "githubStars": "stars on GitHub"
+  },
+  "statuses": {
+    "live": "Live",
+    "shipped": "Shipped",
+    "building": "Building",
+    "acquired": "Acquired",
+    "sunset": "Sunset"
+  },
+  "metadata": {
+    "pageTitle": "Independent software developer | Canh Ta",
+    "pageDescription": "Custom software, agent systems, mobile apps and small SaaS products—scoped, built and run in production by Canh Ta.",
+    "jobTitle": "Software engineer",
+    "offerCatalog": "Three ways to hire me",
+    "workList": "What I have built"
+  }
+}

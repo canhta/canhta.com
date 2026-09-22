@@ -59,7 +59,7 @@ describe('fixture guard', () => {
 
     const content = await importContent()
     expect(content.CONTENT_IS_FIXTURE).toBe(true)
-    expect(content.profile.name).toBe('Canh Ta')
+    expect(content.getSiteContent('en').profile.name).toBe('Canh Ta')
   })
 
   it('does not obstruct development or test runs', async () => {
@@ -75,7 +75,8 @@ describe('fixture guard', () => {
   })
 
   it('finds markers nested inside arrays, not just on the top-level objects', async () => {
-    const { builds, capabilities, services, faq, social } = await importContent()
+    const { getSiteContent } = await importContent()
+    const { builds, capabilities, services, faq, social } = getSiteContent('en')
 
     // The guard's deep scan is only worth as much as the markers it can find.
     // `builds` is deliberately excluded: those projects are real, so they

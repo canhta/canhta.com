@@ -10,7 +10,8 @@ import { Answers } from '@/components/answers'
 import { Closing } from '@/components/closing'
 import { SiteFooter } from '@/components/site-footer'
 import { buildGraph } from '@/lib/structured-data'
-import { capabilities } from '@/content'
+import { getSiteContent } from '@/content'
+import { getMessages } from '@/i18n/messages'
 
 /**
  * Reading order, and the rank each block holds.
@@ -35,6 +36,8 @@ export default async function HomePage({
 }) {
   const { locale } = await params
   setRequestLocale(locale)
+  const content = getSiteContent(locale)
+  const messages = getMessages(locale)
 
   return (
     <>
@@ -54,8 +57,9 @@ export default async function HomePage({
       <main id="main" tabIndex={-1}>
         <Statement locale={locale} />
         <Work locale={locale} />
-        <Capabilities locale={locale} capabilities={capabilities} />
-        <Approach locale={locale} />
+        <Capabilities locale={locale} capabilities={content.capabilities} />
+        {/* Only this section hydrates. Pass its own copy, not the whole catalog. */}
+        <Approach copy={messages.approach} />
         <Engagements locale={locale} />
         <Answers locale={locale} />
         <Closing locale={locale} />

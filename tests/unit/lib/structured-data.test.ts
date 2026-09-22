@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { builds, faq } from '@/content'
+import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
 import { buildGraph } from '@/lib/structured-data'
 
@@ -26,6 +26,7 @@ function nodesOfType(graph: ReturnType<typeof buildGraph>, type: string) {
 
 describe.each(LOCALES)('buildGraph(%s)', (locale) => {
   const graph = buildGraph(locale)
+  const { builds, faq } = getSiteContent(locale)
 
   it('serialises to valid JSON', () => {
     const json = JSON.stringify(graph)

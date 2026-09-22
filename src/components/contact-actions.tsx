@@ -1,12 +1,7 @@
-import { profile, socialByNetwork } from '@/content'
+import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
-import { t } from '@/lib/text'
+import { getMessages } from '@/i18n/messages'
 import { ArrowIcon, ZaloWordmark } from './icons'
-
-const COPY = {
-  chatOn: { en: 'Chat on', vi: 'Nhắn qua' },
-  newTab: { en: 'opens in a new tab', vi: 'mở trong tab mới' },
-} as const
 
 /**
  * The conversion pair, in one place.
@@ -24,7 +19,9 @@ const COPY = {
  * `invert` is for the closing block, where the ground is ink rather than paper.
  */
 export function ContactActions({ locale, invert = false }: { locale: Locale; invert?: boolean }) {
-  const zalo = socialByNetwork('zalo')
+  const { profile, social } = getSiteContent(locale)
+  const messages = getMessages(locale)
+  const zalo = social.find((item) => item.network === 'zalo')
 
   return (
     <div className="flex flex-wrap items-center gap-3">
@@ -36,7 +33,7 @@ export function ContactActions({ locale, invert = false }: { locale: Locale; inv
             : 'btn-primary'
         }
       >
-        {t(profile.ctaLabel, locale)}
+        {profile.ctaLabel}
         <ArrowIcon width={16} height={16} />
       </a>
 
@@ -53,9 +50,9 @@ export function ContactActions({ locale, invert = false }: { locale: Locale; inv
         >
           {/* The wordmark carries the brand name, so the label says the verb
               rather than repeating it. */}
-          {t(COPY.chatOn, locale)}
+          {messages.contact.chatOn}
           <ZaloWordmark />
-          <span className="sr-only">{t(COPY.newTab, locale)}</span>
+          <span className="sr-only">{messages.common.newTab}</span>
         </a>
       ) : null}
     </div>

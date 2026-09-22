@@ -1,6 +1,6 @@
-import { builds } from '@/content'
+import { getSiteContent } from '@/content'
 import type { Build, Locale } from '@/content/types'
-import { t } from '@/lib/text'
+import { getMessages } from '@/i18n/messages'
 import { statusLabel, statusTone } from '@/lib/status'
 import { kindLabel } from '@/lib/build-meta'
 import { fetchStars, type Stars } from '@/lib/github'
@@ -29,22 +29,6 @@ import { BuildLinkButton } from './build-link'
  * the split used to do, honestly — one is shipped, one is live, two are being
  * built, and it says so.
  */
-const COPY = {
-  kicker: { en: 'Work', vi: 'Sản phẩm' },
-  heading: { en: 'What I have built', vi: 'Tôi đã làm gì' },
-  problem: { en: 'The problem', vi: 'Vấn đề' },
-  built: { en: 'What I built', vi: 'Đã làm gì' },
-  result: { en: 'Where it stands', vi: 'Hiện tại ra sao' },
-  subOne: {
-    en: 'One project. The ones with links are public; the rest are still being built.',
-    vi: 'Một dự án. Cái nào có link là đã public, còn lại vẫn đang làm.',
-  },
-  subMany: {
-    en: 'projects. The ones with links are public; the rest are still being built.',
-    vi: 'dự án. Cái nào có link là đã public, còn lại vẫn đang làm.',
-  },
-} as const
-
 /**
  * Digits go through `Intl.NumberFormat` so a locale that groups them differently
  * gets its own grouping, and the sentence is chosen with `Intl.PluralRules`
@@ -52,8 +36,9 @@ const COPY = {
  */
 function summary(n: number, locale: Locale): string {
   const tag = locale === 'vi' ? 'vi-VN' : 'en-US'
-  if (new Intl.PluralRules(tag).select(n) === 'one') return t(COPY.subOne, locale)
-  return `${new Intl.NumberFormat(tag).format(n)} ${t(COPY.subMany, locale)}`
+  const copy = getMessages(locale).work
+  if (new Intl.PluralRules(tag).select(n) === 'one') return copy.summaryOne
+  return copy.summaryMany.replace('{count}', new Intl.NumberFormat(tag).format(n))
 }
 
 function Entry({
@@ -67,6 +52,8 @@ function Entry({
   locale: Locale
   stars: Stars
 }) {
+  const copy = getMessages(locale).work
+
   return (
     <article className="grid gap-x-10 gap-y-6 border-t border-line py-9 lg:grid-cols-12">
       <div className="lg:col-span-5">
@@ -77,7 +64,7 @@ function Entry({
           </h3>
         </div>
 
-        <p className="mt-3 max-w-[40ch] text-[15px] text-muted">{t(build.tagline, locale)}</p>
+        <p className="mt-3 max-w-[40ch] text-[15px] text-muted">{build.tagline}</p>
 
         {/* Kind, year and status on one line. The status is the only coloured
             word in the entry, and it is a word — colour is never the only
@@ -106,16 +93,18 @@ function Entry({
       </div>
 
       <dl className="grid gap-6 text-[15px] leading-snug sm:grid-cols-3 lg:col-span-7 lg:gap-8">
-        <Fact label={t(COPY.problem, locale)}>{t(build.problem, locale)}</Fact>
-        <Fact label={t(COPY.built, locale)}>{t(build.built, locale)}</Fact>
-        <Fact label={t(COPY.result, locale)}>{t(build.result, locale)}</Fact>
+        <Fact label={copy.problem}>{build.problem}</Fact>
+        <Fact label={copy.built}>{build.built}</Fact>
+        <Fact label={copy.result}>{build.result}</Fact>
       </dl>
     </article>
   )
 }
 
 export async function Work({ locale }: { locale: Locale }) {
+  const { builds } = getSiteContent(locale)
   if (builds.length === 0) return null
+  const copy = getMessages(locale).work
 
   // Fetched once at build; fails soft to an empty map.
   const stars = await fetchStars(builds)
@@ -123,8 +112,8 @@ export async function Work({ locale }: { locale: Locale }) {
   return (
     <section className="shell band-1">
       <SectionHeading
-        kicker={t(COPY.kicker, locale)}
-        title={t(COPY.heading, locale)}
+        kicker={copy.kicker}
+        title={copy.heading}
         sub={summary(builds.length, locale)}
       />
 

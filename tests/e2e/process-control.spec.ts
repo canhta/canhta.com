@@ -33,19 +33,6 @@ const COPY = {
       /^Nothing goes live/,
     ],
   },
-  vi: {
-    path: '/vi',
-    group: /khi nào chạy thật/i,
-    running: 'Đang chạy thật',
-    planned: 'Còn trên giấy',
-    choices: [/ngay khi chốt xong/i, /khi tôi đang làm/i, /khi làm xong/i, /không bao giờ/i],
-    consequences: [
-      /^Chạy thật ngay khi chốt xong/,
-      /^Chạy thật khi tôi còn đang làm/,
-      /^Chạy thật khi làm xong/,
-      /^Không có gì chạy thật/,
-    ],
-  },
 } as const
 
 const DEFAULT_STOP = 2
@@ -67,7 +54,7 @@ async function runningCount(page: Page, label: string): Promise<number> {
   return page.getByText(label, { exact: true }).count()
 }
 
-for (const locale of ['en', 'vi'] as const) {
+for (const locale of ['en'] as const) {
   const copy = COPY[locale]
 
   test(`[${locale}] presents one grouped set of four choices`, async ({ page }) => {

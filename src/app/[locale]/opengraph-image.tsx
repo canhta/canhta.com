@@ -1,9 +1,9 @@
 import { ImageResponse } from 'next/og'
 import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
-import { profile } from '@/content'
+import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
-import { t } from '@/lib/text'
+import { getMessages } from '@/i18n/messages'
 
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
@@ -22,10 +22,6 @@ export const alt = 'Canh Ta'
  * request to fonts.gstatic.com means a network blip becomes a failed deploy —
  * and Vietnamese diacritics are exactly what a fallback font gets wrong.
  */
-const COPY = {
-  role: { en: 'Independent software developer', vi: 'Lập trình viên tự do' },
-} as const
-
 const BG = '#fbf9f5'
 const INK = '#17140f'
 const MUTED = '#6e655a'
@@ -39,6 +35,8 @@ async function font(file: string) {
 export default async function Image({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   const l: Locale = locale === 'vi' ? 'vi' : 'en'
+  const { profile } = getSiteContent(l)
+  const messages = getMessages(l)
   const [display, sans] = await Promise.all([
     font('Newsreader-SemiBold.ttf'),
     font('BeVietnamPro-Medium.ttf'),
@@ -70,7 +68,7 @@ export default async function Image({ params }: { params: Promise<{ locale: stri
           }}
         >
           <span style={{ color: INK }}>{profile.name}</span>
-          <span>{t(COPY.role, l)}</span>
+          <span>{messages.header.role}</span>
         </div>
 
         <div
@@ -90,7 +88,7 @@ export default async function Image({ params }: { params: Promise<{ locale: stri
             maxWidth: 980,
           }}
         >
-          {t(profile.hook, l)}
+          {profile.hook}
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -109,7 +107,7 @@ export default async function Image({ params }: { params: Promise<{ locale: stri
             <div
               style={{ display: 'flex', width: 12, height: 12, borderRadius: 6, background: ACCENT }}
             />
-            <span style={{ color: ACCENT }}>{t(profile.availabilityLabel, l)}</span>
+            <span style={{ color: ACCENT }}>{profile.availabilityLabel}</span>
             <span style={{ marginLeft: 'auto' }}>canhta.com</span>
           </div>
         </div>

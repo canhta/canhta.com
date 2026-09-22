@@ -1,14 +1,14 @@
 import type { Metadata, Viewport } from 'next'
 import { Be_Vietnam_Pro, Newsreader } from 'next/font/google'
 import { notFound } from 'next/navigation'
-import { NextIntlClientProvider, hasLocale } from 'next-intl'
+import { hasLocale } from 'next-intl'
 import { setRequestLocale } from 'next-intl/server'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { routing } from '@/i18n/routing'
-import { profile } from '@/content'
+import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
-import { t } from '@/lib/text'
+import { getMessages } from '@/i18n/messages'
 import '../globals.css'
 
 // The organising voice: labels, controls, metadata, body copy.
@@ -38,10 +38,6 @@ const newsreader = Newsreader({
   variable: '--font-newsreader',
   display: 'swap',
 })
-
-const COPY = {
-  role: { en: 'Independent software developer', vi: 'Lập trình viên tự do' },
-} as const
 
 /**
  * Measurement is on for every deployment, and off in development.
@@ -100,11 +96,13 @@ export async function generateMetadata({
   const { locale } = await params
   const l: Locale = locale === 'vi' ? 'vi' : 'en'
   const canonical = l === 'en' ? '/' : `/${l}`
+  const { profile } = getSiteContent(l)
+  const messages = getMessages(l)
 
   return {
     metadataBase: new URL('https://canhta.com'),
-    title: `${profile.name} — ${t(COPY.role, l)}`,
-    description: t(profile.supporting, l),
+    title: messages.metadata.pageTitle,
+    description: messages.metadata.pageDescription,
     alternates: {
       canonical,
       languages: { en: '/', vi: '/vi', 'x-default': '/' },
@@ -115,13 +113,13 @@ export async function generateMetadata({
       locale: l === 'vi' ? 'vi_VN' : 'en_US',
       alternateLocale: l === 'vi' ? 'en_US' : 'vi_VN',
       url: canonical,
-      title: t(profile.hook, l),
-      description: t(profile.supporting, l),
+      title: profile.hook,
+      description: messages.metadata.pageDescription,
     },
     twitter: {
       card: 'summary_large_image',
-      title: t(profile.hook, l),
-      description: t(profile.supporting, l),
+      title: profile.hook,
+      description: messages.metadata.pageDescription,
     },
   }
 }
@@ -136,14 +134,15 @@ export default async function LocaleLayout({
   const { locale } = await params
   if (!hasLocale(routing.locales, locale)) notFound()
   setRequestLocale(locale)
+  const messages = getMessages(locale)
 
   return (
     <html lang={locale} className={`${bvp.variable} ${newsreader.variable}`}>
       <body>
         <a href="#main" className="skip-link">
-          {locale === 'vi' ? 'Tới nội dung chính' : 'Skip to content'}
+          {messages.common.skipToContent}
         </a>
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        {children}
         {/* The `/next` entry point, not the bare package: it reads the App
             Router's own `useParams`/`usePathname`, so a visit is reported
             against the route `/[locale]` instead of splitting one page into two

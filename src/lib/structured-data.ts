@@ -1,6 +1,6 @@
-import { builds, capabilities, faq, profile, services, social } from '@/content'
+import { getSiteContent } from '@/content'
 import type { Build, Locale } from '@/content/types'
-import { t } from '@/lib/text'
+import { getMessages } from '@/i18n/messages'
 
 /**
  * The machine-readable half of the page.
@@ -57,6 +57,8 @@ function appCategory(build: Build): string {
 }
 
 export function buildGraph(locale: Locale) {
+  const { builds, capabilities, faq, profile, services, social } = getSiteContent(locale)
+  const messages = getMessages(locale)
   const personId = `${SITE}/#person`
   const serviceId = `${SITE}/#service`
   const siteId = `${SITE}/#website`
@@ -71,11 +73,11 @@ export function buildGraph(locale: Locale) {
     name: profile.name,
     url: SITE,
     image: `${SITE}${profile.avatar}`,
-    jobTitle: t({ en: 'Software engineer', vi: 'Kỹ sư phần mềm' }, locale),
-    description: t(profile.supporting, locale),
+    jobTitle: messages.metadata.jobTitle,
+    description: profile.supporting,
     // What he can actually be asked about, taken from the capability list rather
     // than from a keyword wishlist.
-    knowsAbout: capabilities.map((c) => t(c.name, locale)),
+    knowsAbout: capabilities.map((c) => c.name),
     knowsLanguage: [
       { '@type': 'Language', name: 'Vietnamese', alternateName: 'vi' },
       { '@type': 'Language', name: 'English', alternateName: 'en' },
@@ -91,7 +93,7 @@ export function buildGraph(locale: Locale) {
     name: profile.name,
     url: SITE,
     image: `${SITE}${profile.avatar}`,
-    description: t(profile.supporting, locale),
+    description: profile.supporting,
     provider: { '@id': personId },
     founder: { '@id': personId },
     // A solo builder working remotely: say so, rather than implying a local shop.
@@ -104,14 +106,14 @@ export function buildGraph(locale: Locale) {
     // needs in order to answer "who can build me X".
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
-      name: t({ en: 'Three ways to hire me', vi: 'Ba cách làm việc cùng tôi' }, locale),
+      name: messages.metadata.offerCatalog,
       itemListElement: services.map((s) => ({
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: t(s.name, locale),
-          description: t(s.output, locale),
-          serviceType: t(s.name, locale),
+          name: s.name,
+          description: s.output,
+          serviceType: s.name,
           provider: { '@id': personId },
           areaServed: { '@type': 'Place', name: 'Worldwide' },
         },
@@ -121,8 +123,8 @@ export function buildGraph(locale: Locale) {
       '@type': 'Offer',
       itemOffered: {
         '@type': 'Service',
-        name: t(c.name, locale),
-        description: t(c.canDeliver, locale),
+        name: c.name,
+        description: c.canDeliver,
         provider: { '@id': personId },
       },
     })),
@@ -136,7 +138,7 @@ export function buildGraph(locale: Locale) {
       '@type': appType(b),
       name: b.name,
       url: (b.links[0] as { url: string }).url,
-      description: t(b.tagline, locale),
+      description: b.tagline,
       applicationCategory: appCategory(b),
       // Only stated where the kind actually implies a platform. This used to
       // emit 'Web' for everything non-mobile, which asserted that an agent skill
@@ -157,8 +159,8 @@ export function buildGraph(locale: Locale) {
           '@id': `${page}#faq`,
           mainEntity: faq.map((f) => ({
             '@type': 'Question',
-            name: t(f.question, locale),
-            acceptedAnswer: { '@type': 'Answer', text: t(f.answer, locale) },
+            name: f.question,
+            acceptedAnswer: { '@type': 'Answer', text: f.answer },
           })),
         }
       : null
@@ -183,15 +185,15 @@ export function buildGraph(locale: Locale) {
         isPartOf: { '@id': siteId },
         about: { '@id': personId },
         inLanguage: locale,
-        name: t(profile.hook, locale),
-        description: t(profile.supporting, locale),
+        name: profile.hook,
+        description: profile.supporting,
       },
       ...(works.length
         ? [
             {
               '@type': 'ItemList',
               '@id': `${page}#work`,
-              name: t({ en: 'What I have built', vi: 'Tôi đã làm gì' }, locale),
+              name: messages.metadata.workList,
               itemListElement: works.map((w, i) => ({
                 '@type': 'ListItem',
                 position: i + 1,

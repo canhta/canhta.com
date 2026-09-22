@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { profile, socialByNetwork } from '@/content'
+import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
-import { t } from '@/lib/text'
+import { getMessages } from '@/i18n/messages'
 import { GitHubIcon, XIcon } from './icons'
 
 /**
@@ -15,15 +15,11 @@ import { GitHubIcon, XIcon } from './icons'
  * screen-reader user was previously getting English landmark and link names on a
  * page that is otherwise fully translated.
  */
-const COPY = {
-  language: { en: 'Language', vi: 'Ngôn ngữ' },
-  newTab: { en: 'opens in a new tab', vi: 'mở trong tab mới' },
-  role: { en: 'Independent software developer', vi: 'Lập trình viên tự do' },
-} as const
-
 export function SiteHeader({ locale }: { locale: Locale }) {
-  const github = socialByNetwork('github')
-  const x = socialByNetwork('x')
+  const { profile, social } = getSiteContent(locale)
+  const messages = getMessages(locale)
+  const github = social.find((item) => item.network === 'github')
+  const x = social.find((item) => item.network === 'x')
   const home = locale === 'en' ? '/' : '/vi'
 
   return (
@@ -42,13 +38,13 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             {profile.name}
           </span>
           <span className="block truncate text-[13px] leading-tight text-muted">
-            {t(COPY.role, locale)}
+            {messages.header.role}
           </span>
         </span>
       </Link>
 
       <div className="ml-auto flex items-center gap-1">
-        <nav aria-label={t(COPY.language, locale)} className="flex items-center text-[13px]">
+        <nav aria-label={messages.header.language} className="flex items-center text-[13px]">
           {/* 44px minimum on both axes: these are the smallest targets on the
               page and they sit next to each other, which is exactly where a
               mis-tap costs a visitor their reading position. */}
@@ -80,7 +76,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             href={github.url}
             target="_blank"
             rel="noreferrer noopener"
-            aria-label={`GitHub (${t(COPY.newTab, locale)})`}
+            aria-label={`GitHub (${messages.common.newTab})`}
             className="grid h-11 w-11 place-items-center text-muted transition-colors duration-150 hover:text-ink"
           >
             <GitHubIcon />
@@ -91,7 +87,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             href={x.url}
             target="_blank"
             rel="noreferrer noopener"
-            aria-label={`X (${t(COPY.newTab, locale)})`}
+            aria-label={`X (${messages.common.newTab})`}
             className="grid h-11 w-11 place-items-center text-muted transition-colors duration-150 hover:text-ink"
           >
             <XIcon />

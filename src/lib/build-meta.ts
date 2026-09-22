@@ -1,8 +1,9 @@
-import type { BuildKind, BuildLinkKind, Locale, LocalizedText } from '@/content/types'
+import type { BuildKind, BuildLinkKind, Locale } from '@/content/types'
+import { getMessages } from '@/i18n/messages'
 
 /**
  * Said the way a client would say it, not the way a stack would — and worded
- * identically to the scope column heads in `content/capabilities.fixture.ts`.
+ * identically to the scope column heads in the resolved content catalog.
  * Both lists name the same four buckets. They once used four different wordings
  * across three lists; the only difference that survives is singular here versus
  * plural in a column head.
@@ -11,33 +12,12 @@ import type { BuildKind, BuildLinkKind, Locale, LocalizedText } from '@/content/
  * said 'Work that runs itself', dropping the noun rather than just the plural.
  * A unit test now pins all four against the other list.
  */
-const KIND_LABELS: Record<BuildKind, LocalizedText> = {
-  agent: { en: 'Work that runs itself', vi: 'Việc tự chạy' },
-  skill: { en: 'Agent skill', vi: 'Agent skill' },
-  mobile: { en: 'Phone app', vi: 'App điện thoại' },
-  web: { en: 'Web product', vi: 'Sản phẩm web' },
-  saas: { en: 'Paid product', vi: 'Sản phẩm thu phí' },
-  tool: { en: 'Developer tool', vi: 'Công cụ cho dev' },
-  desktop: { en: 'Desktop app', vi: 'App máy tính' },
-}
-
-/** "Open ↗" is wrong for a store listing, so each destination says where it goes. */
-const LINK_LABELS: Record<BuildLinkKind, LocalizedText> = {
-  appstore: { en: 'App Store', vi: 'App Store' },
-  playstore: { en: 'Google Play', vi: 'Google Play' },
-  web: { en: 'Visit site', vi: 'Xem trang' },
-  github: { en: 'Source', vi: 'Mã nguồn' },
-  docs: { en: 'Docs', vi: 'Tài liệu' },
-}
-
 export function kindLabel(kind: BuildKind, locale: Locale): string {
-  const text = KIND_LABELS[kind]
-  return text[locale] || text.en
+  return getMessages(locale).buildMeta.kinds[kind]
 }
 
 export function linkLabel(kind: BuildLinkKind, locale: Locale): string {
-  const text = LINK_LABELS[kind]
-  return text[locale] || text.en
+  return getMessages(locale).buildMeta.links[kind]
 }
 
 /** Stable display order for grouping by kind. */

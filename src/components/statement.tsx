@@ -1,6 +1,5 @@
-import { profile } from '@/content'
+import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
-import { t } from '@/lib/text'
 import { ContactActions } from './contact-actions'
 
 /**
@@ -24,18 +23,20 @@ import { ContactActions } from './contact-actions'
  * many facts there turn out to be.
  */
 export function Statement({ locale }: { locale: Locale }) {
+  const { profile } = getSiteContent(locale)
+
   return (
     <section className="shell pt-10 sm:pt-14">
       {profile.available ? (
         <p className="flex items-center gap-2 text-[13px] font-medium text-accent">
           <span aria-hidden="true" className="inline-block h-2 w-2 rounded-full bg-accent" />
-          {t(profile.availabilityLabel, locale)}
+          {profile.availabilityLabel}
         </p>
       ) : null}
 
-      <h1 className="display mt-5 max-w-[17ch]">{t(profile.hook, locale)}</h1>
+      <h1 className="display mt-5 max-w-[17ch]">{profile.hook}</h1>
 
-      <p className="lead mt-7 max-w-[46ch]">{t(profile.supporting, locale)}</p>
+      <p className="lead mt-7 max-w-[46ch]">{profile.supporting}</p>
 
       <div className="mt-9">
         <ContactActions locale={locale} />
@@ -43,9 +44,9 @@ export function Statement({ locale }: { locale: Locale }) {
 
       <dl className="mt-14 flex flex-wrap gap-x-12 gap-y-6 border-t border-line pt-6">
         {profile.spec.map((row) => (
-          <div key={row.label.en}>
-            <dt className="label">{t(row.label, locale)}</dt>
-            <dd className="mt-1 text-[15px] font-medium">{t(row.value, locale)}</dd>
+          <div key={row.id}>
+            <dt className="label">{row.label}</dt>
+            <dd className="mt-1 text-[15px] font-medium">{row.value}</dd>
           </div>
         ))}
       </dl>

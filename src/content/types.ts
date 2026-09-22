@@ -1,112 +1,129 @@
 export type Locale = 'en' | 'vi'
 
-export type LocalizedText = Record<Locale, string>
-
-/**
- * What kind of thing it is. A typed set rather than free text, because the
- * schedule groups and filters on it and the set will grow well past web apps —
- * store apps, agent skills, developer tools.
- */
 export type BuildKind = 'agent' | 'skill' | 'mobile' | 'web' | 'saas' | 'tool' | 'desktop'
-
-/** Where a build can be opened. A build often has more than one. */
 export type BuildLinkKind = 'appstore' | 'playstore' | 'web' | 'github' | 'docs'
+export type BuildStatus = 'live' | 'shipped' | 'building' | 'acquired' | 'sunset'
 
 export interface BuildLink {
   kind: BuildLinkKind
   url: string
 }
 
-export type BuildStatus = 'live' | 'shipped' | 'building' | 'acquired' | 'sunset'
-
 export interface Proof {
-  /** Short factual label, e.g. "active users". Never a claim we cannot verify. */
-  label: LocalizedText
-  /** The number itself. */
+  label: string
   value: string
 }
 
-export interface Build {
+export interface BuildFacts {
   slug: string
   order: number
   name: string
   status: BuildStatus
-  /** Year shipped or started, shown on the entry's meta line. */
   year: string
   kind: BuildKind
-  /** Outcome-oriented. English must stay under 72 characters. */
-  tagline: LocalizedText
-  /** Each of these must stay under 100 characters in English. */
-  problem: LocalizedText
-  built: LocalizedText
-  result: LocalizedText
-  /**
-   * Optional, and currently unused by any surface.
-   *
-   * The work section deliberately has no image slot: no real screenshot exists
-   * for any project, and a layout with a hole shaped like one spends its best
-   * space on a placeholder. The field stays because a real screenshot is a real
-   * possibility — but adding one is a design decision about where it goes, not a
-   * field that fills itself in. Never fake one.
-   */
   cover?: string
   logo?: string
   links: BuildLink[]
+}
+
+export interface BuildCopy {
+  slug: string
+  tagline: string
+  problem: string
+  built: string
+  result: string
   proof?: Proof
 }
 
-export interface Capability {
+export interface Build extends BuildFacts, Omit<BuildCopy, 'slug'> {}
+
+export interface CapabilityFacts {
   id: 'agentic' | 'mobile' | 'web' | 'saas'
   order: number
-  name: LocalizedText
-  bestFor: LocalizedText
-  canDeliver: LocalizedText
 }
 
-export interface Service {
+export interface CapabilityCopy {
+  id: CapabilityFacts['id']
+  name: string
+  bestFor: string
+  canDeliver: string
+}
+
+export interface Capability extends CapabilityFacts, Omit<CapabilityCopy, 'id'> {}
+
+export interface ServiceFacts {
   id: 'advisory' | 'sprint' | 'endToEnd'
   order: number
-  name: LocalizedText
-  output: LocalizedText
-  suitedTo: LocalizedText
 }
 
-export interface Faq {
+export interface ServiceCopy {
+  id: ServiceFacts['id']
+  name: string
+  output: string
+  suitedTo: string
+}
+
+export interface Service extends ServiceFacts, Omit<ServiceCopy, 'id'> {}
+
+export interface FaqFacts {
   id: string
   order: number
-  question: LocalizedText
-  answer: LocalizedText
 }
+
+export interface FaqCopy {
+  id: string
+  question: string
+  answer: string
+}
+
+export interface Faq extends FaqFacts, Omit<FaqCopy, 'id'> {}
 
 export interface SocialLink {
   network: 'github' | 'x' | 'linkedin' | 'email' | 'zalo'
   url: string
 }
 
-/** One of the reachability facts under the opening statement. */
 export interface SpecRow {
-  label: LocalizedText
-  value: LocalizedText
+  id: 'location' | 'languages' | 'replyTime' | 'nowBuilding'
+  label: string
+  value: string
 }
 
-export interface Profile {
+export interface ProfileFacts {
   name: string
-  location: LocalizedText
-  hook: LocalizedText
-  supporting: LocalizedText
-  ctaLabel: LocalizedText
   ctaHref: string
   avatar: string
   available: boolean
-  availabilityLabel: LocalizedText
-  /**
-   * The facts a stranger in another timezone needs and cannot get anywhere else
-   * on the page. Rendered as a wrapping row, so the count is free to change.
-   */
+}
+
+export interface ProfileCopy {
+  location: string
+  hook: string
+  supporting: string
+  ctaLabel: string
+  availabilityLabel: string
   spec: SpecRow[]
 }
 
-/** Every fixture module carries this so the production guard can find it. */
+export interface Profile extends ProfileFacts, ProfileCopy {}
+
+export interface ContentCopy {
+  profile: ProfileCopy
+  builds: BuildCopy[]
+  capabilities: CapabilityCopy[]
+  services: ServiceCopy[]
+  faq: FaqCopy[]
+}
+
+export interface SiteContent {
+  profile: Profile
+  builds: Build[]
+  capabilities: Capability[]
+  services: Service[]
+  faq: Faq[]
+  social: SocialLink[]
+}
+
 export interface FixtureMarked {
   readonly __fixture: true
 }

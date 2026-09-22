@@ -1,6 +1,6 @@
-import { profile, social } from '@/content'
+import { getSiteContent } from '@/content'
 import type { Locale, SocialLink } from '@/content/types'
-import { t } from '@/lib/text'
+import { getMessages } from '@/i18n/messages'
 import { GitHubIcon, LinkedInIcon, XIcon, ZaloWordmark } from './icons'
 
 /**
@@ -8,12 +8,6 @@ import { GitHubIcon, LinkedInIcon, XIcon, ZaloWordmark } from './icons'
  * one, so the footer's whole job is the plain email address and the four places
  * a visitor can go check that the person is real.
  */
-const COPY = {
-  newTab: { en: 'opens in a new tab', vi: 'mở trong tab mới' },
-  write: { en: 'Or write directly', vi: 'Hoặc email thẳng' },
-  elsewhere: { en: 'Elsewhere', vi: 'Kênh khác' },
-} as const
-
 const ICONS = {
   github: GitHubIcon,
   x: XIcon,
@@ -34,6 +28,8 @@ function isIconNetwork(n: SocialLink['network']): n is keyof typeof ICONS {
 }
 
 export function SiteFooter({ locale }: { locale: Locale }) {
+  const { profile, social } = getSiteContent(locale)
+  const messages = getMessages(locale)
   const email = social.find((s) => s.network === 'email')
   const year = new Date().getFullYear()
 
@@ -42,7 +38,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
       <div className="grid gap-10 sm:grid-cols-2">
         {email ? (
           <div>
-            <p className="label">{t(COPY.write, locale)}</p>
+            <p className="label">{messages.footer.write}</p>
             <a
               href={email.url}
               className="link mt-2 inline-block text-[17px] font-medium"
@@ -54,7 +50,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
         ) : null}
 
         <div className="sm:justify-self-end">
-          <p className="label">{t(COPY.elsewhere, locale)}</p>
+          <p className="label">{messages.footer.elsewhere}</p>
           <ul className="mt-2 flex flex-wrap items-center gap-2">
             {social.filter((s) => isIconNetwork(s.network)).map((s) => {
               const Icon = ICONS[s.network as keyof typeof ICONS]
@@ -64,7 +60,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
                     href={s.url}
                     target="_blank"
                     rel="noreferrer noopener"
-                    aria-label={`${NETWORK_LABELS[s.network as keyof typeof ICONS]} (${t(COPY.newTab, locale)})`}
+                    aria-label={`${NETWORK_LABELS[s.network as keyof typeof ICONS]} (${messages.common.newTab})`}
                     /* Zalo's mark is a wordmark, not a glyph — 77x28. Forcing it
                        into the same 44x44 square as the letterform icons either
                        crops it or shrinks it below legibility, so it gets a

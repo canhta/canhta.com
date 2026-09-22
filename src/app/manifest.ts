@@ -1,6 +1,5 @@
 import type { MetadataRoute } from 'next'
-import { profile } from '@/content'
-import { t } from '@/lib/text'
+import { getSiteContent } from '@/content'
 
 /**
  * There is exactly one manifest for both locales — the spec has no mechanism for
@@ -14,10 +13,12 @@ import { t } from '@/lib/text'
  * here is the one a person sees on their home screen long after the page.
  */
 export default function manifest(): MetadataRoute.Manifest {
+  const { profile } = getSiteContent('en')
+
   return {
     name: profile.name,
     short_name: profile.name,
-    description: t(profile.supporting, 'en'),
+    description: profile.supporting,
     start_url: '/',
 
     /**

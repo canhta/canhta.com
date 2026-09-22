@@ -1,5 +1,4 @@
-import { builds, capabilities, faq, profile, services, social } from '@/content'
-import { t } from '@/lib/text'
+import { getSiteContent } from '@/content'
 import { kindLabel } from '@/lib/build-meta'
 
 /**
@@ -18,6 +17,7 @@ export const dynamic = 'force-static'
 
 export function GET() {
   const l = 'en' as const
+  const { builds, capabilities, faq, profile, services, social } = getSiteContent(l)
   const email = social.find((s) => s.network === 'email')?.url.replace('mailto:', '')
   const links = social.filter((s) => s.network !== 'email')
 
@@ -35,21 +35,21 @@ export function GET() {
   const lines: (string | null)[] = [
     `# ${profile.name}`,
     '',
-    `> ${t(profile.supporting, l)}`,
+    `> ${profile.supporting}`,
     '',
-    `Based in ${t(profile.location, l)}. Works in English and Vietnamese.`,
-    profile.available ? `Currently ${t(profile.availabilityLabel, l).toLowerCase()}.` : null,
+    `Based in ${profile.location}. Works in English and Vietnamese.`,
+    profile.available ? `Currently ${profile.availabilityLabel.toLowerCase()}.` : null,
     '',
     '## What I build',
     '',
     ...capabilities.map(
-      (c) => `- **${t(c.name, l)}** — ${sentence(t(c.canDeliver, l))} Best for: ${t(c.bestFor, l)}`,
+      (c) => `- **${c.name}** — ${sentence(c.canDeliver)} Best for: ${c.bestFor}`,
     ),
     '',
     '## Ways to work together',
     '',
     ...services.map(
-      (s) => `- **${t(s.name, l)}** — ${sentence(t(s.output, l))} Right when: ${t(s.suitedTo, l)}`,
+      (s) => `- **${s.name}** — ${sentence(s.output)} Right when: ${s.suitedTo}`,
     ),
     '',
     '## Shipped work',
@@ -57,12 +57,12 @@ export function GET() {
     ...builds.map((b) => {
       const url = b.links[0]?.url
       const head = url ? `- [${b.name}](${url})` : `- ${b.name}`
-      return `${head} — ${kindLabel(b.kind, l)}, ${b.year}. ${sentence(t(b.tagline, l))} ${sentence(t(b.result, l))}`
+      return `${head} — ${kindLabel(b.kind, l)}, ${b.year}. ${sentence(b.tagline)} ${sentence(b.result)}`
     }),
     '',
     '## Questions people ask first',
     '',
-    ...faq.flatMap((f) => [`### ${t(f.question, l)}`, '', t(f.answer, l), '']),
+    ...faq.flatMap((f) => [`### ${f.question}`, '', f.answer, '']),
     '## Contact',
     '',
     email ? `- Email: ${email}` : null,

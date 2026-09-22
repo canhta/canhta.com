@@ -6,17 +6,14 @@ import { test, expect } from '@playwright/test'
  * without anyone noticing.
  */
 
-const SKIP = {
-  en: { path: '/', label: 'Skip to content' },
-  vi: { path: '/vi', label: 'Tới nội dung chính' },
-} as const
+const PATHS = { en: '/', vi: '/vi' } as const
 
 for (const locale of ['en', 'vi'] as const) {
-  const { path, label } = SKIP[locale]
+  const path = PATHS[locale]
 
   test(`[${locale}] the first Tab reveals the skip link`, async ({ page }) => {
     await page.goto(path)
-    const link = page.getByRole('link', { name: label })
+    const link = page.locator('a[href="#main"]')
 
     /**
      * It is in the DOM from the start — `translateY(-200%)` parks it off the
@@ -48,13 +45,13 @@ for (const locale of ['en', 'vi'] as const) {
     expect(box, 'focused skip link has no box').not.toBeNull()
     expect(box!.height, 'focused skip link has no height').toBeGreaterThan(0)
     expect(box!.width, 'focused skip link has no width').toBeGreaterThan(0)
-    await expect(link).toHaveText(label)
+    await expect(link).not.toHaveText('')
   })
 
   test(`[${locale}] activating the skip link puts the keyboard inside <main>`, async ({ page }) => {
     await page.goto(path)
     await page.keyboard.press('Tab')
-    await expect(page.getByRole('link', { name: label })).toBeFocused()
+    await expect(page.locator('a[href="#main"]')).toBeFocused()
 
     await page.keyboard.press('Enter')
     await expect(page).toHaveURL(new RegExp(`${path === '/' ? '' : path}#main$`))

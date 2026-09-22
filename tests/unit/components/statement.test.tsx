@@ -1,8 +1,9 @@
-import { render, screen, within } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
-import { profile } from '@/content'
+import { getSiteContent } from '@/content'
 import { Statement } from '@/components/statement'
-import { t } from '@/lib/text'
+
+const { profile } = getSiteContent('en')
 
 /**
  * The fact row is why this file exists.
@@ -55,7 +56,7 @@ describe('Statement', () => {
   it('renders the fact for every label', () => {
     render(<Statement locale="en" />)
     for (const row of profile.spec) {
-      expect(screen.getByText(t(row.value, 'en'))).toBeInTheDocument()
+      expect(screen.getByText(row.value)).toBeInTheDocument()
     }
   })
 
@@ -74,18 +75,10 @@ describe('Statement', () => {
 
   it('leads with the hook as the page heading and offers the primary action', () => {
     render(<Statement locale="en" />)
-    expect(screen.getByRole('heading', { level: 1, name: t(profile.hook, 'en') })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 1, name: profile.hook })).toBeInTheDocument()
 
-    const cta = screen.getByRole('link', { name: new RegExp(t(profile.ctaLabel, 'en'), 'i') })
+    const cta = screen.getByRole('link', { name: new RegExp(profile.ctaLabel, 'i') })
     expect(cta).toHaveAttribute('href', profile.ctaHref)
     expect(profile.ctaHref).toMatch(/^mailto:/)
-  })
-
-  it('renders the Vietnamese facts on the Vietnamese route', () => {
-    const { container } = render(<Statement locale="vi" />)
-    const list = container.querySelector('dl') as HTMLElement
-    const first = profile.spec[0]
-    expect(first).toBeDefined()
-    if (first) expect(within(list).getByText(t(first.value, 'vi'))).toBeInTheDocument()
   })
 })

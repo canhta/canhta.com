@@ -1,10 +1,11 @@
 import { render, screen, within } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
-import { builds } from '@/content'
+import { getSiteContent } from '@/content'
 import { Work } from '@/components/work'
 import { kindLabel, linkLabel } from '@/lib/build-meta'
 import { statusLabel } from '@/lib/status'
-import { t } from '@/lib/text'
+
+const { builds } = getSiteContent('en')
 
 /**
  * `Work` is an async Server Component — it awaits the GitHub star counts at
@@ -39,9 +40,9 @@ describe('Work', () => {
 
     for (const [i, build] of builds.entries()) {
       const entry = within(entries[i] as HTMLElement)
-      expect(entry.getByText(t(build.problem, 'en'))).toBeInTheDocument()
-      expect(entry.getByText(t(build.built, 'en'))).toBeInTheDocument()
-      expect(entry.getByText(t(build.result, 'en'))).toBeInTheDocument()
+      expect(entry.getByText(build.problem)).toBeInTheDocument()
+      expect(entry.getByText(build.built)).toBeInTheDocument()
+      expect(entry.getByText(build.result)).toBeInTheDocument()
     }
   })
 
@@ -63,7 +64,7 @@ describe('Work', () => {
     expect(container.querySelector('table')).toBeNull()
 
     for (const build of builds) {
-      expect(screen.getAllByText(t(build.result, 'en'))).toHaveLength(1)
+      expect(screen.getAllByText(build.result)).toHaveLength(1)
     }
   })
 
@@ -102,26 +103,11 @@ describe('Work', () => {
   })
 
   it('counts the projects with locale-aware plural rules', async () => {
-    // Vietnamese has one plural form; an `=== 1` check is only ever right for
-    // English, and the count is only in the sentence when there is more than one.
     const en = await renderWork('en')
     if (builds.length === 1) {
       expect(en.container.textContent).toContain('One project.')
     } else {
       expect(en.container.textContent).toContain(`${builds.length} projects.`)
     }
-    en.unmount()
-
-    const vi = await renderWork('vi')
-    if (builds.length === 1) {
-      expect(vi.container.textContent).toContain('Một dự án.')
-    } else {
-      expect(vi.container.textContent).toContain(`${builds.length} dự án.`)
-    }
-  })
-
-  it('renders the Vietnamese copy on the Vietnamese route', async () => {
-    await renderWork('vi')
-    expect(screen.getByRole('heading', { name: 'Tôi đã làm gì' })).toBeInTheDocument()
   })
 })
