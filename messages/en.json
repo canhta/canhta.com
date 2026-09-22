@@ -5,78 +5,78 @@
   },
   "header": {
     "language": "Language",
-    "role": "Independent software developer"
+    "role": "Software for small businesses"
   },
   "contact": {
     "chatOn": "Chat on"
   },
   "work": {
-    "kicker": "Work",
+    "kicker": "Products",
     "heading": "What I have built",
     "problem": "The problem",
     "built": "What I built",
     "result": "Where it stands",
-    "summaryOne": "One project. The ones with links are public; the rest are still being built.",
-    "summaryMany": "{count} projects. The ones with links are public; the rest are still being built."
+    "summaryOne": "One project, with a public link you can open.",
+    "summaryMany": "{count} projects, each with a public link you can open."
   },
   "capabilities": {
-    "kicker": "Scope",
-    "heading": "What I take on",
-    "bestFor": "Best for",
-    "deliverable": "You get"
+    "kicker": "Digital operations",
+    "heading": "When custom software is worth it",
+    "bestFor": "The signal",
+    "deliverable": "What to change"
   },
   "approach": {
-    "kicker": "Process",
-    "heading": "How a project goes",
-    "sub": "Choose when the work goes live. Everything before that point is still on paper.",
-    "lineName": "It goes live",
-    "running": "Running for real",
-    "planned": "Still on paper",
-    "loop": "After that, we keep improving it.",
+    "kicker": "From bottleneck to operation",
+    "heading": "A plan only matters once your team can use it.",
+    "sub": "Choose a launch point and see when the work starts creating value.",
+    "lineName": "Put it into use",
+    "running": "In use",
+    "planned": "Not in use yet",
+    "loop": "Then measure, adjust, and improve it.",
     "stages": [
-      { "id": "problem", "label": "You bring a problem", "detail": "In your own words." },
-      { "id": "agree", "label": "We agree what to build", "detail": "Small and specific." },
-      { "id": "build", "label": "I build, you check", "detail": "You see it as it grows." },
-      { "id": "live", "label": "It goes live", "detail": "Real users, real work." }
+      { "id": "problem", "label": "Locate the bottleneck", "detail": "Who does the work, where it stalls, what it costs." },
+      { "id": "agree", "label": "Choose the smallest useful fix", "detail": "Change the process, connect tools, or write code." },
+      { "id": "build", "label": "Run an early version", "detail": "Your team tests it with real data." },
+      { "id": "live", "label": "Put it into operation", "detail": "Measure, fix, and hand over." }
     ],
     "stops": [
       {
         "id": "agree",
-        "choice": "As soon as we agree",
-        "consequence": "Live as soon as we agree what to build. Everything after that improves something already running."
+        "choice": "A small first release",
+        "consequence": "I build only the core workflow, then your team uses it first."
       },
       {
         "id": "building",
-        "choice": "While I am building",
-        "consequence": "Live while I am still building it. You see it work before it is finished."
+        "choice": "During the build",
+        "consequence": "Your team tests each working part as I finish it."
       },
       {
         "id": "built",
-        "choice": "When it is built",
-        "consequence": "Live when it is built. This is where I put the line."
+        "choice": "After acceptance",
+        "consequence": "I finish the agreed workflow before putting it into operation."
       },
       {
         "id": "never",
-        "choice": "Never",
-        "consequence": "Nothing goes live. The work stays a plan and nobody ever uses it."
+        "choice": "Never put it to work",
+        "consequence": "The project stays in documents and changes no real work."
       }
     ]
   },
   "engagements": {
-    "kicker": "Engagements",
-    "heading": "Three ways to hire me",
-    "sub": "All three begin with a conversation. Pick the first one if you are not sure.",
-    "output": "You get",
-    "suited": "Right when"
+    "kicker": "Ways to work together",
+    "heading": "Start small. Put it to work.",
+    "sub": "Depending on the problem, I can stop at a clear plan, test one workflow, or take the full system into stable operation.",
+    "output": "The outcome",
+    "suited": "Use this when"
   },
   "answers": {
-    "kicker": "Questions",
-    "heading": "Before you write to me",
-    "sub": "The questions I get asked most often."
+    "kicker": "Before we start",
+    "heading": "What to settle before the work starts",
+    "sub": "Pricing, ownership, and choosing what to change."
   },
   "closing": {
-    "heading": "Tell me what you are trying to build.",
-    "reassure": "A few sentences about the problem is enough to start. I reply within one working day."
+    "heading": "Start with the work that is stuck, not an app idea.",
+    "reassure": "Tell me which step is slow, error-prone, or consuming too much staff time. I will map it with you, then send a plan and quote. If you do not need custom code, I will say so."
   },
   "footer": {
     "write": "Or write directly",
@@ -105,7 +105,8 @@
       "github": "Source",
       "docs": "Docs"
     },
-    "githubStars": "stars on GitHub"
+    "githubStarOne": "star on GitHub",
+    "githubStarsMany": "stars on GitHub"
   },
   "statuses": {
     "live": "Live",
@@ -115,10 +116,10 @@
     "sunset": "Sunset"
   },
   "metadata": {
-    "pageTitle": "Independent software developer | Canh Ta",
-    "pageDescription": "Custom software, agent systems, mobile apps and small SaaS products—scoped, built and run in production by Canh Ta.",
-    "jobTitle": "Software engineer",
-    "offerCatalog": "Three ways to hire me",
+    "pageTitle": "Custom software for small businesses | Canh Ta",
+    "pageDescription": "Custom software for small businesses: map the workflow, connect existing systems, automate repetitive work, and apply AI where it helps. Quote before code.",
+    "jobTitle": "Software engineer for small businesses",
+    "offerCatalog": "Ways to work together",
     "workList": "What I have built"
   }
 }

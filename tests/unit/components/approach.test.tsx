@@ -22,7 +22,7 @@ const copy = getMessages('en').approach
 describe('Approach', () => {
   it('is a native radio group, so keyboard and screen reader support is not hand-rolled', () => {
     render(<Approach copy={copy} />)
-    const group = screen.getByRole('group', { name: /it goes live/i })
+    const group = screen.getByRole('group', { name: copy.lineName })
     expect(group.tagName).toBe('FIELDSET')
 
     const options = screen.getAllByRole('radio')
@@ -34,26 +34,24 @@ describe('Approach', () => {
     render(<Approach copy={copy} />)
     const checked = screen.getAllByRole('radio').filter((r) => (r as HTMLInputElement).checked)
     expect(checked).toHaveLength(1)
-    // The default is where Canh actually puts the line, and the copy says so.
-    expect(screen.getByText(/This is where I put the line/)).toBeInTheDocument()
+    expect(screen.getByText(copy.stops[2]!.consequence, { exact: false })).toBeInTheDocument()
   })
 
   it('marks every step past the line as running, in words', () => {
     render(<Approach copy={copy} />)
-    // Default is "when it is built": one of four steps runs for real.
-    expect(screen.getAllByText('Running for real')).toHaveLength(1)
-    expect(screen.getAllByText('Still on paper')).toHaveLength(3)
+    expect(screen.getAllByText(copy.running)).toHaveLength(1)
+    expect(screen.getAllByText(copy.planned)).toHaveLength(3)
   })
 
   it('moves the line when a different option is chosen', async () => {
     const user = userEvent.setup()
     render(<Approach copy={copy} />)
 
-    await user.click(screen.getByRole('radio', { name: /as soon as we agree/i }))
+    await user.click(screen.getByRole('radio', { name: copy.stops[0]!.choice }))
 
     // Three of the four steps are now past the line.
-    expect(screen.getAllByText('Running for real')).toHaveLength(3)
-    expect(screen.getByText(/Live as soon as we agree what to build/)).toBeInTheDocument()
+    expect(screen.getAllByText(copy.running)).toHaveLength(3)
+    expect(screen.getByText(copy.stops[0]!.consequence, { exact: false })).toBeInTheDocument()
   })
 
   it('lets a keyboard move the line with arrow keys, for free', async () => {
@@ -65,17 +63,17 @@ describe('Approach', () => {
     await user.keyboard('{ArrowRight}')
 
     expect((radios[1] as HTMLInputElement).checked).toBe(true)
-    expect(screen.getByText(/You see it work before it is finished/)).toBeInTheDocument()
+    expect(screen.getByText(copy.stops[1]!.consequence, { exact: false })).toBeInTheDocument()
   })
 
   it('keeps the option where nothing ships, because it is the argument', async () => {
     const user = userEvent.setup()
     render(<Approach copy={copy} />)
 
-    await user.click(screen.getByRole('radio', { name: /^never$/i }))
+    await user.click(screen.getByRole('radio', { name: copy.stops[3]!.choice }))
 
-    expect(screen.queryByText('Running for real')).toBeNull()
-    expect(screen.getByText(/nobody ever uses it/)).toBeInTheDocument()
+    expect(screen.queryByText(copy.running)).toBeNull()
+    expect(screen.getByText(copy.stops[3]!.consequence, { exact: false })).toBeInTheDocument()
   })
 
   it('announces the consequence, which happens away from the control', () => {

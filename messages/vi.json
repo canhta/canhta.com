@@ -105,7 +105,8 @@
       "github": "Mã nguồn",
       "docs": "Tài liệu"
     },
-    "githubStars": "sao trên GitHub"
+    "githubStarOne": "sao trên GitHub",
+    "githubStarsMany": "sao trên GitHub"
   },
   "statuses": {
     "live": "Đang chạy",

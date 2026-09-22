@@ -2,10 +2,14 @@ import { render, screen, within } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 import { getSiteContent } from '@/content'
 import { Work } from '@/components/work'
+import { getMessages } from '@/i18n/messages'
 import { kindLabel, linkLabel } from '@/lib/build-meta'
 import { statusLabel } from '@/lib/status'
 
 const { builds } = getSiteContent('en')
+const messages = getMessages('en')
+
+const escapeRegex = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
 /**
  * `Work` is an async Server Component — it awaits the GitHub star counts at
@@ -95,8 +99,11 @@ describe('Work', () => {
 
     for (const [i, build] of builds.entries()) {
       for (const link of build.links) {
+        const label = linkLabel(link.kind, 'en')
         expect(
-          within(entries[i] as HTMLElement).getByText(linkLabel(link.kind, 'en'), { exact: false }),
+          within(entries[i] as HTMLElement).getByRole('link', {
+            name: new RegExp(`^${escapeRegex(label)}`),
+          }),
         ).toBeInTheDocument()
       }
     }
@@ -104,10 +111,10 @@ describe('Work', () => {
 
   it('counts the projects with locale-aware plural rules', async () => {
     const en = await renderWork('en')
-    if (builds.length === 1) {
-      expect(en.container.textContent).toContain('One project.')
-    } else {
-      expect(en.container.textContent).toContain(`${builds.length} projects.`)
-    }
+    const summary =
+      builds.length === 1
+        ? messages.work.summaryOne
+        : messages.work.summaryMany.replace('{count}', String(builds.length))
+    expect(en.container.textContent).toContain(summary)
   })
 })

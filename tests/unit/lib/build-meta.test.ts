@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { getSiteContent } from '@/content'
 import type { BuildKind, BuildLinkKind } from '@/content/types'
-import { KIND_ORDER, kindLabel, linkLabel } from '@/lib/build-meta'
+import { githubStarsLabel, KIND_ORDER, kindLabel, linkLabel } from '@/lib/build-meta'
 
 const LINK_KINDS: BuildLinkKind[] = ['appstore', 'playstore', 'web', 'github', 'docs']
 
@@ -29,5 +29,12 @@ describe('build metadata', () => {
     const all: BuildKind[] = ['agent', 'skill', 'mobile', 'web', 'saas', 'tool', 'desktop']
     expect([...KIND_ORDER].sort()).toEqual([...all].sort())
     expect(new Set(KIND_ORDER).size).toBe(KIND_ORDER.length)
+  })
+
+  it('labels GitHub star counts with locale-aware plural rules', () => {
+    expect(githubStarsLabel(1, 'en')).toBe('star on GitHub')
+    expect(githubStarsLabel(2, 'en')).toBe('stars on GitHub')
+    expect(githubStarsLabel(1, 'vi')).toBe('sao trên GitHub')
+    expect(githubStarsLabel(2, 'vi')).toBe('sao trên GitHub')
   })
 })

@@ -1,4 +1,5 @@
 import { test, expect, type Page } from '@playwright/test'
+import en from '../../messages/en.json' with { type: 'json' }
 
 /**
  * The page's only real interaction, and therefore the only place where a silent
@@ -22,16 +23,11 @@ import { test, expect, type Page } from '@playwright/test'
 const COPY = {
   en: {
     path: '/',
-    group: /it goes live/i,
-    running: 'Running for real',
-    planned: 'Still on paper',
-    choices: [/as soon as we agree/i, /while i am building/i, /when it is built/i, /^never$/i],
-    consequences: [
-      /^Live as soon as we agree/,
-      /^Live while I am still building/,
-      /^Live when it is built/,
-      /^Nothing goes live/,
-    ],
+    group: en.approach.lineName,
+    running: en.approach.running,
+    planned: en.approach.planned,
+    choices: en.approach.stops.map((stop) => stop.choice),
+    consequences: en.approach.stops.map((stop) => stop.consequence),
   },
 } as const
 
@@ -49,7 +45,7 @@ function at<T>(list: readonly T[], i: number, what: string): T {
   return value
 }
 
-/** How many steps currently say, in words, that they are running for real. */
+/** How many steps currently say, in words, that they are in use. */
 async function runningCount(page: Page, label: string): Promise<number> {
   return page.getByText(label, { exact: true }).count()
 }

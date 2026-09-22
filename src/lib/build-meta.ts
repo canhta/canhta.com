@@ -20,5 +20,12 @@ export function linkLabel(kind: BuildLinkKind, locale: Locale): string {
   return getMessages(locale).buildMeta.links[kind]
 }
 
+export function githubStarsLabel(count: number, locale: Locale): string {
+  const copy = getMessages(locale).buildMeta
+  return new Intl.PluralRules(locale).select(count) === 'one'
+    ? copy.githubStarOne
+    : copy.githubStarsMany
+}
+
 /** Stable display order for grouping by kind. */
 export const KIND_ORDER: BuildKind[] = ['agent', 'skill', 'mobile', 'web', 'saas', 'tool', 'desktop']

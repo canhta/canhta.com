@@ -2,8 +2,10 @@ import { render, screen } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 import { getSiteContent } from '@/content'
 import { Answers } from '@/components/answers'
+import { getMessages } from '@/i18n/messages'
 
 const { faq } = getSiteContent('en')
+const copy = getMessages('en').answers
 
 /**
  * The list structure here was a real bug: the `dt`/`dd` pairs were not wrapped
@@ -45,6 +47,6 @@ describe('Answers', () => {
 
   it('sits under its own heading', () => {
     render(<Answers locale="en" />)
-    expect(screen.getByRole('heading', { name: 'Before you write to me' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: copy.heading })).toBeInTheDocument()
   })
 })

@@ -1,13 +1,14 @@
 import type { ContentCopy } from '../types'
 
+/** Written as one English page, not translated field-by-field from Vietnamese. */
 export const enContent: ContentCopy = {
   profile: {
     location: 'Vietnam',
-    hook: 'I build agent systems, mobile apps and small SaaS products.',
+    hook: 'Fix what keeps slowing your business down.',
     supporting:
-      'You do not need a spec to start. Tell me which part of your work is slow or still done by hand, and I will design it, build it and run it in production.',
-    ctaLabel: 'Email me',
-    availabilityLabel: 'Available for work',
+      'I map the workflow with you before choosing the answer. We may keep your tools, connect them, build custom software, or apply AI. You get a plan and quote before I write code.',
+    ctaLabel: "Tell me what's stuck",
+    availabilityLabel: 'Taking on new projects',
     spec: [
       { id: 'location', label: 'Based in', value: 'Vietnam · GMT+7' },
       { id: 'languages', label: 'Works in', value: 'English · Tiếng Việt' },
@@ -18,114 +19,109 @@ export const enContent: ContentCopy = {
   builds: [
     {
       slug: 'reupmatic',
-      tagline: 'A desktop app that preps batches of Douyin reuploads on your machine.',
-      problem:
-        'Reuploading Douyin videos means repeating the same edit, subtitle and voice steps per video.',
-      built: 'A queue that downloads, subtitles, translates and voices a batch on your computer.',
-      result:
-        'Alpha builds are downloadable for macOS and Windows; direct publishing is still in progress.',
+      tagline: 'A desktop app that processes Douyin videos in batches on your machine.',
+      problem: 'Each video repeats the same download, edit, subtitle, and voice steps.',
+      built: 'A local queue that runs those steps across a full batch.',
+      result: 'Alpha builds run on macOS and Windows. I am adding direct publishing next.',
     },
     {
       slug: 'ai-engineering-atlas',
-      tagline: 'A roadmap for AI engineering that starts at your gap, not from zero.',
-      problem:
-        'Experienced engineers know AI unevenly, but most roadmaps treat everyone as a beginner.',
-      built:
-        'A gap-driven curriculum: diagnose first, learn the smallest route, produce evidence.',
-      result:
-        'Public on GitHub and live at ai-eng.canhta.com; coverage grows, routes get ready.',
+      tagline: 'An AI engineering roadmap that starts with what the learner is missing.',
+      problem: 'Working developers know AI unevenly, while most roadmaps restart from zero.',
+      built: 'A diagnostic that finds the gaps and creates the shortest route to a practical project.',
+      result: 'The source code is public, and the website is live. I continue to expand the material.',
     },
     {
       slug: 'copycat-skills',
-      tagline: 'Turns an app idea into a decision backed by market evidence.',
-      problem: 'Deciding what to build from a product link usually ends in a hunch.',
-      built: 'An agent skill that researches the market and recommends a direction.',
-      result: 'Published and installable from the public skills registry.',
+      tagline: 'Check the market before deciding whether to build the app.',
+      problem: 'One product link is not enough evidence for a market decision.',
+      built: 'An agent skill that finds competitors, demand signals, and reasons to build, stop, or change direction.',
+      result: 'You can install it from skills.sh and inspect the source on GitHub.',
     },
     {
       slug: 'pixelbid',
-      tagline: 'A working rebuild of a bidding game that was trending on X.',
-      problem: 'I wanted to understand how the bidding mechanic actually worked.',
+      tagline: 'A working rebuild of a bidding game that gained traction on X.',
+      problem: 'I wanted to understand the auction mechanic instead of guessing from the interface.',
       built: 'A credit-backed attention market: a qualified open burns one credit.',
-      result: 'In build, as a side project. Original idea: outbid.lol.',
+      result: 'I am building it as a side project. The original idea came from outbid.lol.',
     },
   ],
   capabilities: [
     {
       id: 'agentic',
-      name: 'Work that runs itself',
-      bestFor: 'Repetitive work that still needs a judgement call.',
-      canDeliver: 'An agent that uses your existing tools and asks a person when it is unsure.',
+      name: 'AI for repetitive desk work',
+      bestFor: 'Your team reads, sorts, summarizes, or answers the same type of information each day.',
+      canDeliver: 'AI handles repeated steps inside your current systems. A person approves high-stakes decisions.',
     },
     {
       id: 'mobile',
-      name: 'Phone apps',
-      bestFor: 'Users who are away from a desk when they need it.',
-      canDeliver: 'An app on the App Store and Google Play that works on a weak connection.',
+      name: 'Move field work into one system',
+      bestFor: 'Staff receive jobs, record work, or report progress through paper, chat, and spreadsheets.',
+      canDeliver: 'A mobile app built around the workflow that still works on a weak connection.',
     },
     {
       id: 'web',
-      name: 'Web products',
-      bestFor: 'The interface your team uses every day.',
-      canDeliver: 'A fast, accessible interface that stays easy to change.',
+      name: 'Connect a fragmented workflow',
+      bestFor: 'Data gets copied between files, chat threads, or systems that do not share it.',
+      canDeliver: 'Internal software that connects the steps, cuts re-entry, and shows where each job stands.',
     },
     {
       id: 'saas',
-      name: 'Paid products',
-      bestFor: 'An idea you want in front of paying users early.',
-      canDeliver: 'A small product with sign-in, billing and analytics from the start.',
+      name: 'Test a new digital product',
+      bestFor: 'You have a new service or revenue idea but do not yet know whether customers will use it.',
+      canDeliver: 'A small SaaS product that customers can use and pay for before you expand it.',
     },
   ],
   services: [
     {
       id: 'advisory',
-      name: 'Solution advisory',
-      output: 'A written architecture and a build order you can hand to any developer.',
-      suitedTo: 'You know the problem but not how to build the answer.',
+      name: 'Find the bottleneck',
+      output: 'The current workflow, solution options, the smallest useful scope, a plan, and a quote.',
+      suitedTo: 'Work is slow, but you do not yet know whether the process or the software is at fault.',
     },
     {
       id: 'sprint',
-      name: 'Focused build sprint',
-      output: 'One working piece of the product, running in production.',
-      suitedTo: 'You want to see it work before committing to the whole build.',
+      name: 'Put one workflow into use',
+      output: 'One important workflow running with your team and real data.',
+      suitedTo: 'You want evidence from daily use before expanding the system.',
     },
     {
       id: 'endToEnd',
-      name: 'End-to-end product build',
-      output: 'The finished product, released to users and maintained after launch.',
-      suitedTo: 'You want one person responsible from the first idea to launch.',
+      name: 'Build the full system',
+      output: 'Software in operation, with documentation, handover, and a maintenance plan.',
+      suitedTo: 'You want one person responsible from workflow mapping through stable operation.',
     },
   ],
   faq: [
     {
       id: 'pricing',
       question: 'How do you price work?',
-      answer: 'Fixed scope and fixed price, agreed in writing before any work starts.',
+      answer: 'I map the workflow and agree on the scope first. You get the plan, delivery points, and quote before I write code.',
     },
     {
       id: 'ownership',
       question: 'Who owns the code?',
-      answer: 'You own the code, the accounts and the infrastructure. Handover is part of the job.',
+      answer: 'You own the code, accounts, and infrastructure. Handover is part of the job.',
     },
     {
       id: 'vague',
-      question: 'I only have a rough idea. Is that enough?',
-      answer: 'Yes. Making it specific is the first thing we do together.',
+      question: 'What if I do not know whether I need software, automation, or AI?',
+      answer: 'That is fine. I start with the people, steps, and result involved. I choose the technology afterward. Sometimes the right answer requires no custom code.',
     },
     {
       id: 'team',
       question: 'Can you work with my existing team?',
-      answer: 'Yes. I can build alongside your team, or build it and hand it over to them.',
+      answer: 'Yes. I can work alongside your team or build the system and hand it over.',
     },
     {
       id: 'after',
       question: 'What happens after launch?',
-      answer: 'I either stay on to run and improve it, or hand it over documented. Your call.',
+      answer: 'I can continue to run and improve it, or hand it over with documentation.',
     },
     {
       id: 'agency',
-      question: 'Why you and not an agency?',
-      answer: 'You talk to the person writing the code, not to an account manager.',
+      question: 'When does custom software make sense?',
+      answer: 'Build it when existing tools force workarounds or duplicate entry. It also fits when off-the-shelf software cannot follow a core process. If an existing tool fits, use it.',
     },
   ],
 }
