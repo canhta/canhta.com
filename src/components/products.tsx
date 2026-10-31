@@ -15,13 +15,13 @@ export function AppsTeaser({ locale }: { locale: Locale }) {
   const copy = getMessages(locale).home
 
   return (
-    <section aria-labelledby="apps-title" className="band sheet ground-deep on-navy">
+    <section aria-labelledby="apps-title" className="band sheet ground-night on-night">
       <div className="shell">
         <div className="reveal flex flex-wrap items-end justify-between gap-x-10 gap-y-6">
           <h2 id="apps-title" className="headline max-w-[14ch]">
             {copy.appsHeading}
           </h2>
-          <Link href="/products" className="btn-ghost">
+          <Link href="/products" className="btn-light">
             {copy.appsAll}
           </Link>
         </div>
@@ -42,7 +42,7 @@ export function AppsFull({ locale }: { locale: Locale }) {
   const featured = getSiteContent(locale).builds.filter((b) => b.shots?.length)
 
   return (
-    <section className="band sheet ground-deep on-navy" aria-label={getMessages(locale).apps.h1}>
+    <section className="band sheet ground-tint" aria-label={getMessages(locale).apps.h1}>
       <div className="shell">
         <ul className="grid gap-4 md:grid-cols-2 md:gap-5">
           {featured.map((build) => (

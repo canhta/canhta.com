@@ -21,11 +21,11 @@ export const alt = 'Canh Ta'
  * request to fonts.gstatic.com means a network blip becomes a failed deploy —
  * and Vietnamese diacritics are exactly what a fallback font gets wrong.
  */
-const BG = '#ffffff'
-const INK = '#10201a'
-const MUTED = '#4f5f57'
-const LINE = '#10201a'
-const ACCENT = '#ff6a2b'
+const BG = '#131517'
+const INK = '#f7f7f8'
+const MUTED = '#b4b6b8'
+const LINE = '#383e46'
+const ACCENT = '#d1fe17'
 
 async function font(file: string) {
   return readFile(join(process.cwd(), 'src/assets/fonts', file))
@@ -81,7 +81,7 @@ export default async function Image({ params }: { params: Promise<{ locale: stri
              */
             lineHeight: 1.28,
             letterSpacing: '-0.021em',
-            color: INK,
+            color: ACCENT,
             maxWidth: 980,
           }}
         >
@@ -101,7 +101,7 @@ export default async function Image({ params }: { params: Promise<{ locale: stri
             }}
           >
             <div
-              style={{ display: 'flex', width: 16, height: 16, borderRadius: 8, background: ACCENT, border: `2px solid ${INK}` }}
+              style={{ display: 'flex', width: 16, height: 16, borderRadius: 8, background: ACCENT }}
             />
             <span style={{ color: INK }}>{profile.availabilityLabel}</span>
             <span style={{ marginLeft: 'auto' }}>canhta.com</span>

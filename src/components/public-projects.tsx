@@ -5,7 +5,7 @@ import { fetchStars } from '@/lib/github'
 import { statusLabel } from '@/lib/status'
 import { BuildLinkButton } from './build-link'
 
-/** The other public projects, as wide rows on a white band. */
+/** The other public projects, as wide rows on a dark band. */
 export async function PublicProjects({ locale }: { locale: Locale }) {
   const others = getSiteContent(locale).builds.filter((b) => !b.shots?.length)
   if (others.length === 0) return null
@@ -14,7 +14,7 @@ export async function PublicProjects({ locale }: { locale: Locale }) {
   const stars = await fetchStars(others)
 
   return (
-    <section aria-labelledby="public-title" className="band sheet ground-tint">
+    <section aria-labelledby="public-title" className="band sheet ground-night on-night">
       <div className="shell">
         <h2 id="public-title" className="headline reveal max-w-[16ch]">
           {copy.publicHeading}

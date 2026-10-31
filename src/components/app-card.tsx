@@ -6,9 +6,9 @@ import { PhoneShot } from './phone-shot'
 import { Tilt } from './tilt'
 
 /**
- * One app, as a rounded panel on the deep green band. The app's own colour sits
+ * One app, as a rounded panel on the dark band. The app's own colour sits
  * behind two overlapping phone screens that lean toward the pointer; the text
- * is white on deep green below. The compact version (home) leaves out the long
+ * is light on a dark card below. The compact version (home) leaves out the long
  * summary; the products page carries it. Status and platform are text, never only a
  * colour or an image.
  */
@@ -28,7 +28,7 @@ export function AppCard({
   const phoneWidth = variant === 'compact' ? 'w-[40%] max-w-[124px]' : 'w-[40%] max-w-[210px]'
 
   return (
-    <article data-theme={build.slug} className="app-card">
+    <article data-theme={build.slug} className="app-card on-night">
       {shown.length > 0 ? (
         <div className="app-media">
           {shown.map((shot) => (
@@ -59,7 +59,7 @@ export function AppCard({
         {variant === 'full' ? <p className="cell-muted mt-2 text-[15px] leading-relaxed">{build.summary}</p> : null}
 
         <p className="mt-5 text-[14px] leading-snug">
-          <span className="font-extrabold text-leaf">{statusLabel(build.status, locale)}.</span>{' '}
+          <span className="font-extrabold text-accent">{statusLabel(build.status, locale)}.</span>{' '}
           <span className="cell-muted">{build.availability}</span>
         </p>
         <ul className="mt-5 flex flex-wrap gap-2">

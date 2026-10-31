@@ -2,14 +2,14 @@ import * as THREE from 'three'
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js'
 
 /**
- * The home hero as a large 3D scene on the deep green band: scattered sources
+ * The home hero as a large 3D scene on the night band: scattered sources
  * (a chat, a spreadsheet, a paper) across the top, a stream of points flowing
  * along curves down into one dashboard, and three AI agents orbiting it. It
  * exists to show the page's idea, so everything in it means something: the flow
- * is the work moving into one system, the orbit is the agents, the one orange
+ * is the work moving into one system, the orbit is the agents, the one lime
  * node is the approval step. The stage is taller than wide on every layout, so
- * the composition is vertical. White and mint objects read against the ground;
- * orange is used for the approval node and a few of the flow points.
+ * the composition is vertical. White cards and light dots read against the
+ * near-black ground; lime is used for the approval node and every fourth flow point.
  *
  * Loaded lazily and only in the browser. Returns `null` when WebGL is not
  * available (the static drawing underneath stays), otherwise a disposer.
@@ -18,10 +18,14 @@ import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.j
  * the static drawing again until the context returns).
  */
 
-const ACCENT = 0xff6a2b
-const MINT = 0x7fd6a4
+const LIME = 0xd1fe17
 const PAPER = 0xffffff
-const LINE = '#cbd8cf'
+const DOT = 0xf7f7f8
+const RING = 0x898a8b
+const LINE = '#c9cdd3'
+const SOFT = '#e6e8eb'
+const NIGHT = '#131517'
+const LIME_CSS = '#d1fe17'
 
 type Draw = (ctx: CanvasRenderingContext2D, w: number, h: number) => void
 
@@ -47,17 +51,17 @@ function bar(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: 
 const chatFace: Draw = (ctx, w, h) => {
   ctx.fillStyle = '#fff'
   ctx.fillRect(0, 0, w, h)
-  bar(ctx, 40, 50, w * 0.55, 34, '#e3f1e8')
-  bar(ctx, 40, 100, w * 0.4, 34, '#e3f1e8')
-  bar(ctx, w * 0.35, 170, w * 0.58, 34, '#146c43')
-  bar(ctx, w * 0.5, 220, w * 0.43, 34, '#146c43')
-  bar(ctx, 40, 290, w * 0.5, 34, '#e3f1e8')
+  bar(ctx, 40, 50, w * 0.55, 34, SOFT)
+  bar(ctx, 40, 100, w * 0.4, 34, SOFT)
+  bar(ctx, w * 0.35, 170, w * 0.58, 34, NIGHT)
+  bar(ctx, w * 0.5, 220, w * 0.43, 34, NIGHT)
+  bar(ctx, 40, 290, w * 0.5, 34, SOFT)
 }
 
 const sheetFace: Draw = (ctx, w, h) => {
   ctx.fillStyle = '#fff'
   ctx.fillRect(0, 0, w, h)
-  ctx.fillStyle = '#e3f1e8'
+  ctx.fillStyle = SOFT
   ctx.fillRect(0, 0, w, 56)
   ctx.strokeStyle = LINE
   ctx.lineWidth = 3
@@ -73,7 +77,7 @@ const sheetFace: Draw = (ctx, w, h) => {
     ctx.lineTo(w, 56 + ((h - 56) / 5) * r)
     ctx.stroke()
   }
-  ctx.fillStyle = '#ff6a2b'
+  ctx.fillStyle = LIME_CSS
   ctx.fillRect(w / 4 + 6, 120, w / 4 - 12, 44)
 }
 
@@ -86,20 +90,20 @@ const paperFace: Draw = (ctx, w, h) => {
 const hubFace: Draw = (ctx, w, h) => {
   ctx.fillStyle = '#fff'
   ctx.fillRect(0, 0, w, h)
-  ctx.fillStyle = '#e3f1e8'
+  ctx.fillStyle = SOFT
   ctx.fillRect(0, 0, w, 70)
-  bar(ctx, 36, 26, w * 0.34, 20, '#146c43')
+  bar(ctx, 36, 26, w * 0.34, 20, NIGHT)
   for (let i = 0; i < 3; i++) {
     const y = 110 + i * 78
-    ctx.fillStyle = '#f2f5f2'
+    ctx.fillStyle = '#f1f2f4'
     ctx.beginPath()
     ctx.roundRect(28, y, w - 56, 58, 14)
     ctx.fill()
-    ctx.fillStyle = '#146c43'
+    ctx.fillStyle = NIGHT
     ctx.beginPath()
     ctx.arc(70, y + 29, 16, 0, Math.PI * 2)
     ctx.fill()
-    ctx.strokeStyle = '#fff'
+    ctx.strokeStyle = LIME_CSS
     ctx.lineWidth = 5
     ctx.beginPath()
     ctx.moveTo(62, y + 29)
@@ -110,7 +114,7 @@ const hubFace: Draw = (ctx, w, h) => {
   }
   const base = h - 70
   ;[0.5, 0.8, 0.62, 1].forEach((v, i) => {
-    ctx.fillStyle = i === 3 ? '#146c43' : '#bfd9c8'
+    ctx.fillStyle = i === 3 ? NIGHT : '#c9cdd3'
     ctx.fillRect(40 + i * 62, base - 90 * v, 40, 90 * v)
   })
 }
@@ -183,21 +187,21 @@ export function mountScene(host: HTMLElement, onContext?: (lost: boolean) => voi
   hub.rotation.y = 0
   root.add(hub)
 
-  const ringMat = track(new THREE.MeshBasicMaterial({ color: MINT, transparent: true, opacity: 0.6 }))
-  const ring = new THREE.Mesh(track(new THREE.TorusGeometry(2.6, 0.03, 8, 120)), ringMat)
+  const ringMat = track(new THREE.MeshBasicMaterial({ color: RING, transparent: true, opacity: 0.85 }))
+  const ring = new THREE.Mesh(track(new THREE.TorusGeometry(2.6, 0.04, 8, 120)), ringMat)
   ring.position.copy(hub.position)
   ring.rotation.set(1.2, 0.2, 0)
   root.add(ring)
 
   const agentGeo = track(new THREE.SphereGeometry(0.2, 24, 16))
   const agents = [0, 1, 2].map((i) => {
-    const m = new THREE.Mesh(agentGeo, track(new THREE.MeshStandardMaterial({ color: MINT, roughness: 0.4 })))
+    const m = new THREE.Mesh(agentGeo, track(new THREE.MeshBasicMaterial({ color: DOT })))
     root.add(m)
     return { mesh: m, a: (i / 3) * Math.PI * 2 }
   })
   const approve = new THREE.Mesh(
     track(new THREE.SphereGeometry(0.2, 24, 16)),
-    track(new THREE.MeshBasicMaterial({ color: ACCENT })),
+    track(new THREE.MeshBasicMaterial({ color: LIME })),
   )
   root.add(approve)
 
@@ -211,12 +215,12 @@ export function mountScene(host: HTMLElement, onContext?: (lost: boolean) => voi
   const narrow = host.clientWidth < 520
   const perCurve = narrow ? 12 : 20
   const dots = new THREE.InstancedMesh(
-    track(new THREE.SphereGeometry(0.085, 10, 8)),
+    track(new THREE.SphereGeometry(0.1, 10, 8)),
     track(new THREE.MeshBasicMaterial({ color: 0xffffff })),
     perCurve * curves.length,
   )
   const tint = new THREE.Color()
-  for (let n = 0; n < perCurve * curves.length; n++) dots.setColorAt(n, tint.set(n % 4 === 0 ? ACCENT : MINT))
+  for (let n = 0; n < perCurve * curves.length; n++) dots.setColorAt(n, tint.set(n % 4 === 0 ? LIME : DOT))
   root.add(dots)
   const dummy = new THREE.Object3D()
   const point = new THREE.Vector3()

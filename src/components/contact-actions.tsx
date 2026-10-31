@@ -7,7 +7,7 @@ import { ZaloWordmark } from './icons'
 /**
  * The ways to reach us, as three big tappable rows: email, Zalo and WhatsApp.
  * They are different doors to the same inbox. The rows take their colours from
- * the band they sit in (navy rows on orange or tint, light rows on a dark band;
+ * the band they sit in (dark rows on lime or a light band, light rows on a dark band;
  * see `.row-link` in globals.css). The email subject and body are written in the
  * visitor's language.
  */

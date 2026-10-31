@@ -64,9 +64,9 @@ export default async function NotFound() {
       {/* The layout's skip link targets `#main` on every route it wraps, this
           one included. Without the id here, the first thing a keyboard user
           reaches on a 404 is a link to nowhere. */}
-      <main id="main" tabIndex={-1} className="page-head ground-navy on-navy">
+      <main id="main" tabIndex={-1} className="page-head ground-night on-night">
         <div className="shell">
-          <p className="text-[1rem] font-bold text-leaf">{copy.label}</p>
+          <p className="text-[1rem] font-bold text-on-dark">{copy.label}</p>
           <p className="giant mt-2 text-accent" aria-hidden="true">
             404
           </p>

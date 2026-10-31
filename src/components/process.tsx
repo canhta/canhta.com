@@ -14,7 +14,7 @@ export function Process({ locale }: { locale: Locale }) {
   const heading = getMessages(locale).services.processHeading
 
   return (
-    <section aria-labelledby="process-title" className="process band sheet ground-white">
+    <section aria-labelledby="process-title" className="process band sheet ground-night on-night">
       <div className="shell process-grid">
         <div className="process-side">
           <div className="sticky-box">

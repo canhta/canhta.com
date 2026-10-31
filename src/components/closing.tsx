@@ -3,9 +3,9 @@ import { getMessages } from '@/i18n/messages'
 import { ContactActions } from './contact-actions'
 
 /**
- * The ask, on the one orange band: giant ink type on the left and the three
- * ways to reach us as big rows on the right. Ink on orange is 5.9:1. White would
- * be 2.9:1, so nothing on this band is white.
+ * The ask, on the lime band: giant night type on the left and the three
+ * ways to reach us as big rows on the right. Night type on lime is 15.6:1; white would
+ * be 1.2:1, so nothing on this band is white.
  */
 export function Closing({ locale }: { locale: Locale }) {
   const copy = getMessages(locale).closing

@@ -15,15 +15,15 @@ import { InView } from './in-view'
  * anchor ids the home links land on.
  */
 
-type Ground = 'green' | 'navy' | 'white' | 'mint'
+type Ground = 'night' | 'lime' | 'white' | 'wash'
 
 const GROUND: Record<string, Ground> = {
-  systems: 'green',
-  ai: 'navy',
+  systems: 'night',
+  ai: 'lime',
   data: 'white',
-  web: 'mint',
-  iot: 'white',
-  team: 'navy',
+  web: 'wash',
+  iot: 'night',
+  team: 'white',
 }
 
 function Visual({ id, approve }: { id: string; approve: string }) {
@@ -62,7 +62,7 @@ function Visual({ id, approve }: { id: string; approve: string }) {
               <span className="mv-check" />
             </div>
             <svg className="mv-cursor" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M5 3l14 8-6.2 1.6L9.6 19 5 3Z" fill="#fff" stroke="#10201a" strokeWidth="1.6" strokeLinejoin="round" />
+              <path d="M5 3l14 8-6.2 1.6L9.6 19 5 3Z" fill="#fff" stroke="#131517" strokeWidth="1.6" strokeLinejoin="round" />
             </svg>
           </div>
         </InView>

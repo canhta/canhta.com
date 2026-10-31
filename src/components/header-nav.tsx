@@ -34,7 +34,7 @@ export function HeaderNav({
       locale={code}
       aria-current={locale === code ? 'page' : undefined}
       className={`grid h-11 min-w-11 place-items-center rounded-full text-[13px] font-bold transition-colors ${
-        locale === code ? 'bg-brand-tint text-brand-dark' : 'text-muted hover:bg-tint hover:text-ink'
+        locale === code ? 'bg-night text-white' : 'text-muted hover:bg-wash hover:text-ink'
       }`}
     >
       {code.toUpperCase()}
@@ -77,7 +77,7 @@ export function HeaderNav({
 
         <button
           type="button"
-          className="grid h-11 w-11 shrink-0 place-items-center rounded-full hover:bg-tint md:hidden"
+          className="grid h-11 w-11 shrink-0 place-items-center rounded-full hover:bg-wash md:hidden"
           aria-expanded={open}
           aria-controls="menu-panel"
           aria-label={open ? labels.closeMenu : labels.menu}
