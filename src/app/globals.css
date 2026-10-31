@@ -535,7 +535,13 @@ article[id] {
   position: relative;
   z-index: 1;
   /* The next band overlaps by --sheet-r; keep the picture clear of it. */
-  height: clamp(340px, 98vw, 560px);
+  height: clamp(380px, 86vw, 660px);
+}
+/* .hero-scene (below) says height: 100%, which would win over the line above
+   and leave the stage as short as its min-height. The composition is almost as
+   tall as it is wide, so on a tablet it needs the height to fill the width. */
+.hero-scene.hero-stage {
+  height: clamp(380px, 86vw, 660px);
 }
 
 @media (min-width: 1024px) {
