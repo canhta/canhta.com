@@ -8,8 +8,10 @@ import { getMessages } from '@/i18n/messages'
  * decides how its own screens are dressed and this component never knows which
  * product it is in.
  *
- * The screenshots are 640x1391 (Scori) and 1320x2868 (Remoti), the same aspect
- * to within a pixel, so one intrinsic size serves both.
+ * Both products' screenshots are 640x1391 (Remoti was re-encoded down from
+ * 1320x2868): 2.7x the widest slot, so they stay sharp on a 3x phone. The
+ * 660x1434 attributes below only set the aspect ratio (no layout shift); the
+ * optimizer serves whichever width `sizes` asks for.
  */
 export function PhoneShot({
   slug,
@@ -35,6 +37,7 @@ export function PhoneShot({
         width={660}
         height={1434}
         sizes={sizes}
+        quality={82}
         priority={priority}
         className="block h-auto w-full"
       />

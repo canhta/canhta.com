@@ -12,10 +12,8 @@ export const alt = 'Canh Ta'
  * The shared-link card, set in the same two voices as the page: Newsreader
  * argues, Be Vietnam Pro labels.
  *
- * The portrait is deliberately not in it. It is an illustration rather than a
- * photograph, and at 1200x630 the lettering on the shirt is legible — a card is
- * the one place an asset gets blown up in front of strangers, so this uses type
- * and a rule instead.
+ * No photo and no people: AGENTS.md keeps both off the site, so the card is type
+ * and a rule only, in the site palette.
  *
  * Fonts are read from disk, not fetched. Building an image that requires a live
  * request to fonts.gstatic.com means a network blip becomes a failed deploy —
@@ -35,7 +33,7 @@ export default async function Image({ params }: { params: Promise<{ locale: stri
   const { locale } = await params
   const l: Locale = locale === 'vi' ? 'vi' : 'en'
   const { profile } = getSiteContent(l)
-    const [display, sans] = await Promise.all([
+  const [display, sans] = await Promise.all([
     font('BeVietnamPro-ExtraBold.ttf'),
     font('BeVietnamPro-Medium.ttf'),
   ])
@@ -100,9 +98,6 @@ export default async function Image({ params }: { params: Promise<{ locale: stri
               color: MUTED,
             }}
           >
-            <div
-              style={{ display: 'flex', width: 16, height: 16, borderRadius: 8, background: ACCENT }}
-            />
             <span style={{ color: INK }}>{profile.availabilityLabel}</span>
             <span style={{ marginLeft: 'auto' }}>canhta.com</span>
           </div>

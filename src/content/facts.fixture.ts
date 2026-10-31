@@ -14,7 +14,6 @@ import type {
 export const profileFacts: ProfileFacts & FixtureMarked = {
   __fixture: true,
   name: 'Canh Ta',
-  avatar: '/avatar.jpg',
   available: true,
 }
 
@@ -34,7 +33,7 @@ export const buildFacts: BuildFacts[] = [
     appCategory: 'UtilitiesApplication',
     status: 'building',
     os: 'iOS, Android',
-    logo: '/products/scori/icon.png',
+    logo: '/products/scori/icon.webp',
     shots: ['score', 'invite'],
     links: [{ kind: 'web', url: 'https://scori.canhta.com' }],
   },

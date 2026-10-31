@@ -125,7 +125,9 @@
   "products": {
     "alts": {
       "score": "Màn hình ghi điểm của Scori với bốn người chơi và điểm số lớn",
-      "remote-classic": "Màn hình điều khiển của Remoti với phím điều hướng, âm lượng và phát hoặc dừng"
+      "invite": "Màn hình mời bạn chơi của Scori với mã QR, nút sao chép đường dẫn và nút chia sẻ đường dẫn",
+      "remote-classic": "Màn hình điều khiển của Remoti với phím điều hướng, âm lượng và phát hoặc dừng",
+      "present": "Màn hình trình chiếu của Remoti với trang hiện tại, trang kế tiếp và nút trang trước, trang sau"
     }
   },
   "buildMeta": {
