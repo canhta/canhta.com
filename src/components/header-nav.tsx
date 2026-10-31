@@ -19,6 +19,7 @@ export function HeaderNav({
   locale,
   name,
   cta,
+  ctaShort,
   home,
   phone,
   pages,
@@ -28,6 +29,7 @@ export function HeaderNav({
   locale: 'en' | 'vi'
   name: string
   cta: string
+  ctaShort: string
   home: string
   phone: { href: string }
   pages: Page[]
@@ -79,8 +81,11 @@ export function HeaderNav({
           <LangSwitch locale={locale} label={labels.language} pages={pages} />
         </div>
 
-        <a href={phone.href} className="pill-cta min-[360px]:ml-1">
-          {cta}
+        <a href={phone.href} className="pill-cta min-[360px]:ml-1" aria-label={cta}>
+          <span className="max-[479px]:hidden">{cta}</span>
+          <span className="hidden max-[479px]:inline" aria-hidden="true">
+            {ctaShort}
+          </span>
         </a>
 
         <button

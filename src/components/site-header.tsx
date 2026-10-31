@@ -31,6 +31,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
           locale={locale}
           name={profile.name}
           cta={profile.headerCta}
+          ctaShort={getMessages(locale).contact.callShort}
           home={href('/')}
           phone={phoneContact(locale)}
           pages={pages}

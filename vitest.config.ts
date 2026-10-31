@@ -18,8 +18,7 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: ['./tests/setup.ts'],
-    // Unit tests own `tests/unit`. `tests/e2e` is Playwright's and must never be
-    // collected here — Playwright's `test`/`expect` are not Vitest's.
+    // Unit tests live in `tests/unit`.
     include: ['tests/unit/**/*.test.{ts,tsx}'],
     env: {
       // `src/content/index.ts` refuses to load fixture content without this.

@@ -3,8 +3,6 @@ node_modules/
 .env*
 !.env.example
 .vercel/
-test-results/
-playwright-report/
 .DS_Store
 .playwright-mcp/
 /docs/
@@ -25,8 +23,6 @@ hero-*.png
 
 # Build artefact
 tsconfig.tsbuildinfo
-test-results/
-playwright-report/
 
 # Local agent state and worktrees
 .claude/
