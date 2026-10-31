@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { Logo } from './logo'
 import { Link, usePathname } from '@/i18n/navigation'
 import type { AppPathname } from '@/i18n/routing'
 import { LangSwitch } from './lang-switch'
@@ -40,11 +41,12 @@ export function HeaderNav({
       <div className="pill">
         <Link
           href="/"
-          className="grid min-h-11 shrink-0 place-items-center pr-1 text-[16px] font-bold tracking-tight min-[360px]:pr-2"
+          className="flex min-h-11 shrink-0 items-center gap-2 pr-1 text-[16px] font-bold tracking-tight min-[360px]:pr-2"
           translate="no"
           onClick={() => setOpen(false)}
         >
-          {name}
+          <Logo size={30} />
+          <span className="max-[359px]:sr-only">{name}</span>
         </Link>
 
         <nav aria-label={labels.primary} className="ml-auto hidden items-center gap-1 md:flex">

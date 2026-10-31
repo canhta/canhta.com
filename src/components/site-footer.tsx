@@ -1,4 +1,5 @@
 import { Link } from '@/i18n/navigation'
+import { Logo } from './logo'
 import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
@@ -125,8 +126,11 @@ export function SiteFooter({ locale }: { locale: Locale }) {
         </div>
 
         <div className="mt-10 flex items-center justify-between gap-4">
-          <p className="text-[14px] text-dim">
-            © {year} <span translate="no">{profile.name}</span>
+          <p className="flex items-center gap-3 text-[14px] text-dim">
+            <Logo size={32} />
+            <span>
+              © {year} <span translate="no">{profile.name}</span>
+            </span>
           </p>
           <LangSwitch locale={locale} label={messages.nav.language} tone="night" />
         </div>
