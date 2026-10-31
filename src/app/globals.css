@@ -506,6 +506,16 @@ article[id] {
     background-color var(--duration-feedback) var(--ease-out-soft),
     transform var(--duration-feedback) var(--ease-out-soft);
 }
+@media (max-width: 359px) {
+  .pill {
+    padding-left: 14px;
+    padding-right: 6px;
+  }
+  /* No room for the button at this width: Contact is the last link in the menu. */
+  .pill-cta {
+    display: none;
+  }
+}
 .pill-cta:hover {
   background: var(--color-brand-dark);
 }

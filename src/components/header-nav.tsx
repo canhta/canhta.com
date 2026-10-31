@@ -33,7 +33,7 @@ export function HeaderNav({
       href={pathname}
       locale={code}
       aria-current={locale === code ? 'page' : undefined}
-      className={`grid h-11 min-w-11 place-items-center rounded-full text-[13px] font-bold transition-colors ${
+      className={`grid h-11 min-w-10 place-items-center rounded-full text-[13px] min-[360px]:min-w-11 font-bold transition-colors ${
         locale === code ? 'bg-brand-tint text-brand-dark' : 'text-muted hover:bg-tint hover:text-ink'
       }`}
     >
@@ -46,7 +46,7 @@ export function HeaderNav({
       <div className="pill">
         <Link
           href="/"
-          className="grid min-h-11 min-w-0 shrink place-items-center truncate pr-2 text-[17px] font-extrabold tracking-tight"
+          className="grid min-h-11 shrink-0 place-items-center pr-1 text-[16px] font-extrabold tracking-tight min-[360px]:pr-2 min-[360px]:text-[17px]"
           translate="no"
           onClick={() => setOpen(false)}
         >
@@ -71,7 +71,7 @@ export function HeaderNav({
           {lang('vi')}
         </div>
 
-        <Link href="/contact" className="pill-cta ml-1">
+        <Link href="/contact" className="pill-cta min-[360px]:ml-1">
           {cta}
         </Link>
 
