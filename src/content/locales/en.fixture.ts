@@ -50,14 +50,14 @@ export const enContent: ContentCopy = {
       name: 'AI agents and chatbots',
       detail:
         'A customer asks about price or stock in chat, and AI drafts the answer from your own price list. It also reads supplier invoices into the record and flags a total that does not add up.',
-      examples: ['AI agents', 'Customer chatbots', 'Answers from your own documents'],
+      examples: ['AI agents', 'customer chatbots', 'answers from your own documents'],
     },
     {
       id: 'data',
       name: 'Reports and dashboards',
       detail:
         'Sales, stock and customer figures from your spreadsheets and apps, in one report that refreshes by itself. On Monday morning you see where you stand without asking anyone.',
-      examples: ['Dashboards', 'Tidying messy spreadsheets'],
+      examples: ['Dashboards', 'tidying messy spreadsheets'],
     },
     {
       id: 'web',

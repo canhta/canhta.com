@@ -924,6 +924,11 @@ article[id] {
     transform 260ms var(--ease-out-soft),
     box-shadow 260ms var(--ease-out-soft);
 }
+a.cell-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
 a.cell-link::after {
   content: '';
   position: absolute;

@@ -50,14 +50,14 @@ export const viContent: ContentCopy = {
       name: 'AI agent và chatbot',
       detail:
         'Khách hỏi giá hay còn hàng không trên tin nhắn, AI soạn sẵn câu trả lời từ bảng giá của bạn. Hóa đơn nhà cung cấp thì AI đọc vào hệ thống và báo khi tổng tiền không khớp.',
-      examples: ['AI agent', 'Chatbot trả lời khách', 'Trả lời từ tài liệu của bạn'],
+      examples: ['AI agent', 'chatbot trả lời khách', 'trả lời từ tài liệu của bạn'],
     },
     {
       id: 'data',
       name: 'Số liệu và báo cáo',
       detail:
         'Số liệu bán hàng, kho và khách từ Excel và các app, gom thành một báo cáo tự cập nhật. Sáng thứ Hai bạn xem được tình hình mà không phải hỏi ai.',
-      examples: ['Bảng số liệu', 'Dọn file Excel lộn xộn'],
+      examples: ['Bảng số liệu', 'dọn file Excel lộn xộn'],
     },
     {
       id: 'web',

@@ -53,6 +53,7 @@ const hashedAsset = 'public, max-age=31536000, immutable'
 export default withNextIntl({
   reactStrictMode: true,
   redirects: async () => redirects,
+  experimental: { globalNotFound: true },
   images: {
     // Served by Next's own optimizer (Vercel runs it; there is no static export).
     // AVIF first, WebP for browsers without it. Widths are trimmed to what this

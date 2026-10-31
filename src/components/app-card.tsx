@@ -67,7 +67,7 @@ export function AppCard({
         <p className="mt-5 text-[14px] leading-snug">
           <span className="cell-muted">{build.availability}</span>
         </p>
-        <ul className="mt-5 flex flex-wrap gap-2">
+        <ul data-no-bar className="mt-5 flex flex-wrap gap-2">
           {build.links.map((link) => (
             <li key={link.kind}>
               <BuildLinkButton link={link} locale={locale} />
