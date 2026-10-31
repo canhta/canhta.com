@@ -5,6 +5,7 @@
   },
   "nav": {
     "primary": "Main",
+    "breadcrumb": "Breadcrumb",
     "language": "Language",
     "services": "Services",
     "contact": "Contact",
@@ -118,6 +119,13 @@
     "heading": "Got a problem to solve?",
     "body": "We listen first, then find the solution with you.",
     "cta": "Share your problem"
+  },
+  "llms": {
+    "limitsHeading": "What we do not state",
+    "limits": [
+      "We publish no prices. You get a quote after you have seen a small working version.",
+      "We name no clients and show no ratings, reviews or download counts."
+    ]
   },
   "footer": {
     "explore": "Pages",

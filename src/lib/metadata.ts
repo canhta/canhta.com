@@ -21,6 +21,17 @@ export function pageUrl(locale: Locale, page: PageKey): string {
   return `${SITE}${path === '/' ? '' : path}` || SITE
 }
 
+/** The share card of one page in one language, a 1200 by 630 PNG. */
+export function ogImageUrl(locale: Locale, page: PageKey): string {
+  return `${SITE}${locale === routing.defaultLocale ? '' : `/${locale}`}/opengraph-image/${page}`
+}
+
+/** `/index.md` and `/vi/index.md` for the two home pages, otherwise the page URL plus `.md`. */
+export function markdownUrl(locale: Locale, page: PageKey): string {
+  const html = pageUrl(locale, page)
+  return page === 'home' ? `${html}/index.md` : `${html}.md`
+}
+
 /**
  * Title, description, canonical and reciprocal hreflang for one page. Every
  * page lists every locale (itself included) plus an x-default, because a
@@ -31,7 +42,7 @@ export function pageMetadata(locale: Locale, page: PageKey): Metadata {
   const url = pageUrl(locale, page)
   // One share card per page and language, at `[locale]/opengraph-image/<page>`; an
   // explicit openGraph object replaces the file convention, so it is listed here.
-  const image = `${SITE}${locale === routing.defaultLocale ? '' : `/${locale}`}/opengraph-image/${page}`
+  const image = ogImageUrl(locale, page)
   const languages = {
     ...Object.fromEntries(routing.locales.map((l) => [l, pageUrl(l, page)])),
     'x-default': pageUrl(routing.defaultLocale, page),
@@ -40,7 +51,15 @@ export function pageMetadata(locale: Locale, page: PageKey): Metadata {
   return {
     title: copy.title,
     description: copy.description,
-    alternates: { canonical: url, languages },
+    alternates: { canonical: url, languages, types: { 'text/markdown': markdownUrl(locale, page) } },
+    // Said out loud, not left to defaults: index the page, follow its links, and allow a large
+    // preview image and an unlimited snippet. Remove `max-snippet` to limit what AI Overviews and
+    // other result pages may quote (Google: nosnippet, max-snippet, data-nosnippet).
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: { index: true, follow: true, 'max-snippet': -1, 'max-image-preview': 'large', 'max-video-preview': -1 },
+    },
     openGraph: {
       type: 'website',
       url,

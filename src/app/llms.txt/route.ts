@@ -1,95 +1,83 @@
 import { getSiteContent } from '@/content'
+import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
-import { PAGE_PATH, pageUrl } from '@/lib/metadata'
+import { firstSentence } from '@/lib/first-sentence'
+import { MARKDOWN_PAGES } from '@/lib/markdown'
+import { markdownUrl, pageUrl } from '@/lib/metadata'
+import { SITE } from '@/lib/site'
 
 /**
- * /llms.txt — the emerging convention (llmstxt.org) for handing a language model
- * a clean, structured summary instead of making it parse a marketing page.
+ * /llms.txt: the llmstxt.org format (an H1, a blockquote, then H2 lists of links),
+ * a short map of the site for a language model. The full text of every page is at
+ * /llms-full.txt and each page has a Markdown copy; this file only points to them.
  *
- * Generated from `src/content` rather than hand-written, because a hand-written
- * one goes stale the first time a product ships and nobody remembers this file
- * exists.
- *
- * It served a stub while the content was placeholder. That came out with the
- * robots.txt block, for consistency: a site that is open to crawlers has no
- * reason to withhold the one file that tells them what it is.
+ * Generated from `src/content` and the message catalogs, so it states exactly
+ * what the pages state and goes stale only when they do. Google Search ignores
+ * this file (its AI optimization guide says so); other assistants may read it.
  */
 export const dynamic = 'force-static'
 
-const PAGE_KEYS = Object.keys(PAGE_PATH) as (keyof typeof PAGE_PATH)[]
+const sentence = (x: string) => (/[.!?]$/.test(x.trim()) ? x.trim() : `${x.trim()}.`)
 
-/** The four pages of one language, named in that language. */
-const pages = (locale: 'en' | 'vi') =>
-  PAGE_KEYS.map((key) => `- [${getMessages(locale).nav[key]}](${pageUrl(locale, key)})`)
+const pageList = (locale: Locale) =>
+  MARKDOWN_PAGES.map((key) => {
+    const messages = getMessages(locale)
+    return `- [${messages.nav[key]}](${pageUrl(locale, key)}): ${messages.metadata[key].description}`
+  })
 
 export function GET() {
-  const l = 'en' as const
-  const { builds, faq, offers, profile, social } = getSiteContent(l)
-  const messages = getMessages(l)
-  const email = social.find((s) => s.network === 'email')?.url.replace('mailto:', '')
-  // Email, Zalo and WhatsApp stay together and come first; profiles follow.
-  const chat = ['phone', 'zalo', 'whatsapp']
-  const links = [
-    ...chat.flatMap((n) => social.filter((s) => s.network === n)),
-    ...social.filter((s) => s.network !== 'email' && !chat.includes(s.network)),
-  ]
+  const en = getSiteContent('en')
+  const { profile, offers, builds, social } = en
+  const messages = getMessages('en')
+  const url = (n: string) => social.find((s) => s.network === n)?.url
+  const email = url('email')?.replace('mailto:', '')
+  const phone = url('phone')?.replace('tel:', '')
 
-  /**
-   * `null` means "omit this line"; `''` means "a real blank line". They used to
-   * both be `''` and a single filter removed both, which stripped every blank
-   * line in the file — markdown needs them, so the whole document collapsed into
-   * one paragraph with no headings separated from their content.
-   */
-  const NETWORK: Record<string, string> = { github: 'GitHub', x: 'X', linkedin: 'LinkedIn', phone: 'Phone', zalo: 'Zalo', whatsapp: 'WhatsApp' }
-
-  /** A tagline with no terminal punctuation runs straight into the next sentence. */
-  const sentence = (x: string) => (/[.!?]$/.test(x.trim()) ? x.trim() : `${x.trim()}.`)
-
-  const lines: (string | null)[] = [
+  const lines: string[] = [
     `# ${profile.name}`,
     '',
     `> ${profile.supporting}`,
     '',
-    `Based in ${profile.location}. Works in English and Vietnamese.`,
-    profile.available ? `Currently ${profile.availabilityLabel.toLowerCase()}.` : null,
+    `Based in ${profile.location}. Works in English and Vietnamese. ${profile.available ? `${profile.availabilityLabel}. ` : ''}${messages.contact.body}`,
     '',
-    '## Pages',
+    '## English pages',
     '',
-    ...pages('en'),
+    ...pageList('en'),
     '',
-    '## Tiếng Việt',
+    '## Trang tiếng Việt',
     '',
-    ...pages('vi'),
+    ...pageList('vi'),
     '',
     `## ${messages.metadata.offerCatalog}`,
     '',
-    ...offers.map((o) => `- **${o.name}**: ${sentence(o.detail)}`),
+    ...offers.map((o) => `- [${o.name}](${pageUrl('en', 'services')}#${o.id}): ${firstSentence(o.detail)}`),
     '',
-    `## ${messages.services.processHeading}`,
-    '',
-    ...messages.process.steps.map((s, i) => `${i + 1}. ${s.label}. ${s.detail}`),
-    '',
-    '## Some of our products and public projects',
+    '## Some of our products',
     '',
     ...builds.map((b) => {
-      const url = b.links[0]?.url
-      const head = url ? `- [${b.name}](${url})` : `- ${b.name}`
-      return `${head}: ${sentence(b.tagline)} ${sentence(b.summary)} ${sentence(b.availability)}`
+      const link = b.links[0]?.url
+      return `- ${link ? `[${b.name}](${link})` : b.name}: ${sentence(b.tagline)} ${sentence(b.availability)}`
     }),
     '',
-    '## Questions people ask first',
-    '',
-    ...faq.flatMap((f) => [`### ${f.question}`, '', f.answer, '']),
     '## Contact',
     '',
-    messages.contact.body,
+    ...(email ? [`- Email: ${email}`] : []),
+    ...(phone ? [`- Phone: ${phone}`] : []),
+    ...(url('zalo') ? [`- Zalo: ${url('zalo')}`] : []),
+    ...(url('whatsapp') ? [`- WhatsApp: ${url('whatsapp')}`] : []),
     '',
-    email ? `- Email: ${email}` : null,
-    ...links.map((s) => `- ${NETWORK[s.network] ?? s.network}: ${s.network === 'phone' ? s.url.replace('tel:', '') : s.url}`),
+    `## ${messages.llms.limitsHeading}`,
+    '',
+    ...messages.llms.limits.map((l) => `- ${l}`),
+    '',
+    '## Optional',
+    '',
+    `- [Full text of every page, English then Vietnamese](${SITE}/llms-full.txt)`,
+    ...(['en', 'vi'] as const).flatMap((l) =>
+      MARKDOWN_PAGES.map((key) => `- [${getMessages(l).nav[key]} as Markdown (${l})](${markdownUrl(l, key)})`),
+    ),
     '',
   ]
 
-  return new Response(lines.filter((x) => x !== null).join('\n') + '\n', {
-    headers: { 'content-type': 'text/plain; charset=utf-8' },
-  })
+  return new Response(lines.join('\n'), { headers: { 'content-type': 'text/plain; charset=utf-8' } })
 }

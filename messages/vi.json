@@ -5,6 +5,7 @@
   },
   "nav": {
     "primary": "Menu chính",
+    "breadcrumb": "Đường dẫn trang",
     "language": "Ngôn ngữ",
     "services": "Dịch vụ",
     "contact": "Liên hệ",
@@ -118,6 +119,13 @@
     "heading": "Có vấn đề cần giải quyết?",
     "body": "Chúng tôi nghe trước, rồi cùng bạn tìm giải pháp.",
     "cta": "Kể vấn đề của bạn"
+  },
+  "llms": {
+    "limitsHeading": "Những điều chúng tôi không nêu",
+    "limits": [
+      "Chúng tôi không đăng giá. Bạn nhận báo giá sau khi đã thấy bản chạy thử nhỏ.",
+      "Chúng tôi không nêu tên khách hàng và không đăng đánh giá, nhận xét hay lượt tải."
+    ]
   },
   "footer": {
     "explore": "Các trang",
