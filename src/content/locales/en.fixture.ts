@@ -42,36 +42,36 @@ export const enContent: ContentCopy = {
       id: 'systems',
       name: 'Business systems',
       detail:
-        "One record for each order, customer, stock item and debt, so nobody retypes. Enter an order once and stock drops and the customer's balance updates.",
-      examples: ['ERP', 'CRM', 'orders and stock', 'who owes what'],
+        "Enter an order once and stock drops and the customer's balance updates. A customer's past orders and what they owe sit on one screen for whoever picks up the phone.",
+      examples: ['ERP', 'CRM'],
     },
     {
       id: 'ai',
       name: 'AI agents and chatbots',
       detail:
-        'AI reads an incoming order message or invoice, fills in the record and drafts the reply. A person approves anything that costs money or changes a record, and every step is logged.',
-      examples: ['Customer chatbots', 'reading orders and invoices', 'weekly reports'],
+        'A customer asks about price or stock in chat, and AI drafts the answer from your own price list. It also reads supplier invoices into the record and flags a total that does not add up.',
+      examples: ['AI agents', 'Customer chatbots', 'Answers from your own documents'],
     },
     {
       id: 'data',
       name: 'Reports and dashboards',
       detail:
         'Sales, stock and customer figures from your spreadsheets and apps, in one report that refreshes by itself. On Monday morning you see where you stand without asking anyone.',
-      examples: ['Dashboards', 'weekly reports', 'tidying messy spreadsheets'],
+      examples: ['Dashboards', 'Tidying messy spreadsheets'],
     },
     {
       id: 'web',
       name: 'Websites and apps',
       detail:
         'A website where customers order or book, and the order lands straight in your system. Also web and phone apps for your own idea.',
-      examples: ['Websites', 'web apps', 'iPhone and Android apps'],
+      examples: [],
     },
     {
       id: 'iot',
       name: 'Connected devices (IoT)',
       detail:
         'Off-the-shelf sensors send temperature and humidity to one screen, and you get an alert when a reading passes your limit. Everyday readings, not certified.',
-      examples: ['Temperature and humidity', 'dashboard', 'alerts'],
+      examples: [],
     },
     {
       id: 'team',
@@ -86,29 +86,30 @@ export const enContent: ContentCopy = {
       id: 'pricing',
       question: 'How do you price work?',
       answer:
-        'You get a plan and a quote before we build anything. The small working version is priced first, and we agree the next part only when it works.',
+        'A quote comes with the plan, before we build. After the small working version, you decide whether to pay for the next part.',
     },
     {
       id: 'timeline',
       question: 'How long will it take?',
-      answer: 'The plan says how long the small working version takes. Each next part gets its own estimate before we start it.',
+      answer: 'The plan says how long it takes, part by part.',
     },
     {
-      id: 'existing',
-      question: 'Do we really need custom software?',
-      answer: 'Often not. If ready-made software does the job we will say so, and build only what it cannot do.',
+      id: 'apps',
+      question: 'Can you connect the apps I already use?',
+      answer:
+        'Often yes, such as Excel files, Zalo and sales software. The plan says which links work and which do not.',
     },
     {
       id: 'agent',
       question: 'Do I need an AI agent, or is a chatbot enough?',
       answer:
-        'A chatbot answers questions from your price list. An agent also reads an order, checks stock and drafts the reply, and often a chatbot is enough.',
+        'A chatbot answers questions from your price list. An agent also acts in your system, such as creating an order record or updating stock, and often a chatbot is enough.',
     },
     {
       id: 'wrong',
       question: 'AI can be wrong. Who checks?',
       answer:
-        'A named person, agreed at the start, approves anything that costs money or changes an order or record. The agent flags what looks off, such as an invoice total that does not add up, and logs every step.',
+        'A named person, agreed at the start, approves anything that costs money or changes an order or record. Every step the agent takes is logged.',
     },
     {
       id: 'customers',
@@ -118,7 +119,7 @@ export const enContent: ContentCopy = {
     },
     {
       id: 'data',
-      question: 'What happens to my customers\' information when AI is used?',
+      question: "What happens to my customers' information when AI is used?",
       answer:
         'We collect only what the project needs, and agree up front which AI service receives what and who owns it. We cannot give legal advice.',
     },
@@ -130,7 +131,8 @@ export const enContent: ContentCopy = {
     {
       id: 'idea',
       question: 'What if I only have an idea?',
-      answer: 'That is fine. Tell us what it is and who it is for, and we start with the smallest useful version.',
+      answer:
+        'That is fine. Tell us what it is and who will use it, and we work out what the first version needs.',
     },
   ],
 }

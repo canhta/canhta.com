@@ -53,7 +53,7 @@
   },
   "services": {
     "h1": "Chuyển đổi số, phần mềm và AI cho doanh nghiệp nhỏ",
-    "intro": "Mỗi đơn hàng, mỗi khách, mỗi khoản nợ chỉ ghi ở một chỗ, và các app bạn đang dùng nối vào đó. Rồi AI làm các bước lặp lại, có người duyệt.",
+    "intro": "Phần mềm trước, AI agent sau. AI chỉ làm tốt khi thông tin trong hệ thống đã gọn và đúng, nên chúng tôi triển khai theo thứ tự này.",
     "processHeading": "Cách chúng tôi triển khai",
     "faqHeading": "Câu hỏi thường gặp"
   },
@@ -64,7 +64,7 @@
   },
   "contact": {
     "h1": "Kể cho chúng tôi cách bạn làm việc",
-    "body": "Chúng tôi trả lời trong một ngày làm việc, và bạn có kế hoạch cùng báo giá trước khi triển khai.",
+    "body": "Chúng tôi trả lời trong một ngày làm việc.",
     "helpHeading": "Nếu tiện, cho biết thêm",
     "help": [
       "Ai sẽ dùng",
@@ -84,17 +84,17 @@
     "steps": [
       {
         "id": "problem",
-        "label": "Kể việc tốn nhiều thời gian nhất",
-        "detail": "Việc nào, ai làm, hiện bạn dùng gì."
+        "label": "Bạn chọn việc đầu tiên",
+        "detail": "Việc tốn nhiều thời gian hoặc tiền nhất."
       },
       {
         "id": "map",
-        "label": "Theo một đơn từ tin nhắn đến lúc thu tiền",
-        "detail": "Từng bước, ai làm, và chỗ nào phải gõ lại."
+        "label": "Theo một đơn từ đầu đến cuối",
+        "detail": "Từ tin nhắn đến lúc thu tiền: ai làm, chỗ nào gõ lại."
       },
       {
         "id": "plan",
-        "label": "Bạn nhận một kế hoạch và một báo giá",
+        "label": "Bạn nhận kế hoạch và báo giá",
         "detail": "Dùng sẵn gì, triển khai thêm gì, theo thứ tự nào. Chốt trước."
       },
       {
@@ -110,7 +110,7 @@
   },
   "closing": {
     "heading": "Việc nào chiếm nhiều thời gian nhất?",
-    "body": "Vài dòng là đủ, chúng tôi trả lời trong một ngày làm việc.",
+    "body": "Vài dòng là đủ.",
     "cta": "Nhắn chúng tôi"
   },
   "footer": {

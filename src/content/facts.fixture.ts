@@ -90,7 +90,7 @@ export const offerFacts: (OfferFacts & FixtureMarked)[] = [
 export const faqFacts: (FaqFacts & FixtureMarked)[] = [
   { id: 'pricing', order: 1 },
   { id: 'timeline', order: 2 },
-  { id: 'existing', order: 3 },
+  { id: 'apps', order: 3 },
   { id: 'agent', order: 4 },
   { id: 'wrong', order: 5 },
   { id: 'customers', order: 6 },
