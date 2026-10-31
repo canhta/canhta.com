@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Be_Vietnam_Pro } from 'next/font/google'
+import localFont from 'next/font/local'
 import { notFound } from 'next/navigation'
 import { hasLocale } from 'next-intl'
 import { setRequestLocale } from 'next-intl/server'
@@ -12,11 +12,52 @@ import '../globals.css'
 // stacked marks (ệ, ộ) are designed in rather than patched, and a Vietnamese
 // reader sees a face they already know. Three weights only: every declared
 // weight is two more font files (latin + vietnamese). 800 is the display weight.
-const bvp = Be_Vietnam_Pro({
-  subsets: ['latin', 'vietnamese'],
-  weight: ['400', '700', '800'],
+//
+// The files are the two subsets Google serves for this family, kept in the repo
+// instead of fetched by next/font/google. That is on purpose. Google also serves a
+// third "latin-ext" subset whose range overlaps the Vietnamese one (đ ơ ư ă), and
+// where ranges overlap the browser uses the one declared last. So a Vietnamese
+// page fetched three more files after first paint, just for those letters, and
+// showed them in the fallback font until they arrived. Declared by hand, each
+// letter has exactly one file, and both subsets are preloaded.
+//
+// Two families, chained in `--font-sans`: a letter outside one family's
+// unicode-range falls through to the next. `Be Vietnam Pro Fallback` (globals.css)
+// is the size-adjusted system font shown until the files arrive. (next/font needs
+// literal values here, so the file list is written out.)
+const bvp = localFont({
+  src: [
+    { path: '../../assets/fonts/bvp-latin-400.woff2', weight: '400', style: 'normal' },
+    { path: '../../assets/fonts/bvp-latin-700.woff2', weight: '700', style: 'normal' },
+    { path: '../../assets/fonts/bvp-latin-800.woff2', weight: '800', style: 'normal' },
+  ],
   variable: '--font-bvp',
   display: 'swap',
+  adjustFontFallback: false,
+  declarations: [
+    {
+      prop: 'unicode-range',
+      value:
+        'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD',
+    },
+  ],
+})
+const bvpVietnamese = localFont({
+  src: [
+    { path: '../../assets/fonts/bvp-vietnamese-400.woff2', weight: '400', style: 'normal' },
+    { path: '../../assets/fonts/bvp-vietnamese-700.woff2', weight: '700', style: 'normal' },
+    { path: '../../assets/fonts/bvp-vietnamese-800.woff2', weight: '800', style: 'normal' },
+  ],
+  variable: '--font-bvp-vi',
+  display: 'swap',
+  adjustFontFallback: false,
+  declarations: [
+    {
+      prop: 'unicode-range',
+      value:
+        'U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB',
+    },
+  ],
 })
 
 /**
@@ -83,7 +124,7 @@ export default async function LocaleLayout({
   const messages = getMessages(locale)
 
   return (
-    <html lang={locale} className={bvp.variable}>
+    <html lang={locale} className={`${bvp.variable} ${bvpVietnamese.variable}`}>
       <body>
         <div aria-hidden="true" className="scroll-line" />
         <a href="#main" className="skip-link">
