@@ -3,10 +3,11 @@ import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
+import { getMessages } from '@/i18n/messages'
+import { OG_PAGES, type OgPage } from '@/lib/og'
 
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
-export const alt = 'Canh Ta'
 
 /**
  * The shared-link card, set in the same two voices as the page: Newsreader
@@ -31,11 +32,40 @@ async function font(file: string) {
   return readFile(join(process.cwd(), 'src/assets/fonts', file))
 }
 
-export default async function Image({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params
-  const l: Locale = locale === 'vi' ? 'vi' : 'en'
+/** One card per page, each with its own headline and its own alt text (the page title). */
+export async function generateImageMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const l = asLocale((await params).locale)
+  return OG_PAGES.map((page) => ({
+    id: page,
+    size,
+    contentType,
+    alt: getMessages(l).metadata[page].title,
+  }))
+}
+
+function asLocale(locale: string): Locale {
+  return locale === 'vi' ? 'vi' : 'en'
+}
+
+function headline(l: Locale, page: OgPage): string {
+  const messages = getMessages(l)
+  if (page === 'services') return messages.services.h1
+  if (page === 'products') return messages.apps.h1
+  if (page === 'contact') return messages.contact.h1
+  return getSiteContent(l).profile.hook
+}
+
+export default async function Image({
+  params,
+  id,
+}: {
+  params: Promise<{ locale: string }>
+  id: Promise<string | number>
+}) {
+  const l = asLocale((await params).locale)
+  const page = (OG_PAGES as readonly string[]).includes(String(await id)) ? (String(await id) as OgPage) : 'home'
   const { profile } = getSiteContent(l)
-    const [display, sans] = await Promise.all([
+  const [display, sans] = await Promise.all([
     font('BeVietnamPro-ExtraBold.ttf'),
     font('BeVietnamPro-Medium.ttf'),
   ])
@@ -85,7 +115,7 @@ export default async function Image({ params }: { params: Promise<{ locale: stri
             maxWidth: 980,
           }}
         >
-          {profile.hook}
+          {headline(l, page)}
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -94,15 +124,11 @@ export default async function Image({ params }: { params: Promise<{ locale: stri
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: 14,
               fontSize: 22,
               letterSpacing: '0.02em',
               color: MUTED,
             }}
           >
-            <div
-              style={{ display: 'flex', width: 16, height: 16, borderRadius: 8, background: ACCENT }}
-            />
             <span style={{ color: INK }}>{profile.availabilityLabel}</span>
             <span style={{ marginLeft: 'auto' }}>canhta.com</span>
           </div>

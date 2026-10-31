@@ -29,9 +29,9 @@ export function pageUrl(locale: Locale, page: PageKey): string {
 export function pageMetadata(locale: Locale, page: PageKey): Metadata {
   const copy = getMessages(locale).metadata[page]
   const url = pageUrl(locale, page)
-  // The share card is generated per language at `[locale]/opengraph-image`; an
+  // One share card per page and language, at `[locale]/opengraph-image/<page>`; an
   // explicit openGraph object replaces the file convention, so it is listed here.
-  const image = `${SITE}${locale === routing.defaultLocale ? '' : `/${locale}`}/opengraph-image`
+  const image = `${SITE}${locale === routing.defaultLocale ? '' : `/${locale}`}/opengraph-image/${page}`
   const languages = {
     ...Object.fromEntries(routing.locales.map((l) => [l, pageUrl(l, page)])),
     'x-default': pageUrl(routing.defaultLocale, page),
@@ -49,13 +49,13 @@ export function pageMetadata(locale: Locale, page: PageKey): Metadata {
       alternateLocale: locale === 'vi' ? 'en_US' : 'vi_VN',
       title: copy.title,
       description: copy.description,
-      images: [{ url: image, width: 1200, height: 630 }],
+      images: [{ url: image, width: 1200, height: 630, alt: copy.title }],
     },
     twitter: {
       card: 'summary_large_image',
       title: copy.title,
       description: copy.description,
-      images: [image],
+      images: [{ url: image, alt: copy.title }],
     },
   }
 }
