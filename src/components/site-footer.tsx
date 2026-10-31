@@ -81,9 +81,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
               <li>
                 <a href={phone.href} className="foot-row">
                   <PhoneTile size={36} tone="light" />
-                  <span className="foot-label">
-                    {messages.contact.call} <span translate="no">{phone.display}</span>
-                  </span>
+                  <span className="foot-label">{messages.contact.call}</span>
                 </a>
               </li>
               <li>
