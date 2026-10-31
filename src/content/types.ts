@@ -102,5 +102,5 @@ export interface SiteContent {
 }
 
 export interface FixtureMarked {
-  readonly __fixture: true
+  readonly __fixture?: true
 }

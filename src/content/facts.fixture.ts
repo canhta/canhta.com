@@ -12,7 +12,6 @@ import type {
  * written as a complete page instead of sentence-by-sentence translation.
  */
 export const profileFacts: ProfileFacts & FixtureMarked = {
-  __fixture: true,
   name: 'Canh Ta',
   avatar: '/avatar.jpg',
   available: true,
@@ -80,31 +79,31 @@ export const buildFacts: BuildFacts[] = [
 ]
 
 export const offerFacts: (OfferFacts & FixtureMarked)[] = [
-  { __fixture: true, id: 'systems', order: 1 },
-  { __fixture: true, id: 'ai', order: 2 },
-  { __fixture: true, id: 'data', order: 3 },
-  { __fixture: true, id: 'web', order: 4 },
-  { __fixture: true, id: 'iot', order: 5 },
-  { __fixture: true, id: 'team', order: 6 },
+  { id: 'systems', order: 1 },
+  { id: 'ai', order: 2 },
+  { id: 'data', order: 3 },
+  { id: 'web', order: 4 },
+  { id: 'iot', order: 5 },
+  { id: 'team', order: 6 },
 ]
 
 export const faqFacts: (FaqFacts & FixtureMarked)[] = [
-  { __fixture: true, id: 'pricing', order: 1 },
-  { __fixture: true, id: 'existing', order: 2 },
-  { __fixture: true, id: 'agent', order: 3 },
-  { __fixture: true, id: 'wrong', order: 4 },
-  { __fixture: true, id: 'customers', order: 5 },
-  { __fixture: true, id: 'data', order: 6 },
-  { __fixture: true, id: 'ownership', order: 7 },
-  { __fixture: true, id: 'idea', order: 8 },
+  { id: 'pricing', order: 1 },
+  { id: 'existing', order: 2 },
+  { id: 'agent', order: 3 },
+  { id: 'wrong', order: 4 },
+  { id: 'customers', order: 5 },
+  { id: 'data', order: 6 },
+  { id: 'ownership', order: 7 },
+  { id: 'idea', order: 8 },
 ]
 
 export const socialFacts: (SocialLink & FixtureMarked)[] = [
-  { __fixture: true, network: 'github', url: 'https://github.com/canhta' },
-  { __fixture: true, network: 'x', url: 'https://x.com/canh_builds' },
-  { __fixture: true, network: 'linkedin', url: 'https://www.linkedin.com/in/canhta' },
-  { __fixture: true, network: 'zalo', url: 'https://zalo.me/84825252599' },
+  { network: 'github', url: 'https://github.com/canhta' },
+  { network: 'x', url: 'https://x.com/canh_builds' },
+  { network: 'linkedin', url: 'https://www.linkedin.com/in/canhta' },
+  { network: 'zalo', url: 'https://zalo.me/84825252599' },
   // The WhatsApp number is the Zalo number: the only phone number in the repo. Owner to confirm.
-  { __fixture: true, network: 'whatsapp', url: 'https://wa.me/84825252599' },
-  { __fixture: true, network: 'email', url: 'mailto:hello@canhta.com' },
+  { network: 'whatsapp', url: 'https://wa.me/84825252599' },
+  { network: 'email', url: 'mailto:hello@canhta.com' },
 ]
