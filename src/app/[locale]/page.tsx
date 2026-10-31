@@ -27,8 +27,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
 
   return (
     <PageShell locale={locale} jsonLd={buildGraph(locale, 'home')}>
-      <Hero locale={locale} />
-      <Ticker words={home.scope} label={home.servicesHeading} pause={home.scopePause} />
+      <div className="first-screen">
+        <Hero locale={locale} />
+        <Ticker words={home.scope} label={home.servicesHeading} pause={home.scopePause} />
+      </div>
       <OfferCards locale={locale} />
       <AppsTeaser locale={locale} />
       <About locale={locale} />

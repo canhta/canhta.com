@@ -518,6 +518,23 @@ article[id] {
    Hero: night, the 3D scene as the main picture, bleeding to the edge.
    ========================================================================= */
 
+/* The first screen is the hero plus the ticker and nothing else: exactly one
+   viewport tall (svh, so a phone's address bar cannot cut it), never shorter
+   than a small laptop needs and never taller than a huge monitor wants. The
+   hero takes what the ticker leaves, so the strip ends on the fold, whole. If
+   the content is taller than that (a phone), the container simply grows. */
+.first-screen {
+  display: flex;
+  flex-direction: column;
+  min-height: clamp(36rem, 100svh, 68rem);
+}
+.first-screen > .hero {
+  flex: 1 0 auto;
+}
+.first-screen > .ticker {
+  flex: none;
+}
+
 .hero {
   position: relative;
   overflow-x: clip;
@@ -549,8 +566,7 @@ article[id] {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-height: min(calc(100svh - 72px), 60rem);
-    padding-bottom: calc(var(--sheet-r) + 24px);
+    padding-bottom: 24px;
   }
   .hero-text {
     padding-bottom: 0;
@@ -560,7 +576,7 @@ article[id] {
     z-index: 1;
     top: calc(var(--pill-top) + var(--pill-h));
     right: 0;
-    bottom: var(--sheet-r);
+    bottom: 0;
     width: 56%;
     margin: 0;
   }
@@ -573,6 +589,13 @@ article[id] {
 @media (min-width: 1024px) and (max-width: 1279px) {
   .hero-stage {
     width: 50%;
+  }
+}
+/* On a very wide window the text stays in its 1240px column while the picture
+   keeps growing; hold the picture to the space the text leaves. */
+@media (min-width: 1700px) {
+  .hero-stage {
+    width: calc(50vw - 40px);
   }
 }
 
@@ -1107,29 +1130,6 @@ a.cell-link::after {
     color var(--duration-feedback) var(--ease-out-soft),
     box-shadow var(--duration-feedback) var(--ease-out-soft);
 }
-.row-link small {
-  font-size: 0.9375rem;
-  font-weight: 500;
-  letter-spacing: 0;
-  color: var(--color-on-dark);
-  overflow-wrap: anywhere;
-  text-align: right;
-}
-.row-link:hover {
-  transform: translateY(-3px);
-  background: var(--color-raised);
-  box-shadow: var(--shadow-lift);
-}
-.row-link:active {
-  transform: translateY(1px) scale(0.985);
-  transition-duration: 60ms;
-}
-/* On a dark ground the rows are light, so they read as objects on the page. */
-.on-night .row-link {
-  background: #fff;
-}
-.on-night .row-link small {
-  color: var(--color-muted);
 /* A dark row gets a light envelope tile; the light and lime rows on a night
    band get the night one. */
 .row-link {
@@ -1149,14 +1149,14 @@ a.cell-link::after {
 .row-main > svg {
   flex: none;
 }
+.row-link small {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--color-on-dark);
+  overflow-wrap: anywhere;
+  text-align: right;
 }
-.on-night .row-link:hover {
-  background: var(--color-wash);
-}
-.on-night .row-link[data-primary='true'] {
-  background: var(--color-accent);
-}
-.on-night .row-link[data-primary='true'] small {
 /* On a phone the address would wrap inside a narrow row: stack it under the label. */
 @media (max-width: 519px) {
   .row-link:has(> small) {
@@ -1177,6 +1177,29 @@ a.cell-link::after {
     font-size: 0.875rem;
   }
 }
+.row-link:hover {
+  transform: translateY(-3px);
+  background: var(--color-raised);
+  box-shadow: var(--shadow-lift);
+}
+.row-link:active {
+  transform: translateY(1px) scale(0.985);
+  transition-duration: 60ms;
+}
+/* On a dark ground the rows are light, so they read as objects on the page. */
+.on-night .row-link {
+  background: #fff;
+}
+.on-night .row-link small {
+  color: var(--color-muted);
+}
+.on-night .row-link:hover {
+  background: var(--color-wash);
+}
+.on-night .row-link[data-primary='true'] {
+  background: var(--color-accent);
+}
+.on-night .row-link[data-primary='true'] small {
   color: var(--color-night);
 }
 .on-night .row-link[data-primary='true']:hover {
@@ -2457,6 +2480,9 @@ a.cell-link::after {
       background-color var(--duration-feedback) var(--ease-out-soft),
       transform var(--duration-feedback) var(--ease-out-soft);
   }
+  .contact-bar a > svg {
+    flex: none;
+  }
   .contact-bar a:hover {
     background: var(--color-raised);
   }
@@ -2480,32 +2506,6 @@ a.cell-link::after {
   }
 }
 
-  .contact-bar a > svg {
-    flex: none;
-  }
-/* --- Products head: the two app icons ----------------------------------- */
-
-.marks {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  max-width: 30rem;
-  margin-inline: auto;
-  padding-block: 1rem 2.5rem;
-}
-.mark {
-  display: grid;
-  place-items: center;
-  width: min(50%, 14rem);
-  aspect-ratio: 1;
-  border-radius: 24%;
-  background: var(--app-bg);
-  box-shadow: 0 36px 56px -26px rgb(0 0 0 / 0.75);
-}
-.mark img {
-  width: 58%;
-  height: auto;
-  border-radius: 22%;
 /* --- Footer rows: a logo tile and a visible label, one per channel ------- */
 
 .foot-row {
@@ -2547,6 +2547,29 @@ a.cell-link::after {
   color: #f7f7f8;
 }
 
+/* --- Products head: the two app icons ----------------------------------- */
+
+.marks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 30rem;
+  margin-inline: auto;
+  padding-block: 1rem 2.5rem;
+}
+.mark {
+  display: grid;
+  place-items: center;
+  width: min(50%, 14rem);
+  aspect-ratio: 1;
+  border-radius: 24%;
+  background: var(--app-bg);
+  box-shadow: 0 36px 56px -26px rgb(0 0 0 / 0.75);
+}
+.mark img {
+  width: 58%;
+  height: auto;
+  border-radius: 22%;
 }
 .mark:nth-child(1) {
   rotate: -6deg;
