@@ -17,7 +17,7 @@
     "primary": "Kể về công việc của bạn",
     "secondary": "Xem dịch vụ",
     "visual": {
-      "label": "Zalo, Excel và giấy tờ gom về một màn hình. AI làm các việc lặp lại, việc quan trọng có người duyệt.",
+      "label": "Zalo, Excel và giấy tờ gom về một màn hình. AI làm việc lặp lại, một người duyệt.",
       "sources": [
         "Zalo",
         "Excel",
@@ -48,28 +48,28 @@
       "AI agent"
     ],
     "scopePause": "Tạm dừng",
-    "questionsHeading": "Những câu hỏi hay gặp nhất",
-    "questionsMore": "Xem thêm câu hỏi"
+    "questionsHeading": "Trả lời nhanh",
+    "questionsMore": "Thêm câu hỏi"
   },
   "services": {
     "h1": "Chuyển đổi số, phần mềm và AI cho doanh nghiệp nhỏ",
-    "intro": "Việc đang làm tay, nằm rải rác trong Zalo và Excel, chúng tôi gom về một hệ thống, rồi để AI lo các bước lặp lại. Chúng tôi bắt đầu từ cách bạn đang làm và đi từng bước.",
+    "intro": "Việc nằm rải rác trong Zalo và Excel, chúng tôi gom về một hệ thống, rồi thêm AI cho các bước lặp lại.",
     "processHeading": "Cách chúng tôi làm một dự án",
     "faqHeading": "Câu hỏi thường gặp"
   },
   "apps": {
     "h1": "Một vài sản phẩm của chúng tôi",
-    "intro": "App, web và AI do chính chúng tôi làm. Scori và Remoti đang làm, chưa có trên App Store hay Google Play.",
+    "intro": "App, web và AI do chính chúng tôi làm.",
     "publicHeading": "Dự án khác"
   },
   "contact": {
     "h1": "Kể cho chúng tôi cách bạn đang làm việc",
-    "body": "Mô tả vài dòng hay một ý tưởng là đủ. Chúng tôi trả lời trong một ngày làm việc. Bạn có kế hoạch và báo giá trước khi chúng tôi làm bất cứ thứ gì.",
+    "body": "Chúng tôi trả lời trong một ngày làm việc, và bạn có kế hoạch cùng báo giá trước khi chúng tôi làm.",
     "helpHeading": "Nếu tiện, cho biết thêm",
     "help": [
       "Ai sẽ dùng",
-      "Việc nào đang tốn nhiều thời gian nhất",
-      "Hiện bạn đang dùng gì (Zalo, Excel, phần mềm nào)"
+      "Việc nào tốn nhiều thời gian nhất",
+      "Hiện bạn dùng gì"
     ],
     "channels": "Liên hệ qua",
     "barLabel": "Liên hệ nhanh",
@@ -80,7 +80,7 @@
     "nextHeading": "Sau khi bạn liên hệ"
   },
   "process": {
-    "rule": "Nếu đã có phần mềm làm được việc đó, chúng tôi sẽ chỉ bạn dùng nó thay vì làm mới.",
+    "rule": "Nếu phần mềm có sẵn làm được việc, chúng tôi sẽ chỉ bạn dùng nó.",
     "steps": [
       {
         "id": "problem",
@@ -90,17 +90,17 @@
       {
         "id": "map",
         "label": "Xem bạn đang làm thế nào",
-        "detail": "Ai làm gì, việc nào nằm trong Zalo, Excel hay giấy, thời gian mất ở đâu."
+        "detail": "Ai làm gì, thời gian mất ở đâu."
       },
       {
         "id": "plan",
         "label": "Gửi kế hoạch và báo giá",
-        "detail": "Phần nào dùng phần mềm bán sẵn, phần nào phải làm mới. Chốt trước khi làm."
+        "detail": "Dùng sẵn gì, làm mới gì. Chốt trước."
       },
       {
         "id": "build",
         "label": "Làm bản chạy thử",
-        "detail": "Chạy bằng thông tin thật của bạn. Chạy ổn thì làm tiếp phần khác, rồi thêm AI cho các bước lặp lại, từng việc một."
+        "detail": "Thông tin thật, từng việc một."
       }
     ]
   },
@@ -110,7 +110,7 @@
   },
   "closing": {
     "heading": "Việc nào đang chiếm nhiều thời gian nhất của bạn?",
-    "body": "Chỉ cần vài dòng. Chúng tôi trả lời trong một ngày làm việc.",
+    "body": "Vài dòng là đủ, chúng tôi trả lời trong một ngày làm việc.",
     "cta": "Nhắn chúng tôi"
   },
   "footer": {
@@ -148,13 +148,6 @@
       "docs": "Tài liệu"
     }
   },
-  "statuses": {
-    "live": "Đang chạy",
-    "shipped": "Đã phát hành",
-    "building": "Đang làm",
-    "acquired": "Đã được mua lại",
-    "sunset": "Đã ngừng"
-  },
   "metadata": {
     "home": {
       "title": "Chuyển đổi số và AI cho doanh nghiệp nhỏ | Canh Ta",
@@ -166,14 +159,14 @@
     },
     "contact": {
       "title": "Liên hệ qua email, Zalo hoặc WhatsApp | Canh Ta",
-      "description": "Kể cho chúng tôi việc đang mất nhiều thời gian, hoặc thứ bạn muốn làm. Nhắn qua email, Zalo hoặc WhatsApp, chúng tôi sẽ trả lời trong một ngày làm việc."
+      "description": "Kể cho chúng tôi việc đang tốn thời gian, hoặc thứ bạn muốn làm. Nhắn qua email, Zalo hoặc WhatsApp, chúng tôi trả lời trong một ngày làm việc."
     },
     "jobTitle": "Kỹ sư phần mềm",
     "offerCatalog": "Chúng tôi làm gì",
     "workList": "Một vài sản phẩm và dự án của chúng tôi",
     "products": {
       "title": "Scori, Remoti và các sản phẩm khác | Canh Ta",
-      "description": "Scori và Remoti là hai app chúng tôi đang làm, chưa có trên App Store hay Google Play. Cùng AI Engineering Atlas và copycat-skills, hai dự án đã ra mắt."
+      "description": "Scori ghi điểm khi chơi bài và board game. Remoti biến iPhone thành điều khiển cho Android TV và Google TV. Cùng các dự án web và AI."
     }
   }
 }

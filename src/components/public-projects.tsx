@@ -1,7 +1,6 @@
 import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
-import { statusLabel } from '@/lib/status'
 import { BuildLinkButton } from './build-link'
 
 /** The other public projects, as wide rows on a dark band. */
@@ -24,7 +23,7 @@ export function PublicProjects({ locale }: { locale: Locale }) {
                   {build.name}
                 </h3>
                 <p className="mt-2 text-[15px] leading-snug text-muted">
-                  <span className="font-bold text-ink">{statusLabel(build.status, locale)}.</span> {build.availability}
+                  {build.availability}
                 </p>
               </div>
               <div className="lg:col-span-5">
