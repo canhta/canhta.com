@@ -23,6 +23,7 @@ These came from the owner during the 2026-10-31 redesign. Each one replaces any 
 - Write for a shop owner or an ordinary person, in everyday words. No jargon they would not say: tool, POC, plan, module, repo, SaaS, dev, data, PM, brief, outsourcing. Use: phần mềm, kế hoạch, bản chạy thử, hệ thống, báo giá. Product names and common words (AI, app, ERP, CRM, Zalo, Excel, QR) are fine.
 - Short sentences, one point each. No machine-translated phrasing, no AI-slop patterns (rule of three, staging, inflated claims, "not X but Y", em dashes, bold labels). Check new copy against the `humanizer` skill and the anti-slop copywriting rules before shipping.
 - "Chuyển đổi số" may appear in titles and headings (people search it); always follow it with a plain sentence.
+- Vietnamese: say "triển khai" (not "làm") for building or rolling out a project or software. Headings and button labels stay short: no heading over about 5 words.
 
 ### Facts we may and may not state
 - Do not state a studio name, headcount, people, photos or founding story. Do not name past clients, describe their products or use any confidential detail. The owner's past outsourcing work may be stated only as the plain sentence in `about.proof`, in the owner's own wording.
