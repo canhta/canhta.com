@@ -1785,7 +1785,7 @@ a.cell-link::after {
 /* iot: a sensor and rings that spread */
 .mv-sensor {
   position: relative;
-  font-size: clamp(7px, 4.4cqw, 14px);
+  font-size: clamp(7px, 3.4cqw, 12px);
   display: grid;
   place-items: center;
   width: 17em;
@@ -1827,7 +1827,7 @@ a.cell-link::after {
 
 /* team: two blocks that fit together */
 .mv-blocks {
-  font-size: clamp(9px, 6.5cqw, 19px);
+  font-size: clamp(10px, 5.6cqw, 16px);
   display: flex;
   align-items: center;
 }
