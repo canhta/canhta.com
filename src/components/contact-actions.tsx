@@ -1,7 +1,7 @@
 import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
-import { mailContact, phoneContact } from '@/lib/contact'
+import { mailContact, phoneContact, whatsappContact } from '@/lib/contact'
 import { MailTile, PhoneTile, WhatsAppTile, ZaloTile } from './icons'
 
 /**
@@ -15,7 +15,7 @@ export function ContactActions({ locale }: { locale: Locale }) {
   const { social } = getSiteContent(locale)
   const messages = getMessages(locale)
   const zalo = social.find((item) => item.network === 'zalo')
-  const whatsapp = social.find((item) => item.network === 'whatsapp')
+  const whatsapp = whatsappContact(locale)
   const mail = mailContact(locale)
   const phone = phoneContact(locale)
 
@@ -50,7 +50,7 @@ export function ContactActions({ locale }: { locale: Locale }) {
       ) : null}
 
       {whatsapp ? (
-        <a href={whatsapp.url} target="_blank" rel="noreferrer noopener" className="row-link">
+        <a href={whatsapp.href} target="_blank" rel="noreferrer noopener" className="row-link">
           <span className="row-main">
             <WhatsAppTile size={48} />
             <span>

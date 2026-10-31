@@ -30,6 +30,12 @@ describe.each(LOCALES)('buildGraph(%s)', (locale) => {
   const home = buildGraph(locale, 'home')
   const { builds, faq } = getSiteContent(locale)
 
+  it('states the area served once, as a country, on the provider', () => {
+    const [provider] = nodesOfType(graph, 'ProfessionalService')
+    expect(provider).toMatchObject({ areaServed: { '@type': 'Country', name: 'Vietnam' } })
+    expect(JSON.stringify(graph).match(/areaServed/g)).toHaveLength(1)
+  })
+
   it('serialises to valid JSON', () => {
     const json = JSON.stringify(graph)
     expect(() => JSON.parse(json) as unknown).not.toThrow()

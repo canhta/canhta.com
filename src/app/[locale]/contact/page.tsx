@@ -1,4 +1,5 @@
 import { setRequestLocale } from 'next-intl/server'
+import { Link } from '@/i18n/navigation'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
 import { ContactActions } from '@/components/contact-actions'
@@ -7,7 +8,7 @@ import { PageShell } from '@/components/page-shell'
 import { pageMetadata } from '@/lib/metadata'
 import { buildGraph } from '@/lib/structured-data'
 
-/** One ask: a problem or an idea, no brief. Three ways to send it. */
+/** One ask: a problem or an idea, no brief. Four ways to send it. */
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
   return pageMetadata((await params).locale, 'contact')
 }
@@ -17,7 +18,6 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
   setRequestLocale(locale)
   const messages = getMessages(locale)
   const copy = messages.contact
-  const next = messages.process.steps.slice(1)
 
   return (
     <PageShell locale={locale} jsonLd={buildGraph(locale, 'contact')}>
@@ -46,19 +46,15 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
             <h2 id="next-title" className="section-title">
               {copy.nextHeading}
             </h2>
-            <ol className="mt-6">
-              {next.map((step, i) => (
-                <li key={step.id} className="step">
-                  <p aria-hidden="true" className="step-num !text-[clamp(2.75rem,5vw,4rem)]">
-                    {i + 1}
-                  </p>
-                  <div className="min-w-0">
-                    <h3 className="title max-w-[20ch]">{step.label}</h3>
-                    <p className="lead mt-2 max-w-[36ch]">{step.detail}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
+            <p className="lead mt-6 max-w-[40ch]">{copy.next}</p>
+            <p className="mt-4">
+              <Link
+                href={{ pathname: '/services', hash: 'process-title' }}
+                className="link inline-flex min-h-11 items-center font-bold"
+              >
+                {messages.services.processHeading}
+              </Link>
+            </p>
           </div>
         </div>
       </section>

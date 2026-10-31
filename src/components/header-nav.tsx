@@ -20,7 +20,7 @@ export function HeaderNav({
   name,
   cta,
   home,
-  contact,
+  phone,
   pages,
   links,
   labels,
@@ -29,7 +29,7 @@ export function HeaderNav({
   name: string
   cta: string
   home: string
-  contact: string
+  phone: { href: string; display: string }
   pages: Page[]
   links: NavLink[]
   labels: { primary: string; language: string; menu: string; closeMenu: string }
@@ -78,9 +78,12 @@ export function HeaderNav({
           <LangSwitch locale={locale} label={labels.language} pages={pages} />
         </div>
 
-        <Link href={contact} className="pill-cta min-[360px]:ml-1">
+        <span className="ml-2 hidden text-[14px] font-bold whitespace-nowrap lg:inline" translate="no">
+          {phone.display}
+        </span>
+        <a href={phone.href} className="pill-cta min-[360px]:ml-1">
           {cta}
-        </Link>
+        </a>
 
         <button
           type="button"

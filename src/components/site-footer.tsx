@@ -3,7 +3,7 @@ import { Logo } from './logo'
 import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
-import { mailContact, phoneContact } from '@/lib/contact'
+import { mailContact, phoneContact, whatsappContact } from '@/lib/contact'
 import { getPages } from '@/lib/pages'
 import { GitHubIcon, LinkedInIcon, MailTile, PhoneTile, WhatsAppTile, XIcon, ZaloTile } from './icons'
 import { LangSwitch } from './lang-switch'
@@ -27,7 +27,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
   const mail = mailContact(locale)
   const phone = phoneContact(locale)
   const zalo = social.find((s) => s.network === 'zalo')
-  const whatsapp = social.find((s) => s.network === 'whatsapp')
+  const whatsapp = whatsappContact(locale)
   const elsewhere = ELSEWHERE.flatMap((e) => {
     const link = social.find((s) => s.network === e.network)
     return link ? [{ ...e, url: link.url }] : []
@@ -49,9 +49,9 @@ export function SiteFooter({ locale }: { locale: Locale }) {
               {mail.address}
             </a>
           </div>
-          <Link href="/contact" className="btn-accent self-start lg:mb-2 lg:self-auto">
+          <a href={phone.href} className="btn-accent self-start lg:mb-2 lg:self-auto">
             {profile.headerCta}
-          </Link>
+          </a>
         </div>
 
         <div className="mt-14 grid gap-10 border-t border-white/25 pt-10 sm:grid-cols-2 lg:grid-cols-3">
@@ -105,7 +105,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
               ) : null}
               {whatsapp ? (
                 <li>
-                  <a href={whatsapp.url} target="_blank" rel="noreferrer noopener" className="foot-row">
+                  <a href={whatsapp.href} target="_blank" rel="noreferrer noopener" className="foot-row">
                     <WhatsAppTile size={36} />
                     <span className="foot-label">
                       {messages.contact.chatOn} <span translate="no">WhatsApp</span>
