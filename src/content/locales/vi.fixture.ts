@@ -45,7 +45,7 @@ export const viContent: ContentCopy = {
       id: 'systems',
       name: 'Hệ thống quản lý',
       detail:
-        'ERP, CRM và hệ thống nội bộ cho đơn hàng, kho, công nợ và báo cáo, thay cho việc nhắn Zalo và ghi Excel. Chúng tôi nối với phần mềm hóa đơn điện tử hay phần mềm bán hàng bạn đang dùng.',
+        'ERP, CRM và hệ thống nội bộ cho đơn hàng, kho, công nợ và báo cáo, thay cho việc nhắn Zalo và ghi Excel.',
       examples: ['ERP', 'CRM', 'Đơn hàng và kho', 'Công nợ'],
     },
     {

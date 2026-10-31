@@ -44,7 +44,7 @@ export const enContent: ContentCopy = {
       id: 'systems',
       name: 'Business systems',
       detail:
-        'ERP, CRM and internal systems for orders, stock, who owes what and reports, in place of chat threads and spreadsheets. We connect to the invoice or sales software you already use.',
+        'ERP, CRM and internal systems for orders, stock, who owes what and reports, in place of chat threads and spreadsheets.',
       examples: ['ERP', 'CRM', 'Orders and stock', 'Who owes what'],
     },
     {
