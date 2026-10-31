@@ -49,6 +49,9 @@ export function HeaderNav({
   const lang = (code: 'en' | 'vi') => (
     <Link
       href={here?.[code] ?? (code === 'en' ? '/' : '/vi')}
+      // Few visitors switch language; prefetching the other language's pages would
+      // fetch a copy of every page in it on every visit.
+      prefetch={false}
       aria-current={locale === code ? 'page' : undefined}
       className={`grid h-11 min-w-11 place-items-center rounded-full text-[13px] font-bold transition-[color,background-color,transform] active:scale-95 ${
         locale === code ? 'bg-night text-white' : 'text-muted hover:bg-wash hover:text-ink'

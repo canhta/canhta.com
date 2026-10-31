@@ -8,6 +8,8 @@ const PAGES = Object.keys(PAGE_PATH) as (keyof typeof PAGE_PATH)[]
 /**
  * Every page in every language, each entry listing all its language versions
  * (itself included): hreflang is reciprocal, and a one-way declaration is ignored.
+ * No `lastModified`: there is no per-page edit date, and a build timestamp on every
+ * URL is a date that is not true of the page, which crawlers learn to ignore.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   return PAGES.flatMap((page) => {
@@ -17,7 +19,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
     return routing.locales.map((locale) => ({
       url: pageUrl(locale as Locale, page),
-      lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: page === 'home' ? 1 : page === 'services' ? 0.9 : 0.7,
       alternates: { languages },

@@ -25,8 +25,9 @@ export function PageShell({
     <>
       <script
         type="application/ld+json"
-        // Built from our own typed content, never from user input.
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        // Built from our own typed content, never from user input. `<` is escaped so
+        // that no string in the content can ever close the script element early.
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
       />
       <SiteHeader locale={locale} />
       <main id="main" tabIndex={-1}>
