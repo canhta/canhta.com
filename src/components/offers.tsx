@@ -32,7 +32,7 @@ function Visual({ id, approve }: { id: string; approve: string }) {
       return (
         <InView className="mv mv-lg">
           <div className="mv-flow">
-            {[0, 1, 2].map((row) => (
+            {[0, 1, 2, 3, 4].map((row) => (
               <div key={row} className="mv-flow-row">
                 <span className="mv-bubble" />
                 <span className="mv-dash" />

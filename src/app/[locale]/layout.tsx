@@ -85,6 +85,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={bvp.variable}>
       <body>
+        <div aria-hidden="true" className="scroll-line" />
         <a href="#main" className="skip-link">
           {messages.common.skipToContent}
         </a>

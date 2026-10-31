@@ -10,15 +10,15 @@
    single gradient, blur or glow.
 
    Palette
-     navy  #0c2e22  deep green ground, white type (14.6:1)
+     navy  #0c2e22  deep green ground, white type (14.7:1)
      brand #146c43  action on light grounds, white type on it (6.4:1)
      accent #ff6a2b the one accent. Ink on it 5.9:1, it on navy 5.1:1.
                     Never white on it (2.9:1) and never it as text on white.
      tint  #f2f5f2  cool tint ground
-     mint  #cdeedb  light mint: panel ground, type on navy (12.2:1)
-     leaf  #7fd6a4  mid green for particles and rules on navy (9.4:1)
+     mint  #cdeedb  light mint: panel ground, type on navy (11.8:1)
+     leaf  #7fd6a4  mid green for particles and rules on navy (8.4:1)
      deep  #081f17  the darker green under the products band
-     ink   #10201a  text on light grounds (15.9:1 on white)
+     ink   #10201a  text on light grounds (16.9:1 on white)
 
    Motion is transform or position only, plays once, never hides content and
    stops for prefers-reduced-motion. Every scroll-linked effect sits behind
@@ -44,7 +44,7 @@
   --color-mint: #cdeedb;
   --color-leaf: #7fd6a4;
   --color-accent: #ff6a2b;
-  /* Secondary text on navy: 8.7:1. */
+  /* Secondary text on navy: 9.0:1. */
   --color-on-dark: #b9d0c4;
 
   --font-sans: var(--font-bvp), ui-sans-serif, system-ui, sans-serif;
@@ -321,7 +321,7 @@ section[id] {
   transition-duration: 60ms;
 }
 
-/* Quiet button on a dark ground: outlined, white type (navy 14.6:1). */
+/* Quiet button on a dark ground: outlined, white type (navy 14.7:1). */
 @utility btn-ghost {
   display: inline-flex;
   align-items: center;
@@ -548,6 +548,7 @@ section[id] {
   color: #fff;
   /* Header clearance, then the text. The hero grows with its content. */
   padding-top: calc(var(--pill-top) + var(--pill-h) + clamp(28px, 6vh, 64px));
+  padding-bottom: 8px;
 }
 .hero-text {
   position: relative;
@@ -559,7 +560,6 @@ section[id] {
   z-index: 1;
   /* The next band overlaps by --sheet-r; keep the picture clear of it. */
   height: clamp(340px, 98vw, 560px);
-  margin-bottom: calc(var(--sheet-r) * 0.5);
 }
 
 @media (min-width: 1024px) {
@@ -567,7 +567,7 @@ section[id] {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-height: min(100svh, 62rem);
+    min-height: min(calc(100svh - 72px), 60rem);
     padding-bottom: calc(var(--sheet-r) + 24px);
   }
   .hero-text {
@@ -827,9 +827,11 @@ section[id] {
     overflow: visible;
   }
   .ticker-track {
+    display: block;
     width: auto;
   }
   .ticker-list {
+    flex: initial;
     flex-wrap: wrap;
     row-gap: 4px;
   }
@@ -1193,6 +1195,7 @@ a.cell-link::after {
   letter-spacing: -0.06em;
   color: var(--color-brand);
   font-variant-numeric: tabular-nums;
+  min-width: 0.75em;
 }
 .track {
   height: 10px;
@@ -1314,6 +1317,26 @@ a.cell-link::after {
   display: grid;
   gap: 14px;
 }
+.mv-flow-row:nth-child(n + 4) {
+  display: none;
+}
+@media (min-width: 1024px) {
+  .mv-flow-row:nth-child(n + 4) {
+    display: grid;
+  }
+  .mv-flow {
+    gap: 22px;
+  }
+  .mv-bubble {
+    height: 44px;
+  }
+  .mv-bubble::after {
+    margin-top: 18px;
+  }
+  .mv-trow {
+    height: 52px;
+  }
+}
 .mv-flow-row {
   display: grid;
   grid-template-columns: 36% 1fr 46%;
@@ -1357,7 +1380,7 @@ a.cell-link::after {
 .mv-trow i:first-child {
   background: var(--color-brand);
 }
-.mv-flow-row:last-child .mv-trow {
+.mv-flow-row:nth-child(3) .mv-trow {
   background: var(--color-mint);
 }
 
@@ -1707,6 +1730,12 @@ a.cell-link::after {
   [data-play='play'] .mv-flow-row:nth-child(3) .mv-trow {
     animation-delay: 360ms;
   }
+  [data-play='play'] .mv-flow-row:nth-child(4) .mv-trow {
+    animation-delay: 540ms;
+  }
+  [data-play='play'] .mv-flow-row:nth-child(5) .mv-trow {
+    animation-delay: 720ms;
+  }
   [data-play='play'] .mv-bars i {
     animation: rise-y 800ms var(--ease-out-soft) both;
     animation-delay: calc(var(--i) * 90ms);
@@ -1781,6 +1810,38 @@ a.cell-link::after {
       animation: slide-up linear both;
       animation-timeline: view();
       animation-range: entry 0% entry 55%;
+    }
+  }
+}
+
+/* A thin line along the top edge that fills as the page scrolls. Shown only
+   where scroll-driven animation exists and motion is not reduced. */
+.scroll-line {
+  display: none;
+}
+@keyframes line-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .scroll-line {
+      display: block;
+      position: fixed;
+      z-index: 60;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--color-accent);
+      transform-origin: left;
+      pointer-events: none;
+      animation: line-fill linear both;
+      animation-timeline: scroll(root);
     }
   }
 }

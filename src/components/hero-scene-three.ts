@@ -250,11 +250,11 @@ export function mountScene(host: HTMLElement): (() => void) | null {
 
   let visible = true
   let raf = 0
-  const clock = new THREE.Clock()
+  const t0 = performance.now()
   const frame = () => {
     raf = 0
     if (!visible || document.hidden) return
-    const t = clock.getElapsedTime()
+    const t = (performance.now() - t0) / 1000
 
     root.rotation.y += (target.y - root.rotation.y) * 0.06
     root.rotation.x += (target.x - root.rotation.x) * 0.06
