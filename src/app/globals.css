@@ -1,24 +1,32 @@
 @import 'tailwindcss';
 
 /* =========================================================================
-   canhta.com: design system (visual layer, 2026-10-31 pass)
+   canhta.com: design system (Higgsfield palette pass, 2026-10-31)
 
-   Colour is blocked in full-width bands that change the ground as you scroll:
-   deep green (hero), tint (services), white, deep green (products), mint,
-   orange (the ask), deep green (footer). Each band is a sheet that overlaps
-   the one before it with a rounded top edge, so the page has depth without a
-   single gradient, blur or glow.
+   The colours are higgsfield.ai's, read from its computed styles: one lime
+   accent, near-black grounds and a cool light tint. The page is mostly dark.
+   Bands change ground as you scroll (dark, lime, light, dark, light, lime,
+   dark). Each band is a sheet that overlaps the one before it with a rounded
+   top edge, so there is depth without a gradient, blur or glow.
 
-   Palette
-     navy  #0c2e22  deep green ground, white type (14.7:1)
-     brand #146c43  action on light grounds, white type on it (6.4:1)
-     accent #ff6a2b the one accent. Ink on it 5.9:1, it on navy 5.1:1.
-                    Never white on it (2.9:1) and never it as text on white.
-     tint  #f2f5f2  cool tint ground
-     mint  #cdeedb  light mint: panel ground, type on navy (11.8:1)
-     leaf  #7fd6a4  mid green for particles and rules on navy (8.4:1)
-     deep  #081f17  the darker green under the products band
-     ink   #10201a  text on light grounds (16.9:1 on white)
+   Palette                                           contrast
+     night   #131517  dark ground, the hero and footer   F7F7F8 on it 17.1:1
+     surface #1c1e21  cards on a dark ground             F7F7F8 on it 15.6:1
+     raised  #23262a  hover and raised parts of a card
+     hair    #383e46  rules on dark
+     accent  #d1fe17  lime. The one accent.              on night 15.6:1
+                      Fill with night type on it (15.6:1), or type on night.
+                      Never as type on a light ground (1.17:1 on white).
+     tint    #f7f7f8  the light band
+     wash    #e6e8eb  a second light, for cells and hovers
+     ink     #131517  type on light grounds              18.3:1 on white
+     muted   #565b62  secondary type on light            6.8:1 white, 5.6:1 wash
+     on-dark #b4b6b8  secondary type on dark             9.0:1 night, 8.2:1 surface
+     dim     #898a8b  labels on night only               5.3:1 on night
+
+   A band with .on-night re-maps ink, muted, line and card for a dark ground,
+   so type utilities written for light grounds work on both. A light object
+   sitting on a dark band (.on-light) maps them back.
 
    Motion is transform or position only, plays once, never hides content and
    stops for prefers-reduced-motion. Every scroll-linked effect sits behind
@@ -30,22 +38,23 @@
    uses it; the plain CSS below reads them with var(). */
 @theme static {
   --color-bg: #ffffff;
-  --color-tint: #f2f5f2;
-  --color-ink: #10201a;
-  /* 6.2:1 on white, 5.7:1 on --color-tint. */
-  --color-muted: #4f5f57;
-  --color-line: #dfe7e1;
-  --color-line-strong: #84938a;
-  --color-brand: #146c43;
-  --color-brand-dark: #0e5232;
-  --color-brand-tint: #e3f1e8;
-  --color-navy: #0c2e22;
-  --color-deep: #081f17;
-  --color-mint: #cdeedb;
-  --color-leaf: #7fd6a4;
-  --color-accent: #ff6a2b;
-  /* Secondary text on navy: 9.0:1. */
-  --color-on-dark: #b9d0c4;
+  --color-tint: #f7f7f8;
+  --color-wash: #e6e8eb;
+  --color-ink: #131517;
+  --color-muted: #565b62;
+  --color-line: #e4e6e9;
+  /* 3.4:1 on white, 3.2:1 on tint: the edge of a control. */
+  --color-line-strong: #868b93;
+  --color-night: #131517;
+  --color-surface: #1c1e21;
+  --color-raised: #23262a;
+  --color-hair: #383e46;
+  --color-accent: #d1fe17;
+  --color-accent-hover: #ddff4a;
+  --color-on-dark: #b4b6b8;
+  --color-dim: #898a8b;
+  /* The ground of a card. Dark bands re-map it to --color-surface. */
+  --color-card: #ffffff;
 
   --font-sans: var(--font-bvp), ui-sans-serif, system-ui, sans-serif;
 
@@ -65,12 +74,12 @@
 
   /* Layered, soft. Three layers: contact, mid, ambient. */
   --shadow-card:
-    0 1px 1px rgb(12 46 34 / 0.05), 0 4px 10px -2px rgb(12 46 34 / 0.06),
-    0 18px 36px -12px rgb(12 46 34 / 0.16);
+    0 1px 1px rgb(19 21 23 / 0.05), 0 4px 10px -2px rgb(19 21 23 / 0.06),
+    0 18px 36px -12px rgb(19 21 23 / 0.16);
   --shadow-lift:
-    0 2px 2px rgb(12 46 34 / 0.06), 0 10px 20px -4px rgb(12 46 34 / 0.1),
-    0 32px 56px -16px rgb(12 46 34 / 0.28);
-  --shadow-press: 0 1px 1px rgb(12 46 34 / 0.08), 0 2px 4px -1px rgb(12 46 34 / 0.12);
+    0 2px 2px rgb(19 21 23 / 0.06), 0 10px 20px -4px rgb(19 21 23 / 0.1),
+    0 32px 56px -16px rgb(19 21 23 / 0.28);
+  --shadow-press: 0 1px 1px rgb(19 21 23 / 0.08), 0 2px 4px -1px rgb(19 21 23 / 0.12);
 }
 
 @media (min-width: 768px) {
@@ -87,7 +96,7 @@
 html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
-  background: var(--color-navy);
+  background: var(--color-night);
 }
 
 body {
@@ -99,7 +108,7 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   touch-action: manipulation;
-  -webkit-tap-highlight-color: color-mix(in srgb, var(--color-brand) 20%, transparent);
+  -webkit-tap-highlight-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
   overflow-x: clip;
 }
 
@@ -141,13 +150,9 @@ article[id] {
   border-top-left-radius: var(--sheet-r);
   border-top-right-radius: var(--sheet-r);
 }
-.ground-navy {
-  background: var(--color-navy);
-  color: #fff;
-}
-.ground-deep {
-  background: var(--color-deep);
-  color: #fff;
+.ground-night {
+  background: var(--color-night);
+  color: var(--color-ink);
 }
 .ground-tint {
   background: var(--color-tint);
@@ -155,11 +160,31 @@ article[id] {
 .ground-white {
   background: #fff;
 }
-.ground-mint {
-  background: var(--color-mint);
-}
 .ground-accent {
   background: var(--color-accent);
+  color: var(--color-night);
+}
+
+/* A dark band re-maps the light-ground tokens, so type utilities and component
+   rules written once (text-ink, text-muted, var(--color-line), .lead, .step)
+   work on both. Re-declared per scope, so it never leaks into a light object
+   that sits on the band: those use .on-light. */
+.on-night {
+  --color-ink: #f7f7f8;
+  --color-muted: var(--color-on-dark);
+  --color-line: rgb(255 255 255 / 0.14);
+  --color-line-strong: rgb(255 255 255 / 0.45);
+  --color-card: var(--color-surface);
+  color: var(--color-ink);
+}
+.on-light,
+.hv-chip,
+.hv-card,
+.on-night .row-link {
+  --color-ink: #131517;
+  --color-muted: #565b62;
+  --color-line: #e4e6e9;
+  --color-line-strong: #868b93;
   color: var(--color-ink);
 }
 
@@ -210,12 +235,13 @@ article[id] {
 :lang(vi) .title {
   line-height: 1.22;
 }
-.on-navy .lead,
 .on-accent .lead {
-  color: var(--color-on-dark);
+  color: var(--color-night);
 }
-.on-accent .lead {
-  color: var(--color-ink);
+/* Display type on a dark ground is the lime: the page title words. */
+.hero .display,
+.page-head.on-night .headline {
+  color: var(--color-accent);
 }
 
 @utility closing-title {
@@ -235,35 +261,6 @@ article[id] {
 
 /* --- Controls ----------------------------------------------------------- */
 
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.625rem;
-  min-height: 52px;
-  padding-inline: 1.75rem;
-  border-radius: 999px;
-  font-weight: 700;
-  font-size: 1rem;
-  line-height: 1.2;
-  text-align: center;
-  box-shadow: var(--shadow-card);
-  transition:
-    background-color var(--duration-feedback) var(--ease-out-soft),
-    color var(--duration-feedback) var(--ease-out-soft),
-    transform var(--duration-feedback) var(--ease-out-soft),
-    box-shadow var(--duration-feedback) var(--ease-out-soft);
-}
-.btn:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lift);
-}
-.btn:active {
-  transform: translateY(1px) scale(0.975);
-  box-shadow: var(--shadow-press);
-  transition-duration: 60ms;
-}
-
 @utility btn-primary {
   display: inline-flex;
   align-items: center;
@@ -271,7 +268,7 @@ article[id] {
   min-height: 52px;
   padding-inline: 1.75rem;
   border-radius: 999px;
-  background: var(--color-brand);
+  background: var(--color-night);
   color: #fff;
   font-weight: 700;
   line-height: 1.2;
@@ -283,7 +280,7 @@ article[id] {
     box-shadow var(--duration-feedback) var(--ease-out-soft);
 }
 .btn-primary:hover {
-  background: var(--color-brand-dark);
+  background: var(--color-raised);
   transform: translateY(-2px);
   box-shadow: var(--shadow-lift);
 }
@@ -293,7 +290,7 @@ article[id] {
   transition-duration: 60ms;
 }
 
-/* The accent carries the main action on a dark ground. Ink on orange: 5.9:1. */
+/* Lime carries the main action on a dark ground. Night type on lime: 15.6:1. */
 @utility btn-accent {
   display: inline-flex;
   align-items: center;
@@ -302,7 +299,7 @@ article[id] {
   padding-inline: 1.75rem;
   border-radius: 999px;
   background: var(--color-accent);
-  color: var(--color-ink);
+  color: var(--color-night);
   font-weight: 700;
   line-height: 1.2;
   text-align: center;
@@ -313,7 +310,7 @@ article[id] {
     box-shadow var(--duration-feedback) var(--ease-out-soft);
 }
 .btn-accent:hover {
-  background: #ff7d45;
+  background: var(--color-accent-hover);
   transform: translateY(-2px);
   box-shadow: 0 2px 2px rgb(0 0 0 / 0.2), 0 14px 24px -8px rgb(0 0 0 / 0.5);
 }
@@ -322,61 +319,28 @@ article[id] {
   transition-duration: 60ms;
 }
 
-/* Quiet button on a dark ground: outlined, white type (navy 14.7:1). */
-@utility btn-ghost {
+/* Second button on a dark ground: white fill, night type (18.3:1). */
+@utility btn-light {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 52px;
   padding-inline: 1.75rem;
-  border: 2px solid rgb(255 255 255 / 0.55);
   border-radius: 999px;
-  color: #fff;
-  font-weight: 700;
-  line-height: 1.2;
-  text-align: center;
-  transition:
-    background-color var(--duration-feedback) var(--ease-out-soft),
-    color var(--duration-feedback) var(--ease-out-soft),
-    border-color var(--duration-feedback) var(--ease-out-soft),
-    transform var(--duration-feedback) var(--ease-out-soft);
-}
-.btn-ghost:hover {
   background: #fff;
-  border-color: #fff;
-  color: var(--color-navy);
-  transform: translateY(-2px);
-}
-.btn-ghost:active {
-  transform: translateY(1px) scale(0.975);
-  transition-duration: 60ms;
-}
-
-/* Outlined button on a light ground. */
-@utility btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 52px;
-  padding-inline: 1.75rem;
-  border: 2px solid var(--color-ink);
-  border-radius: 999px;
-  background: transparent;
-  color: var(--color-ink);
+  color: var(--color-night);
   font-weight: 700;
   line-height: 1.2;
   text-align: center;
   transition:
     background-color var(--duration-feedback) var(--ease-out-soft),
-    color var(--duration-feedback) var(--ease-out-soft),
     transform var(--duration-feedback) var(--ease-out-soft);
 }
-.btn-secondary:hover {
-  background: var(--color-ink);
-  color: #fff;
+.btn-light:hover {
+  background: var(--color-wash);
   transform: translateY(-2px);
 }
-.btn-secondary:active {
+.btn-light:active {
   transform: translateY(1px) scale(0.975);
   transition-duration: 60ms;
 }
@@ -407,14 +371,14 @@ article[id] {
   transform: scale(0.97);
   transition-duration: 60ms;
 }
-.on-navy .chip {
+.on-night .chip {
   --chip-bg: transparent;
-  --chip-fg: #fff;
+  --chip-fg: #f7f7f8;
   --chip-border: rgb(255 255 255 / 0.5);
 }
-.on-navy .chip:hover {
+.on-night .chip:hover {
   background: #fff;
-  color: var(--color-navy);
+  color: var(--color-night);
 }
 
 @utility link {
@@ -432,7 +396,7 @@ article[id] {
 /* A short label in plain bold text: who it is for, or a status. Not a badge. */
 @utility tag {
   display: inline;
-  color: var(--color-brand);
+  color: var(--color-ink);
   font-size: 0.875rem;
   font-weight: 700;
   line-height: 1.5;
@@ -465,9 +429,10 @@ article[id] {
   padding: 6px 8px 6px 20px;
   border-radius: 999px;
   background: #fff;
+  color: var(--color-night);
   box-shadow:
-    0 1px 1px rgb(12 46 34 / 0.06), 0 6px 12px -2px rgb(12 46 34 / 0.12),
-    0 24px 40px -12px rgb(12 46 34 / 0.34);
+    0 1px 1px rgb(19 21 23 / 0.06), 0 6px 12px -2px rgb(19 21 23 / 0.12),
+    0 24px 40px -12px rgb(19 21 23 / 0.34);
 }
 .pill-link {
   display: grid;
@@ -482,14 +447,14 @@ article[id] {
     transform var(--duration-feedback) var(--ease-out-soft);
 }
 .pill-link:hover {
-  background: var(--color-tint);
+  background: var(--color-wash);
 }
 .pill-link:active {
   transform: scale(0.96);
 }
 .pill-link[aria-current='page'] {
-  background: var(--color-brand-tint);
-  color: var(--color-brand-dark);
+  background: var(--color-night);
+  color: #fff;
 }
 .pill-cta {
   display: inline-flex;
@@ -497,8 +462,8 @@ article[id] {
   min-height: 44px;
   padding-inline: 1.25rem;
   border-radius: 999px;
-  background: var(--color-brand);
-  color: #fff;
+  background: var(--color-accent);
+  color: var(--color-night);
   font-size: 0.9375rem;
   font-weight: 700;
   white-space: nowrap;
@@ -517,7 +482,7 @@ article[id] {
   }
 }
 .pill-cta:hover {
-  background: var(--color-brand-dark);
+  background: var(--color-accent-hover);
 }
 .pill-cta:active {
   transform: scale(0.96);
@@ -531,6 +496,7 @@ article[id] {
   padding: 10px;
   border-radius: 32px;
   background: #fff;
+  color: var(--color-night);
   box-shadow: var(--shadow-lift);
 }
 .menu-link {
@@ -545,18 +511,17 @@ article[id] {
 }
 .menu-link:hover,
 .menu-link[aria-current='page'] {
-  background: var(--color-tint);
+  background: var(--color-wash);
 }
 
 /* =========================================================================
-   Hero: deep green, the 3D scene as the main picture, bleeding to the edge.
+   Hero: night, the 3D scene as the main picture, bleeding to the edge.
    ========================================================================= */
 
 .hero {
   position: relative;
   overflow-x: clip;
-  background: var(--color-navy);
-  color: #fff;
+  background: var(--color-night);
   /* Header clearance, then the text. The hero grows with its content. */
   padding-top: calc(var(--pill-top) + var(--pill-h) + clamp(28px, 6vh, 64px));
   padding-bottom: 8px;
@@ -591,8 +556,12 @@ article[id] {
     right: 0;
     bottom: var(--sheet-r);
     width: 56%;
-    height: auto;
     margin: 0;
+  }
+  /* .hero-scene (later in the file) sets height: 100%; the stage is placed by
+     top and bottom, so it must stay auto or it hangs below the hero. */
+  .hero-scene.hero-stage {
+    height: auto;
   }
 }
 @media (min-width: 1024px) and (max-width: 1279px) {
@@ -641,7 +610,6 @@ article[id] {
   grid-column: 1;
   padding: 11px 18px;
   background: #fff;
-  color: var(--color-ink);
   border-radius: 14px;
   box-shadow: 0 12px 24px -10px rgb(0 0 0 / 0.5);
   font-size: 0.9375rem;
@@ -661,7 +629,7 @@ article[id] {
 .hv-flow {
   grid-column: 2;
   height: 0;
-  border-top: 3px dashed var(--color-leaf);
+  border-top: 3px dashed var(--color-accent);
 }
 .hv-card {
   grid-column: 3;
@@ -669,7 +637,6 @@ article[id] {
   align-self: center;
   padding: 18px;
   background: #fff;
-  color: var(--color-ink);
   border-radius: 24px;
   box-shadow: 0 30px 50px -20px rgb(0 0 0 / 0.6);
 }
@@ -690,7 +657,7 @@ article[id] {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: var(--color-brand);
+  background: var(--color-night);
   position: relative;
 }
 .hv-tick::after {
@@ -700,7 +667,7 @@ article[id] {
   top: 3px;
   width: 5px;
   height: 9px;
-  border: solid #fff;
+  border: solid var(--color-accent);
   border-width: 0 2px 2px 0;
   rotate: 45deg;
 }
@@ -716,7 +683,7 @@ article[id] {
   padding: 7px 12px;
   border-radius: 999px;
   background: var(--color-accent);
-  color: var(--color-ink);
+  color: var(--color-night);
   font-size: 0.8125rem;
   font-weight: 800;
   text-align: center;
@@ -739,7 +706,7 @@ article[id] {
 }
 
 /* =========================================================================
-   Ticker: scope words in brackets, on an orange strip. The one loop.
+   Ticker: scope words in brackets, on a lime strip. The one loop.
    ========================================================================= */
 
 .ticker {
@@ -793,7 +760,7 @@ article[id] {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: var(--color-ink);
+  background: var(--color-night);
   transition: transform var(--duration-feedback) var(--ease-out-soft);
 }
 .ticker-btn:active {
@@ -854,7 +821,7 @@ article[id] {
 }
 
 /* A statement whose words fill in as it scrolls past. Every word starts at
-   #6f8177 (4.1:1 on white, and the type is 28px or larger bold, so AA large
+   #7a7f86 (4.0:1 on white, and the type is 28px or larger bold, so AA large
    needs 3:1) and ends at ink. Without scroll-driven animation it is ink. */
 .statement {
   view-timeline-name: --statement;
@@ -864,7 +831,7 @@ article[id] {
 }
 @keyframes ink-in {
   from {
-    color: #6f8177;
+    color: #7a7f86;
   }
   to {
     color: var(--color-ink);
@@ -908,44 +875,38 @@ a.cell-link::after {
   box-shadow: var(--shadow-lift);
 }
 .cell:has(a:focus-visible) {
-  outline: 3px solid var(--color-brand);
+  outline: 3px solid var(--color-night);
   outline-offset: 4px;
 }
 .cell:has(a:focus-visible) a:focus-visible {
   outline: none;
 }
-.cell[data-ground='green'],
-.cell[data-ground='navy'] {
-  color: #fff;
+.cell[data-ground='night'] {
+  background: var(--color-night);
+  --color-ink: #f7f7f8;
+  --color-muted: var(--color-on-dark);
+  --color-line: rgb(255 255 255 / 0.14);
+  color: var(--color-ink);
 }
-.cell[data-ground='green']:has(a:focus-visible),
-.cell[data-ground='navy']:has(a:focus-visible) {
-  outline-color: var(--color-navy);
-}
-.cell[data-ground='green'] {
-  background: var(--color-brand);
-}
-.cell[data-ground='navy'] {
-  background: var(--color-navy);
+.cell[data-ground='lime'] {
+  background: var(--color-accent);
+  color: var(--color-night);
 }
 .cell[data-ground='white'] {
   background: #fff;
 }
-.cell[data-ground='mint'] {
-  background: var(--color-mint);
+.cell[data-ground='wash'] {
+  background: var(--color-wash);
 }
 .cell-body p {
   max-width: 44ch;
 }
-.cell[data-ground='green'] .cell-muted,
-.cell[data-ground='navy'] .cell-muted {
-  color: #d6e8dd;
-}
 .cell-muted {
   color: var(--color-muted);
 }
-.cell[data-ground='mint'] .cell-muted {
-  color: #2e4338;
+/* Night type on lime: 15.6:1, so the secondary line needs no lighter grey. */
+.cell[data-ground='lime'] .cell-muted {
+  color: var(--color-night);
 }
 
 .bento {
@@ -1027,16 +988,17 @@ a.cell-link::after {
 }
 
 /* An app panel: a rounded sheet, the app's colour behind its phones, text on
-   deep green below. */
+   a dark card below. */
 .app-card {
   display: flex;
   flex-direction: column;
   height: 100%;
   overflow: hidden;
-  background: #11392b;
-  color: #fff;
+  background: var(--color-surface);
   border-radius: clamp(26px, 3vw, 36px);
-  box-shadow: 0 24px 48px -20px rgb(0 0 0 / 0.6);
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.08),
+    0 24px 48px -20px rgb(0 0 0 / 0.6);
 }
 .app-media {
   position: relative;
@@ -1075,24 +1037,21 @@ a.cell-link::after {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   border-bottom: 0;
-  box-shadow: 0 -10px 30px -10px rgb(12 46 34 / 0.45);
+  box-shadow: 0 -10px 30px -10px rgb(19 21 23 / 0.45);
 }
 .app-card[data-theme='scori'] {
   --app-bg: #ffe9a6;
 }
 .app-card[data-theme='remoti'] {
-  --app-bg: #dbe6dd;
-}
-.app-card .cell-muted {
-  color: #cfe2d7;
+  --app-bg: #dce2ec;
 }
 
 @utility phone {
   overflow: hidden;
-  border: 1px solid rgb(16 32 26 / 0.18);
+  border: 1px solid rgb(19 21 23 / 0.18);
   border-radius: 26px;
   background: #fff;
-  box-shadow: 0 18px 32px -16px rgb(16 32 26 / 0.45);
+  box-shadow: 0 18px 32px -16px rgb(19 21 23 / 0.45);
 }
 
 /* A phone screen leans toward a mouse pointer. */
@@ -1108,7 +1067,7 @@ a.cell-link::after {
   gap: 16px;
   padding: clamp(22px, 2.6vw, 34px);
   border-radius: 28px;
-  background: #fff;
+  background: var(--color-card);
   box-shadow: var(--shadow-card);
 }
 @media (min-width: 1024px) {
@@ -1134,8 +1093,8 @@ a.cell-link::after {
   min-height: 84px;
   padding: 14px 28px;
   border-radius: 28px;
-  background: var(--color-navy);
-  color: #fff;
+  background: var(--color-night);
+  color: #f7f7f8;
   font-size: clamp(1.35rem, 2.6vw, 2rem);
   font-weight: 800;
   line-height: 1.15;
@@ -1157,7 +1116,7 @@ a.cell-link::after {
 }
 .row-link:hover {
   transform: translateY(-3px);
-  background: var(--color-deep);
+  background: var(--color-raised);
   box-shadow: var(--shadow-lift);
 }
 .row-link:active {
@@ -1165,27 +1124,23 @@ a.cell-link::after {
   transition-duration: 60ms;
 }
 /* On a dark ground the rows are light, so they read as objects on the page. */
-.on-navy .row-link {
+.on-night .row-link {
   background: #fff;
-  color: var(--color-ink);
 }
-.on-navy .row-link small {
+.on-night .row-link small {
   color: var(--color-muted);
 }
-.on-navy .row-link:hover {
-  background: var(--color-mint);
+.on-night .row-link:hover {
+  background: var(--color-wash);
 }
-.on-navy .row-link[data-primary='true'] {
+.on-night .row-link[data-primary='true'] {
   background: var(--color-accent);
 }
-.on-navy .row-link[data-primary='true'] small {
-  color: var(--color-ink);
+.on-night .row-link[data-primary='true'] small {
+  color: var(--color-night);
 }
-.on-navy .row-link[data-primary='true']:hover {
-  background: #ff7d45;
-}
-.on-accent .row-link:focus-visible {
-  outline-color: var(--color-ink);
+.on-night .row-link[data-primary='true']:hover {
+  background: var(--color-accent-hover);
 }
 
 /* =========================================================================
@@ -1200,14 +1155,25 @@ a.cell-link::after {
   padding-block: 28px;
   border-top: 2px solid var(--color-ink);
 }
+.on-night .step {
+  border-top-color: var(--color-line);
+}
 .step-num {
   font-weight: 800;
   font-size: clamp(4.25rem, 16vw, 5.5rem);
   line-height: 0.85;
   letter-spacing: -0.06em;
-  color: var(--color-brand);
+  color: var(--color-ink);
+  /* On a light ground the numeral is ink with a lime rule under it: lime type
+     on white would be 1.17:1. On a dark ground it is the lime itself. */
+  text-decoration: underline 0.09em var(--color-accent);
+  text-underline-offset: 0.08em;
   font-variant-numeric: tabular-nums;
   min-width: 0.75em;
+}
+.on-night .step-num {
+  color: var(--color-accent);
+  text-decoration: none;
 }
 .track {
   height: 10px;
@@ -1220,7 +1186,7 @@ a.cell-link::after {
   display: block;
   height: 100%;
   border-radius: 999px;
-  background: var(--color-brand);
+  background: var(--color-accent);
 }
 @media (min-width: 1024px) {
   .process-grid {
@@ -1370,7 +1336,7 @@ a.cell-link::after {
   background: rgb(255 255 255 / 0.75);
 }
 .mv-dash {
-  border-top: 3px dashed var(--color-leaf);
+  border-top: 3px dashed var(--color-accent);
 }
 .mv-trow {
   display: grid;
@@ -1387,13 +1353,16 @@ a.cell-link::after {
   display: block;
   height: 8px;
   border-radius: 4px;
-  background: #b9cfc2;
+  background: #c9cdd3;
 }
 .mv-trow i:first-child {
-  background: var(--color-brand);
+  background: var(--color-night);
 }
 .mv-flow-row:nth-child(3) .mv-trow {
-  background: var(--color-mint);
+  background: var(--color-accent);
+}
+.mv-flow-row:nth-child(3) .mv-trow i {
+  background: var(--color-night);
 }
 
 /* ai: an agent card with an Approve button that presses itself once */
@@ -1403,8 +1372,8 @@ a.cell-link::after {
   padding: 18px;
   border-radius: 22px;
   background: #fff;
-  color: var(--color-ink);
-  box-shadow: 0 24px 40px -16px rgb(0 0 0 / 0.55);
+  color: var(--color-night);
+  box-shadow: 0 24px 40px -16px rgb(0 0 0 / 0.35);
 }
 .mv-agent-head {
   display: flex;
@@ -1416,7 +1385,7 @@ a.cell-link::after {
   width: 38px;
   height: 38px;
   border-radius: 12px;
-  background: var(--color-brand);
+  background: var(--color-night);
 }
 .mv-line {
   display: block;
@@ -1441,8 +1410,8 @@ a.cell-link::after {
   min-height: 40px;
   padding-inline: 20px;
   border-radius: 999px;
-  background: var(--color-accent);
-  color: var(--color-ink);
+  background: var(--color-night);
+  color: var(--color-accent);
   font-size: 0.9375rem;
   font-weight: 800;
 }
@@ -1450,7 +1419,7 @@ a.cell-link::after {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: var(--color-brand);
+  background: var(--color-night);
   position: relative;
 }
 .mv-check::after {
@@ -1460,7 +1429,7 @@ a.cell-link::after {
   top: 6px;
   width: 6px;
   height: 12px;
-  border: solid #fff;
+  border: solid var(--color-accent);
   border-width: 0 3px 3px 0;
   rotate: 45deg;
 }
@@ -1487,14 +1456,14 @@ a.cell-link::after {
   flex: 1;
   height: var(--h);
   border-radius: 10px 10px 0 0;
-  background: var(--color-mint);
+  background: #d3d6db;
   transform-origin: bottom;
 }
 .mv-bars i:nth-child(odd) {
-  background: #8fcdaa;
+  background: #b3b8bf;
 }
 .mv-bars i:last-child {
-  background: var(--color-brand);
+  background: var(--color-night);
 }
 
 /* web: a browser and a phone */
@@ -1504,7 +1473,7 @@ a.cell-link::after {
   width: min(100%, 300px);
   padding: 12px;
   border-radius: 18px;
-  background: var(--color-tint);
+  background: #fff;
   box-shadow: inset 0 0 0 2px var(--color-line);
 }
 .mv-browser-bar {
@@ -1519,12 +1488,12 @@ a.cell-link::after {
   display: block;
   height: 64px;
   border-radius: 12px;
-  background: var(--color-brand);
+  background: var(--color-night);
 }
 .mv-browser .mv-line {
   margin-top: 10px;
   width: 70%;
-  background: #c8d6cd;
+  background: #d3d6db;
 }
 .mv-browser .mv-line + .mv-line {
   width: 48%;
@@ -1537,14 +1506,14 @@ a.cell-link::after {
   height: 112px;
   padding: 8px;
   border-radius: 16px;
-  background: var(--color-navy);
-  box-shadow: 0 14px 24px -8px rgb(12 46 34 / 0.55);
+  background: var(--color-night);
+  box-shadow: 0 14px 24px -8px rgb(19 21 23 / 0.55);
 }
 .mv-phone i {
   display: block;
   height: 100%;
   border-radius: 9px;
-  background: var(--color-mint);
+  background: var(--color-accent);
 }
 
 /* iot: a sensor and rings that spread */
@@ -1558,7 +1527,7 @@ a.cell-link::after {
 .mv-ring {
   position: absolute;
   border-radius: 50%;
-  border: 3px solid var(--color-brand);
+  border: 3px solid var(--color-accent);
 }
 .mv-ring:nth-child(1) {
   width: 96px;
@@ -1567,26 +1536,26 @@ a.cell-link::after {
 .mv-ring:nth-child(2) {
   width: 134px;
   height: 134px;
-  border-color: #5aa985;
+  border-color: rgb(209 254 23 / 0.6);
 }
 .mv-ring:nth-child(3) {
   width: 170px;
   height: 170px;
-  border-color: #9ccbb2;
+  border-color: rgb(209 254 23 / 0.3);
 }
 .mv-node {
   position: relative;
   width: 44px;
   height: 44px;
   border-radius: 14px;
-  background: var(--color-navy);
+  background: #f7f7f8;
 }
 .mv-node::after {
   content: '';
   position: absolute;
   inset: 13px;
   border-radius: 50%;
-  background: var(--color-accent);
+  background: var(--color-night);
 }
 
 /* team: two blocks that fit together */
@@ -1601,12 +1570,12 @@ a.cell-link::after {
 }
 .mv-blocks i:first-child {
   border-radius: 20px 6px 6px 20px;
-  background: var(--color-mint);
+  background: var(--color-night);
 }
 .mv-blocks i:last-child {
   margin-left: 6px;
   border-radius: 6px 20px 20px 6px;
-  background: #fff;
+  background: var(--color-accent);
   position: relative;
 }
 .mv-blocks i:last-child::after {
@@ -1617,7 +1586,8 @@ a.cell-link::after {
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background: var(--color-accent);
+  background: var(--color-night);
+  box-shadow: 0 0 0 4px #fff;
 }
 
 @keyframes draw-x {
@@ -1860,27 +1830,29 @@ a.cell-link::after {
 
 /* --- Focus, selection, skip -------------------------------------------- */
 
+/* Night outline on light grounds, lime on dark ones. */
 :focus-visible {
-  outline: 3px solid var(--color-brand);
+  outline: 3px solid var(--color-night);
   outline-offset: 3px;
 }
 :focus:not(:focus-visible) {
   outline: none;
 }
-.on-navy :focus-visible {
-  outline-color: #fff;
+.on-night :focus-visible {
+  outline-color: var(--color-accent);
 }
 .on-accent :focus-visible {
-  outline-color: var(--color-ink);
+  outline-color: var(--color-night);
 }
 /* The pill is white even when it floats over a dark band. */
 .pill :focus-visible,
 .menu-panel :focus-visible {
-  outline-color: var(--color-brand);
+  outline-color: var(--color-night);
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--color-brand) 22%, transparent);
+  background: var(--color-accent);
+  color: var(--color-night);
 }
 
 .skip-link {

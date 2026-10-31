@@ -6,7 +6,7 @@ import { HeroScene } from './hero-scene'
 import { HeroVisual } from './hero-visual'
 
 /**
- * The hook and the next step on a deep green ground, with the 3D scene as the
+ * The hook and the next step on a night ground, with the 3D scene as the
  * main picture. On a desktop the scene fills the right of the band and bleeds to
  * its edges; on a phone it sits under the buttons. Text rises in once on load.
  * No product is promoted here: the services come first.
@@ -16,7 +16,7 @@ export function Hero({ locale }: { locale: Locale }) {
   const copy = getMessages(locale).hero
 
   return (
-    <section className="hero on-navy">
+    <section className="hero on-night">
       <div className="shell hero-text">
         <h1 className="display enter max-w-[12ch] sm:max-w-[13ch]">{profile.hook}</h1>
         <p className="lead enter enter-1 mt-6 max-w-[40ch]">{profile.supporting}</p>
@@ -24,7 +24,7 @@ export function Hero({ locale }: { locale: Locale }) {
           <Link href="/contact" className="btn-accent">
             {copy.primary}
           </Link>
-          <Link href="/services" className="btn-ghost">
+          <Link href="/services" className="btn-light">
             {copy.secondary}
           </Link>
         </div>

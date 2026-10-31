@@ -9,22 +9,20 @@ import type { ReactNode } from 'react'
 export function PageHeader({
   title,
   intro,
-  tone = 'navy',
   children,
 }: {
   title: string
   intro: string
-  tone?: 'navy' | 'mint'
   children?: ReactNode
 }) {
   return (
     <header
-      className={`page-head ${tone === 'navy' ? 'ground-navy on-navy' : 'ground-mint'}`}
+      className="page-head ground-night on-night"
     >
       <div className={`shell ${children ? 'grid gap-10 lg:grid-cols-12 lg:items-end lg:gap-14' : ''}`}>
         <div className={children ? 'lg:col-span-7' : ''}>
           <h1 className="headline enter max-w-[16ch]">{title}</h1>
-          <p className={`lead enter enter-1 mt-6 max-w-[46ch] ${tone === 'mint' ? '!text-[#2e4338]' : ''}`}>{intro}</p>
+          <p className="lead enter enter-1 mt-6 max-w-[46ch]">{intro}</p>
         </div>
         {children ? <div className="enter enter-2 lg:col-span-5">{children}</div> : null}
       </div>
