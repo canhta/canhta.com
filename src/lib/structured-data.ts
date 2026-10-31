@@ -26,11 +26,8 @@ import { pageUrl } from '@/lib/metadata'
 
 const SITE = 'https://canhta.com'
 
-/** Vietnam first: that is where the small businesses we write for are. */
-const AREA_SERVED = [
-  { '@type': 'Country', name: 'Vietnam' },
-  { '@type': 'Place', name: 'Worldwide' },
-]
+/** Stated once, on the provider: each Service inherits it. */
+const AREA_SERVED = { '@type': 'Country', name: 'Vietnam' }
 
 export type GraphPage = 'home' | 'services' | 'products' | 'contact'
 
@@ -85,7 +82,6 @@ export function buildGraph(locale: Locale, page: GraphPage = 'home') {
           description: o.detail,
           serviceType: o.name,
           provider: { '@id': serviceId },
-          areaServed: AREA_SERVED,
         },
       })),
     },

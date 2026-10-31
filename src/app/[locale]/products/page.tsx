@@ -9,7 +9,7 @@ import { PublicProjects } from '@/components/public-projects'
 import { pageMetadata } from '@/lib/metadata'
 import { buildGraph } from '@/lib/structured-data'
 
-/** Some of the apps we make, each with its own status and its own site. */
+/** Some of the apps we make, each with its own site. */
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
   return pageMetadata((await params).locale, 'products')
 }

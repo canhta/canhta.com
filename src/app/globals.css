@@ -75,7 +75,7 @@
 }
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
   --measure: 1240px;
   --gutter: 20px;
   /* Sizing scale (2026-10-31 refinement). Section padding, on a 4px grid. */

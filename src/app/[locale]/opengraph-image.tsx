@@ -5,6 +5,7 @@ import { getSiteContent } from '@/content'
 import { routing } from '@/i18n/routing'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
+import { firstSentence } from '@/lib/first-sentence'
 import { OG_PAGES, type OgPage } from '@/lib/og'
 
 export const size = { width: 1200, height: 630 }
@@ -51,12 +52,20 @@ function asLocale(locale: string): Locale {
   return locale === 'vi' ? 'vi' : 'en'
 }
 
-function headline(l: Locale, page: OgPage): string {
+/** The last two words are joined by a no-break space, so a headline never ends on a single stray word. */
+function noOrphan(text: string): string {
+  const i = text.lastIndexOf(' ')
+  return i > 0 ? `${text.slice(0, i)}\u00a0${text.slice(i + 1)}` : text
+}
+
+/** Each card carries the page's headline and, below the rule, the page's own second line. */
+function lines(l: Locale, page: OgPage): { headline: string; second: string } {
   const messages = getMessages(l)
-  if (page === 'services') return messages.services.h1
-  if (page === 'products') return messages.apps.h1
-  if (page === 'contact') return messages.contact.h1
-  return getSiteContent(l).profile.hook
+  const { profile } = getSiteContent(l)
+  if (page === 'services') return { headline: messages.services.h1, second: firstSentence(messages.services.intro) }
+  if (page === 'products') return { headline: messages.apps.h1, second: firstSentence(messages.apps.intro) }
+  if (page === 'contact') return { headline: messages.contact.h1, second: firstSentence(messages.contact.body) }
+  return { headline: profile.hook, second: firstSentence(profile.supporting) }
 }
 
 export default async function Image({
@@ -69,6 +78,7 @@ export default async function Image({
   const l = asLocale((await params).locale)
   const page = (OG_PAGES as readonly string[]).includes(String(await id)) ? (String(await id) as OgPage) : 'home'
   const { profile } = getSiteContent(l)
+  const text = lines(l, page)
   const [display, sans] = await Promise.all([
     font('BeVietnamPro-ExtraBold.ttf'),
     font('BeVietnamPro-Medium.ttf'),
@@ -119,7 +129,7 @@ export default async function Image({
             maxWidth: 980,
           }}
         >
-          {headline(l, page)}
+          {noOrphan(text.headline)}
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -133,8 +143,7 @@ export default async function Image({
               color: MUTED,
             }}
           >
-            <span style={{ color: INK }}>{profile.availabilityLabel}</span>
-            <span style={{ marginLeft: 'auto' }}>canhta.com</span>
+            <span style={{ color: INK }}>{text.second}</span>
           </div>
         </div>
       </div>

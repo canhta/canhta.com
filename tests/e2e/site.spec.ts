@@ -367,3 +367,13 @@ test.describe('reduced motion', () => {
     expect(await tilt.evaluate((el) => getComputedStyle(el).transform)).toBe('none')
   })
 })
+
+for (const { locale, path } of PAGES.filter((p) => p.key === 'home')) {
+  test(`[${locale}] the header and hero offer a call, and WhatsApp opens a drafted chat`, async ({ page }) => {
+    await page.goto(path)
+    await expect(page.locator('header a[href^="tel:"]')).toHaveCount(1)
+    await expect(page.locator('.hero a[href^="tel:"]')).toHaveCount(1)
+    const wa = new URL((await page.locator('a[href*="wa.me"]').first().getAttribute('href')) ?? '')
+    expect(wa.searchParams.get('text')).toBeTruthy()
+  })
+}

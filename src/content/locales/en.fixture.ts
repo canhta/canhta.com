@@ -6,7 +6,7 @@ export const enContent: ContentCopy = {
     location: 'Vietnam',
     hook: 'Digitise your work. Let AI do the routine.',
     supporting:
-      'For shops and small businesses. Tell us the problem and we find the solution with you. It might be one record for every order, stock item and debt, so nobody retypes.',
+      'For shops and small businesses in Vietnam. Tell us the problem and we find the solution with you. It might be one record for every order, stock item and debt, so nobody retypes.',
     headerCta: 'Call us',
     availabilityLabel: 'Taking on new projects',
   },
@@ -14,13 +14,13 @@ export const enContent: ContentCopy = {
     {
       slug: 'scori',
       tagline: 'Keep score at card and board games.',
-      summary: 'Add players, enter points, see who leads. Works offline. Friends follow along with a QR code.',
+      summary: 'Add players, enter points, see who leads. Friends follow along with a QR code.',
       availability: 'iPhone and Android, 10 languages.',
     },
     {
       slug: 'remoti',
       tagline: 'Your iPhone as a remote for Android TV and Google TV.',
-      summary: 'Buttons, a touch pad and typing from your iPhone keyboard.',
+      summary: 'Buttons and a touch pad.',
       availability: 'iPhone only.',
     },
     {
@@ -42,21 +42,21 @@ export const enContent: ContentCopy = {
       id: 'systems',
       name: 'Business systems',
       detail:
-        "Enter an order once and stock drops and the customer's balance updates. A customer's past orders and what they owe sit on one screen for whoever picks up the phone.",
+        "Enter an order once and the stock and the customer's balance follow. A customer's past orders and what they owe sit on one screen for whoever picks up the phone.",
       examples: ['ERP', 'CRM'],
     },
     {
       id: 'ai',
       name: 'AI agents and chatbots',
       detail:
-        'A customer asks about price or stock in chat, and AI drafts the answer from your own price list. It also reads supplier invoices into the record and flags a total that does not add up.',
+        'A customer asks about price or stock in chat, and the chatbot answers from your own price list. It can read supplier invoices into the record for a person to check. A person approves anything that costs money or changes an order or record.',
       examples: ['AI agents', 'customer chatbots', 'answers from your own documents'],
     },
     {
       id: 'data',
       name: 'Reports and dashboards',
       detail:
-        'Sales, stock and customer figures from your spreadsheets and apps, in one report that refreshes by itself. On Monday morning you see where you stand without asking anyone.',
+        'Sales, stock and customer figures from your spreadsheets and apps, in one report that stays up to date. On Monday morning you see where you stand without asking anyone.',
       examples: ['Dashboards', 'tidying messy spreadsheets'],
     },
     {
@@ -98,25 +98,25 @@ export const enContent: ContentCopy = {
       id: 'apps',
       question: 'Can you connect the apps I already use?',
       answer:
-        'Often yes, such as Excel files, Zalo and sales software. We check this while we learn how it runs today, and tell you which links work and which do not.',
+        'We check this while we learn how your work runs today, and tell you which links are possible.',
     },
     {
       id: 'agent',
       question: 'Do I need an AI agent, or is a chatbot enough?',
       answer:
-        'A chatbot answers questions from your price list. An agent also acts in your system, such as creating an order record or updating stock, and often a chatbot is enough.',
+        'A chatbot answers questions. An agent also does steps in your systems, with a person approving. Often a chatbot is enough.',
     },
     {
       id: 'wrong',
       question: 'AI can be wrong. Who checks?',
       answer:
-        'A named person, agreed at the start, approves anything that costs money or changes an order or record. Every step the agent takes is logged.',
+        'A named person, agreed at the start, approves anything that costs money or changes an order or record.',
     },
     {
       id: 'customers',
       question: 'Can AI chat with my customers?',
       answer:
-        'Yes. It says it is automated, answers only from the information you gave it, and hands over to a person when unsure or asked.',
+        'Yes, for questions it can answer from the information you gave it. It says it is automated, and it hands over to a person when it is unsure or when the customer asks.',
     },
     {
       id: 'data',
@@ -133,7 +133,7 @@ export const enContent: ContentCopy = {
       id: 'support',
       question: 'What happens after launch?',
       answer:
-        'We keep it running and improving, or hand it over with instructions. How we do that is part of the quote, so you know before you commit.',
+        'How we maintain and support it is part of the quote, so you know before you commit.',
     },
     {
       id: 'idea',

@@ -3,6 +3,7 @@ import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
 import { getPathname } from '@/i18n/navigation'
 import { routing, type AppPathname } from '@/i18n/routing'
+import { phoneContact } from '@/lib/contact'
 import { HeaderNav } from './header-nav'
 
 /**
@@ -31,7 +32,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
           name={profile.name}
           cta={profile.headerCta}
           home={href('/')}
-          contact={href('/contact')}
+          phone={phoneContact(locale)}
           pages={pages}
           links={[
             { href: href('/services'), label: nav.services },
