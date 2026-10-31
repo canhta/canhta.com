@@ -74,7 +74,7 @@ export function AppMarks({ locale }: { locale: Locale }) {
             alt=""
             width={144}
             height={144}
-            priority
+            preload
             unoptimized={build.logo!.endsWith('.svg')}
           />
         </span>

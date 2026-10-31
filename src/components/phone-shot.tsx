@@ -18,14 +18,14 @@ export function PhoneShot({
   shot,
   locale,
   className = '',
-  priority = false,
+  preload = false,
   sizes,
 }: {
   slug: string
   shot: string
   locale: Locale
   className?: string
-  priority?: boolean
+  preload?: boolean
   sizes: string
 }) {
   const alts = getMessages(locale).products.alts as Record<string, string>
@@ -38,7 +38,7 @@ export function PhoneShot({
         height={1434}
         sizes={sizes}
         quality={82}
-        priority={priority}
+        preload={preload}
         className="block h-auto w-full"
       />
     </div>
