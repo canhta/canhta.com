@@ -30,6 +30,7 @@ These came from the owner during the 2026-10-31 redesign. Each one replaces any 
 - "We reply within one working day" is true and may be stated.
 - Scori and Remoti are not released and not in any store. Say "in development" / "đang làm". No store badges, no download or rating claims. Remoti works only with Android TV and Google TV and only on iPhone; say what it does and never compare it with another remote app. Remoti's casting, mirroring and PDF presenting are built but not yet verified on a real iPhone and TV: describe them as in progress, never as working or tested.
 - Dropped for good: Reupmatic, PixelBid.
+- Claims backed by research (`docs/research/2026-10-31-dx-ai-research.md`, local only). Never state: an AI adoption percentage, "fully compliant" with tax, e-invoice or data law, subsidy or grant amounts, "replaces staff", "runs on its own", ROI or percent saved, audit-grade sensor readings. Safe to state: we pick the smallest fix first; a chatbot answers while an agent does steps in your systems; AI can be wrong, so a named person approves anything that costs money or goes to a customer; a chatbot that talks to customers says it is automated; we tell you what customer data an AI service receives; sensors means a dashboard and alerts on off-the-shelf devices. Legal rules change: the site is not tax or legal advice.
 
 ### Structure and SEO
 - Four pages per language, one search intent each: home, services, products, contact. Vietnamese slugs: /vi/dich-vu, /vi/san-pham, /vi/lien-he. Add a page only when it has its own intent and its own content.
