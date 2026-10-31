@@ -166,7 +166,7 @@ describe('buildGraph states no person', () => {
       expect(JSON.stringify(g)).not.toContain('#person')
       expect(JSON.stringify(g)).not.toMatch(/avatar/)
       const site = g['@graph'].find((n) => n['@type'] === 'WebSite') as { name: string; publisher: { '@id': string } }
-      expect(site.name).toBe('Canh Ta')
+      expect(site.name).toBe(getSiteContent(locale).profile.name)
       expect(site.publisher['@id']).toMatch(/#service$/)
     }
   })
