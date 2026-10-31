@@ -41,7 +41,7 @@ function SystemsVisual() {
             <i />
           </span>
           {times(5).map((r) => (
-            <span key={r} className="mvs-row">
+            <span key={r} className="mvs-row" style={{ '--r': r } as CSSProperties}>
               <u />
               <i />
               <i />
@@ -163,14 +163,14 @@ export function ServiceCollage({ approve }: { approve: string }) {
           </span>
         </div>
 
-        <div className="sc-sheet">
+        <div className="mvs-sheet sc-sheet">
           <span className="mvs-head">
             <i />
             <i />
             <i />
           </span>
           {times(4).map((r) => (
-            <span key={r} className="mvs-row">
+            <span key={r} className="mvs-row" style={{ '--r': r } as CSSProperties}>
               <u />
               <i />
               <i />
@@ -192,11 +192,18 @@ export function ServiceCollage({ approve }: { approve: string }) {
           </div>
         </div>
 
-        <div className="sc-report">
+        <div className="mvs-stock sc-report">
           {[38, 52, 44, 70, 62, 94].map((h, i) => (
             <i key={i} style={{ '--h': `${h}%`, '--i': i } as CSSProperties} />
           ))}
         </div>
+
+        <span className="sc-sensor">
+          {times(3).map((i) => (
+            <span key={i} className="mv-ring" style={{ '--i': i } as CSSProperties} />
+          ))}
+          <span className="mv-node" />
+        </span>
 
         <div className="sc-web">
           <span className="sc-web-bar" />
