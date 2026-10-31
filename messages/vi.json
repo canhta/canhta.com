@@ -4,7 +4,7 @@
     "skipToContent": "Tới nội dung chính"
   },
   "nav": {
-    "primary": "Chính",
+    "primary": "Menu chính",
     "language": "Ngôn ngữ",
     "services": "Dịch vụ",
     "contact": "Liên hệ",
@@ -14,10 +14,10 @@
     "products": "Sản phẩm"
   },
   "hero": {
-    "primary": "Kể về doanh nghiệp của bạn",
+    "primary": "Kể về công việc của bạn",
     "secondary": "Xem dịch vụ",
     "visual": {
-      "label": "Zalo, Excel và giấy tờ được gom về một màn hình",
+      "label": "Zalo, Excel và giấy tờ gom về một màn hình",
       "sources": [
         "Zalo",
         "Excel",
@@ -43,7 +43,7 @@
       "CRM",
       "Chatbot",
       "Website",
-      "Dữ liệu",
+      "Báo cáo",
       "IoT",
       "AI agent"
     ],
@@ -51,23 +51,23 @@
   },
   "services": {
     "h1": "Chuyển đổi số, phần mềm và AI cho doanh nghiệp nhỏ",
-    "intro": "Cho chúng tôi biết doanh nghiệp bạn đang vận hành thế nào. Chúng tôi vẽ lại việc đó, rồi chuyển dần sang hệ thống làm việc thay bạn.",
+    "intro": "Việc đang làm tay, nằm rải rác trong Zalo và Excel, chúng tôi gom về một hệ thống, rồi để AI lo các bước lặp lại. Chúng tôi bắt đầu từ cách bạn đang làm và đi từng bước.",
     "processHeading": "Cách chúng tôi làm một dự án",
     "faqHeading": "Câu hỏi thường gặp"
   },
   "apps": {
     "h1": "Một vài sản phẩm của chúng tôi",
-    "intro": "App, web, dữ liệu và AI: đây là một vài thứ chúng tôi đã làm. Scori và Remoti vẫn đang làm, chưa có trên cửa hàng ứng dụng.",
-    "publicHeading": "Còn những dự án khác bạn có thể xem"
+    "intro": "App, web, dữ liệu và AI: đây là một vài thứ chúng tôi đã làm. Scori và Remoti vẫn đang làm, chưa có trên App Store hay Google Play.",
+    "publicHeading": "Dự án khác"
   },
   "contact": {
-    "h1": "Kể cho chúng tôi doanh nghiệp bạn vận hành thế nào",
+    "h1": "Kể cho chúng tôi cách bạn đang làm việc",
     "body": "Mô tả vài dòng hay một ý tưởng là đủ. Chúng tôi trả lời trong một ngày làm việc.",
     "helpHeading": "Nếu tiện, cho biết thêm",
     "help": [
       "Ai sẽ dùng",
       "Việc nào đang tốn nhiều thời gian nhất",
-      "Hiện bạn đang dùng công cụ nào"
+      "Hiện bạn đang dùng gì (Zalo, Excel, phần mềm nào)"
     ],
     "channels": "Liên hệ qua",
     "chatOn": "Nhắn qua",
@@ -86,18 +86,18 @@
       },
       {
         "id": "map",
-        "label": "Vẽ lại việc đang chạy",
-        "detail": "Ai làm gì, dùng hệ thống nào, thời gian mất ở đâu."
+        "label": "Xem bạn đang làm thế nào",
+        "detail": "Ai làm gì, việc nào nằm trong Zalo, Excel hay giấy, thời gian mất ở đâu."
       },
       {
         "id": "plan",
         "label": "Gửi kế hoạch và báo giá",
-        "detail": "Trước khi làm."
+        "detail": "Phần nào dùng phần mềm bán sẵn, phần nào phải làm mới. Chốt trước khi làm."
       },
       {
         "id": "build",
         "label": "Làm bản chạy thử",
-        "detail": "Với thông tin thật của bạn. Ổn rồi mới chuyển tiếp phần khác."
+        "detail": "Với thông tin thật của bạn. Chạy ổn thì làm tiếp phần khác, rồi thêm AI cho các bước lặp lại, từng việc một."
       }
     ]
   },
@@ -106,8 +106,8 @@
     "proof": "Chúng tôi từng làm các sản phẩm có hàng trăm nghìn người dùng, ở vai trò lập trình, xử lý dữ liệu và quản lý sản phẩm."
   },
   "closing": {
-    "heading": "Sẵn sàng đưa công việc lên phần mềm và AI?",
-    "body": "Kể cho chúng tôi doanh nghiệp bạn đang vận hành thế nào. Chúng tôi trả lời trong một ngày làm việc.",
+    "heading": "Việc nào đang chiếm nhiều thời gian nhất của bạn?",
+    "body": "Chỉ cần vài dòng. Chúng tôi trả lời trong một ngày làm việc.",
     "cta": "Liên hệ"
   },
   "footer": {
@@ -117,9 +117,9 @@
   },
   "notFound": {
     "label": "Không tìm thấy",
-    "heading": "Địa chỉ này không có trang nào.",
-    "body": "Kiểm tra lại xem gõ sai không, hoặc quay về trang đầu.",
-    "home": "Về trang đầu"
+    "heading": "Không có trang nào ở địa chỉ này.",
+    "body": "Kiểm tra lại xem gõ sai không, hoặc quay về trang chủ.",
+    "home": "Về trang chủ"
   },
   "products": {
     "alts": {
@@ -129,7 +129,7 @@
   },
   "buildMeta": {
     "kinds": {
-      "agent": "Việc tự chạy",
+      "agent": "Tự động hóa",
       "skill": "Công cụ cho trợ lý AI",
       "mobile": "Ứng dụng điện thoại",
       "web": "Sản phẩm web",
@@ -156,14 +156,14 @@
   "metadata": {
     "home": {
       "title": "Chuyển đổi số và AI cho doanh nghiệp nhỏ | Canh Ta",
-      "description": "Chúng tôi số hóa cách doanh nghiệp nhỏ làm việc và cho AI tự làm các bước lặp lại. Ngoài ra còn tự làm app như Scori, Remoti."
+      "description": "Chúng tôi gom đơn hàng nhập tay, tin nhắn và file Excel về một hệ thống, rồi để AI làm các bước lặp lại, có người duyệt. Cho cửa hàng và doanh nghiệp nhỏ."
     },
     "services": {
       "title": "Phần mềm, ERP, CRM và AI cho doanh nghiệp nhỏ | Canh Ta",
-      "description": "ERP, CRM, chatbot, website, dữ liệu, IoT và AI agent cho doanh nghiệp nhỏ và cá nhân. Có kế hoạch và báo giá trước khi làm."
+      "description": "ERP, CRM, phần mềm bán hàng, chatbot, AI agent, báo cáo, website và IoT cho cửa hàng, doanh nghiệp nhỏ và cá nhân. Có kế hoạch và báo giá trước khi làm."
     },
     "contact": {
-      "title": "Liên hệ | Canh Ta",
+      "title": "Liên hệ qua email, Zalo hoặc WhatsApp | Canh Ta",
       "description": "Kể cho chúng tôi việc đang mất nhiều thời gian, hoặc thứ bạn muốn làm. Chúng tôi trả lời trong một ngày làm việc."
     },
     "jobTitle": "Kỹ sư phần mềm",

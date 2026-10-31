@@ -43,7 +43,7 @@
       "CRM",
       "Chatbots",
       "Websites",
-      "Data",
+      "Reports",
       "IoT",
       "AI agents"
     ],
@@ -51,14 +51,14 @@
   },
   "services": {
     "h1": "Digital transformation, software and AI for small businesses",
-    "intro": "Tell us how your business runs today. We map it, then move it onto systems that work for you, one step at a time.",
+    "intro": "We take work that is done by hand and scattered across chat and spreadsheets, put it in one system, and let AI handle the routine steps. We start from how you work today and go one step at a time.",
     "processHeading": "How a project works",
     "faqHeading": "Questions"
   },
   "apps": {
     "h1": "Some of our products",
     "intro": "Apps, web, data and AI: a few of the things we have built. Scori and Remoti are still being built and are not in the app stores yet.",
-    "publicHeading": "More public projects"
+    "publicHeading": "Other projects"
   },
   "contact": {
     "h1": "Tell us how your business runs",
@@ -67,7 +67,7 @@
     "help": [
       "Who will use it",
       "Which work takes the most time today",
-      "Which tools you use now"
+      "What you use now (chat, spreadsheets, software)"
     ],
     "channels": "Reach us on",
     "chatOn": "Chat on",
@@ -86,18 +86,18 @@
       },
       {
         "id": "map",
-        "label": "We map how it runs today",
-        "detail": "Who does what, which systems, where the time goes."
+        "label": "We look at how you do it now",
+        "detail": "Who does what, what lives in chat, sheets and paper, and where the time goes."
       },
       {
         "id": "plan",
         "label": "You get a plan and a price",
-        "detail": "Before we build anything."
+        "detail": "Which parts existing software can cover and which we would build. Agreed before we build anything."
       },
       {
         "id": "build",
         "label": "We build a small working version",
-        "detail": "On your real information. If it works well, we move the next part."
+        "detail": "On your real information. If it works well, we move on to the next part and add AI for the routine steps, one job at a time."
       }
     ]
   },
@@ -106,8 +106,8 @@
     "proof": "We have worked on products used by hundreds of thousands of people, as developers, in data and in product management."
   },
   "closing": {
-    "heading": "Ready to move your work onto software and AI?",
-    "body": "Tell us how your business runs today. We reply within one working day.",
+    "heading": "Which job takes most of your week?",
+    "body": "A few lines is enough. We reply within one working day.",
     "cta": "Talk to us"
   },
   "footer": {
@@ -118,8 +118,8 @@
   "notFound": {
     "label": "Not found",
     "heading": "There is no page at this address.",
-    "body": "Check the address for a typo, or go back to the front page.",
-    "home": "Go to the front page"
+    "body": "Check the address for a typo, or go back to the home page.",
+    "home": "Go to the home page"
   },
   "products": {
     "alts": {
@@ -129,7 +129,7 @@
   },
   "buildMeta": {
     "kinds": {
-      "agent": "Work that runs itself",
+      "agent": "Automation",
       "skill": "Tool for AI assistants",
       "mobile": "Phone app",
       "web": "Web product",
@@ -156,14 +156,14 @@
   "metadata": {
     "home": {
       "title": "Digital transformation and AI for small businesses | Canh Ta",
-      "description": "We digitise how small businesses work and put AI agents on the routine steps. We also make our own apps, like Scori and Remoti."
+      "description": "We move small businesses from hand-typed orders, chats and spreadsheets to one system, then add AI for the routine steps, with a person approving."
     },
     "services": {
       "title": "Custom software, ERP, CRM and AI for small businesses | Canh Ta",
-      "description": "ERP, CRM, chatbots, websites, data, IoT and AI agents for small businesses and individuals. A plan and a price before we build anything."
+      "description": "ERP, CRM, sales software, chatbots, AI agents, reports, websites and sensors for small businesses and individuals. A plan and a price before we build anything."
     },
     "contact": {
-      "title": "Contact | Canh Ta",
+      "title": "Contact us by email, Zalo or WhatsApp | Canh Ta",
       "description": "Tell us what takes too much time, or what you want to build. We reply within one working day."
     },
     "jobTitle": "Software engineer",
