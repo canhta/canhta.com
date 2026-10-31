@@ -8,7 +8,8 @@ import { Tilt } from './tilt'
 /**
  * One app, as a rounded panel on the deep green band. The app's own colour sits
  * behind two overlapping phone screens that lean toward the pointer; the text
- * is white on deep green below. Status and platform are text, never only a
+ * is white on deep green below. The compact version (home) leaves out the long
+ * summary; the products page carries it. Status and platform are text, never only a
  * colour or an image.
  */
 export function AppCard({
@@ -24,7 +25,7 @@ export function AppCard({
   // Under the home page's section heading a card name is an h3; on the products
   // page it follows the h1 directly, so it is an h2 (no skipped level).
   const Heading = variant === 'full' ? 'h2' : 'h3'
-  const phoneWidth = variant === 'compact' ? 'w-[40%] max-w-[150px]' : 'w-[40%] max-w-[210px]'
+  const phoneWidth = variant === 'compact' ? 'w-[40%] max-w-[124px]' : 'w-[40%] max-w-[210px]'
 
   return (
     <article data-theme={build.slug} className="app-card">
@@ -37,7 +38,7 @@ export function AppCard({
                   slug={build.slug}
                   shot={shot}
                   locale={locale}
-                  sizes={variant === 'compact' ? '150px' : '(min-width: 1024px) 210px, 40vw'}
+                  sizes={variant === 'compact' ? '124px' : '(min-width: 1024px) 210px, 40vw'}
                 />
               </Tilt>
             </div>
@@ -55,7 +56,7 @@ export function AppCard({
           </Heading>
         </div>
         <p className="subtitle mt-4">{build.tagline}</p>
-        <p className="cell-muted mt-2 text-[15px] leading-relaxed">{build.summary}</p>
+        {variant === 'full' ? <p className="cell-muted mt-2 text-[15px] leading-relaxed">{build.summary}</p> : null}
 
         <p className="mt-5 text-[14px] leading-snug">
           <span className="font-extrabold text-leaf">{statusLabel(build.status, locale)}.</span>{' '}

@@ -14,11 +14,11 @@ export function Ticker({ words, label, pause }: { words: string[]; label: string
   const [paused, setPaused] = useState(false)
 
   return (
-    <section aria-label={label} className="ticker ground-accent on-accent" data-paused={paused}>
+    <div className="ticker ground-accent on-accent" data-paused={paused}>
       <div className="ticker-bar">
         <div className="ticker-window">
           <div className="ticker-track">
-            <ul className="ticker-list">
+            <ul className="ticker-list" aria-label={label}>
               {words.map((w) => (
                 <li key={w} className="ticker-item" translate="no">
                   {w}
@@ -39,6 +39,6 @@ export function Ticker({ words, label, pause }: { words: string[]; label: string
           <span className="sr-only">{pause}</span>
         </button>
       </div>
-    </section>
+    </div>
   )
 }

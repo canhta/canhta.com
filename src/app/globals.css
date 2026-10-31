@@ -114,7 +114,8 @@ li {
   text-wrap: pretty;
 }
 
-section[id] {
+section[id],
+article[id] {
   scroll-margin-top: calc(var(--pill-top) + var(--pill-h) + 16px);
 }
 
@@ -834,6 +835,7 @@ section[id] {
     flex: initial;
     flex-wrap: wrap;
     row-gap: 4px;
+    padding-left: max(var(--gutter), env(safe-area-inset-left));
   }
   .ticker-copy,
   .ticker-btn {
