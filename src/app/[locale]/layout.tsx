@@ -9,6 +9,7 @@ import { Fx } from '@/components/fx'
 import { Measure } from '@/components/measure'
 import '../globals.css'
 import '../fx.css'
+import { SITE } from '@/lib/site'
 
 // One family for the whole page. Be Vietnam Pro was drawn for Vietnamese, so the
 // stacked marks (ệ, ộ) are designed in rather than patched, and a Vietnamese
@@ -110,7 +111,7 @@ export const viewport: Viewport = {
  * page, one search intent, one set of tags.
  */
 export const metadata: Metadata = {
-  metadataBase: new URL('https://canhta.com'),
+  metadataBase: new URL(SITE),
 }
 
 export default async function LocaleLayout({

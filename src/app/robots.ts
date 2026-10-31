@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next'
+import { SITE } from '@/lib/site'
 
 /**
  * AI crawlers are named explicitly rather than left to `*`.
@@ -40,6 +41,6 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: '*', allow: '/' },
       { userAgent: AI_CRAWLERS, allow: '/' },
     ],
-    sitemap: 'https://canhta.com/sitemap.xml',
+    sitemap: `${SITE}/sitemap.xml`,
   }
 }

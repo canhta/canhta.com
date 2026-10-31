@@ -182,8 +182,8 @@ describe('buildGraph across locales', () => {
   it('points the two routes at their own URLs', () => {
     const en = buildGraph('en')['@graph'].find((n) => n['@type'] === 'WebPage') as { url: string }
     const vi = buildGraph('vi')['@graph'].find((n) => n['@type'] === 'WebPage') as { url: string }
-    expect(en.url).toBe('https://canhta.com')
-    expect(vi.url).toBe('https://canhta.com/vi')
+    expect(en.url).toBe('https://www.canhta.com')
+    expect(vi.url).toBe('https://www.canhta.com/vi')
   })
 
   it('keeps one stable service identity shared by both routes', () => {

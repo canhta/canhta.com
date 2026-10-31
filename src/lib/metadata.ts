@@ -3,8 +3,8 @@ import type { Locale } from '@/content/types'
 import { getPathname } from '@/i18n/navigation'
 import { routing, type AppPathname } from '@/i18n/routing'
 import { getMessages } from '@/i18n/messages'
+import { SITE } from '@/lib/site'
 
-const SITE = 'https://canhta.com'
 
 type PageKey = 'home' | 'services' | 'products' | 'contact'
 

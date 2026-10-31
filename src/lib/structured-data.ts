@@ -2,6 +2,7 @@ import { getSiteContent } from '@/content'
 import type { Build, Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
 import { pageUrl } from '@/lib/metadata'
+import { SITE } from '@/lib/site'
 
 /**
  * The machine-readable half of each page.
@@ -24,7 +25,6 @@ import { pageUrl } from '@/lib/metadata'
  * speaks as "we" and states no people, so neither does its markup.
  */
 
-const SITE = 'https://canhta.com'
 
 /** Stated once, on the provider: each Service inherits it. */
 const AREA_SERVED = { '@type': 'Country', name: 'Vietnam' }

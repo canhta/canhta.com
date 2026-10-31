@@ -42,7 +42,7 @@ function SystemsVisual() {
           </span>
           {times(5).map((r) => (
             <span key={r} className="mvs-row" style={{ '--r': r } as CSSProperties}>
-              <u />
+              <span className="mvs-u" />
               <i />
               <i />
             </span>
@@ -178,7 +178,7 @@ export function ServiceCollage({ approve }: { approve: string }) {
           </span>
           {times(4).map((r) => (
             <span key={r} className="mvs-row" style={{ '--r': r } as CSSProperties}>
-              <u />
+              <span className="mvs-u" />
               <i />
               <i />
             </span>

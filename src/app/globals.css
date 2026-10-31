@@ -1485,14 +1485,14 @@ a.cell-link::after {
   border-radius: 0.8em;
   transform-origin: left center;
 }
-.mvs-row u {
+.mvs-row .mvs-u {
   position: relative;
   width: 1.5em;
   height: 1.5em;
   border-radius: 50%;
   background: var(--color-night);
 }
-.mvs-row u::after {
+.mvs-row .mvs-u::after {
   content: '';
   position: absolute;
   left: 0.55em;
