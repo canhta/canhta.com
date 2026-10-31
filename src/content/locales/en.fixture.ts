@@ -45,35 +45,35 @@ export const enContent: ContentCopy = {
       name: 'Business systems',
       detail:
         'ERP, CRM and internal systems for orders, stock, who owes what and reports, in place of chat threads and spreadsheets.',
-      examples: ['ERP', 'CRM', 'Orders and stock', 'Who owes what'],
+      examples: ['ERP', 'CRM', 'orders and stock', 'who owes what'],
     },
     {
       id: 'ai',
       name: 'AI agents and chatbots',
       detail:
         'Typical first jobs: reading orders and invoices into your system, drafting replies for your staff to approve, answering from your own documents, and a weekly report. A person approves anything that costs money or goes to a customer.',
-      examples: ['Customer chatbots', 'Reading orders and invoices', 'Weekly reports'],
+      examples: ['Customer chatbots', 'reading orders and invoices', 'weekly reports'],
     },
     {
       id: 'data',
       name: 'Data and reports',
       detail:
         'Pull sales, stock and customer figures out of your spreadsheets and apps into one place, then turn them into a report you can act on.',
-      examples: ['Dashboards', 'Weekly reports', 'Tidying messy spreadsheets'],
+      examples: ['Dashboards', 'weekly reports', 'tidying messy spreadsheets'],
     },
     {
       id: 'web',
       name: 'Websites and apps',
       detail:
         'Websites, web apps and phone apps, for your business or for your own idea.',
-      examples: ['Websites', 'Web apps', 'iPhone and Android apps'],
+      examples: ['Websites', 'web apps', 'iPhone and Android apps'],
     },
     {
       id: 'iot',
       name: 'Connected devices (IoT)',
       detail:
         'A dashboard and alerts on sensors and devices you can buy off the shelf, such as temperature and humidity. You see the readings in one place and get a message when something is off. These are everyday readings, not certified measurements.',
-      examples: ['Temperature and humidity', 'Dashboard', 'Alerts'],
+      examples: ['Temperature and humidity', 'dashboard', 'alerts'],
     },
     {
       id: 'team',

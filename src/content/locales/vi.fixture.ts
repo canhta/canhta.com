@@ -46,35 +46,35 @@ export const viContent: ContentCopy = {
       name: 'Hệ thống quản lý',
       detail:
         'ERP, CRM và hệ thống nội bộ cho đơn hàng, kho, công nợ và báo cáo, thay cho việc nhắn Zalo và ghi Excel.',
-      examples: ['ERP', 'CRM', 'Đơn hàng và kho', 'Công nợ'],
+      examples: ['ERP', 'CRM', 'đơn hàng và kho', 'công nợ'],
     },
     {
       id: 'ai',
       name: 'AI agent và chatbot',
       detail:
         'Việc nên giao cho AI trước thường gồm: đọc đơn hàng và hóa đơn vào hệ thống, soạn sẵn câu trả lời để nhân viên duyệt, tìm câu trả lời trong tài liệu của bạn, làm báo cáo hằng tuần. Việc nào tốn tiền hoặc gửi đến khách đều có người duyệt.',
-      examples: ['Chatbot trả lời khách', 'Đọc đơn hàng và hóa đơn', 'Báo cáo hằng tuần'],
+      examples: ['Chatbot trả lời khách', 'đọc đơn hàng và hóa đơn', 'báo cáo hằng tuần'],
     },
     {
       id: 'data',
       name: 'Số liệu và báo cáo',
       detail:
         'Gom số liệu bán hàng, kho và khách hàng từ Excel và các app về một chỗ, rồi làm thành báo cáo để bạn quyết định.',
-      examples: ['Bảng số liệu', 'Báo cáo hằng tuần', 'Dọn file Excel lộn xộn'],
+      examples: ['Bảng số liệu', 'báo cáo hằng tuần', 'dọn file Excel lộn xộn'],
     },
     {
       id: 'web',
       name: 'Website và ứng dụng',
       detail:
         'Website, ứng dụng web và ứng dụng điện thoại, cho việc kinh doanh hoặc ý tưởng của riêng bạn.',
-      examples: ['Website', 'Ứng dụng web', 'Ứng dụng iPhone và Android'],
+      examples: ['Website', 'ứng dụng web', 'ứng dụng iPhone và Android'],
     },
     {
       id: 'iot',
       name: 'Thiết bị kết nối (IoT)',
       detail:
         'Bảng theo dõi và cảnh báo trên cảm biến, thiết bị bán sẵn, ví dụ nhiệt độ và độ ẩm. Bạn xem số ở một chỗ và nhận tin báo khi có gì bất thường. Đây là số đo dùng hằng ngày, không phải số đo có chứng nhận.',
-      examples: ['Nhiệt độ và độ ẩm', 'Bảng theo dõi', 'Cảnh báo'],
+      examples: ['Nhiệt độ và độ ẩm', 'bảng theo dõi', 'cảnh báo'],
     },
     {
       id: 'team',
