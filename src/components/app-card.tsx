@@ -45,7 +45,7 @@ export function AppCard({
         </div>
       ) : null}
 
-      <div className="flex flex-1 flex-col p-6 sm:p-8">
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
         <div className="flex items-center gap-3">
           {build.logo ? (
             <Image
@@ -62,7 +62,7 @@ export function AppCard({
           </Heading>
         </div>
         <p className="subtitle mt-4">{build.tagline}</p>
-        {variant === 'full' ? <p className="cell-muted mt-2 text-[15px] leading-relaxed">{build.summary}</p> : null}
+        {variant === 'full' ? <p className="cell-muted mt-2 text-[14px] leading-relaxed">{build.summary}</p> : null}
 
         <p className="mt-5 text-[14px] leading-snug">
           <span className="cell-muted">{build.availability}</span>

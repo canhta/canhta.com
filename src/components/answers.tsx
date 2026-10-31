@@ -56,13 +56,13 @@ export function Answers({ locale }: { locale: Locale }) {
 
   return (
     <section aria-labelledby="answers-title" className="band sheet ground-tint">
-      <div className="shell grid gap-10 lg:grid-cols-12 lg:gap-14">
-        <h2 id="answers-title" className="title-band title reveal self-start lg:col-span-4 lg:text-[clamp(2rem,3.4vw,3rem)]">
+      <div className="shell grid gap-8 lg:grid-cols-12 lg:gap-12">
+        <h2 id="answers-title" className="title-band section-title reveal self-start lg:col-span-4">
           {heading}
         </h2>
         <dl className="reveal lg:col-span-8">
           {faq.map((item) => (
-            <div key={item.id} className="border-t-2 border-ink py-7 first:border-t-0 first:pt-0 lg:first:pt-2">
+            <div key={item.id} className="border-t-2 border-ink py-6 first:border-t-0 first:pt-0 lg:first:pt-2">
               <dt className="title max-w-[26ch]">{item.question}</dt>
               <dd className="lead mt-3 max-w-[52ch]">{item.answer}</dd>
             </div>

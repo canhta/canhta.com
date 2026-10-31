@@ -18,15 +18,15 @@ export function AppsTeaser({ locale }: { locale: Locale }) {
   return (
     <section aria-labelledby="apps-title" className="band sheet ground-night on-night">
       <div className="shell">
-        <div className="title-band reveal flex flex-wrap items-center justify-between gap-x-10 gap-y-6">
-          <h2 id="apps-title" className="headline max-w-[14ch]">
+        <div className="title-band reveal flex flex-wrap items-center justify-between gap-x-8 gap-y-4">
+          <h2 id="apps-title" className="section-title max-w-[14ch]">
             {copy.appsHeading}
           </h2>
           <Link href="/products" className="btn-light">
             {copy.appsAll}
           </Link>
         </div>
-        <ul className="snap-row mt-10">
+        <ul className="snap-row mt-8">
           {featured.map((build) => (
             <li key={build.slug}>
               <AppCard build={build} locale={locale} variant="compact" />

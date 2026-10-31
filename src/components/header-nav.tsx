@@ -40,7 +40,7 @@ export function HeaderNav({
       <div className="pill">
         <Link
           href="/"
-          className="grid min-h-11 shrink-0 place-items-center pr-1 text-[16px] font-extrabold tracking-tight min-[360px]:pr-2 min-[360px]:text-[17px]"
+          className="grid min-h-11 shrink-0 place-items-center pr-1 text-[16px] font-bold tracking-tight min-[360px]:pr-2"
           translate="no"
           onClick={() => setOpen(false)}
         >

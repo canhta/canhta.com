@@ -12,7 +12,7 @@ export function PublicProjects({ locale }: { locale: Locale }) {
   return (
     <section aria-labelledby="public-title" className="band sheet ground-night on-night">
       <div className="shell">
-        <h2 id="public-title" className="headline reveal max-w-[16ch]">
+        <h2 id="public-title" className="section-title reveal max-w-[16ch]">
           {copy.publicHeading}
         </h2>
         <ul className="mt-10 grid gap-4">

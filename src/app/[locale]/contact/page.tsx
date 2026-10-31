@@ -26,16 +26,16 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
       </PageHeader>
 
       <section className="band sheet ground-tint" aria-labelledby="help-title">
-        <div className="shell grid gap-12 lg:grid-cols-12 lg:gap-14">
+        <div className="shell grid gap-10 lg:grid-cols-12 lg:gap-12">
           <div className="reveal lg:col-span-5">
-            <h2 id="help-title" className="headline">
+            <h2 id="help-title" className="section-title">
               {copy.helpHeading}
             </h2>
-            <ul className="mt-8 grid gap-3">
+            <ul className="mt-6 grid gap-3">
               {copy.help.map((item) => (
                 <li
                   key={item}
-                  className="rounded-[28px] bg-white px-6 py-5 text-[clamp(1.1rem,1.8vw,1.35rem)] leading-snug font-bold shadow-[var(--shadow-card)]"
+                  className="rounded-[var(--r-card)] bg-white px-5 py-4 text-[clamp(1rem,0.95rem+0.3vw,1.1875rem)] leading-snug font-bold shadow-[var(--shadow-card)]"
                 >
                   {item}
                 </li>
@@ -43,13 +43,13 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
             </ul>
           </div>
           <div className="reveal lg:col-span-7" aria-labelledby="next-title" role="region">
-            <h2 id="next-title" className="headline">
+            <h2 id="next-title" className="section-title">
               {copy.nextHeading}
             </h2>
-            <ol className="mt-8">
+            <ol className="mt-6">
               {next.map((step, i) => (
                 <li key={step.id} className="step">
-                  <p aria-hidden="true" className="step-num !text-[clamp(3.5rem,8vw,5.5rem)]">
+                  <p aria-hidden="true" className="step-num !text-[clamp(2.75rem,5vw,4rem)]">
                     {i + 1}
                   </p>
                   <div className="min-w-0">
