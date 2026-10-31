@@ -4,6 +4,7 @@ const withNextIntl = createNextIntlPlugin()
 
 export default withNextIntl({
   reactStrictMode: true,
+  experimental: { globalNotFound: true },
   images: {
     // Placeholder assets are SVG while we wait for real product imagery.
     // Sandboxed per Next's documented pattern; revisit when raster assets land.

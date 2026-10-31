@@ -1,7 +1,7 @@
 import { defineConfig, devices } from '@playwright/test'
 
 /**
- * The dev server on :3111 is usually already up and owned by the person running
+ * The dev server on :3310 is usually already up and owned by the person running
  * the suite, so `reuseExistingServer` is not a convenience here — starting a
  * second Next dev on the same port is how you get a suite that fails for
  * reasons that have nothing to do with the site.
@@ -9,7 +9,7 @@ import { defineConfig, devices } from '@playwright/test'
  * `ALLOW_FIXTURES=1` matters when Playwright *does* have to start the server:
  * `src/content/index.ts` refuses to load fixture content without it.
  */
-const PORT = 3111
+const PORT = 3310
 const BASE_URL = `http://localhost:${PORT}`
 
 export default defineConfig({
@@ -51,7 +51,7 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: 'pnpm exec next dev --port 3111',
+    command: 'pnpm exec next dev --port 3310',
     port: PORT,
     reuseExistingServer: true,
     timeout: 180_000,
