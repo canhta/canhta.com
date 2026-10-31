@@ -6,7 +6,7 @@ export const enContent: ContentCopy = {
     location: 'Vietnam',
     hook: 'We digitise how you work, then let AI agents do the routine part.',
     supporting:
-      'ERP, CRM, chatbots, websites, data, IoT and AI agents for small businesses and individuals. We start from how you work today and move it over step by step.',
+      'If orders are typed by hand, chats wait for an answer and stock lives in a spreadsheet, we bring it into one system. AI then does the routine steps and a person approves what matters.',
     headerCta: 'Talk to us',
     availabilityLabel: 'Taking on new projects',
   },
@@ -28,7 +28,7 @@ export const enContent: ContentCopy = {
     {
       slug: 'ai-engineering-atlas',
       tagline: 'A learning roadmap for software engineers moving into AI.',
-      summary: 'Take a short test to see what you are missing, then get the shortest route to a hands-on project.',
+      summary: 'Take a short test to see what you are missing, then follow a route that fills the gaps.',
       availability: 'Open source, in English and Vietnamese.',
     },
     {
@@ -44,22 +44,22 @@ export const enContent: ContentCopy = {
       id: 'systems',
       name: 'Business systems',
       detail:
-        'ERP, CRM, orders, stock and internal systems that replace chat threads and spreadsheets.',
-      examples: ['ERP', 'CRM', 'Orders and stock', 'Internal systems'],
+        'ERP, CRM and internal systems for orders, stock, who owes what and reports, in place of chat threads and spreadsheets. We connect to the invoice or sales software you already use.',
+      examples: ['ERP', 'CRM', 'Orders and stock', 'Who owes what'],
     },
     {
       id: 'ai',
       name: 'AI agents and chatbots',
       detail:
-        'AI that reads, answers and does the routine steps inside your systems. A person approves what matters.',
-      examples: ['Customer chatbots', 'Order and document reading', 'Automated workflows'],
+        'Typical first jobs: reading orders and invoices into your system, drafting replies for your staff to approve, answering from your own documents, and a weekly report. A person approves anything that costs money or goes to a customer.',
+      examples: ['Customer chatbots', 'Reading orders and invoices', 'Weekly reports'],
     },
     {
       id: 'data',
       name: 'Data and reports',
       detail:
-        'Gather scattered data, clean it up, and turn it into reports you can act on.',
-      examples: ['Dashboards', 'Reports', 'Data clean-up'],
+        'Pull sales, stock and customer figures out of your spreadsheets and apps into one place, then turn them into a report you can act on.',
+      examples: ['Dashboards', 'Weekly reports', 'Tidying messy spreadsheets'],
     },
     {
       id: 'web',
@@ -72,8 +72,8 @@ export const enContent: ContentCopy = {
       id: 'iot',
       name: 'Connected devices (IoT)',
       detail:
-        'Connect sensors and devices to your system so you can watch and control them in one place.',
-      examples: ['Sensors', 'Device monitoring', 'Alerts'],
+        'A dashboard and alerts on sensors and devices you can buy off the shelf, such as temperature and humidity. You see the readings in one place and get a message when something is off. These are everyday readings, not certified measurements.',
+      examples: ['Temperature and humidity', 'Dashboard', 'Alerts'],
     },
     {
       id: 'team',
@@ -91,32 +91,46 @@ export const enContent: ContentCopy = {
         'We send a plan and a price before we build anything. The project starts with a small working version. If it works well, we continue.',
     },
     {
-      id: 'ownership',
-      question: 'Who owns what you build?',
-      answer: 'You do. The code, the accounts and the systems are all in your name.',
-    },
-    {
       id: 'existing',
       question: 'Do we really need custom software?',
       answer:
-        'Often not. If software you can already buy does the job, we will tell you, so you do not spend money for nothing.',
+        'Often not. We pick the smallest fix first. If software you can already buy does the job, we will tell you, so you do not spend money for nothing.',
+    },
+    {
+      id: 'agent',
+      question: 'Do I need an AI agent, or is a chatbot enough?',
+      answer:
+        'A chatbot answers messages. An AI agent does steps in your systems, like reading an order and filling in the record. Often a chatbot or a simple fixed rule is enough, and then that is what we build.',
+    },
+    {
+      id: 'wrong',
+      question: 'AI can be wrong. Who checks?',
+      answer:
+        'A named person approves anything that costs money or goes to a customer, before it happens. Usually that is you or someone on your team. We agree who at the start.',
+    },
+    {
+      id: 'customers',
+      question: 'Can AI chat with my customers?',
+      answer:
+        'Yes. It tells customers it is an automated assistant, answers from the information you gave it, and hands over to a person when it is unsure or the customer asks for one.',
+    },
+    {
+      id: 'data',
+      question: 'What happens to my customers\' data when AI is used?',
+      answer:
+        'We collect only what the project needs. Before we start, we tell you what an AI service would receive and from which provider, and we agree who owns the data. We cannot give legal advice.',
+    },
+    {
+      id: 'ownership',
+      question: 'Who owns what you build?',
+      answer:
+        'You do. The code, the accounts and the systems are all in your name. When it is finished we can keep fixing and improving it, or hand it over with clear instructions so you can run it yourself.',
     },
     {
       id: 'idea',
       question: 'What if I only have an idea?',
       answer:
         'That is fine. Tell us what you want to make and who it is for. We will help you start with the smallest useful version.',
-    },
-    {
-      id: 'team',
-      question: 'Can you work with my team?',
-      answer: 'Yes. We work alongside your team, or take one piece of the work and hand it over.',
-    },
-    {
-      id: 'after',
-      question: 'What happens when it is finished?',
-      answer:
-        'We can keep fixing and improving it, or hand it over with clear instructions so you can run it yourself.',
     },
   ],
 }
