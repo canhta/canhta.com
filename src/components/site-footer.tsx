@@ -54,7 +54,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
         <div className="mt-14 grid gap-10 border-t border-white/25 pt-10 sm:grid-cols-2 lg:grid-cols-3">
           <nav aria-label={messages.footer.explore}>
             <p className="text-[14px] font-bold text-dim">{messages.footer.explore}</p>
-            <ul className="mt-3">
+            <ul className="mt-3 grid justify-items-start gap-0.5">
               {(
                 [
                   ['/', messages.nav.home],
@@ -64,11 +64,8 @@ export function SiteFooter({ locale }: { locale: Locale }) {
                 ] as const
               ).map(([href, label]) => (
                 <li key={href}>
-                  <Link
-                    href={href}
-                    className="flex min-h-11 items-center text-[17px] font-bold transition-colors hover:text-accent active:opacity-70"
-                  >
-                    {label}
+                  <Link href={href} className="foot-row">
+                    <span className="foot-label">{label}</span>
                   </Link>
                 </li>
               ))}
@@ -77,18 +74,18 @@ export function SiteFooter({ locale }: { locale: Locale }) {
 
           <div>
             <p className="text-[14px] font-bold text-dim">{messages.contact.channels}</p>
-            <ul className="mt-3 grid gap-1.5">
+            <ul className="mt-3 grid justify-items-start gap-0.5">
               <li>
                 <a href={mail.href} className="foot-row">
                   <MailTile size={36} tone="light" />
-                  <span>{messages.contact.email}</span>
+                  <span className="foot-label">{messages.contact.email}</span>
                 </a>
               </li>
               {zalo ? (
                 <li>
                   <a href={zalo.url} target="_blank" rel="noreferrer noopener" className="foot-row">
                     <ZaloTile size={36} />
-                    <span>
+                    <span className="foot-label">
                       {messages.contact.chatOn} <span translate="no">Zalo</span>
                     </span>
                     <span className="sr-only">({newTab})</span>
@@ -99,7 +96,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
                 <li>
                   <a href={whatsapp.url} target="_blank" rel="noreferrer noopener" className="foot-row">
                     <WhatsAppTile size={36} />
-                    <span>
+                    <span className="foot-label">
                       {messages.contact.chatOn} <span translate="no">WhatsApp</span>
                     </span>
                     <span className="sr-only">({newTab})</span>
@@ -111,14 +108,14 @@ export function SiteFooter({ locale }: { locale: Locale }) {
 
           <div>
             <p className="text-[14px] font-bold text-dim">{messages.footer.elsewhere}</p>
-            <ul className="mt-3 grid gap-1.5">
+            <ul className="mt-3 grid justify-items-start gap-0.5">
               {elsewhere.map(({ network, label, Icon, url }) => (
                 <li key={network}>
                   <a href={url} target="_blank" rel="noreferrer noopener" className="foot-row">
                     <span className="foot-glyph">
                       <Icon width={20} height={20} />
                     </span>
-                    <span translate="no">{label}</span>
+                    <span className="foot-label" translate="no">{label}</span>
                     <span className="sr-only">({newTab})</span>
                   </a>
                 </li>
@@ -127,7 +124,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
           </div>
         </div>
 
-        <div className="mt-12 flex items-center justify-between gap-4 border-t border-white/25 pt-5">
+        <div className="mt-10 flex items-center justify-between gap-4">
           <p className="text-[14px] text-dim">
             © {year} <span translate="no">{profile.name}</span>
           </p>

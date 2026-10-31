@@ -125,7 +125,7 @@ for (const { locale, key, path, other } of PAGES) {
     test('switches to the same page in the other language', async ({ page }) => {
       await page.goto(path)
       const target = locale === 'en' ? 'VI' : 'EN'
-      await page.getByRole('group').getByRole('link', { name: target, exact: true }).click()
+      await page.getByRole('banner').getByRole('group').getByRole('link', { name: target, exact: true }).click()
       await expect(page).toHaveURL(new RegExp(`${other === '/' ? '/$' : other}$`))
       await expect(page.locator('html')).toHaveAttribute('lang', locale === 'en' ? 'vi' : 'en')
     })

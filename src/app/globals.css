@@ -2444,7 +2444,6 @@ a.cell-link::after {
     border-radius: 999px;
     background: var(--color-night);
     box-shadow:
-      inset 0 0 0 1px rgb(255 255 255 / 0.2),
       0 2px 2px rgb(19 21 23 / 0.1),
       0 14px 28px -8px rgb(19 21 23 / 0.5);
     transform: translateY(calc(100% + 28px));
@@ -2506,45 +2505,77 @@ a.cell-link::after {
   }
 }
 
-/* --- Footer rows: a logo tile and a visible label, one per channel ------- */
+/* --- Footer links: a logo tile and a bold label, no box around them ------ */
 
 .foot-row {
   display: flex;
+  width: fit-content;
   align-items: center;
-  gap: 12px;
-  min-height: 48px;
-  padding: 6px 12px 6px 6px;
-  border-radius: 16px;
-  border: 1px solid rgb(255 255 255 / 0.2);
+  gap: 14px;
+  min-height: 44px;
+  padding-block: 4px;
+  padding-right: 8px;
+  border-radius: 12px;
   color: #f7f7f8;
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 1.0625rem;
+  font-weight: 800;
   line-height: 1.2;
-  transition:
-    background-color var(--duration-feedback) var(--ease-out-soft),
-    border-color var(--duration-feedback) var(--ease-out-soft),
-    transform var(--duration-feedback) var(--ease-out-soft);
-}
-.foot-row:hover {
-  background: rgb(255 255 255 / 0.08);
-  border-color: rgb(255 255 255 / 0.5);
-}
-.foot-row:active {
-  transform: scale(0.985);
-  transition-duration: 60ms;
+  letter-spacing: -0.01em;
+  transition: color var(--duration-feedback) var(--ease-out-soft);
 }
 .foot-row > svg,
 .foot-glyph {
   flex: none;
+  transition: transform var(--duration-feedback) var(--ease-out-soft);
 }
+.foot-label {
+  position: relative;
+}
+/* A 2px lime line grows under the label from the left. */
+.foot-label::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 2px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 300ms var(--ease-out-soft);
+}
+.foot-row:hover,
+.foot-row:focus-visible {
+  color: var(--color-accent);
+}
+.foot-row:hover .foot-label::after,
+.foot-row:focus-visible .foot-label::after {
+  transform: scaleX(1);
+}
+.foot-row:hover > svg,
+.foot-row:hover .foot-glyph {
+  transform: translateY(-2px);
+}
+.foot-row:active {
+  color: var(--color-accent-hover);
+}
+.foot-row:active > svg,
+.foot-row:active .foot-glyph {
+  transform: scale(0.92);
+  transition-duration: 60ms;
+}
+.foot-row:focus-visible {
+  outline-offset: 4px;
+}
+/* Solid, borderless tile for the marks that have no brand colour of their own. */
 .foot-glyph {
   display: grid;
   place-items: center;
   width: 36px;
   height: 36px;
   border-radius: 9px;
-  background: rgb(255 255 255 / 0.12);
-  color: #f7f7f8;
+  background: #f7f7f8;
+  color: #131517;
 }
 
 /* --- Products head: the two app icons ----------------------------------- */
@@ -2632,6 +2663,15 @@ a.cell-link::after {
 /* Reduced motion: colour and shadow still answer a hover or a press, but
    nothing moves, so the lift, the lean and the press are switched off. */
 @media (prefers-reduced-motion: reduce) {
+  .foot-row:hover > svg,
+  .foot-row:hover .foot-glyph,
+  .foot-row:active > svg,
+  .foot-row:active .foot-glyph {
+    transform: none;
+  }
+  .foot-label::after {
+    transition: none;
+  }
   .btn-primary:hover,
   .btn-primary:active,
   .btn-accent:hover,
