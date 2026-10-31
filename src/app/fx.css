@@ -181,7 +181,9 @@
 /* --- Buttons: magnet, squash on press, ripple ------------------------------- */
 :is(.btn-primary, .btn-accent, .btn-light, .pill-cta, .chip) {
   position: relative;
-  overflow: hidden;
+  /* `clip`, not `hidden`: the ripple stays inside the control, and a flex item does
+     not lose its minimum width (hidden would let a long label shrink and be cut). */
+  overflow: clip;
   isolation: isolate;
   translate: var(--mx, 0px) var(--my, 0px);
   transition:
@@ -490,6 +492,11 @@ a.cell-link:active {
     left: 0;
     top: 0;
     pointer-events: none;
+  }
+  .fx-dot {
+    will-change: translate;
+  }
+  .fx-ring {
     will-change: transform;
   }
   /* The dot sits on the pointer. Near-black with a lime edge, so it shows on
@@ -540,7 +547,7 @@ a.cell-link:active {
     scale: 0.5;
   }
   .fx-cursor[data-state='label'] .fx-ring-i {
-    scale: 1.9;
+    scale: 1.6;
     background: var(--color-accent);
   }
   .fx-cursor[data-state='label'] .fx-dot {
@@ -554,7 +561,7 @@ a.cell-link:active {
     scale: 0.55;
   }
   .fx-cursor[data-down][data-state='label'] .fx-ring-i {
-    scale: 1.6;
+    scale: 1.35;
   }
 }
 

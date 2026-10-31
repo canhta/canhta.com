@@ -93,7 +93,9 @@ function live(cursor: HTMLElement, withPointer: boolean): Stop {
       rx = x
       ry = y
     }
-    dot.style.transform = `translate3d(${x}px,${y}px,0)`
+    // `translate`, not `transform`: the dot also has a CSS `scale`, which is applied after a
+    // translate in the same property chain and would pull a transform toward the origin.
+    dot.style.translate = `${x}px ${y}px`
     ring.style.transform = `translate3d(${rx}px,${ry}px,0)`
     if (!close) raf = requestAnimationFrame(tick)
   }
