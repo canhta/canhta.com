@@ -6,9 +6,11 @@ import { PhoneShot } from './phone-shot'
 import { Tilt } from './tilt'
 
 /**
- * One app. The card is the same white skeleton for every app; the app's own
- * colour lives only in the panel behind its screens. Status and platform are
- * text, never only a colour or an image.
+ * One app, as a rounded panel on the deep green band. The app's own colour sits
+ * behind two overlapping phone screens that lean toward the pointer; the text
+ * is white on deep green below. The compact version (home) leaves out the long
+ * summary; the products page carries it. Status and platform are text, never only a
+ * colour or an image.
  */
 export function AppCard({
   build,
@@ -19,46 +21,46 @@ export function AppCard({
   locale: Locale
   variant: 'compact' | 'full'
 }) {
-  const shots = build.shots ?? []
-  const shown = variant === 'compact' ? shots.slice(0, 1) : shots
+  const shown = (build.shots ?? []).slice(0, 2)
   // Under the home page's section heading a card name is an h3; on the products
   // page it follows the h1 directly, so it is an h2 (no skipped level).
   const Heading = variant === 'full' ? 'h2' : 'h3'
+  const phoneWidth = variant === 'compact' ? 'w-[40%] max-w-[124px]' : 'w-[40%] max-w-[210px]'
 
   return (
     <article data-theme={build.slug} className="app-card">
       {shown.length > 0 ? (
         <div className="app-media">
           {shown.map((shot) => (
-            <Tilt key={shot} className={variant === 'compact' ? 'w-[148px]' : 'w-[42%] max-w-[220px]'}>
-              <PhoneShot
-                slug={build.slug}
-                shot={shot}
-                locale={locale}
-                sizes={variant === 'compact' ? '160px' : '(min-width: 1024px) 220px, 40vw'}
-              />
-            </Tilt>
+            <div key={shot} className={`phone-slot ${phoneWidth}`}>
+              <Tilt>
+                <PhoneShot
+                  slug={build.slug}
+                  shot={shot}
+                  locale={locale}
+                  sizes={variant === 'compact' ? '124px' : '(min-width: 1024px) 210px, 40vw'}
+                />
+              </Tilt>
+            </div>
           ))}
         </div>
       ) : null}
 
-      <div className="flex flex-1 flex-col p-6 sm:p-7">
+      <div className="flex flex-1 flex-col p-6 sm:p-8">
         <div className="flex items-center gap-3">
           {build.logo ? (
-            <Image src={build.logo} alt="" width={44} height={44} className="h-11 w-11 rounded-[11px]" />
+            <Image src={build.logo} alt="" width={48} height={48} className="h-12 w-12 rounded-[14px]" />
           ) : null}
           <Heading className="title" translate="no">
             {build.name}
           </Heading>
         </div>
         <p className="subtitle mt-4">{build.tagline}</p>
-        <p className="mt-2 text-[15px] leading-relaxed text-muted">{build.summary}</p>
+        {variant === 'full' ? <p className="cell-muted mt-2 text-[15px] leading-relaxed">{build.summary}</p> : null}
 
-        <p className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-[14px]">
-          <span>
-            <span className="font-bold">{statusLabel(build.status, locale)}.</span>{' '}
-            <span className="text-muted">{build.availability}</span>
-          </span>
+        <p className="mt-5 text-[14px] leading-snug">
+          <span className="font-extrabold text-leaf">{statusLabel(build.status, locale)}.</span>{' '}
+          <span className="cell-muted">{build.availability}</span>
         </p>
         <ul className="mt-5 flex flex-wrap gap-2">
           {build.links.map((link) => (

@@ -4,7 +4,6 @@ import { getLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
-import { ArrowIcon } from '@/components/icons'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 
@@ -65,21 +64,22 @@ export default async function NotFound() {
       {/* The layout's skip link targets `#main` on every route it wraps, this
           one included. Without the id here, the first thing a keyboard user
           reaches on a 404 is a link to nowhere. */}
-      <main id="main" className="shell band-1">
-        <p className="label">{copy.label}</p>
-        <p className="tnum mt-2 font-display text-[64px] leading-none font-semibold text-accent">
-          404
-        </p>
+      <main id="main" tabIndex={-1} className="page-head ground-navy on-navy">
+        <div className="shell">
+          <p className="text-[1rem] font-bold text-leaf">{copy.label}</p>
+          <p className="giant mt-2 text-accent" aria-hidden="true">
+            404
+          </p>
 
-        <h1 className="title mt-8 max-w-[20ch]">{copy.heading}</h1>
+          <h1 className="title mt-8 max-w-[20ch]">{copy.heading}</h1>
 
-        <p className="lead mt-5 max-w-[52ch]">{copy.body}</p>
+          <p className="lead mt-5 max-w-[52ch]">{copy.body}</p>
 
-        <div className="mt-9">
-          <Link href={home} className="btn-primary">
-            {copy.home}
-            <ArrowIcon width={16} height={16} />
-          </Link>
+          <div className="mt-9">
+            <Link href={home} className="btn-accent">
+              {copy.home}
+            </Link>
+          </div>
         </div>
       </main>
 

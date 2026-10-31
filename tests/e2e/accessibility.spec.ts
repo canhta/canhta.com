@@ -19,7 +19,16 @@ for (const { locale, key, path } of PAGES) {
       await page.goto(path)
       await page.evaluate(
         () =>
-          Promise.all(document.getAnimations().map((a) => a.finished.catch(() => undefined))) as Promise<unknown>,
+          // Arrival animations only: the ticker loops forever and scroll-driven
+          // animations only move on scroll, so neither ever finishes.
+          Promise.all(
+            document
+              .getAnimations()
+              .filter(
+                (a) => a.timeline === document.timeline && a.effect?.getComputedTiming().iterations !== Infinity,
+              )
+              .map((a) => a.finished.catch(() => undefined)),
+          ) as Promise<unknown>,
       )
       const { violations } = await new AxeBuilder({ page }).withTags(TAGS).analyze()
       const summary = violations.map((v) => `${v.id}: ${v.help} (${v.nodes.length} nodes)`)

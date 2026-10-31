@@ -21,34 +21,46 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
 
   return (
     <PageShell locale={locale} jsonLd={buildGraph(locale, 'contact')}>
-      <PageHeader title={copy.h1} intro={copy.body} />
-      <section className="shell band-2">
+      <PageHeader title={copy.h1} intro={copy.body}>
         <ContactActions locale={locale} />
-      </section>
-      <section aria-labelledby="help-title" className="shell band-1">
-        <h2 id="help-title" className="subtitle">
-          {copy.helpHeading}
-        </h2>
-        <ul className="mt-4 grid max-w-[44ch] gap-2 text-[17px]">
-          {copy.help.map((item) => (
-            <li key={item} className="border-t border-ink pt-2">
-              {item}
-            </li>
-          ))}
-        </ul>
-      </section>
-      <section aria-labelledby="next-title" className="shell band-1">
-        <h2 id="next-title" className="subtitle">
-          {copy.nextHeading}
-        </h2>
-        <ol className="mt-4 grid max-w-[52ch] gap-4">
-          {next.map((step) => (
-            <li key={step.id} className="border-t border-ink pt-3">
-              <p className="font-bold">{step.label}</p>
-              <p className="text-[15px] text-muted">{step.detail}</p>
-            </li>
-          ))}
-        </ol>
+      </PageHeader>
+
+      <section className="band sheet ground-tint" aria-labelledby="help-title">
+        <div className="shell grid gap-12 lg:grid-cols-12 lg:gap-14">
+          <div className="reveal lg:col-span-5">
+            <h2 id="help-title" className="headline">
+              {copy.helpHeading}
+            </h2>
+            <ul className="mt-8 grid gap-3">
+              {copy.help.map((item) => (
+                <li
+                  key={item}
+                  className="rounded-[28px] bg-white px-6 py-5 text-[clamp(1.1rem,1.8vw,1.35rem)] leading-snug font-bold shadow-[var(--shadow-card)]"
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="reveal lg:col-span-7" aria-labelledby="next-title" role="region">
+            <h2 id="next-title" className="headline">
+              {copy.nextHeading}
+            </h2>
+            <ol className="mt-8">
+              {next.map((step, i) => (
+                <li key={step.id} className="step">
+                  <p aria-hidden="true" className="step-num !text-[clamp(3.5rem,8vw,5.5rem)]">
+                    {i + 2}
+                  </p>
+                  <div className="min-w-0">
+                    <h3 className="title max-w-[20ch]">{step.label}</h3>
+                    <p className="lead mt-2 max-w-[36ch]">{step.detail}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
       </section>
     </PageShell>
   )

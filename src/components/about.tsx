@@ -1,27 +1,32 @@
+import type { CSSProperties } from 'react'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
-import { ContactActions } from './contact-actions'
 
 /**
- * Who is behind the page, in one sentence we can stand behind and no names or
- * numbers we cannot show, then the ask itself with its three ways to reach us.
- * The dark ground is the page's one inversion.
+ * Who is behind the page, in the one sentence we can stand behind and no names
+ * or numbers we cannot show. It is set large on its own white band, and its
+ * words fill in from grey-green to ink as the band scrolls past. The text is
+ * readable at every moment (the grey is 4.1:1 on white and the type is large
+ * bold), and without scroll-driven animation it is simply ink.
  */
 export function About({ locale }: { locale: Locale }) {
   const copy = getMessages(locale).about
+  const words = copy.proof.split(' ')
 
   return (
-    <section aria-labelledby="about-title" className="on-navy mt-[var(--rank-1)] bg-navy text-white">
-      <div className="reveal shell py-[var(--rank-1)]">
-        <h2 id="about-title" className="title">
+    <section aria-labelledby="about-title" className="band sheet ground-white">
+      <div className="shell grid gap-6 lg:grid-cols-12 lg:gap-14">
+        <h2 id="about-title" className="subtitle text-brand lg:col-span-3">
           {copy.heading}
         </h2>
-        <p className="mt-4 max-w-[34ch] text-[clamp(1.25rem,2.4vw,1.75rem)] leading-snug font-bold">
-          {copy.proof}
+        <p className="statement max-w-[26ch] text-[clamp(1.75rem,4.2vw,3.5rem)] leading-[1.15] font-extrabold tracking-[-0.035em] lg:col-span-9">
+          {words.map((word, i) => (
+            <span key={i} className="w" style={{ '--s': `${((i / words.length) * 40).toFixed(1)}%` } as CSSProperties}>
+              {word}
+              {i < words.length - 1 ? ' ' : ''}
+            </span>
+          ))}
         </p>
-        <div className="mt-8">
-          <ContactActions locale={locale} tone="dark" />
-        </div>
       </div>
     </section>
   )

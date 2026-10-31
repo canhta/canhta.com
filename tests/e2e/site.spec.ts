@@ -55,7 +55,17 @@ for (const { locale, key, path, other } of PAGES) {
       await page.goto(path)
       await page.evaluate(
         () =>
-          Promise.all(document.getAnimations().map((a) => a.finished.catch(() => undefined))) as Promise<unknown>,
+          // Wait for the arrival animations only. The ticker loops forever and
+          // scroll-driven animations only move when the page scrolls, so neither
+          // ever "finishes"; waiting on them would hang.
+          Promise.all(
+            document
+              .getAnimations()
+              .filter(
+                (a) => a.timeline === document.timeline && a.effect?.getComputedTiming().iterations !== Infinity,
+              )
+              .map((a) => a.finished.catch(() => undefined)),
+          ) as Promise<unknown>,
       )
       const hidden = await page.evaluate(() =>
         Array.from(document.querySelectorAll('main *'))
