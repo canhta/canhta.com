@@ -24,20 +24,42 @@ export function HeroScene({
   useEffect(() => {
     const el = host.current
     if (!el) return
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)')
     const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData
-    if (reduce || saveData) return
+    if (saveData) return
 
-    let cancelled = false
+    // `run` is the generation of the latest start; an import that resolves after
+    // a stop (or a newer start) sees a different number and does nothing.
+    let run = 0
     let dispose: (() => void) | null = null
-    import('./hero-scene-three').then(({ mountScene }) => {
-      if (cancelled) return
-      dispose = mountScene(el)
-      if (dispose) setLive(true)
-    })
-    return () => {
-      cancelled = true
+    const stop = () => {
+      run++
       dispose?.()
+      dispose = null
+    }
+    const start = () => {
+      const mine = ++run
+      import('./hero-scene-three').then(({ mountScene }) => {
+        if (mine !== run) return
+        // The scene tells us when the GPU takes its context away, so the drawing
+        // comes back while the canvas cannot paint.
+        dispose = mountScene(el, (lost) => setLive(!lost))
+        if (dispose) setLive(true)
+      })
+    }
+    // Asking for reduced motion while the page is open stops the scene and
+    // brings the drawing back; turning it off again starts the scene.
+    const sync = () => {
+      if (motion.matches) {
+        stop()
+        setLive(false)
+      } else if (!dispose) start()
+    }
+    sync()
+    motion.addEventListener('change', sync)
+    return () => {
+      motion.removeEventListener('change', sync)
+      stop()
     }
   }, [])
 
