@@ -27,3 +27,6 @@ hero-*.png
 tsconfig.tsbuildinfo
 test-results/
 playwright-report/
+
+# Local agent state and worktrees
+.claude/
