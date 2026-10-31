@@ -17,7 +17,7 @@
     "primary": "Kể về công việc của bạn",
     "secondary": "Xem dịch vụ",
     "visual": {
-      "label": "Zalo, Excel và giấy tờ gom về một màn hình. AI làm các việc lặp lại, một người duyệt.",
+      "label": "Zalo, Excel và giấy tờ gom về một màn hình. AI làm các việc lặp lại, việc quan trọng có người duyệt.",
       "sources": [
         "Zalo",
         "Excel",
@@ -47,7 +47,9 @@
       "IoT",
       "AI agent"
     ],
-    "scopePause": "Tạm dừng"
+    "scopePause": "Tạm dừng",
+    "questionsHeading": "Những câu hỏi hay gặp nhất",
+    "questionsMore": "Xem thêm câu hỏi"
   },
   "services": {
     "h1": "Chuyển đổi số, phần mềm và AI cho doanh nghiệp nhỏ",
@@ -57,12 +59,12 @@
   },
   "apps": {
     "h1": "Một vài sản phẩm của chúng tôi",
-    "intro": "App, web, dữ liệu và AI: đây là một vài thứ chúng tôi đã làm. Scori và Remoti vẫn đang làm, chưa có trên App Store hay Google Play.",
+    "intro": "App, web và AI do chính chúng tôi làm. Scori và Remoti đang làm, chưa có trên App Store hay Google Play.",
     "publicHeading": "Dự án khác"
   },
   "contact": {
     "h1": "Kể cho chúng tôi cách bạn đang làm việc",
-    "body": "Mô tả vài dòng hay một ý tưởng là đủ. Chúng tôi trả lời trong một ngày làm việc.",
+    "body": "Mô tả vài dòng hay một ý tưởng là đủ. Chúng tôi trả lời trong một ngày làm việc. Bạn có kế hoạch và báo giá trước khi chúng tôi làm bất cứ thứ gì.",
     "helpHeading": "Nếu tiện, cho biết thêm",
     "help": [
       "Ai sẽ dùng",
@@ -98,7 +100,7 @@
       {
         "id": "build",
         "label": "Làm bản chạy thử",
-        "detail": "Với thông tin thật của bạn. Chạy ổn thì làm tiếp phần khác, rồi thêm AI cho các bước lặp lại, từng việc một."
+        "detail": "Chạy bằng thông tin thật của bạn. Chạy ổn thì làm tiếp phần khác, rồi thêm AI cho các bước lặp lại, từng việc một."
       }
     ]
   },
@@ -109,7 +111,7 @@
   "closing": {
     "heading": "Việc nào đang chiếm nhiều thời gian nhất của bạn?",
     "body": "Chỉ cần vài dòng. Chúng tôi trả lời trong một ngày làm việc.",
-    "cta": "Liên hệ"
+    "cta": "Nhắn chúng tôi"
   },
   "footer": {
     "explore": "Các trang",
@@ -125,7 +127,8 @@
   "products": {
     "alts": {
       "score": "Màn hình ghi điểm của Scori với bốn người chơi và điểm số lớn",
-      "remote-classic": "Màn hình điều khiển của Remoti với phím điều hướng, âm lượng và phát hoặc dừng"
+      "remote-classic": "Màn hình điều khiển của Remoti với phím điều hướng, âm lượng và phát hoặc dừng",
+      "invite": "Màn hình mời bạn bè của Scori với mã QR, nút sao chép đường dẫn và nút chia sẻ"
     }
   },
   "buildMeta": {
@@ -143,9 +146,7 @@
       "web": "Xem trang",
       "github": "Xem trên GitHub",
       "docs": "Tài liệu"
-    },
-    "githubStarOne": "sao trên GitHub",
-    "githubStarsMany": "sao trên GitHub"
+    }
   },
   "statuses": {
     "live": "Đang chạy",
@@ -157,7 +158,7 @@
   "metadata": {
     "home": {
       "title": "Chuyển đổi số và AI cho doanh nghiệp nhỏ | Canh Ta",
-      "description": "Chúng tôi gom đơn hàng nhập tay, tin nhắn và file Excel về một hệ thống, rồi để AI làm các bước lặp lại, có người duyệt. Cho cửa hàng và doanh nghiệp nhỏ."
+      "description": "Chúng tôi gom đơn hàng nhập tay, tin nhắn và file Excel về một hệ thống. AI lo các bước lặp lại, việc quan trọng có người duyệt. Cho doanh nghiệp nhỏ."
     },
     "services": {
       "title": "Phần mềm, ERP, CRM và AI cho doanh nghiệp nhỏ | Canh Ta",
@@ -165,14 +166,14 @@
     },
     "contact": {
       "title": "Liên hệ qua email, Zalo hoặc WhatsApp | Canh Ta",
-      "description": "Kể cho chúng tôi việc đang mất nhiều thời gian, hoặc thứ bạn muốn làm. Chúng tôi trả lời trong một ngày làm việc."
+      "description": "Kể cho chúng tôi việc đang mất nhiều thời gian, hoặc thứ bạn muốn làm. Nhắn qua email, Zalo hoặc WhatsApp, chúng tôi sẽ trả lời trong một ngày làm việc."
     },
     "jobTitle": "Kỹ sư phần mềm",
     "offerCatalog": "Chúng tôi làm gì",
     "workList": "Một vài sản phẩm và dự án của chúng tôi",
     "products": {
       "title": "Scori, Remoti và các sản phẩm khác | Canh Ta",
-      "description": "Một vài sản phẩm chúng tôi làm: app như Scori, Remoti, cùng các dự án web, dữ liệu và AI."
+      "description": "Scori và Remoti là hai app chúng tôi đang làm, chưa có trên App Store hay Google Play. Cùng AI Engineering Atlas và copycat-skills, hai dự án đã ra mắt."
     }
   }
 }

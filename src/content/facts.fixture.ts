@@ -48,7 +48,7 @@ export const buildFacts: BuildFacts[] = [
     status: 'building',
     os: 'iOS',
     logo: '/products/remoti/icon.svg',
-    shots: ['remote-classic', 'present'],
+    shots: ['remote-classic'],
     links: [{ kind: 'web', url: 'https://remoti.canhta.com' }],
   },
   {
@@ -90,13 +90,14 @@ export const offerFacts: (OfferFacts & FixtureMarked)[] = [
 
 export const faqFacts: (FaqFacts & FixtureMarked)[] = [
   { __fixture: true, id: 'pricing', order: 1 },
-  { __fixture: true, id: 'existing', order: 2 },
-  { __fixture: true, id: 'agent', order: 3 },
-  { __fixture: true, id: 'wrong', order: 4 },
-  { __fixture: true, id: 'customers', order: 5 },
-  { __fixture: true, id: 'data', order: 6 },
-  { __fixture: true, id: 'ownership', order: 7 },
-  { __fixture: true, id: 'idea', order: 8 },
+  { __fixture: true, id: 'timeline', order: 2 },
+  { __fixture: true, id: 'existing', order: 3 },
+  { __fixture: true, id: 'agent', order: 4 },
+  { __fixture: true, id: 'wrong', order: 5 },
+  { __fixture: true, id: 'customers', order: 6 },
+  { __fixture: true, id: 'data', order: 7 },
+  { __fixture: true, id: 'ownership', order: 8 },
+  { __fixture: true, id: 'idea', order: 9 },
 ]
 
 export const socialFacts: (SocialLink & FixtureMarked)[] = [

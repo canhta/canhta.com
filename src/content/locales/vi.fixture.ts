@@ -4,10 +4,10 @@ import type { ContentCopy } from '../types'
 export const viContent: ContentCopy = {
   profile: {
     location: 'Việt Nam',
-    hook: 'Số hóa cách bạn làm việc, rồi để AI làm thay phần lặp lại.',
+    hook: 'Số hóa cách bạn làm việc, rồi để AI lo phần việc lặp lại.',
     supporting:
-      'Nếu đơn hàng còn nhập tay, khách nhắn Zalo phải chờ trả lời và hàng tồn nằm trong Excel, chúng tôi gom tất cả về một hệ thống. AI sẽ lo các bước lặp lại, việc quan trọng do người duyệt.',
-    headerCta: 'Liên hệ',
+      'Cho cửa hàng và doanh nghiệp nhỏ. Khi đơn hàng còn nhập tay và hàng tồn nằm trong Excel, chúng tôi gom tất cả về một hệ thống. AI lo các bước lặp lại, còn việc quan trọng thì có người duyệt.',
+    headerCta: 'Nhắn chúng tôi',
     availabilityLabel: 'Đang nhận dự án mới',
   },
   builds: [
@@ -46,41 +46,41 @@ export const viContent: ContentCopy = {
       name: 'Hệ thống quản lý',
       detail:
         'ERP, CRM và hệ thống nội bộ cho đơn hàng, kho, công nợ và báo cáo, thay cho việc nhắn Zalo và ghi Excel.',
-      examples: ['ERP', 'CRM', 'Đơn hàng và kho', 'Công nợ'],
+      examples: ['ERP', 'CRM', 'đơn hàng và kho', 'công nợ'],
     },
     {
       id: 'ai',
       name: 'AI agent và chatbot',
       detail:
-        'Việc nên giao cho AI trước thường gồm: đọc đơn hàng và hóa đơn vào hệ thống, soạn sẵn câu trả lời để nhân viên duyệt, tìm câu trả lời trong tài liệu của bạn, làm báo cáo hằng tuần. Việc nào tốn tiền hoặc gửi đến khách đều có người duyệt.',
-      examples: ['Chatbot trả lời khách', 'Đọc đơn hàng và hóa đơn', 'Báo cáo hằng tuần'],
+        'AI đọc đơn hàng và hóa đơn vào hệ thống, soạn sẵn câu trả lời cho nhân viên duyệt và tìm câu trả lời trong tài liệu của bạn. Một người cụ thể duyệt mọi việc tốn tiền hoặc làm thay đổi đơn hàng và thông tin đã lưu. Chatbot nói chuyện với khách chỉ trả lời theo thông tin bạn đã đưa, nói rõ đây là trả lời tự động và chuyển cho nhân viên khi không chắc.',
+      examples: ['Chatbot trả lời khách', 'đọc đơn hàng và hóa đơn', 'báo cáo hằng tuần'],
     },
     {
       id: 'data',
       name: 'Số liệu và báo cáo',
       detail:
         'Gom số liệu bán hàng, kho và khách hàng từ Excel và các app về một chỗ, rồi làm thành báo cáo để bạn quyết định.',
-      examples: ['Bảng số liệu', 'Báo cáo hằng tuần', 'Dọn file Excel lộn xộn'],
+      examples: ['Bảng số liệu', 'báo cáo hằng tuần', 'dọn file Excel lộn xộn'],
     },
     {
       id: 'web',
       name: 'Website và ứng dụng',
       detail:
         'Website, ứng dụng web và ứng dụng điện thoại, cho việc kinh doanh hoặc ý tưởng của riêng bạn.',
-      examples: ['Website', 'Ứng dụng web', 'Ứng dụng iPhone và Android'],
+      examples: ['Website', 'ứng dụng web', 'ứng dụng iPhone và Android'],
     },
     {
       id: 'iot',
       name: 'Thiết bị kết nối (IoT)',
       detail:
         'Bảng theo dõi và cảnh báo trên cảm biến, thiết bị bán sẵn, ví dụ nhiệt độ và độ ẩm. Bạn xem số ở một chỗ và nhận tin báo khi có gì bất thường. Đây là số đo dùng hằng ngày, không phải số đo có chứng nhận.',
-      examples: ['Nhiệt độ và độ ẩm', 'Bảng theo dõi', 'Cảnh báo'],
+      examples: ['Nhiệt độ và độ ẩm', 'bảng theo dõi', 'cảnh báo'],
     },
     {
       id: 'team',
-      name: 'Thêm người cho đội của bạn',
+      name: 'Hỗ trợ đội kỹ thuật của bạn',
       detail:
-        'Chúng tôi làm cùng đội lập trình của bạn, hoặc nhận một phần việc, ngay trên hệ thống bạn đang dùng.',
+        'Chúng tôi làm cùng đội kỹ thuật của bạn, hoặc nhận một phần việc, ngay trên hệ thống bạn đang dùng.',
       examples: [],
     },
   ],
@@ -92,10 +92,16 @@ export const viContent: ContentCopy = {
         'Chúng tôi gửi kế hoạch và báo giá trước khi làm. Dự án bắt đầu bằng một bản chạy thử nhỏ. Dùng ổn rồi mới làm tiếp.',
     },
     {
+      id: 'timeline',
+      question: 'Làm mất bao lâu?',
+      answer:
+        'Tùy việc bạn cần. Kế hoạch ghi rõ bản chạy thử đầu tiên làm trong bao lâu, để bạn biết trước khi chúng tôi bắt đầu.',
+    },
+    {
       id: 'existing',
       question: 'Có thật sự cần làm phần mềm riêng không?',
       answer:
-        'Nhiều khi không. Chúng tôi chọn cách nhỏ nhất làm được việc trước. Nếu phần mềm bán sẵn đã đủ dùng, chúng tôi sẽ nói để bạn khỏi tốn tiền.',
+        'Nhiều khi không. Chúng tôi thử cách đơn giản nhất trước. Nếu phần mềm bán sẵn đã đủ dùng, chúng tôi sẽ nói để bạn khỏi tốn tiền.',
     },
     {
       id: 'agent',
@@ -107,13 +113,13 @@ export const viContent: ContentCopy = {
       id: 'wrong',
       question: 'AI có thể sai. Ai kiểm tra?',
       answer:
-        'Một người cụ thể duyệt mọi việc tốn tiền hoặc gửi đến khách, trước khi việc đó diễn ra. Thường là bạn hoặc một nhân viên của bạn. Chúng tôi chốt người đó ngay từ đầu.',
+        'Một người cụ thể duyệt mọi việc tốn tiền hoặc làm thay đổi đơn hàng và thông tin đã lưu, trước khi việc đó diễn ra. Thường là bạn hoặc một nhân viên của bạn. Chúng tôi chốt người đó ngay từ đầu. Chatbot nói chuyện với khách chỉ trả lời theo thông tin bạn đã đưa, và chuyển cho nhân viên khi không chắc.',
     },
     {
       id: 'customers',
       question: 'AI có nhắn tin với khách của tôi được không?',
       answer:
-        'Được. AI nói rõ với khách đây là trả lời tự động, trả lời theo thông tin bạn đã đưa, và chuyển cho nhân viên khi không chắc hoặc khi khách muốn nói chuyện với người.',
+        'Được. AI nói rõ với khách đây là trả lời tự động và chỉ trả lời theo thông tin bạn đã đưa. Khi không chắc, hoặc khi khách muốn nói chuyện với người, AI chuyển cho nhân viên.',
     },
     {
       id: 'data',
@@ -125,7 +131,7 @@ export const viContent: ContentCopy = {
       id: 'ownership',
       question: 'Sản phẩm làm xong là của ai?',
       answer:
-        'Của bạn. Phần mềm, tài khoản và hệ thống đều đứng tên bạn. Làm xong, chúng tôi có thể tiếp tục sửa và làm thêm, hoặc bàn giao kèm hướng dẫn để bạn tự dùng.',
+        'Của bạn. Mọi thứ chúng tôi làm đều đứng tên bạn, kể cả phần mềm và tài khoản. Làm xong, chúng tôi có thể tiếp tục sửa và làm thêm, hoặc bàn giao kèm hướng dẫn để bạn tự dùng.',
     },
     {
       id: 'idea',

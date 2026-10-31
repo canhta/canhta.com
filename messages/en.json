@@ -17,7 +17,7 @@
     "primary": "Tell us about your business",
     "secondary": "See services",
     "visual": {
-      "label": "Chat, a spreadsheet and paper gathered onto one screen. AI does the routine work and a person approves it.",
+      "label": "Chat, a spreadsheet and paper gathered onto one screen. AI does the routine work, and a person approves what matters.",
       "sources": [
         "Chat",
         "Spreadsheet",
@@ -47,7 +47,9 @@
       "IoT",
       "AI agents"
     ],
-    "scopePause": "Pause"
+    "scopePause": "Pause",
+    "questionsHeading": "The questions we hear first",
+    "questionsMore": "More questions"
   },
   "services": {
     "h1": "Digital transformation, software and AI for small businesses",
@@ -57,12 +59,12 @@
   },
   "apps": {
     "h1": "Some of our products",
-    "intro": "Apps, web, data and AI: a few of the things we have built. Scori and Remoti are still being built and are not in the app stores yet.",
+    "intro": "Apps, web and AI projects of our own. Scori and Remoti are in development and not in the app stores yet.",
     "publicHeading": "Other projects"
   },
   "contact": {
     "h1": "Tell us how your business runs",
-    "body": "A description or an idea is enough. We reply within one working day.",
+    "body": "A description or an idea is enough. We reply within one working day, and you get a plan and a price before we build anything.",
     "helpHeading": "If you can, mention",
     "help": [
       "Who will use it",
@@ -125,27 +127,26 @@
   "products": {
     "alts": {
       "score": "Scori score screen with four players and large scores",
-      "remote-classic": "Remoti remote with directional pad, volume and playback keys"
+      "remote-classic": "Remoti remote with directional pad, volume and playback keys",
+      "invite": "Scori invite screen with a QR code, a copy link button and a share link button"
     }
   },
   "buildMeta": {
     "kinds": {
       "agent": "Automation",
-      "skill": "Tool for AI assistants",
+      "skill": "Add-on for AI assistants",
       "mobile": "Phone app",
       "web": "Web product",
       "saas": "Paid product",
-      "tool": "Developer tool"
+      "tool": "For software teams"
     },
     "links": {
       "appstore": "App Store",
       "playstore": "Google Play",
       "web": "Visit site",
-      "github": "Source",
-      "docs": "Docs"
-    },
-    "githubStarOne": "star on GitHub",
-    "githubStarsMany": "stars on GitHub"
+      "github": "Source code",
+      "docs": "Guide"
+    }
   },
   "statuses": {
     "live": "Live",
@@ -157,22 +158,22 @@
   "metadata": {
     "home": {
       "title": "Digital transformation and AI for small businesses | Canh Ta",
-      "description": "We move small businesses from hand-typed orders, chats and spreadsheets to one system, then add AI for the routine steps, with a person approving."
+      "description": "We bring hand-typed orders, chats and spreadsheets into one system for small businesses. AI does the routine steps and a person approves what matters."
     },
     "services": {
       "title": "Custom software, ERP, CRM and AI for small businesses | Canh Ta",
-      "description": "ERP, CRM, sales software, chatbots, AI agents, reports, websites and sensors for small businesses and individuals. A plan and a price before we build anything."
+      "description": "ERP, CRM, sales software, chatbots, AI agents, reports, websites and sensors for small businesses and individuals. A plan and a price before we build."
     },
     "contact": {
       "title": "Contact us by email, Zalo or WhatsApp | Canh Ta",
-      "description": "Tell us what takes too much time, or what you want to build. We reply within one working day."
+      "description": "Tell us what takes too much time or what you want to build, by email, Zalo or WhatsApp. We reply within one working day. A plan and a price come first."
     },
     "jobTitle": "Software engineer",
     "offerCatalog": "What we do",
     "workList": "Some of our products and projects",
     "products": {
       "title": "Scori, Remoti and more: some of our products | Canh Ta",
-      "description": "Some of the products we have built: apps like Scori and Remoti, plus web, data and AI projects."
+      "description": "Scori and Remoti are apps we are building and are not in the app stores yet. See them with AI Engineering Atlas and copycat-skills, which are out now."
     }
   }
 }
