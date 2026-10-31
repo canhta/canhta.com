@@ -227,9 +227,11 @@ export function mountScene(host: HTMLElement, onContext?: (lost: boolean) => voi
     const h = Math.max(host.clientHeight, 1)
     renderer.setSize(w, h, false)
     camera.aspect = w / h
-    // Fit the whole composition (about 7.6 wide, 9 tall) in whatever the stage is.
+    // Fit the whole composition in whatever the stage is. The cards span about
+    // 7.3 units across and the stack about 8.2 tall; the numbers below add room
+    // for the outer cards, which sit nearer the camera and lean as the pointer moves.
     const half = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2))
-    camera.position.z = Math.max(9 / (2 * half), 7.6 / (2 * half * camera.aspect))
+    camera.position.z = Math.max(9.4 / (2 * half), 8.6 / (2 * half * camera.aspect))
     camera.position.y = 0.45
     camera.updateProjectionMatrix()
   }

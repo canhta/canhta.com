@@ -33,7 +33,7 @@ export function HeaderNav({
       href={pathname}
       locale={code}
       aria-current={locale === code ? 'page' : undefined}
-      className={`grid h-11 min-w-10 place-items-center rounded-full text-[13px] min-[360px]:min-w-11 font-bold transition-colors ${
+      className={`grid h-11 min-w-11 place-items-center rounded-full text-[13px] font-bold transition-colors ${
         locale === code ? 'bg-brand-tint text-brand-dark' : 'text-muted hover:bg-tint hover:text-ink'
       }`}
     >
