@@ -9,7 +9,7 @@ import { defineConfig, devices } from '@playwright/test'
  * `ALLOW_FIXTURES=1` matters when Playwright *does* have to start the server:
  * `src/content/index.ts` refuses to load fixture content without it.
  */
-const PORT = 3310
+const PORT = Number(process.env.PORT ?? 3310)
 const BASE_URL = `http://localhost:${PORT}`
 
 export default defineConfig({
@@ -51,7 +51,7 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: 'pnpm exec next dev --port 3310',
+    command: `pnpm exec next dev --port ${PORT}`,
     port: PORT,
     reuseExistingServer: true,
     timeout: 180_000,

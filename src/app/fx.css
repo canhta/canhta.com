@@ -648,3 +648,61 @@ a.cell-link:active {
     }
   }
 }
+
+/* --- Between pages: the pill stays, the new page rises over the old one ------
+   The old page stays in the root snapshot, fully opaque, and the new page fades up
+   from a short way below, on top of it, so the screen never dips dark in between.
+   (The new root snapshot would be an opaque night canvas that hides the old page,
+   so it is not drawn.) Movement is translate only. With reduced motion, or
+   without view transitions, pages swap at once. */
+::view-transition {
+  pointer-events: none;
+}
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+::view-transition-old(site-header) {
+  display: none;
+}
+::view-transition-new(site-header) {
+  animation: none;
+}
+::view-transition-old(root) {
+  animation: none;
+}
+::view-transition-new(root) {
+  display: none;
+}
+@keyframes page-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes page-rise {
+  from {
+    translate: 0 28px;
+  }
+}
+/* Old page below, new page above; the old one is not touched. */
+::view-transition-group(.page-out) {
+  z-index: 1;
+}
+::view-transition-old(.page-out) {
+  animation: none;
+}
+::view-transition-group(.page-in) {
+  z-index: 2;
+}
+::view-transition-new(.page-in) {
+  animation:
+    page-fade 240ms ease-out both,
+    page-rise 440ms var(--glide) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

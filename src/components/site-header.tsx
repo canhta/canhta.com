@@ -24,7 +24,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
   }))
 
   return (
-    <header className="pill-wrap">
+    <header className="pill-wrap" style={{ viewTransitionName: 'site-header' }}>
       <div className="pill-inner">
         <HeaderNav
           locale={locale}
