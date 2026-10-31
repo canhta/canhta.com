@@ -2470,7 +2470,7 @@ a.cell-link::after {
     right: max(12px, env(safe-area-inset-right));
     bottom: max(12px, env(safe-area-inset-bottom));
     display: grid;
-    grid-template-columns: 1fr 1fr 1.25fr;
+    grid-template-columns: 1.5fr 1fr 1fr 1.25fr;
     gap: 4px;
     padding: 4px;
     border-radius: 999px;
@@ -2514,6 +2514,20 @@ a.cell-link::after {
   .contact-bar a > svg {
     flex: none;
   }
+}
+/* Four targets do not fit with labels on a narrow phone: the call button keeps
+   its word, the others show their logo and keep the label for screen readers. */
+@media (max-width: 559px) {
+  .contact-bar a:not([data-primary='true']) > span:not(.sr-only) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+@media (max-width: 767px) {
   .contact-bar a:hover {
     background: var(--color-raised);
   }

@@ -3,8 +3,8 @@ import { Logo } from './logo'
 import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
-import { mailContact } from '@/lib/contact'
-import { GitHubIcon, LinkedInIcon, MailTile, WhatsAppTile, XIcon, ZaloTile } from './icons'
+import { mailContact, phoneContact } from '@/lib/contact'
+import { GitHubIcon, LinkedInIcon, MailTile, PhoneTile, WhatsAppTile, XIcon, ZaloTile } from './icons'
 import { LangSwitch } from './lang-switch'
 
 /**
@@ -24,6 +24,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
   const { profile, social } = getSiteContent(locale)
   const messages = getMessages(locale)
   const mail = mailContact(locale)
+  const phone = phoneContact(locale)
   const zalo = social.find((s) => s.network === 'zalo')
   const whatsapp = social.find((s) => s.network === 'whatsapp')
   const elsewhere = ELSEWHERE.flatMap((e) => {
@@ -76,6 +77,14 @@ export function SiteFooter({ locale }: { locale: Locale }) {
           <div>
             <p className="text-[14px] font-bold text-dim">{messages.contact.channels}</p>
             <ul className="mt-3 grid justify-items-start gap-0.5">
+              <li>
+                <a href={phone.href} className="foot-row">
+                  <PhoneTile size={36} tone="light" />
+                  <span className="foot-label">
+                    {messages.contact.call} <span translate="no">{phone.display}</span>
+                  </span>
+                </a>
+              </li>
               <li>
                 <a href={mail.href} className="foot-row">
                   <MailTile size={36} tone="light" />

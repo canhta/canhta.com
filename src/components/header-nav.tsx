@@ -41,7 +41,7 @@ export function HeaderNav({
       <div className="pill">
         <Link
           href="/"
-          className="flex min-h-11 shrink-0 items-center gap-2 pr-1 text-[16px] font-bold tracking-tight min-[360px]:pr-2"
+          className="flex min-h-11 min-w-11 shrink-0 items-center gap-2 pr-1 text-[16px] font-bold tracking-tight min-[360px]:pr-2"
           translate="no"
           onClick={() => setOpen(false)}
         >

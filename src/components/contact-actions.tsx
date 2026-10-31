@@ -1,11 +1,11 @@
 import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
-import { mailContact } from '@/lib/contact'
-import { MailTile, WhatsAppTile, ZaloTile } from './icons'
+import { mailContact, phoneContact } from '@/lib/contact'
+import { MailTile, PhoneTile, WhatsAppTile, ZaloTile } from './icons'
 
 /**
- * The ways to reach us, as three big tappable rows: email, Zalo and WhatsApp.
+ * The ways to reach us, as big tappable rows: phone call, email, Zalo and WhatsApp.
  * They are different doors to the same inbox. The rows take their colours from
  * the band they sit in (dark rows on lime or a light band, light rows on a dark band;
  * see `.row-link` in globals.css). The email subject and body are written in the
@@ -17,10 +17,19 @@ export function ContactActions({ locale }: { locale: Locale }) {
   const zalo = social.find((item) => item.network === 'zalo')
   const whatsapp = social.find((item) => item.network === 'whatsapp')
   const mail = mailContact(locale)
+  const phone = phoneContact(locale)
 
   return (
     <div className="rows" data-no-bar>
-      <a href={mail.href} className="row-link" data-primary="true">
+      <a href={phone.href} className="row-link" data-primary="true">
+        <span className="row-main">
+          <PhoneTile size={48} tone="auto" />
+          <span>{messages.contact.call}</span>
+        </span>
+        <small translate="no">{phone.display}</small>
+      </a>
+
+      <a href={mail.href} className="row-link">
         <span className="row-main">
           <MailTile size={48} tone="auto" />
           <span>{messages.contact.email}</span>

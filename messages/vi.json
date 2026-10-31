@@ -79,7 +79,8 @@
     "mailBody": "Xin chào,\n\nVấn đề tôi muốn giải quyết:\nAi phải xử lý mỗi ngày:\nHiện đang dùng:\n",
     "nextHeading": "Sau khi bạn liên hệ",
     "call": "Gọi điện",
-    "callAria": "Gọi điện thoại cho chúng tôi"
+    "callAria": "Gọi điện thoại cho chúng tôi",
+    "callShort": "Gọi"
   },
   "process": {
     "rule": "Nếu phần mềm có sẵn làm được việc, chúng tôi sẽ chỉ bạn dùng nó.",

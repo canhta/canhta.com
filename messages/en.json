@@ -79,7 +79,8 @@
     "mailBody": "Hi,\n\nThe problem I want to solve:\nWho deals with it every day:\nWhat I use today:\n",
     "nextHeading": "What happens next",
     "call": "Call us",
-    "callAria": "Call us by phone"
+    "callAria": "Call us by phone",
+    "callShort": "Call"
   },
   "process": {
     "rule": "If existing software does the job, we will point you to it.",

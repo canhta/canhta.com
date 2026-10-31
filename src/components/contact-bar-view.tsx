@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { MailTile, WhatsAppTile, ZaloTile } from './icons'
+import { MailTile, PhoneTile, WhatsAppTile, ZaloTile } from './icons'
 
 /**
  * The compact contact bar for phones: email, Zalo and WhatsApp as three big
@@ -15,7 +15,7 @@ import { MailTile, WhatsAppTile, ZaloTile } from './icons'
  */
 export type BarItem = { key: string; label: string; href: string; external: boolean; note?: string }
 
-const TILES = { email: MailTile, zalo: ZaloTile, whatsapp: WhatsAppTile } as const
+const TILES = { phone: PhoneTile, email: MailTile, zalo: ZaloTile, whatsapp: WhatsAppTile } as const
 
 export function ContactBarView({ label, items }: { label: string; items: BarItem[] }) {
   const [scrolled, setScrolled] = useState(false)
@@ -50,11 +50,11 @@ export function ContactBarView({ label, items }: { label: string; items: BarItem
           <a
             key={item.key}
             href={item.href}
-            data-primary={item.key === 'email' ? 'true' : undefined}
+            data-primary={item.key === 'phone' ? 'true' : undefined}
             {...(item.external ? { target: '_blank', rel: 'noreferrer noopener' } : {})}
           >
             {Tile ? <Tile size={24} /> : null}
-            <span translate={item.key === 'email' ? undefined : 'no'}>{item.label}</span>
+            <span translate={item.key === 'email' || item.key === 'phone' ? undefined : 'no'}>{item.label}</span>
             {item.note ? <span className="sr-only">{item.note}</span> : null}
           </a>
         )

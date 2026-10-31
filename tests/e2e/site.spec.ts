@@ -204,7 +204,7 @@ for (const { locale, path } of PAGES.filter((p) => p.key === 'home')) {
   test.describe(`[${locale}] the phone contact bar`, () => {
     test.use({ viewport: { width: 390, height: 844 } })
 
-    test('shows email, Zalo and WhatsApp as 44px targets after the first screen, with a localized email draft', async ({
+    test('shows call, email, Zalo and WhatsApp as 44px targets after the first screen, with a localized email draft', async ({
       page,
     }) => {
       await page.goto(path)
@@ -213,7 +213,8 @@ for (const { locale, path } of PAGES.filter((p) => p.key === 'home')) {
       await page.evaluate(() => window.scrollTo(0, 1400))
       await expect(bar).toBeVisible()
       const links = bar.getByRole('link')
-      await expect(links).toHaveCount(3)
+      await expect(links).toHaveCount(4)
+      await expect(bar.locator('a[href^="tel:"]')).toHaveCount(1)
       for (const box of await links.evaluateAll((els) => els.map((el) => el.getBoundingClientRect().toJSON()))) {
         expect(box.width).toBeGreaterThanOrEqual(44)
         expect(box.height).toBeGreaterThanOrEqual(44)
