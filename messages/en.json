@@ -1,6 +1,5 @@
 {
   "common": {
-    "newTab": "opens in a new tab",
     "skipToContent": "Skip to content"
   },
   "nav": {
@@ -34,7 +33,7 @@
     "orCall": "or call"
   },
   "home": {
-    "servicesHeading": "What we do",
+    "servicesHeading": "Our services",
     "servicesAll": "All services",
     "appsHeading": "Some of our products",
     "appsAll": "All products",
@@ -119,6 +118,13 @@
     "body": "We listen first, then find the solution with you.",
     "cta": "Share your problem"
   },
+  "llms": {
+    "limitsHeading": "What we do not state",
+    "limits": [
+      "We publish no prices. You get a quote after you have seen a small working version.",
+      "We name no clients and show no ratings, reviews or download counts."
+    ]
+  },
   "footer": {
     "explore": "Pages",
     "write": "Email us the problem",
@@ -156,8 +162,8 @@
   },
   "metadata": {
     "home": {
-      "title": "Digital transformation and AI for small businesses | Canh Ta",
-      "description": "Tell us the problem and we solve it with you. One system for orders, stock and debts, then AI does the routine steps and a person approves what matters."
+      "title": "Digital transformation and AI services | Canh Ta",
+      "description": "Services for small businesses: one system for orders, stock and debts, then AI does the routine steps and a person approves. Plus some of our products."
     },
     "services": {
       "title": "ERP, CRM and AI for small businesses in Vietnam | Canh Ta",
@@ -167,7 +173,7 @@
       "title": "Contact us: tell us the problem | Canh Ta",
       "description": "Call us, or write on Zalo, WhatsApp or email, about the problem you want to solve. We reply within one working day and work out the solution with you."
     },
-    "offerCatalog": "What we do",
+    "offerCatalog": "Our services",
     "workList": "Some of our products and projects",
     "products": {
       "title": "Scori, Remoti and more: some of our products | Canh Ta",

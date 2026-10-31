@@ -127,7 +127,7 @@ export default async function LocaleLayout({
   const messages = getMessages(locale)
 
   return (
-    <html lang={locale} data-scroll-behavior="smooth" className={`${bvp.variable} ${bvpVietnamese.variable}`}>
+    <html lang={locale} dir="ltr" data-scroll-behavior="smooth" className={`${bvp.variable} ${bvpVietnamese.variable}`}>
       <body>
         <div aria-hidden="true" className="scroll-line" />
         <a href="#main" className="skip-link">

@@ -1,6 +1,5 @@
 {
   "common": {
-    "newTab": "mở trong tab mới",
     "skipToContent": "Tới nội dung chính"
   },
   "nav": {
@@ -119,6 +118,13 @@
     "body": "Chúng tôi nghe trước, rồi cùng bạn tìm giải pháp.",
     "cta": "Kể vấn đề của bạn"
   },
+  "llms": {
+    "limitsHeading": "Những điều chúng tôi không nêu",
+    "limits": [
+      "Chúng tôi không đăng giá. Bạn nhận báo giá sau khi đã thấy bản chạy thử nhỏ.",
+      "Chúng tôi không nêu tên khách hàng và không đăng đánh giá, nhận xét hay lượt tải."
+    ]
+  },
   "footer": {
     "explore": "Các trang",
     "write": "Gửi vấn đề của bạn qua email",
@@ -156,8 +162,8 @@
   },
   "metadata": {
     "home": {
-      "title": "Chuyển đổi số và AI cho doanh nghiệp nhỏ | Canh Ta",
-      "description": "Bạn kể vấn đề, chúng tôi cùng giải quyết. Một hệ thống cho đơn hàng, kho và công nợ, rồi AI lo việc lặp lại, có người duyệt những việc quan trọng nhất."
+      "title": "Dịch vụ chuyển đổi số và AI cho doanh nghiệp nhỏ | Canh Ta",
+      "description": "Dịch vụ cho cửa hàng, doanh nghiệp nhỏ: một hệ thống cho đơn hàng, kho và công nợ, rồi AI lo việc lặp lại, có người duyệt. Xem vài sản phẩm của chúng tôi."
     },
     "services": {
       "title": "Phần mềm, ERP, CRM và AI cho doanh nghiệp nhỏ | Canh Ta",

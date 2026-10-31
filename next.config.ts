@@ -25,6 +25,20 @@ const redirects = [
   { source: '/en/:path*', destination: '/:path*' },
 ].map((rule) => ({ ...rule, permanent: true }))
 
+/**
+ * Each page also has a Markdown copy (llmstxt.org): \`/services.md\`, \`/vi/dich-vu.md\`,
+ * \`/index.md\` and \`/vi/index.md\` for the homes. They are rewrites to one route
+ * handler, and the proxy skips every \`*.md\` address.
+ */
+const markdownCopies = [
+  { source: '/index.md', destination: '/md/en/home' },
+  { source: '/vi/index.md', destination: '/md/vi/home' },
+  ...slugs.flatMap(([en, vi]) => [
+    { source: `/${en}.md`, destination: `/md/en/${en}` },
+    { source: `/vi/${vi}.md`, destination: `/md/vi/${en}` },
+  ]),
+]
+
 const DAY = 86_400
 
 /**
@@ -38,7 +52,7 @@ const DAY = 86_400
 const publicAsset = `public, max-age=${DAY}, stale-while-revalidate=${30 * DAY}`
 
 /**
- * robots.txt, sitemap.xml and llms.txt change only with a deployment, and the
+ * robots.txt, sitemap.xml, llms.txt, llms-full.txt and the Markdown copies change only with a deployment, and the
  * CDN drops its copy on every deployment. So the CDN may keep them for a day and
  * serve stale for a week; browsers and crawlers always ask again.
  */
@@ -53,6 +67,7 @@ const hashedAsset = 'public, max-age=31536000, immutable'
 export default withNextIntl({
   reactStrictMode: true,
   redirects: async () => redirects,
+  rewrites: async () => markdownCopies,
   experimental: { globalNotFound: true },
   images: {
     // Served by Next's own optimizer (Vercel runs it; there is no static export).
@@ -81,6 +96,8 @@ export default withNextIntl({
       { source: '/robots.txt', headers: [{ key: 'Cache-Control', value: generatedText }] },
       { source: '/sitemap.xml', headers: [{ key: 'Cache-Control', value: generatedText }] },
       { source: '/llms.txt', headers: [{ key: 'Cache-Control', value: generatedText }] },
+      { source: '/llms-full.txt', headers: [{ key: 'Cache-Control', value: generatedText }] },
+      ...markdownCopies.map(({ source }) => ({ source, headers: [{ key: 'Cache-Control', value: generatedText }] })),
       { source: '/manifest.webmanifest', headers: [{ key: 'Cache-Control', value: generatedText }] },
       { source: '/icon.svg', headers: [{ key: 'Cache-Control', value: hashedAsset }] },
     ]

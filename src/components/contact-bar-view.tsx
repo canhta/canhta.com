@@ -13,7 +13,7 @@ import { MailTile, PhoneTile, WhatsAppTile, ZaloTile } from './icons'
  * carries `data-no-bar` hides it while it is on screen. Labels and links arrive
  * as props; this file never imports content.
  */
-export type BarItem = { key: string; label: string; href: string; external: boolean; note?: string }
+export type BarItem = { key: string; label: string; href: string; external: boolean }
 
 const TILES = { phone: PhoneTile, email: MailTile, zalo: ZaloTile, whatsapp: WhatsAppTile } as const
 
@@ -55,7 +55,6 @@ export function ContactBarView({ label, items }: { label: string; items: BarItem
           >
             {Tile ? <Tile size={24} /> : null}
             <span translate={item.key === 'email' || item.key === 'phone' ? undefined : 'no'}>{item.label}</span>
-            {item.note ? <span className="sr-only">{item.note}</span> : null}
           </a>
         )
       })}

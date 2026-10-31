@@ -18,7 +18,7 @@ export function PublicProjects({ locale }: { locale: Locale }) {
         </h2>
         <ul className="mt-10 grid gap-4">
           {others.map((build) => (
-            <li key={build.slug} className="row-card reveal">
+            <li key={build.slug} id={build.slug} className="row-card reveal">
               <div className="lg:col-span-4">
                 <h3 className="title" translate="no">
                   {build.name}

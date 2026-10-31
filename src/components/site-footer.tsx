@@ -33,7 +33,6 @@ export function SiteFooter({ locale }: { locale: Locale }) {
     return link ? [{ ...e, url: link.url }] : []
   })
   const year = new Date().getFullYear()
-  const newTab = messages.common.newTab
 
   return (
     <footer data-no-bar className="sheet ground-night on-night pt-[calc(var(--space)*0.8)] pb-8">
@@ -97,7 +96,6 @@ export function SiteFooter({ locale }: { locale: Locale }) {
                     <span className="foot-label">
                       {messages.contact.chatOn} <span translate="no">Zalo</span>
                     </span>
-                    <span className="sr-only">({newTab})</span>
                   </a>
                 </li>
               ) : null}
@@ -108,7 +106,6 @@ export function SiteFooter({ locale }: { locale: Locale }) {
                     <span className="foot-label">
                       {messages.contact.chatOn} <span translate="no">WhatsApp</span>
                     </span>
-                    <span className="sr-only">({newTab})</span>
                   </a>
                 </li>
               ) : null}
@@ -125,7 +122,6 @@ export function SiteFooter({ locale }: { locale: Locale }) {
                       <Icon width={20} height={20} />
                     </span>
                     <span className="foot-label" translate="no">{label}</span>
-                    <span className="sr-only">({newTab})</span>
                   </a>
                 </li>
               ))}

@@ -21,7 +21,11 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
 
   return (
     <PageShell locale={locale} jsonLd={buildGraph(locale, 'products')}>
-      <PageHeader title={copy.h1} intro={copy.intro} visual={<AppMarks locale={locale} />} />
+      <PageHeader
+        title={copy.h1}
+        intro={copy.intro}
+        visual={<AppMarks locale={locale} />}
+      />
       <AppsFull locale={locale} />
       <PublicProjects locale={locale} />
       <Closing locale={locale} />

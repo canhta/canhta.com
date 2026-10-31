@@ -286,6 +286,20 @@ article[id] {
   padding-bottom: var(--space);
 }
 
+/* The trail above an inner page's title: plain text, the page you are on last. */
+.crumb-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+  text-underline-offset: 0.2em;
+}
+.crumb-link:hover {
+  color: var(--color-accent);
+  text-decoration-color: currentColor;
+}
+
 /* --- Controls ----------------------------------------------------------- */
 
 @utility btn-primary {
