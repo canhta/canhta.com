@@ -1,17 +1,12 @@
 export type Locale = 'en' | 'vi'
 
-export type BuildKind = 'agent' | 'skill' | 'mobile' | 'web' | 'saas' | 'tool' | 'desktop'
+export type BuildKind = 'agent' | 'skill' | 'mobile' | 'web' | 'saas' | 'tool'
 export type BuildLinkKind = 'appstore' | 'playstore' | 'web' | 'github' | 'docs'
 export type BuildStatus = 'live' | 'shipped' | 'building' | 'acquired' | 'sunset'
 
 export interface BuildLink {
   kind: BuildLinkKind
   url: string
-}
-
-export interface Proof {
-  label: string
-  value: string
 }
 
 export interface BuildFacts {
@@ -21,49 +16,40 @@ export interface BuildFacts {
   status: BuildStatus
   year: string
   kind: BuildKind
-  cover?: string
+  /** Platform names are proper nouns, so they are a fact, not copy. Used in structured data. */
+  os?: string
+  /** schema.org / Google applicationCategory for this product. */
+  appCategory: string
   logo?: string
+  /** File stems under `/products/<slug>/<locale>/`. Present only on a featured product. */
+  shots?: string[]
   links: BuildLink[]
 }
 
 export interface BuildCopy {
   slug: string
   tagline: string
-  problem: string
-  built: string
-  result: string
-  proof?: Proof
+  summary: string
+  /** Where it can be used today: platform, store status, compatibility. */
+  availability: string
 }
 
 export interface Build extends BuildFacts, Omit<BuildCopy, 'slug'> {}
 
-export interface CapabilityFacts {
-  id: 'agentic' | 'mobile' | 'web' | 'saas'
+export interface OfferFacts {
+  id: 'systems' | 'ai' | 'data' | 'web' | 'iot' | 'team'
   order: number
 }
 
-export interface CapabilityCopy {
-  id: CapabilityFacts['id']
+export interface OfferCopy {
+  id: OfferFacts['id']
   name: string
-  bestFor: string
-  canDeliver: string
+  detail: string
+  /** Concrete things in this group, in the words a buyer would search for. */
+  examples: string[]
 }
 
-export interface Capability extends CapabilityFacts, Omit<CapabilityCopy, 'id'> {}
-
-export interface ServiceFacts {
-  id: 'advisory' | 'sprint' | 'endToEnd'
-  order: number
-}
-
-export interface ServiceCopy {
-  id: ServiceFacts['id']
-  name: string
-  output: string
-  suitedTo: string
-}
-
-export interface Service extends ServiceFacts, Omit<ServiceCopy, 'id'> {}
+export interface Offer extends OfferFacts, Omit<OfferCopy, 'id'> {}
 
 export interface FaqFacts {
   id: string
@@ -79,19 +65,12 @@ export interface FaqCopy {
 export interface Faq extends FaqFacts, Omit<FaqCopy, 'id'> {}
 
 export interface SocialLink {
-  network: 'github' | 'x' | 'linkedin' | 'email' | 'zalo'
+  network: 'github' | 'x' | 'linkedin' | 'email' | 'zalo' | 'whatsapp'
   url: string
-}
-
-export interface SpecRow {
-  id: 'location' | 'languages' | 'replyTime' | 'nowBuilding'
-  label: string
-  value: string
 }
 
 export interface ProfileFacts {
   name: string
-  ctaHref: string
   avatar: string
   available: boolean
 }
@@ -100,9 +79,9 @@ export interface ProfileCopy {
   location: string
   hook: string
   supporting: string
-  ctaLabel: string
+  /** Short label for the sticky header button. */
+  headerCta: string
   availabilityLabel: string
-  spec: SpecRow[]
 }
 
 export interface Profile extends ProfileFacts, ProfileCopy {}
@@ -110,16 +89,14 @@ export interface Profile extends ProfileFacts, ProfileCopy {}
 export interface ContentCopy {
   profile: ProfileCopy
   builds: BuildCopy[]
-  capabilities: CapabilityCopy[]
-  services: ServiceCopy[]
+  offers: OfferCopy[]
   faq: FaqCopy[]
 }
 
 export interface SiteContent {
   profile: Profile
   builds: Build[]
-  capabilities: Capability[]
-  services: Service[]
+  offers: Offer[]
   faq: Faq[]
   social: SocialLink[]
 }

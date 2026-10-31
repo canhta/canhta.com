@@ -1,10 +1,9 @@
 import type {
   BuildFacts,
-  CapabilityFacts,
   FaqFacts,
   FixtureMarked,
+  OfferFacts,
   ProfileFacts,
-  ServiceFacts,
   SocialLink,
 } from './types'
 
@@ -15,28 +14,50 @@ import type {
 export const profileFacts: ProfileFacts & FixtureMarked = {
   __fixture: true,
   name: 'Canh Ta',
-  ctaHref: 'mailto:hello@canhta.com?subject=Project%20inquiry%20from%20canhta.com',
   avatar: '/avatar.jpg',
   available: true,
 }
 
-/** These projects and their links are real, so they carry no fixture marker. */
+/**
+ * These projects and their links are real, so they carry no fixture marker.
+ * Scori and Remoti are not in any store yet (Scori's `store-links.json` is null,
+ * Remoti's own site says "Coming soon"), so both stay `building` and link to
+ * their sites. Add a store link here only when it exists.
+ */
 export const buildFacts: BuildFacts[] = [
   {
-    slug: 'reupmatic',
+    slug: 'scori',
     order: 1,
-    name: 'Reupmatic',
+    name: 'Scori',
     year: '2026',
-    kind: 'desktop',
+    kind: 'mobile',
+    appCategory: 'UtilitiesApplication',
     status: 'building',
-    links: [{ kind: 'web', url: 'https://reupmatic.canhta.com' }],
+    os: 'iOS, Android',
+    logo: '/products/scori/icon.png',
+    shots: ['score', 'invite'],
+    links: [{ kind: 'web', url: 'https://scori.canhta.com' }],
+  },
+  {
+    slug: 'remoti',
+    order: 2,
+    name: 'Remoti',
+    year: '2026',
+    kind: 'mobile',
+    appCategory: 'UtilitiesApplication',
+    status: 'building',
+    os: 'iOS',
+    logo: '/products/remoti/icon.svg',
+    shots: ['remote-classic', 'present'],
+    links: [{ kind: 'web', url: 'https://remoti.canhta.com' }],
   },
   {
     slug: 'ai-engineering-atlas',
-    order: 2,
+    order: 3,
     name: 'AI Engineering Atlas',
     year: '2026',
     kind: 'web',
+    appCategory: 'EducationalApplication',
     status: 'live',
     links: [
       { kind: 'web', url: 'https://ai-eng.canhta.com' },
@@ -45,47 +66,35 @@ export const buildFacts: BuildFacts[] = [
   },
   {
     slug: 'copycat-skills',
-    order: 3,
+    order: 4,
     name: 'copycat-skills',
     year: '2026',
     kind: 'skill',
+    appCategory: 'DeveloperApplication',
     status: 'shipped',
     links: [
       { kind: 'docs', url: 'https://skills.sh/canhta/copycat-skills' },
       { kind: 'github', url: 'https://github.com/canhta/copycat-skills' },
     ],
   },
-  {
-    slug: 'pixelbid',
-    order: 4,
-    name: 'PixelBid',
-    year: '2026',
-    kind: 'web',
-    status: 'building',
-    links: [{ kind: 'web', url: 'https://pixelbid.lol' }],
-  },
 ]
 
-export const capabilityFacts: (CapabilityFacts & FixtureMarked)[] = [
-  { __fixture: true, id: 'agentic', order: 1 },
-  { __fixture: true, id: 'mobile', order: 2 },
-  { __fixture: true, id: 'web', order: 3 },
-  { __fixture: true, id: 'saas', order: 4 },
-]
-
-export const serviceFacts: (ServiceFacts & FixtureMarked)[] = [
-  { __fixture: true, id: 'advisory', order: 1 },
-  { __fixture: true, id: 'sprint', order: 2 },
-  { __fixture: true, id: 'endToEnd', order: 3 },
+export const offerFacts: (OfferFacts & FixtureMarked)[] = [
+  { __fixture: true, id: 'systems', order: 1 },
+  { __fixture: true, id: 'ai', order: 2 },
+  { __fixture: true, id: 'data', order: 3 },
+  { __fixture: true, id: 'web', order: 4 },
+  { __fixture: true, id: 'iot', order: 5 },
+  { __fixture: true, id: 'team', order: 6 },
 ]
 
 export const faqFacts: (FaqFacts & FixtureMarked)[] = [
   { __fixture: true, id: 'pricing', order: 1 },
   { __fixture: true, id: 'ownership', order: 2 },
-  { __fixture: true, id: 'vague', order: 3 },
-  { __fixture: true, id: 'team', order: 4 },
-  { __fixture: true, id: 'after', order: 5 },
-  { __fixture: true, id: 'agency', order: 6 },
+  { __fixture: true, id: 'existing', order: 3 },
+  { __fixture: true, id: 'idea', order: 4 },
+  { __fixture: true, id: 'team', order: 5 },
+  { __fixture: true, id: 'after', order: 6 },
 ]
 
 export const socialFacts: (SocialLink & FixtureMarked)[] = [
@@ -93,5 +102,7 @@ export const socialFacts: (SocialLink & FixtureMarked)[] = [
   { __fixture: true, network: 'x', url: 'https://x.com/canh_builds' },
   { __fixture: true, network: 'linkedin', url: 'https://www.linkedin.com/in/canhta' },
   { __fixture: true, network: 'zalo', url: 'https://zalo.me/84825252599' },
+  // The WhatsApp number is the Zalo number: the only phone number in the repo. Owner to confirm.
+  { __fixture: true, network: 'whatsapp', url: 'https://wa.me/84825252599' },
   { __fixture: true, network: 'email', url: 'mailto:hello@canhta.com' },
 ]

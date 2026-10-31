@@ -26,7 +26,7 @@ describe('build metadata', () => {
   })
 
   it('lists every build kind exactly once', () => {
-    const all: BuildKind[] = ['agent', 'skill', 'mobile', 'web', 'saas', 'tool', 'desktop']
+    const all: BuildKind[] = ['agent', 'skill', 'mobile', 'web', 'saas', 'tool']
     expect([...KIND_ORDER].sort()).toEqual([...all].sort())
     expect(new Set(KIND_ORDER).size).toBe(KIND_ORDER.length)
   })

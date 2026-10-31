@@ -12,6 +12,9 @@ export default defineConfig({
     },
   },
   test: {
+    // next-intl's navigation helpers import `next/navigation` without the extension,
+    // which Node's ESM resolver rejects; inlining lets Vite resolve it.
+    server: { deps: { inline: ['next-intl'] } },
     environment: 'jsdom',
     globals: true,
     setupFiles: ['./tests/setup.ts'],

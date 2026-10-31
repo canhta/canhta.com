@@ -3,106 +3,133 @@
     "newTab": "mở trong tab mới",
     "skipToContent": "Tới nội dung chính"
   },
-  "header": {
+  "nav": {
+    "primary": "Chính",
     "language": "Ngôn ngữ",
-    "role": "Phần mềm cho doanh nghiệp nhỏ"
+    "services": "Dịch vụ",
+    "contact": "Liên hệ",
+    "menu": "Menu",
+    "closeMenu": "Đóng menu",
+    "home": "Trang chủ",
+    "products": "Sản phẩm"
+  },
+  "hero": {
+    "primary": "Kể về doanh nghiệp của bạn",
+    "secondary": "Xem dịch vụ",
+    "visual": {
+      "label": "Zalo, Excel và giấy tờ được gom về một màn hình",
+      "sources": [
+        "Zalo",
+        "Excel",
+        "Giấy tờ"
+      ],
+      "title": "Một chỗ",
+      "rows": [
+        "Đơn hàng",
+        "Hàng tồn",
+        "Khách hàng"
+      ],
+      "tag": "AI làm, bạn duyệt"
+    }
+  },
+  "home": {
+    "servicesHeading": "Chúng tôi làm gì",
+    "servicesAll": "Xem tất cả dịch vụ",
+    "appsHeading": "Một vài sản phẩm của chúng tôi",
+    "appsAll": "Xem tất cả sản phẩm"
+  },
+  "services": {
+    "h1": "Chuyển đổi số, phần mềm và AI cho doanh nghiệp nhỏ",
+    "intro": "Cho chúng tôi biết doanh nghiệp bạn đang vận hành thế nào. Chúng tôi vẽ lại việc đó, rồi chuyển dần sang hệ thống làm việc thay bạn.",
+    "processHeading": "Cách chúng tôi làm một dự án",
+    "faqHeading": "Câu hỏi thường gặp"
+  },
+  "apps": {
+    "h1": "Một vài sản phẩm của chúng tôi",
+    "intro": "App, web, dữ liệu và AI: đây là một vài thứ chúng tôi đã làm. Scori và Remoti vẫn đang làm, chưa có trên cửa hàng ứng dụng.",
+    "publicHeading": "Còn những dự án khác bạn có thể xem"
   },
   "contact": {
-    "chatOn": "Nhắn qua"
-  },
-  "work": {
-    "kicker": "Sản phẩm",
-    "heading": "Sản phẩm tôi đã làm",
-    "problem": "Bài toán",
-    "built": "Tôi đã làm",
-    "result": "Hiện tại",
-    "summaryOne": "Một dự án. Có link để mở xem ngay.",
-    "summaryMany": "{count} dự án. Có link để mở xem ngay."
-  },
-  "capabilities": {
-    "kicker": "Chuyển đổi số trong vận hành",
-    "heading": "Khi nào đáng làm phần mềm riêng?",
-    "bestFor": "Dấu hiệu",
-    "deliverable": "Hướng xử lý"
-  },
-  "approach": {
-    "kicker": "Từ bài toán đến vận hành",
-    "heading": "Plan chỉ có giá trị khi thành thứ team dùng được.",
-    "sub": "Thử từng mốc để xem dự án bắt đầu tạo ra giá trị từ đâu.",
-    "lineName": "Đưa vào dùng ở mốc nào",
-    "running": "Đang chạy thật",
-    "planned": "Chưa chạy thật",
-    "loop": "Từ đó tiếp tục đo, sửa và cải tiến.",
-    "stages": [
-      { "id": "problem", "label": "Chỉ đúng chỗ đang kẹt", "detail": "Ai đang làm, kẹt ở đâu, tốn bao nhiêu." },
-      { "id": "agree", "label": "Chọn cách giải vừa đủ", "detail": "Sửa quy trình, nối tool hay code mới." },
-      { "id": "build", "label": "Có bản chạy sớm", "detail": "Team thật dùng và phản hồi." },
-      { "id": "live", "label": "Đưa vào vận hành", "detail": "Đo, sửa và bàn giao." }
+    "h1": "Kể cho chúng tôi doanh nghiệp bạn vận hành thế nào",
+    "body": "Mô tả vài dòng hay một ý tưởng là đủ. Chúng tôi trả lời trong một ngày làm việc.",
+    "helpHeading": "Nếu tiện, cho biết thêm",
+    "help": [
+      "Ai sẽ dùng",
+      "Việc nào đang tốn nhiều thời gian nhất",
+      "Hiện bạn đang dùng công cụ nào"
     ],
-    "stops": [
+    "channels": "Liên hệ qua",
+    "chatOn": "Nhắn qua",
+    "email": "Gửi email",
+    "mailSubject": "Hỏi về dự án từ canhta.com",
+    "mailBody": "Xin chào,\n\nAi sẽ dùng:\nViệc đang tốn nhiều thời gian nhất:\nHiện đang dùng:\n",
+    "nextHeading": "Sau khi bạn liên hệ"
+  },
+  "process": {
+    "rule": "Nếu đã có phần mềm làm được việc đó, chúng tôi sẽ chỉ bạn dùng nó thay vì làm mới.",
+    "steps": [
       {
-        "id": "agree",
-        "choice": "Bản nhỏ sau khi chốt",
-        "consequence": "Chỉ làm luồng cốt lõi và đưa cho team dùng trước."
+        "id": "problem",
+        "label": "Kể việc đang vướng",
+        "detail": "Chỉ cần vài dòng."
       },
       {
-        "id": "building",
-        "choice": "Ngay trong lúc build",
-        "consequence": "Phần nào xong, team dùng thử phần đó."
+        "id": "map",
+        "label": "Vẽ lại việc đang chạy",
+        "detail": "Ai làm gì, dùng hệ thống nào, thời gian mất ở đâu."
       },
       {
-        "id": "built",
-        "choice": "Sau khi nghiệm thu",
-        "consequence": "Hoàn thiện luồng đã chốt rồi mới đưa vào vận hành."
+        "id": "plan",
+        "label": "Gửi kế hoạch và báo giá",
+        "detail": "Trước khi làm."
       },
       {
-        "id": "never",
-        "choice": "Không đưa vào dùng",
-        "consequence": "Dự án nằm trên tài liệu và không thay đổi được công việc nào."
+        "id": "build",
+        "label": "Làm bản chạy thử",
+        "detail": "Với thông tin thật của bạn. Ổn rồi mới chuyển tiếp phần khác."
       }
     ]
   },
-  "engagements": {
-    "kicker": "Phạm vi hợp tác",
-    "heading": "Bắt đầu nhỏ. Đưa vào chạy thật.",
-    "sub": "Tùy bài toán, chúng ta có thể chỉ chốt hướng, thử một luồng hoặc làm trọn tới lúc vận hành.",
-    "output": "Đầu ra",
-    "suited": "Phù hợp khi"
-  },
-  "answers": {
-    "kicker": "Trước khi bắt đầu",
-    "heading": "Những điều cần rõ trước khi làm",
-    "sub": "Chi phí, quyền sở hữu và cách chọn giải pháp."
+  "about": {
+    "heading": "Chúng tôi là ai",
+    "proof": "Chúng tôi từng làm các sản phẩm có hàng trăm nghìn người dùng, ở vai trò lập trình, xử lý dữ liệu và quản lý sản phẩm."
   },
   "closing": {
-    "heading": "Đừng bắt đầu bằng “cần làm app gì”.",
-    "reassure": "Hãy gửi cho tôi khâu đang chậm, dễ sai hoặc tốn người nhất. Tôi sẽ cùng bạn bóc tách quy trình, chốt plan và báo giá. Nếu chưa cần code, tôi cũng nói thẳng."
+    "heading": "Sẵn sàng đưa công việc lên phần mềm và AI?",
+    "body": "Kể cho chúng tôi doanh nghiệp bạn đang vận hành thế nào. Chúng tôi trả lời trong một ngày làm việc.",
+    "cta": "Liên hệ"
   },
   "footer": {
-    "write": "Hoặc gửi email trực tiếp",
-    "elsewhere": "Các kênh khác"
+    "explore": "Các trang",
+    "write": "Email",
+    "elsewhere": "Nơi khác"
   },
   "notFound": {
     "label": "Không tìm thấy",
-    "heading": "Không có trang nào ở địa chỉ này.",
-    "body": "Kiểm tra xem có gõ nhầm không, hoặc quay về trang chính. Cả site chỉ có một trang.",
-    "home": "Về trang chính"
+    "heading": "Địa chỉ này không có trang nào.",
+    "body": "Kiểm tra lại xem gõ sai không, hoặc quay về trang đầu.",
+    "home": "Về trang đầu"
+  },
+  "products": {
+    "alts": {
+      "score": "Màn hình ghi điểm của Scori với bốn người chơi và điểm số lớn",
+      "remote-classic": "Màn hình điều khiển của Remoti với phím điều hướng, âm lượng và phát hoặc dừng"
+    }
   },
   "buildMeta": {
     "kinds": {
-      "agent": "Agent tự chạy",
-      "skill": "Agent skill",
-      "mobile": "App mobile",
+      "agent": "Việc tự chạy",
+      "skill": "Công cụ cho trợ lý AI",
+      "mobile": "Ứng dụng điện thoại",
       "web": "Sản phẩm web",
-      "saas": "Sản phẩm thu phí",
-      "tool": "Tool cho dev",
-      "desktop": "Desktop app"
+      "saas": "Sản phẩm trả phí",
+      "tool": "Công cụ cho lập trình viên"
     },
     "links": {
       "appstore": "App Store",
       "playstore": "Google Play",
-      "web": "Mở trang",
-      "github": "Mã nguồn",
+      "web": "Xem trang",
+      "github": "Xem trên GitHub",
       "docs": "Tài liệu"
     },
     "githubStarOne": "sao trên GitHub",
@@ -110,16 +137,30 @@
   },
   "statuses": {
     "live": "Đang chạy",
-    "shipped": "Đã ship",
+    "shipped": "Đã phát hành",
     "building": "Đang làm",
-    "acquired": "Đã bán",
-    "sunset": "Đã dừng"
+    "acquired": "Đã được mua lại",
+    "sunset": "Đã ngừng"
   },
   "metadata": {
-    "pageTitle": "Phần mềm theo yêu cầu cho doanh nghiệp nhỏ | Canh Ta",
-    "pageDescription": "Chuyển đổi số cho doanh nghiệp nhỏ: bóc tách quy trình, kết nối hệ thống, làm phần mềm theo yêu cầu và ứng dụng AI. Có báo giá trước khi code.",
-    "jobTitle": "Kỹ sư phần mềm cho doanh nghiệp nhỏ",
-    "offerCatalog": "Phạm vi hợp tác",
-    "workList": "Sản phẩm tôi đã làm"
+    "home": {
+      "title": "Chuyển đổi số và AI cho doanh nghiệp nhỏ | Canh Ta",
+      "description": "Chúng tôi số hóa cách doanh nghiệp nhỏ làm việc và cho AI tự làm các bước lặp lại. Ngoài ra còn tự làm app như Scori, Remoti."
+    },
+    "services": {
+      "title": "Phần mềm, ERP, CRM và AI cho doanh nghiệp nhỏ | Canh Ta",
+      "description": "ERP, CRM, chatbot, website, dữ liệu, IoT và AI agent cho doanh nghiệp nhỏ và cá nhân. Có kế hoạch và báo giá trước khi làm."
+    },
+    "contact": {
+      "title": "Liên hệ | Canh Ta",
+      "description": "Kể cho chúng tôi việc đang mất nhiều thời gian, hoặc thứ bạn muốn làm. Chúng tôi trả lời trong một ngày làm việc."
+    },
+    "jobTitle": "Kỹ sư phần mềm",
+    "offerCatalog": "Chúng tôi làm gì",
+    "workList": "Một vài sản phẩm và dự án của chúng tôi",
+    "products": {
+      "title": "Scori, Remoti và các sản phẩm khác | Canh Ta",
+      "description": "Một vài sản phẩm chúng tôi làm: app như Scori, Remoti, cùng các dự án web, dữ liệu và AI."
+    }
   }
 }

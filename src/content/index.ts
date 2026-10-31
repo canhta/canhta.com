@@ -1,23 +1,7 @@
-import {
-  buildFacts,
-  capabilityFacts,
-  faqFacts,
-  profileFacts,
-  serviceFacts,
-  socialFacts,
-} from './facts.fixture'
+import { buildFacts, faqFacts, offerFacts, profileFacts, socialFacts } from './facts.fixture'
 import { enContent } from './locales/en.fixture'
 import { viContent } from './locales/vi.fixture'
-import type {
-  Build,
-  Capability,
-  ContentCopy,
-  Faq,
-  Locale,
-  Service,
-  SiteContent,
-  SocialLink,
-} from './types'
+import type { Build, ContentCopy, Faq, Locale, Offer, SiteContent, SocialLink } from './types'
 
 const copies: Record<Locale, ContentCopy> = { en: enContent, vi: viContent }
 
@@ -71,15 +55,9 @@ for (const locale of ['en', 'vi'] as const) {
   )
   assertIds(
     locale,
-    'capability',
-    capabilityFacts.map((item) => item.id),
-    copy.capabilities.map((item) => item.id),
-  )
-  assertIds(
-    locale,
-    'service',
-    serviceFacts.map((item) => item.id),
-    copy.services.map((item) => item.id),
+    'offer',
+    offerFacts.map((item) => item.id),
+    copy.offers.map((item) => item.id),
   )
   assertIds(
     locale,
@@ -96,8 +74,7 @@ function byId<T extends { id: string }>(items: T[]): Map<string, T> {
 function resolve(locale: Locale): SiteContent {
   const copy = copies[locale]
   const buildsBySlug = new Map(copy.builds.map((item) => [item.slug, item]))
-  const capabilitiesById = byId(copy.capabilities)
-  const servicesById = byId(copy.services)
+  const offersById = byId(copy.offers)
   const faqById = byId(copy.faq)
 
   const builds: Build[] = buildFacts
@@ -109,19 +86,10 @@ function resolve(locale: Locale): SiteContent {
     })
     .sort((a, b) => a.order - b.order)
 
-  const capabilities: Capability[] = capabilityFacts
+  const offers: Offer[] = offerFacts
     .map((facts) => {
-      const localized = capabilitiesById.get(facts.id)
-      if (!localized) throw new Error(`Missing ${locale} capability copy: ${facts.id}`)
-      const { id: _, ...words } = localized
-      return { ...facts, ...words }
-    })
-    .sort((a, b) => a.order - b.order)
-
-  const services: Service[] = serviceFacts
-    .map((facts) => {
-      const localized = servicesById.get(facts.id)
-      if (!localized) throw new Error(`Missing ${locale} service copy: ${facts.id}`)
+      const localized = offersById.get(facts.id)
+      if (!localized) throw new Error(`Missing ${locale} offer copy: ${facts.id}`)
       const { id: _, ...words } = localized
       return { ...facts, ...words }
     })
@@ -139,8 +107,7 @@ function resolve(locale: Locale): SiteContent {
   return {
     profile: { ...profileFacts, ...copy.profile },
     builds,
-    capabilities,
-    services,
+    offers,
     faq,
     social: socialFacts,
   }
@@ -151,8 +118,7 @@ const resolved: Record<Locale, SiteContent> = { en: resolve('en'), vi: resolve('
 export const CONTENT_IS_FIXTURE = containsFixture({
   profileFacts,
   buildFacts,
-  capabilityFacts,
-  serviceFacts,
+  offerFacts,
   faqFacts,
   socialFacts,
 })

@@ -1,41 +1,22 @@
 import type { Metadata, Viewport } from 'next'
-import { Be_Vietnam_Pro, Newsreader } from 'next/font/google'
+import { Be_Vietnam_Pro } from 'next/font/google'
 import { notFound } from 'next/navigation'
-import { hasLocale } from 'next-intl'
+import { hasLocale, NextIntlClientProvider } from 'next-intl'
 import { setRequestLocale } from 'next-intl/server'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { routing } from '@/i18n/routing'
-import { getSiteContent } from '@/content'
-import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
 import '../globals.css'
 
-// The organising voice: labels, controls, metadata, body copy.
-// A Vietnamese-designed typeface for a Vietnamese builder's bilingual site —
-// full diacritic coverage, and a real choice rather than the default sans.
-// Two weights only. Every declared weight is two more font files (latin +
-// vietnamese) on a page whose LCP element is text, so an unused weight is pure
-// LCP cost — 800 went with the old display face that no longer sets anything.
+// One family for the whole page. Be Vietnam Pro was drawn for Vietnamese, so the
+// stacked marks (ệ, ộ) are designed in rather than patched, and a Vietnamese
+// reader sees a face they already know. Three weights only: every declared
+// weight is two more font files (latin + vietnamese).
 const bvp = Be_Vietnam_Pro({
   subsets: ['latin', 'vietnamese'],
-  weight: ['400', '500'],
+  weight: ['400', '500', '700'],
   variable: '--font-bvp',
-  display: 'swap',
-})
-
-// The arguing voice: the hook, every section title, every product name.
-//
-// There are no screenshots on this site and no metrics anyone could check, so
-// the sentences are the product demo. A serif is what makes a page read as
-// written rather than assembled — and Newsreader is one of the few editorial
-// faces with a real Vietnamese subset, which is not optional here.
-//
-// Declared without `weight`: this is a variable font, so one file covers the
-// whole range and next/font refuses a weight list for it.
-const newsreader = Newsreader({
-  subsets: ['latin', 'vietnamese'],
-  variable: '--font-newsreader',
   display: 'swap',
 })
 
@@ -76,52 +57,17 @@ export function generateStaticParams() {
  * failure, not a polish detail.
  */
 export const viewport: Viewport = {
-  themeColor: '#fbf9f5',
+  themeColor: '#f3f3ef',
   colorScheme: 'light',
 }
 
 /**
- * Per-locale metadata, with reciprocal hreflang.
- *
- * This was one static English block serving both routes, so `/vi` advertised an
- * English title and description to every crawler and shared-link preview, and
- * neither route declared the other existed. Two locales that do not point at
- * each other are two competing pages, not one page in two languages.
+ * Site-wide defaults only. Each page sets its own title, description, canonical
+ * and hreflang in its own `generateMetadata` (see `src/lib/metadata.ts`): one
+ * page, one search intent, one set of tags.
  */
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>
-}): Promise<Metadata> {
-  const { locale } = await params
-  const l: Locale = locale === 'vi' ? 'vi' : 'en'
-  const canonical = l === 'en' ? '/' : `/${l}`
-  const { profile } = getSiteContent(l)
-  const messages = getMessages(l)
-
-  return {
-    metadataBase: new URL('https://canhta.com'),
-    title: messages.metadata.pageTitle,
-    description: messages.metadata.pageDescription,
-    alternates: {
-      canonical,
-      languages: { en: '/', vi: '/vi', 'x-default': '/' },
-    },
-    openGraph: {
-      type: 'profile',
-      siteName: profile.name,
-      locale: l === 'vi' ? 'vi_VN' : 'en_US',
-      alternateLocale: l === 'vi' ? 'en_US' : 'vi_VN',
-      url: canonical,
-      title: profile.hook,
-      description: messages.metadata.pageDescription,
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: profile.hook,
-      description: messages.metadata.pageDescription,
-    },
-  }
+export const metadata: Metadata = {
+  metadataBase: new URL('https://canhta.com'),
 }
 
 export default async function LocaleLayout({
@@ -137,12 +83,16 @@ export default async function LocaleLayout({
   const messages = getMessages(locale)
 
   return (
-    <html lang={locale} className={`${bvp.variable} ${newsreader.variable}`}>
+    <html lang={locale} className={bvp.variable}>
       <body>
         <a href="#main" className="skip-link">
           {messages.common.skipToContent}
         </a>
-        {children}
+        {/* Locale only, no messages: the one client component (the header menu) takes
+            its labels as props, so no message catalog ships to the browser. */}
+        <NextIntlClientProvider locale={locale} messages={null}>
+          {children}
+        </NextIntlClientProvider>
         {/* The `/next` entry point, not the bare package: it reads the App
             Router's own `useParams`/`usePathname`, so a visit is reported
             against the route `/[locale]` instead of splitting one page into two

@@ -1,21 +1,26 @@
 import type { MetadataRoute } from 'next'
+import type { Locale } from '@/content/types'
 import { routing } from '@/i18n/routing'
+import { PAGE_PATH, pageUrl } from '@/lib/metadata'
 
-const SITE = 'https://canhta.com'
+const PAGES = Object.keys(PAGE_PATH) as (keyof typeof PAGE_PATH)[]
 
-/** `as-needed` prefixing means the default locale has no segment. */
-const urlFor = (locale: string) => (locale === routing.defaultLocale ? SITE : `${SITE}/${locale}`)
-
+/**
+ * Every page in every language, each entry listing all its language versions
+ * (itself included): hreflang is reciprocal, and a one-way declaration is ignored.
+ */
 export default function sitemap(): MetadataRoute.Sitemap {
-  // Every locale points at every other, itself included: hreflang is reciprocal,
-  // and a one-way declaration is ignored.
-  const languages = Object.fromEntries(routing.locales.map((l) => [l, urlFor(l)]))
-
-  return routing.locales.map((locale) => ({
-    url: urlFor(locale),
-    lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: locale === routing.defaultLocale ? 1 : 0.9,
-    alternates: { languages },
-  }))
+  return PAGES.flatMap((page) => {
+    const languages = {
+      ...Object.fromEntries(routing.locales.map((l) => [l, pageUrl(l as Locale, page)])),
+      'x-default': pageUrl(routing.defaultLocale as Locale, page),
+    }
+    return routing.locales.map((locale) => ({
+      url: pageUrl(locale as Locale, page),
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: page === 'home' ? 1 : page === 'services' ? 0.9 : 0.7,
+      alternates: { languages },
+    }))
+  })
 }

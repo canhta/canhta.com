@@ -1,57 +1,51 @@
 import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
-import { ArrowIcon, ZaloWordmark } from './icons'
+import { ZaloWordmark } from './icons'
 
 /**
- * The conversion pair, in one place.
- *
- * The primary button's markup was once duplicated in three sections, which is
- * how three copies of one action drift apart. It appears twice on the page now —
- * once where a visitor arrives and once where they finish — and both are this
- * component.
- *
- * Zalo sits beside it rather than replacing it because they are different
- * affordances, not two CTAs: one opens a considered email, the other opens a
- * chat a Vietnamese visitor already has on their phone. It is styled as the
- * secondary of the pair so the hierarchy stays single.
- *
- * `invert` is for the closing block, where the ground is ink rather than paper.
+ * The ways to reach us, in one place: email as the primary action, Zalo for
+ * Vietnam and WhatsApp for everywhere else. They are different doors to the same
+ * inbox, so email is styled as primary and the chat apps as secondary.
  */
-export function ContactActions({ locale, invert = false }: { locale: Locale; invert?: boolean }) {
-  const { profile, social } = getSiteContent(locale)
+export function ContactActions({
+  locale,
+  tone = 'light',
+}: {
+  locale: Locale
+  tone?: 'light' | 'dark'
+}) {
+  const { social } = getSiteContent(locale)
   const messages = getMessages(locale)
   const zalo = social.find((item) => item.network === 'zalo')
+  const whatsapp = social.find((item) => item.network === 'whatsapp')
+  const address = social.find((item) => item.network === 'email')?.url ?? 'mailto:hello@canhta.com'
+  // Subject and starting lines in the visitor's own language, so the email is
+  // already half written in the words they would use.
+  const mailto = `${address}?subject=${encodeURIComponent(messages.contact.mailSubject)}&body=${encodeURIComponent(messages.contact.mailBody)}`
+  const secondary =
+    tone === 'dark'
+      ? 'btn-secondary !border-white/40 !bg-transparent !text-white hover:!border-white'
+      : 'btn-secondary'
 
   return (
     <div className="flex flex-wrap items-center gap-3">
-      <a
-        href={profile.ctaHref}
-        className={
-          invert
-            ? 'inline-flex min-h-12 items-center gap-3 rounded-[2px] bg-bg px-5 text-[15px] font-medium text-ink transition-colors duration-150 hover:bg-accent hover:text-on-accent'
-            : 'btn-primary'
-        }
-      >
-        {profile.ctaLabel}
-        <ArrowIcon width={16} height={16} />
+      <a href={mailto} className={tone === 'dark' ? 'btn-accent' : 'btn-primary'}>
+        {messages.contact.email}
       </a>
 
       {zalo ? (
-        <a
-          href={zalo.url}
-          target="_blank"
-          rel="noreferrer noopener"
-          className={
-            invert
-              ? 'inline-flex min-h-12 items-center gap-2.5 rounded-[2px] border border-bg/30 px-[18px] text-[15px] font-medium text-bg/80 transition-colors duration-150 hover:border-bg hover:text-bg'
-              : 'btn-secondary'
-          }
-        >
-          {/* The wordmark carries the brand name, so the label says the verb
-              rather than repeating it. */}
+        <a href={zalo.url} target="_blank" rel="noreferrer noopener" className={secondary}>
           {messages.contact.chatOn}
           <ZaloWordmark />
+          <span className="sr-only">{messages.common.newTab}</span>
+        </a>
+      ) : null}
+
+      {whatsapp ? (
+        <a href={whatsapp.url} target="_blank" rel="noreferrer noopener" className={secondary}>
+          {messages.contact.chatOn}
+          <span translate="no">WhatsApp</span>
           <span className="sr-only">{messages.common.newTab}</span>
         </a>
       ) : null}

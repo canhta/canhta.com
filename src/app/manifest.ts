@@ -39,8 +39,8 @@ export default function manifest(): MetadataRoute.Manifest {
      * `globals.css`: a mismatch is not a config detail, it is a visible seam
      * between the address bar and the page on Android.
      */
-    background_color: '#fbf9f5',
-    theme_color: '#fbf9f5',
+    background_color: '#f3f3ef',
+    theme_color: '#f3f3ef',
 
     lang: 'en',
     dir: 'ltr',

@@ -3,7 +3,6 @@ import vi from '../../messages/vi.json'
 import type { Locale } from '@/content/types'
 
 export type AppMessages = typeof en
-export type ApproachMessages = AppMessages['approach']
 
 const catalogs: Record<Locale, AppMessages> = { en, vi }
 

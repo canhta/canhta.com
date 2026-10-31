@@ -25,7 +25,9 @@ function nodesOfType(graph: ReturnType<typeof buildGraph>, type: string) {
 }
 
 describe.each(LOCALES)('buildGraph(%s)', (locale) => {
-  const graph = buildGraph(locale)
+  const graph = buildGraph(locale, 'services')
+  const apps = buildGraph(locale, 'products')
+  const home = buildGraph(locale, 'home')
   const { builds, faq } = getSiteContent(locale)
 
   it('serialises to valid JSON', () => {
@@ -41,15 +43,24 @@ describe.each(LOCALES)('buildGraph(%s)', (locale) => {
     expect(graph['@graph'].length).toBeGreaterThan(0)
   })
 
-  it('contains exactly the expected top-level types', () => {
-    const types = graph['@graph'].map((node) => node['@type'])
-    expect(types).toEqual([
+  it('contains the expected top-level types on each page', () => {
+    const typesOf = (g: typeof graph) => g['@graph'].map((node) => node['@type'])
+    expect(typesOf(home)).toEqual(['Person', 'ProfessionalService', 'WebSite', 'WebPage'])
+    expect(typesOf(graph)).toEqual([
       'Person',
       'ProfessionalService',
       'WebSite',
       'WebPage',
-      'ItemList',
+      'BreadcrumbList',
       'FAQPage',
+    ])
+    expect(typesOf(apps)).toEqual([
+      'Person',
+      'ProfessionalService',
+      'WebSite',
+      'WebPage',
+      'BreadcrumbList',
+      'ItemList',
     ])
   })
 
@@ -94,7 +105,7 @@ describe.each(LOCALES)('buildGraph(%s)', (locale) => {
   })
 
   it('lists only products a crawler can actually follow', () => {
-    const [itemList] = nodesOfType(graph, 'ItemList')
+    const [itemList] = nodesOfType(apps, 'ItemList')
     const items = (itemList as { itemListElement?: unknown[] } | undefined)?.itemListElement ?? []
     expect(items).toHaveLength(builds.filter((b) => b.links.length > 0).length)
 

@@ -8,18 +8,45 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
-## Vietnamese product copy
+## Site rules (decided by the owner; do not reopen without asking)
 
-- Keep user-facing copy in `src/content/locales/vi.fixture.ts` or `messages/vi.json`; do not hardcode it in components.
-- Write the Vietnamese page as a whole for people who build and buy web products. Do not translate the English page sentence by sentence.
-- Sound like a Vietnamese solo builder: short, direct, conversational, and concrete. Use familiar work terms such as `spec`, `app`, `SaaS`, `team`, `dev`, and `production` when they are more natural than formal Vietnamese.
-- Write for small businesses with operational problems. Lead with digitizing work, improving a process, connecting scattered systems, or applying AI where it helps. Tools, mobile apps, web apps, and SaaS are possible implementations, not the pitch.
-- Do not make the buyer diagnose the technology. They bring a slow, manual, fragmented, or error-prone part of the business; we identify the smallest useful solution. Keep AI subordinate to the business problem and name the human review point when it matters.
-- Give the page a point of view a buyer can remember. State a real tradeoff or decision rule, such as using an existing tool when it is enough, instead of listing generic capabilities. Never invent a contrarian line that the delivery model cannot support.
-- Make the mechanism concrete: find the bottleneck, map the current workflow, choose the smallest adequate intervention, agree the plan and price, then put it into use. Claims about outcomes need linked work or other verifiable proof.
-- Contact copy must ask for the problem, not a polished brief or a message of any particular length. Explain the next steps plainly: discuss the problem, break it down together, plan the implementation, then quote the work.
-- Pick one primary search intent for each page. Put the phrase people actually search for in the page title and a prominent heading or closely related visible copy; use related terms only where they describe real services. Do not pile keywords into the hero or metadata.
-- A search title and description must describe this specific page, not repeat the brand role or the hero mechanically. Optimize for the right click, not for maximum keyword coverage; metadata does not replace useful on-page content.
-- Cut ceremonial language, consultant-speak, inflated promises, repeated context, and sentences that only sound professional. One sentence should make one point.
-- Before finishing, read `/vi` from top to bottom and aloud. Every line must fit its surrounding section, sound like something a real person would say, and render without overflow.
-- Locale tests may verify catalog completeness, parity, rendering, and routing. Do not duplicate or freeze exact Vietnamese prose in component or end-to-end tests; the locale files are the copy source of truth.
+These came from the owner during the 2026-10-31 redesign. Each one replaces any earlier guidance that disagrees.
+
+### What the site is for
+- Job 1 (priority): sell digital transformation, software and AI to small businesses and individuals. Job 2: show some of our products to bring traffic.
+- Services come before products on every page and in every list. Products are compact and never pushed: they are "some of our products", not all.
+- Scope is wide and must read wide: ERP, CRM, chatbots, websites, web and mobile apps, data and reports, AI agents, IoT, extra hands for a product team. Never narrow it to "apps" or to "fixing" a problem. The frame is transformation: digitise how the business runs, then let AI agents do the routine steps with a person approving.
+- English and Vietnamese carry the same content and structure. Write each language separately for its own readers; never translate sentence by sentence.
+
+### Voice and language
+- Speak as "we" (Vietnamese: "chúng tôi", never "tụi mình"). No "I". Not a solo builder.
+- Write for a shop owner or an ordinary person, in everyday words. No jargon they would not say: tool, POC, plan, module, repo, SaaS, dev, data, PM, brief, outsourcing. Use: phần mềm, kế hoạch, bản chạy thử, hệ thống, báo giá. Product names and common words (AI, app, ERP, CRM, Zalo, Excel, QR) are fine.
+- Short sentences, one point each. No machine-translated phrasing, no AI-slop patterns (rule of three, staging, inflated claims, "not X but Y", em dashes, bold labels). Check new copy against the `humanizer` skill and the anti-slop copywriting rules before shipping.
+- "Chuyển đổi số" may appear in titles and headings (people search it); always follow it with a plain sentence.
+
+### Facts we may and may not state
+- Do not state a studio name, headcount, people, photos or founding story. Do not name past clients, describe their products or use any confidential detail. The owner's past outsourcing work may be stated only as the plain sentence in `about.proof`, in the owner's own wording.
+- No invented testimonials, logos, ratings, metrics or prices. No price numbers. Pricing is phased: a plan and a quote first, then a small working version ("bản chạy thử"); only when it works do we agree the next phase.
+- "We reply within one working day" is true and may be stated.
+- Scori and Remoti are not released and not in any store. Say "in development" / "đang làm". No store badges, no download or rating claims. Remoti works only with Android TV and Google TV and only on iPhone; say what it does and never compare it with another remote app. Remoti's casting, mirroring and PDF presenting are built but not yet verified on a real iPhone and TV: describe them as in progress, never as working or tested.
+- Dropped for good: Reupmatic, PixelBid.
+
+### Structure and SEO
+- Four pages per language, one search intent each: home, services, products, contact. Vietnamese slugs: /vi/dich-vu, /vi/san-pham, /vi/lien-he. Add a page only when it has its own intent and its own content.
+- Each page sets its own title, description, canonical, hreflang (with x-default) and JSON-LD. Titles must differ between pages. No keyword stuffing.
+- Mobile first: home is a few screens, not a long scroll. Offers and apps swipe or stack; detail lives one tap away.
+- Contact channels, always together: email, Zalo and WhatsApp. The email subject and body are written in the visitor's language.
+
+### Design
+- Palette comes from our own products: Remoti's deep blue is the action colour, Scori's yellow is the one accent. Neutrals: white, a cool tint, ink, navy. No gradients, glass, glow, background grids or blurred orbs. Font: Be Vietnam Pro (drawn for Vietnamese).
+- No eyebrow badge above a headline, no decorative status dots, no sparkle icons for AI, no arrows on buttons, no coloured left stripes, no identical card grids, no stock-style illustrations. Vary section layouts.
+- Depth and motion are wanted and must have a purpose: the hero scene explains the idea (scattered work flowing into one system with AI agents), sections slide up as they arrive, phone screens tilt, buttons respond. Motion is position or transform only, never hides content, never loops without a reason, and stops for `prefers-reduced-motion`. Heavy code (three.js) loads lazily, has a static fallback, and pauses off screen.
+- Accessibility is a gate: WCAG AA contrast, visible focus, 44px targets, 200% zoom, no fixed-height text boxes, Vietnamese diacritics never clipped.
+
+### Process
+- Verify UI in the Orca browser on a phone width and a desktop width, in both languages, before saying it is done.
+- Before handing work to the owner, have it reviewed by independent agents (fact check, copy, CRO, SEO, and codex for a second model's view) and triage the findings against these rules. Use the marketing skills and the anti-slop skills for those reviews.
+
+### Copy files
+- User-facing copy lives in `src/content/locales/*.fixture.ts` and `messages/*.json`; never hardcode it in components.
+- Locale tests verify catalog completeness, parity, rendering and routing. Do not freeze exact prose in tests. Before finishing, read `/vi` top to bottom as a Vietnamese reader would.

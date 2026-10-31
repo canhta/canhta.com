@@ -3,100 +3,127 @@
     "newTab": "opens in a new tab",
     "skipToContent": "Skip to content"
   },
-  "header": {
+  "nav": {
+    "primary": "Main",
     "language": "Language",
-    "role": "Software for small businesses"
+    "services": "Services",
+    "contact": "Contact",
+    "menu": "Menu",
+    "closeMenu": "Close menu",
+    "home": "Home",
+    "products": "Products"
+  },
+  "hero": {
+    "primary": "Tell us about your business",
+    "secondary": "See services",
+    "visual": {
+      "label": "Chat, a spreadsheet and paper collected into one screen",
+      "sources": [
+        "Chat",
+        "Spreadsheet",
+        "Paper"
+      ],
+      "title": "One place",
+      "rows": [
+        "Orders",
+        "Stock",
+        "Customers"
+      ],
+      "tag": "AI does it, you approve"
+    }
+  },
+  "home": {
+    "servicesHeading": "What we do",
+    "servicesAll": "All services",
+    "appsHeading": "Some of our products",
+    "appsAll": "All products"
+  },
+  "services": {
+    "h1": "Digital transformation, software and AI for small businesses",
+    "intro": "Tell us how your business runs today. We map it, then move it onto systems that work for you, one step at a time.",
+    "processHeading": "How a project works",
+    "faqHeading": "Questions"
+  },
+  "apps": {
+    "h1": "Some of our products",
+    "intro": "Apps, web, data and AI: a few of the things we have built. Scori and Remoti are still being built and are not in the app stores yet.",
+    "publicHeading": "More public projects"
   },
   "contact": {
-    "chatOn": "Chat on"
-  },
-  "work": {
-    "kicker": "Products",
-    "heading": "What I have built",
-    "problem": "The problem",
-    "built": "What I built",
-    "result": "Where it stands",
-    "summaryOne": "One project, with a public link you can open.",
-    "summaryMany": "{count} projects, each with a public link you can open."
-  },
-  "capabilities": {
-    "kicker": "Digital operations",
-    "heading": "When custom software is worth it",
-    "bestFor": "The signal",
-    "deliverable": "What to change"
-  },
-  "approach": {
-    "kicker": "From bottleneck to operation",
-    "heading": "A plan only matters once your team can use it.",
-    "sub": "Choose a launch point and see when the work starts creating value.",
-    "lineName": "Put it into use",
-    "running": "In use",
-    "planned": "Not in use yet",
-    "loop": "Then measure, adjust, and improve it.",
-    "stages": [
-      { "id": "problem", "label": "Locate the bottleneck", "detail": "Who does the work, where it stalls, what it costs." },
-      { "id": "agree", "label": "Choose the smallest useful fix", "detail": "Change the process, connect tools, or write code." },
-      { "id": "build", "label": "Run an early version", "detail": "Your team tests it with real data." },
-      { "id": "live", "label": "Put it into operation", "detail": "Measure, fix, and hand over." }
+    "h1": "Tell us how your business runs",
+    "body": "A description or an idea is enough. We reply within one working day.",
+    "helpHeading": "If you can, mention",
+    "help": [
+      "Who will use it",
+      "Which work takes the most time today",
+      "Which tools you use now"
     ],
-    "stops": [
+    "channels": "Reach us on",
+    "chatOn": "Chat on",
+    "email": "Email us",
+    "mailSubject": "Project inquiry from canhta.com",
+    "mailBody": "Hi,\n\nWho will use it:\nWhat takes the most time today:\nWhat you use now:\n",
+    "nextHeading": "What happens next"
+  },
+  "process": {
+    "rule": "If software that already exists does the job, we will point you to it instead of building something new.",
+    "steps": [
       {
-        "id": "agree",
-        "choice": "A small first release",
-        "consequence": "I build only the core workflow, then your team uses it first."
+        "id": "problem",
+        "label": "Tell us what is slowing you down",
+        "detail": "A few lines is enough."
       },
       {
-        "id": "building",
-        "choice": "During the build",
-        "consequence": "Your team tests each working part as I finish it."
+        "id": "map",
+        "label": "We map how it runs today",
+        "detail": "Who does what, which systems, where the time goes."
       },
       {
-        "id": "built",
-        "choice": "After acceptance",
-        "consequence": "I finish the agreed workflow before putting it into operation."
+        "id": "plan",
+        "label": "You get a plan and a price",
+        "detail": "Before we build anything."
       },
       {
-        "id": "never",
-        "choice": "Never put it to work",
-        "consequence": "The project stays in documents and changes no real work."
+        "id": "build",
+        "label": "We build a small working version",
+        "detail": "On your real information. If it works well, we move the next part."
       }
     ]
   },
-  "engagements": {
-    "kicker": "Ways to work together",
-    "heading": "Start small. Put it to work.",
-    "sub": "Depending on the problem, I can stop at a clear plan, test one workflow, or take the full system into stable operation.",
-    "output": "The outcome",
-    "suited": "Use this when"
-  },
-  "answers": {
-    "kicker": "Before we start",
-    "heading": "What to settle before the work starts",
-    "sub": "Pricing, ownership, and choosing what to change."
+  "about": {
+    "heading": "Who we are",
+    "proof": "We have worked on products used by hundreds of thousands of people, as developers, in data and in product management."
   },
   "closing": {
-    "heading": "Start with the work that is stuck, not an app idea.",
-    "reassure": "Tell me which step is slow, error-prone, or consuming too much staff time. I will map it with you, then send a plan and quote. If you do not need custom code, I will say so."
+    "heading": "Ready to move your work onto software and AI?",
+    "body": "Tell us how your business runs today. We reply within one working day.",
+    "cta": "Talk to us"
   },
   "footer": {
-    "write": "Or write directly",
+    "explore": "Pages",
+    "write": "Email",
     "elsewhere": "Elsewhere"
   },
   "notFound": {
     "label": "Not found",
     "heading": "There is no page at this address.",
-    "body": "Check it for a typo, or start from the front page. This site is one page, so everything on it is a single scroll away.",
+    "body": "Check the address for a typo, or go back to the front page.",
     "home": "Go to the front page"
+  },
+  "products": {
+    "alts": {
+      "score": "Scori score screen with four players and large scores",
+      "remote-classic": "Remoti remote with directional pad, volume and playback keys"
+    }
   },
   "buildMeta": {
     "kinds": {
       "agent": "Work that runs itself",
-      "skill": "Agent skill",
+      "skill": "Tool for AI assistants",
       "mobile": "Phone app",
       "web": "Web product",
       "saas": "Paid product",
-      "tool": "Developer tool",
-      "desktop": "Desktop app"
+      "tool": "Developer tool"
     },
     "links": {
       "appstore": "App Store",
@@ -110,16 +137,30 @@
   },
   "statuses": {
     "live": "Live",
-    "shipped": "Shipped",
-    "building": "Building",
+    "shipped": "Released",
+    "building": "Being built",
     "acquired": "Acquired",
-    "sunset": "Sunset"
+    "sunset": "Retired"
   },
   "metadata": {
-    "pageTitle": "Custom software for small businesses | Canh Ta",
-    "pageDescription": "Custom software for small businesses: map the workflow, connect existing systems, automate repetitive work, and apply AI where it helps. Quote before code.",
-    "jobTitle": "Software engineer for small businesses",
-    "offerCatalog": "Ways to work together",
-    "workList": "What I have built"
+    "home": {
+      "title": "Digital transformation and AI for small businesses | Canh Ta",
+      "description": "We digitise how small businesses work and put AI agents on the routine steps. We also make our own apps, like Scori and Remoti."
+    },
+    "services": {
+      "title": "Custom software, ERP, CRM and AI for small businesses | Canh Ta",
+      "description": "ERP, CRM, chatbots, websites, data, IoT and AI agents for small businesses and individuals. A plan and a price before we build anything."
+    },
+    "contact": {
+      "title": "Contact | Canh Ta",
+      "description": "Tell us what takes too much time, or what you want to build. We reply within one working day."
+    },
+    "jobTitle": "Software engineer",
+    "offerCatalog": "What we do",
+    "workList": "Some of our products and projects",
+    "products": {
+      "title": "Scori, Remoti and more: some of our products | Canh Ta",
+      "description": "Some of the products we have built: apps like Scori and Remoti, plus web, data and AI projects."
+    }
   }
 }

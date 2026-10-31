@@ -1,5 +1,4 @@
 import { getSiteContent } from '@/content'
-import { kindLabel } from '@/lib/build-meta'
 
 /**
  * /llms.txt — the emerging convention (llmstxt.org) for handing a language model
@@ -15,11 +14,18 @@ import { kindLabel } from '@/lib/build-meta'
  */
 export const dynamic = 'force-static'
 
+const PAGES: [string, string][] = [
+  ['Home', 'https://canhta.com'],
+  ['Services', 'https://canhta.com/services'],
+  ['Products', 'https://canhta.com/products'],
+  ['Contact', 'https://canhta.com/contact'],
+]
+
 export function GET() {
   const l = 'en' as const
-  const { builds, capabilities, faq, profile, services, social } = getSiteContent(l)
+  const { builds, faq, offers, profile, social } = getSiteContent(l)
   const email = social.find((s) => s.network === 'email')?.url.replace('mailto:', '')
-  const links = social.filter((s) => s.network !== 'email')
+  const links = social.filter((s) => s.network !== 'email' && s.network !== 'whatsapp')
 
   /**
    * `null` means "omit this line"; `''` means "a real blank line". They used to
@@ -27,7 +33,7 @@ export function GET() {
    * line in the file — markdown needs them, so the whole document collapsed into
    * one paragraph with no headings separated from their content.
    */
-  const NETWORK: Record<string, string> = { github: 'GitHub', x: 'X', linkedin: 'LinkedIn' }
+  const NETWORK: Record<string, string> = { github: 'GitHub', x: 'X', linkedin: 'LinkedIn', zalo: 'Zalo' }
 
   /** A tagline with no terminal punctuation runs straight into the next sentence. */
   const sentence = (x: string) => (/[.!?]$/.test(x.trim()) ? x.trim() : `${x.trim()}.`)
@@ -40,24 +46,20 @@ export function GET() {
     `Based in ${profile.location}. Works in English and Vietnamese.`,
     profile.available ? `Currently ${profile.availabilityLabel.toLowerCase()}.` : null,
     '',
-    '## What I build',
+    '## Pages',
     '',
-    ...capabilities.map(
-      (c) => `- **${c.name}** — ${sentence(c.canDeliver)} Best for: ${c.bestFor}`,
-    ),
+    ...PAGES.map(([name, href]) => `- [${name}](${href})`),
     '',
-    '## Ways to work together',
+    '## What we build for others',
     '',
-    ...services.map(
-      (s) => `- **${s.name}** — ${sentence(s.output)} Right when: ${s.suitedTo}`,
-    ),
+    ...offers.map((o) => `- **${o.name}**: ${sentence(o.detail)}${o.examples.length ? ` Includes ${o.examples.join(', ')}.` : ''}`),
     '',
-    '## Shipped work',
+    '## Some of our products and public projects',
     '',
     ...builds.map((b) => {
       const url = b.links[0]?.url
       const head = url ? `- [${b.name}](${url})` : `- ${b.name}`
-      return `${head} — ${kindLabel(b.kind, l)}, ${b.year}. ${sentence(b.tagline)} ${sentence(b.result)}`
+      return `${head}: ${sentence(b.tagline)} ${sentence(b.summary)} ${sentence(b.availability)}`
     }),
     '',
     '## Questions people ask first',

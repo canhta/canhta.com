@@ -1,13 +1,10 @@
+import { Link } from '@/i18n/navigation'
 import { getSiteContent } from '@/content'
 import type { Locale, SocialLink } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
 import { GitHubIcon, LinkedInIcon, XIcon, ZaloWordmark } from './icons'
 
-/**
- * The colophon. Everything persuasive already happened in the block above this
- * one, so the footer's whole job is the plain email address and the four places
- * a visitor can go check that the person is real.
- */
+/** The colophon: pages, the plain email address, and where to check we are real. */
 const ICONS = {
   github: GitHubIcon,
   x: XIcon,
@@ -15,12 +12,12 @@ const ICONS = {
   zalo: ZaloWordmark,
 } as const
 
-/** An icon button's only name is its label, so it says the destination. */
-const NETWORK_LABELS: Record<keyof typeof ICONS, string> = {
+const NETWORK_LABELS: Record<keyof typeof ICONS | 'whatsapp', string> = {
   github: 'GitHub',
   x: 'X',
   linkedin: 'LinkedIn',
   zalo: 'Zalo',
+  whatsapp: 'WhatsApp',
 }
 
 function isIconNetwork(n: SocialLink['network']): n is keyof typeof ICONS {
@@ -31,17 +28,44 @@ export function SiteFooter({ locale }: { locale: Locale }) {
   const { profile, social } = getSiteContent(locale)
   const messages = getMessages(locale)
   const email = social.find((s) => s.network === 'email')
+  const whatsapp = social.find((s) => s.network === 'whatsapp')
   const year = new Date().getFullYear()
 
   return (
-    <footer className="shell band-3 pb-[var(--rank-3)]">
-      <div className="grid gap-10 sm:grid-cols-2">
+    <footer className="shell band-1 pb-10">
+      <div className="grid gap-10 border-t border-line pt-10 md:grid-cols-3">
+        <nav aria-label={messages.footer.explore}>
+          <p className="text-[14px] font-semibold text-muted">{messages.footer.explore}</p>
+          <ul className="mt-2">
+            <li>
+              <Link href="/" className="block py-1.5 font-semibold">
+                {messages.nav.home}
+              </Link>
+            </li>
+            <li>
+              <Link href="/services" className="block py-1.5 font-semibold">
+                {messages.nav.services}
+              </Link>
+            </li>
+            <li>
+              <Link href="/products" className="block py-1.5 font-semibold">
+                {messages.nav.products}
+              </Link>
+            </li>
+            <li>
+              <Link href="/contact" className="block py-1.5 font-semibold">
+                {messages.nav.contact}
+              </Link>
+            </li>
+          </ul>
+        </nav>
+
         {email ? (
           <div>
-            <p className="label">{messages.footer.write}</p>
+            <p className="text-[14px] font-semibold text-muted">{messages.footer.write}</p>
             <a
               href={email.url}
-              className="link mt-2 inline-block text-[17px] font-medium"
+              className="link mt-2 inline-block text-[clamp(1.1rem,2vw,1.4rem)] font-bold"
               translate="no"
             >
               {email.url.replace('mailto:', '')}
@@ -49,40 +73,46 @@ export function SiteFooter({ locale }: { locale: Locale }) {
           </div>
         ) : null}
 
-        <div className="sm:justify-self-end">
-          <p className="label">{messages.footer.elsewhere}</p>
+        <div>
+          <p className="text-[14px] font-semibold text-muted">{messages.footer.elsewhere}</p>
           <ul className="mt-2 flex flex-wrap items-center gap-2">
-            {social.filter((s) => isIconNetwork(s.network)).map((s) => {
-              const Icon = ICONS[s.network as keyof typeof ICONS]
-              return (
-                <li key={s.network}>
-                  <a
-                    href={s.url}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    aria-label={`${NETWORK_LABELS[s.network as keyof typeof ICONS]} (${messages.common.newTab})`}
-                    /* Zalo's mark is a wordmark, not a glyph — 77x28. Forcing it
-                       into the same 44x44 square as the letterform icons either
-                       crops it or shrinks it below legibility, so it gets a
-                       wider cell and keeps the shared height. */
-                    className={`grid h-11 place-items-center rounded-[2px] border border-line text-muted transition-colors duration-150 hover:border-ink hover:text-ink ${
-                      s.network === 'zalo' ? 'px-3' : 'w-11'
-                    }`}
-                  >
-                    <Icon />
-                  </a>
-                </li>
-              )
-            })}
+            {social
+              .filter((s) => isIconNetwork(s.network))
+              .map((s) => {
+                const Icon = ICONS[s.network as keyof typeof ICONS]
+                return (
+                  <li key={s.network}>
+                    <a
+                      href={s.url}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      aria-label={`${NETWORK_LABELS[s.network as keyof typeof ICONS]} (${messages.common.newTab})`}
+                      className={`grid h-11 place-items-center rounded-full border border-line-strong text-ink transition-colors duration-150 hover:bg-ink hover:text-bg ${
+                        s.network === 'zalo' ? 'px-3' : 'w-11'
+                      }`}
+                    >
+                      <Icon />
+                    </a>
+                  </li>
+                )
+              })}
+            {whatsapp ? (
+              <li>
+                <a
+                  href={whatsapp.url}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  aria-label={`WhatsApp (${messages.common.newTab})`}
+                  className="grid h-11 place-items-center rounded-full border border-line-strong px-3 text-[13px] font-bold transition-colors duration-150 hover:bg-ink hover:text-bg"
+                >
+                  <span translate="no">WhatsApp</span>
+                </a>
+              </li>
+            ) : null}
           </ul>
         </div>
       </div>
-
-      {/* "Built in Vietnam, shipped worldwide" used to sit on the right of this
-          row. It was a tagline rather than a fact, and the statement's fact row
-          already says where he works and in which timezone. What is left is the
-          one line a footer actually owes you. */}
-      <p className="label mt-12 border-t border-line pt-5">
+      <p className="mt-10 text-[14px] text-muted">
         © {year} <span translate="no">{profile.name}</span>
       </p>
     </footer>

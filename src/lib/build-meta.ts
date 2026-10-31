@@ -28,4 +28,4 @@ export function githubStarsLabel(count: number, locale: Locale): string {
 }
 
 /** Stable display order for grouping by kind. */
-export const KIND_ORDER: BuildKind[] = ['agent', 'skill', 'mobile', 'web', 'saas', 'tool', 'desktop']
+export const KIND_ORDER: BuildKind[] = ['agent', 'skill', 'mobile', 'web', 'saas', 'tool']

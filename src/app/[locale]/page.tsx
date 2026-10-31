@@ -1,70 +1,32 @@
 import { setRequestLocale } from 'next-intl/server'
 import type { Locale } from '@/content/types'
-import { SiteHeader } from '@/components/site-header'
-import { Statement } from '@/components/statement'
-import { Work } from '@/components/work'
-import { Capabilities } from '@/components/capabilities'
-import { Approach } from '@/components/approach'
-import { Engagements } from '@/components/engagements'
-import { Answers } from '@/components/answers'
-import { Closing } from '@/components/closing'
-import { SiteFooter } from '@/components/site-footer'
+import { About } from '@/components/about'
+import { Hero } from '@/components/hero'
+import { OfferCards } from '@/components/offers'
+import { PageShell } from '@/components/page-shell'
+import { AppsTeaser } from '@/components/products'
+import { pageMetadata } from '@/lib/metadata'
 import { buildGraph } from '@/lib/structured-data'
-import { getSiteContent } from '@/content'
-import { getMessages } from '@/i18n/messages'
 
 /**
- * Reading order, and the rank each block holds.
- *
- *   Statement    who this is, what they do, how to reach them      rank 1
- *   Work         the proof, three projects, every claim linked     rank 1
- *   Capabilities the four things he builds                         rank 3
- *   Approach     how an engagement actually goes                   rank 2
- *   Engagements  the three commercial shapes                       rank 2
- *   Answers      the objections, answered                          rank 3
- *   Closing      the decision                                      rank 1
- *
- * The ranks are the point. The previous page gave seven sections identical
- * padding and near-identical heads, which is why it read as one long
- * undifferentiated column — a scanner had nothing to aim at, because nothing
- * claimed to matter more than anything else.
+ * Home: the hook, what we do, a look at the apps, who we are. Short on purpose:
+ * every other topic has its own page, so a phone visitor reaches the end of this
+ * one in a few screens and the detail is one tap away.
  */
-export default async function HomePage({
-  params,
-}: {
-  params: Promise<{ locale: Locale }>
-}) {
+export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
+  return pageMetadata((await params).locale, 'home')
+}
+
+export default async function HomePage({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params
   setRequestLocale(locale)
-  const content = getSiteContent(locale)
-  const messages = getMessages(locale)
 
   return (
-    <>
-      {/* The machine-readable half of the page. Everything in it derives from
-          `src/content`, so it can never drift from what a human reads. */}
-      <script
-        type="application/ld+json"
-        // The payload is built from our own typed content, never from user input.
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildGraph(locale)) }}
-      />
-      <SiteHeader locale={locale} />
-      {/* `tabIndex={-1}` is what makes the skip link work. Without it the target
-          is not focusable, `document.activeElement` stays on `body`, and only
-          Chromium's sequential-focus fallback carries the next Tab into `main` —
-          Safari has not implemented that, so there the link silently returns the
-          user to the header. */}
-      <main id="main" tabIndex={-1}>
-        <Statement locale={locale} />
-        <Work locale={locale} />
-        <Capabilities locale={locale} capabilities={content.capabilities} />
-        {/* Only this section hydrates. Pass its own copy, not the whole catalog. */}
-        <Approach copy={messages.approach} />
-        <Engagements locale={locale} />
-        <Answers locale={locale} />
-        <Closing locale={locale} />
-      </main>
-      <SiteFooter locale={locale} />
-    </>
+    <PageShell locale={locale} jsonLd={buildGraph(locale, 'home')}>
+      <Hero locale={locale} />
+      <OfferCards locale={locale} />
+      <AppsTeaser locale={locale} />
+      <About locale={locale} />
+    </PageShell>
   )
 }

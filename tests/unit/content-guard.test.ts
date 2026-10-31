@@ -76,14 +76,14 @@ describe('fixture guard', () => {
 
   it('finds markers nested inside arrays, not just on the top-level objects', async () => {
     const { getSiteContent } = await importContent()
-    const { builds, capabilities, services, faq, social } = getSiteContent('en')
+    const { builds, offers, faq, social } = getSiteContent('en')
 
     // The guard's deep scan is only worth as much as the markers it can find.
     // `builds` is deliberately excluded: those projects are real, so they
     // carry no marker. That is the point of a per-item marker rather than a
     // single global flag — content can go real one module at a time, and the
     // guard stays armed until the last placeholder is gone.
-    for (const collection of [capabilities, services, faq, social]) {
+    for (const collection of [offers, faq, social]) {
       expect(collection.length).toBeGreaterThan(0)
       for (const item of collection) {
         expect(item).toHaveProperty('__fixture', true)

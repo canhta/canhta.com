@@ -48,8 +48,7 @@ describe('locale harness', () => {
     })
 
     expect(vi.builds.map(facts)).toEqual(en.builds.map(facts))
-    expect(vi.capabilities.map(({ id }) => id)).toEqual(en.capabilities.map(({ id }) => id))
-    expect(vi.services.map(({ id }) => id)).toEqual(en.services.map(({ id }) => id))
+    expect(vi.offers.map(({ id }) => id)).toEqual(en.offers.map(({ id }) => id))
     expect(vi.faq.map(({ id }) => id)).toEqual(en.faq.map(({ id }) => id))
     expect(vi.profile.hook).not.toBe(en.profile.hook)
   })

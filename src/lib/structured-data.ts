@@ -1,36 +1,30 @@
 import { getSiteContent } from '@/content'
 import type { Build, Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
+import { pageUrl } from '@/lib/metadata'
 
 /**
- * The machine-readable half of the page.
+ * The machine-readable half of each page.
  *
- * WHAT THIS IS NOT. It does not tell a crawler that Canh is the best at
- * anything. Unverifiable superlatives are discounted to nothing by search
- * ranking and by language models alike — "best in town" is the single most
- * common string on the web and carries no information. There is also a standing
- * rule on this project against claims nobody can check.
- *
- * WHAT IT IS. A model recommends what it can cite *specifically*. So this emits
- * the facts a competitor's page usually leaves as prose a machine has to guess
- * at: which services exist and what each one produces, which languages are
- * spoken, which timezone, how fast a reply comes, what has actually shipped and
- * where to verify it, and the answers to the questions buyers ask first.
+ * It does not tell a crawler that we are the best at anything: unverifiable
+ * superlatives are discounted to nothing by search and by language models, and
+ * this project has a standing rule against claims nobody can check. It states
+ * what exists: which services, what each produces, which apps and where to
+ * verify them, and the answers to the questions buyers ask first.
  *
  * DELIBERATELY ABSENT: `aggregateRating`, `review`, and `offers` with prices.
  * There are no real ratings or published prices, and inventing them in a place
- * only machines read is still inventing them — with the added problem that
- * structured data is exactly where fabrication gets penalised.
+ * only machines read is still inventing them.
  *
- * Everything here derives from `src/content`, so replacing the fixtures with
- * real content updates the markup with no second edit.
+ * Every page carries the same entities (person, service, site) so each can be
+ * understood alone, then adds its own: services get the FAQ, apps get the list
+ * of applications, every inner page gets a breadcrumb.
  */
 
 const SITE = 'https://canhta.com'
 
-const urlFor = (locale: Locale) => (locale === 'en' ? SITE : `${SITE}/${locale}`)
+export type GraphPage = 'home' | 'services' | 'products' | 'contact'
 
-/** schema.org's closest type for each kind of thing he ships. */
 function appType(build: Build): string {
   switch (build.kind) {
     case 'mobile':
@@ -43,28 +37,20 @@ function appType(build: Build): string {
   }
 }
 
-function appCategory(build: Build): string {
-  switch (build.kind) {
-    case 'mobile':
-      return 'MobileApplication'
-    case 'saas':
-      return 'BusinessApplication'
-    case 'tool':
-      return 'DeveloperApplication'
-    default:
-      return 'BusinessApplication'
-  }
-}
-
-export function buildGraph(locale: Locale) {
-  const { builds, capabilities, faq, profile, services, social } = getSiteContent(locale)
+export function buildGraph(locale: Locale, page: GraphPage = 'home') {
+  const { builds, faq, offers, profile, social } = getSiteContent(locale)
   const messages = getMessages(locale)
   const personId = `${SITE}/#person`
   const serviceId = `${SITE}/#service`
   const siteId = `${SITE}/#website`
-  const page = urlFor(locale)
+  const url = pageUrl(locale, page)
+  const meta = messages.metadata[page]
 
-  const sameAs = social.filter((s) => s.network !== 'email').map((s) => s.url)
+  // Profiles a person can open to check we exist. A chat number is not one, so
+  // neither Zalo nor WhatsApp is listed.
+  const sameAs = social
+    .filter((s) => s.network !== 'email' && s.network !== 'whatsapp' && s.network !== 'zalo')
+    .map((s) => s.url)
   const email = social.find((s) => s.network === 'email')?.url.replace('mailto:', '')
 
   const person = {
@@ -75,9 +61,7 @@ export function buildGraph(locale: Locale) {
     image: `${SITE}${profile.avatar}`,
     jobTitle: messages.metadata.jobTitle,
     description: profile.supporting,
-    // What he can actually be asked about, taken from the capability list rather
-    // than from a keyword wishlist.
-    knowsAbout: capabilities.map((c) => c.name),
+    knowsAbout: offers.map((o) => o.name),
     knowsLanguage: [
       { '@type': 'Language', name: 'Vietnamese', alternateName: 'vi' },
       { '@type': 'Language', name: 'English', alternateName: 'en' },
@@ -94,69 +78,63 @@ export function buildGraph(locale: Locale) {
     url: SITE,
     image: `${SITE}${profile.avatar}`,
     description: profile.supporting,
-    provider: { '@id': personId },
     founder: { '@id': personId },
-    // A solo builder working remotely: say so, rather than implying a local shop.
     areaServed: { '@type': 'Place', name: 'Worldwide' },
-    availableLanguage: ['vi', 'en'],
     address: { '@type': 'PostalAddress', addressCountry: 'VN' },
     ...(email ? { email } : {}),
     ...(sameAs.length ? { sameAs } : {}),
-    // The concrete deliverable of each engagement, which is the part a model
-    // needs in order to answer "who can build me X".
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: messages.metadata.offerCatalog,
-      itemListElement: services.map((s) => ({
+      itemListElement: offers.map((o) => ({
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: s.name,
-          description: s.output,
-          serviceType: s.name,
+          name: o.name,
+          description: o.detail,
+          serviceType: o.name,
           provider: { '@id': personId },
           areaServed: { '@type': 'Place', name: 'Worldwide' },
         },
       })),
     },
-    makesOffer: capabilities.map((c) => ({
-      '@type': 'Offer',
-      itemOffered: {
-        '@type': 'Service',
-        name: c.name,
-        description: c.canDeliver,
-        provider: { '@id': personId },
-      },
-    })),
   }
 
-  // Only products with a real destination: a citation nobody can follow is not
-  // a citation.
-  const works = builds
+  const apps = builds
     .filter((b) => b.links.length > 0)
     .map((b) => ({
       '@type': appType(b),
       name: b.name,
       url: (b.links[0] as { url: string }).url,
-      description: b.tagline,
-      applicationCategory: appCategory(b),
-      // Only stated where the kind actually implies a platform. This used to
-      // emit 'Web' for everything non-mobile, which asserted that an agent skill
-      // and a CLI run in a browser — an unverifiable claim, placed in the one
-      // part of the page no human reviewer reads. That is the same failure this
-      // file's header forbids for ratings and prices.
-      ...(b.kind === 'mobile' ? { operatingSystem: 'iOS, Android' } : {}),
+      description: `${b.tagline} ${b.summary}`,
+      applicationCategory: b.appCategory,
+      // The platform is a fact on the build, not inferred from its kind: Remoti is
+      // iPhone only, Scori is iOS and Android, a skill runs on neither.
+      ...(b.os ? { operatingSystem: b.os } : {}),
       ...(b.kind === 'web' || b.kind === 'saas' ? { operatingSystem: 'Web' } : {}),
-      datePublished: b.year,
+      // Only a product that is out has a publication date.
+      ...(b.status === 'live' || b.status === 'shipped' ? { datePublished: b.year } : {}),
       author: { '@id': personId },
       ...(b.links.length > 1 ? { sameAs: b.links.slice(1).map((l) => l.url) } : {}),
     }))
 
+  const breadcrumb =
+    page === 'home'
+      ? null
+      : {
+          '@type': 'BreadcrumbList',
+          '@id': `${url}#breadcrumb`,
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: messages.nav.home, item: pageUrl(locale, 'home') },
+            { '@type': 'ListItem', position: 2, name: messages.nav[page], item: url },
+          ],
+        }
+
   const faqPage =
-    faq.length > 0
+    page === 'services' && faq.length > 0
       ? {
           '@type': 'FAQPage',
-          '@id': `${page}#faq`,
+          '@id': `${url}#faq`,
           mainEntity: faq.map((f) => ({
             '@type': 'Question',
             name: f.question,
@@ -180,24 +158,26 @@ export function buildGraph(locale: Locale) {
       },
       {
         '@type': 'WebPage',
-        '@id': `${page}#webpage`,
-        url: page,
+        '@id': `${url}#webpage`,
+        url,
         isPartOf: { '@id': siteId },
         about: { '@id': personId },
         inLanguage: locale,
-        name: profile.hook,
-        description: profile.supporting,
+        name: meta.title,
+        description: meta.description,
+        ...(breadcrumb ? { breadcrumb: { '@id': `${url}#breadcrumb` } } : {}),
       },
-      ...(works.length
+      ...(breadcrumb ? [breadcrumb] : []),
+      ...(page === 'products' && apps.length
         ? [
             {
               '@type': 'ItemList',
-              '@id': `${page}#work`,
+              '@id': `${url}#apps`,
               name: messages.metadata.workList,
-              itemListElement: works.map((w, i) => ({
+              itemListElement: apps.map((a, i) => ({
                 '@type': 'ListItem',
                 position: i + 1,
-                item: w,
+                item: a,
               })),
             },
           ]
@@ -206,3 +186,4 @@ export function buildGraph(locale: Locale) {
     ],
   }
 }
+
