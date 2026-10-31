@@ -25,7 +25,12 @@ export function GET() {
   const l = 'en' as const
   const { builds, faq, offers, profile, social } = getSiteContent(l)
   const email = social.find((s) => s.network === 'email')?.url.replace('mailto:', '')
-  const links = social.filter((s) => s.network !== 'email' && s.network !== 'whatsapp')
+  // Email, Zalo and WhatsApp stay together and come first; profiles follow.
+  const chat = ['zalo', 'whatsapp']
+  const links = [
+    ...chat.flatMap((n) => social.filter((s) => s.network === n)),
+    ...social.filter((s) => s.network !== 'email' && !chat.includes(s.network)),
+  ]
 
   /**
    * `null` means "omit this line"; `''` means "a real blank line". They used to
@@ -33,7 +38,7 @@ export function GET() {
    * line in the file — markdown needs them, so the whole document collapsed into
    * one paragraph with no headings separated from their content.
    */
-  const NETWORK: Record<string, string> = { github: 'GitHub', x: 'X', linkedin: 'LinkedIn', zalo: 'Zalo' }
+  const NETWORK: Record<string, string> = { github: 'GitHub', x: 'X', linkedin: 'LinkedIn', zalo: 'Zalo', whatsapp: 'WhatsApp' }
 
   /** A tagline with no terminal punctuation runs straight into the next sentence. */
   const sentence = (x: string) => (/[.!?]$/.test(x.trim()) ? x.trim() : `${x.trim()}.`)
