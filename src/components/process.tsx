@@ -1,6 +1,7 @@
 import { Link } from '@/i18n/navigation'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
+import { Words } from './words'
 
 /**
  * Four steps, in order, so the numerals are real: this is the one list on the
@@ -19,7 +20,7 @@ export function Process({ locale }: { locale: Locale }) {
         <div className="process-side">
           <div className="sticky-box">
             <h2 id="process-title" className="title-band section-title max-w-[12ch]">
-              {heading}
+              <Words text={heading} />
             </h2>
             <div className="track mt-8 max-w-sm" aria-hidden="true" />
             <p className="mt-6 max-w-[30ch] text-[clamp(1rem,0.95rem+0.3vw,1.1875rem)] leading-snug font-bold">{copy.rule}</p>

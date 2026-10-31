@@ -1,6 +1,7 @@
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
 import { ContactActions } from './contact-actions'
+import { Words } from './words'
 
 /**
  * The ask, on the lime band: giant night type on the left and the three
@@ -15,7 +16,7 @@ export function Closing({ locale }: { locale: Locale }) {
       <div className="shell grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-12">
         <div className="reveal lg:col-span-7">
           <h2 id="closing-title" className="closing-title max-w-[11ch]">
-            {copy.heading}
+            <Words text={copy.heading} />
           </h2>
           <p className="mt-5 max-w-[34ch] text-[clamp(1rem,0.95rem+0.3vw,1.1875rem)] leading-snug font-bold">{copy.body}</p>
         </div>

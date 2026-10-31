@@ -4,6 +4,7 @@ import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
 import { AppCard } from './app-card'
+import { Words } from './words'
 
 /**
  * Home: the two apps as a compact dark band after the services. On a phone the
@@ -20,7 +21,7 @@ export function AppsTeaser({ locale }: { locale: Locale }) {
       <div className="shell">
         <div className="title-band reveal flex flex-wrap items-center justify-between gap-x-8 gap-y-4">
           <h2 id="apps-title" className="section-title max-w-[14ch]">
-            {copy.appsHeading}
+            <Words text={copy.appsHeading} />
           </h2>
           <Link href="/products" className="btn-light">
             {copy.appsAll}

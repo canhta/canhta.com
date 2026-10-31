@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { Words } from './words'
 
 /**
  * The top of an inner page: a full-width band with one h1 and one line saying
@@ -26,7 +27,9 @@ export function PageHeader({
         className={`shell ${side ? `grid gap-8 lg:grid-cols-12 lg:gap-12 ${children ? 'lg:items-end' : 'lg:items-center'}` : ''}`}
       >
         <div className={side ? 'lg:col-span-7' : ''}>
-          <h1 className="headline enter max-w-[16ch]">{title}</h1>
+          <h1 className="headline max-w-[16ch]">
+            <Words text={title} load />
+          </h1>
           <p className="lead enter mt-5 max-w-[46ch]">{intro}</p>
         </div>
         {side ? <div className="enter lg:col-span-5">{side}</div> : null}

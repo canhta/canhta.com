@@ -15,7 +15,7 @@ export function BuildLinkButton({ link, locale }: { link: BuildLink; locale: Loc
   const Icon = ICONS[link.kind]
 
   return (
-    <a href={link.url} target="_blank" rel="noreferrer noopener" className="chip">
+    <a href={link.url} target="_blank" rel="noreferrer noopener" className="chip" data-cursor="open">
       <Icon aria-hidden="true" width={15} height={15} />
       {linkLabel(link.kind, locale)}
     </a>

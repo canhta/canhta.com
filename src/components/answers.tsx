@@ -3,6 +3,7 @@ import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
 import { firstSentence } from '@/lib/first-sentence'
+import { Words } from './words'
 
 /** The three questions a buyer asks before anything else, shown on the home page. */
 const FIRST_QUESTIONS = ['pricing', 'wrong', 'ownership']
@@ -22,10 +23,10 @@ export function HomeQuestions({ locale }: { locale: Locale }) {
       <div className="shell">
         <div className="title-band reveal flex flex-wrap items-center justify-between gap-x-10 gap-y-6">
           <h2 id="hq-title" className="headline max-w-[16ch]">
-            {copy.questionsHeading}
+            <Words text={copy.questionsHeading} />
           </h2>
           <Link href={{ pathname: '/services', hash: 'answers-title' }} className="hq-more">
-            {copy.questionsMore}
+            <span className="ul ul-rest">{copy.questionsMore}</span>
           </Link>
         </div>
         <dl className="hq-list reveal mt-10">
@@ -59,11 +60,11 @@ export function Answers({ locale }: { locale: Locale }) {
     <section aria-labelledby="answers-title" className="band sheet ground-tint">
       <div className="shell grid gap-8 lg:grid-cols-12 lg:gap-12">
         <h2 id="answers-title" className="title-band section-title reveal self-start lg:col-span-4">
-          {heading}
+          <Words text={heading} />
         </h2>
-        <dl className="reveal lg:col-span-8">
+        <dl className="faq-list reveal lg:col-span-8">
           {faq.map((item) => (
-            <div key={item.id} className="border-t-2 border-ink py-6 first:border-t-0 first:pt-0 lg:first:pt-2">
+            <div key={item.id} className="faq-item border-t-2 border-ink py-6 first:border-t-0 first:pt-0 lg:first:pt-2">
               <dt className="title max-w-[26ch]">{item.question}</dt>
               <dd className="lead mt-3 max-w-[52ch]">{item.answer}</dd>
             </div>

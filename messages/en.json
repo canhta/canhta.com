@@ -1,5 +1,6 @@
 {
   "common": {
+    "open": "Open",
     "newTab": "opens in a new tab",
     "skipToContent": "Skip to content"
   },
