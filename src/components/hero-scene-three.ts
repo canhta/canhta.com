@@ -6,7 +6,7 @@ import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.j
  * a paper) on the left, a stream of points flowing along curves into one
  * dashboard on the right, and three AI agents orbiting it. It exists to show the
  * page's idea, so everything in it means something: the flow is the work moving
- * into one system, the orbit is the agents, the one yellow node is the
+ * into one system, the orbit is the agents, the one orange node is the
  * approval step.
  *
  * Loaded lazily and only in the browser. Returns `null` when WebGL is not
@@ -14,10 +14,10 @@ import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.j
  * It renders only while visible and while the tab is open.
  */
 
-const BRAND = 0x1d4f91
-const ACCENT = 0xffc21a
+const BRAND = 0x146c43
+const ACCENT = 0xff6a2b
 const PAPER = 0xffffff
-const LINE = '#cdd5e1'
+const LINE = '#cbd8cf'
 
 type Draw = (ctx: CanvasRenderingContext2D, w: number, h: number) => void
 
@@ -43,17 +43,17 @@ function bar(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: 
 const chatFace: Draw = (ctx, w, h) => {
   ctx.fillStyle = '#fff'
   ctx.fillRect(0, 0, w, h)
-  bar(ctx, 40, 50, w * 0.55, 34, '#e6edf7')
-  bar(ctx, 40, 100, w * 0.4, 34, '#e6edf7')
-  bar(ctx, w * 0.35, 170, w * 0.58, 34, '#1d4f91')
-  bar(ctx, w * 0.5, 220, w * 0.43, 34, '#1d4f91')
-  bar(ctx, 40, 290, w * 0.5, 34, '#e6edf7')
+  bar(ctx, 40, 50, w * 0.55, 34, '#e3f1e8')
+  bar(ctx, 40, 100, w * 0.4, 34, '#e3f1e8')
+  bar(ctx, w * 0.35, 170, w * 0.58, 34, '#146c43')
+  bar(ctx, w * 0.5, 220, w * 0.43, 34, '#146c43')
+  bar(ctx, 40, 290, w * 0.5, 34, '#e3f1e8')
 }
 
 const sheetFace: Draw = (ctx, w, h) => {
   ctx.fillStyle = '#fff'
   ctx.fillRect(0, 0, w, h)
-  ctx.fillStyle = '#e6edf7'
+  ctx.fillStyle = '#e3f1e8'
   ctx.fillRect(0, 0, w, 56)
   ctx.strokeStyle = LINE
   ctx.lineWidth = 3
@@ -69,7 +69,7 @@ const sheetFace: Draw = (ctx, w, h) => {
     ctx.lineTo(w, 56 + ((h - 56) / 5) * r)
     ctx.stroke()
   }
-  ctx.fillStyle = '#ffc21a'
+  ctx.fillStyle = '#ff6a2b'
   ctx.fillRect(w / 4 + 6, 120, w / 4 - 12, 44)
 }
 
@@ -82,16 +82,16 @@ const paperFace: Draw = (ctx, w, h) => {
 const hubFace: Draw = (ctx, w, h) => {
   ctx.fillStyle = '#fff'
   ctx.fillRect(0, 0, w, h)
-  ctx.fillStyle = '#e6edf7'
+  ctx.fillStyle = '#e3f1e8'
   ctx.fillRect(0, 0, w, 70)
-  bar(ctx, 36, 26, w * 0.34, 20, '#1d4f91')
+  bar(ctx, 36, 26, w * 0.34, 20, '#146c43')
   for (let i = 0; i < 3; i++) {
     const y = 110 + i * 78
-    ctx.fillStyle = '#f3f5f8'
+    ctx.fillStyle = '#f2f5f2'
     ctx.beginPath()
     ctx.roundRect(28, y, w - 56, 58, 14)
     ctx.fill()
-    ctx.fillStyle = '#1d4f91'
+    ctx.fillStyle = '#146c43'
     ctx.beginPath()
     ctx.arc(70, y + 29, 16, 0, Math.PI * 2)
     ctx.fill()
@@ -106,7 +106,7 @@ const hubFace: Draw = (ctx, w, h) => {
   }
   const base = h - 70
   ;[0.5, 0.8, 0.62, 1].forEach((v, i) => {
-    ctx.fillStyle = i === 3 ? '#1d4f91' : '#c4d3ea'
+    ctx.fillStyle = i === 3 ? '#146c43' : '#bfd9c8'
     ctx.fillRect(40 + i * 62, base - 90 * v, 40, 90 * v)
   })
 }

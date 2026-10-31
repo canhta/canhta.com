@@ -21,11 +21,11 @@ export const alt = 'Canh Ta'
  * request to fonts.gstatic.com means a network blip becomes a failed deploy —
  * and Vietnamese diacritics are exactly what a fallback font gets wrong.
  */
-const BG = '#f3f3ef'
-const INK = '#121316'
-const MUTED = '#565b63'
-const LINE = '#121316'
-const ACCENT = '#ffc21a'
+const BG = '#ffffff'
+const INK = '#10201a'
+const MUTED = '#4f5f57'
+const LINE = '#10201a'
+const ACCENT = '#ff6a2b'
 
 async function font(file: string) {
   return readFile(join(process.cwd(), 'src/assets/fonts', file))

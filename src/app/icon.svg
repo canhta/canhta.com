@@ -3,9 +3,9 @@
        monogram: four steps, and the point where the work starts running for
        real. Two steps still on paper, two in accent. It survives 16px because
        it is four flat rectangles. -->
-  <rect width="32" height="32" fill="#17140f"/>
-  <rect x="5" y="14" width="5" height="4" fill="#cfc4b2"/>
-  <rect x="12" y="14" width="5" height="4" fill="#cfc4b2"/>
-  <rect x="19" y="12" width="5" height="8" fill="#b4401e"/>
-  <rect x="26" y="12" width="1" height="8" fill="#b4401e"/>
+  <rect width="32" height="32" fill="#0c2e22"/>
+  <rect x="5" y="14" width="5" height="4" fill="#bfd9c8"/>
+  <rect x="12" y="14" width="5" height="4" fill="#bfd9c8"/>
+  <rect x="19" y="12" width="5" height="8" fill="#ff6a2b"/>
+  <rect x="26" y="12" width="1" height="8" fill="#ff6a2b"/>
 </svg>

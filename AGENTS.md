@@ -38,7 +38,7 @@ These came from the owner during the 2026-10-31 redesign. Each one replaces any 
 - Contact channels, always together: email, Zalo and WhatsApp. The email subject and body are written in the visitor's language.
 
 ### Design
-- Palette comes from our own products: Remoti's deep blue is the action colour, Scori's yellow is the one accent. Neutrals: white, a cool tint, ink, navy. No gradients, glass, glow, background grids or blurred orbs. Font: Be Vietnam Pro (drawn for Vietnamese).
+- Palette (changed 2026-10-31, the owner called blue and yellow generic AI slop): deep forest green `#146c43` is the action colour, orange `#ff6a2b` is the one accent, neutrals are white, pale green tint `#f2f5f2`, green-black ink `#10201a`, dark green `#0c2e22`. No blue, purple, cream or black. Product panels keep each app's own colour. No gradients, glass, glow, background grids or blurred orbs. Font: Be Vietnam Pro (drawn for Vietnamese).
 - No eyebrow badge above a headline, no decorative status dots, no sparkle icons for AI, no arrows on buttons, no coloured left stripes, no identical card grids, no stock-style illustrations. Vary section layouts.
 - Depth and motion are wanted and must have a purpose: the hero scene explains the idea (scattered work flowing into one system with AI agents), sections slide up as they arrive, phone screens tilt, buttons respond. Motion is position or transform only, never hides content, never loops without a reason, and stops for `prefers-reduced-motion`. Heavy code (three.js) loads lazily, has a static fallback, and pauses off screen.
 - Accessibility is a gate: WCAG AA contrast, visible focus, 44px targets, 200% zoom, no fixed-height text boxes, Vietnamese diacritics never clipped.

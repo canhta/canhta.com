@@ -3,10 +3,10 @@
 /* =========================================================================
    canhta.com: design system
 
-   The palette is the two apps' own: Remoti's deep blue is the studio's
-   action colour, Scori's yellow is the one accent (the closing call to action
-   and Scori's own panel). Neutrals are white, a cool tint for one chapter, and
-   ink. No gradients, no glass, no glow. Cards are flat with a hairline; only
+   Palette: a deep forest green is the action colour, a single orange is the
+   one accent (the closing call to action). Neutrals are white, a pale green
+   tint for one chapter, and a green-black ink. Scori's own panel keeps its
+   yellow because that is the app's colour. No gradients, no glass, no glow. Cards are flat with a hairline; only
    the phone screens and the one featured card lift off the page, because those
    are the only things that should read as objects. Motion happens once, with a
    reason: the hero text rises in, sections slide up as they arrive, buttons
@@ -15,17 +15,17 @@
 
 @theme {
   --color-bg: #ffffff;
-  --color-tint: #f3f5f8;
-  --color-ink: #0e1a2f;
+  --color-tint: #f2f5f2;
+  --color-ink: #10201a;
   /* 6.2:1 on white, 5.7:1 on --color-tint. */
-  --color-muted: #52607a;
-  --color-line: #e1e7f0;
-  --color-line-strong: #8793ab;
-  --color-brand: #1d4f91;
-  --color-brand-dark: #153b6e;
-  --color-brand-tint: #e6edf7;
-  --color-navy: #0f2a4d;
-  --color-accent: #ffc21a;
+  --color-muted: #4f5f57;
+  --color-line: #dfe7e1;
+  --color-line-strong: #84938a;
+  --color-brand: #146c43;
+  --color-brand-dark: #0e5232;
+  --color-brand-tint: #e3f1e8;
+  --color-navy: #0c2e22;
+  --color-accent: #ff6a2b;
 
   --font-sans: var(--font-bvp), ui-sans-serif, system-ui, sans-serif;
 
@@ -40,8 +40,8 @@
   --rank-1: clamp(56px, 8vw, 104px);
   --rank-2: clamp(40px, 5.5vw, 72px);
 
-  --shadow-card: 0 1px 2px rgb(14 26 47 / 0.06), 0 12px 28px -14px rgb(14 26 47 / 0.18);
-  --shadow-lift: 0 2px 4px rgb(14 26 47 / 0.08), 0 20px 36px -16px rgb(14 26 47 / 0.28);
+  --shadow-card: 0 1px 2px rgb(16 32 26 / 0.06), 0 12px 28px -14px rgb(16 32 26 / 0.18);
+  --shadow-lift: 0 2px 4px rgb(16 32 26 / 0.08), 0 20px 36px -16px rgb(16 32 26 / 0.28);
 }
 
 @media (min-width: 768px) {
@@ -175,7 +175,7 @@ section[id] {
   transform: translateX(3px);
 }
 
-/* The one place the accent yellow carries an action: the closing ask. */
+/* The one place the accent orange carries an action: the closing ask. */
 @utility btn-accent {
   display: inline-flex;
   align-items: center;
@@ -287,10 +287,10 @@ section[id] {
 
 @utility phone {
   overflow: hidden;
-  border: 1px solid rgb(14 26 47 / 0.14);
+  border: 1px solid rgb(16 32 26 / 0.14);
   border-radius: 24px;
   background: #fff;
-  box-shadow: 0 18px 32px -16px rgb(14 26 47 / 0.4);
+  box-shadow: 0 18px 32px -16px rgb(16 32 26 / 0.4);
 }
 
 /* --- Swipe row: one card per swipe on a phone, a grid from md or lg up. --- */
@@ -375,14 +375,14 @@ a.card:hover {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   border-bottom: 0;
-  box-shadow: 0 -8px 24px -12px rgb(14 26 47 / 0.35);
+  box-shadow: 0 -8px 24px -12px rgb(16 32 26 / 0.35);
 }
 
 .app-card[data-theme='scori'] {
   --app-bg: #ffe9a6;
 }
 .app-card[data-theme='remoti'] {
-  --app-bg: #dde3ec;
+  --app-bg: #e0e7e1;
 }
 
 /* --- Home hero illustration: chat, a spreadsheet and paper flow into one
