@@ -2,6 +2,7 @@ import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
 import { BuildLinkButton } from './build-link'
+import { Words } from './words'
 
 /** The other public projects, as wide rows on a dark band. */
 export function PublicProjects({ locale }: { locale: Locale }) {
@@ -13,7 +14,7 @@ export function PublicProjects({ locale }: { locale: Locale }) {
     <section aria-labelledby="public-title" className="band sheet ground-night on-night">
       <div className="shell">
         <h2 id="public-title" className="section-title reveal max-w-[16ch]">
-          {copy.publicHeading}
+          <Words text={copy.publicHeading} />
         </h2>
         <ul className="mt-10 grid gap-4">
           {others.map((build) => (

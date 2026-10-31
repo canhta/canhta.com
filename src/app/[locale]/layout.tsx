@@ -5,8 +5,10 @@ import { hasLocale } from 'next-intl'
 import { setRequestLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
 import { getMessages } from '@/i18n/messages'
+import { Fx } from '@/components/fx'
 import { Measure } from '@/components/measure'
 import '../globals.css'
+import '../fx.css'
 
 // One family for the whole page. Be Vietnam Pro was drawn for Vietnamese, so the
 // stacked marks (ệ, ộ) are designed in rather than patched, and a Vietnamese
@@ -124,13 +126,14 @@ export default async function LocaleLayout({
   const messages = getMessages(locale)
 
   return (
-    <html lang={locale} className={`${bvp.variable} ${bvpVietnamese.variable}`}>
+    <html lang={locale} data-scroll-behavior="smooth" className={`${bvp.variable} ${bvpVietnamese.variable}`}>
       <body>
         <div aria-hidden="true" className="scroll-line" />
         <a href="#main" className="skip-link">
           {messages.common.skipToContent}
         </a>
         {children}
+        <Fx open={messages.common.open} />
         {/* Loaded after the page is idle (see `Measure`). The `/next` entry points
             of both packages read the App Router's own `useParams`/`usePathname`, so a
             visit is reported against the route `/[locale]` instead of splitting one

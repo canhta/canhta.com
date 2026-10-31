@@ -1,3 +1,5 @@
+import { Words } from './words'
+
 /**
  * A section opens with its heading and, only when it has a job, one line under
  * it. There is no eyebrow label above the heading: the heading already says
@@ -15,7 +17,7 @@ export function SectionHeading({
   return (
     <header>
       <h2 id={id} className="section-title max-w-[24ch]">
-        {title}
+        <Words text={title} />
       </h2>
       {sub ? <p className="lead mt-4 max-w-[52ch]">{sub}</p> : null}
     </header>

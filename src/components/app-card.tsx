@@ -27,7 +27,7 @@ export function AppCard({
   const phoneWidth = variant === 'compact' ? 'w-[40%] max-w-[124px]' : 'w-[40%] max-w-[210px]'
 
   return (
-    <article data-theme={build.slug} className="app-card on-night">
+    <article data-theme={build.slug} data-tilt="" className="app-card on-night">
       {shown.length > 0 ? (
         <div className="app-media">
           {shown.map((shot) => (

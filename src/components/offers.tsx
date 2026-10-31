@@ -4,6 +4,7 @@ import { getSiteContent } from '@/content'
 import type { Locale, Offer } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
 import { Visual } from './mini-visuals'
+import { Words } from './words'
 
 /**
  * The services as a bento: cells of different sizes and grounds, each with a
@@ -49,7 +50,7 @@ function Cell({
       <Heading className={nameClass}>
         {mode === 'home' ? (
           <Link href={{ pathname: '/services', hash: offer.id }} className="cell-link">
-            {offer.name}
+            <span className="cell-label">{offer.name}</span>
           </Link>
         ) : (
           offer.name
@@ -73,6 +74,8 @@ function Cell({
       id={mode === 'page' ? offer.id : undefined}
       data-cell={offer.id}
       data-ground={ground}
+      data-tilt={mode === 'home' ? '' : undefined}
+      data-cursor={mode === 'home' ? 'open' : undefined}
       className="cell"
     >
       <Visual id={offer.id} approve={approve} />
@@ -103,7 +106,7 @@ export function OfferCards({ locale }: { locale: Locale }) {
       <div className="shell">
         <div className="title-band reveal flex flex-wrap items-center justify-between gap-x-8 gap-y-4">
           <h2 id="offers-title" className="section-title max-w-[14ch]">
-            {copy.servicesHeading}
+            <Words text={copy.servicesHeading} />
           </h2>
           <Link href="/services" className="btn-primary">
             {copy.servicesAll}

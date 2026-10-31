@@ -5,6 +5,7 @@ import { getMessages } from '@/i18n/messages'
 import { phoneContact } from '@/lib/contact'
 import { HeroScene } from './hero-scene'
 import { HeroVisual } from './hero-visual'
+import { Words } from './words'
 
 /**
  * The hook and the next step on a night ground, with the 3D scene as the
@@ -20,7 +21,9 @@ export function Hero({ locale }: { locale: Locale }) {
   return (
     <section className="hero on-night">
       <div className="shell hero-text">
-        <h1 className="display enter max-w-[12ch] sm:max-w-[13ch]">{profile.hook}</h1>
+        <h1 className="display max-w-[12ch] sm:max-w-[13ch]">
+          <Words text={profile.hook} load />
+        </h1>
         <p className="lead enter mt-5 max-w-[40ch]">{profile.supporting}</p>
         <div className="enter mt-7 flex flex-wrap gap-3">
           <Link href="/contact" className="btn-accent">

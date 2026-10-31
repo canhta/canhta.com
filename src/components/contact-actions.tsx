@@ -21,7 +21,7 @@ export function ContactActions({ locale }: { locale: Locale }) {
 
   return (
     <div className="rows" data-no-bar>
-      <a href={phone.href} className="row-link" data-primary="true">
+      <a href={phone.href} className="row-link" data-cursor="open" data-primary="true">
         <span className="row-main">
           <PhoneTile size={48} tone="auto" />
           <span>{messages.contact.call}</span>
@@ -29,7 +29,7 @@ export function ContactActions({ locale }: { locale: Locale }) {
         <small translate="no">{phone.display}</small>
       </a>
 
-      <a href={mail.href} className="row-link">
+      <a href={mail.href} className="row-link" data-cursor="open">
         <span className="row-main">
           <MailTile size={48} tone="auto" />
           <span>{messages.contact.email}</span>
@@ -38,7 +38,7 @@ export function ContactActions({ locale }: { locale: Locale }) {
       </a>
 
       {zalo ? (
-        <a href={zalo.url} target="_blank" rel="noreferrer noopener" className="row-link">
+        <a href={zalo.url} target="_blank" rel="noreferrer noopener" className="row-link" data-cursor="open">
           <span className="row-main">
             <ZaloTile size={48} />
             <span>
@@ -50,7 +50,7 @@ export function ContactActions({ locale }: { locale: Locale }) {
       ) : null}
 
       {whatsapp ? (
-        <a href={whatsapp.href} target="_blank" rel="noreferrer noopener" className="row-link">
+        <a href={whatsapp.href} target="_blank" rel="noreferrer noopener" className="row-link" data-cursor="open">
           <span className="row-main">
             <WhatsAppTile size={48} />
             <span>

@@ -1,0 +1,715 @@
+/* =========================================================================
+   Interaction layer: hover, press, focus and arrival motion.
+
+   What it borrows from ticcostudios.com (measured on the live site, 2026-10-31):
+     - underline that grows 0 to 100% of the label in 0.3s, held full on the
+       current page (their `.hover-underline`)
+     - a follower that sits on the pointer and grows over links (their cursor,
+       scaled 1.25 over 150ms); ours keeps the native cursor and adds a ring
+     - picture inside a card scales 1.05 over 0.5s on hover
+     - headline words that settle in one by one on `cubic-bezier(.16,1,.3,1)`
+       with staggered delays; ours moves by translate and skew only and the text
+       is always painted at full contrast (theirs starts at opacity .01 and blur)
+
+   House rules kept here: transform, translate, rotate and scale only; nothing
+   hides content; every movement sits in `prefers-reduced-motion: no-preference`
+   (colour and shadow still answer a hover or a press when motion is reduced);
+   pointer-driven effects are written for a fine pointer and default to "not
+   moved" when no script sets their variables; keyboard focus gets the same
+   lift a hover gets. This file loads after globals.css, so where it repeats a
+   selector it wins by order.
+   ========================================================================= */
+
+:root {
+  /* A damped spring, sampled: 12% overshoot, settled in 0.8s. Browsers without
+     linear() get the cubic-bezier overshoot that globals.css already uses. */
+  --spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --glide: cubic-bezier(0.22, 1, 0.36, 1);
+}
+@supports (transition-timing-function: linear(0, 1)) {
+  :root {
+    --spring: linear(
+      0,
+      0.142 5%,
+      0.435 10%,
+      0.731 15%,
+      0.953 20%,
+      1.079 25%,
+      1.125 30%,
+      1.116 35%,
+      1.082 40%,
+      1.043 45%,
+      1.012 50%,
+      0.993 55%,
+      0.985 60%,
+      0.985 65%,
+      0.988 70%,
+      0.993 75%,
+      0.998 80%,
+      1 85%,
+      1.002 90%,
+      1.002 95%,
+      1
+    );
+  }
+}
+
+/* --- Micro: colour answers at 150ms, anchors clear the pill ----------------
+   `:where` keeps this at zero specificity, so any component rule replaces it. */
+:where(a, button, summary) {
+  transition-property: color, background-color, border-color, text-decoration-color;
+  transition-duration: 150ms;
+  transition-timing-function: var(--ease-out-soft);
+}
+:where([id]) {
+  scroll-margin-top: calc(var(--pill-top) + var(--pill-h) + 16px);
+}
+#main {
+  scroll-margin-top: 16px;
+}
+
+/* --- Underline that grows (`.ul` wraps a label) ----------------------------- */
+.ul {
+  position: relative;
+  display: inline-block;
+}
+.ul::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 2px;
+  border-radius: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 300ms var(--ease-out-soft);
+}
+:is(a, button):is(:hover, :focus-visible) > .ul::after,
+[aria-current='page'] > .ul::after {
+  transform: scaleX(1);
+}
+/* A link that already reads as a link keeps a faint rule at rest. */
+.ul-rest::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 2px;
+  border-radius: 1px;
+  background: currentColor;
+  opacity: 0.35;
+}
+.hq-more {
+  text-decoration: none;
+}
+.hq-more:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* --- Header: a highlight that glides from link to link ---------------------- */
+.pill-nav {
+  position: relative;
+  isolation: isolate;
+}
+.pill-nav::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  top: 50%;
+  width: var(--gw, 0px);
+  height: 44px;
+  margin-top: -22px;
+  border-radius: 999px;
+  background: var(--color-wash);
+  opacity: 0;
+  transform: translateX(var(--gx, 0px));
+  transition:
+    transform 320ms var(--glide),
+    width 320ms var(--glide),
+    opacity 160ms var(--glide);
+}
+.pill-nav[data-glide='on']::before {
+  opacity: 1;
+}
+/* Once the highlight is running it replaces the per-link hover fill. */
+.pill-nav[data-glide] .pill-link:hover:not([aria-current='page']) {
+  background: transparent;
+}
+
+/* --- Language switch: the filled disc travels to the language you chose ----- */
+.lang-sw {
+  position: relative;
+  display: flex;
+  align-items: center;
+  --lang-fill: var(--color-night);
+}
+.lang-sw[data-tone='night'] {
+  --lang-fill: #fff;
+}
+.lang-sw::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background: var(--lang-fill);
+  transform: translateX(calc(var(--i, 0) * 100%));
+  transition: transform 420ms var(--spring);
+}
+.lang-sw > a {
+  position: relative;
+}
+
+/* --- Focus ring: it eases in from a little further out, and is visible at once */
+@keyframes fx-focus {
+  from {
+    outline-offset: 9px;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  :is(a, button, summary):focus-visible {
+    animation: fx-focus 240ms var(--ease-out-soft);
+  }
+}
+
+/* --- Buttons: magnet, squash on press, ripple ------------------------------- */
+:is(.btn-primary, .btn-accent, .btn-light, .pill-cta, .chip) {
+  position: relative;
+  /* `clip`, not `hidden`: the ripple stays inside the control, and a flex item does
+     not lose its minimum width (hidden would let a long label shrink and be cut). */
+  overflow: clip;
+  isolation: isolate;
+  translate: var(--mx, 0px) var(--my, 0px);
+  transition:
+    background-color 180ms var(--ease-out-soft),
+    color 180ms var(--ease-out-soft),
+    box-shadow 180ms var(--ease-out-soft),
+    transform 420ms var(--spring),
+    translate 520ms var(--spring);
+}
+/* While the pointer is on the button it follows closely; on leaving it springs back. */
+:is(.btn-primary, .btn-accent, .btn-light, .pill-cta, .chip)[data-near] {
+  transition-property: background-color, color, box-shadow, transform, translate;
+  transition-duration: 180ms, 180ms, 180ms, 420ms, 140ms;
+  transition-timing-function: var(--ease-out-soft), var(--ease-out-soft), var(--ease-out-soft), var(--spring), var(--ease-out-soft);
+}
+@media (prefers-reduced-motion: no-preference) {
+  /* The main action lifts a little more, and keeps its flat shadow. */
+  .btn-accent:hover {
+    transform: translateY(-3px);
+  }
+  .pill-cta:hover {
+    transform: translateY(-1px);
+  }
+  :is(.btn-primary, .btn-accent, .btn-light):active {
+    transform: translateY(1px) scale(1.025, 0.93);
+    transition-duration: 70ms;
+  }
+  .pill-cta:active {
+    transform: scale(1.03, 0.92);
+    transition-duration: 70ms;
+  }
+  .chip:active {
+    transform: scale(1.02, 0.93);
+    transition-duration: 70ms;
+  }
+}
+.fx-ripple {
+  position: absolute;
+  z-index: -1;
+  left: var(--rx);
+  top: var(--ry);
+  width: var(--rs);
+  height: var(--rs);
+  margin: calc(var(--rs) / -2) 0 0 calc(var(--rs) / -2);
+  border-radius: 50%;
+  background: var(--ripple, rgb(209 254 23 / 0.95));
+  pointer-events: none;
+  scale: 0;
+  animation: fx-ripple 560ms var(--ease-out-soft) forwards;
+}
+.btn-primary .fx-ripple,
+.chip .fx-ripple {
+  --ripple: rgb(209 254 23 / 0.35);
+}
+.btn-accent .fx-ripple,
+.pill-cta .fx-ripple {
+  --ripple: rgb(19 21 23 / 0.16);
+}
+@keyframes fx-ripple {
+  from {
+    scale: 0;
+    opacity: 0.9;
+  }
+  to {
+    scale: 1;
+    opacity: 0;
+  }
+}
+
+/* --- Pressed feedback for the rest ------------------------------------------ */
+.link:active,
+.hq-more:active,
+a.cell-link:active {
+  color: var(--color-muted);
+}
+.row-link svg {
+  transition:
+    translate 420ms var(--spring),
+    rotate 420ms var(--spring),
+    scale 420ms var(--spring);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .row-link:is(:hover, :focus-visible) svg {
+    rotate: -6deg;
+    scale: 1.08;
+  }
+  .row-link:active svg {
+    scale: 0.92;
+  }
+}
+
+/* --- Cards: lift, lean toward the pointer, picture drifts the other way ----- */
+.cell,
+.app-card {
+  transition:
+    transform 200ms var(--ease-out-soft),
+    box-shadow 260ms var(--ease-out-soft),
+    background-color 260ms var(--ease-out-soft);
+}
+.cell-label {
+  display: inline-block;
+  transition: translate 280ms var(--ease-out-soft);
+}
+.cell .mv {
+  transition: translate 280ms var(--ease-out-soft);
+}
+.app-media .phone-slot {
+  transition:
+    transform 400ms var(--ease-out-soft),
+    translate 280ms var(--ease-out-soft);
+}
+.hq-item,
+.faq-item {
+  transition:
+    translate 280ms var(--ease-out-soft),
+    transform 280ms var(--ease-out-soft);
+}
+.hq-item .subtitle,
+.faq-item .title {
+  transition: translate 280ms var(--ease-out-soft);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cell[data-tilt]:is(:hover, :has(:focus-visible)) {
+    transform: perspective(1100px) translateY(-4px) rotateX(calc(var(--ty, 0) * -3deg)) rotateY(calc(var(--tx, 0) * 4deg));
+    box-shadow: var(--shadow-lift);
+  }
+  .cell[data-tilt]:active {
+    transform: perspective(1100px) translateY(-1px) scale(0.985);
+    transition-duration: 80ms;
+  }
+  .cell[data-tilt]:is(:hover, :has(:focus-visible)) .mv {
+    translate: calc(var(--tx, 0) * -14px) calc(var(--ty, 0) * -9px);
+  }
+  .cell[data-tilt]:is(:hover, :has(:focus-visible)) .cell-label {
+    translate: 6px 0;
+  }
+
+  .app-card[data-tilt]:is(:hover, :has(:focus-visible)) {
+    transform: perspective(1100px) translateY(-4px) rotateX(calc(var(--ty, 0) * -2.5deg)) rotateY(calc(var(--tx, 0) * 3.5deg));
+  }
+  .app-card[data-tilt]:is(:hover, :has(:focus-visible)) .phone-slot:nth-child(1) {
+    translate: calc(var(--tx, 0) * -16px) calc(var(--ty, 0) * -8px);
+  }
+  .app-card[data-tilt]:is(:hover, :has(:focus-visible)) .phone-slot:nth-child(2) {
+    translate: calc(var(--tx, 0) * -28px) calc(var(--ty, 0) * -12px);
+  }
+  /* The keyboard gets the phones' separation too. */
+  .app-card:has(:focus-visible) .phone-slot:nth-child(1) {
+    transform: translate(-8px, -4px);
+  }
+  .app-card:has(:focus-visible) .phone-slot:nth-child(2) {
+    transform: translate(8px, -10px);
+  }
+
+  .hq-item:hover,
+  .faq-item:hover {
+    translate: 0 -3px;
+  }
+  .hq-item:hover .subtitle,
+  .faq-item:hover .title {
+    translate: 6px 0;
+  }
+  .row-card:hover h3 {
+    translate: 4px 0;
+  }
+}
+.row-card h3 {
+  transition: translate 280ms var(--ease-out-soft);
+}
+.row-card {
+  transition:
+    box-shadow 260ms var(--ease-out-soft),
+    background-color 260ms var(--ease-out-soft);
+}
+/* Background swap: each ground steps to its neighbour. */
+.cell[data-tilt]:is(:hover, :has(:focus-visible)) {
+  box-shadow: var(--shadow-lift);
+}
+.cell[data-ground='white'][data-tilt]:is(:hover, :has(:focus-visible)) {
+  background: var(--color-wash);
+}
+.cell[data-ground='wash'][data-tilt]:is(:hover, :has(:focus-visible)) {
+  background: #fff;
+}
+.cell[data-ground='night'][data-tilt]:is(:hover, :has(:focus-visible)) {
+  background: var(--color-raised);
+}
+.cell[data-ground='lime'][data-tilt]:is(:hover, :has(:focus-visible)) {
+  background: var(--color-accent-hover);
+}
+.app-card:is(:hover, :has(:focus-visible)) {
+  background: var(--color-raised);
+}
+.row-card:is(:hover, :has(:focus-visible)) {
+  background: var(--color-raised);
+}
+
+/* --- Mini visuals: small touches that answer the card being touched ---------
+   Individual properties (scale, rotate, translate) so they compose with the
+   `transform` animations the pictures already play on arrival. */
+.mv-bars i,
+.mvs-stock i,
+.mv-approve,
+.mv-avatar,
+.mv-phone,
+.mv-browser-hero,
+.mv-ring,
+.mv-blocks i,
+.mvs-invoice,
+.mvs-sheet,
+.sc-agent,
+.sc-sheet,
+.sc-web {
+  transition:
+    scale 420ms var(--spring),
+    rotate 420ms var(--spring),
+    translate 420ms var(--spring),
+    background-color 200ms var(--ease-out-soft);
+}
+@media (prefers-reduced-motion: no-preference) {
+  /* data: the bars nearest the pointer rise. */
+  .cell:is(:hover, :has(:focus-visible)) .mv-bars i {
+    scale: 1 calc(1 + 0.3 * max(0, 1 - abs(var(--tx, 0) - (var(--i) - 2.5) / 6) * 4));
+  }
+  .cell:is(:hover, :has(:focus-visible)) .mvs-stock i {
+    scale: 1 calc(1 + 0.18 * max(0, 1 - abs(var(--tx, 0) - (var(--i) - 1.5) / 4) * 3));
+  }
+  /* ai: the Approve button is pressed, the avatar turns to look. */
+  .cell:is(:hover, :has(:focus-visible)) .mv-approve {
+    scale: 0.93;
+  }
+  .cell:is(:hover, :has(:focus-visible)) .mv-avatar {
+    rotate: -12deg;
+  }
+  /* web: the phone pops out of the page. */
+  .cell:is(:hover, :has(:focus-visible)) .mv-phone {
+    translate: -6px -8px;
+    rotate: 5deg;
+  }
+  .cell:is(:hover, :has(:focus-visible)) .mv-browser-hero {
+    scale: 1.04;
+  }
+  /* iot: the rings pulse outwards one after another. */
+  .cell:is(:hover, :has(:focus-visible)) .mv-ring {
+    scale: calc(1.04 + var(--i) * 0.06);
+    transition-delay: calc(var(--i) * 70ms);
+  }
+  /* team: the two blocks press together and wiggle. */
+  .cell:is(:hover, :has(:focus-visible)) .mv-blocks i:first-child {
+    translate: 5px 0;
+    rotate: -3deg;
+  }
+  .cell:is(:hover, :has(:focus-visible)) .mv-blocks i:last-child {
+    translate: -5px 0;
+    rotate: 3deg;
+  }
+  /* systems: the invoice straightens, the table lifts. */
+  .cell:is(:hover, :has(:focus-visible)) .mvs-invoice {
+    rotate: 0deg;
+    translate: 0 -4px;
+  }
+  .cell:is(:hover, :has(:focus-visible)) .mvs-sheet {
+    scale: 1.025;
+  }
+  /* services page head: the whole range shifts a little. */
+  .sc-wrap:hover .sc-agent {
+    translate: 0 -0.6em;
+    rotate: 3deg;
+  }
+  .sc-wrap:hover .sc-sheet {
+    translate: 0 0.4em;
+    rotate: 0.4deg;
+  }
+  .sc-wrap:hover .sc-web {
+    translate: 0 -0.5em;
+  }
+}
+
+/* --- Pointer follower (fine pointers, motion allowed) ------------------------ */
+.fx-cursor {
+  display: none;
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  html[data-fx-cursor] .fx-cursor {
+    display: block;
+    position: fixed;
+    inset: 0 auto auto 0;
+    z-index: 9999;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 160ms var(--ease-out-soft);
+  }
+  html[data-fx-cursor] .fx-cursor[data-on]:not([data-state='off']) {
+    opacity: 1;
+  }
+  /* The follower steps aside while the keyboard is in use. */
+  html[data-fx-input='key'] .fx-cursor {
+    opacity: 0 !important;
+  }
+  .fx-dot,
+  .fx-ring {
+    position: absolute;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+  }
+  .fx-dot {
+    will-change: translate;
+  }
+  .fx-ring {
+    will-change: transform;
+  }
+  /* The dot sits on the pointer. Near-black with a lime edge, so it shows on
+     the dark bands and the light ones alike. */
+  .fx-dot {
+    width: 8px;
+    height: 8px;
+    margin: -4px 0 0 -4px;
+    border-radius: 50%;
+    background: var(--color-night);
+    box-shadow: 0 0 0 1.5px var(--color-accent);
+    transition: scale 220ms var(--spring);
+  }
+  /* The ring is lime with a near-black hairline, and trails by a few frames. */
+  .fx-ring-i {
+    position: absolute;
+    left: -18px;
+    top: -18px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid var(--color-accent);
+    box-shadow:
+      0 0 0 1px var(--color-night),
+      inset 0 0 0 1px var(--color-night);
+    scale: 0.7;
+    transition:
+      scale 300ms var(--spring),
+      background-color 160ms var(--ease-out-soft);
+  }
+  .fx-label {
+    position: absolute;
+    left: -40px;
+    top: -9px;
+    width: 80px;
+    text-align: center;
+    color: var(--color-night);
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 18px;
+    scale: 0;
+    transition: scale 220ms var(--ease-out-soft);
+  }
+  .fx-cursor[data-state='link'] .fx-ring-i {
+    scale: 1.25;
+  }
+  .fx-cursor[data-state='link'] .fx-dot {
+    scale: 0.5;
+  }
+  .fx-cursor[data-state='label'] .fx-ring-i {
+    scale: 1.6;
+    background: var(--color-accent);
+  }
+  .fx-cursor[data-state='label'] .fx-dot {
+    scale: 0;
+  }
+  .fx-cursor[data-state='label'] .fx-label {
+    scale: 1;
+    transition-delay: 60ms;
+  }
+  .fx-cursor[data-down] .fx-ring-i {
+    scale: 0.55;
+  }
+  .fx-cursor[data-down][data-state='label'] .fx-ring-i {
+    scale: 1.35;
+  }
+}
+
+/* --- Headlines: words settle in one by one ----------------------------------
+   The whole headline is painted from the first frame at full contrast. Each word
+   only starts a little low and a little skewed, then settles. Hero and page
+   heads play on load; section headings play as they scroll in. */
+.sw {
+  display: inline-block;
+}
+.sw:nth-child(odd) {
+  --sx: -0.22em;
+  --sk: -5deg;
+}
+.sw:nth-child(even) {
+  --sx: 0.18em;
+  --sk: 4deg;
+}
+@keyframes sw-in {
+  from {
+    transform: translate(var(--sx, 0), 0.32em) skewX(var(--sk, 0deg));
+  }
+  to {
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .sw-load {
+    animation: sw-in 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(var(--i) * 55ms);
+  }
+  @supports (animation-timeline: view()) {
+    :is(h1, h2, h3):has(> .sw:not(.sw-load)) {
+      view-timeline-name: --heading;
+    }
+    .sw:not(.sw-load) {
+      animation: sw-in linear both;
+      animation-timeline: --heading;
+      animation-range: entry calc(var(--i) * 4%) entry calc(60% + var(--i) * 4%);
+    }
+  }
+}
+
+/* --- Lists: items arrive one after another as the list scrolls in ------------
+   `translate`, so a card's own hover `transform` is untouched. */
+@keyframes arrive {
+  from {
+    translate: 0 36px;
+  }
+  to {
+    translate: 0 0;
+  }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .bento > .cell,
+    .hq-item,
+    .rows > .row-link,
+    .faq-item {
+      animation: arrive linear both;
+      animation-timeline: view();
+      animation-range: entry calc(var(--n, 0) * 7%) entry calc(55% + var(--n, 0) * 7%);
+    }
+    :is(.bento, .snap-row, .hq-list, .rows, .faq-list) > :nth-child(2) {
+      --n: 1;
+    }
+    :is(.bento, .snap-row, .hq-list, .rows, .faq-list) > :nth-child(3) {
+      --n: 2;
+    }
+    :is(.bento, .snap-row, .hq-list, .rows, .faq-list) > :nth-child(4) {
+      --n: 3;
+    }
+    :is(.bento, .snap-row, .hq-list, .rows, .faq-list) > :nth-child(5) {
+      --n: 4;
+    }
+    :is(.bento, .snap-row, .hq-list, .rows, .faq-list) > :nth-child(n + 6) {
+      --n: 5;
+    }
+    @media (min-width: 768px) {
+      .snap-row > li {
+        animation: arrive linear both;
+        animation-timeline: view();
+        animation-range: entry calc(var(--n, 0) * 7%) entry calc(55% + var(--n, 0) * 7%);
+      }
+    }
+    /* A hover lift on the same element must not fight the arrival. */
+    .hq-item:hover,
+    .faq-item:hover {
+      translate: none;
+      transform: translateY(-3px);
+    }
+  }
+}
+
+/* --- Between pages: the pill stays, the new page rises over the old one ------
+   The old page stays in the root snapshot, fully opaque, and the new page fades up
+   from a short way below, on top of it, so the screen never dips dark in between.
+   (The new root snapshot would be an opaque night canvas that hides the old page,
+   so it is not drawn.) Movement is translate only. With reduced motion, or
+   without view transitions, pages swap at once. */
+::view-transition {
+  pointer-events: none;
+}
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+::view-transition-old(site-header) {
+  display: none;
+}
+::view-transition-new(site-header) {
+  animation: none;
+}
+::view-transition-old(root) {
+  animation: none;
+}
+::view-transition-new(root) {
+  display: none;
+}
+@keyframes page-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes page-rise {
+  from {
+    translate: 0 28px;
+  }
+}
+/* Old page below, new page above; the old one is not touched. */
+::view-transition-group(.page-out) {
+  z-index: 1;
+}
+::view-transition-old(.page-out) {
+  animation: none;
+}
+::view-transition-group(.page-in) {
+  z-index: 2;
+}
+::view-transition-new(.page-in) {
+  animation:
+    page-fade 240ms ease-out both,
+    page-rise 440ms var(--glide) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

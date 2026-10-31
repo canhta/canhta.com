@@ -61,7 +61,8 @@ export function HeaderNav({
           <span className="max-[359px]:sr-only">{name}</span>
         </Link>
 
-        <nav aria-label={labels.primary} className="ml-auto hidden items-center gap-1 md:flex">
+        <nav aria-label={labels.primary} data-glide="off"
+          className="pill-nav ml-auto hidden items-center gap-1 md:flex">
           {links.map((l) => (
             <Link
               key={l.href}
@@ -69,7 +70,7 @@ export function HeaderNav({
               aria-current={current(l.href) ? 'page' : undefined}
               className="pill-link"
             >
-              {l.label}
+              <span className="ul">{l.label}</span>
             </Link>
           ))}
         </nav>

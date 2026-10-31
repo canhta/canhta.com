@@ -16,6 +16,12 @@ import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.j
  * It renders only while visible and while the tab is open, and not while the GPU
  * has taken its context away (`onContext` reports that, so the caller can show
  * the static drawing again until the context returns).
+ *
+ * Pressing or tapping a source card sends one lime point along that card's own
+ * curve into the hub, and the approval node pulses when it arrives: the idea of
+ * the picture, played on request. A pointer over a card shows the pointer hand.
+ * Three reusable points, no allocation per click, drawn only inside the same
+ * frame loop (so nothing runs while the scene is off screen).
  */
 
 const LIME = 0xd1fe17
@@ -225,6 +231,28 @@ export function mountScene(host: HTMLElement, onContext?: (lost: boolean) => voi
   const dummy = new THREE.Object3D()
   const point = new THREE.Vector3()
 
+  // ---- Press a card: a point travels its curve, the approval node pulses
+  const SEND = 1.1
+  const PULSE = 0.7
+  const sparkGeo = track(new THREE.SphereGeometry(0.17, 16, 12))
+  const sparkMat = track(new THREE.MeshBasicMaterial({ color: LIME }))
+  const sparks = curves.map(() => {
+    const mesh = new THREE.Mesh(sparkGeo, sparkMat)
+    mesh.visible = false
+    root.add(mesh)
+    return { mesh, start: -1 }
+  })
+  const pops = cards.map(() => -1)
+  let pulseAt = -1
+  const ray = new THREE.Raycaster()
+  const ndc = new THREE.Vector2()
+  const cardAt = (e: PointerEvent) => {
+    const r = renderer.domElement.getBoundingClientRect()
+    ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1)
+    ray.setFromCamera(ndc, camera)
+    return cards.findIndex((c) => ray.intersectObject(c.group, true).length > 0)
+  }
+
   // ---- Sizing, pointer, visibility
   const resize = () => {
     const w = Math.max(host.clientWidth, 1)
@@ -250,11 +278,27 @@ export function mountScene(host: HTMLElement, onContext?: (lost: boolean) => voi
     target.x = ((e.clientY - r.top) / r.height - 0.5) * 0.28
   }
   host.addEventListener('pointermove', onMove)
+  const onHover = (e: PointerEvent) => {
+    if (e.pointerType === 'touch') return
+    host.style.cursor = cardAt(e) >= 0 ? 'pointer' : ''
+  }
+  host.addEventListener('pointermove', onHover)
   const onLeave = () => {
     target.x = 0
     target.y = 0
+    host.style.cursor = ''
   }
   host.addEventListener('pointerleave', onLeave)
+  const onDown = (e: PointerEvent) => {
+    if (e.button !== 0 || lost) return
+    const i = cardAt(e)
+    if (i < 0) return
+    const now = (performance.now() - t0) / 1000
+    sparks[i]!.start = now
+    pops[i] = now
+    start()
+  }
+  host.addEventListener('pointerdown', onDown)
 
   let visible = true
   let lost = false
@@ -284,6 +328,28 @@ export function mountScene(host: HTMLElement, onContext?: (lost: boolean) => voi
     })
     const aa = t * 0.35
     approve.position.set(Math.cos(aa) * 1.35, HUB_Y + 1.15 + Math.sin(aa * 1.3) * 0.15, 1.3)
+
+    // A pressed card pops; its point rides the curve, then the approval node pulses.
+    cards.forEach((c, i) => {
+      const k = (t - pops[i]!) / 0.35
+      c.group.scale.setScalar(pops[i]! >= 0 && k < 1 ? 1 + 0.07 * Math.sin(Math.PI * k) : 1)
+    })
+    sparks.forEach((sp, ci) => {
+      const k = (t - sp.start) / SEND
+      sp.mesh.visible = sp.start >= 0 && k < 1
+      if (sp.start >= 0 && k >= 1) {
+        sp.start = -1
+        pulseAt = t
+      }
+      if (sp.mesh.visible) {
+        curves[ci]!.getPoint(1 - Math.pow(1 - k, 3), sp.mesh.position)
+        sp.mesh.scale.setScalar(0.6 + 0.8 * Math.sin(Math.PI * k))
+      }
+    })
+    const pk = (t - pulseAt) / PULSE
+    const pulse = pulseAt >= 0 && pk < 1 ? Math.sin(Math.PI * pk) : 0
+    approve.scale.setScalar(1 + 1.1 * pulse)
+    hub.scale.setScalar(1 + 0.03 * pulse)
 
     let n = 0
     curves.forEach((curve, ci) => {
@@ -334,7 +400,10 @@ export function mountScene(host: HTMLElement, onContext?: (lost: boolean) => voi
     io.disconnect()
     ro.disconnect()
     host.removeEventListener('pointermove', onMove)
+    host.removeEventListener('pointermove', onHover)
     host.removeEventListener('pointerleave', onLeave)
+    host.removeEventListener('pointerdown', onDown)
+    host.style.cursor = ''
     document.removeEventListener('visibilitychange', onVisibility)
     canvas.removeEventListener('webglcontextlost', onLost)
     canvas.removeEventListener('webglcontextrestored', onRestored)

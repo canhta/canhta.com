@@ -913,6 +913,7 @@ article[id] {
    ========================================================================= */
 
 .cell {
+  container-type: inline-size;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -934,10 +935,6 @@ a.cell-link::after {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-}
-.cell:has(a.cell-link):hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lift);
 }
 .cell:has(a:focus-visible) {
   outline: 3px solid var(--color-night);
@@ -1371,20 +1368,19 @@ a.cell-link::after {
    then settle into place once. Transform only.
    ========================================================================= */
 
+/* Each picture is a container: its parts are drawn in em, and the em is a share
+   of the picture's own width (cqw, clamped), so the drawing scales with its cell
+   and never needs a pixel size. The cell (also a container) sets the height. */
 .mv {
+  container-type: inline-size;
   position: relative;
   flex: 1;
-  min-height: 150px;
+  min-height: clamp(9rem, 44cqw, 15rem);
   display: grid;
   place-items: center;
 }
 .mv-lg {
-  min-height: 210px;
-}
-@media (min-width: 768px) {
-  .mv-lg {
-    min-height: 250px;
-  }
+  min-height: clamp(13rem, 50cqw, 18rem);
 }
 
 /* systems: a chat becomes an order table, then an invoice and a stock count.
@@ -1395,7 +1391,7 @@ a.cell-link::after {
   place-items: stretch;
 }
 .mvs {
-  font-size: 12.5px;
+  font-size: clamp(10px, 4cqw, 17px);
   display: grid;
   grid-template-columns: 1.5fr 1fr;
   grid-template-areas:
@@ -1577,7 +1573,7 @@ a.cell-link::after {
 
 @media (min-width: 768px) and (max-width: 1023px) {
   .mvs {
-    font-size: 14px;
+    font-size: clamp(11px, 1.9cqw, 16px);
     grid-template-columns: 0.9fr 3.2em 1.5fr 1fr;
     grid-template-areas: 'chat flow sheet side';
     grid-template-rows: auto;
@@ -1608,7 +1604,7 @@ a.cell-link::after {
 }
 @media (min-width: 1024px) {
   .mvs {
-    font-size: clamp(13.5px, 1.3vw, 18px);
+    font-size: clamp(11px, 2.7cqw, 18px);
   }
   .mvs-chat > :nth-child(3) {
     display: grid;
@@ -1618,56 +1614,57 @@ a.cell-link::after {
 /* ai: an agent card with an Approve button that presses itself once */
 .mv-agent {
   position: relative;
-  width: min(100%, 300px);
-  padding: 18px;
-  border-radius: 22px;
+  font-size: clamp(10px, 4.8cqw, 18px);
+  width: min(100%, 18.75em);
+  padding: 1.125em;
+  border-radius: 1.375em;
   background: #fff;
   color: var(--color-night);
-  box-shadow: 0 24px 40px -16px rgb(0 0 0 / 0.35);
+  box-shadow: 0 1.5em 2.5em -1em rgb(0 0 0 / 0.35);
 }
 .mv-agent-head {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 0.75em;
 }
 .mv-avatar {
   flex: none;
-  width: 38px;
-  height: 38px;
-  border-radius: 12px;
+  width: 2.375em;
+  height: 2.375em;
+  border-radius: 0.75em;
   background: var(--color-night);
 }
 .mv-line {
   display: block;
-  height: 9px;
-  border-radius: 5px;
+  height: 0.5625em;
+  border-radius: 0.3em;
   background: var(--color-line);
 }
 .mv-agent-lines {
   display: grid;
-  gap: 8px;
+  gap: 0.5em;
   flex: 1;
 }
 .mv-agent-foot {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-top: 16px;
+  gap: 0.75em;
+  margin-top: 1em;
 }
 .mv-approve {
   display: inline-grid;
   place-items: center;
-  min-height: 40px;
-  padding-inline: 20px;
+  min-height: 2.5em;
+  padding-inline: 1.25em;
   border-radius: 999px;
   background: var(--color-night);
   color: var(--color-accent);
-  font-size: 0.875rem;
+  font-size: 0.875em;
   font-weight: 700;
 }
 .mv-check {
-  width: 40px;
-  height: 40px;
+  width: 2.5em;
+  height: 2.5em;
   flex: none;
   border-radius: 50%;
   background: var(--color-night) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6.5 12.6l3.7 3.7 7.3-8.1' fill='none' stroke='%23d1fe17' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 62% no-repeat;
@@ -1681,26 +1678,27 @@ a.cell-link::after {
   left: 64%;
   top: 58%;
   z-index: 1;
-  width: 24px;
-  height: 24px;
+  width: 1.5em;
+  height: 1.5em;
   pointer-events: none;
-  filter: drop-shadow(0 2px 2px rgb(0 0 0 / 0.35));
+  filter: drop-shadow(0 0.125em 0.125em rgb(0 0 0 / 0.35));
 }
 
 /* data: bars that rise */
 .mv-bars {
+  font-size: clamp(8px, 3.2cqw, 14px);
   display: flex;
   align-items: flex-end;
-  gap: 10px;
+  gap: 0.8em;
   width: 100%;
-  height: 160px;
-  padding-bottom: 6px;
-  border-bottom: 3px solid var(--color-ink);
+  height: clamp(7rem, 42cqw, 13rem);
+  padding-bottom: 0.5em;
+  border-bottom: 0.25em solid var(--color-ink);
 }
 .mv-bars i {
   flex: 1;
   height: var(--h);
-  border-radius: 10px 10px 0 0;
+  border-radius: 0.8em 0.8em 0 0;
   background: #d3d6db;
   transform-origin: bottom;
 }
@@ -1714,29 +1712,31 @@ a.cell-link::after {
 /* web: a browser and a phone */
 .mv-browser {
   position: relative;
-  margin-bottom: 14px;
-  width: min(100%, 300px);
-  padding: 12px;
-  border-radius: 18px;
+  font-size: clamp(10px, 4.4cqw, 17px);
+  margin-bottom: 0.875em;
+  margin-right: 0.6em;
+  width: min(92%, 18.75em);
+  padding: 0.75em;
+  border-radius: 1.125em;
   background: #fff;
-  box-shadow: inset 0 0 0 2px var(--color-line);
+  box-shadow: inset 0 0 0 0.125em var(--color-line);
 }
 .mv-browser-bar {
   display: block;
   width: 46%;
-  height: 10px;
-  margin-bottom: 12px;
-  border-radius: 5px;
+  height: 0.625em;
+  margin-bottom: 0.75em;
+  border-radius: 0.3em;
   background: var(--color-line-strong);
 }
 .mv-browser-hero {
   display: block;
-  height: 64px;
-  border-radius: 12px;
+  height: 4em;
+  border-radius: 0.75em;
   background: var(--color-night);
 }
 .mv-browser .mv-line {
-  margin-top: 10px;
+  margin-top: 0.625em;
   width: 70%;
   background: #d3d6db;
 }
@@ -1745,28 +1745,28 @@ a.cell-link::after {
 }
 .mv-phone {
   position: absolute;
-  right: -10px;
-  bottom: -14px;
-  width: 64px;
-  height: 112px;
-  padding: 8px;
-  border-radius: 16px;
+  right: -0.625em;
+  bottom: -0.875em;
+  width: 4em;
+  height: 7em;
+  padding: 0.5em;
+  border-radius: 1em;
   background: var(--color-night);
-  box-shadow: 0 14px 24px -8px rgb(19 21 23 / 0.55);
+  box-shadow: 0 0.875em 1.5em -0.5em rgb(19 21 23 / 0.55);
 }
 .mv-phone i {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 0.375em;
   height: 100%;
-  padding: 8px 7px;
-  border-radius: 9px;
+  padding: 0.5em 0.44em;
+  border-radius: 0.56em;
   background: var(--color-accent);
 }
 .mv-phone b {
   display: block;
-  height: 5px;
-  border-radius: 3px;
+  height: 0.3em;
+  border-radius: 0.2em;
   background: var(--color-night);
 }
 .mv-phone b:first-child {
@@ -1776,84 +1776,86 @@ a.cell-link::after {
   opacity: 0.35;
 }
 .mv-phone b:last-child {
-  height: 18px;
+  height: 1.1em;
   margin-top: auto;
-  border-radius: 7px;
+  border-radius: 0.44em;
   opacity: 1;
 }
 
 /* iot: a sensor and rings that spread */
 .mv-sensor {
   position: relative;
+  font-size: clamp(7px, 3.4cqw, 12px);
   display: grid;
   place-items: center;
-  width: 170px;
-  height: 150px;
+  width: 17em;
+  height: 15em;
 }
 .mv-ring {
   position: absolute;
   border-radius: 50%;
-  border: 3px solid var(--color-accent);
+  border: 0.3em solid var(--color-accent);
 }
 .mv-ring:nth-child(1) {
-  width: 96px;
-  height: 96px;
+  width: 9.6em;
+  height: 9.6em;
 }
 .mv-ring:nth-child(2) {
-  width: 134px;
-  height: 134px;
+  width: 13.4em;
+  height: 13.4em;
   border-color: rgb(209 254 23 / 0.6);
 }
 .mv-ring:nth-child(3) {
-  width: 170px;
-  height: 170px;
+  width: 17em;
+  height: 17em;
   border-color: rgb(209 254 23 / 0.3);
 }
 .mv-node {
   position: relative;
-  width: 44px;
-  height: 44px;
-  border-radius: 14px;
+  width: 4.4em;
+  height: 4.4em;
+  border-radius: 1.4em;
   background: #f7f7f8;
 }
 .mv-node::after {
   content: '';
   position: absolute;
-  inset: 13px;
+  inset: 1.3em;
   border-radius: 50%;
   background: var(--color-night);
 }
 
 /* team: two blocks that fit together */
 .mv-blocks {
+  font-size: clamp(10px, 5.6cqw, 16px);
   display: flex;
   align-items: center;
 }
 .mv-blocks i {
   display: block;
-  width: 78px;
-  height: 96px;
+  width: 4.875em;
+  height: 6em;
 }
 .mv-blocks i:first-child {
-  border-radius: 20px 6px 6px 20px;
+  border-radius: 1.25em 0.375em 0.375em 1.25em;
   background: var(--color-night);
 }
 .mv-blocks i:last-child {
-  margin-left: 6px;
-  border-radius: 6px 20px 20px 6px;
+  margin-left: 0.375em;
+  border-radius: 0.375em 1.25em 1.25em 0.375em;
   background: var(--color-accent);
   position: relative;
 }
 .mv-blocks i:last-child::after {
   content: '';
   position: absolute;
-  left: -16px;
-  top: 34px;
-  width: 26px;
-  height: 26px;
+  left: -1em;
+  top: 2.1em;
+  width: 1.6em;
+  height: 1.6em;
   border-radius: 50%;
   background: var(--color-night);
-  box-shadow: 0 0 0 4px #fff;
+  box-shadow: 0 0 0 0.25em #fff;
 }
 
 /* The services page head: the whole range on one picture, in the same language
@@ -2085,7 +2087,7 @@ a.cell-link::after {
 }
 @keyframes slide-l {
   from {
-    transform: translateX(-34px);
+    transform: translateX(-2.4em);
   }
   to {
     transform: none;
@@ -2093,7 +2095,7 @@ a.cell-link::after {
 }
 @keyframes slide-r {
   from {
-    transform: translateX(34px);
+    transform: translateX(2.4em);
   }
   to {
     transform: none;
@@ -2101,7 +2103,7 @@ a.cell-link::after {
 }
 @keyframes slide-up-big {
   from {
-    transform: translateY(46px);
+    transform: translateY(3.2em);
   }
   to {
     transform: none;
@@ -2117,7 +2119,7 @@ a.cell-link::after {
 }
 @keyframes cursor-tap {
   0% {
-    transform: translate(72px, 56px);
+    transform: translate(4.5em, 3.5em);
   }
   55% {
     transform: translate(0, 0);
@@ -2180,22 +2182,22 @@ a.cell-link::after {
   }
   [data-play='armed'] .mv-browser-hero,
   [data-play='armed'] .mv-phone {
-    transform: translateY(46px);
+    transform: translateY(3.2em);
   }
   [data-play='armed'] .mv-ring {
     transform: scale(0.5);
   }
   [data-play='armed'] .mv-blocks i:first-child {
-    transform: translateX(-34px);
+    transform: translateX(-2.4em);
   }
   [data-play='armed'] .mv-blocks i:last-child {
-    transform: translateX(34px);
+    transform: translateX(2.4em);
   }
   [data-play='armed'] .mv-check {
     transform: scale(0);
   }
   [data-play='armed'] .mv-cursor {
-    transform: translate(72px, 56px);
+    transform: translate(4.5em, 3.5em);
   }
 
   [data-play='play'] .mvs-b {
@@ -2637,17 +2639,18 @@ a.cell-link::after {
 /* --- Products head: the two app icons ----------------------------------- */
 
 .marks {
+  container-type: inline-size;
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 30rem;
+  max-width: min(100%, 34rem);
   margin-inline: auto;
   padding-block: 1rem 2.5rem;
 }
 .mark {
   display: grid;
   place-items: center;
-  width: min(50%, 14rem);
+  width: 50cqw;
   aspect-ratio: 1;
   border-radius: 24%;
   background: var(--app-bg);
@@ -2685,10 +2688,6 @@ a.cell-link::after {
 }
 .ticker-btn:hover {
   background: var(--color-raised);
-}
-.cell:has(a.cell-link):active {
-  transform: translateY(-1px) scale(0.99);
-  transition-duration: 80ms;
 }
 .menu-link {
   transition:
