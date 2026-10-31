@@ -37,7 +37,7 @@ export function AppCard({
                   slug={build.slug}
                   shot={shot}
                   locale={locale}
-                  sizes={variant === 'compact' ? '124px' : '(min-width: 1024px) 210px, 40vw'}
+                  sizes={variant === 'compact' ? '124px' : '(min-width: 540px) 210px, 36vw'}
                 />
               </Tilt>
             </div>
@@ -48,7 +48,14 @@ export function AppCard({
       <div className="flex flex-1 flex-col p-6 sm:p-8">
         <div className="flex items-center gap-3">
           {build.logo ? (
-            <Image src={build.logo} alt="" width={48} height={48} className="h-12 w-12 rounded-[14px]" />
+            <Image
+              src={build.logo}
+              alt=""
+              width={48}
+              height={48}
+              unoptimized={build.logo.endsWith('.svg')}
+              className="h-12 w-12 rounded-[14px]"
+            />
           ) : null}
           <Heading className="title" translate="no">
             {build.name}

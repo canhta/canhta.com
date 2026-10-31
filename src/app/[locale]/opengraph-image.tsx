@@ -13,10 +13,8 @@ export const contentType = 'image/png'
  * The shared-link card, set in the same two voices as the page: Newsreader
  * argues, Be Vietnam Pro labels.
  *
- * The portrait is deliberately not in it. It is an illustration rather than a
- * photograph, and at 1200x630 the lettering on the shirt is legible — a card is
- * the one place an asset gets blown up in front of strangers, so this uses type
- * and a rule instead.
+ * No photo and no people: AGENTS.md keeps both off the site, so the card is type
+ * and a rule only, in the site palette.
  *
  * Fonts are read from disk, not fetched. Building an image that requires a live
  * request to fonts.gstatic.com means a network blip becomes a failed deploy —

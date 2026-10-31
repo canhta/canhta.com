@@ -69,7 +69,14 @@ export function AppMarks({ locale }: { locale: Locale }) {
     <div className="marks" aria-hidden="true">
       {marks.map((build) => (
         <span key={build.slug} className="mark" data-theme={build.slug}>
-          <Image src={build.logo!} alt="" width={256} height={256} />
+          <Image
+            src={build.logo!}
+            alt=""
+            width={144}
+            height={144}
+            preload
+            unoptimized={build.logo!.endsWith('.svg')}
+          />
         </span>
       ))}
     </div>

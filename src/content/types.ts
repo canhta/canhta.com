@@ -71,7 +71,6 @@ export interface SocialLink {
 
 export interface ProfileFacts {
   name: string
-  avatar: string
   available: boolean
 }
 

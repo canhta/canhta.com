@@ -518,6 +518,23 @@ article[id] {
    Hero: night, the 3D scene as the main picture, bleeding to the edge.
    ========================================================================= */
 
+/* The first screen is the hero plus the ticker and nothing else: exactly one
+   viewport tall (svh, so a phone's address bar cannot cut it), never shorter
+   than a small laptop needs and never taller than a huge monitor wants. The
+   hero takes what the ticker leaves, so the strip ends on the fold, whole. If
+   the content is taller than that (a phone), the container simply grows. */
+.first-screen {
+  display: flex;
+  flex-direction: column;
+  min-height: clamp(36rem, 100svh, 68rem);
+}
+.first-screen > .hero {
+  flex: 1 0 auto;
+}
+.first-screen > .ticker {
+  flex: none;
+}
+
 .hero {
   position: relative;
   overflow-x: clip;
@@ -549,8 +566,7 @@ article[id] {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-height: min(calc(100svh - 72px), 60rem);
-    padding-bottom: calc(var(--sheet-r) + 24px);
+    padding-bottom: 24px;
   }
   .hero-text {
     padding-bottom: 0;
@@ -560,7 +576,7 @@ article[id] {
     z-index: 1;
     top: calc(var(--pill-top) + var(--pill-h));
     right: 0;
-    bottom: var(--sheet-r);
+    bottom: 0;
     width: 56%;
     margin: 0;
   }
@@ -573,6 +589,13 @@ article[id] {
 @media (min-width: 1024px) and (max-width: 1279px) {
   .hero-stage {
     width: 50%;
+  }
+}
+/* On a very wide window the text stays in its 1240px column while the picture
+   keeps growing; hold the picture to the space the text leaves. */
+@media (min-width: 1700px) {
+  .hero-stage {
+    width: calc(50vw - 40px);
   }
 }
 
@@ -1096,7 +1119,7 @@ a.cell-link::after {
   border-radius: 28px;
   background: var(--color-night);
   color: #f7f7f8;
-  font-size: clamp(1.35rem, 2.6vw, 2rem);
+  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: -0.03em;
@@ -1107,6 +1130,25 @@ a.cell-link::after {
     color var(--duration-feedback) var(--ease-out-soft),
     box-shadow var(--duration-feedback) var(--ease-out-soft);
 }
+/* A dark row gets a light envelope tile; the light and lime rows on a night
+   band get the night one. */
+.row-link {
+  --mail-tile: #f7f7f8;
+  --mail-ink: #131517;
+}
+.on-night .row-link {
+  --mail-tile: #131517;
+  --mail-ink: #f7f7f8;
+}
+.row-main {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+.row-main > svg {
+  flex: none;
+}
 .row-link small {
   font-size: 0.9375rem;
   font-weight: 500;
@@ -1114,6 +1156,26 @@ a.cell-link::after {
   color: var(--color-on-dark);
   overflow-wrap: anywhere;
   text-align: right;
+}
+/* On a phone the address would wrap inside a narrow row: stack it under the label. */
+@media (max-width: 519px) {
+  .row-link:has(> small) {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 16px;
+    align-content: center;
+  }
+  .row-link:has(> small) .row-main {
+    display: contents;
+  }
+  .row-link:has(> small) .row-main > svg {
+    grid-row: span 2;
+    align-self: center;
+  }
+  .row-link small {
+    text-align: left;
+    font-size: 0.875rem;
+  }
 }
 .row-link:hover {
   transform: translateY(-3px);
@@ -2382,7 +2444,6 @@ a.cell-link::after {
     border-radius: 999px;
     background: var(--color-night);
     box-shadow:
-      inset 0 0 0 1px rgb(255 255 255 / 0.2),
       0 2px 2px rgb(19 21 23 / 0.1),
       0 14px 28px -8px rgb(19 21 23 / 0.5);
     transform: translateY(calc(100% + 28px));
@@ -2402,10 +2463,12 @@ a.cell-link::after {
     transition-delay: 0s, 300ms;
   }
   .contact-bar a {
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
     min-height: 48px;
-    padding-inline: 8px;
+    padding-inline: 6px;
     border-radius: 999px;
     color: #f7f7f8;
     font-size: 0.9375rem;
@@ -2415,6 +2478,9 @@ a.cell-link::after {
     transition:
       background-color var(--duration-feedback) var(--ease-out-soft),
       transform var(--duration-feedback) var(--ease-out-soft);
+  }
+  .contact-bar a > svg {
+    flex: none;
   }
   .contact-bar a:hover {
     background: var(--color-raised);
@@ -2437,6 +2503,79 @@ a.cell-link::after {
   .contact-bar a[data-primary='true']:focus-visible {
     outline-color: #fff;
   }
+}
+
+/* --- Footer links: a logo tile and a bold label, no box around them ------ */
+
+.foot-row {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: 14px;
+  min-height: 44px;
+  padding-block: 4px;
+  padding-right: 8px;
+  border-radius: 12px;
+  color: #f7f7f8;
+  font-size: 1.0625rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  transition: color var(--duration-feedback) var(--ease-out-soft);
+}
+.foot-row > svg,
+.foot-glyph {
+  flex: none;
+  transition: transform var(--duration-feedback) var(--ease-out-soft);
+}
+.foot-label {
+  position: relative;
+}
+/* A 2px lime line grows under the label from the left. */
+.foot-label::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 2px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 300ms var(--ease-out-soft);
+}
+.foot-row:hover,
+.foot-row:focus-visible {
+  color: var(--color-accent);
+}
+.foot-row:hover .foot-label::after,
+.foot-row:focus-visible .foot-label::after {
+  transform: scaleX(1);
+}
+.foot-row:hover > svg,
+.foot-row:hover .foot-glyph {
+  transform: translateY(-2px);
+}
+.foot-row:active {
+  color: var(--color-accent-hover);
+}
+.foot-row:active > svg,
+.foot-row:active .foot-glyph {
+  transform: scale(0.92);
+  transition-duration: 60ms;
+}
+.foot-row:focus-visible {
+  outline-offset: 4px;
+}
+/* Solid, borderless tile for the marks that have no brand colour of their own. */
+.foot-glyph {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: #f7f7f8;
+  color: #131517;
 }
 
 /* --- Products head: the two app icons ----------------------------------- */
@@ -2524,6 +2663,15 @@ a.cell-link::after {
 /* Reduced motion: colour and shadow still answer a hover or a press, but
    nothing moves, so the lift, the lean and the press are switched off. */
 @media (prefers-reduced-motion: reduce) {
+  .foot-row:hover > svg,
+  .foot-row:hover .foot-glyph,
+  .foot-row:active > svg,
+  .foot-row:active .foot-glyph {
+    transform: none;
+  }
+  .foot-label::after {
+    transition: none;
+  }
   .btn-primary:hover,
   .btn-primary:active,
   .btn-accent:hover,

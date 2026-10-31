@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { Link, usePathname } from '@/i18n/navigation'
 import type { AppPathname } from '@/i18n/routing'
+import { LangSwitch } from './lang-switch'
 
 /**
  * The only client code in the header: the open/closed state of the phone menu,
@@ -34,19 +35,6 @@ export function HeaderNav({
     return () => document.documentElement.removeAttribute('data-menu-open')
   }, [open])
 
-  const lang = (code: 'en' | 'vi') => (
-    <Link
-      href={pathname}
-      locale={code}
-      aria-current={locale === code ? 'page' : undefined}
-      className={`grid h-11 min-w-11 place-items-center rounded-full text-[13px] font-bold transition-[color,background-color,transform] active:scale-95 ${
-        locale === code ? 'bg-night text-white' : 'text-muted hover:bg-wash hover:text-ink'
-      }`}
-    >
-      {code.toUpperCase()}
-    </Link>
-  )
-
   return (
     <>
       <div className="pill">
@@ -72,9 +60,8 @@ export function HeaderNav({
           ))}
         </nav>
 
-        <div role="group" aria-label={labels.language} className="ml-auto flex items-center md:ml-3">
-          {lang('en')}
-          {lang('vi')}
+        <div className="ml-auto flex items-center md:ml-3">
+          <LangSwitch locale={locale} label={labels.language} />
         </div>
 
         <Link href="/contact" className="pill-cta min-[360px]:ml-1">

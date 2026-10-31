@@ -2,7 +2,7 @@ import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
 import { mailContact } from '@/lib/contact'
-import { ZaloWordmark } from './icons'
+import { MailTile, WhatsAppTile, ZaloTile } from './icons'
 
 /**
  * The ways to reach us, as three big tappable rows: email, Zalo and WhatsApp.
@@ -21,22 +21,33 @@ export function ContactActions({ locale }: { locale: Locale }) {
   return (
     <div className="rows" data-no-bar>
       <a href={mail.href} className="row-link" data-primary="true">
-        <span>{messages.contact.email}</span>
+        <span className="row-main">
+          <MailTile size={48} tone="auto" />
+          <span>{messages.contact.email}</span>
+        </span>
         <small translate="no">{mail.address}</small>
       </a>
 
       {zalo ? (
         <a href={zalo.url} target="_blank" rel="noreferrer noopener" className="row-link">
-          <span>{messages.contact.chatOn}</span>
-          <ZaloWordmark height={22} width={60} />
-          <span className="sr-only">Zalo, {messages.common.newTab}</span>
+          <span className="row-main">
+            <ZaloTile size={48} />
+            <span>
+              {messages.contact.chatOn} <span translate="no">Zalo</span>
+            </span>
+          </span>
+          <span className="sr-only">{messages.common.newTab}</span>
         </a>
       ) : null}
 
       {whatsapp ? (
         <a href={whatsapp.url} target="_blank" rel="noreferrer noopener" className="row-link">
-          <span>{messages.contact.chatOn}</span>
-          <span translate="no">WhatsApp</span>
+          <span className="row-main">
+            <WhatsAppTile size={48} />
+            <span>
+              {messages.contact.chatOn} <span translate="no">WhatsApp</span>
+            </span>
+          </span>
           <span className="sr-only">{messages.common.newTab}</span>
         </a>
       ) : null}
