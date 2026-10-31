@@ -8,8 +8,9 @@ import { routing } from '@/i18n/routing'
 /**
  * The same pages as plain Markdown, for readers that are not browsers (llmstxt.org
  * suggests a `.md` copy of each page). Every line is built from the same messages
- * and content the HTML pages read, so the two cannot drift, and nothing is added
- * that a visitor could not see on the page.
+ * and content the HTML pages read, so the two cannot drift. The one addition is the
+ * short "what we do not state" list on home and services, which restates the quote
+ * and no-clients rules.
  */
 export type MarkdownPage = keyof typeof PAGE_PATH
 export const MARKDOWN_PAGES = Object.keys(PAGE_PATH) as MarkdownPage[]

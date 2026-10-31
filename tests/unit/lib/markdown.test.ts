@@ -1,5 +1,6 @@
 /** @vitest-environment node */
 import { describe, expect, it } from 'vitest'
+import { GET as page } from '@/app/md/[locale]/[page]/route'
 import { GET as llms } from '@/app/llms.txt/route'
 import { GET as llmsFull } from '@/app/llms-full.txt/route'
 import { GET as robots } from '@/app/robots.txt/route'
@@ -18,6 +19,14 @@ describe('Markdown copies of the pages', () => {
       expect(md).toContain('hello@canhta.com')
       expect(md).not.toMatch(/\d\s?(?:usd|vnd|đ|\$|₫)|(?:usd|\$|₫)\s?\d/i)
     }
+  })
+
+  it('names the HTML page as canonical in a Link header', async () => {
+    const res = await page(new Request('https://www.canhta.com/vi/dich-vu.md'), {
+      params: Promise.resolve({ locale: 'vi', page: 'services' }),
+    })
+    expect(res.headers.get('link')).toBe('<https://www.canhta.com/vi/dich-vu>; rel="canonical"')
+    expect(res.headers.get('content-type')).toContain('text/markdown')
   })
 
   it('gives each page its own address, with the two homes at index.md', () => {

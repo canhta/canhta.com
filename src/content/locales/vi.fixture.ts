@@ -40,7 +40,7 @@ export const viContent: ContentCopy = {
   offers: [
     {
       id: 'systems',
-      name: 'Hệ thống quản lý',
+      name: 'Hệ thống quản lý đơn hàng và kho',
       detail:
         'Nhập đơn một lần, kho và công nợ của khách cập nhật theo. Ai nghe điện thoại cũng thấy ngay khách từng mua gì và đang nợ bao nhiêu.',
       examples: ['ERP', 'CRM'],

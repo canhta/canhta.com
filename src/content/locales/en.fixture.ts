@@ -40,7 +40,7 @@ export const enContent: ContentCopy = {
   offers: [
     {
       id: 'systems',
-      name: 'Business systems',
+      name: 'Business systems for orders and stock',
       detail:
         "Enter an order once and the stock and the customer's balance follow. A customer's past orders and what they owe sit on one screen for whoever picks up the phone.",
       examples: ['ERP', 'CRM'],
