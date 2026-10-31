@@ -4,30 +4,27 @@
  * stay server components and nothing here ships per element.
  *
  *   - ripple on press (any pointer, so a tap answers too)
- *   - fine pointers only: the follower, magnetic buttons, card tilt, the sliding
- *     highlight in the header, a replay of a service picture when it is entered
+ *   - fine pointers only: magnetic buttons, card tilt, the sliding highlight in
+ *     the header, a replay of a service picture when it is entered
  *
  * Everything is off while the visitor asks for reduced motion (and switches back
  * on or off if the setting changes while the page is open). Nothing here writes
  * layout: only custom properties that CSS turns into `translate` / `transform`.
- * The follower's frame loop runs only while the ring is still catching up.
  * Each effect is switched off for good by `stop`.
  */
 
 const PRESS = '.btn-primary,.btn-accent,.btn-light,.pill-cta,.chip'
-const HOT = 'a[href],button,summary,[role="button"],[data-cursor]'
-const TEXT = 'input,textarea,select,[contenteditable=""],[contenteditable="true"]'
 
 const clamp = (n: number, m: number) => Math.max(-m, Math.min(m, n))
 type Stop = () => void
 
-export function startFx(cursor: HTMLElement): Stop {
+export function startFx(): Stop {
   const fine = matchMedia('(hover: hover) and (pointer: fine)')
   const calm = matchMedia('(prefers-reduced-motion: reduce)')
   let stopLive: Stop | null = null
   const sync = () => {
     stopLive?.()
-    stopLive = calm.matches ? null : live(cursor, fine.matches)
+    stopLive = calm.matches ? null : live(fine.matches)
   }
   sync()
   fine.addEventListener('change', sync)
@@ -39,7 +36,7 @@ export function startFx(cursor: HTMLElement): Stop {
   }
 }
 
-function live(cursor: HTMLElement, withPointer: boolean): Stop {
+function live(withPointer: boolean): Stop {
   const html = document.documentElement
   const off: Stop[] = []
   const on = <T extends Event>(target: EventTarget, type: string, fn: (e: T) => void) => {
@@ -63,47 +60,13 @@ function live(cursor: HTMLElement, withPointer: boolean): Stop {
 
   if (!withPointer) return () => off.forEach((f) => f())
 
-  const dot = cursor.querySelector<HTMLElement>('.fx-dot')!
-  const ring = cursor.querySelector<HTMLElement>('.fx-ring')!
-  const label = cursor.querySelector<HTMLElement>('.fx-label')!
-  html.setAttribute('data-fx-cursor', '')
-
   let x = 0
   let y = 0
-  let rx = 0
-  let ry = 0
-  let last = 0
-  let raf = 0
-  let shown = false
 
   let magnet: HTMLElement | null = null
   let card: HTMLElement | null = null
   let glide: HTMLElement | null = null
   let replayed = 0
-
-  const tick = (now: number) => {
-    raf = 0
-    // Frame-rate independent catch-up, about 70ms to close most of the gap.
-    const k = 1 - Math.exp(-(now - last) / 70)
-    last = now
-    rx += (x - rx) * k
-    ry += (y - ry) * k
-    const close = Math.abs(x - rx) + Math.abs(y - ry) < 0.2
-    if (close) {
-      rx = x
-      ry = y
-    }
-    // `translate`, not `transform`: the dot also has a CSS `scale`, which is applied after a
-    // translate in the same property chain and would pull a transform toward the origin.
-    dot.style.translate = `${x}px ${y}px`
-    ring.style.transform = `translate3d(${rx}px,${ry}px,0)`
-    if (!close) raf = requestAnimationFrame(tick)
-  }
-  const kick = () => {
-    if (raf) return
-    last = performance.now()
-    raf = requestAnimationFrame(tick)
-  }
 
   const releaseMagnet = () => {
     if (!magnet) return
@@ -141,25 +104,8 @@ function live(cursor: HTMLElement, withPointer: boolean): Stop {
     if (e.pointerType === 'touch') return
     x = e.clientX
     y = e.clientY
-    html.dataset.fxInput = 'pointer'
-    if (!shown) {
-      shown = true
-      rx = x
-      ry = y
-      cursor.dataset.on = ''
-    }
     const el = e.target as Element | null
     if (!el || !el.closest) return
-
-    // What the follower says about what is under it.
-    const hot = el.closest<HTMLElement>(HOT)
-    const key = hot?.closest<HTMLElement>('[data-cursor]')?.dataset.cursor
-    const state = el.closest(TEXT) ? 'off' : key ? 'label' : hot ? 'link' : 'idle'
-    if (cursor.dataset.state !== state) cursor.dataset.state = state
-    if (key && label.dataset.key !== key) {
-      label.dataset.key = key
-      label.textContent = cursor.dataset[key] ?? ''
-    }
 
     // Magnetic pull: a few pixels toward the pointer, released with a spring.
     const m = el.closest<HTMLElement>(PRESS)
@@ -199,24 +145,10 @@ function live(cursor: HTMLElement, withPointer: boolean): Stop {
         nav.dataset.glide = 'on'
       } else nav.dataset.glide = 'off'
     }
-
-    kick()
   })
 
-  on<PointerEvent>(document, 'pointerdown', (e) => {
-    if (e.pointerType !== 'touch') cursor.dataset.down = ''
-  })
-  on<PointerEvent>(document, 'pointerup', () => {
-    delete cursor.dataset.down
-  })
-  // Keyboard navigation hides the follower until the mouse moves again.
-  on<KeyboardEvent>(document, 'keydown', (e) => {
-    if (e.key === 'Tab' || e.key.startsWith('Arrow')) html.dataset.fxInput = 'key'
-  })
-  // It also leaves with the pointer.
+  // The effects let go when the pointer leaves the window.
   on(html, 'mouseleave', () => {
-    shown = false
-    delete cursor.dataset.on
     releaseMagnet()
     releaseCard()
     releaseGlide()
@@ -224,14 +156,8 @@ function live(cursor: HTMLElement, withPointer: boolean): Stop {
 
   return () => {
     off.forEach((f) => f())
-    if (raf) cancelAnimationFrame(raf)
     releaseMagnet()
     releaseCard()
     releaseGlide()
-    html.removeAttribute('data-fx-cursor')
-    delete html.dataset.fxInput
-    delete cursor.dataset.on
-    delete cursor.dataset.down
-    delete cursor.dataset.state
   }
 }

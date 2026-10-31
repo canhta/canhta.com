@@ -134,7 +134,7 @@ export default async function LocaleLayout({
           {messages.common.skipToContent}
         </a>
         {children}
-        <Fx open={messages.common.open} />
+        <Fx />
         {/* Loaded after the page is idle (see `Measure`). The `/next` entry points
             of both packages read the App Router's own `useParams`/`usePathname`, so a
             visit is reported against the route `/[locale]` instead of splitting one

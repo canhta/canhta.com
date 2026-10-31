@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 /* =========================================================================
-   canhta.com: design system (Higgsfield palette pass, 2026-10-31)
+   canhta.com: design system
 
    The colours are higgsfield.ai's, read from its computed styles: one lime
    accent, near-black grounds and a cool light tint. The page is mostly dark.
@@ -78,7 +78,7 @@
   color-scheme: light;
   --measure: 1240px;
   --gutter: 20px;
-  /* Sizing scale (2026-10-31 refinement). Section padding, on a 4px grid. */
+  /* Section padding, on a 4px grid. */
   --space: clamp(56px, 7.5vw, 104px);
   --sheet-r: clamp(24px, 3vw, 40px);
   --pill-top: 10px;

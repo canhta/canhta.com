@@ -75,7 +75,6 @@ function Cell({
       data-cell={offer.id}
       data-ground={ground}
       data-tilt={mode === 'home' ? '' : undefined}
-      data-cursor={mode === 'home' ? 'open' : undefined}
       className="cell"
     >
       <Visual id={offer.id} approve={approve} />
