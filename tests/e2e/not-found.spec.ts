@@ -20,12 +20,12 @@ for (const [locale, copy] of [['en', en], ['vi', vi]] as const) {
     })
   }
   test(`[${locale}] the branded 404 works without JavaScript`, async ({ browser }) => {
-    const context = await browser.newContext({ javaScriptEnabled: false })
+    const context = await browser.newContext({ javaScriptEnabled: false, baseURL: test.info().project.use.baseURL })
     const page = await context.newPage()
-    const response = await page.goto(`http://localhost:3310${locale === 'vi' ? '/vi' : ''}/missing-page`)
+    const response = await page.goto(`${locale === 'vi' ? '/vi' : ''}/missing-page`)
     expect(response?.status()).toBe(404)
     await expect(page.getByRole('heading', { level: 1 })).toHaveText(copy.notFound.heading)
-    await expect(page.locator('footer a[href^="mailto:"]')).toBeVisible()
+    await expect(page.locator('footer a[href^="mailto:"]').first()).toBeVisible()
     await context.close()
   })
 }
