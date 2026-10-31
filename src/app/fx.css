@@ -463,9 +463,13 @@ a.cell-link:active {
   }
 }
 
-/* --- Pointer follower (fine pointers, motion allowed) ------------------------ */
+/* --- Pointer follower (switched off) ------------------------------------------
+   The owner found the ring around the mouse annoying (2026-10-31), so the
+   follower never shows. The markup and the engine stay, because the engine also
+   drives the magnetic buttons and the card lean; delete `display: none !important`
+   below to bring the follower back. */
 .fx-cursor {
-  display: none;
+  display: none !important;
 }
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   html[data-fx-cursor] .fx-cursor {
