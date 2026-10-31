@@ -34,9 +34,9 @@
   },
   "home": {
     "servicesHeading": "Chúng tôi làm gì",
-    "servicesAll": "Xem tất cả dịch vụ",
-    "appsHeading": "Một vài sản phẩm của chúng tôi",
-    "appsAll": "Xem tất cả sản phẩm",
+    "servicesAll": "Tất cả dịch vụ",
+    "appsHeading": "Vài sản phẩm của chúng tôi",
+    "appsAll": "Tất cả sản phẩm",
     "approve": "Duyệt",
     "scope": [
       "ERP",
@@ -53,18 +53,18 @@
   },
   "services": {
     "h1": "Chuyển đổi số, phần mềm và AI cho doanh nghiệp nhỏ",
-    "intro": "Việc nằm rải rác trong Zalo và Excel, chúng tôi gom về một hệ thống, rồi thêm AI cho các bước lặp lại.",
-    "processHeading": "Cách chúng tôi làm một dự án",
+    "intro": "Mỗi đơn hàng, mỗi khách, mỗi khoản nợ chỉ ghi ở một chỗ, và các app bạn đang dùng nối vào đó. Rồi AI làm các bước lặp lại, có người duyệt.",
+    "processHeading": "Cách chúng tôi triển khai",
     "faqHeading": "Câu hỏi thường gặp"
   },
   "apps": {
-    "h1": "Một vài sản phẩm của chúng tôi",
-    "intro": "App, web và AI do chính chúng tôi làm.",
+    "h1": "Vài sản phẩm của chúng tôi",
+    "intro": "App, web và AI do chính chúng tôi triển khai.",
     "publicHeading": "Dự án khác"
   },
   "contact": {
-    "h1": "Kể cho chúng tôi cách bạn đang làm việc",
-    "body": "Chúng tôi trả lời trong một ngày làm việc, và bạn có kế hoạch cùng báo giá trước khi chúng tôi làm.",
+    "h1": "Kể cho chúng tôi cách bạn làm việc",
+    "body": "Chúng tôi trả lời trong một ngày làm việc, và bạn có kế hoạch cùng báo giá trước khi triển khai.",
     "helpHeading": "Nếu tiện, cho biết thêm",
     "help": [
       "Ai sẽ dùng",
@@ -84,23 +84,23 @@
     "steps": [
       {
         "id": "problem",
-        "label": "Kể việc đang vướng",
-        "detail": "Chỉ cần vài dòng."
+        "label": "Kể việc tốn nhiều thời gian nhất",
+        "detail": "Việc nào, ai làm, hiện bạn dùng gì."
       },
       {
         "id": "map",
-        "label": "Xem bạn đang làm thế nào",
-        "detail": "Ai làm gì, thời gian mất ở đâu."
+        "label": "Theo một đơn từ tin nhắn đến lúc thu tiền",
+        "detail": "Từng bước, ai làm, và chỗ nào phải gõ lại."
       },
       {
         "id": "plan",
-        "label": "Gửi kế hoạch và báo giá",
-        "detail": "Dùng sẵn gì, làm mới gì. Chốt trước."
+        "label": "Bạn nhận một kế hoạch và một báo giá",
+        "detail": "Dùng sẵn gì, triển khai thêm gì, theo thứ tự nào. Chốt trước."
       },
       {
         "id": "build",
-        "label": "Làm bản chạy thử",
-        "detail": "Thông tin thật, từng việc một."
+        "label": "Triển khai bản chạy thử nhỏ",
+        "detail": "Chạy trên đơn thật. Phần tiếp và AI chỉ thêm khi có ích."
       }
     ]
   },
@@ -109,7 +109,7 @@
     "proof": "Chúng tôi từng làm các sản phẩm có hàng trăm nghìn người dùng, ở vai trò lập trình, xử lý dữ liệu và quản lý sản phẩm."
   },
   "closing": {
-    "heading": "Việc nào đang chiếm nhiều thời gian nhất của bạn?",
+    "heading": "Việc nào chiếm nhiều thời gian nhất?",
     "body": "Vài dòng là đủ, chúng tôi trả lời trong một ngày làm việc.",
     "cta": "Nhắn chúng tôi"
   },
@@ -151,11 +151,11 @@
   "metadata": {
     "home": {
       "title": "Chuyển đổi số và AI cho doanh nghiệp nhỏ | Canh Ta",
-      "description": "Chúng tôi gom đơn hàng nhập tay, tin nhắn và file Excel về một hệ thống. AI lo các bước lặp lại, việc quan trọng có người duyệt. Cho doanh nghiệp nhỏ."
+      "description": "Mỗi đơn hàng, khách và khoản nợ có một chỗ ghi, không ai gõ lại. Sau đó AI đọc tin nhắn và hóa đơn, có người duyệt. Cho cửa hàng và doanh nghiệp nhỏ."
     },
     "services": {
       "title": "Phần mềm, ERP, CRM và AI cho doanh nghiệp nhỏ | Canh Ta",
-      "description": "ERP, CRM, phần mềm bán hàng, chatbot, AI agent, báo cáo, website và IoT cho cửa hàng, doanh nghiệp nhỏ và cá nhân. Có kế hoạch và báo giá trước khi làm."
+      "description": "ERP, CRM, phần mềm bán hàng, chatbot, AI agent, báo cáo, website và IoT cho cửa hàng, doanh nghiệp nhỏ và cá nhân. Có kế hoạch và báo giá trước khi triển khai."
     },
     "contact": {
       "title": "Liên hệ qua email, Zalo hoặc WhatsApp | Canh Ta",

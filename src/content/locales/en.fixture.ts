@@ -4,8 +4,9 @@ import type { ContentCopy } from '../types'
 export const enContent: ContentCopy = {
   profile: {
     location: 'Vietnam',
-    hook: 'Digitise your work. Let AI do the routine.',
-    supporting: 'For shops and small businesses. Orders and stock in one system, then AI for the routine steps.',
+    hook: 'Enter each order once.',
+    supporting:
+      'Orders, stock and debts get one record, so nobody retypes them. Then AI reads messages and invoices and fills in the record for a person to approve.',
     headerCta: 'Talk to us',
     availabilityLabel: 'Taking on new projects',
   },
@@ -40,38 +41,43 @@ export const enContent: ContentCopy = {
     {
       id: 'systems',
       name: 'Business systems',
-      detail: 'ERP and CRM for orders, stock, who owes what and reports.',
+      detail:
+        "One record for each order, customer, stock item and debt, so nobody retypes. Enter an order once and stock drops and the customer's balance updates.",
       examples: ['ERP', 'CRM', 'orders and stock', 'who owes what'],
     },
     {
       id: 'ai',
       name: 'AI agents and chatbots',
-      detail: 'AI that reads orders and invoices, drafts replies for your staff and answers from your own documents.',
+      detail:
+        'AI reads an incoming order message or invoice, fills in the record and drafts the reply. A person approves anything that costs money or changes a record, and every step is logged.',
       examples: ['Customer chatbots', 'reading orders and invoices', 'weekly reports'],
     },
     {
       id: 'data',
       name: 'Reports and dashboards',
-      detail: 'Sales, stock and customer figures from your spreadsheets and apps, in one report.',
+      detail:
+        'Sales, stock and customer figures from your spreadsheets and apps, in one report that refreshes by itself. On Monday morning you see where you stand without asking anyone.',
       examples: ['Dashboards', 'weekly reports', 'tidying messy spreadsheets'],
     },
     {
       id: 'web',
       name: 'Websites and apps',
-      detail: 'Websites, web apps and phone apps, for your business or your own idea.',
+      detail:
+        'A website where customers order or book, and the order lands straight in your system. Also web and phone apps for your own idea.',
       examples: ['Websites', 'web apps', 'iPhone and Android apps'],
     },
     {
       id: 'iot',
       name: 'Connected devices (IoT)',
       detail:
-        'A dashboard and alerts for off-the-shelf sensors, such as temperature and humidity (everyday readings, not certified).',
+        'Off-the-shelf sensors send temperature and humidity to one screen, and you get an alert when a reading passes your limit. Everyday readings, not certified.',
       examples: ['Temperature and humidity', 'dashboard', 'alerts'],
     },
     {
       id: 'team',
       name: 'Extra hands for your team',
-      detail: 'We join your team or take one piece of the work, on the systems you already use.',
+      detail:
+        'We join your team for a while, or take one piece, such as a phone app or a link between two systems. We work on the systems you already use and follow how your team works.',
       examples: [],
     },
   ],
@@ -80,34 +86,35 @@ export const enContent: ContentCopy = {
       id: 'pricing',
       question: 'How do you price work?',
       answer:
-        'You get a plan and a price before we build. We start with a small working version and go on only if it works.',
+        'You get a plan and a quote before we build anything. The small working version is priced first, and we agree the next part only when it works.',
     },
     {
       id: 'timeline',
       question: 'How long will it take?',
-      answer: 'The plan says how long the first small version takes.',
+      answer: 'The plan says how long the small working version takes. Each next part gets its own estimate before we start it.',
     },
     {
       id: 'existing',
       question: 'Do we really need custom software?',
-      answer: 'Often not. If software you can buy does the job, we will say so.',
+      answer: 'Often not. If ready-made software does the job we will say so, and build only what it cannot do.',
     },
     {
       id: 'agent',
       question: 'Do I need an AI agent, or is a chatbot enough?',
       answer:
-        'A chatbot answers messages. An agent also does steps in your systems, and often a chatbot is enough.',
+        'A chatbot answers questions from your price list. An agent also reads an order, checks stock and drafts the reply, and often a chatbot is enough.',
     },
     {
       id: 'wrong',
       question: 'AI can be wrong. Who checks?',
       answer:
-        'A named person, agreed at the start, approves anything that costs money or changes an order or record. A customer chatbot only answers from the information you gave it.',
+        'A named person, agreed at the start, approves anything that costs money or changes an order or record. The agent flags what looks off, such as an invoice total that does not add up, and logs every step.',
     },
     {
       id: 'customers',
       question: 'Can AI chat with my customers?',
-      answer: 'Yes. It says it is automated and hands over to a person when unsure or asked.',
+      answer:
+        'Yes. It says it is automated, answers only from the information you gave it, and hands over to a person when unsure or asked.',
     },
     {
       id: 'data',
