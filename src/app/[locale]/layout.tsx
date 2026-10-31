@@ -49,15 +49,16 @@ export function generateStaticParams() {
 }
 
 /**
- * The browser chrome matches the page ground, so the address bar does not sit
- * above the page as a foreign band. Must stay equal to `--color-bg` in
- * globals.css and to `theme_color` in `src/app/manifest.ts`.
+ * The browser chrome matches the ground every page opens on (a night hero or
+ * page header), so the address bar does not sit above the page as a foreign
+ * band. Must stay equal to `--color-night` in globals.css and to `theme_color`
+ * in `src/app/manifest.ts`.
  *
  * `maximumScale` is deliberately absent — capping zoom is an accessibility
  * failure, not a polish detail.
  */
 export const viewport: Viewport = {
-  themeColor: '#ffffff',
+  themeColor: '#131517',
   colorScheme: 'light',
 }
 

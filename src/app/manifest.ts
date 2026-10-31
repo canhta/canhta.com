@@ -34,13 +34,13 @@ export default function manifest(): MetadataRoute.Manifest {
     display: 'browser',
 
     /**
-     * Both are the page ground. `theme_color` must stay equal to the `themeColor`
-     * in `src/app/[locale]/layout.tsx`, which is in turn `--color-bg` in
-     * `globals.css`: a mismatch is not a config detail, it is a visible seam
+     * Both are the ground every page opens on. `theme_color` must stay equal to the
+     * `themeColor` in `src/app/[locale]/layout.tsx`, which is in turn `--color-night`
+     * in `globals.css`: a mismatch is not a config detail, it is a visible seam
      * between the address bar and the page on Android.
      */
-    background_color: '#ffffff',
-    theme_color: '#ffffff',
+    background_color: '#131517',
+    theme_color: '#131517',
 
     lang: 'en',
     dir: 'ltr',
