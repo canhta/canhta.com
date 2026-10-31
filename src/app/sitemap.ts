@@ -19,8 +19,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
     return routing.locales.map((locale) => ({
       url: pageUrl(locale as Locale, page),
-      changeFrequency: 'monthly' as const,
-      priority: page === 'home' ? 1 : page === 'services' ? 0.9 : 0.7,
       alternates: { languages },
     }))
   })
