@@ -44,7 +44,6 @@ export function BuildLinkButton({
           <span className="sr-only">{githubStarsLabel(count, locale)}</span>
         </>
       ) : null}
-      <span aria-hidden="true">↗</span>
     </a>
   )
 }

@@ -36,7 +36,18 @@
     "servicesHeading": "Chúng tôi làm gì",
     "servicesAll": "Xem tất cả dịch vụ",
     "appsHeading": "Một vài sản phẩm của chúng tôi",
-    "appsAll": "Xem tất cả sản phẩm"
+    "appsAll": "Xem tất cả sản phẩm",
+    "approve": "Duyệt",
+    "scope": [
+      "ERP",
+      "CRM",
+      "Chatbot",
+      "Website",
+      "Dữ liệu",
+      "IoT",
+      "AI agent"
+    ],
+    "scopePause": "Tạm dừng"
   },
   "services": {
     "h1": "Chuyển đổi số, phần mềm và AI cho doanh nghiệp nhỏ",

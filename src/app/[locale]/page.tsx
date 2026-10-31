@@ -1,15 +1,18 @@
 import { setRequestLocale } from 'next-intl/server'
 import type { Locale } from '@/content/types'
 import { About } from '@/components/about'
+import { Closing } from '@/components/closing'
 import { Hero } from '@/components/hero'
 import { OfferCards } from '@/components/offers'
 import { PageShell } from '@/components/page-shell'
+import { Ticker } from '@/components/ticker'
+import { getMessages } from '@/i18n/messages'
 import { AppsTeaser } from '@/components/products'
 import { pageMetadata } from '@/lib/metadata'
 import { buildGraph } from '@/lib/structured-data'
 
 /**
- * Home: the hook, what we do, a look at the apps, who we are. Short on purpose:
+ * Home: the hook, what we do, a look at the apps, who we are, the ask. Short on purpose:
  * every other topic has its own page, so a phone visitor reaches the end of this
  * one in a few screens and the detail is one tap away.
  */
@@ -20,13 +23,16 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
 export default async function HomePage({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params
   setRequestLocale(locale)
+  const home = getMessages(locale).home
 
   return (
     <PageShell locale={locale} jsonLd={buildGraph(locale, 'home')}>
       <Hero locale={locale} />
+      <Ticker words={home.scope} label={home.servicesHeading} pause={home.scopePause} />
       <OfferCards locale={locale} />
       <AppsTeaser locale={locale} />
       <About locale={locale} />
+      <Closing locale={locale} />
     </PageShell>
   )
 }

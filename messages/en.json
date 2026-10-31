@@ -36,7 +36,18 @@
     "servicesHeading": "What we do",
     "servicesAll": "All services",
     "appsHeading": "Some of our products",
-    "appsAll": "All products"
+    "appsAll": "All products",
+    "approve": "Approve",
+    "scope": [
+      "ERP",
+      "CRM",
+      "Chatbots",
+      "Websites",
+      "Data",
+      "IoT",
+      "AI agents"
+    ],
+    "scopePause": "Pause"
   },
   "services": {
     "h1": "Digital transformation, software and AI for small businesses",
