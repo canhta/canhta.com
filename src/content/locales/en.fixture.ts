@@ -6,8 +6,8 @@ export const enContent: ContentCopy = {
     location: 'Vietnam',
     hook: 'Digitise your work. Let AI do the routine.',
     supporting:
-      'For shops and small businesses. Every order, stock item and debt gets one record, so nobody retypes. AI reads messages and invoices, fills it in, and a person approves.',
-    headerCta: 'Talk to us',
+      'For shops and small businesses. Tell us the problem and we find the solution with you. It might be one record for every order, stock item and debt, so nobody retypes.',
+    headerCta: 'Call us',
     availabilityLabel: 'Taking on new projects',
   },
   builds: [
@@ -84,20 +84,21 @@ export const enContent: ContentCopy = {
   faq: [
     {
       id: 'pricing',
-      question: 'How do you price work?',
+      question: 'How much will it cost?',
       answer:
-        'A quote comes with the plan, before we build. After the small working version, you decide whether to pay for the next part.',
+        'You see a small working version first, and only then do we give you a clear quote. It comes with a plan, a timeline and how we maintain and support it.',
     },
     {
       id: 'timeline',
       question: 'How long will it take?',
-      answer: 'The plan says how long it takes, part by part.',
+      answer:
+        'The small working version comes first, so you see it work early. The plan that comes with the quote gives the timeline, part by part.',
     },
     {
       id: 'apps',
       question: 'Can you connect the apps I already use?',
       answer:
-        'Often yes, such as Excel files, Zalo and sales software. The plan says which links work and which do not.',
+        'Often yes, such as Excel files, Zalo and sales software. We check this while we learn how it runs today, and tell you which links work and which do not.',
     },
     {
       id: 'agent',
@@ -126,13 +127,19 @@ export const enContent: ContentCopy = {
     {
       id: 'ownership',
       question: 'Who owns what you build?',
-      answer: 'You do. Everything is in your name, and we can keep improving it or hand it over with instructions.',
+      answer: 'You do. Everything is in your name.',
+    },
+    {
+      id: 'support',
+      question: 'What happens after launch?',
+      answer:
+        'We keep it running and improving, or hand it over with instructions. How we do that is part of the quote, so you know before you commit.',
     },
     {
       id: 'idea',
       question: 'What if I only have an idea?',
       answer:
-        'That is fine. Tell us what it is and who will use it, and we work out what the first version needs.',
+        'That is fine. Tell us what you want to achieve and who will use it, and we work out together what the small working version needs.',
     },
   ],
 }

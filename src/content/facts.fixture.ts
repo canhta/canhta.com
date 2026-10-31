@@ -95,7 +95,8 @@ export const faqFacts: (FaqFacts & FixtureMarked)[] = [
   { id: 'customers', order: 6 },
   { id: 'data', order: 7 },
   { id: 'ownership', order: 8 },
-  { id: 'idea', order: 9 },
+  { id: 'support', order: 9 },
+  { id: 'idea', order: 10 },
 ]
 
 export const socialFacts: (SocialLink & FixtureMarked)[] = [

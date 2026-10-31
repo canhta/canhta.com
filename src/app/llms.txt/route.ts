@@ -25,6 +25,7 @@ const pages = (locale: 'en' | 'vi') =>
 export function GET() {
   const l = 'en' as const
   const { builds, faq, offers, profile, social } = getSiteContent(l)
+  const messages = getMessages(l)
   const email = social.find((s) => s.network === 'email')?.url.replace('mailto:', '')
   // Email, Zalo and WhatsApp stay together and come first; profiles follow.
   const chat = ['zalo', 'whatsapp']
@@ -60,9 +61,13 @@ export function GET() {
     '',
     ...pages('vi'),
     '',
-    '## What we build for others',
+    `## ${messages.metadata.offerCatalog}`,
     '',
     ...offers.map((o) => `- **${o.name}**: ${sentence(o.detail)}`),
+    '',
+    `## ${messages.services.processHeading}`,
+    '',
+    ...messages.process.steps.map((s, i) => `${i + 1}. ${s.label}. ${s.detail}`),
     '',
     '## Some of our products and public projects',
     '',
@@ -76,6 +81,8 @@ export function GET() {
     '',
     ...faq.flatMap((f) => [`### ${f.question}`, '', f.answer, '']),
     '## Contact',
+    '',
+    messages.contact.body,
     '',
     email ? `- Email: ${email}` : null,
     ...links.map((s) => `- ${NETWORK[s.network] ?? s.network}: ${s.url}`),
