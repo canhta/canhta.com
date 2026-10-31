@@ -2,20 +2,22 @@ import * as THREE from 'three'
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js'
 
 /**
- * The home hero as a small 3D scene: scattered sources (a chat, a spreadsheet,
- * a paper) on the left, a stream of points flowing along curves into one
- * dashboard on the right, and three AI agents orbiting it. It exists to show the
- * page's idea, so everything in it means something: the flow is the work moving
- * into one system, the orbit is the agents, the one orange node is the
- * approval step.
+ * The home hero as a large 3D scene on the deep green band: scattered sources
+ * (a chat, a spreadsheet, a paper) across the top, a stream of points flowing
+ * along curves down into one dashboard, and three AI agents orbiting it. It
+ * exists to show the page's idea, so everything in it means something: the flow
+ * is the work moving into one system, the orbit is the agents, the one orange
+ * node is the approval step. The stage is taller than wide on every layout, so
+ * the composition is vertical. White and mint objects read against the ground;
+ * orange is used for the approval node and a few of the flow points.
  *
  * Loaded lazily and only in the browser. Returns `null` when WebGL is not
  * available (the static drawing underneath stays), otherwise a disposer.
  * It renders only while visible and while the tab is open.
  */
 
-const BRAND = 0x146c43
 const ACCENT = 0xff6a2b
+const MINT = 0x7fd6a4
 const PAPER = 0xffffff
 const LINE = '#cbd8cf'
 
@@ -111,16 +113,6 @@ const hubFace: Draw = (ctx, w, h) => {
   })
 }
 
-function shadowBlob(): THREE.CanvasTexture {
-  return texture(128, 128, (ctx, w, h) => {
-    const g = ctx.createRadialGradient(w / 2, h / 2, 4, w / 2, h / 2, w / 2)
-    g.addColorStop(0, 'rgba(14,26,47,0.28)')
-    g.addColorStop(1, 'rgba(14,26,47,0)')
-    ctx.fillStyle = g
-    ctx.fillRect(0, 0, w, h)
-  })
-}
-
 interface Card {
   group: THREE.Group
   baseY: number
@@ -156,7 +148,7 @@ export function mountScene(host: HTMLElement): (() => void) | null {
 
   const scene = new THREE.Scene()
   const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 50)
-  camera.position.set(0, 0.2, 11)
+  camera.position.set(0, 0.45, 14)
   scene.add(new THREE.AmbientLight(0xffffff, 1.5))
   const sun = new THREE.DirectionalLight(0xffffff, 1.7)
   sun.position.set(3, 5, 7)
@@ -168,7 +160,6 @@ export function mountScene(host: HTMLElement): (() => void) | null {
   const track = <T extends { dispose(): void }>(d: T): T => (disposables.push(d), d)
 
   // ---- Sources, left
-  const blob = track(shadowBlob())
   const cards: Card[] = []
   const place = (g: THREE.Group, x: number, y: number, rz: number, ry: number, phase: number) => {
     g.position.set(x, y, 0)
@@ -179,64 +170,51 @@ export function mountScene(host: HTMLElement): (() => void) | null {
   const chat = card(2.2, 1.65, track(texture(512, 384, chatFace)))
   const sheet = card(2.5, 1.75, track(texture(512, 384, sheetFace)))
   const paper = card(1.8, 2.2, track(texture(384, 448, paperFace)))
-  place(chat, -3.7, 2.05, -0.1, 0.28, 0)
-  place(sheet, -3.9, -0.1, 0.06, 0.2, 2.1)
-  place(paper, -3.5, -2.25, -0.05, 0.3, 4.2)
+  place(chat, -2.55, 3.3, -0.08, 0.3, 0)
+  place(sheet, 0.1, 3.55, 0.05, 0, 2.1)
+  place(paper, 2.65, 3.25, -0.06, -0.3, 4.2)
 
   // ---- Hub, right
   const hub = card(3.2, 3.9, track(texture(512, 624, hubFace)), 0.24)
-  hub.position.set(2.7, 0, 0)
-  hub.rotation.y = -0.22
+  const HUB_Y = -1.75
+  hub.position.set(0, HUB_Y, 0)
+  hub.rotation.y = 0
   root.add(hub)
 
-  const ringMat = track(new THREE.MeshBasicMaterial({ color: BRAND, transparent: true, opacity: 0.55 }))
-  const ring = new THREE.Mesh(track(new THREE.TorusGeometry(2.75, 0.022, 8, 120)), ringMat)
+  const ringMat = track(new THREE.MeshBasicMaterial({ color: MINT, transparent: true, opacity: 0.6 }))
+  const ring = new THREE.Mesh(track(new THREE.TorusGeometry(2.6, 0.03, 8, 120)), ringMat)
   ring.position.copy(hub.position)
   ring.rotation.set(1.2, 0.2, 0)
   root.add(ring)
 
-  const agentGeo = track(new THREE.SphereGeometry(0.17, 24, 16))
+  const agentGeo = track(new THREE.SphereGeometry(0.2, 24, 16))
   const agents = [0, 1, 2].map((i) => {
-    const m = new THREE.Mesh(agentGeo, track(new THREE.MeshStandardMaterial({ color: BRAND, roughness: 0.35 })))
+    const m = new THREE.Mesh(agentGeo, track(new THREE.MeshStandardMaterial({ color: MINT, roughness: 0.4 })))
     root.add(m)
     return { mesh: m, a: (i / 3) * Math.PI * 2 }
   })
   const approve = new THREE.Mesh(
-    track(new THREE.SphereGeometry(0.13, 24, 16)),
-    track(new THREE.MeshStandardMaterial({ color: ACCENT, roughness: 0.3, emissive: ACCENT, emissiveIntensity: 0.25 })),
+    track(new THREE.SphereGeometry(0.2, 24, 16)),
+    track(new THREE.MeshBasicMaterial({ color: ACCENT })),
   )
   root.add(approve)
 
-  // ---- Contact shadows
-  const shadowMat = track(new THREE.MeshBasicMaterial({ map: blob, transparent: true, depthWrite: false }))
-  const shadowGeo = track(new THREE.PlaneGeometry(1, 1))
-  ;[
-    [-3.8, 3.4, 0.9],
-    [2.7, 4.2, 0.9],
-  ].forEach(([x, w, o]) => {
-    const s = new THREE.Mesh(shadowGeo, shadowMat)
-    s.rotation.x = -Math.PI / 2
-    s.position.set(x!, -3.05, 0)
-    s.scale.set(w!, w! * 0.55, 1)
-    s.material = shadowMat
-    void o
-    root.add(s)
-  })
-
   // ---- Flow: points travelling along curves from each source into the hub
   const curves = cards.map(({ group }, i) => {
-    const from = new THREE.Vector3(group.position.x + 1.2, group.position.y, 0.2)
-    const to = new THREE.Vector3(1.0, (i - 1) * 0.9, 0.2)
-    const mid = new THREE.Vector3((from.x + to.x) / 2, (from.y + to.y) / 2 + (i === 1 ? 0 : i === 0 ? 0.7 : -0.7), 1.0)
+    const from = new THREE.Vector3(group.position.x, group.position.y - 1.15, 0.2)
+    const to = new THREE.Vector3((i - 1) * 0.8, HUB_Y + 1.95, 0.3)
+    const mid = new THREE.Vector3((from.x + to.x) / 2 + (i - 1) * 0.5, (from.y + to.y) / 2, 1.2)
     return new THREE.CatmullRomCurve3([from, mid, to])
   })
   const narrow = host.clientWidth < 520
   const perCurve = narrow ? 12 : 20
   const dots = new THREE.InstancedMesh(
-    track(new THREE.SphereGeometry(0.06, 10, 8)),
-    track(new THREE.MeshBasicMaterial({ color: BRAND })),
+    track(new THREE.SphereGeometry(0.085, 10, 8)),
+    track(new THREE.MeshBasicMaterial({ color: 0xffffff })),
     perCurve * curves.length,
   )
+  const tint = new THREE.Color()
+  for (let n = 0; n < perCurve * curves.length; n++) dots.setColorAt(n, tint.set(n % 4 === 0 ? ACCENT : MINT))
   root.add(dots)
   const dummy = new THREE.Object3D()
   const point = new THREE.Vector3()
@@ -247,8 +225,10 @@ export function mountScene(host: HTMLElement): (() => void) | null {
     const h = Math.max(host.clientHeight, 1)
     renderer.setSize(w, h, false)
     camera.aspect = w / h
-    // Keep the whole composition in frame on a narrow panel.
-    camera.position.z = w / h < 1.15 ? 14.5 : 11.5
+    // Fit the whole composition (about 7.6 wide, 9 tall) in whatever the stage is.
+    const half = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2))
+    camera.position.z = Math.max(9 / (2 * half), 7.6 / (2 * half * camera.aspect))
+    camera.position.y = 0.45
     camera.updateProjectionMatrix()
   }
   const ro = new ResizeObserver(resize)
@@ -282,19 +262,19 @@ export function mountScene(host: HTMLElement): (() => void) | null {
     cards.forEach((c) => {
       c.group.position.y = c.baseY + Math.sin(t * 0.9 + c.phase) * 0.09
     })
-    hub.position.y = Math.sin(t * 0.7) * 0.06
+    hub.position.y = HUB_Y + Math.sin(t * 0.7) * 0.06
     ring.rotation.z = t * 0.18
 
     agents.forEach(({ mesh, a }, i) => {
       const ang = a + t * (0.55 + i * 0.05)
       mesh.position.set(
-        hub.position.x + Math.cos(ang) * 2.75,
-        Math.sin(ang) * 2.75 * Math.sin(1.2) * 0.9,
-        Math.sin(ang) * 2.75 * Math.cos(1.2) * 0.9,
+        hub.position.x + Math.cos(ang) * 2.6,
+        HUB_Y + Math.sin(ang) * 2.6 * Math.sin(1.2) * 0.9,
+        Math.sin(ang) * 2.6 * Math.cos(1.2) * 0.9 + 0.2,
       )
     })
     const aa = t * 0.35
-    approve.position.set(hub.position.x + Math.cos(aa) * 1.9, 1.5 + Math.sin(aa * 1.3) * 0.2, 1.1)
+    approve.position.set(Math.cos(aa) * 1.35, HUB_Y + 1.15 + Math.sin(aa * 1.3) * 0.15, 1.3)
 
     let n = 0
     curves.forEach((curve, ci) => {

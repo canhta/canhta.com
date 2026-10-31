@@ -14,10 +14,14 @@ type NavLink = { href: Exclude<AppPathname, '/'>; label: string }
 
 export function HeaderNav({
   locale,
+  name,
+  cta,
   links,
   labels,
 }: {
   locale: 'en' | 'vi'
+  name: string
+  cta: string
   links: NavLink[]
   labels: { primary: string; language: string; menu: string; closeMenu: string }
 }) {
@@ -29,8 +33,8 @@ export function HeaderNav({
       href={pathname}
       locale={code}
       aria-current={locale === code ? 'page' : undefined}
-      className={`grid h-11 min-w-10 place-items-center text-[13px] ${
-        locale === code ? 'font-bold text-ink' : 'text-muted hover:text-ink'
+      className={`grid h-11 min-w-11 place-items-center rounded-full text-[13px] font-bold transition-colors ${
+        locale === code ? 'bg-brand-tint text-brand-dark' : 'text-muted hover:bg-tint hover:text-ink'
       }`}
     >
       {code.toUpperCase()}
@@ -39,53 +43,67 @@ export function HeaderNav({
 
   return (
     <>
-      <nav aria-label={labels.primary} className="ml-auto hidden items-center gap-6 md:flex">
-        {links.map((l) => (
-          <Link
-            key={l.href}
-            href={l.href}
-            aria-current={pathname === l.href ? 'page' : undefined}
-            className={`text-[14px] font-medium hover:underline hover:underline-offset-4 ${
-              pathname === l.href ? 'underline underline-offset-4' : ''
-            }`}
-          >
-            {l.label}
-          </Link>
-        ))}
-      </nav>
+      <div className="pill">
+        <Link
+          href="/"
+          className="grid min-h-11 min-w-0 shrink place-items-center truncate pr-2 text-[17px] font-extrabold tracking-tight"
+          translate="no"
+          onClick={() => setOpen(false)}
+        >
+          {name}
+        </Link>
 
-      <div role="group" aria-label={labels.language} className="ml-auto flex items-center md:ml-0">
-        {lang('en')}
-        <span aria-hidden="true" className="text-line-strong">
-          /
-        </span>
-        {lang('vi')}
+        <nav aria-label={labels.primary} className="ml-auto hidden items-center gap-1 md:flex">
+          {links.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              aria-current={pathname === l.href ? 'page' : undefined}
+              className="pill-link"
+            >
+              {l.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div role="group" aria-label={labels.language} className="ml-auto flex items-center md:ml-3">
+          {lang('en')}
+          {lang('vi')}
+        </div>
+
+        <Link href="/contact" className="pill-cta ml-1">
+          {cta}
+        </Link>
+
+        <button
+          type="button"
+          className="grid h-11 w-11 shrink-0 place-items-center rounded-full hover:bg-tint md:hidden"
+          aria-expanded={open}
+          aria-controls="menu-panel"
+          aria-label={open ? labels.closeMenu : labels.menu}
+          onClick={() => setOpen((v) => !v)}
+        >
+          <span aria-hidden="true" className="grid gap-[5px]">
+            <span
+              className={`block h-0.5 w-5 rounded bg-ink transition-transform ${open ? 'translate-y-[7px] rotate-45' : ''}`}
+            />
+            <span className={`block h-0.5 w-5 rounded bg-ink transition-transform ${open ? 'scale-x-0' : ''}`} />
+            <span
+              className={`block h-0.5 w-5 rounded bg-ink transition-transform ${open ? '-translate-y-[7px] -rotate-45' : ''}`}
+            />
+          </span>
+        </button>
       </div>
 
-      <button
-        type="button"
-        className="grid h-11 w-11 shrink-0 place-items-center md:hidden"
-        aria-expanded={open}
-        aria-controls="menu-panel"
-        aria-label={open ? labels.closeMenu : labels.menu}
-        onClick={() => setOpen((v) => !v)}
-      >
-        <span aria-hidden="true" className="grid gap-[5px]">
-          <span className={`block h-0.5 w-5 bg-ink transition-transform ${open ? 'translate-y-[7px] rotate-45' : ''}`} />
-          <span className={`block h-0.5 w-5 bg-ink transition-opacity ${open ? 'opacity-0' : ''}`} />
-          <span className={`block h-0.5 w-5 bg-ink transition-transform ${open ? '-translate-y-[7px] -rotate-45' : ''}`} />
-        </span>
-      </button>
-
       {open ? (
-        <div id="menu-panel" className="menu-panel absolute inset-x-0 top-full md:hidden">
-          <ul className="shell py-3">
+        <div id="menu-panel" className="menu-panel md:hidden">
+          <ul>
             {links.map((l) => (
               <li key={l.href}>
                 <Link
                   href={l.href}
                   aria-current={pathname === l.href ? 'page' : undefined}
-                  className="block border-b border-line py-4 text-[18px] font-bold"
+                  className="menu-link"
                   onClick={() => setOpen(false)}
                 >
                   {l.label}

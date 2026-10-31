@@ -6,37 +6,32 @@ import { HeroScene } from './hero-scene'
 import { HeroVisual } from './hero-visual'
 
 /**
- * The hook and the next step, in the first screen on a phone. Text rises in once
- * on load; the illustration keeps a slow drift. No product is promoted here: the
- * apps come after the services, because that is the order of what people hire us
- * for.
+ * The hook and the next step on a deep green ground, with the 3D scene as the
+ * main picture. On a desktop the scene fills the right of the band and bleeds to
+ * its edges; on a phone it sits under the buttons. Text rises in once on load.
+ * No product is promoted here: the services come first.
  */
 export function Hero({ locale }: { locale: Locale }) {
   const { profile } = getSiteContent(locale)
   const copy = getMessages(locale).hero
 
   return (
-    <section className="shell pt-8 sm:pt-14 lg:pt-20">
-      <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
-        <div className="lg:col-span-7">
-          <h1 className="display enter max-w-[15ch]">{profile.hook}</h1>
-          <p className="lead enter enter-1 mt-5 max-w-[44ch]">{profile.supporting}</p>
-          <div className="enter enter-2 mt-8 flex flex-wrap gap-3">
-            <Link href="/contact" className="btn-primary">
-              {copy.primary}
-            </Link>
-            <Link href="/services" className="btn-secondary">
-              {copy.secondary}
-            </Link>
-          </div>
+    <section className="hero on-navy">
+      <div className="shell hero-text">
+        <h1 className="display enter max-w-[12ch] sm:max-w-[13ch]">{profile.hook}</h1>
+        <p className="lead enter enter-1 mt-6 max-w-[40ch]">{profile.supporting}</p>
+        <div className="enter enter-2 mt-9 flex flex-wrap gap-3">
+          <Link href="/contact" className="btn-accent">
+            {copy.primary}
+          </Link>
+          <Link href="/services" className="btn-ghost">
+            {copy.secondary}
+          </Link>
         </div>
-        <HeroScene
-          label={copy.visual.label}
-          className="enter enter-2 hv-panel lg:col-span-5"
-        >
-          <HeroVisual locale={locale} />
-        </HeroScene>
       </div>
+      <HeroScene label={copy.visual.label} className="hero-stage">
+        <HeroVisual locale={locale} />
+      </HeroScene>
     </section>
   )
 }

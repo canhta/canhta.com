@@ -11,11 +11,11 @@ import '../globals.css'
 
 // One family for the whole page. Be Vietnam Pro was drawn for Vietnamese, so the
 // stacked marks (ệ, ộ) are designed in rather than patched, and a Vietnamese
-// reader sees a face they already know. Three weights only: every declared
-// weight is two more font files (latin + vietnamese).
+// reader sees a face they already know. Four weights only: every declared
+// weight is two more font files (latin + vietnamese). 800 is the display weight.
 const bvp = Be_Vietnam_Pro({
   subsets: ['latin', 'vietnamese'],
-  weight: ['400', '500', '700'],
+  weight: ['400', '500', '700', '800'],
   variable: '--font-bvp',
   display: 'swap',
 })
