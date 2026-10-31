@@ -102,6 +102,8 @@ export const socialFacts: (SocialLink & FixtureMarked)[] = [
   { network: 'github', url: 'https://github.com/canhta' },
   { network: 'x', url: 'https://x.com/canh_builds' },
   { network: 'linkedin', url: 'https://www.linkedin.com/in/canhta' },
+  // The same number as Zalo and WhatsApp (owner confirmed 2026-10-31).
+  { network: 'phone', url: 'tel:+84825252599' },
   { network: 'zalo', url: 'https://zalo.me/84825252599' },
   // The WhatsApp number is the Zalo number: the only phone number in the repo. Owner to confirm.
   { network: 'whatsapp', url: 'https://wa.me/84825252599' },

@@ -27,7 +27,7 @@ export function GET() {
   const { builds, faq, offers, profile, social } = getSiteContent(l)
   const email = social.find((s) => s.network === 'email')?.url.replace('mailto:', '')
   // Email, Zalo and WhatsApp stay together and come first; profiles follow.
-  const chat = ['zalo', 'whatsapp']
+  const chat = ['phone', 'zalo', 'whatsapp']
   const links = [
     ...chat.flatMap((n) => social.filter((s) => s.network === n)),
     ...social.filter((s) => s.network !== 'email' && !chat.includes(s.network)),
@@ -39,7 +39,7 @@ export function GET() {
    * line in the file — markdown needs them, so the whole document collapsed into
    * one paragraph with no headings separated from their content.
    */
-  const NETWORK: Record<string, string> = { github: 'GitHub', x: 'X', linkedin: 'LinkedIn', zalo: 'Zalo', whatsapp: 'WhatsApp' }
+  const NETWORK: Record<string, string> = { github: 'GitHub', x: 'X', linkedin: 'LinkedIn', phone: 'Phone', zalo: 'Zalo', whatsapp: 'WhatsApp' }
 
   /** A tagline with no terminal punctuation runs straight into the next sentence. */
   const sentence = (x: string) => (/[.!?]$/.test(x.trim()) ? x.trim() : `${x.trim()}.`)
@@ -78,7 +78,7 @@ export function GET() {
     '## Contact',
     '',
     email ? `- Email: ${email}` : null,
-    ...links.map((s) => `- ${NETWORK[s.network] ?? s.network}: ${s.url}`),
+    ...links.map((s) => `- ${NETWORK[s.network] ?? s.network}: ${s.network === 'phone' ? s.url.replace('tel:', '') : s.url}`),
     '',
   ]
 

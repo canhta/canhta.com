@@ -102,6 +102,24 @@ export const MailTile = ({
   )
 }
 
+/** A phone handset (Feather "phone", MIT) on the same tile shape as the other channels. */
+export const PhoneTile = ({
+  size = 44,
+  tone = 'night',
+  ...props
+}: TileProps & { tone?: 'night' | 'light' | 'auto' }) => {
+  const ground = tone === 'auto' ? 'var(--mail-tile, #131517)' : tone === 'night' ? '#131517' : '#f7f7f8'
+  const ink = tone === 'auto' ? 'var(--mail-ink, #f7f7f8)' : tone === 'night' ? '#f7f7f8' : '#131517'
+  return (
+    <svg {...tile(size)} data-brand="phone" {...props}>
+      <rect width="48" height="48" rx="11" style={{ fill: ground }} />
+      <g transform="translate(10 10) scale(1.1)" fill="none" style={{ stroke: ink }} strokeWidth="2.1" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+      </g>
+    </svg>
+  )
+}
+
 /** Apple's mark, for an App Store destination. */
 export const AppleIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg {...base} {...props}>

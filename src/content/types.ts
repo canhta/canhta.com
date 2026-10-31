@@ -65,7 +65,7 @@ export interface FaqCopy {
 export interface Faq extends FaqFacts, Omit<FaqCopy, 'id'> {}
 
 export interface SocialLink {
-  network: 'github' | 'x' | 'linkedin' | 'email' | 'zalo' | 'whatsapp'
+  network: 'github' | 'x' | 'linkedin' | 'email' | 'phone' | 'zalo' | 'whatsapp'
   url: string
 }
 

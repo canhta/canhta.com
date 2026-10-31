@@ -57,9 +57,10 @@ export function buildGraph(locale: Locale, page: GraphPage = 'home') {
   // Profiles a person can open to check we exist. A chat number is not one, so
   // neither Zalo nor WhatsApp is listed.
   const sameAs = social
-    .filter((s) => s.network !== 'email' && s.network !== 'whatsapp' && s.network !== 'zalo')
+    .filter((s) => s.network !== 'email' && s.network !== 'phone' && s.network !== 'whatsapp' && s.network !== 'zalo')
     .map((s) => s.url)
   const email = social.find((s) => s.network === 'email')?.url.replace('mailto:', '')
+  const phone = social.find((s) => s.network === 'phone')?.url.replace('tel:', '')
 
   const professionalService = {
     '@type': 'ProfessionalService',
@@ -71,6 +72,7 @@ export function buildGraph(locale: Locale, page: GraphPage = 'home') {
     knowsLanguage: ['vi', 'en'],
     address: { '@type': 'PostalAddress', addressCountry: 'VN' },
     ...(email ? { email } : {}),
+    ...(phone ? { telephone: phone } : {}),
     ...(sameAs.length ? { sameAs } : {}),
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
