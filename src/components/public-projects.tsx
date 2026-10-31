@@ -34,7 +34,7 @@ export async function PublicProjects({ locale }: { locale: Locale }) {
                 <p className="subtitle">{build.tagline}</p>
                 <p className="mt-2 text-[15px] leading-relaxed text-muted">{build.summary}</p>
               </div>
-              <ul className="flex flex-wrap content-start gap-2 lg:col-span-3 lg:justify-end">
+              <ul data-no-bar className="flex flex-wrap content-start gap-2 lg:col-span-3 lg:justify-end">
                 {build.links.map((link) => (
                   <li key={link.kind}>
                     <BuildLinkButton link={link} locale={locale} stars={stars} />

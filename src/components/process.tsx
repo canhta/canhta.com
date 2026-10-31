@@ -24,7 +24,7 @@ export function Process({ locale }: { locale: Locale }) {
             <div className="track mt-8 max-w-sm" aria-hidden="true" />
             <p className="mt-8 max-w-[30ch] text-[clamp(1.1rem,1.6vw,1.3rem)] leading-snug font-bold">{copy.rule}</p>
             <p className="mt-6">
-              <Link href="/products" className="link font-bold">
+              <Link href="/products" className="link inline-flex min-h-11 items-center font-bold">
                 {getMessages(locale).home.appsAll}
               </Link>
             </p>

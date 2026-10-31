@@ -62,7 +62,7 @@ export function AppCard({
           <span className="font-extrabold text-accent">{statusLabel(build.status, locale)}.</span>{' '}
           <span className="cell-muted">{build.availability}</span>
         </p>
-        <ul className="mt-5 flex flex-wrap gap-2">
+        <ul data-no-bar className="mt-5 flex flex-wrap gap-2">
           {build.links.map((link) => (
             <li key={link.kind}>
               <BuildLinkButton link={link} locale={locale} stars={{}} />

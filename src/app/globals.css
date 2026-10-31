@@ -827,34 +827,6 @@ article[id] {
   }
 }
 
-/* A statement whose words fill in as it scrolls past. Every word starts at
-   #7a7f86 (4.0:1 on white, and the type is 28px or larger bold, so AA large
-   needs 3:1) and ends at ink. Without scroll-driven animation it is ink. */
-.statement {
-  view-timeline-name: --statement;
-}
-.statement .w {
-  color: var(--color-ink);
-}
-@keyframes ink-in {
-  from {
-    color: #7a7f86;
-  }
-  to {
-    color: var(--color-ink);
-  }
-}
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .statement .w {
-      animation: ink-in linear both;
-      animation-timeline: --statement;
-      animation-range-start: cover calc(14% + var(--s));
-      animation-range-end: cover calc(24% + var(--s));
-    }
-  }
-}
-
 /* =========================================================================
    Cards, bento, panels
    ========================================================================= */
@@ -870,6 +842,11 @@ article[id] {
   transition:
     transform 260ms var(--ease-out-soft),
     box-shadow 260ms var(--ease-out-soft);
+}
+a.cell-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
 }
 a.cell-link::after {
   content: '';
