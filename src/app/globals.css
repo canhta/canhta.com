@@ -2240,6 +2240,10 @@ a.cell-link::after {
 .on-night .title-band {
   --bar: var(--color-hair);
 }
+/* Stacked Vietnamese marks on a capital sit higher: keep a little more air above. */
+:lang(vi) .title-band {
+  padding-top: clamp(10px, 1.2vw, 14px);
+}
 @keyframes band-wipe {
   from {
     transform: scaleX(0);
