@@ -50,7 +50,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
               {next.map((step, i) => (
                 <li key={step.id} className="step">
                   <p aria-hidden="true" className="step-num !text-[clamp(3.5rem,8vw,5.5rem)]">
-                    {i + 2}
+                    {i + 1}
                   </p>
                   <div className="min-w-0">
                     <h3 className="title max-w-[20ch]">{step.label}</h3>
