@@ -1,11 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
-  <!-- Palette tokens only. The mark is the page's argument rather than a
-       monogram: four steps, and the point where the work starts running for
-       real. Two steps still on paper, two in accent. It survives 16px because
-       it is four flat rectangles. -->
-  <rect width="32" height="32" fill="#131517"/>
-  <rect x="5" y="14" width="5" height="4" fill="#898a8b"/>
-  <rect x="12" y="14" width="5" height="4" fill="#898a8b"/>
-  <rect x="19" y="12" width="5" height="8" fill="#d1fe17"/>
-  <rect x="26" y="12" width="1" height="8" fill="#d1fe17"/>
+  <!-- A bold C: the site's near-black ground and its one lime accent. Flat
+       caps and a single stroke so it holds at 16px. -->
+  <rect width="32" height="32" rx="8" fill="#131517"/>
+  <path d="M22.4 9.6A9 9 0 1 0 22.4 22.4" fill="none" stroke="#d1fe17" stroke-width="6.2"/>
 </svg>
