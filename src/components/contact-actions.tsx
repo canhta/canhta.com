@@ -45,7 +45,6 @@ export function ContactActions({ locale }: { locale: Locale }) {
               {messages.contact.chatOn} <span translate="no">Zalo</span>
             </span>
           </span>
-          <span className="sr-only">{messages.common.newTab}</span>
         </a>
       ) : null}
 
@@ -57,7 +56,6 @@ export function ContactActions({ locale }: { locale: Locale }) {
               {messages.contact.chatOn} <span translate="no">WhatsApp</span>
             </span>
           </span>
-          <span className="sr-only">{messages.common.newTab}</span>
         </a>
       ) : null}
     </div>
