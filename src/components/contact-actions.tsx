@@ -1,6 +1,7 @@
 import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
+import { mailContact } from '@/lib/contact'
 import { ZaloWordmark } from './icons'
 
 /**
@@ -15,14 +16,13 @@ export function ContactActions({ locale }: { locale: Locale }) {
   const messages = getMessages(locale)
   const zalo = social.find((item) => item.network === 'zalo')
   const whatsapp = social.find((item) => item.network === 'whatsapp')
-  const address = social.find((item) => item.network === 'email')?.url ?? 'mailto:hello@canhta.com'
-  const mailto = `${address}?subject=${encodeURIComponent(messages.contact.mailSubject)}&body=${encodeURIComponent(messages.contact.mailBody)}`
+  const mail = mailContact(locale)
 
   return (
     <div className="rows">
-      <a href={mailto} className="row-link" data-primary="true">
+      <a href={mail.href} className="row-link" data-primary="true">
         <span>{messages.contact.email}</span>
-        <small translate="no">{address.replace('mailto:', '')}</small>
+        <small translate="no">{mail.address}</small>
       </a>
 
       {zalo ? (
