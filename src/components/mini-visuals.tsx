@@ -82,12 +82,14 @@ export function Visual({ id, approve }: { id: string; approve: string }) {
               </span>
             </div>
             <div className="mv-agent-foot">
-              <span className="mv-approve">{approve}</span>
+              <span className="mv-approve">
+                {approve}
+                <svg className="mv-cursor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M5 3l14 8-6.2 1.6L9.6 19 5 3Z" fill="#fff" stroke="#131517" strokeWidth="1.6" strokeLinejoin="round" />
+                </svg>
+              </span>
               <span className="mv-check" />
             </div>
-            <svg className="mv-cursor" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M5 3l14 8-6.2 1.6L9.6 19 5 3Z" fill="#fff" stroke="#131517" strokeWidth="1.6" strokeLinejoin="round" />
-            </svg>
           </div>
         </InView>
       )
