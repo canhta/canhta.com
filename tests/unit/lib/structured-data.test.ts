@@ -45,9 +45,8 @@ describe.each(LOCALES)('buildGraph(%s)', (locale) => {
 
   it('contains the expected top-level types on each page', () => {
     const typesOf = (g: typeof graph) => g['@graph'].map((node) => node['@type'])
-    expect(typesOf(home)).toEqual(['Person', 'ProfessionalService', 'WebSite', 'WebPage'])
+    expect(typesOf(home)).toEqual(['ProfessionalService', 'WebSite', 'WebPage'])
     expect(typesOf(graph)).toEqual([
-      'Person',
       'ProfessionalService',
       'WebSite',
       'WebPage',
@@ -55,7 +54,6 @@ describe.each(LOCALES)('buildGraph(%s)', (locale) => {
       'FAQPage',
     ])
     expect(typesOf(apps)).toEqual([
-      'Person',
       'ProfessionalService',
       'WebSite',
       'WebPage',
@@ -158,6 +156,22 @@ describe.each(LOCALES)('buildGraph(%s)', (locale) => {
   })
 })
 
+describe('buildGraph states no person', () => {
+  it.each(LOCALES)('[%s] has no Person, photo, job title or founder, and every reference resolves to the service or site', (locale) => {
+    for (const page of ['home', 'services', 'products', 'contact'] as const) {
+      const g = buildGraph(locale, page)
+      const keys = allKeys(g)
+      for (const forbidden of ['image', 'jobTitle', 'founder', 'knowsAbout']) expect(keys.has(forbidden)).toBe(false)
+      expect(g['@graph'].map((n) => n['@type'])).not.toContain('Person')
+      expect(JSON.stringify(g)).not.toContain('#person')
+      expect(JSON.stringify(g)).not.toMatch(/avatar/)
+      const site = g['@graph'].find((n) => n['@type'] === 'WebSite') as { name: string; publisher: { '@id': string } }
+      expect(site.name).toBe('Canh Ta')
+      expect(site.publisher['@id']).toMatch(/#service$/)
+    }
+  })
+})
+
 describe('buildGraph across locales', () => {
   it('points the two routes at their own URLs', () => {
     const en = buildGraph('en')['@graph'].find((n) => n['@type'] === 'WebPage') as { url: string }
@@ -166,26 +180,26 @@ describe('buildGraph across locales', () => {
     expect(vi.url).toBe('https://canhta.com/vi')
   })
 
-  it('keeps one stable Person identity shared by both routes', () => {
+  it('keeps one stable service identity shared by both routes', () => {
     const idOf = (locale: Locale) =>
-      (buildGraph(locale)['@graph'].find((n) => n['@type'] === 'Person') as { '@id': string })['@id']
+      (buildGraph(locale)['@graph'].find((n) => n['@type'] === 'ProfessionalService') as { '@id': string })['@id']
     expect(idOf('en')).toBe(idOf('vi'))
   })
 
   it('translates the prose it carries', () => {
     const descOf = (locale: Locale) =>
-      (buildGraph(locale)['@graph'].find((n) => n['@type'] === 'Person') as { description: string })
+      (buildGraph(locale)['@graph'].find((n) => n['@type'] === 'ProfessionalService') as { description: string })
         .description
     expect(descOf('vi')).not.toBe(descOf('en'))
   })
 
   it('exposes the contact address without the mailto: scheme', () => {
-    const person = buildGraph('en')['@graph'].find((n) => n['@type'] === 'Person') as {
+    const service = buildGraph('en')['@graph'].find((n) => n['@type'] === 'ProfessionalService') as {
       email?: string
       sameAs?: string[]
     }
-    expect(person.email).toBe('hello@canhta.com')
+    expect(service.email).toBe('hello@canhta.com')
     // The email link belongs in `email`, not in the profile list.
-    for (const url of person.sameAs ?? []) expect(url).not.toMatch(/^mailto:/)
+    for (const url of service.sameAs ?? []) expect(url).not.toMatch(/^mailto:/)
   })
 })

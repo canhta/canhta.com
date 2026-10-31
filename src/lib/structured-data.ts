@@ -16,9 +16,12 @@ import { pageUrl } from '@/lib/metadata'
  * There are no real ratings or published prices, and inventing them in a place
  * only machines read is still inventing them.
  *
- * Every page carries the same entities (person, service, site) so each can be
+ * Every page carries the same entities (service, site) so each can be
  * understood alone, then adds its own: services get the FAQ, apps get the list
  * of applications, every inner page gets a breadcrumb.
+ *
+ * DELIBERATELY ABSENT: a Person, a photo, a job title or a founder. The site
+ * speaks as "we" and states no people, so neither does its markup.
  */
 
 const SITE = 'https://canhta.com'
@@ -40,7 +43,6 @@ function appType(build: Build): string {
 export function buildGraph(locale: Locale, page: GraphPage = 'home') {
   const { builds, faq, offers, profile, social } = getSiteContent(locale)
   const messages = getMessages(locale)
-  const personId = `${SITE}/#person`
   const serviceId = `${SITE}/#service`
   const siteId = `${SITE}/#website`
   const url = pageUrl(locale, page)
@@ -53,33 +55,14 @@ export function buildGraph(locale: Locale, page: GraphPage = 'home') {
     .map((s) => s.url)
   const email = social.find((s) => s.network === 'email')?.url.replace('mailto:', '')
 
-  const person = {
-    '@type': 'Person',
-    '@id': personId,
-    name: profile.name,
-    url: SITE,
-    image: `${SITE}${profile.avatar}`,
-    jobTitle: messages.metadata.jobTitle,
-    description: profile.supporting,
-    knowsAbout: offers.map((o) => o.name),
-    knowsLanguage: [
-      { '@type': 'Language', name: 'Vietnamese', alternateName: 'vi' },
-      { '@type': 'Language', name: 'English', alternateName: 'en' },
-    ],
-    address: { '@type': 'PostalAddress', addressCountry: 'VN' },
-    ...(email ? { email } : {}),
-    ...(sameAs.length ? { sameAs } : {}),
-  }
-
   const professionalService = {
     '@type': 'ProfessionalService',
     '@id': serviceId,
     name: profile.name,
     url: SITE,
-    image: `${SITE}${profile.avatar}`,
     description: profile.supporting,
-    founder: { '@id': personId },
     areaServed: { '@type': 'Place', name: 'Worldwide' },
+    knowsLanguage: ['vi', 'en'],
     address: { '@type': 'PostalAddress', addressCountry: 'VN' },
     ...(email ? { email } : {}),
     ...(sameAs.length ? { sameAs } : {}),
@@ -93,7 +76,7 @@ export function buildGraph(locale: Locale, page: GraphPage = 'home') {
           name: o.name,
           description: o.detail,
           serviceType: o.name,
-          provider: { '@id': personId },
+          provider: { '@id': serviceId },
           areaServed: { '@type': 'Place', name: 'Worldwide' },
         },
       })),
@@ -114,7 +97,7 @@ export function buildGraph(locale: Locale, page: GraphPage = 'home') {
       ...(b.kind === 'web' || b.kind === 'saas' ? { operatingSystem: 'Web' } : {}),
       // Only a product that is out has a publication date.
       ...(b.status === 'live' || b.status === 'shipped' ? { datePublished: b.year } : {}),
-      author: { '@id': personId },
+      author: { '@id': serviceId },
       ...(b.links.length > 1 ? { sameAs: b.links.slice(1).map((l) => l.url) } : {}),
     }))
 
@@ -146,7 +129,6 @@ export function buildGraph(locale: Locale, page: GraphPage = 'home') {
   return {
     '@context': 'https://schema.org',
     '@graph': [
-      person,
       professionalService,
       {
         '@type': 'WebSite',
@@ -154,14 +136,14 @@ export function buildGraph(locale: Locale, page: GraphPage = 'home') {
         url: SITE,
         name: profile.name,
         inLanguage: locale,
-        publisher: { '@id': personId },
+        publisher: { '@id': serviceId },
       },
       {
         '@type': 'WebPage',
         '@id': `${url}#webpage`,
         url,
         isPartOf: { '@id': siteId },
-        about: { '@id': personId },
+        about: { '@id': serviceId },
         inLanguage: locale,
         name: meta.title,
         description: meta.description,
