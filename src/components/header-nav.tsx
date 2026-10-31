@@ -1,8 +1,8 @@
 'use client'
 
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { Link, usePathname } from '@/i18n/navigation'
-import type { AppPathname } from '@/i18n/routing'
 
 /**
  * The only client code in the header: the open/closed state of the phone menu,
@@ -10,22 +10,34 @@ import type { AppPathname } from '@/i18n/routing'
  * path to land on the same page in the other language). Labels arrive as props;
  * a client component must never import the content module.
  */
-type NavLink = { href: Exclude<AppPathname, '/'>; label: string }
+type NavLink = { href: string; label: string }
+type Page = { key: string; en: string; vi: string }
 
 export function HeaderNav({
   locale,
   name,
   cta,
+  home,
+  contact,
+  pages,
   links,
   labels,
 }: {
   locale: 'en' | 'vi'
   name: string
   cta: string
+  home: string
+  contact: string
+  pages: Page[]
   links: NavLink[]
   labels: { primary: string; language: string; menu: string; closeMenu: string }
 }) {
-  const pathname = usePathname()
+  // Hrefs arrive finished (already in this language), so no routing library runs
+  // in the browser. The pathname is the address bar's, `/vi/dich-vu`, or on the
+  // server's first render the route's own, `/vi/services`; both name the same page.
+  const rest = (usePathname().replace(/^\/(en|vi)(?=\/|$)/, '').replace(/\/$/, '') || '/')
+  const here = pages.find((p) => rest === p.key || p.en === rest || p.vi.replace(/^\/vi/, '') === rest)
+  const current = (href: string) => here?.[locale] === href
   const [open, setOpen] = useState(false)
 
   // The phone contact bar steps aside while the menu is open (see globals.css).
@@ -36,8 +48,7 @@ export function HeaderNav({
 
   const lang = (code: 'en' | 'vi') => (
     <Link
-      href={pathname}
-      locale={code}
+      href={here?.[code] ?? (code === 'en' ? '/' : '/vi')}
       aria-current={locale === code ? 'page' : undefined}
       className={`grid h-11 min-w-11 place-items-center rounded-full text-[13px] font-bold transition-[color,background-color,transform] active:scale-95 ${
         locale === code ? 'bg-night text-white' : 'text-muted hover:bg-wash hover:text-ink'
@@ -51,7 +62,7 @@ export function HeaderNav({
     <>
       <div className="pill">
         <Link
-          href="/"
+          href={home}
           className="grid min-h-11 shrink-0 place-items-center pr-1 text-[16px] font-extrabold tracking-tight min-[360px]:pr-2 min-[360px]:text-[17px]"
           translate="no"
           onClick={() => setOpen(false)}
@@ -64,7 +75,7 @@ export function HeaderNav({
             <Link
               key={l.href}
               href={l.href}
-              aria-current={pathname === l.href ? 'page' : undefined}
+              aria-current={current(l.href) ? 'page' : undefined}
               className="pill-link"
             >
               {l.label}
@@ -77,7 +88,7 @@ export function HeaderNav({
           {lang('vi')}
         </div>
 
-        <Link href="/contact" className="pill-cta min-[360px]:ml-1">
+        <Link href={contact} className="pill-cta min-[360px]:ml-1">
           {cta}
         </Link>
 
@@ -108,7 +119,7 @@ export function HeaderNav({
               <li key={l.href}>
                 <Link
                   href={l.href}
-                  aria-current={pathname === l.href ? 'page' : undefined}
+                  aria-current={current(l.href) ? 'page' : undefined}
                   className="menu-link"
                   onClick={() => setOpen(false)}
                 >

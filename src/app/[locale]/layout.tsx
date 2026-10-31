@@ -1,21 +1,20 @@
 import type { Metadata, Viewport } from 'next'
 import { Be_Vietnam_Pro } from 'next/font/google'
 import { notFound } from 'next/navigation'
-import { hasLocale, NextIntlClientProvider } from 'next-intl'
+import { hasLocale } from 'next-intl'
 import { setRequestLocale } from 'next-intl/server'
-import { Analytics } from '@vercel/analytics/next'
-import { SpeedInsights } from '@vercel/speed-insights/next'
 import { routing } from '@/i18n/routing'
 import { getMessages } from '@/i18n/messages'
+import { Measure } from '@/components/measure'
 import '../globals.css'
 
 // One family for the whole page. Be Vietnam Pro was drawn for Vietnamese, so the
 // stacked marks (ệ, ộ) are designed in rather than patched, and a Vietnamese
-// reader sees a face they already know. Four weights only: every declared
+// reader sees a face they already know. Three weights only: every declared
 // weight is two more font files (latin + vietnamese). 800 is the display weight.
 const bvp = Be_Vietnam_Pro({
   subsets: ['latin', 'vietnamese'],
-  weight: ['400', '500', '700', '800'],
+  weight: ['400', '700', '800'],
   variable: '--font-bvp',
   display: 'swap',
 })
@@ -90,23 +89,12 @@ export default async function LocaleLayout({
         <a href="#main" className="skip-link">
           {messages.common.skipToContent}
         </a>
-        {/* Locale only, no messages: the one client component (the header menu) takes
-            its labels as props, so no message catalog ships to the browser. */}
-        <NextIntlClientProvider locale={locale} messages={null}>
-          {children}
-        </NextIntlClientProvider>
-        {/* The `/next` entry point, not the bare package: it reads the App
-            Router's own `useParams`/`usePathname`, so a visit is reported
-            against the route `/[locale]` instead of splitting one page into two
-            unrelated URLs. Both render `null` and append a `<script defer>`
-            from an effect after hydration, so neither is on the path to first
-            paint — they cannot be, there is no element to paint. */}
-        {MEASURE ? (
-          <>
-            <Analytics />
-            <SpeedInsights />
-          </>
-        ) : null}
+        {children}
+        {/* Loaded after the page is idle (see `Measure`). The `/next` entry points
+            of both packages read the App Router's own `useParams`/`usePathname`, so a
+            visit is reported against the route `/[locale]` instead of splitting one
+            page into two unrelated URLs. */}
+        {MEASURE ? <Measure /> : null}
       </body>
     </html>
   )

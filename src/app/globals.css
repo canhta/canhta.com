@@ -753,12 +753,12 @@ article[id] {
 .ticker-item::before {
   content: '(' / '';
   margin-right: 0.18em;
-  font-weight: 500;
+  font-weight: 400;
 }
 .ticker-item::after {
   content: ')' / '';
   margin-left: 0.18em;
-  font-weight: 500;
+  font-weight: 400;
 }
 .ticker-btn {
   flex: none;
@@ -1109,7 +1109,7 @@ a.cell-link::after {
 }
 .row-link small {
   font-size: 0.9375rem;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 0;
   color: var(--color-on-dark);
   overflow-wrap: anywhere;
@@ -2154,6 +2154,9 @@ a.cell-link::after {
    Motion on arrival
    ========================================================================= */
 
+/* The text above the fold (it is the largest contentful paint) is never delayed:
+   no animation-delay, no wait on script, painted on the first frame. It only
+   settles upward by transform. */
 @keyframes rise-in {
   from {
     transform: translateY(18px);
@@ -2163,16 +2166,7 @@ a.cell-link::after {
   }
 }
 .enter {
-  animation: rise-in 700ms var(--ease-out-soft) both;
-}
-.enter-1 {
-  animation-delay: 90ms;
-}
-.enter-2 {
-  animation-delay: 190ms;
-}
-.enter-3 {
-  animation-delay: 290ms;
+  animation: rise-in 500ms var(--ease-out-soft) both;
 }
 
 /* Sections slide up a little as they scroll into view. Position only, never

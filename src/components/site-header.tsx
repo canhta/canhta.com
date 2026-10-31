@@ -1,6 +1,8 @@
 import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
+import { getPathname } from '@/i18n/navigation'
+import { routing, type AppPathname } from '@/i18n/routing'
 import { HeaderNav } from './header-nav'
 
 /**
@@ -12,6 +14,14 @@ import { HeaderNav } from './header-nav'
 export function SiteHeader({ locale }: { locale: Locale }) {
   const { profile } = getSiteContent(locale)
   const { nav } = getMessages(locale)
+  const href = (path: AppPathname) => getPathname({ locale, href: path })
+  // Every page in both languages, so the client can find the page it is on and
+  // link the language switch to the same page in the other language.
+  const pages = (Object.keys(routing.pathnames) as AppPathname[]).map((key) => ({
+    key,
+    en: getPathname({ locale: 'en', href: key }),
+    vi: getPathname({ locale: 'vi', href: key }),
+  }))
 
   return (
     <header className="pill-wrap">
@@ -20,10 +30,13 @@ export function SiteHeader({ locale }: { locale: Locale }) {
           locale={locale}
           name={profile.name}
           cta={profile.headerCta}
+          home={href('/')}
+          contact={href('/contact')}
+          pages={pages}
           links={[
-            { href: '/services', label: nav.services },
-            { href: '/products', label: nav.products },
-            { href: '/contact', label: nav.contact },
+            { href: href('/services'), label: nav.services },
+            { href: href('/products'), label: nav.products },
+            { href: href('/contact'), label: nav.contact },
           ]}
           labels={{
             primary: nav.primary,
