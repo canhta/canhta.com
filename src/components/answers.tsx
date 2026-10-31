@@ -1,6 +1,44 @@
+import { Link } from '@/i18n/navigation'
 import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
+
+/** The three questions a buyer asks before anything else, shown on the home page. */
+const FIRST_QUESTIONS = ['pricing', 'wrong', 'ownership']
+
+/**
+ * Home: price, who checks the AI and who owns the work, with the same answers
+ * as the services page and a link to the rest. Plain text in three columns, so
+ * it reads as a short list and not as a row of cards.
+ */
+export function HomeQuestions({ locale }: { locale: Locale }) {
+  const faq = getSiteContent(locale).faq.filter((f) => FIRST_QUESTIONS.includes(f.id))
+  if (faq.length === 0) return null
+  const copy = getMessages(locale).home
+
+  return (
+    <section aria-labelledby="hq-title" className="band sheet ground-white hq">
+      <div className="shell">
+        <div className="title-band reveal flex flex-wrap items-center justify-between gap-x-10 gap-y-6">
+          <h2 id="hq-title" className="headline max-w-[16ch]">
+            {copy.questionsHeading}
+          </h2>
+          <Link href={{ pathname: '/services', hash: 'answers-title' }} className="hq-more">
+            {copy.questionsMore}
+          </Link>
+        </div>
+        <dl className="hq-list reveal mt-10">
+          {faq.map((item) => (
+            <div key={item.id} className="hq-item">
+              <dt className="subtitle">{item.question}</dt>
+              <dd className="mt-2 text-[16px] leading-relaxed text-muted">{item.answer}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+  )
+}
 
 /**
  * Answers, not an accordion. Every one is visible at once: hiding "who owns the

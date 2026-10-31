@@ -1,17 +1,14 @@
 import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
-import { fetchStars } from '@/lib/github'
 import { statusLabel } from '@/lib/status'
 import { BuildLinkButton } from './build-link'
 
 /** The other public projects, as wide rows on a dark band. */
-export async function PublicProjects({ locale }: { locale: Locale }) {
+export function PublicProjects({ locale }: { locale: Locale }) {
   const others = getSiteContent(locale).builds.filter((b) => !b.shots?.length)
   if (others.length === 0) return null
   const copy = getMessages(locale).apps
-  // Fetched once at build; fails soft to an empty map.
-  const stars = await fetchStars(others)
 
   return (
     <section aria-labelledby="public-title" className="band sheet ground-night on-night">
@@ -37,7 +34,7 @@ export async function PublicProjects({ locale }: { locale: Locale }) {
               <ul className="flex flex-wrap content-start gap-2 lg:col-span-3 lg:justify-end">
                 {build.links.map((link) => (
                   <li key={link.kind}>
-                    <BuildLinkButton link={link} locale={locale} stars={stars} />
+                    <BuildLinkButton link={link} locale={locale} />
                   </li>
                 ))}
               </ul>

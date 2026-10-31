@@ -65,7 +65,7 @@ export function AppCard({
         <ul className="mt-5 flex flex-wrap gap-2">
           {build.links.map((link) => (
             <li key={link.kind}>
-              <BuildLinkButton link={link} locale={locale} stars={{}} />
+              <BuildLinkButton link={link} locale={locale} />
             </li>
           ))}
         </ul>

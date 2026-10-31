@@ -10,9 +10,9 @@ import { Visual } from './mini-visuals'
  * systems is the core), so they are not equal cards. The pictures are drawn in
  * CSS, hidden from screen readers, and play once when they scroll into view.
  *
- * `home` shows the name and the examples and makes each cell one link to its
- * place on the services page. `page` shows the full sentence and carries the
- * anchor ids the home links land on.
+ * `home` shows the name and the first plain sentence of the detail and makes
+ * each cell one link to its place on the services page. `page` shows the whole
+ * detail and the examples, and carries the anchor ids the home links land on.
  */
 
 type Ground = 'night' | 'lime' | 'white' | 'wash'
@@ -24,6 +24,11 @@ const GROUND: Record<string, Ground> = {
   web: 'wash',
   iot: 'night',
   team: 'white',
+}
+
+/** The first sentence of a detail: what the service gives you, before the fine print. */
+function firstSentence(text: string): string {
+  return text.split(/(?<=[.!?])\s/)[0] ?? text
 }
 
 function Cell({
@@ -52,14 +57,16 @@ function Cell({
           offer.name
         )}
       </Heading>
-      {mode === 'page' ? <p className="cell-muted mt-3 text-[16px] leading-relaxed">{offer.detail}</p> : null}
-      {offer.examples.length > 0 ? (
-        <p className={`mt-3 leading-snug font-bold ${mode === 'home' ? 'cell-muted text-[15px]' : 'text-[16px]'}`}>
-          {offer.examples.join(', ')}
-        </p>
-      ) : mode === 'home' ? (
-        <p className="cell-muted mt-3 text-[15px] leading-snug">{offer.detail}</p>
-      ) : null}
+      {mode === 'home' ? (
+        <p className="cell-muted mt-3 text-[15px] leading-snug">{firstSentence(offer.detail)}</p>
+      ) : (
+        <>
+          <p className="cell-muted mt-3 text-[16px] leading-relaxed">{offer.detail}</p>
+          {offer.examples.length > 0 ? (
+            <p className="mt-3 text-[16px] leading-snug font-bold">{offer.examples.join(', ')}</p>
+          ) : null}
+        </>
+      )}
     </div>
   )
 
