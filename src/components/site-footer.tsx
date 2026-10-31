@@ -2,6 +2,7 @@ import { Link } from '@/i18n/navigation'
 import { getSiteContent } from '@/content'
 import type { Locale, SocialLink } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
+import { mailContact } from '@/lib/contact'
 import { GitHubIcon, LinkedInIcon, XIcon, ZaloWordmark } from './icons'
 
 /** The colophon: pages, the plain email address, and where to check we are real. */
@@ -27,7 +28,7 @@ function isIconNetwork(n: SocialLink['network']): n is keyof typeof ICONS {
 export function SiteFooter({ locale }: { locale: Locale }) {
   const { profile, social } = getSiteContent(locale)
   const messages = getMessages(locale)
-  const email = social.find((s) => s.network === 'email')
+  const mail = mailContact(locale)
   const whatsapp = social.find((s) => s.network === 'whatsapp')
   const year = new Date().getFullYear()
 
@@ -35,15 +36,13 @@ export function SiteFooter({ locale }: { locale: Locale }) {
     <footer className="sheet ground-navy on-navy pt-[calc(var(--space)*0.8)] pb-10">
       <div className="shell">
         <p className="mb-3 text-[14px] font-bold text-on-dark">{messages.footer.write}</p>
-        {email ? (
-          <a
-            href={email.url}
-            className="inline-block min-h-11 text-[clamp(1.75rem,5.6vw,4.75rem)] leading-[1.1] font-extrabold tracking-[-0.04em] break-all text-white underline decoration-leaf decoration-[3px] underline-offset-[0.18em] hover:decoration-white sm:break-normal"
-            translate="no"
-          >
-            {email.url.replace('mailto:', '')}
-          </a>
-        ) : null}
+        <a
+          href={mail.href}
+          className="inline-block min-h-11 text-[clamp(1.75rem,5.6vw,4.75rem)] leading-[1.1] font-extrabold tracking-[-0.04em] break-all text-white underline decoration-leaf decoration-[3px] underline-offset-[0.18em] hover:decoration-white sm:break-normal"
+          translate="no"
+        >
+          {mail.address}
+        </a>
 
         <div className="mt-14 grid gap-10 border-t border-white/25 pt-10 md:grid-cols-3">
           <nav aria-label={messages.footer.explore}>

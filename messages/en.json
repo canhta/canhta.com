@@ -17,7 +17,7 @@
     "primary": "Tell us about your business",
     "secondary": "See services",
     "visual": {
-      "label": "Chat, a spreadsheet and paper collected into one screen",
+      "label": "Chat, a spreadsheet and paper gathered onto one screen. AI does the routine work and a person approves it.",
       "sources": [
         "Chat",
         "Spreadsheet",

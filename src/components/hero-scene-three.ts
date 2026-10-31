@@ -13,7 +13,9 @@ import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.j
  *
  * Loaded lazily and only in the browser. Returns `null` when WebGL is not
  * available (the static drawing underneath stays), otherwise a disposer.
- * It renders only while visible and while the tab is open.
+ * It renders only while visible and while the tab is open, and not while the GPU
+ * has taken its context away (`onContext` reports that, so the caller can show
+ * the static drawing again until the context returns).
  */
 
 const ACCENT = 0xff6a2b
@@ -134,7 +136,7 @@ function card(w: number, h: number, face: THREE.CanvasTexture, depth = 0.16): TH
   return group
 }
 
-export function mountScene(host: HTMLElement): (() => void) | null {
+export function mountScene(host: HTMLElement, onContext?: (lost: boolean) => void): (() => void) | null {
   let renderer: THREE.WebGLRenderer
   try {
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' })
@@ -225,9 +227,11 @@ export function mountScene(host: HTMLElement): (() => void) | null {
     const h = Math.max(host.clientHeight, 1)
     renderer.setSize(w, h, false)
     camera.aspect = w / h
-    // Fit the whole composition (about 7.6 wide, 9 tall) in whatever the stage is.
+    // Fit the whole composition in whatever the stage is. The cards span about
+    // 7.3 units across and the stack about 8.2 tall; the numbers below add room
+    // for the outer cards, which sit nearer the camera and lean as the pointer moves.
     const half = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2))
-    camera.position.z = Math.max(9 / (2 * half), 7.6 / (2 * half * camera.aspect))
+    camera.position.z = Math.max(9.4 / (2 * half), 8.6 / (2 * half * camera.aspect))
     camera.position.y = 0.45
     camera.updateProjectionMatrix()
   }
@@ -249,11 +253,12 @@ export function mountScene(host: HTMLElement): (() => void) | null {
   host.addEventListener('pointerleave', onLeave)
 
   let visible = true
+  let lost = false
   let raf = 0
   const t0 = performance.now()
   const frame = () => {
     raf = 0
-    if (!visible || document.hidden) return
+    if (!visible || document.hidden || lost) return
     const t = (performance.now() - t0) / 1000
 
     root.rotation.y += (target.y - root.rotation.y) * 0.06
@@ -293,7 +298,7 @@ export function mountScene(host: HTMLElement): (() => void) | null {
     raf = requestAnimationFrame(frame)
   }
   const start = () => {
-    if (!raf && visible && !document.hidden) raf = requestAnimationFrame(frame)
+    if (!raf && visible && !document.hidden && !lost) raf = requestAnimationFrame(frame)
   }
   const io = new IntersectionObserver(([entry]) => {
     visible = entry?.isIntersecting ?? true
@@ -302,6 +307,22 @@ export function mountScene(host: HTMLElement): (() => void) | null {
   io.observe(host)
   const onVisibility = () => start()
   document.addEventListener('visibilitychange', onVisibility)
+  // three.js re-creates its GPU state on restore; we only stop drawing meanwhile.
+  const canvas = renderer.domElement
+  const onLost = (e: Event) => {
+    e.preventDefault()
+    lost = true
+    if (raf) cancelAnimationFrame(raf)
+    raf = 0
+    onContext?.(true)
+  }
+  const onRestored = () => {
+    lost = false
+    onContext?.(false)
+    start()
+  }
+  canvas.addEventListener('webglcontextlost', onLost)
+  canvas.addEventListener('webglcontextrestored', onRestored)
   start()
 
   return () => {
@@ -311,6 +332,8 @@ export function mountScene(host: HTMLElement): (() => void) | null {
     host.removeEventListener('pointermove', onMove)
     host.removeEventListener('pointerleave', onLeave)
     document.removeEventListener('visibilitychange', onVisibility)
+    canvas.removeEventListener('webglcontextlost', onLost)
+    canvas.removeEventListener('webglcontextrestored', onRestored)
     disposables.forEach((d) => d.dispose())
     cards.forEach(({ group }) =>
       group.traverse((o) => {

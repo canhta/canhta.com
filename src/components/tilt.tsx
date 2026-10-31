@@ -11,7 +11,7 @@ export function Tilt({ children, className }: { children: ReactNode; className?:
   const ref = useRef<HTMLDivElement>(null)
 
   const move = (e: React.PointerEvent) => {
-    if (e.pointerType === 'touch') return
+    if (e.pointerType === 'touch' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const el = ref.current
     if (!el) return
     const r = el.getBoundingClientRect()

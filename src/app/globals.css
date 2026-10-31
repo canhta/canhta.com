@@ -612,11 +612,12 @@ article[id] {
   inset: 0;
   width: 100%;
   height: 100%;
-  opacity: 0;
-  transition: opacity 700ms var(--ease-out-soft);
+  /* Not drawn until the scene is live, and again not drawn if the GPU drops it.
+     Hidden by visibility, not by opacity: nothing here fades. */
+  visibility: hidden;
 }
 .hero-scene[data-live='true'] > .hero-canvas {
-  opacity: 1;
+  visibility: visible;
 }
 /* The drawing keeps its place in the layout, so nothing moves when the 3D scene arrives. */
 .hero-scene[data-live='true'] > .hv {
@@ -1785,11 +1786,9 @@ a.cell-link::after {
 
 @keyframes rise-in {
   from {
-    opacity: 0;
     transform: translateY(18px);
   }
   to {
-    opacity: 1;
     transform: none;
   }
 }
@@ -1914,5 +1913,10 @@ a.cell-link::after {
     animation-delay: 0s !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  /* The lean toward the pointer is movement too. */
+  .tilt {
+    transform: none;
+    will-change: auto;
   }
 }
