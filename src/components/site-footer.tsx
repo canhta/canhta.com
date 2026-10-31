@@ -4,6 +4,7 @@ import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
 import { mailContact, phoneContact } from '@/lib/contact'
+import { getPages } from '@/lib/pages'
 import { GitHubIcon, LinkedInIcon, MailTile, PhoneTile, WhatsAppTile, XIcon, ZaloTile } from './icons'
 import { LangSwitch } from './lang-switch'
 
@@ -141,7 +142,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
               © {year} <span translate="no">{profile.name}</span>
             </span>
           </p>
-          <LangSwitch locale={locale} label={messages.nav.language} tone="night" />
+          <LangSwitch locale={locale} label={messages.nav.language} pages={getPages()} tone="night" />
         </div>
       </div>
     </footer>

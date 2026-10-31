@@ -27,9 +27,9 @@ export function PageHeader({
       >
         <div className={side ? 'lg:col-span-7' : ''}>
           <h1 className="headline enter max-w-[16ch]">{title}</h1>
-          <p className="lead enter enter-1 mt-5 max-w-[46ch]">{intro}</p>
+          <p className="lead enter mt-5 max-w-[46ch]">{intro}</p>
         </div>
-        {side ? <div className="enter enter-2 lg:col-span-5">{side}</div> : null}
+        {side ? <div className="enter lg:col-span-5">{side}</div> : null}
       </div>
     </header>
   )

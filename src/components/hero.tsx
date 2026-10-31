@@ -19,8 +19,8 @@ export function Hero({ locale }: { locale: Locale }) {
     <section className="hero on-night">
       <div className="shell hero-text">
         <h1 className="display enter max-w-[12ch] sm:max-w-[13ch]">{profile.hook}</h1>
-        <p className="lead enter enter-1 mt-5 max-w-[40ch]">{profile.supporting}</p>
-        <div className="enter enter-2 mt-7 flex flex-wrap gap-3">
+        <p className="lead enter mt-5 max-w-[40ch]">{profile.supporting}</p>
+        <div className="enter mt-7 flex flex-wrap gap-3">
           <Link href="/contact" className="btn-accent">
             {copy.primary}
           </Link>

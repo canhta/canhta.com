@@ -6,6 +6,9 @@ export const routing = defineRouting({
   localePrefix: 'as-needed',
   localeDetection: false,
   localeCookie: false,
+  // Each page already lists its alternates in the HTML (src/lib/metadata.ts). The
+  // proxy would add a second copy in a `Link` header built from the request's Host.
+  alternateLinks: false,
   /**
    * One page per search intent, with a Vietnamese slug a Vietnamese reader
    * would actually type or recognise. The folder names under `src/app/[locale]`

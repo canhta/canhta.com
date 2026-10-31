@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { afterLoadAndIdle } from '@/lib/idle'
 
 /**
  * Wraps the static hero drawing and, when the browser can and should, replaces
@@ -32,20 +33,29 @@ export function HeroScene({
     // a stop (or a newer start) sees a different number and does nothing.
     let run = 0
     let dispose: (() => void) | null = null
+    let cancelWait = () => {}
     const stop = () => {
+      cancelWait()
       run++
       dispose?.()
       dispose = null
     }
+    // The scene is decoration, so it never competes with the first paint: the
+    // chunk is requested only after the page has loaded and the main thread is
+    // idle (the timeout keeps a busy page from postponing it for ever). Until
+    // then, and for good if anything here fails, the drawing stays.
     const start = () => {
       const mine = ++run
-      import('./hero-scene-three').then(({ mountScene }) => {
-        if (mine !== run) return
-        // The scene tells us when the GPU takes its context away, so the drawing
-        // comes back while the canvas cannot paint.
-        dispose = mountScene(el, (lost) => setLive(!lost))
-        if (dispose) setLive(true)
-      })
+      const load = () =>
+        import('./hero-scene-three').then(({ mountScene }) => {
+          if (mine !== run) return
+          // The scene tells us when the GPU takes its context away, so the drawing
+          // comes back while the canvas cannot paint.
+          dispose = mountScene(el, (lost) => setLive(!lost))
+          if (dispose) setLive(true)
+        })
+      cancelWait()
+      cancelWait = afterLoadAndIdle(load)
     }
     // Asking for reduced motion while the page is open stops the scene and
     // brings the drawing back; turning it off again starts the scene.

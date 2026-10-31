@@ -2,12 +2,18 @@ import { ImageResponse } from 'next/og'
 import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { getSiteContent } from '@/content'
+import { routing } from '@/i18n/routing'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
 import { OG_PAGES, type OgPage } from '@/lib/og'
 
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
+
+/** Drawn once per language at build time, so the CDN serves it and a link preview never runs a function. */
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }))
+}
 
 /**
  * The shared-link card, set in the same two voices as the page: Newsreader

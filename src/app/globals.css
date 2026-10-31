@@ -34,6 +34,17 @@
    simply finished.
    ========================================================================= */
 
+/* The system font shown until Be Vietnam Pro arrives, scaled so its lines wrap
+   where the real font wraps (the metrics next/font computed for this family). */
+@font-face {
+  font-family: 'Be Vietnam Pro Fallback';
+  src: local('Arial');
+  ascent-override: 90.61%;
+  descent-override: 24.01%;
+  line-gap-override: 0%;
+  size-adjust: 110.36%;
+}
+
 /* `static` so every token is emitted as a CSS variable even when no utility
    uses it; the plain CSS below reads them with var(). */
 @theme static {
@@ -56,7 +67,7 @@
   /* The ground of a card. Dark bands re-map it to --color-surface. */
   --color-card: #ffffff;
 
-  --font-sans: var(--font-bvp), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-bvp), var(--font-bvp-vi), 'Be Vietnam Pro Fallback', ui-sans-serif, system-ui, sans-serif;
 
   --duration-feedback: 180ms;
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
@@ -795,12 +806,12 @@ article[id] {
 .ticker-item::before {
   content: '(' / '';
   margin-right: 0.18em;
-  font-weight: 500;
+  font-weight: 400;
 }
 .ticker-item::after {
   content: ')' / '';
   margin-left: 0.18em;
-  font-weight: 500;
+  font-weight: 400;
 }
 .ticker-btn {
   flex: none;
@@ -1170,7 +1181,7 @@ a.cell-link::after {
 }
 .row-link small {
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 0;
   color: var(--color-on-dark);
   overflow-wrap: anywhere;
@@ -2244,6 +2255,9 @@ a.cell-link::after {
    Motion on arrival
    ========================================================================= */
 
+/* The text above the fold (it is the largest contentful paint) is never delayed:
+   no animation-delay, no wait on script, painted on the first frame. It only
+   settles upward by transform. */
 @keyframes rise-in {
   from {
     transform: translateY(18px);
@@ -2253,16 +2267,7 @@ a.cell-link::after {
   }
 }
 .enter {
-  animation: rise-in 700ms var(--ease-out-soft) both;
-}
-.enter-1 {
-  animation-delay: 90ms;
-}
-.enter-2 {
-  animation-delay: 190ms;
-}
-.enter-3 {
-  animation-delay: 290ms;
+  animation: rise-in 500ms var(--ease-out-soft) both;
 }
 
 /* Sections slide up a little as they scroll into view. Position only, never
