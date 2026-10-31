@@ -1,7 +1,7 @@
 import { getSiteContent } from '@/content'
 import type { Build, Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
-import { pageUrl } from '@/lib/metadata'
+import { ogImageUrl, pageUrl } from '@/lib/metadata'
 import { SITE } from '@/lib/site'
 
 /**
@@ -65,8 +65,21 @@ export function buildGraph(locale: Locale, page: GraphPage = 'home') {
     name: profile.name,
     url: SITE,
     description: profile.supporting,
+    // The 180 by 180 PNG that is also the apple-touch icon: a real file, crawlable, above Google's 112 px minimum.
+    logo: { '@type': 'ImageObject', url: `${SITE}/apple-icon`, width: 180, height: 180 },
     areaServed: AREA_SERVED,
     knowsLanguage: ['vi', 'en'],
+    ...(email || phone
+      ? {
+          contactPoint: {
+            '@type': 'ContactPoint',
+            contactType: 'customer service',
+            availableLanguage: ['Vietnamese', 'English'],
+            ...(email ? { email } : {}),
+            ...(phone ? { telephone: phone } : {}),
+          },
+        }
+      : {}),
     address: { '@type': 'PostalAddress', addressCountry: 'VN' },
     ...(email ? { email } : {}),
     ...(phone ? { telephone: phone } : {}),
@@ -81,6 +94,7 @@ export function buildGraph(locale: Locale, page: GraphPage = 'home') {
           name: o.name,
           description: o.detail,
           serviceType: o.name,
+          url: `${pageUrl(locale, 'services')}#${o.id}`,
           provider: { '@id': serviceId },
         },
       })),
@@ -151,6 +165,7 @@ export function buildGraph(locale: Locale, page: GraphPage = 'home') {
         inLanguage: locale,
         name: meta.title,
         description: meta.description,
+        primaryImageOfPage: { '@type': 'ImageObject', url: ogImageUrl(locale, page), width: 1200, height: 630 },
         ...(breadcrumb ? { breadcrumb: { '@id': `${url}#breadcrumb` } } : {}),
       },
       ...(breadcrumb ? [breadcrumb] : []),
