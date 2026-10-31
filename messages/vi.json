@@ -14,7 +14,7 @@
     "products": "Sản phẩm"
   },
   "hero": {
-    "primary": "Kể về công việc của bạn",
+    "primary": "Kể vấn đề của bạn",
     "secondary": "Xem dịch vụ",
     "visual": {
       "label": "Zalo, Excel và giấy tờ gom về một màn hình. AI làm việc lặp lại, một người duyệt.",
@@ -54,7 +54,7 @@
   "services": {
     "h1": "Chuyển đổi số, phần mềm và AI cho doanh nghiệp nhỏ",
     "intro": "Phần mềm trước, AI agent sau. AI chỉ làm tốt khi thông tin trong hệ thống đã gọn và đúng, nên chúng tôi triển khai theo thứ tự này.",
-    "processHeading": "Cách chúng tôi triển khai",
+    "processHeading": "Cách chúng tôi đồng hành",
     "faqHeading": "Câu hỏi thường gặp"
   },
   "apps": {
@@ -63,44 +63,46 @@
     "publicHeading": "Dự án khác"
   },
   "contact": {
-    "h1": "Kể cho chúng tôi cách bạn làm việc",
-    "body": "Chúng tôi trả lời trong một ngày làm việc.",
+    "h1": "Bạn muốn giải quyết vấn đề gì?",
+    "body": "Gọi điện hoặc viết cho chúng tôi, cứ kể theo cách của bạn. Chúng tôi trả lời trong một ngày làm việc, rồi cùng bạn tìm giải pháp.",
     "helpHeading": "Nếu tiện, cho biết thêm",
     "help": [
-      "Ai sẽ dùng",
-      "Việc nào tốn nhiều thời gian nhất",
-      "Hiện bạn dùng gì"
+      "Nó tốn của bạn bao nhiêu thời gian, tiền bạc",
+      "Ai phải xử lý nó mỗi ngày",
+      "Hiện bạn đang dùng gì"
     ],
     "channels": "Liên hệ qua",
     "barLabel": "Liên hệ nhanh",
-    "chatOn": "Nhắn qua",
+    "chatOn": "Gọi qua",
     "email": "Gửi email",
-    "mailSubject": "Hỏi về dự án từ canhta.com",
-    "mailBody": "Xin chào,\n\nAi sẽ dùng:\nViệc đang tốn nhiều thời gian nhất:\nHiện đang dùng:\n",
-    "nextHeading": "Sau khi bạn liên hệ"
+    "mailSubject": "Vấn đề tôi muốn giải quyết (từ canhta.com)",
+    "mailBody": "Xin chào,\n\nVấn đề tôi muốn giải quyết:\nAi phải xử lý mỗi ngày:\nHiện đang dùng:\n",
+    "nextHeading": "Sau khi bạn liên hệ",
+    "call": "Gọi điện",
+    "callAria": "Gọi điện thoại cho chúng tôi"
   },
   "process": {
     "rule": "Nếu phần mềm có sẵn làm được việc, chúng tôi sẽ chỉ bạn dùng nó.",
     "steps": [
       {
         "id": "problem",
-        "label": "Bạn chọn việc đầu tiên",
-        "detail": "Việc tốn nhiều thời gian hoặc tiền nhất."
+        "label": "Bạn kể vấn đề cần giải quyết",
+        "detail": "Bắt đầu từ việc tốn nhiều thời gian hoặc tiền nhất."
       },
       {
         "id": "map",
-        "label": "Theo một đơn từ đầu đến cuối",
-        "detail": "Từ tin nhắn đến lúc thu tiền: ai làm, chỗ nào gõ lại."
-      },
-      {
-        "id": "plan",
-        "label": "Bạn nhận kế hoạch và báo giá",
-        "detail": "Dùng sẵn gì, triển khai thêm gì, theo thứ tự nào. Chốt trước."
+        "label": "Chúng tôi hiểu việc đang chạy ra sao",
+        "detail": "Theo một đơn từ tin nhắn đến lúc thu tiền: ai làm, chỗ nào phải gõ lại."
       },
       {
         "id": "build",
         "label": "Triển khai bản chạy thử nhỏ",
-        "detail": "Chạy trên đơn thật. Phần tiếp và AI chỉ thêm khi có ích."
+        "detail": "Chạy trên việc thật của bạn, để bạn thấy chúng tôi làm được gì và nó mang lại giá trị gì."
+      },
+      {
+        "id": "plan",
+        "label": "Sau đó là báo giá rõ ràng",
+        "detail": "Khi bạn đã thấy nó chạy: báo giá cụ thể, kế hoạch có thời gian, cách bảo trì và hỗ trợ. Rồi mới bàn phần tiếp theo."
       }
     ]
   },
@@ -109,13 +111,13 @@
     "proof": "Chúng tôi từng làm các sản phẩm có hàng trăm nghìn người dùng, ở vai trò lập trình, xử lý dữ liệu và quản lý sản phẩm."
   },
   "closing": {
-    "heading": "Việc nào chiếm nhiều thời gian nhất?",
-    "body": "Vài dòng là đủ.",
-    "cta": "Nhắn chúng tôi"
+    "heading": "Có vấn đề cần giải quyết?",
+    "body": "Chúng tôi nghe trước, rồi cùng bạn tìm giải pháp.",
+    "cta": "Kể vấn đề của bạn"
   },
   "footer": {
     "explore": "Các trang",
-    "write": "Email",
+    "write": "Gửi vấn đề của bạn qua email",
     "elsewhere": "Nơi khác"
   },
   "notFound": {
@@ -151,15 +153,15 @@
   "metadata": {
     "home": {
       "title": "Chuyển đổi số và AI cho doanh nghiệp nhỏ | Canh Ta",
-      "description": "Mỗi đơn hàng, khách và khoản nợ có một chỗ ghi, không ai gõ lại. Sau đó AI đọc tin nhắn và hóa đơn, có người duyệt. Cho cửa hàng và doanh nghiệp nhỏ."
+      "description": "Cho cửa hàng và doanh nghiệp nhỏ: kể vấn đề, chúng tôi cùng bạn tìm giải pháp. Mỗi đơn hàng và khoản nợ một chỗ ghi, rồi AI làm việc lặp lại, có người duyệt."
     },
     "services": {
       "title": "Phần mềm, ERP, CRM và AI cho doanh nghiệp nhỏ | Canh Ta",
-      "description": "ERP, CRM, phần mềm bán hàng, chatbot, AI agent, báo cáo, website và IoT cho cửa hàng, doanh nghiệp nhỏ và cá nhân. Có kế hoạch và báo giá trước khi triển khai."
+      "description": "ERP, CRM, chatbot, AI agent, báo cáo, website và IoT cho cửa hàng, doanh nghiệp nhỏ và cá nhân. Bạn xem bản chạy thử nhỏ trước khi nhận báo giá."
     },
     "contact": {
-      "title": "Liên hệ qua email, Zalo hoặc WhatsApp | Canh Ta",
-      "description": "Kể cho chúng tôi việc đang tốn thời gian, hoặc thứ bạn muốn làm. Nhắn qua email, Zalo hoặc WhatsApp, chúng tôi trả lời trong một ngày làm việc."
+      "title": "Liên hệ: kể vấn đề cần giải quyết | Canh Ta",
+      "description": "Gọi điện hoặc viết cho chúng tôi vấn đề bạn muốn giải quyết, qua Zalo, WhatsApp hay email. Chúng tôi trả lời trong một ngày làm việc."
     },
     "jobTitle": "Kỹ sư phần mềm",
     "offerCatalog": "Chúng tôi làm gì",

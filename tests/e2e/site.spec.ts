@@ -1,4 +1,5 @@
 import { test, expect, type Page } from '@playwright/test'
+import { readFileSync } from 'node:fs'
 import { canonicalOf, PAGES, SITE } from './pages'
 
 /**
@@ -6,6 +7,11 @@ import { canonicalOf, PAGES, SITE } from './pages'
  * metadata and reciprocal hreflang, fit every phone width, hide nothing, link to
  * its counterpart, and ship valid structured data.
  */
+
+const catalog = (locale: string) =>
+  JSON.parse(readFileSync(new URL(`../../messages/${locale}.json`, import.meta.url), 'utf8')) as {
+    contact: { mailSubject: string }
+  }
 
 const WIDTHS = [320, 390, 768, 1280]
 
@@ -213,9 +219,8 @@ for (const { locale, path } of PAGES.filter((p) => p.key === 'home')) {
         expect(box.height).toBeGreaterThanOrEqual(44)
       }
       const mail = new URL((await bar.locator('a[href^="mailto:"]').getAttribute('href')) ?? '')
-      expect(mail.searchParams.get('subject')).toBe(
-        locale === 'en' ? 'Project inquiry from canhta.com' : 'Hỏi về dự án từ canhta.com',
-      )
+      // Read from the catalog so the test checks the language, not frozen prose.
+      expect(mail.searchParams.get('subject')).toBe(catalog(locale).contact.mailSubject)
       await expect(bar.locator('a[href*="zalo.me"]')).toHaveCount(1)
       await expect(bar.locator('a[href*="wa.me"]')).toHaveCount(1)
     })

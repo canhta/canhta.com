@@ -14,7 +14,7 @@
     "products": "Products"
   },
   "hero": {
-    "primary": "Tell us about your business",
+    "primary": "Share your problem",
     "secondary": "See services",
     "visual": {
       "label": "Chat, spreadsheet and paper gathered on one screen. AI does the routine work and a person approves.",
@@ -54,7 +54,7 @@
   "services": {
     "h1": "Digital transformation, software and AI for small businesses",
     "intro": "Software first, AI agents after. AI works well only when the records are clean, so we go in this order.",
-    "processHeading": "How a project runs",
+    "processHeading": "How we work with you",
     "faqHeading": "Questions"
   },
   "apps": {
@@ -63,44 +63,46 @@
     "publicHeading": "Other projects"
   },
   "contact": {
-    "h1": "Tell us how your business runs",
-    "body": "We reply within one working day.",
+    "h1": "What problem should we solve?",
+    "body": "Call or write to us in your own words. We reply within one working day, then work out the solution with you.",
     "helpHeading": "If you can, mention",
     "help": [
-      "Who will use it",
-      "Which work takes the most time",
-      "What you use now"
+      "How much time or money it costs you",
+      "Who deals with it every day",
+      "What you use today"
     ],
     "channels": "Reach us on",
     "barLabel": "Quick contact",
-    "chatOn": "Chat on",
+    "chatOn": "Call on",
     "email": "Email us",
-    "mailSubject": "Project inquiry from canhta.com",
-    "mailBody": "Hi,\n\nWho will use it:\nWhat takes the most time today:\nWhat you use now:\n",
-    "nextHeading": "What happens next"
+    "mailSubject": "A problem I want to solve (from canhta.com)",
+    "mailBody": "Hi,\n\nThe problem I want to solve:\nWho deals with it every day:\nWhat I use today:\n",
+    "nextHeading": "What happens next",
+    "call": "Call us",
+    "callAria": "Call us by phone"
   },
   "process": {
     "rule": "If existing software does the job, we will point you to it.",
     "steps": [
       {
         "id": "problem",
-        "label": "You pick the first job",
-        "detail": "The one that costs the most time or money."
+        "label": "You tell us the problem",
+        "detail": "Start with the one that costs you the most time or money."
       },
       {
         "id": "map",
-        "label": "We follow one order to payment",
-        "detail": "Every step, who does it, and where it is retyped."
-      },
-      {
-        "id": "plan",
-        "label": "You get a plan and a quote",
-        "detail": "What we reuse, what we build, in what order. Agreed first."
+        "label": "We understand how it runs today",
+        "detail": "We follow one order from first message to payment: who does each step, and where it is retyped."
       },
       {
         "id": "build",
         "label": "We build a small working version",
-        "detail": "Real orders first. More parts, and AI, only where they help."
+        "detail": "It runs on your real work, so you see what we can do and the value it brings."
+      },
+      {
+        "id": "plan",
+        "label": "Then a clear quote and plan",
+        "detail": "Once you have seen it work: a specific quote, a plan with a timeline, and how we maintain and support it. Then we agree the next part."
       }
     ]
   },
@@ -109,13 +111,13 @@
     "proof": "We have worked on products used by hundreds of thousands of people, as developers, in data and in product management."
   },
   "closing": {
-    "heading": "Which job takes most of your week?",
-    "body": "A few lines is enough.",
-    "cta": "Talk to us"
+    "heading": "Got a problem to solve?",
+    "body": "We listen first, then find the solution with you.",
+    "cta": "Share your problem"
   },
   "footer": {
     "explore": "Pages",
-    "write": "Email",
+    "write": "Email us the problem",
     "elsewhere": "Elsewhere"
   },
   "notFound": {
@@ -151,15 +153,15 @@
   "metadata": {
     "home": {
       "title": "Digital transformation and AI for small businesses | Canh Ta",
-      "description": "One record for every order, customer and debt, so nothing is retyped. Then AI reads messages and invoices and a person approves. For small businesses."
+      "description": "For small businesses: tell us the problem and we find the solution with you. One record for every order and debt, then AI does the routine and a person approves."
     },
     "services": {
       "title": "Custom software, ERP, CRM and AI for small businesses | Canh Ta",
-      "description": "ERP, CRM, sales software, chatbots, AI agents, reports, websites and sensors for small businesses and individuals. A plan and a price before we build."
+      "description": "ERP, CRM, chatbots, AI agents, reports, websites and sensors for small businesses and individuals. You see a small working version before any quote."
     },
     "contact": {
-      "title": "Contact us by email, Zalo or WhatsApp | Canh Ta",
-      "description": "Tell us what takes too much time or what you want to build, by email, Zalo or WhatsApp. We reply within one working day."
+      "title": "Contact us: tell us the problem | Canh Ta",
+      "description": "Call or write to us about the problem you want to solve, on Zalo, WhatsApp or email. We reply within one working day."
     },
     "jobTitle": "Software engineer",
     "offerCatalog": "What we do",

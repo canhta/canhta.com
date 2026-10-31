@@ -6,8 +6,8 @@ export const viContent: ContentCopy = {
     location: 'Việt Nam',
     hook: 'Số hóa công việc, AI lo việc lặp lại.',
     supporting:
-      'Cho cửa hàng và doanh nghiệp nhỏ. Mỗi đơn hàng, món hàng và khoản nợ có một chỗ ghi, không ai phải gõ lại. AI đọc tin nhắn và hóa đơn, ghi sẵn, người duyệt.',
-    headerCta: 'Nhắn chúng tôi',
+      'Cho cửa hàng và doanh nghiệp nhỏ. Bạn kể vấn đề, chúng tôi cùng bạn tìm giải pháp. Có thể là một chỗ ghi chung cho mọi đơn hàng, món hàng và khoản nợ, không ai phải gõ lại.',
+    headerCta: 'Gọi chúng tôi',
     availabilityLabel: 'Đang nhận dự án mới',
   },
   builds: [
@@ -86,18 +86,19 @@ export const viContent: ContentCopy = {
       id: 'pricing',
       question: 'Tính tiền thế nào?',
       answer:
-        'Báo giá đi cùng kế hoạch, trước khi triển khai. Sau bản chạy thử nhỏ, bạn quyết định có trả tiền cho phần tiếp theo hay không.',
+        'Bạn xem bản chạy thử nhỏ trước, rồi chúng tôi mới đưa báo giá rõ ràng. Báo giá đi kèm kế hoạch có thời gian, cách bảo trì và hỗ trợ.',
     },
     {
       id: 'timeline',
-      question: 'Làm mất bao lâu?',
-      answer: 'Kế hoạch ghi rõ thời gian, từng phần một.',
+      question: 'Triển khai mất bao lâu?',
+      answer:
+        'Bản chạy thử nhỏ triển khai trước, nên bạn thấy nó chạy sớm. Kế hoạch đi kèm báo giá ghi thời gian từng phần.',
     },
     {
       id: 'apps',
       question: 'Các app tôi đang dùng có nối được không?',
       answer:
-        'Thường là được, như file Excel, Zalo hay phần mềm bán hàng. Kế hoạch ghi rõ chỗ nào nối được, chỗ nào không.',
+        'Thường là được, như file Excel, Zalo hay phần mềm bán hàng. Chúng tôi kiểm tra ngay từ lúc tìm hiểu vấn đề, và báo rõ chỗ nào nối được, chỗ nào không.',
     },
     {
       id: 'agent',
@@ -125,13 +126,19 @@ export const viContent: ContentCopy = {
     },
     {
       id: 'ownership',
-      question: 'Sản phẩm làm xong là của ai?',
-      answer: 'Của bạn. Mọi thứ đứng tên bạn, chúng tôi có thể làm tiếp hoặc bàn giao kèm hướng dẫn.',
+      question: 'Phần mềm triển khai xong là của ai?',
+      answer: 'Của bạn. Mọi thứ đứng tên bạn.',
+    },
+    {
+      id: 'support',
+      question: 'Sau khi chạy rồi thì sao?',
+      answer:
+        'Chúng tôi duy trì và cải thiện tiếp, hoặc bàn giao kèm hướng dẫn. Cách làm nằm trong báo giá, để bạn biết trước khi quyết định.',
     },
     {
       id: 'idea',
       question: 'Tôi mới có ý tưởng thôi thì sao?',
-      answer: 'Vẫn được. Cho biết bạn muốn làm gì và ai sẽ dùng, chúng tôi cùng tính bản đầu tiên cần có gì.',
+      answer: 'Vẫn được. Cho biết bạn muốn đạt được gì và ai sẽ dùng, chúng tôi cùng tính xem bản chạy thử nhỏ cần có gì.',
     },
   ],
 }
