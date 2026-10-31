@@ -17,7 +17,7 @@
     "primary": "Kể vấn đề của bạn",
     "secondary": "Xem dịch vụ",
     "visual": {
-      "label": "Zalo, Excel và giấy tờ gom về một màn hình. AI làm việc lặp lại, một người duyệt.",
+      "label": "Zalo, Excel và giấy tờ gom về một màn hình. AI lo các bước lặp lại. Một người duyệt mọi việc tốn tiền hoặc thay đổi đơn hàng và thông tin đã lưu.",
       "sources": [
         "Zalo",
         "Excel",
@@ -29,11 +29,12 @@
         "Hàng tồn",
         "Khách hàng"
       ],
-      "tag": "AI làm, bạn duyệt"
-    }
+      "tag": "AI làm, có người duyệt"
+    },
+    "orCall": "hoặc gọi"
   },
   "home": {
-    "servicesHeading": "Chúng tôi làm gì",
+    "servicesHeading": "Dịch vụ của chúng tôi",
     "servicesAll": "Tất cả dịch vụ",
     "appsHeading": "Vài sản phẩm của chúng tôi",
     "appsAll": "Tất cả sản phẩm",
@@ -63,46 +64,48 @@
     "publicHeading": "Dự án khác"
   },
   "contact": {
-    "h1": "Bạn muốn giải quyết vấn đề gì?",
+    "h1": "Bạn đang gặp vấn đề gì?",
     "body": "Gọi điện hoặc viết cho chúng tôi, cứ kể theo cách của bạn. Chúng tôi trả lời trong một ngày làm việc, rồi cùng bạn tìm giải pháp.",
     "helpHeading": "Nếu tiện, cho biết thêm",
     "help": [
-      "Nó tốn của bạn bao nhiêu thời gian, tiền bạc",
-      "Ai phải xử lý nó mỗi ngày",
-      "Hiện bạn đang dùng gì"
+      "Mất bao nhiêu thời gian hoặc tiền",
+      "Ai làm việc này hằng ngày",
+      "Bạn đang dùng gì"
     ],
     "channels": "Liên hệ qua",
     "barLabel": "Liên hệ nhanh",
     "chatOn": "Gọi qua",
     "email": "Gửi email",
     "mailSubject": "Vấn đề tôi muốn giải quyết (từ canhta.com)",
-    "mailBody": "Xin chào,\n\nVấn đề tôi muốn giải quyết:\nAi phải xử lý mỗi ngày:\nHiện đang dùng:\n",
+    "mailBody": "Xin chào,\n\nVấn đề tôi muốn giải quyết:\nMất bao nhiêu thời gian hoặc tiền:\nAi làm việc này hằng ngày:\nHiện đang dùng:\n",
     "nextHeading": "Sau khi bạn liên hệ",
     "call": "Gọi điện",
     "callAria": "Gọi điện thoại cho chúng tôi",
-    "callShort": "Gọi"
+    "callShort": "Gọi",
+    "next": "Chúng tôi bắt đầu từ một bản chạy thử nhỏ trên việc thật của bạn. Báo giá và kế hoạch đến sau, khi bạn đã thấy nó chạy.",
+    "chatText": "Xin chào, tôi muốn kể vấn đề tôi cần giải quyết (từ canhta.com)."
   },
   "process": {
     "rule": "Nếu phần mềm có sẵn làm được việc, chúng tôi sẽ chỉ bạn dùng nó.",
     "steps": [
       {
         "id": "problem",
-        "label": "Bạn kể vấn đề cần giải quyết",
+        "label": "Bạn kể vấn đề",
         "detail": "Bắt đầu từ việc tốn nhiều thời gian hoặc tiền nhất."
       },
       {
         "id": "map",
-        "label": "Chúng tôi hiểu việc đang chạy ra sao",
+        "label": "Chúng tôi xem việc đang diễn ra",
         "detail": "Theo một đơn từ tin nhắn đến lúc thu tiền: ai làm, chỗ nào phải gõ lại."
       },
       {
         "id": "build",
-        "label": "Triển khai bản chạy thử nhỏ",
+        "label": "Chúng tôi triển khai bản chạy thử",
         "detail": "Chạy trên việc thật của bạn, để bạn thấy chúng tôi làm được gì và nó mang lại giá trị gì."
       },
       {
         "id": "plan",
-        "label": "Sau đó là báo giá rõ ràng",
+        "label": "Rồi báo giá rõ ràng",
         "detail": "Khi bạn đã thấy nó chạy: báo giá cụ thể, kế hoạch có thời gian, cách bảo trì và hỗ trợ. Rồi mới bàn phần tiếp theo."
       }
     ]
@@ -119,7 +122,7 @@
   "footer": {
     "explore": "Các trang",
     "write": "Gửi vấn đề của bạn qua email",
-    "elsewhere": "Nơi khác"
+    "elsewhere": "Kênh khác"
   },
   "notFound": {
     "label": "Không tìm thấy",
@@ -137,11 +140,11 @@
   "buildMeta": {
     "kinds": {
       "agent": "Tự động hóa",
-      "skill": "Công cụ cho trợ lý AI",
+      "skill": "Phần mềm bổ sung cho trợ lý AI",
       "mobile": "Ứng dụng điện thoại",
       "web": "Sản phẩm web",
       "saas": "Sản phẩm trả phí",
-      "tool": "Công cụ cho lập trình viên"
+      "tool": "Phần mềm cho lập trình viên"
     },
     "links": {
       "appstore": "App Store",
@@ -154,22 +157,21 @@
   "metadata": {
     "home": {
       "title": "Chuyển đổi số và AI cho doanh nghiệp nhỏ | Canh Ta",
-      "description": "Cho cửa hàng và doanh nghiệp nhỏ: kể vấn đề, chúng tôi cùng bạn tìm giải pháp. Mỗi đơn hàng và khoản nợ một chỗ ghi, rồi AI làm việc lặp lại, có người duyệt."
+      "description": "Bạn kể vấn đề, chúng tôi cùng giải quyết. Một hệ thống cho đơn hàng, kho và công nợ, rồi AI lo việc lặp lại, có người duyệt những việc quan trọng nhất."
     },
     "services": {
       "title": "Phần mềm, ERP, CRM và AI cho doanh nghiệp nhỏ | Canh Ta",
-      "description": "ERP, CRM, chatbot, AI agent, báo cáo, website và IoT cho cửa hàng, doanh nghiệp nhỏ và cá nhân. Bạn xem bản chạy thử nhỏ trước khi nhận báo giá."
+      "description": "ERP, CRM, chatbot, AI agent, báo cáo, website và IoT cho cửa hàng, doanh nghiệp nhỏ và cá nhân. Bạn xem bản chạy thử nhỏ trước, rồi mới có báo giá cụ thể."
     },
     "contact": {
       "title": "Liên hệ: kể vấn đề cần giải quyết | Canh Ta",
-      "description": "Gọi điện hoặc viết cho chúng tôi vấn đề bạn muốn giải quyết, qua Zalo, WhatsApp hay email. Chúng tôi trả lời trong một ngày làm việc."
+      "description": "Gọi điện hoặc viết qua Zalo, WhatsApp hay email về vấn đề bạn muốn giải quyết. Chúng tôi trả lời trong một ngày làm việc, rồi cùng bạn tìm ra giải pháp."
     },
-    "jobTitle": "Kỹ sư phần mềm",
-    "offerCatalog": "Chúng tôi làm gì",
+    "offerCatalog": "Dịch vụ của chúng tôi",
     "workList": "Một vài sản phẩm và dự án của chúng tôi",
     "products": {
       "title": "Scori, Remoti và các sản phẩm khác | Canh Ta",
-      "description": "Scori ghi điểm khi chơi bài và board game. Remoti biến iPhone thành điều khiển cho Android TV và Google TV. Cùng các dự án web và AI."
+      "description": "Scori ghi điểm khi chơi bài và board game. Remoti biến iPhone thành điều khiển cho Android TV và Google TV. Cùng vài dự án web và AI khác của chúng tôi."
     }
   }
 }

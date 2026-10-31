@@ -17,7 +17,7 @@
     "primary": "Share your problem",
     "secondary": "See services",
     "visual": {
-      "label": "Chat, spreadsheet and paper gathered on one screen. AI does the routine work and a person approves.",
+      "label": "Chat, spreadsheet and paper gathered on one screen. AI does the routine steps. A person approves anything that costs money or changes an order or record.",
       "sources": [
         "Chat",
         "Spreadsheet",
@@ -29,8 +29,9 @@
         "Stock",
         "Customers"
       ],
-      "tag": "AI does it, you approve"
-    }
+      "tag": "AI does it, a person approves"
+    },
+    "orCall": "or call"
   },
   "home": {
     "servicesHeading": "What we do",
@@ -67,20 +68,22 @@
     "body": "Call or write to us in your own words. We reply within one working day, then work out the solution with you.",
     "helpHeading": "If you can, mention",
     "help": [
-      "How much time or money it costs you",
-      "Who deals with it every day",
-      "What you use today"
+      "Roughly what it costs you in time or money",
+      "Who deals with it each day",
+      "What you use now"
     ],
     "channels": "Reach us on",
     "barLabel": "Quick contact",
     "chatOn": "Call on",
     "email": "Email us",
     "mailSubject": "A problem I want to solve (from canhta.com)",
-    "mailBody": "Hi,\n\nThe problem I want to solve:\nWho deals with it every day:\nWhat I use today:\n",
+    "mailBody": "Hi,\n\nThe problem I want to solve:\nRoughly what it costs me in time or money:\nWho deals with it each day:\nWhat I use now:\n",
     "nextHeading": "What happens next",
     "call": "Call us",
     "callAria": "Call us by phone",
-    "callShort": "Call"
+    "callShort": "Call",
+    "next": "We start with a small working version on your real work. A quote and a plan come after you have seen it run.",
+    "chatText": "Hi, I would like to talk about a problem I want to solve (from canhta.com)."
   },
   "process": {
     "rule": "If existing software does the job, we will point you to it.",
@@ -92,17 +95,17 @@
       },
       {
         "id": "map",
-        "label": "We understand how it runs today",
+        "label": "We learn how it runs",
         "detail": "We follow one order from first message to payment: who does each step, and where it is retyped."
       },
       {
         "id": "build",
-        "label": "We build a small working version",
-        "detail": "It runs on your real work, so you see what we can do and the value it brings."
+        "label": "We build a small version",
+        "detail": "It is a working version that runs on your real work, so you see what we can do and the value it brings."
       },
       {
         "id": "plan",
-        "label": "Then a clear quote and plan",
+        "label": "Then a quote and plan",
         "detail": "Once you have seen it work: a specific quote, a plan with a timeline, and how we maintain and support it. Then we agree the next part."
       }
     ]
@@ -154,22 +157,21 @@
   "metadata": {
     "home": {
       "title": "Digital transformation and AI for small businesses | Canh Ta",
-      "description": "For small businesses: tell us the problem and we find the solution with you. One record for every order and debt, then AI does the routine and a person approves."
+      "description": "Tell us the problem and we solve it with you. One system for orders, stock and debts, then AI does the routine steps and a person approves what matters."
     },
     "services": {
-      "title": "Custom software, ERP, CRM and AI for small businesses | Canh Ta",
-      "description": "ERP, CRM, chatbots, AI agents, reports, websites and sensors for small businesses and individuals. You see a small working version before any quote."
+      "title": "ERP, CRM and AI for small businesses in Vietnam | Canh Ta",
+      "description": "ERP, CRM, chatbots, AI agents, reports, websites and sensors for small businesses in Vietnam. You see a small working version before any quote or plan."
     },
     "contact": {
       "title": "Contact us: tell us the problem | Canh Ta",
-      "description": "Call or write to us about the problem you want to solve, on Zalo, WhatsApp or email. We reply within one working day."
+      "description": "Call us, or write on Zalo, WhatsApp or email, about the problem you want to solve. We reply within one working day and work out the solution with you."
     },
-    "jobTitle": "Software engineer",
     "offerCatalog": "What we do",
     "workList": "Some of our products and projects",
     "products": {
       "title": "Scori, Remoti and more: some of our products | Canh Ta",
-      "description": "Scori keeps score at card and board games. Remoti turns an iPhone into a remote for Android TV and Google TV. Plus web and AI projects."
+      "description": "Scori keeps score at card and board games. Remoti turns an iPhone into a remote for Android TV and Google TV. Plus a few web and AI projects of our own."
     }
   }
 }
