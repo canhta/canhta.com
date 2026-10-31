@@ -2,13 +2,14 @@ import { Link } from '@/i18n/navigation'
 import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
+import { firstSentence } from '@/lib/first-sentence'
 
 /** The three questions a buyer asks before anything else, shown on the home page. */
 const FIRST_QUESTIONS = ['pricing', 'wrong', 'ownership']
 
 /**
- * Home: price, who checks the AI and who owns the work, with the same answers
- * as the services page and a link to the rest. Plain text in three columns, so
+ * Home: price, who checks the AI and who owns the work, with the first sentence of
+ * each answer and a link to the full answers on the services page. Plain text in three columns, so
  * it reads as a short list and not as a row of cards.
  */
 export function HomeQuestions({ locale }: { locale: Locale }) {
@@ -31,7 +32,7 @@ export function HomeQuestions({ locale }: { locale: Locale }) {
           {faq.map((item) => (
             <div key={item.id} className="hq-item">
               <dt className="subtitle">{item.question}</dt>
-              <dd className="mt-2 text-[16px] leading-relaxed text-muted">{item.answer}</dd>
+              <dd className="mt-2 text-[16px] leading-relaxed text-muted">{firstSentence(item.answer)}</dd>
             </div>
           ))}
         </dl>

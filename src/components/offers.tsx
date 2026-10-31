@@ -1,3 +1,4 @@
+import { firstSentence } from '@/lib/first-sentence'
 import { Link } from '@/i18n/navigation'
 import { getSiteContent } from '@/content'
 import type { Locale, Offer } from '@/content/types'
@@ -27,9 +28,6 @@ const GROUND: Record<string, Ground> = {
 }
 
 /** The first sentence of a detail: what the service gives you, before the fine print. */
-function firstSentence(text: string): string {
-  return text.split(/(?<=[.!?])\s/)[0] ?? text
-}
 
 function Cell({
   offer,

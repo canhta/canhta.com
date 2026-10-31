@@ -4,9 +4,9 @@ import type { ContentCopy } from '../types'
 export const viContent: ContentCopy = {
   profile: {
     location: 'Việt Nam',
-    hook: 'Đơn hàng chỉ phải nhập một lần.',
+    hook: 'Số hóa công việc, AI lo việc lặp lại.',
     supporting:
-      'Đơn hàng, kho và công nợ nằm chung một hệ thống, không ai phải gõ lại. Sau đó AI đọc tin nhắn và hóa đơn, ghi sẵn vào đó, chờ một người duyệt.',
+      'Cho cửa hàng và doanh nghiệp nhỏ. Mỗi đơn hàng, món hàng và khoản nợ có một chỗ ghi, không ai phải gõ lại. AI đọc tin nhắn và hóa đơn, ghi sẵn, người duyệt.',
     headerCta: 'Nhắn chúng tôi',
     availabilityLabel: 'Đang nhận dự án mới',
   },

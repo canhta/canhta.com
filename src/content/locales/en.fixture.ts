@@ -4,9 +4,9 @@ import type { ContentCopy } from '../types'
 export const enContent: ContentCopy = {
   profile: {
     location: 'Vietnam',
-    hook: 'Enter each order once.',
+    hook: 'Digitise your work. Let AI do the routine.',
     supporting:
-      'Orders, stock and debts get one record, so nobody retypes them. Then AI reads messages and invoices and fills in the record for a person to approve.',
+      'For shops and small businesses. Every order, stock item and debt gets one record, so nobody retypes. AI reads messages and invoices, fills it in, and a person approves.',
     headerCta: 'Talk to us',
     availabilityLabel: 'Taking on new projects',
   },
