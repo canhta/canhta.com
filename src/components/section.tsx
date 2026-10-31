@@ -14,7 +14,7 @@ export function SectionHeading({
 }) {
   return (
     <header>
-      <h2 id={id} className="title max-w-[24ch]">
+      <h2 id={id} className="section-title max-w-[24ch]">
         {title}
       </h2>
       {sub ? <p className="lead mt-4 max-w-[52ch]">{sub}</p> : null}

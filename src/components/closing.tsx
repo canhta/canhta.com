@@ -12,12 +12,12 @@ export function Closing({ locale }: { locale: Locale }) {
 
   return (
     <section aria-labelledby="closing-title" className="band sheet ground-accent on-accent">
-      <div className="shell grid gap-10 lg:grid-cols-12 lg:items-end lg:gap-14">
+      <div className="shell grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-12">
         <div className="reveal lg:col-span-7">
           <h2 id="closing-title" className="closing-title max-w-[11ch]">
             {copy.heading}
           </h2>
-          <p className="mt-6 max-w-[34ch] text-[clamp(1.1rem,1.6vw,1.35rem)] leading-snug font-bold">{copy.body}</p>
+          <p className="mt-5 max-w-[34ch] text-[clamp(1rem,0.95rem+0.3vw,1.1875rem)] leading-snug font-bold">{copy.body}</p>
         </div>
         <div className="reveal lg:col-span-5">
           <ContactActions locale={locale} />

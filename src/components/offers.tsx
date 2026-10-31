@@ -39,7 +39,7 @@ function Cell({
 }) {
   const big = offer.id === 'systems' || offer.id === 'ai'
   const ground = GROUND[offer.id] ?? 'white'
-  const nameClass = big ? 'title max-w-[18ch]' : 'subtitle text-[1.3rem] max-w-[20ch]'
+  const nameClass = big ? 'title max-w-[18ch]' : 'subtitle max-w-[20ch]'
 
   const body = (
     <div className="cell-body">
@@ -52,13 +52,13 @@ function Cell({
           offer.name
         )}
       </Heading>
-      {mode === 'page' ? <p className="cell-muted mt-3 text-[16px] leading-relaxed">{offer.detail}</p> : null}
+      {mode === 'page' ? <p className="cell-muted mt-2 text-[15px] leading-relaxed">{offer.detail}</p> : null}
       {offer.examples.length > 0 ? (
-        <p className={`mt-3 leading-snug font-bold ${mode === 'home' ? 'cell-muted text-[15px]' : 'text-[16px]'}`}>
+        <p className={`mt-2 leading-snug font-bold ${mode === 'home' ? 'cell-muted text-[14px]' : 'text-[15px]'}`}>
           {offer.examples.join(', ')}
         </p>
       ) : mode === 'home' ? (
-        <p className="cell-muted mt-3 text-[15px] leading-snug">{offer.detail}</p>
+        <p className="cell-muted mt-2 text-[14px] leading-snug">{offer.detail}</p>
       ) : null}
     </div>
   )
@@ -96,18 +96,18 @@ export function OfferCards({ locale }: { locale: Locale }) {
   return (
     <section aria-labelledby="offers-title" className="band sheet ground-tint">
       <div className="shell">
-        <div className="title-band reveal flex flex-wrap items-center justify-between gap-x-10 gap-y-6">
-          <h2 id="offers-title" className="headline max-w-[14ch]">
+        <div className="title-band reveal flex flex-wrap items-center justify-between gap-x-8 gap-y-4">
+          <h2 id="offers-title" className="section-title max-w-[14ch]">
             {copy.servicesHeading}
           </h2>
           <Link href="/services" className="btn-primary">
             {copy.servicesAll}
           </Link>
         </div>
-        <div className="mt-10 sm:mt-14">
+        <div className="mt-8 sm:mt-10">
           <OfferBento locale={locale} mode="home" />
         </div>
-        <p className="mt-12 max-w-[34ch] text-[clamp(1.25rem,2.2vw,1.75rem)] leading-snug font-bold tracking-tight">
+        <p className="mt-10 max-w-[34ch] text-[clamp(1.125rem,1rem+0.7vw,1.5rem)] leading-snug font-bold tracking-tight">
           {messages.process.rule}
         </p>
       </div>

@@ -23,11 +23,11 @@ export function PageHeader({
   return (
     <header className="page-head ground-night on-night">
       <div
-        className={`shell ${side ? `grid gap-10 lg:grid-cols-12 lg:gap-14 ${children ? 'lg:items-end' : 'lg:items-center'}` : ''}`}
+        className={`shell ${side ? `grid gap-8 lg:grid-cols-12 lg:gap-12 ${children ? 'lg:items-end' : 'lg:items-center'}` : ''}`}
       >
         <div className={side ? 'lg:col-span-7' : ''}>
           <h1 className="headline enter max-w-[16ch]">{title}</h1>
-          <p className="lead enter enter-1 mt-6 max-w-[46ch]">{intro}</p>
+          <p className="lead enter enter-1 mt-5 max-w-[46ch]">{intro}</p>
         </div>
         {side ? <div className="enter enter-2 lg:col-span-5">{side}</div> : null}
       </div>

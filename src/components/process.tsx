@@ -18,11 +18,11 @@ export function Process({ locale }: { locale: Locale }) {
       <div className="shell process-grid">
         <div className="process-side">
           <div className="sticky-box">
-            <h2 id="process-title" className="title-band headline max-w-[12ch]">
+            <h2 id="process-title" className="title-band section-title max-w-[12ch]">
               {heading}
             </h2>
             <div className="track mt-8 max-w-sm" aria-hidden="true" />
-            <p className="mt-8 max-w-[30ch] text-[clamp(1.1rem,1.6vw,1.3rem)] leading-snug font-bold">{copy.rule}</p>
+            <p className="mt-6 max-w-[30ch] text-[clamp(1rem,0.95rem+0.3vw,1.1875rem)] leading-snug font-bold">{copy.rule}</p>
             <p className="mt-6">
               <Link href="/products" className="link font-bold">
                 {getMessages(locale).home.appsAll}

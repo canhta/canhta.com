@@ -46,20 +46,20 @@ export function AppCard({
         </div>
       ) : null}
 
-      <div className="flex flex-1 flex-col p-6 sm:p-8">
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
         <div className="flex items-center gap-3">
           {build.logo ? (
-            <Image src={build.logo} alt="" width={48} height={48} className="h-12 w-12 rounded-[14px]" />
+            <Image src={build.logo} alt="" width={44} height={44} className="h-11 w-11 rounded-[12px]" />
           ) : null}
           <Heading className="title" translate="no">
             {build.name}
           </Heading>
         </div>
         <p className="subtitle mt-4">{build.tagline}</p>
-        {variant === 'full' ? <p className="cell-muted mt-2 text-[15px] leading-relaxed">{build.summary}</p> : null}
+        {variant === 'full' ? <p className="cell-muted mt-2 text-[14px] leading-relaxed">{build.summary}</p> : null}
 
-        <p className="mt-5 text-[14px] leading-snug">
-          <span className="font-extrabold text-accent">{statusLabel(build.status, locale)}.</span>{' '}
+        <p className="mt-4 text-[14px] leading-snug">
+          <span className="font-bold text-accent">{statusLabel(build.status, locale)}.</span>{' '}
           <span className="cell-muted">{build.availability}</span>
         </p>
         <ul className="mt-5 flex flex-wrap gap-2">

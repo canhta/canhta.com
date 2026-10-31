@@ -19,7 +19,7 @@ export function About({ locale }: { locale: Locale }) {
         <h2 id="about-title" className="subtitle lg:col-span-3">
           {copy.heading}
         </h2>
-        <p className="statement max-w-[26ch] text-[clamp(1.75rem,4.2vw,3.5rem)] leading-[1.15] font-extrabold tracking-[-0.035em] lg:col-span-9">
+        <p className="statement max-w-[26ch] text-[clamp(1.5rem,1rem+2.2vw,2.75rem)] leading-[1.22] font-bold tracking-[-0.03em] lg:col-span-9">
           {words.map((word, i) => (
             <span key={i} className="w" style={{ '--s': `${((i / words.length) * 40).toFixed(1)}%` } as CSSProperties}>
               {word}
