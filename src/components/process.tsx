@@ -18,7 +18,7 @@ export function Process({ locale }: { locale: Locale }) {
       <div className="shell process-grid">
         <div className="process-side">
           <div className="sticky-box">
-            <h2 id="process-title" className="headline max-w-[12ch]">
+            <h2 id="process-title" className="title-band headline max-w-[12ch]">
               {heading}
             </h2>
             <div className="track mt-8 max-w-sm" aria-hidden="true" />

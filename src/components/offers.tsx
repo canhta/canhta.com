@@ -2,7 +2,7 @@ import { Link } from '@/i18n/navigation'
 import { getSiteContent } from '@/content'
 import type { Locale, Offer } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
-import { InView } from './in-view'
+import { Visual } from './mini-visuals'
 
 /**
  * The services as a bento: cells of different sizes and grounds, each with a
@@ -24,94 +24,6 @@ const GROUND: Record<string, Ground> = {
   web: 'wash',
   iot: 'night',
   team: 'white',
-}
-
-function Visual({ id, approve }: { id: string; approve: string }) {
-  switch (id) {
-    case 'systems':
-      return (
-        <InView className="mv mv-lg">
-          <div className="mv-flow">
-            {[0, 1, 2, 3, 4].map((row) => (
-              <div key={row} className="mv-flow-row">
-                <span className="mv-bubble" />
-                <span className="mv-dash" />
-                <span className="mv-trow">
-                  <i />
-                  <i />
-                  <i />
-                </span>
-              </div>
-            ))}
-          </div>
-        </InView>
-      )
-    case 'ai':
-      return (
-        <InView className="mv mv-lg">
-          <div className="mv-agent">
-            <div className="mv-agent-head">
-              <span className="mv-avatar" />
-              <span className="mv-agent-lines">
-                <span className="mv-line" />
-                <span className="mv-line" style={{ width: '62%' }} />
-              </span>
-            </div>
-            <div className="mv-agent-foot">
-              <span className="mv-approve">{approve}</span>
-              <span className="mv-check" />
-            </div>
-            <svg className="mv-cursor" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M5 3l14 8-6.2 1.6L9.6 19 5 3Z" fill="#fff" stroke="#131517" strokeWidth="1.6" strokeLinejoin="round" />
-            </svg>
-          </div>
-        </InView>
-      )
-    case 'data':
-      return (
-        <InView className="mv">
-          <div className="mv-bars">
-            {[38, 52, 44, 70, 62, 94].map((h, i) => (
-              <i key={i} style={{ '--h': `${h}%`, '--i': i } as React.CSSProperties} />
-            ))}
-          </div>
-        </InView>
-      )
-    case 'web':
-      return (
-        <InView className="mv">
-          <div className="mv-browser">
-            <span className="mv-browser-bar" />
-            <span className="mv-browser-hero" />
-            <span className="mv-line" />
-            <span className="mv-line" />
-            <span className="mv-phone">
-              <i />
-            </span>
-          </div>
-        </InView>
-      )
-    case 'iot':
-      return (
-        <InView className="mv">
-          <div className="mv-sensor">
-            {[0, 1, 2].map((i) => (
-              <span key={i} className="mv-ring" style={{ '--i': i } as React.CSSProperties} />
-            ))}
-            <span className="mv-node" />
-          </div>
-        </InView>
-      )
-    default:
-      return (
-        <InView className="mv">
-          <div className="mv-blocks">
-            <i />
-            <i />
-          </div>
-        </InView>
-      )
-  }
 }
 
 function Cell({
@@ -184,7 +96,7 @@ export function OfferCards({ locale }: { locale: Locale }) {
   return (
     <section aria-labelledby="offers-title" className="band sheet ground-tint">
       <div className="shell">
-        <div className="reveal flex flex-wrap items-end justify-between gap-x-10 gap-y-6">
+        <div className="title-band reveal flex flex-wrap items-center justify-between gap-x-10 gap-y-6">
           <h2 id="offers-title" className="headline max-w-[14ch]">
             {copy.servicesHeading}
           </h2>

@@ -33,12 +33,12 @@ export function SiteFooter({ locale }: { locale: Locale }) {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="sheet ground-night on-night pt-[calc(var(--space)*0.8)] pb-10">
+    <footer data-no-bar className="sheet ground-night on-night pt-[calc(var(--space)*0.8)] pb-10">
       <div className="shell">
         <p className="mb-3 text-[14px] font-bold text-dim">{messages.footer.write}</p>
         <a
           href={mail.href}
-          className="inline-block min-h-11 text-[clamp(1.75rem,5.6vw,4.75rem)] leading-[1.1] font-extrabold tracking-[-0.04em] break-all text-white underline decoration-accent decoration-[3px] underline-offset-[0.18em] hover:decoration-white sm:break-normal"
+          className="inline-block min-h-11 text-[clamp(1.75rem,5.6vw,4.75rem)] leading-[1.1] font-extrabold tracking-[-0.04em] break-all text-white underline decoration-accent decoration-[3px] underline-offset-[0.18em] transition-colors hover:decoration-white active:opacity-70 sm:break-normal"
           translate="no"
         >
           {mail.address}
@@ -57,7 +57,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
                 ] as const
               ).map(([href, label]) => (
                 <li key={href}>
-                  <Link href={href} className="flex min-h-11 items-center text-[17px] font-bold hover:text-accent">
+                  <Link href={href} className="flex min-h-11 items-center text-[17px] font-bold transition-colors hover:text-accent active:opacity-70">
                     {label}
                   </Link>
                 </li>
@@ -79,7 +79,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
                         target="_blank"
                         rel="noreferrer noopener"
                         aria-label={`${NETWORK_LABELS[s.network as keyof typeof ICONS]} (${messages.common.newTab})`}
-                        className={`grid h-11 place-items-center rounded-full border border-white/40 text-white transition-colors duration-150 hover:bg-accent hover:text-night ${
+                        className={`grid h-11 place-items-center rounded-full border border-white/40 text-white transition-colors duration-150 hover:bg-accent hover:text-night active:opacity-70 ${
                           s.network === 'zalo' ? 'px-4' : 'w-11'
                         }`}
                       >
@@ -95,13 +95,18 @@ export function SiteFooter({ locale }: { locale: Locale }) {
                     target="_blank"
                     rel="noreferrer noopener"
                     aria-label={`WhatsApp (${messages.common.newTab})`}
-                    className="grid h-11 place-items-center rounded-full border border-white/40 px-4 text-[13px] font-bold transition-colors duration-150 hover:bg-accent hover:text-night"
+                    className="grid h-11 place-items-center rounded-full border border-white/40 px-4 text-[13px] font-bold transition-colors duration-150 hover:bg-accent hover:text-night active:opacity-70"
                   >
                     <span translate="no">WhatsApp</span>
                   </a>
                 </li>
               ) : null}
             </ul>
+          </div>
+          <div className="md:justify-self-end">
+            <Link href="/contact" className="btn-accent">
+              {profile.headerCta}
+            </Link>
           </div>
         </div>
         <p className="mt-12 text-[14px] text-dim">

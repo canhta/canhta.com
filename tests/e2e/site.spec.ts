@@ -194,6 +194,53 @@ test('the phone menu opens, lists the pages and closes on choosing one', async (
   await expect(page.getByRole('button', { name: 'Menu' })).toHaveAttribute('aria-expanded', 'false')
 })
 
+for (const { locale, path } of PAGES.filter((p) => p.key === 'home')) {
+  test.describe(`[${locale}] the phone contact bar`, () => {
+    test.use({ viewport: { width: 390, height: 844 } })
+
+    test('shows email, Zalo and WhatsApp as 44px targets after the first screen, with a localized email draft', async ({
+      page,
+    }) => {
+      await page.goto(path)
+      const bar = page.locator('nav.contact-bar')
+      await expect(bar).toBeHidden()
+      await page.evaluate(() => window.scrollTo(0, 1400))
+      await expect(bar).toBeVisible()
+      const links = bar.getByRole('link')
+      await expect(links).toHaveCount(3)
+      for (const box of await links.evaluateAll((els) => els.map((el) => el.getBoundingClientRect().toJSON()))) {
+        expect(box.width).toBeGreaterThanOrEqual(44)
+        expect(box.height).toBeGreaterThanOrEqual(44)
+      }
+      const mail = new URL((await bar.locator('a[href^="mailto:"]').getAttribute('href')) ?? '')
+      expect(mail.searchParams.get('subject')).toBe(
+        locale === 'en' ? 'Project inquiry from canhta.com' : 'Hỏi về dự án từ canhta.com',
+      )
+      await expect(bar.locator('a[href*="zalo.me"]')).toHaveCount(1)
+      await expect(bar.locator('a[href*="wa.me"]')).toHaveCount(1)
+    })
+
+    test('steps aside while the menu is open and while the footer is on screen', async ({ page }) => {
+      await page.goto(path)
+      const bar = page.locator('nav.contact-bar')
+      await page.evaluate(() => window.scrollTo(0, 1400))
+      await expect(bar).toBeVisible()
+      await page.locator('button[aria-controls="menu-panel"]').click()
+      await expect(bar).toBeHidden()
+      await page.locator('button[aria-controls="menu-panel"]').click()
+      await expect(bar).toBeVisible()
+      await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
+      await expect(bar).toBeHidden()
+    })
+  })
+}
+
+test('the contact bar is for phones only', async ({ page }) => {
+  await page.goto('/')
+  await page.evaluate(() => window.scrollTo(0, 1400))
+  await expect(page.locator('nav.contact-bar')).toBeHidden()
+})
+
 for (const width of [320, 390, 1440]) {
   for (const { locale, path } of PAGES.filter((p) => p.key === 'home')) {
     test(`[${locale}] every header control is at least 44px at ${width}px`, async ({ page }) => {

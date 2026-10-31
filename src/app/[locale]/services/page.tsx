@@ -3,6 +3,7 @@ import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
 import { Answers } from '@/components/answers'
 import { Closing } from '@/components/closing'
+import { ServiceCollage } from '@/components/mini-visuals'
 import { OfferList } from '@/components/offers'
 import { PageHeader } from '@/components/page-header'
 import { PageShell } from '@/components/page-shell'
@@ -22,7 +23,11 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
 
   return (
     <PageShell locale={locale} jsonLd={buildGraph(locale, 'services')}>
-      <PageHeader title={copy.h1} intro={copy.intro} />
+      <PageHeader
+        title={copy.h1}
+        intro={copy.intro}
+        visual={<ServiceCollage approve={getMessages(locale).home.approve} />}
+      />
       <OfferList locale={locale} />
       <Process locale={locale} />
       <Answers locale={locale} />

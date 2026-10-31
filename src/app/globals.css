@@ -535,7 +535,13 @@ article[id] {
   position: relative;
   z-index: 1;
   /* The next band overlaps by --sheet-r; keep the picture clear of it. */
-  height: clamp(340px, 98vw, 560px);
+  height: clamp(380px, 86vw, 660px);
+}
+/* .hero-scene (below) says height: 100%, which would win over the line above
+   and leave the stage as short as its min-height. The composition is almost as
+   tall as it is wide, so on a tablet it needs the height to fill the width. */
+.hero-scene.hero-stage {
+  height: clamp(380px, 86vw, 660px);
 }
 
 @media (min-width: 1024px) {
@@ -1040,12 +1046,6 @@ a.cell-link::after {
   border-bottom: 0;
   box-shadow: 0 -10px 30px -10px rgb(19 21 23 / 0.45);
 }
-.app-card[data-theme='scori'] {
-  --app-bg: #ffe9a6;
-}
-.app-card[data-theme='remoti'] {
-  --app-bg: #dce2ec;
-}
 
 @utility phone {
   overflow: hidden;
@@ -1290,80 +1290,232 @@ a.cell-link::after {
   }
 }
 
-/* systems: three chat bubbles become three rows of a table */
-.mv-flow {
+/* systems: a chat becomes an order table, then an invoice and a stock count.
+   Sized in em so the whole picture scales with the cell. Phone: two bubbles
+   above the table. Tablet (cell is wide and short): left to right. Desktop
+   (cell is tall): top to bottom, and the dashed line takes the spare height. */
+.mv-sys {
+  place-items: stretch;
+}
+.mvs {
+  font-size: 12.5px;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  grid-template-areas:
+    'chat chat'
+    'flow flow'
+    'sheet side';
+  grid-template-rows: auto minmax(2.6em, 1fr) auto;
+  column-gap: 1.1em;
+  align-items: start;
   width: 100%;
+}
+.mvs-chat {
+  grid-area: chat;
   display: grid;
-  gap: 14px;
+  gap: 0.8em;
 }
-.mv-flow-row:nth-child(n + 4) {
-  display: none;
-}
-@media (min-width: 1024px) {
-  .mv-flow-row:nth-child(n + 4) {
-    display: grid;
-  }
-  .mv-flow {
-    gap: 22px;
-  }
-  .mv-bubble {
-    height: 44px;
-  }
-  .mv-bubble::after {
-    margin-top: 18px;
-  }
-  .mv-trow {
-    height: 52px;
-  }
-}
-.mv-flow-row {
+.mvs-b {
   display: grid;
-  grid-template-columns: 36% 1fr 46%;
-  align-items: center;
-  gap: 8px;
+  gap: 0.55em;
+  width: 64%;
+  padding: 0.95em 1.15em;
+  border-radius: 1.5em 1.5em 1.5em 0.4em;
+  background: rgb(255 255 255 / 0.16);
 }
-.mv-bubble {
-  height: 34px;
-  border-radius: 18px 18px 18px 6px;
-  background: rgb(255 255 255 / 0.2);
-}
-.mv-bubble::after {
-  content: '';
+.mvs-b i {
   display: block;
-  width: 62%;
-  height: 8px;
-  margin: 13px 0 0 16px;
-  border-radius: 4px;
-  background: rgb(255 255 255 / 0.75);
+  height: 0.62em;
+  border-radius: 0.31em;
+  background: rgb(255 255 255 / 0.78);
 }
-.mv-dash {
-  border-top: 3px dashed var(--color-accent);
+.mvs-b i:last-child {
+  width: 58%;
 }
-.mv-trow {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr 0.6fr;
-  gap: 8px;
-  align-items: center;
-  height: 40px;
-  padding-inline: 12px;
-  border-radius: 12px;
-  background: #fff;
-  transform-origin: left center;
-}
-.mv-trow i {
-  display: block;
-  height: 8px;
-  border-radius: 4px;
-  background: #c9cdd3;
-}
-.mv-trow i:first-child {
-  background: var(--color-night);
-}
-.mv-flow-row:nth-child(3) .mv-trow {
+.mvs-b-out {
+  justify-self: end;
+  border-radius: 1.5em 1.5em 0.4em 1.5em;
   background: var(--color-accent);
 }
-.mv-flow-row:nth-child(3) .mv-trow i {
+.mvs-b-out i {
   background: var(--color-night);
+}
+.mvs-chat > :nth-child(3) {
+  display: none;
+}
+.mvs-flow {
+  grid-area: flow;
+  position: relative;
+  justify-self: center;
+  align-self: stretch;
+  border-left: 0.24em dashed var(--color-accent);
+  transform-origin: top center;
+}
+.mvs-flow b {
+  position: absolute;
+  left: 50%;
+  bottom: -0.5em;
+  width: 1.1em;
+  height: 1.1em;
+  margin-left: -0.67em;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+.mvs-sheet {
+  grid-area: sheet;
+  display: grid;
+  gap: 0.5em;
+  padding: 0.95em;
+  border-radius: 1.3em;
+  background: #fff;
+  box-shadow: 0 1.8em 2.6em -1.4em rgb(0 0 0 / 0.55);
+}
+.mvs-head {
+  display: grid;
+  grid-template-columns: 1.1fr 0.8fr 0.6fr;
+  gap: 0.6em;
+  padding: 0.2em 0.4em 0.65em;
+  border-bottom: 1px solid #e4e6e9;
+}
+.mvs-head i {
+  display: block;
+  height: 0.6em;
+  border-radius: 0.3em;
+  background: #9aa0a8;
+}
+.mvs-row {
+  display: grid;
+  grid-template-columns: auto 1.1fr 0.7fr;
+  align-items: center;
+  gap: 0.7em;
+  padding: 0.4em;
+  border-radius: 0.8em;
+  transform-origin: left center;
+}
+.mvs-row u {
+  position: relative;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  background: var(--color-night);
+}
+.mvs-row u::after {
+  content: '';
+  position: absolute;
+  left: 0.55em;
+  top: 0.28em;
+  width: 0.36em;
+  height: 0.7em;
+  border: solid var(--color-accent);
+  border-width: 0 0.18em 0.18em 0;
+  rotate: 45deg;
+}
+.mvs-row i {
+  display: block;
+  height: 0.62em;
+  border-radius: 0.31em;
+  background: #c9cdd3;
+}
+.mvs-row i:first-of-type {
+  background: var(--color-night);
+}
+.mvs-sheet > :nth-child(4) {
+  background: var(--color-accent);
+}
+.mvs-side {
+  grid-area: side;
+  display: grid;
+  gap: 1em;
+  align-content: start;
+}
+.mvs-invoice {
+  display: grid;
+  gap: 0.55em;
+  padding: 1em;
+  border-radius: 0.9em;
+  background: #fff;
+  rotate: 2.5deg;
+  box-shadow: 0 1.4em 2em -1.2em rgb(0 0 0 / 0.55);
+}
+.mvs-invoice i {
+  display: block;
+  height: 0.55em;
+  border-radius: 0.28em;
+  background: #c9cdd3;
+}
+.mvs-invoice i:nth-child(2) {
+  width: 72%;
+}
+.mvs-invoice i:nth-child(3) {
+  width: 86%;
+}
+.mvs-invoice b {
+  justify-self: end;
+  width: 58%;
+  height: 1.7em;
+  margin-top: 0.3em;
+  border-radius: 0.6em;
+  background: var(--color-accent);
+}
+.mvs-stock {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.55em;
+  height: 6.4em;
+  padding: 0.9em 1em 0;
+  border-radius: 1.1em;
+  background: var(--color-surface);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.14);
+}
+.mvs-stock i {
+  flex: 1;
+  height: var(--h);
+  border-radius: 0.4em 0.4em 0 0;
+  background: #c9cdd3;
+  transform-origin: bottom;
+}
+.mvs-stock i:last-child {
+  background: var(--color-accent);
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .mvs {
+    font-size: 14px;
+    grid-template-columns: 0.9fr 3.2em 1.5fr 1fr;
+    grid-template-areas: 'chat flow sheet side';
+    grid-template-rows: auto;
+    align-items: center;
+    column-gap: 0.5em;
+  }
+  .mvs-b {
+    width: 100%;
+  }
+  .mvs-chat > :nth-child(3) {
+    display: grid;
+  }
+  .mvs-flow {
+    align-self: center;
+    justify-self: stretch;
+    height: 0;
+    border-left: 0;
+    border-top: 0.24em dashed var(--color-accent);
+    transform-origin: left center;
+  }
+  .mvs-flow b {
+    left: auto;
+    right: -0.5em;
+    bottom: auto;
+    top: -0.67em;
+    margin-left: 0;
+  }
+}
+@media (min-width: 1024px) {
+  .mvs {
+    font-size: clamp(13.5px, 1.3vw, 18px);
+  }
+  .mvs-chat > :nth-child(3) {
+    display: grid;
+  }
 }
 
 /* ai: an agent card with an Approve button that presses itself once */
@@ -1591,6 +1743,205 @@ a.cell-link::after {
   box-shadow: 0 0 0 4px #fff;
 }
 
+/* The services page head: the whole range on one picture, in the same language
+   as the cells. 1em is 2.4% of the picture's width, so it scales as one piece. */
+.sc-wrap {
+  container-type: inline-size;
+  width: 100%;
+  max-width: 38rem;
+  margin-inline: auto;
+}
+.sc {
+  --t0: 650ms;
+  --t1: 1000ms;
+  --t2: 900ms;
+  position: relative;
+  aspect-ratio: 100 / 86;
+  font-size: 2.4cqw;
+  color: var(--color-night);
+}
+.sc > * {
+  position: absolute;
+}
+.sc-chat {
+  left: 0;
+  top: 3%;
+  width: 46%;
+  display: grid;
+  gap: 0.8em;
+  rotate: -2deg;
+}
+.sc-chat .mvs-b {
+  width: 88%;
+}
+.sc-chat .mvs-b-out {
+  justify-self: end;
+}
+.sc-sheet {
+  left: 18%;
+  top: 35%;
+  width: 56%;
+  rotate: 1.2deg;
+  z-index: 2;
+}
+.sc-agent {
+  right: 0;
+  top: 0;
+  width: 46%;
+  padding: 1.2em;
+  border-radius: 1.5em;
+  background: #fff;
+  rotate: 2deg;
+  z-index: 3;
+  box-shadow: 0 2em 3em -1.6em rgb(0 0 0 / 0.6);
+}
+.sc-agent .mv-agent-head {
+  gap: 1em;
+}
+.sc-agent .mv-avatar {
+  width: 3em;
+  height: 3em;
+  border-radius: 0.9em;
+}
+.sc-agent .mv-agent-lines {
+  gap: 0.65em;
+}
+.sc-agent .mv-line {
+  height: 0.7em;
+  border-radius: 0.35em;
+}
+.sc-agent .mv-agent-foot {
+  gap: 1em;
+  margin-top: 1.2em;
+}
+.sc-agent .mv-approve {
+  min-height: 2.8em;
+  padding-inline: 1.4em;
+  font-size: 1em;
+}
+.sc-agent .mv-check {
+  width: 2.4em;
+  height: 2.4em;
+}
+.sc-agent .mv-check::after {
+  left: 0.85em;
+  top: 0.4em;
+  width: 0.5em;
+  height: 1em;
+  border-width: 0 0.22em 0.22em 0;
+}
+.sc-report {
+  left: 0;
+  bottom: 0;
+  width: 27%;
+  height: 28%;
+  padding-top: 1.2em;
+}
+.sc-web {
+  right: 1%;
+  bottom: 0;
+  width: 38%;
+  padding: 1em;
+  border-radius: 1.4em;
+  background: #fff;
+  z-index: 3;
+  box-shadow: 0 2em 3em -1.6em rgb(0 0 0 / 0.6);
+}
+.sc-web-bar {
+  display: block;
+  width: 46%;
+  height: 0.7em;
+  margin-bottom: 0.9em;
+  border-radius: 0.35em;
+  background: #9aa0a8;
+}
+.sc-web-hero {
+  display: block;
+  height: 5.6em;
+  border-radius: 0.9em;
+  background: var(--color-night);
+}
+.sc-web-line {
+  display: block;
+  width: 68%;
+  height: 0.6em;
+  margin-top: 0.9em;
+  border-radius: 0.3em;
+  background: #d3d6db;
+}
+.sc-web-phone {
+  position: absolute;
+  right: -0.9em;
+  bottom: -1.2em;
+  width: 4.6em;
+  height: 7.8em;
+  padding: 0.6em;
+  border-radius: 1.2em;
+  background: var(--color-night);
+  box-shadow: 0 1em 1.6em -0.6em rgb(0 0 0 / 0.6), 0 0 0 0.2em #fff;
+}
+.sc-web-phone i {
+  display: block;
+  height: 100%;
+  border-radius: 0.7em;
+  background: var(--color-accent);
+}
+.sc-sensor {
+  right: 3%;
+  top: 31%;
+  width: 21%;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+}
+.sc-sensor .mv-ring {
+  inset: 0;
+  margin: auto;
+  border-width: 0.25em;
+}
+.sc-sensor .mv-ring:nth-child(1) {
+  width: 46%;
+  height: 46%;
+}
+.sc-sensor .mv-ring:nth-child(2) {
+  width: 72%;
+  height: 72%;
+}
+.sc-sensor .mv-ring:nth-child(3) {
+  width: 100%;
+  height: 100%;
+}
+.sc-sensor .mv-node {
+  width: 2.4em;
+  height: 2.4em;
+  border-radius: 0.8em;
+}
+.sc-sensor .mv-node::after {
+  inset: 0.7em;
+}
+@media (max-width: 639px) {
+  .sc-wrap {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-play='armed'] .sc-sheet,
+  [data-play='armed'] .sc-agent,
+  [data-play='armed'] .sc-web {
+    transform: translateY(3em);
+  }
+  [data-play='play'] .sc-sheet {
+    animation: slide-up-big 800ms var(--ease-out-soft) 450ms both;
+  }
+  [data-play='play'] .sc-agent {
+    animation: slide-up-big 800ms var(--ease-out-soft) 150ms both;
+  }
+  [data-play='play'] .sc-web {
+    animation: slide-up-big 800ms var(--ease-out-soft) 900ms both;
+  }
+}
+
 @keyframes draw-x {
   from {
     transform: scaleX(0);
@@ -1604,6 +1955,25 @@ a.cell-link::after {
     transform: scaleY(0.12);
   }
   to {
+    transform: none;
+  }
+}
+@keyframes draw-y {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes bump {
+  0% {
+    transform: scale(0);
+  }
+  70% {
+    transform: scale(1.35);
+  }
+  100% {
     transform: none;
   }
 }
@@ -1678,8 +2048,26 @@ a.cell-link::after {
 
 @media (prefers-reduced-motion: no-preference) {
   /* armed: the "before" frame, set by script only when it will also play */
-  [data-play='armed'] .mv-trow {
+  [data-play='armed'] .mvs-b {
+    transform: translateX(-2em);
+  }
+  [data-play='armed'] .mvs-b-out {
+    transform: translateX(2em);
+  }
+  [data-play='armed'] .mvs-flow {
+    transform: scaleY(0);
+  }
+  [data-play='armed'] .mvs-flow b {
+    transform: scale(0);
+  }
+  [data-play='armed'] .mvs-row {
     transform: scaleX(0);
+  }
+  [data-play='armed'] .mvs-invoice {
+    transform: translateY(3em);
+  }
+  [data-play='armed'] .mvs-stock i {
+    transform: scaleY(0.12);
   }
   [data-play='armed'] .mv-bars i {
     transform: scaleY(0.12);
@@ -1704,20 +2092,32 @@ a.cell-link::after {
     transform: translate(86px, 72px);
   }
 
-  [data-play='play'] .mv-trow {
-    animation: draw-x 700ms var(--ease-out-soft) both;
+  [data-play='play'] .mvs-b {
+    animation: slide-l 700ms var(--ease-spring) both;
   }
-  [data-play='play'] .mv-flow-row:nth-child(2) .mv-trow {
-    animation-delay: 180ms;
+  [data-play='play'] .mvs-b-out {
+    animation-name: slide-r;
+    animation-delay: 160ms;
   }
-  [data-play='play'] .mv-flow-row:nth-child(3) .mv-trow {
-    animation-delay: 360ms;
+  [data-play='play'] .mvs-chat > :nth-child(3) {
+    animation-delay: 320ms;
   }
-  [data-play='play'] .mv-flow-row:nth-child(4) .mv-trow {
-    animation-delay: 540ms;
+  [data-play='play'] .mvs-flow {
+    animation: draw-y 700ms var(--ease-out-soft) 500ms both;
   }
-  [data-play='play'] .mv-flow-row:nth-child(5) .mv-trow {
-    animation-delay: 720ms;
+  [data-play='play'] .mvs-flow b {
+    animation: bump 500ms var(--ease-spring) 1150ms both;
+  }
+  [data-play='play'] .mvs-row {
+    animation: draw-x 600ms var(--ease-out-soft) both;
+    animation-delay: calc(var(--t0, 1150ms) + var(--r) * 130ms);
+  }
+  [data-play='play'] .mvs-invoice {
+    animation: slide-up-big 800ms var(--ease-spring) var(--t2, 1800ms) both;
+  }
+  [data-play='play'] .mvs-stock i {
+    animation: rise-y 800ms var(--ease-out-soft) both;
+    animation-delay: calc(var(--t1, 2000ms) + var(--i) * 90ms);
   }
   [data-play='play'] .mv-bars i {
     animation: rise-y 800ms var(--ease-out-soft) both;
@@ -1795,6 +2195,50 @@ a.cell-link::after {
   }
 }
 
+/* A coloured bar behind a section heading that wipes out to full width as the
+   section scrolls into view. The text is always readable: on a light band the
+   bar is lime and the type is near-black (15.6:1 on the bar, 17.1:1 on the page
+   behind it), so every moment of the wipe is safe. On a dark band the bar is a
+   raised slate and the type is white (10.1:1 on the bar, 17.1:1 on the night
+   behind it). Without scroll-driven animation the bar is simply full width. */
+.title-band {
+  --bar: var(--color-accent);
+  position: relative;
+  isolation: isolate;
+  padding: clamp(12px, 1.7vw, 22px) clamp(18px, 2.6vw, 34px) clamp(14px, 1.9vw, 24px);
+  border-radius: clamp(20px, 3vw, 34px);
+  color: var(--color-ink);
+}
+.title-band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--bar);
+  transform-origin: left center;
+}
+.on-night .title-band {
+  --bar: var(--color-hair);
+}
+@keyframes band-wipe {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: none;
+  }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .title-band::before {
+      animation: band-wipe linear both;
+      animation-timeline: view();
+      animation-range: entry 8% entry 90%;
+    }
+  }
+}
+
 /* A thin line along the top edge that fills as the page scrolls. Shown only
    where scroll-driven animation exists and motion is not reduced. */
 .scroll-line {
@@ -1817,12 +2261,20 @@ a.cell-link::after {
       top: 0;
       left: 0;
       right: 0;
-      height: 4px;
+      height: 6px;
+      /* Two tones, so it shows on both grounds: the top half is near-black and
+         shows on a light band, the lower half is lime and shows on a dark one. */
       background: var(--color-accent);
       transform-origin: left;
       pointer-events: none;
       animation: line-fill linear both;
       animation-timeline: scroll(root);
+    }
+    .scroll-line::before {
+      content: '';
+      position: absolute;
+      inset: 0 0 3px;
+      background: var(--color-night);
     }
   }
 }
@@ -1890,5 +2342,210 @@ a.cell-link::after {
   .tilt {
     transform: none;
     will-change: auto;
+  }
+}
+
+/* A page head with a picture beside it gives the text a little less room, so the
+   title is set a size down to stay at four lines or fewer. */
+@media (min-width: 1024px) {
+  .page-head:has(.sc-wrap) .headline {
+    font-size: clamp(2.25rem, 4.6vw, 4.25rem);
+  }
+  .sc-wrap {
+    width: calc(100% + 2.5rem);
+    max-width: none;
+    margin-right: -2.5rem;
+  }
+}
+
+/* =========================================================================
+   Phone contact bar: email, Zalo and WhatsApp pinned to the bottom edge.
+   Phones only. It slides in after the first screen and slides out while the
+   footer or the contact rows are on screen, or the menu is open. Hidden means
+   visibility:hidden, so it cannot be focused while it is off screen.
+   ========================================================================= */
+
+.contact-bar {
+  display: none;
+}
+@media (max-width: 767px) {
+  .contact-bar {
+    position: fixed;
+    z-index: 45;
+    left: max(12px, env(safe-area-inset-left));
+    right: max(12px, env(safe-area-inset-right));
+    bottom: max(12px, env(safe-area-inset-bottom));
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.25fr;
+    gap: 4px;
+    padding: 4px;
+    border-radius: 999px;
+    background: var(--color-night);
+    box-shadow:
+      inset 0 0 0 1px rgb(255 255 255 / 0.2),
+      0 2px 2px rgb(19 21 23 / 0.1),
+      0 14px 28px -8px rgb(19 21 23 / 0.5);
+    transform: translateY(calc(100% + 28px));
+    visibility: hidden;
+    transition:
+      transform 300ms var(--ease-out-soft),
+      visibility 0s linear 300ms;
+  }
+  .contact-bar[data-show='true'] {
+    transform: none;
+    visibility: visible;
+    transition-delay: 0s;
+  }
+  html[data-menu-open] .contact-bar {
+    transform: translateY(calc(100% + 28px));
+    visibility: hidden;
+    transition-delay: 0s, 300ms;
+  }
+  .contact-bar a {
+    display: grid;
+    place-items: center;
+    min-height: 48px;
+    padding-inline: 8px;
+    border-radius: 999px;
+    color: #f7f7f8;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    transition:
+      background-color var(--duration-feedback) var(--ease-out-soft),
+      transform var(--duration-feedback) var(--ease-out-soft);
+  }
+  .contact-bar a:hover {
+    background: var(--color-raised);
+  }
+  .contact-bar a:active {
+    transform: scale(0.96);
+    transition-duration: 60ms;
+  }
+  .contact-bar a[data-primary='true'] {
+    background: var(--color-accent);
+    color: var(--color-night);
+  }
+  .contact-bar a[data-primary='true']:hover {
+    background: var(--color-accent-hover);
+  }
+  .contact-bar :focus-visible {
+    outline-color: var(--color-accent);
+    outline-offset: 2px;
+  }
+  .contact-bar a[data-primary='true']:focus-visible {
+    outline-color: #fff;
+  }
+}
+
+/* --- Products head: the two app icons ----------------------------------- */
+
+.marks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 30rem;
+  margin-inline: auto;
+  padding-block: 1rem 2.5rem;
+}
+.mark {
+  display: grid;
+  place-items: center;
+  width: min(50%, 14rem);
+  aspect-ratio: 1;
+  border-radius: 24%;
+  background: var(--app-bg);
+  box-shadow: 0 36px 56px -26px rgb(0 0 0 / 0.75);
+}
+.mark img {
+  width: 58%;
+  height: auto;
+  border-radius: 22%;
+}
+.mark:nth-child(1) {
+  rotate: -6deg;
+  z-index: 1;
+}
+.mark:nth-child(2) {
+  rotate: 5deg;
+  margin-left: -6%;
+  margin-top: 22%;
+}
+.app-card[data-theme='scori'],
+.mark[data-theme='scori'] {
+  --app-bg: #ffe9a6;
+}
+.app-card[data-theme='remoti'],
+.mark[data-theme='remoti'] {
+  --app-bg: #dce2ec;
+}
+
+/* --- Hover, focus and pressed states for what was left without one -------- */
+
+.ticker-btn {
+  transition:
+    background-color var(--duration-feedback) var(--ease-out-soft),
+    transform var(--duration-feedback) var(--ease-out-soft);
+}
+.ticker-btn:hover {
+  background: var(--color-raised);
+}
+.cell:has(a.cell-link):active {
+  transform: translateY(-1px) scale(0.99);
+  transition-duration: 80ms;
+}
+.menu-link {
+  transition:
+    background-color var(--duration-feedback) var(--ease-out-soft),
+    transform var(--duration-feedback) var(--ease-out-soft);
+}
+.menu-link:active {
+  transform: scale(0.98);
+}
+.app-card {
+  transition:
+    transform 260ms var(--ease-out-soft),
+    box-shadow 260ms var(--ease-out-soft);
+}
+.app-card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.14),
+    0 32px 56px -20px rgb(0 0 0 / 0.75);
+}
+.row-card {
+  transition: box-shadow 260ms var(--ease-out-soft);
+}
+.row-card:hover {
+  box-shadow: var(--shadow-lift);
+}
+
+/* Reduced motion: colour and shadow still answer a hover or a press, but
+   nothing moves, so the lift, the lean and the press are switched off. */
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary:hover,
+  .btn-primary:active,
+  .btn-accent:hover,
+  .btn-accent:active,
+  .btn-light:hover,
+  .btn-light:active,
+  .chip:hover,
+  .chip:active,
+  .row-link:hover,
+  .row-link:active,
+  .cell:has(a.cell-link):hover,
+  .cell:has(a.cell-link):active,
+  .app-card:hover,
+  .pill-link:active,
+  .pill-cta:active,
+  .menu-link:active,
+  .ticker-btn:active,
+  .contact-bar a:active {
+    transform: none;
+  }
+  .app-card:hover .phone-slot:nth-child(1),
+  .app-card:hover .phone-slot:nth-child(2) {
+    transform: none;
   }
 }

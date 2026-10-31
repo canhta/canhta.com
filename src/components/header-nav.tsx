@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, usePathname } from '@/i18n/navigation'
 import type { AppPathname } from '@/i18n/routing'
 
@@ -28,12 +28,18 @@ export function HeaderNav({
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
 
+  // The phone contact bar steps aside while the menu is open (see globals.css).
+  useEffect(() => {
+    document.documentElement.toggleAttribute('data-menu-open', open)
+    return () => document.documentElement.removeAttribute('data-menu-open')
+  }, [open])
+
   const lang = (code: 'en' | 'vi') => (
     <Link
       href={pathname}
       locale={code}
       aria-current={locale === code ? 'page' : undefined}
-      className={`grid h-11 min-w-11 place-items-center rounded-full text-[13px] font-bold transition-colors ${
+      className={`grid h-11 min-w-11 place-items-center rounded-full text-[13px] font-bold transition-[color,background-color,transform] active:scale-95 ${
         locale === code ? 'bg-night text-white' : 'text-muted hover:bg-wash hover:text-ink'
       }`}
     >
@@ -77,7 +83,7 @@ export function HeaderNav({
 
         <button
           type="button"
-          className="grid h-11 w-11 shrink-0 place-items-center rounded-full hover:bg-wash md:hidden"
+          className="grid h-11 w-11 shrink-0 place-items-center rounded-full transition-[background-color,transform] hover:bg-wash active:scale-95 md:hidden"
           aria-expanded={open}
           aria-controls="menu-panel"
           aria-label={open ? labels.closeMenu : labels.menu}

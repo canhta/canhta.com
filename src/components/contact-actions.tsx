@@ -19,7 +19,7 @@ export function ContactActions({ locale }: { locale: Locale }) {
   const mail = mailContact(locale)
 
   return (
-    <div className="rows">
+    <div className="rows" data-no-bar>
       <a href={mail.href} className="row-link" data-primary="true">
         <span>{messages.contact.email}</span>
         <small translate="no">{mail.address}</small>

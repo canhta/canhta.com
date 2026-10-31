@@ -4,7 +4,7 @@ import { getMessages } from '@/i18n/messages'
 import { Closing } from '@/components/closing'
 import { PageHeader } from '@/components/page-header'
 import { PageShell } from '@/components/page-shell'
-import { AppsFull } from '@/components/products'
+import { AppMarks, AppsFull } from '@/components/products'
 import { PublicProjects } from '@/components/public-projects'
 import { pageMetadata } from '@/lib/metadata'
 import { buildGraph } from '@/lib/structured-data'
@@ -21,7 +21,7 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
 
   return (
     <PageShell locale={locale} jsonLd={buildGraph(locale, 'products')}>
-      <PageHeader title={copy.h1} intro={copy.intro} />
+      <PageHeader title={copy.h1} intro={copy.intro} visual={<AppMarks locale={locale} />} />
       <AppsFull locale={locale} />
       <PublicProjects locale={locale} />
       <Closing locale={locale} />

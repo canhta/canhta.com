@@ -19,7 +19,7 @@ export function Answers({ locale }: { locale: Locale }) {
   return (
     <section aria-labelledby="answers-title" className="band sheet ground-tint">
       <div className="shell grid gap-10 lg:grid-cols-12 lg:gap-14">
-        <h2 id="answers-title" className="title reveal lg:col-span-4 lg:text-[clamp(2rem,3.4vw,3rem)]">
+        <h2 id="answers-title" className="title-band title reveal self-start lg:col-span-4 lg:text-[clamp(2rem,3.4vw,3rem)]">
           {heading}
         </h2>
         <dl className="reveal lg:col-span-8">

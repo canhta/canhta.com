@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import type { Locale } from '@/content/types'
+import { ContactBar } from './contact-bar'
 import { SiteFooter } from './site-footer'
 import { SiteHeader } from './site-header'
 
@@ -32,6 +33,7 @@ export function PageShell({
         {children}
       </main>
       <SiteFooter locale={locale} />
+      <ContactBar locale={locale} />
     </>
   )
 }
