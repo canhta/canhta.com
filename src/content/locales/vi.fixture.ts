@@ -4,8 +4,9 @@ import type { ContentCopy } from '../types'
 export const viContent: ContentCopy = {
   profile: {
     location: 'Việt Nam',
-    hook: 'Số hóa công việc, AI lo việc lặp lại.',
-    supporting: 'Cho cửa hàng và doanh nghiệp nhỏ. Đơn hàng và hàng tồn về một hệ thống, AI lo các bước lặp lại.',
+    hook: 'Đơn hàng chỉ phải nhập một lần.',
+    supporting:
+      'Đơn hàng, kho và công nợ nằm chung một hệ thống, không ai phải gõ lại. Sau đó AI đọc tin nhắn và hóa đơn, ghi sẵn vào đó, chờ một người duyệt.',
     headerCta: 'Nhắn chúng tôi',
     availabilityLabel: 'Đang nhận dự án mới',
   },
@@ -30,7 +31,7 @@ export const viContent: ContentCopy = {
     },
     {
       slug: 'copycat-skills',
-      tagline: 'Xem thị trường trước khi làm app.',
+      tagline: 'Xem thị trường trước khi triển khai app.',
       summary:
         'Công cụ cho trợ lý AI lập trình. Tìm đối thủ và nhu cầu, rồi gợi ý nên làm, nên dừng hay nên đổi hướng.',
       availability: 'Mã nguồn trên GitHub.',
@@ -40,38 +41,43 @@ export const viContent: ContentCopy = {
     {
       id: 'systems',
       name: 'Hệ thống quản lý',
-      detail: 'ERP và CRM cho đơn hàng, kho, công nợ và báo cáo.',
-      examples: ['ERP', 'CRM', 'đơn hàng và kho', 'công nợ'],
+      detail:
+        'Nhập đơn một lần, kho tự trừ và công nợ của khách tự cập nhật. Ai nghe điện thoại cũng thấy ngay khách từng mua gì và đang nợ bao nhiêu.',
+      examples: ['ERP', 'CRM'],
     },
     {
       id: 'ai',
       name: 'AI agent và chatbot',
-      detail: 'AI đọc đơn hàng và hóa đơn, soạn câu trả lời cho nhân viên và tìm trong tài liệu của bạn.',
-      examples: ['Chatbot trả lời khách', 'đọc đơn hàng và hóa đơn', 'báo cáo hằng tuần'],
+      detail:
+        'Khách hỏi giá hay còn hàng không trên tin nhắn, AI soạn sẵn câu trả lời từ bảng giá của bạn. Hóa đơn nhà cung cấp thì AI đọc vào hệ thống và báo khi tổng tiền không khớp.',
+      examples: ['AI agent', 'Chatbot trả lời khách', 'Trả lời từ tài liệu của bạn'],
     },
     {
       id: 'data',
       name: 'Số liệu và báo cáo',
-      detail: 'Gom số liệu bán hàng, kho và khách từ Excel và các app thành một báo cáo.',
-      examples: ['Bảng số liệu', 'báo cáo hằng tuần', 'dọn file Excel lộn xộn'],
+      detail:
+        'Số liệu bán hàng, kho và khách từ Excel và các app, gom thành một báo cáo tự cập nhật. Sáng thứ Hai bạn xem được tình hình mà không phải hỏi ai.',
+      examples: ['Bảng số liệu', 'Dọn file Excel lộn xộn'],
     },
     {
       id: 'web',
       name: 'Website và ứng dụng',
-      detail: 'Website, ứng dụng web và ứng dụng điện thoại, cho việc kinh doanh hoặc ý tưởng của bạn.',
-      examples: ['Website', 'ứng dụng web', 'ứng dụng iPhone và Android'],
+      detail:
+        'Website cho khách đặt hàng hoặc đặt lịch, đơn về thẳng hệ thống của bạn. Cũng triển khai ứng dụng web và điện thoại cho ý tưởng riêng của bạn.',
+      examples: [],
     },
     {
       id: 'iot',
       name: 'Thiết bị kết nối (IoT)',
       detail:
-        'Bảng theo dõi và cảnh báo cho cảm biến bán sẵn, như nhiệt độ và độ ẩm (số đo thường ngày, không có chứng nhận).',
-      examples: ['Nhiệt độ và độ ẩm', 'bảng theo dõi', 'cảnh báo'],
+        'Cảm biến bán sẵn gửi nhiệt độ và độ ẩm về một màn hình, và bạn nhận cảnh báo khi số đo vượt mức bạn đặt. Số đo thường ngày, không có chứng nhận.',
+      examples: [],
     },
     {
       id: 'team',
       name: 'Hỗ trợ đội kỹ thuật của bạn',
-      detail: 'Chúng tôi làm cùng đội của bạn, hoặc nhận một phần việc, trên hệ thống bạn đang dùng.',
+      detail:
+        'Chúng tôi tham gia cùng đội của bạn một thời gian, hoặc nhận riêng một phần việc triển khai, như ứng dụng điện thoại hay phần nối hai hệ thống. Làm việc trên hệ thống bạn đang dùng, theo cách đội bạn quen.',
       examples: [],
     },
   ],
@@ -79,34 +85,37 @@ export const viContent: ContentCopy = {
     {
       id: 'pricing',
       question: 'Tính tiền thế nào?',
-      answer: 'Bạn nhận kế hoạch và báo giá trước khi chúng tôi làm. Bắt đầu bằng bản chạy thử nhỏ, ổn mới làm tiếp.',
+      answer:
+        'Báo giá đi cùng kế hoạch, trước khi triển khai. Sau bản chạy thử nhỏ, bạn quyết định có trả tiền cho phần tiếp theo hay không.',
     },
     {
       id: 'timeline',
       question: 'Làm mất bao lâu?',
-      answer: 'Kế hoạch ghi rõ bản chạy thử đầu tiên làm trong bao lâu.',
+      answer: 'Kế hoạch ghi rõ thời gian, từng phần một.',
     },
     {
-      id: 'existing',
-      question: 'Có thật sự cần làm phần mềm riêng không?',
-      answer: 'Nhiều khi không. Nếu phần mềm bán sẵn đã đủ dùng, chúng tôi sẽ nói.',
+      id: 'apps',
+      question: 'Các app tôi đang dùng có nối được không?',
+      answer:
+        'Thường là được, như file Excel, Zalo hay phần mềm bán hàng. Kế hoạch ghi rõ chỗ nào nối được, chỗ nào không.',
     },
     {
       id: 'agent',
       question: 'Tôi cần AI agent, hay chỉ cần chatbot?',
       answer:
-        'Chatbot trả lời tin nhắn. AI agent còn làm các bước trong hệ thống của bạn, và nhiều khi chatbot là đủ.',
+        'Chatbot trả lời câu hỏi theo bảng giá của bạn. AI agent còn làm việc trong hệ thống, như tạo đơn hay cập nhật kho, và nhiều khi chatbot là đủ.',
     },
     {
       id: 'wrong',
       question: 'AI có thể sai. Ai kiểm tra?',
       answer:
-        'Một người cụ thể, chốt từ đầu, duyệt mọi việc tốn tiền hoặc làm thay đổi đơn hàng và thông tin đã lưu. Chatbot nói chuyện với khách chỉ trả lời theo thông tin bạn đã đưa.',
+        'Một người cụ thể, chốt từ đầu, duyệt mọi việc tốn tiền hoặc làm thay đổi đơn hàng và thông tin đã lưu. Mọi bước AI làm đều được ghi lại.',
     },
     {
       id: 'customers',
       question: 'AI có nhắn tin với khách của tôi được không?',
-      answer: 'Được. AI nói rõ đây là trả lời tự động, và chuyển cho nhân viên khi không chắc hoặc khi khách muốn.',
+      answer:
+        'Được. AI nói rõ đây là trả lời tự động, chỉ trả lời theo thông tin bạn đã đưa, và chuyển cho nhân viên khi không chắc hoặc khi khách muốn.',
     },
     {
       id: 'data',
@@ -122,7 +131,7 @@ export const viContent: ContentCopy = {
     {
       id: 'idea',
       question: 'Tôi mới có ý tưởng thôi thì sao?',
-      answer: 'Vẫn được. Cho biết bạn muốn làm gì và cho ai dùng, chúng tôi bắt đầu từ bản nhỏ nhất.',
+      answer: 'Vẫn được. Cho biết bạn muốn làm gì và ai sẽ dùng, chúng tôi cùng tính bản đầu tiên cần có gì.',
     },
   ],
 }

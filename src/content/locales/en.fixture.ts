@@ -4,8 +4,9 @@ import type { ContentCopy } from '../types'
 export const enContent: ContentCopy = {
   profile: {
     location: 'Vietnam',
-    hook: 'Digitise your work. Let AI do the routine.',
-    supporting: 'For shops and small businesses. Orders and stock in one system, then AI for the routine steps.',
+    hook: 'Enter each order once.',
+    supporting:
+      'Orders, stock and debts get one record, so nobody retypes them. Then AI reads messages and invoices and fills in the record for a person to approve.',
     headerCta: 'Talk to us',
     availabilityLabel: 'Taking on new projects',
   },
@@ -40,38 +41,43 @@ export const enContent: ContentCopy = {
     {
       id: 'systems',
       name: 'Business systems',
-      detail: 'ERP and CRM for orders, stock, who owes what and reports.',
-      examples: ['ERP', 'CRM', 'orders and stock', 'who owes what'],
+      detail:
+        "Enter an order once and stock drops and the customer's balance updates. A customer's past orders and what they owe sit on one screen for whoever picks up the phone.",
+      examples: ['ERP', 'CRM'],
     },
     {
       id: 'ai',
       name: 'AI agents and chatbots',
-      detail: 'AI that reads orders and invoices, drafts replies for your staff and answers from your own documents.',
-      examples: ['Customer chatbots', 'reading orders and invoices', 'weekly reports'],
+      detail:
+        'A customer asks about price or stock in chat, and AI drafts the answer from your own price list. It also reads supplier invoices into the record and flags a total that does not add up.',
+      examples: ['AI agents', 'Customer chatbots', 'Answers from your own documents'],
     },
     {
       id: 'data',
       name: 'Reports and dashboards',
-      detail: 'Sales, stock and customer figures from your spreadsheets and apps, in one report.',
-      examples: ['Dashboards', 'weekly reports', 'tidying messy spreadsheets'],
+      detail:
+        'Sales, stock and customer figures from your spreadsheets and apps, in one report that refreshes by itself. On Monday morning you see where you stand without asking anyone.',
+      examples: ['Dashboards', 'Tidying messy spreadsheets'],
     },
     {
       id: 'web',
       name: 'Websites and apps',
-      detail: 'Websites, web apps and phone apps, for your business or your own idea.',
-      examples: ['Websites', 'web apps', 'iPhone and Android apps'],
+      detail:
+        'A website where customers order or book, and the order lands straight in your system. Also web and phone apps for your own idea.',
+      examples: [],
     },
     {
       id: 'iot',
       name: 'Connected devices (IoT)',
       detail:
-        'A dashboard and alerts for off-the-shelf sensors, such as temperature and humidity (everyday readings, not certified).',
-      examples: ['Temperature and humidity', 'dashboard', 'alerts'],
+        'Off-the-shelf sensors send temperature and humidity to one screen, and you get an alert when a reading passes your limit. Everyday readings, not certified.',
+      examples: [],
     },
     {
       id: 'team',
       name: 'Extra hands for your team',
-      detail: 'We join your team or take one piece of the work, on the systems you already use.',
+      detail:
+        'We join your team for a while, or take one piece, such as a phone app or a link between two systems. We work on the systems you already use and follow how your team works.',
       examples: [],
     },
   ],
@@ -80,38 +86,40 @@ export const enContent: ContentCopy = {
       id: 'pricing',
       question: 'How do you price work?',
       answer:
-        'You get a plan and a price before we build. We start with a small working version and go on only if it works.',
+        'A quote comes with the plan, before we build. After the small working version, you decide whether to pay for the next part.',
     },
     {
       id: 'timeline',
       question: 'How long will it take?',
-      answer: 'The plan says how long the first small version takes.',
+      answer: 'The plan says how long it takes, part by part.',
     },
     {
-      id: 'existing',
-      question: 'Do we really need custom software?',
-      answer: 'Often not. If software you can buy does the job, we will say so.',
+      id: 'apps',
+      question: 'Can you connect the apps I already use?',
+      answer:
+        'Often yes, such as Excel files, Zalo and sales software. The plan says which links work and which do not.',
     },
     {
       id: 'agent',
       question: 'Do I need an AI agent, or is a chatbot enough?',
       answer:
-        'A chatbot answers messages. An agent also does steps in your systems, and often a chatbot is enough.',
+        'A chatbot answers questions from your price list. An agent also acts in your system, such as creating an order record or updating stock, and often a chatbot is enough.',
     },
     {
       id: 'wrong',
       question: 'AI can be wrong. Who checks?',
       answer:
-        'A named person, agreed at the start, approves anything that costs money or changes an order or record. A customer chatbot only answers from the information you gave it.',
+        'A named person, agreed at the start, approves anything that costs money or changes an order or record. Every step the agent takes is logged.',
     },
     {
       id: 'customers',
       question: 'Can AI chat with my customers?',
-      answer: 'Yes. It says it is automated and hands over to a person when unsure or asked.',
+      answer:
+        'Yes. It says it is automated, answers only from the information you gave it, and hands over to a person when unsure or asked.',
     },
     {
       id: 'data',
-      question: 'What happens to my customers\' information when AI is used?',
+      question: "What happens to my customers' information when AI is used?",
       answer:
         'We collect only what the project needs, and agree up front which AI service receives what and who owns it. We cannot give legal advice.',
     },
@@ -123,7 +131,8 @@ export const enContent: ContentCopy = {
     {
       id: 'idea',
       question: 'What if I only have an idea?',
-      answer: 'That is fine. Tell us what it is and who it is for, and we start with the smallest useful version.',
+      answer:
+        'That is fine. Tell us what it is and who will use it, and we work out what the first version needs.',
     },
   ],
 }

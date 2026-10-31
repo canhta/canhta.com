@@ -53,8 +53,8 @@
   },
   "services": {
     "h1": "Digital transformation, software and AI for small businesses",
-    "intro": "We put work that lives in chats and spreadsheets into one system, then add AI for the routine steps.",
-    "processHeading": "How a project works",
+    "intro": "Software first, AI agents after. AI works well only when the records are clean, so we go in this order.",
+    "processHeading": "How a project runs",
     "faqHeading": "Questions"
   },
   "apps": {
@@ -64,7 +64,7 @@
   },
   "contact": {
     "h1": "Tell us how your business runs",
-    "body": "We reply within one working day, and you get a plan and a price before we build anything.",
+    "body": "We reply within one working day.",
     "helpHeading": "If you can, mention",
     "help": [
       "Who will use it",
@@ -84,23 +84,23 @@
     "steps": [
       {
         "id": "problem",
-        "label": "Tell us what is slowing you down",
-        "detail": "A few lines is enough."
+        "label": "You pick the first job",
+        "detail": "The one that costs the most time or money."
       },
       {
         "id": "map",
-        "label": "We look at how you do it now",
-        "detail": "Who does what, and where time goes."
+        "label": "We follow one order to payment",
+        "detail": "Every step, who does it, and where it is retyped."
       },
       {
         "id": "plan",
-        "label": "You get a plan and a price",
-        "detail": "What we reuse, what we build. Agreed first."
+        "label": "You get a plan and a quote",
+        "detail": "What we reuse, what we build, in what order. Agreed first."
       },
       {
         "id": "build",
         "label": "We build a small working version",
-        "detail": "Real information, one job at a time."
+        "detail": "Real orders first. More parts, and AI, only where they help."
       }
     ]
   },
@@ -110,7 +110,7 @@
   },
   "closing": {
     "heading": "Which job takes most of your week?",
-    "body": "A few lines is enough, and we reply within one working day.",
+    "body": "A few lines is enough.",
     "cta": "Talk to us"
   },
   "footer": {
@@ -151,7 +151,7 @@
   "metadata": {
     "home": {
       "title": "Digital transformation and AI for small businesses | Canh Ta",
-      "description": "We bring hand-typed orders, chats and spreadsheets into one system for small businesses. AI does the routine steps and a person approves what matters."
+      "description": "One record for every order, customer and debt, so nothing is retyped. Then AI reads messages and invoices and a person approves. For small businesses."
     },
     "services": {
       "title": "Custom software, ERP, CRM and AI for small businesses | Canh Ta",
