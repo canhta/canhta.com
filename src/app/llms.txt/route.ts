@@ -1,4 +1,6 @@
 import { getSiteContent } from '@/content'
+import { getMessages } from '@/i18n/messages'
+import { PAGE_PATH, pageUrl } from '@/lib/metadata'
 
 /**
  * /llms.txt — the emerging convention (llmstxt.org) for handing a language model
@@ -14,12 +16,11 @@ import { getSiteContent } from '@/content'
  */
 export const dynamic = 'force-static'
 
-const PAGES: [string, string][] = [
-  ['Home', 'https://canhta.com'],
-  ['Services', 'https://canhta.com/services'],
-  ['Products', 'https://canhta.com/products'],
-  ['Contact', 'https://canhta.com/contact'],
-]
+const PAGE_KEYS = Object.keys(PAGE_PATH) as (keyof typeof PAGE_PATH)[]
+
+/** The four pages of one language, named in that language. */
+const pages = (locale: 'en' | 'vi') =>
+  PAGE_KEYS.map((key) => `- [${getMessages(locale).nav[key]}](${pageUrl(locale, key)})`)
 
 export function GET() {
   const l = 'en' as const
@@ -53,11 +54,15 @@ export function GET() {
     '',
     '## Pages',
     '',
-    ...PAGES.map(([name, href]) => `- [${name}](${href})`),
+    ...pages('en'),
+    '',
+    '## Tiếng Việt',
+    '',
+    ...pages('vi'),
     '',
     '## What we build for others',
     '',
-    ...offers.map((o) => `- **${o.name}**: ${sentence(o.detail)}${o.examples.length ? ` Includes ${o.examples.join(', ')}.` : ''}`),
+    ...offers.map((o) => `- **${o.name}**: ${sentence(o.detail)}`),
     '',
     '## Some of our products and public projects',
     '',
@@ -74,11 +79,6 @@ export function GET() {
     '',
     email ? `- Email: ${email}` : null,
     ...links.map((s) => `- ${NETWORK[s.network] ?? s.network}: ${s.url}`),
-    '',
-    '---',
-    '',
-    'This file is generated from the site content. Nothing in it is a claim that',
-    'cannot be checked against a link above.',
     '',
   ]
 

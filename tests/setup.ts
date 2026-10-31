@@ -12,16 +12,7 @@ import { afterEach, beforeEach, vi } from 'vitest'
  * the network.
  */
 
-/**
- * `fetchStars` calls the GitHub API at build time and fails soft to an empty
- * map. Left unstubbed, every render of `Work` in this suite made a real request
- * to api.github.com: slow, rate-limited, and a test that passes or fails
- * depending on whether GitHub is reachable.
- *
- * Rejecting is the honest stub. It exercises the fail-soft path, which is the
- * path a rate-limited production build takes, and it means no star count is
- * asserted against a number that could change tomorrow.
- */
+/** No test may depend on the network, so a stray fetch rejects. */
 beforeEach(() => {
   vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('network disabled in tests')))
 })

@@ -1,6 +1,7 @@
 import { setRequestLocale } from 'next-intl/server'
 import type { Locale } from '@/content/types'
 import { About } from '@/components/about'
+import { HomeQuestions } from '@/components/answers'
 import { Closing } from '@/components/closing'
 import { Hero } from '@/components/hero'
 import { OfferCards } from '@/components/offers'
@@ -30,6 +31,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
       <Hero locale={locale} />
       <Ticker words={home.scope} label={home.servicesHeading} pause={home.scopePause} />
       <OfferCards locale={locale} />
+      <HomeQuestions locale={locale} />
       <AppsTeaser locale={locale} />
       <About locale={locale} />
       <Closing locale={locale} />

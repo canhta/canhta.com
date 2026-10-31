@@ -26,6 +26,12 @@ import { pageUrl } from '@/lib/metadata'
 
 const SITE = 'https://canhta.com'
 
+/** Vietnam first: that is where the small businesses we write for are. */
+const AREA_SERVED = [
+  { '@type': 'Country', name: 'Vietnam' },
+  { '@type': 'Place', name: 'Worldwide' },
+]
+
 export type GraphPage = 'home' | 'services' | 'products' | 'contact'
 
 function appType(build: Build): string {
@@ -61,7 +67,7 @@ export function buildGraph(locale: Locale, page: GraphPage = 'home') {
     name: profile.name,
     url: SITE,
     description: profile.supporting,
-    areaServed: { '@type': 'Place', name: 'Worldwide' },
+    areaServed: AREA_SERVED,
     knowsLanguage: ['vi', 'en'],
     address: { '@type': 'PostalAddress', addressCountry: 'VN' },
     ...(email ? { email } : {}),
@@ -77,7 +83,7 @@ export function buildGraph(locale: Locale, page: GraphPage = 'home') {
           description: o.detail,
           serviceType: o.name,
           provider: { '@id': serviceId },
-          areaServed: { '@type': 'Place', name: 'Worldwide' },
+          areaServed: AREA_SERVED,
         },
       })),
     },

@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import type { Build, Locale } from '@/content/types'
-import { statusLabel } from '@/lib/status'
 import { BuildLinkButton } from './build-link'
 import { PhoneShot } from './phone-shot'
 import { Tilt } from './tilt'
@@ -59,13 +58,12 @@ export function AppCard({
         {variant === 'full' ? <p className="cell-muted mt-2 text-[15px] leading-relaxed">{build.summary}</p> : null}
 
         <p className="mt-5 text-[14px] leading-snug">
-          <span className="font-extrabold text-accent">{statusLabel(build.status, locale)}.</span>{' '}
           <span className="cell-muted">{build.availability}</span>
         </p>
         <ul className="mt-5 flex flex-wrap gap-2">
           {build.links.map((link) => (
             <li key={link.kind}>
-              <BuildLinkButton link={link} locale={locale} stars={{}} />
+              <BuildLinkButton link={link} locale={locale} />
             </li>
           ))}
         </ul>
