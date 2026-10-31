@@ -14,13 +14,13 @@ export const enContent: ContentCopy = {
     {
       slug: 'scori',
       tagline: 'Keep score at card and board games.',
-      summary: 'Add players, enter points, see who leads. Friends follow along with a QR code.',
+      summary: 'Add players, enter points, see who leads. Works offline. Friends follow along with a QR code.',
       availability: 'iPhone and Android, 10 languages.',
     },
     {
       slug: 'remoti',
       tagline: 'Your iPhone as a remote for Android TV and Google TV.',
-      summary: 'Buttons and a touch pad.',
+      summary: 'Buttons, a touch pad and typing from your iPhone keyboard.',
       availability: 'iPhone only.',
     },
     {

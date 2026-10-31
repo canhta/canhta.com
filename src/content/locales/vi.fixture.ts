@@ -14,13 +14,13 @@ export const viContent: ContentCopy = {
     {
       slug: 'scori',
       tagline: 'Ghi điểm khi chơi bài và board game.',
-      summary: 'Thêm người chơi, ghi điểm, xem ai dẫn đầu. Bạn bè xem điểm bằng mã QR.',
+      summary: 'Thêm người chơi, ghi điểm, xem ai dẫn đầu. Không cần mạng. Bạn bè xem điểm bằng mã QR.',
       availability: 'iPhone và Android, 10 ngôn ngữ.',
     },
     {
       slug: 'remoti',
       tagline: 'Dùng iPhone điều khiển Android TV hoặc Google TV.',
-      summary: 'Có nút bấm và vùng vuốt.',
+      summary: 'Có nút bấm, vùng vuốt và gõ chữ bằng bàn phím iPhone.',
       availability: 'Chỉ dành cho iPhone.',
     },
     {
