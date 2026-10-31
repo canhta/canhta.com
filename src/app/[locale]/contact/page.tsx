@@ -2,6 +2,7 @@ import { setRequestLocale } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
+import { Breadcrumb } from '@/components/breadcrumb'
 import { ContactActions } from '@/components/contact-actions'
 import { PageHeader } from '@/components/page-header'
 import { PageShell } from '@/components/page-shell'
@@ -21,7 +22,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
 
   return (
     <PageShell locale={locale} jsonLd={buildGraph(locale, 'contact')}>
-      <PageHeader title={copy.h1} intro={copy.body}>
+      <PageHeader title={copy.h1} intro={copy.body} crumb={<Breadcrumb locale={locale} page="/contact" />}>
         <ContactActions locale={locale} />
       </PageHeader>
 

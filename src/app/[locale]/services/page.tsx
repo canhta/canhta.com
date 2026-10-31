@@ -1,6 +1,7 @@
 import { setRequestLocale } from 'next-intl/server'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
+import { Breadcrumb } from '@/components/breadcrumb'
 import { Answers } from '@/components/answers'
 import { Closing } from '@/components/closing'
 import { ServiceCollage } from '@/components/mini-visuals'
@@ -26,6 +27,7 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
       <PageHeader
         title={copy.h1}
         intro={copy.intro}
+        crumb={<Breadcrumb locale={locale} page="/services" />}
         visual={<ServiceCollage approve={getMessages(locale).home.approve} />}
       />
       <OfferList locale={locale} />

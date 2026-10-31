@@ -14,11 +14,14 @@ export function PageHeader({
   intro,
   children,
   visual,
+  crumb,
 }: {
   title: string
   intro: string
   children?: ReactNode
   visual?: ReactNode
+  /** The breadcrumb, above the title. */
+  crumb?: ReactNode
 }) {
   const side = children ?? visual
   return (
@@ -27,6 +30,7 @@ export function PageHeader({
         className={`shell ${side ? `grid gap-8 lg:grid-cols-12 lg:gap-12 ${children ? 'lg:items-end' : 'lg:items-center'}` : ''}`}
       >
         <div className={side ? 'lg:col-span-7' : ''}>
+          {crumb}
           <h1 className="headline max-w-[16ch]">
             <Words text={title} load />
           </h1>

@@ -4,6 +4,7 @@ import { getLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
+import { getPathname } from '@/i18n/navigation'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 
@@ -15,7 +16,8 @@ export default async function NotFound() {
   const requested = await getLocale()
   const locale: Locale = hasLocale(routing.locales, requested) ? requested : 'en'
   const home = locale === 'en' ? '/' : '/vi'
-  const copy = getMessages(locale).notFound
+  const messages = getMessages(locale)
+  const copy = messages.notFound
 
   return (
     <>
@@ -40,6 +42,16 @@ export default async function NotFound() {
               {copy.home}
             </Link>
           </div>
+
+          <ul className="mt-6 flex flex-wrap gap-x-6">
+            {(['/services', '/products', '/contact'] as const).map((path) => (
+              <li key={path}>
+                <Link href={getPathname({ locale, href: path })} className="crumb-link">
+                  {messages.nav[path.slice(1) as 'services' | 'products' | 'contact']}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </main>
 

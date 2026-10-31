@@ -2,6 +2,7 @@ import { setRequestLocale } from 'next-intl/server'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
 import { Closing } from '@/components/closing'
+import { Breadcrumb } from '@/components/breadcrumb'
 import { PageHeader } from '@/components/page-header'
 import { PageShell } from '@/components/page-shell'
 import { AppMarks, AppsFull } from '@/components/products'
@@ -21,7 +22,12 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
 
   return (
     <PageShell locale={locale} jsonLd={buildGraph(locale, 'products')}>
-      <PageHeader title={copy.h1} intro={copy.intro} visual={<AppMarks locale={locale} />} />
+      <PageHeader
+        title={copy.h1}
+        intro={copy.intro}
+        crumb={<Breadcrumb locale={locale} page="/products" />}
+        visual={<AppMarks locale={locale} />}
+      />
       <AppsFull locale={locale} />
       <PublicProjects locale={locale} />
       <Closing locale={locale} />
