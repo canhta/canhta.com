@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, usePathname } from '@/i18n/navigation'
 import type { AppPathname } from '@/i18n/routing'
 
@@ -27,6 +27,12 @@ export function HeaderNav({
 }) {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
+
+  // The phone contact bar steps aside while the menu is open (see globals.css).
+  useEffect(() => {
+    document.documentElement.toggleAttribute('data-menu-open', open)
+    return () => document.documentElement.removeAttribute('data-menu-open')
+  }, [open])
 
   const lang = (code: 'en' | 'vi') => (
     <Link

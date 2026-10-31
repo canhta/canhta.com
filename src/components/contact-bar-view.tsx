@@ -1,0 +1,57 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+
+/**
+ * The compact contact bar for phones: email, Zalo and WhatsApp as three big
+ * targets pinned to the bottom of the screen. It stays out of the way:
+ * it appears only after the visitor has scrolled past the first screen, and it
+ * steps aside whenever the page already shows its own contact block (the
+ * footer, the contact rows), and while the menu is open (the header sets
+ * `data-menu-open` on <html>; see globals.css). Anything on the page that
+ * carries `data-no-bar` hides it while it is on screen. Labels and links arrive
+ * as props; this file never imports content.
+ */
+export type BarItem = { key: string; label: string; href: string; external: boolean; note?: string }
+
+export function ContactBarView({ label, items }: { label: string; items: BarItem[] }) {
+  const [scrolled, setScrolled] = useState(false)
+  const [blocked, setBlocked] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 240)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    if (typeof IntersectionObserver === 'undefined') return
+    const seen = new Set<Element>()
+    const io = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) seen.add(entry.target)
+        else seen.delete(entry.target)
+      }
+      setBlocked(seen.size > 0)
+    })
+    document.querySelectorAll('[data-no-bar]').forEach((el) => io.observe(el))
+    return () => io.disconnect()
+  }, [])
+
+  return (
+    <nav aria-label={label} className="contact-bar" data-show={scrolled && !blocked}>
+      {items.map((item) => (
+        <a
+          key={item.key}
+          href={item.href}
+          data-primary={item.key === 'email' ? 'true' : undefined}
+          {...(item.external ? { target: '_blank', rel: 'noreferrer noopener' } : {})}
+        >
+          <span translate={item.key === 'email' ? undefined : 'no'}>{item.label}</span>
+          {item.note ? <span className="sr-only">{item.note}</span> : null}
+        </a>
+      ))}
+    </nav>
+  )
+}

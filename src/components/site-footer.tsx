@@ -33,7 +33,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="sheet ground-night on-night pt-[calc(var(--space)*0.8)] pb-10">
+    <footer data-no-bar className="sheet ground-night on-night pt-[calc(var(--space)*0.8)] pb-10">
       <div className="shell">
         <p className="mb-3 text-[14px] font-bold text-dim">{messages.footer.write}</p>
         <a

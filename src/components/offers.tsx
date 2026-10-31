@@ -96,7 +96,7 @@ export function OfferCards({ locale }: { locale: Locale }) {
   return (
     <section aria-labelledby="offers-title" className="band sheet ground-tint">
       <div className="shell">
-        <div className="reveal flex flex-wrap items-end justify-between gap-x-10 gap-y-6">
+        <div className="title-band reveal flex flex-wrap items-center justify-between gap-x-10 gap-y-6">
           <h2 id="offers-title" className="headline max-w-[14ch]">
             {copy.servicesHeading}
           </h2>
