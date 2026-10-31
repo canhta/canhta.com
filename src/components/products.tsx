@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
@@ -53,5 +54,24 @@ export function AppsFull({ locale }: { locale: Locale }) {
         </ul>
       </div>
     </section>
+  )
+}
+
+/**
+ * The head of the products page: the two apps' own icons, large, on the colour
+ * each app already wears on its panel below. Decorative, so no text and no alt.
+ */
+export function AppMarks({ locale }: { locale: Locale }) {
+  const marks = getSiteContent(locale).builds.filter((b) => b.shots?.length && b.logo)
+  if (marks.length === 0) return null
+
+  return (
+    <div className="marks" aria-hidden="true">
+      {marks.map((build) => (
+        <span key={build.slug} className="mark" data-theme={build.slug}>
+          <Image src={build.logo!} alt="" width={256} height={256} />
+        </span>
+      ))}
+    </div>
   )
 }

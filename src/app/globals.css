@@ -1046,12 +1046,6 @@ a.cell-link::after {
   border-bottom: 0;
   box-shadow: 0 -10px 30px -10px rgb(19 21 23 / 0.45);
 }
-.app-card[data-theme='scori'] {
-  --app-bg: #ffe9a6;
-}
-.app-card[data-theme='remoti'] {
-  --app-bg: #dce2ec;
-}
 
 @utility phone {
   overflow: hidden;
@@ -2442,5 +2436,116 @@ a.cell-link::after {
   }
   .contact-bar a[data-primary='true']:focus-visible {
     outline-color: #fff;
+  }
+}
+
+/* --- Products head: the two app icons ----------------------------------- */
+
+.marks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 30rem;
+  margin-inline: auto;
+  padding-block: 1rem 2.5rem;
+}
+.mark {
+  display: grid;
+  place-items: center;
+  width: min(50%, 14rem);
+  aspect-ratio: 1;
+  border-radius: 24%;
+  background: var(--app-bg);
+  box-shadow: 0 36px 56px -26px rgb(0 0 0 / 0.75);
+}
+.mark img {
+  width: 58%;
+  height: auto;
+  border-radius: 22%;
+}
+.mark:nth-child(1) {
+  rotate: -6deg;
+  z-index: 1;
+}
+.mark:nth-child(2) {
+  rotate: 5deg;
+  margin-left: -6%;
+  margin-top: 22%;
+}
+.app-card[data-theme='scori'],
+.mark[data-theme='scori'] {
+  --app-bg: #ffe9a6;
+}
+.app-card[data-theme='remoti'],
+.mark[data-theme='remoti'] {
+  --app-bg: #dce2ec;
+}
+
+/* --- Hover, focus and pressed states for what was left without one -------- */
+
+.ticker-btn {
+  transition:
+    background-color var(--duration-feedback) var(--ease-out-soft),
+    transform var(--duration-feedback) var(--ease-out-soft);
+}
+.ticker-btn:hover {
+  background: var(--color-raised);
+}
+.cell:has(a.cell-link):active {
+  transform: translateY(-1px) scale(0.99);
+  transition-duration: 80ms;
+}
+.menu-link {
+  transition:
+    background-color var(--duration-feedback) var(--ease-out-soft),
+    transform var(--duration-feedback) var(--ease-out-soft);
+}
+.menu-link:active {
+  transform: scale(0.98);
+}
+.app-card {
+  transition:
+    transform 260ms var(--ease-out-soft),
+    box-shadow 260ms var(--ease-out-soft);
+}
+.app-card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.14),
+    0 32px 56px -20px rgb(0 0 0 / 0.75);
+}
+.row-card {
+  transition: box-shadow 260ms var(--ease-out-soft);
+}
+.row-card:hover {
+  box-shadow: var(--shadow-lift);
+}
+
+/* Reduced motion: colour and shadow still answer a hover or a press, but
+   nothing moves, so the lift, the lean and the press are switched off. */
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary:hover,
+  .btn-primary:active,
+  .btn-accent:hover,
+  .btn-accent:active,
+  .btn-light:hover,
+  .btn-light:active,
+  .chip:hover,
+  .chip:active,
+  .row-link:hover,
+  .row-link:active,
+  .cell:has(a.cell-link):hover,
+  .cell:has(a.cell-link):active,
+  .app-card:hover,
+  .pill-link:active,
+  .pill-cta:active,
+  .menu-link:active,
+  .ticker-btn:active,
+  .contact-bar a:active {
+    transform: none;
+  }
+  .app-card:hover .phone-slot:nth-child(1),
+  .app-card:hover .phone-slot:nth-child(2) {
+    transform: none;
   }
 }
