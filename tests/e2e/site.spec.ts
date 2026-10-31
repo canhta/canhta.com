@@ -282,9 +282,48 @@ for (const locale of ['en', 'vi'] as const) {
   test(`[${locale}] the footer offers email, Zalo and WhatsApp together`, async ({ page }) => {
     await page.goto(contact)
     const footer = page.locator('footer')
-    await expect(footer.locator('a[href^="mailto:"]')).toHaveCount(1)
+    // The headline address and the email row both open the same draft.
+    expect(await footer.locator('a[href^="mailto:"]').count()).toBeGreaterThanOrEqual(1)
     await expect(footer.locator('a[href*="zalo.me"]')).toHaveCount(1)
     await expect(footer.locator('a[href*="wa.me"]')).toHaveCount(1)
+  })
+}
+
+for (const locale of ['en', 'vi'] as const) {
+  const contact = locale === 'en' ? '/contact' : '/vi/lien-he'
+  const rows = [
+    { brand: 'email', href: 'a[href^="mailto:"]' },
+    { brand: 'zalo', href: 'a[href*="zalo.me"]' },
+    { brand: 'whatsapp', href: 'a[href*="wa.me"]' },
+  ] as const
+
+  // Each channel shows its logo tile (decorative) next to a visible text label.
+  for (const place of ['.rows', 'footer'] as const) {
+    test(`[${locale}] ${place}: each contact channel shows its logo and a visible label`, async ({ page }) => {
+      await page.goto(contact)
+      for (const { brand, href } of rows) {
+        const link = page.locator(`${place} ${href}:has(svg[data-brand="${brand}"])`).first()
+        await expect(link, brand).toBeVisible()
+        await expect(link.locator('svg[data-brand]')).toHaveAttribute('aria-hidden', 'true')
+        const label = (await link.innerText()).trim()
+        expect(label.length, `${brand} has a visible label`).toBeGreaterThan(2)
+        if (brand !== 'email') expect(label.toLowerCase()).toContain(brand)
+      }
+    })
+  }
+
+  test(`[${locale}] phone contact bar: each channel shows its logo and a visible label`, async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 })
+    await page.goto(locale === 'en' ? '/' : '/vi')
+    await page.evaluate(() => window.scrollTo(0, 700))
+    const bar = page.locator('nav.contact-bar')
+    await expect(bar).toBeVisible()
+    for (const { brand, href } of rows) {
+      const link = bar.locator(`${href}:has(svg[data-brand="${brand}"])`)
+      await expect(link, brand).toBeVisible()
+      expect((await link.innerText()).trim().length, `${brand} label`).toBeGreaterThan(2)
+      expect((await link.boundingBox())?.height ?? 0).toBeGreaterThanOrEqual(44)
+    }
   })
 }
 
