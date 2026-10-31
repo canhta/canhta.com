@@ -110,7 +110,12 @@ export function Visual({ id, approve }: { id: string; approve: string }) {
             <span className="mv-line" />
             <span className="mv-line" />
             <span className="mv-phone">
-              <i />
+              <i>
+                <b />
+                <b />
+                <b />
+                <b />
+              </i>
             </span>
           </div>
         </InView>
