@@ -36,6 +36,14 @@ describe.each(LOCALES)('buildGraph(%s)', (locale) => {
     expect(JSON.stringify(graph).match(/areaServed/g)).toHaveLength(1)
   })
 
+  it('gives the provider a logo URL and a contact point an agent can read', () => {
+    const [provider] = nodesOfType(graph, 'ProfessionalService')
+    expect(provider).toMatchObject({
+      logo: { '@type': 'ImageObject', url: 'https://www.canhta.com/apple-icon' },
+      contactPoint: { '@type': 'ContactPoint', email: 'hello@canhta.com' },
+    })
+  })
+
   it('serialises to valid JSON', () => {
     const json = JSON.stringify(graph)
     expect(() => JSON.parse(json) as unknown).not.toThrow()
