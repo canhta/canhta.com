@@ -358,7 +358,7 @@ export function mountDesk(host: HTMLElement, labels: DeskLabels, still = false):
 
   // The whole desk (about 10 by 9 units) stays in frame at any stage shape: the
   // camera keeps its angle and steps back when the stage is narrow.
-  const dir = new THREE.Vector3(0.08, 0.66, 0.75).normalize()
+  const dir = new THREE.Vector3(0.06, 0.82, 0.57).normalize()
   // Each object's own corners (not one box around all of them, whose empty
   // corners would make the camera step back too far).
   scene.updateMatrixWorld(true)
@@ -387,7 +387,7 @@ export function mountDesk(host: HTMLElement, labels: DeskLabels, still = false):
       camera.updateMatrixWorld()
       const fits = corners.every((c) => {
         probe.copy(c).project(camera)
-        return Math.abs(probe.x) < 0.94 && Math.abs(probe.y) < 0.92
+        return Math.abs(probe.x) < 0.94 && probe.y < 0.92 && probe.y > -0.8
       })
       if (fits) break
     }
