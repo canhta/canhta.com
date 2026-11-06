@@ -35,6 +35,18 @@ const LIME_CSS = '#d1fe17'
 
 type Draw = (ctx: CanvasRenderingContext2D, w: number, h: number) => void
 
+/** The words of the static drawing, so the scene says the same thing. */
+export type SceneLabels = { sources: string[]; title: string; rows: string[]; tag: string }
+
+// The page's own face (Be Vietnam Pro), read from the body once fonts are in.
+let FONT = 'sans-serif'
+function label(ctx: CanvasRenderingContext2D, text: string, x: number, y: number, size: number, color: string) {
+  ctx.fillStyle = color
+  ctx.font = `700 ${size}px ${FONT}`
+  ctx.textBaseline = 'middle'
+  ctx.fillText(text, x, y)
+}
+
 function texture(w: number, h: number, draw: Draw): THREE.CanvasTexture {
   const canvas = document.createElement('canvas')
   canvas.width = w
@@ -54,17 +66,17 @@ function bar(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: 
   ctx.fill()
 }
 
-const chatFace: Draw = (ctx, w, h) => {
+const chatFace = (name: string): Draw => (ctx, w) => {
   ctx.fillStyle = '#fff'
-  ctx.fillRect(0, 0, w, h)
-  bar(ctx, 40, 50, w * 0.55, 34, SOFT)
-  bar(ctx, 40, 100, w * 0.4, 34, SOFT)
+  ctx.fillRect(0, 0, w, 384)
+  label(ctx, name, 40, 52, 44, NIGHT)
+  bar(ctx, 40, 110, w * 0.55, 34, SOFT)
   bar(ctx, w * 0.35, 170, w * 0.58, 34, NIGHT)
   bar(ctx, w * 0.5, 220, w * 0.43, 34, NIGHT)
   bar(ctx, 40, 290, w * 0.5, 34, SOFT)
 }
 
-const sheetFace: Draw = (ctx, w, h) => {
+const sheetFace = (name: string): Draw => (ctx, w, h) => {
   ctx.fillStyle = '#fff'
   ctx.fillRect(0, 0, w, h)
   ctx.fillStyle = SOFT
@@ -85,20 +97,24 @@ const sheetFace: Draw = (ctx, w, h) => {
   }
   ctx.fillStyle = LIME_CSS
   ctx.fillRect(w / 4 + 6, 120, w / 4 - 12, 44)
+  ctx.fillStyle = SOFT
+  ctx.fillRect(0, 0, w, 56)
+  label(ctx, name, 24, 30, 36, NIGHT)
 }
 
-const paperFace: Draw = (ctx, w, h) => {
+const paperFace = (name: string): Draw => (ctx, w, h) => {
   ctx.fillStyle = '#fff'
   ctx.fillRect(0, 0, w, h)
-  for (let i = 0; i < 8; i++) bar(ctx, 44, 52 + i * 44, i % 3 === 2 ? w * 0.5 : w * 0.78, 16, LINE)
+  label(ctx, name, 44, 60, 40, NIGHT)
+  for (let i = 0; i < 7; i++) bar(ctx, 44, 112 + i * 44, i % 3 === 2 ? w * 0.5 : w * 0.78, 16, LINE)
 }
 
-const hubFace: Draw = (ctx, w, h) => {
+const hubFace = (l: SceneLabels): Draw => (ctx, w, h) => {
   ctx.fillStyle = '#fff'
   ctx.fillRect(0, 0, w, h)
   ctx.fillStyle = SOFT
   ctx.fillRect(0, 0, w, 70)
-  bar(ctx, 36, 26, w * 0.34, 20, NIGHT)
+  label(ctx, l.title, 36, 37, 34, NIGHT)
   for (let i = 0; i < 3; i++) {
     const y = 110 + i * 78
     ctx.fillStyle = '#f1f2f4'
@@ -116,7 +132,7 @@ const hubFace: Draw = (ctx, w, h) => {
     ctx.lineTo(69, y + 36)
     ctx.lineTo(80, y + 22)
     ctx.stroke()
-    bar(ctx, 108, y + 21, w * (0.42 - i * 0.06), 16, LINE)
+    label(ctx, l.rows[i] ?? '', 108, y + 30, 30, NIGHT)
   }
   const base = h - 70
   ;[0.5, 0.8, 0.62, 1].forEach((v, i) => {
@@ -146,7 +162,12 @@ function card(w: number, h: number, face: THREE.CanvasTexture, depth = 0.16): TH
   return group
 }
 
-export function mountScene(host: HTMLElement, onContext?: (lost: boolean) => void): (() => void) | null {
+export function mountScene(
+  host: HTMLElement,
+  labels: SceneLabels,
+  onContext?: (lost: boolean) => void,
+): (() => void) | null {
+  FONT = getComputedStyle(document.body).fontFamily || FONT
   let renderer: THREE.WebGLRenderer
   try {
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' })
@@ -179,15 +200,15 @@ export function mountScene(host: HTMLElement, onContext?: (lost: boolean) => voi
     root.add(g)
     cards.push({ group: g, baseY: y, phase })
   }
-  const chat = card(2.2, 1.65, track(texture(512, 384, chatFace)))
-  const sheet = card(2.5, 1.75, track(texture(512, 384, sheetFace)))
-  const paper = card(1.8, 2.2, track(texture(384, 448, paperFace)))
+  const chat = card(2.2, 1.65, track(texture(512, 384, chatFace(labels.sources[0] ?? ''))))
+  const sheet = card(2.5, 1.75, track(texture(512, 384, sheetFace(labels.sources[1] ?? ''))))
+  const paper = card(1.8, 2.2, track(texture(384, 448, paperFace(labels.sources[2] ?? ''))))
   place(chat, -2.55, 3.3, -0.08, 0.3, 0)
   place(sheet, 0.1, 3.55, 0.05, 0, 2.1)
   place(paper, 2.65, 3.25, -0.06, -0.3, 4.2)
 
   // ---- Hub, right
-  const hub = card(3.2, 3.9, track(texture(512, 624, hubFace)), 0.24)
+  const hub = card(3.2, 3.9, track(texture(512, 624, hubFace(labels))), 0.24)
   const HUB_Y = -1.75
   hub.position.set(0, HUB_Y, 0)
   hub.rotation.y = 0

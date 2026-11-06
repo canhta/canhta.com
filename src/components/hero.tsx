@@ -39,7 +39,7 @@ export function Hero({ locale }: { locale: Locale }) {
           </a>
         </p>
       </div>
-      <HeroScene label={copy.visual.label} className="hero-stage">
+      <HeroScene label={copy.visual.label} labels={copy.visual} className="hero-stage">
         <HeroVisual locale={locale} />
       </HeroScene>
     </section>

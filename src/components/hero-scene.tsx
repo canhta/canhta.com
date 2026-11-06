@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { afterLoadAndIdle } from '@/lib/idle'
+import type { SceneLabels } from './hero-scene-three'
 
 /**
  * Wraps the static hero drawing and, when the browser can and should, replaces
@@ -13,13 +14,17 @@ import { afterLoadAndIdle } from '@/lib/idle'
 export function HeroScene({
   children,
   label,
+  labels,
   className,
 }: {
   children: ReactNode
   label: string
+  labels: SceneLabels
   className?: string
 }) {
   const host = useRef<HTMLDivElement>(null)
+  // The words never change for a page, so the scene reads them once.
+  const words = useRef(labels)
   const [live, setLive] = useState(false)
 
   useEffect(() => {
@@ -51,7 +56,7 @@ export function HeroScene({
           if (mine !== run) return
           // The scene tells us when the GPU takes its context away, so the drawing
           // comes back while the canvas cannot paint.
-          dispose = mountScene(el, (lost) => setLive(!lost))
+          dispose = mountScene(el, words.current, (lost) => setLive(!lost))
           if (dispose) setLive(true)
         })
       cancelWait()

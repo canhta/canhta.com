@@ -9,7 +9,7 @@ import { mountScene } from '@/components/hero-scene-three'
 describe('hero scene without WebGL', () => {
   it('returns null and adds nothing to the page', () => {
     const host = document.createElement('div')
-    expect(mountScene(host)).toBeNull()
+    expect(mountScene(host, { sources: [], title: '', rows: [], tag: '' })).toBeNull()
     expect(host.children).toHaveLength(0)
   })
 })
