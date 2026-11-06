@@ -3,7 +3,7 @@ import { Link } from '@/i18n/navigation'
 import { getSiteContent } from '@/content'
 import type { Locale, Offer } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
-import { Visual } from './mini-visuals'
+import { Visual, type Pics } from './mini-visuals'
 import { Words } from './words'
 
 /**
@@ -33,12 +33,12 @@ const GROUND: Record<string, Ground> = {
 function Cell({
   offer,
   mode,
-  approve,
+  pics,
   Heading,
 }: {
   offer: Offer
   mode: 'home' | 'page'
-  approve: string
+  pics: Pics
   Heading: 'h2' | 'h3'
 }) {
   const big = offer.id === 'systems' || offer.id === 'ai'
@@ -77,7 +77,7 @@ function Cell({
       data-tilt={mode === 'home' ? '' : undefined}
       className="cell"
     >
-      <Visual id={offer.id} approve={approve} />
+      <Visual id={offer.id} pics={pics} />
       {body}
     </article>
   )
@@ -85,11 +85,12 @@ function Cell({
 
 function OfferBento({ locale, mode }: { locale: Locale; mode: 'home' | 'page' }) {
   const { offers } = getSiteContent(locale)
-  const approve = getMessages(locale).home.approve
+  const home = getMessages(locale).home
+  const pics = { ...home.pics, approve: home.approve }
   return (
     <div className={mode === 'home' ? 'bento bento-home' : 'bento'}>
       {offers.map((offer) => (
-        <Cell key={offer.id} offer={offer} mode={mode} approve={approve} Heading={mode === 'home' ? 'h3' : 'h2'} />
+        <Cell key={offer.id} offer={offer} mode={mode} pics={pics} Heading={mode === 'home' ? 'h3' : 'h2'} />
       ))}
     </div>
   )

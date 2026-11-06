@@ -96,8 +96,7 @@ export function HeaderNav({
 
         <a href={phone.href} className="pill-cta min-[360px]:ml-1" aria-label={`${cta} ${phone.display}`}>
           <span className="max-[479px]:hidden">{cta}</span>
-          <span className="hidden lg:inline" translate="no">
-            {' '}
+          <span className="ml-1.5 hidden lg:inline" translate="no">
             {phone.display}
           </span>
           <span className="hidden max-[479px]:inline" aria-hidden="true">

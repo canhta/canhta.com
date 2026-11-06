@@ -382,7 +382,7 @@ a.cell-link:active {
 .mv-avatar,
 .mv-phone,
 .mv-browser-hero,
-.mv-ring,
+.mv-tile-alert,
 .mv-blocks i,
 .mvs-invoice,
 .mvs-sheet,
@@ -418,10 +418,9 @@ a.cell-link:active {
   .cell:is(:hover, :has(:focus-visible)) .mv-browser-hero {
     scale: 1.04;
   }
-  /* iot: the rings pulse outwards one after another. */
-  .cell:is(:hover, :has(:focus-visible)) .mv-ring {
-    scale: calc(1.04 + var(--i) * 0.06);
-    transition-delay: calc(var(--i) * 70ms);
+  /* iot: the alert lifts. */
+  .cell:is(:hover, :has(:focus-visible)) .mv-tile-alert {
+    translate: 0 -3px;
   }
   /* team: the two blocks press together and wiggle. */
   .cell:is(:hover, :has(:focus-visible)) .mv-blocks i:first-child {

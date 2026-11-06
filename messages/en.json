@@ -49,7 +49,28 @@
     ],
     "scopePause": "Pause",
     "questionsHeading": "Quick answers",
-    "questionsMore": "More questions"
+    "questionsMore": "More questions",
+    "pics": {
+      "chatIn": "Two boxes, same as last week",
+      "chatOut": "Done, order placed",
+      "chatIn2": "Still in stock?",
+      "cols": [
+        "Order",
+        "Customer",
+        "Owes"
+      ],
+      "invoice": "Invoice",
+      "stock": "Stock",
+      "task": "Enter supplier invoice",
+      "taskNote": "Filled in by AI",
+      "report": "Monday morning",
+      "book": "Book now",
+      "sensor": "Fridge 2",
+      "alert": "Above 5°C",
+      "ours": "Your team",
+      "us": "Us",
+      "reading": "6°C"
+    }
   },
   "services": {
     "h1": "Digital transformation, software and AI for small businesses",

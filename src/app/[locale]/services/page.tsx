@@ -26,7 +26,7 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
       <PageHeader
         title={copy.h1}
         intro={copy.intro}
-        visual={<ServiceCollage approve={getMessages(locale).home.approve} />}
+        visual={<ServiceCollage pics={{ ...getMessages(locale).home.pics, approve: getMessages(locale).home.approve }} />}
       />
       <OfferList locale={locale} />
       <Process locale={locale} />

@@ -49,7 +49,28 @@
     ],
     "scopePause": "Tạm dừng",
     "questionsHeading": "Hỏi nhanh",
-    "questionsMore": "Xem thêm câu hỏi"
+    "questionsMore": "Xem thêm câu hỏi",
+    "pics": {
+      "chatIn": "Lấy 2 thùng như tuần trước nhé",
+      "chatOut": "Dạ, đã lên đơn",
+      "chatIn2": "Còn hàng không em?",
+      "cols": [
+        "Đơn",
+        "Khách",
+        "Nợ"
+      ],
+      "invoice": "Hóa đơn",
+      "stock": "Tồn kho",
+      "task": "Nhập hóa đơn nhà cung cấp",
+      "taskNote": "AI đã điền sẵn",
+      "report": "Sáng thứ Hai",
+      "book": "Đặt lịch",
+      "sensor": "Tủ mát 2",
+      "alert": "Vượt 5°C",
+      "ours": "Đội bạn",
+      "us": "Chúng tôi",
+      "reading": "6°C"
+    }
   },
   "services": {
     "h1": "Chuyển đổi số, phần mềm và AI cho doanh nghiệp nhỏ",
