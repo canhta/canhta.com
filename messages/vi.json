@@ -74,13 +74,18 @@
           "value": "128"
         },
         {
-          "label": "Chưa giao",
-          "value": "6"
-        },
-        {
           "label": "Khách còn nợ",
           "value": "4"
         }
+      ],
+      "reportDays": [
+        "T2",
+        "T3",
+        "T4",
+        "T5",
+        "T6",
+        "T7",
+        "CN"
       ]
     }
   },

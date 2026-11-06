@@ -1578,7 +1578,7 @@ a.cell-link::after {
   filter: drop-shadow(0 0.125em 0.125em rgb(0 0 0 / 0.35));
 }
 
-/* data: the Monday-morning report, three lines anyone can read */
+/* data: the Monday-morning report, a week's chart and two figures */
 .mv-report {
   font-size: clamp(10px, 4.4cqw, 17px);
   display: grid;
@@ -1593,6 +1593,36 @@ a.cell-link::after {
   font-size: 0.8em;
   color: var(--color-muted);
   padding-bottom: 0.6em;
+}
+.mv-chart {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.45em;
+  height: 6.5em;
+  padding-bottom: 0.5em;
+}
+.mv-col {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  justify-items: center;
+  gap: 0.3em;
+  height: 100%;
+}
+.mv-col i {
+  align-self: end;
+  width: 100%;
+  height: var(--h);
+  border-radius: 0.3em 0.3em 0 0;
+  background: #c9cdd3;
+  transform-origin: bottom;
+}
+.mv-col:last-child i {
+  background: var(--color-night);
+}
+.mv-col small {
+  font-size: 0.65em;
+  font-weight: 700;
+  color: var(--color-muted);
 }
 .mv-report-row {
   display: flex;
@@ -1925,6 +1955,13 @@ a.cell-link::after {
   }
   [data-play='armed'] .mv-report-row {
     transform: translateY(0.8em);
+  }
+  [data-play='armed'] .mv-col i {
+    transform: scaleY(0.15);
+  }
+  [data-play='play'] .mv-col i {
+    animation: rise-y 700ms var(--ease-out-soft) both;
+    animation-delay: calc(var(--i) * 60ms);
   }
   [data-play='play'] .mv-report-row {
     animation: slide-up-big 600ms var(--ease-out-soft) both;

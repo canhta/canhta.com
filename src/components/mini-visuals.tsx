@@ -22,6 +22,7 @@ export type Pics = {
   taskNote: string
   report: string
   reportRows: { label: string; value: string }[]
+  reportDays: string[]
   book: string
   sensor: string
   reading: string
@@ -83,6 +84,9 @@ function SensorTile({ pics }: { pics: Pics }) {
     </span>
   )
 }
+
+/** Orders per day in the report picture: illustrative, the last day highest. */
+const CHART = [42, 55, 48, 66, 60, 38, 80]
 
 const times = (n: number) => Array.from({ length: n }, (_, i) => i)
 
@@ -146,6 +150,14 @@ export function Visual({ id, pics }: { id: string; pics: Pics }) {
         <InView className="mv">
           <div className="mv-report">
             <span className="mv-t mv-report-title">{pics.report}</span>
+            <span className="mv-chart">
+              {pics.reportDays.map((day, i) => (
+                <span key={day} className="mv-col" style={{ '--h': `${CHART[i] ?? 50}%`, '--i': i } as CSSProperties}>
+                  <i />
+                  <small>{day}</small>
+                </span>
+              ))}
+            </span>
             {pics.reportRows.map((row, i) => (
               <span key={row.label} className="mv-report-row" style={{ '--i': i } as CSSProperties}>
                 <span className="mv-t">{row.label}</span>

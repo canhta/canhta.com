@@ -74,13 +74,18 @@
           "value": "128"
         },
         {
-          "label": "Not delivered",
-          "value": "6"
-        },
-        {
           "label": "Customers owing",
           "value": "4"
         }
+      ],
+      "reportDays": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat",
+        "Sun"
       ]
     }
   },
