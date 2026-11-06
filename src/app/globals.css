@@ -2436,3 +2436,28 @@ a.cell-link::after {
     scroll-padding-bottom: 88px;
   }
 }
+
+/* FAQ: a question is the row you tap; a plus turns into a minus when open. */
+.faq-q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 44px;
+  padding-block: 16px;
+  cursor: pointer;
+  list-style: none;
+}
+.faq-q::-webkit-details-marker {
+  display: none;
+}
+.faq-q::after {
+  content: '+';
+  flex: none;
+  font-size: 1.4em;
+  line-height: 1;
+  font-weight: 400;
+}
+.faq-item[open] > .faq-q::after {
+  content: '\2212';
+}

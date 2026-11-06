@@ -43,14 +43,13 @@ export function HomeQuestions({ locale }: { locale: Locale }) {
 }
 
 /**
- * Answers, not an accordion. Every one is visible at once: hiding "who owns the
- * code" behind a tap is the wrong move on a page whose job is to remove doubt.
- * The heading sits left on a desktop and the answers run down the right, so
- * this band reads differently from the bento above it.
- *
- * The `dt`/`dd` pairs are wrapped in a grouping element so a screen reader keeps
- * the pairing; a test pins the structure.
+ * Questions as a short list. The first few, the ones people ask before anything
+ * else (price, time, connecting their software), are open; the rest open with a
+ * tap. Native `details`, so it works without script, from the keyboard, and the
+ * closed answers are still in the page for search and for the FAQ JSON-LD.
+ * The heading sits left on a desktop and the answers run down the right.
  */
+const OPEN = 3
 export function Answers({ locale }: { locale: Locale }) {
   const { faq } = getSiteContent(locale)
   if (faq.length === 0) return null
@@ -62,14 +61,19 @@ export function Answers({ locale }: { locale: Locale }) {
         <h2 id="answers-title" className="title-band section-title reveal self-start lg:col-span-4">
           <Words text={heading} />
         </h2>
-        <dl className="faq-list reveal lg:col-span-8">
-          {faq.map((item) => (
-            <div key={item.id} id={`faq-${item.id}`} className="faq-item border-t border-black/15 py-5 first:border-t-0 first:pt-0 lg:first:pt-2">
-              <dt className="subtitle max-w-[40ch]">{item.question}</dt>
-              <dd className="lead mt-3 max-w-[52ch]">{item.answer}</dd>
-            </div>
+        <div className="faq-list reveal lg:col-span-8">
+          {faq.map((item, i) => (
+            <details
+              key={item.id}
+              id={`faq-${item.id}`}
+              open={i < OPEN}
+              className="faq-item border-t border-black/15 first:border-t-0"
+            >
+              <summary className="faq-q subtitle">{item.question}</summary>
+              <p className="lead max-w-[52ch] pb-5">{item.answer}</p>
+            </details>
           ))}
-        </dl>
+        </div>
       </div>
     </section>
   )
