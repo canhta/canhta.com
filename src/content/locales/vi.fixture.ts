@@ -4,9 +4,9 @@ import type { ContentCopy } from '../types'
 export const viContent: ContentCopy = {
   profile: {
     location: 'Việt Nam',
-    hook: 'Số hóa công việc, AI lo việc lặp lại.',
+    hook: 'Zalo, Excel, sổ\u00a0sách về chung một hệ thống.',
     supporting:
-      'Cho cửa hàng và doanh nghiệp nhỏ. Bạn kể vấn đề, chúng tôi cùng bạn tìm giải pháp. Có thể là một sổ chung cho đơn hàng, kho và công nợ, để không ai phải gõ lại.',
+      'Chúng tôi triển khai phần mềm quản lý, website, app và AI agent cho doanh nghiệp nhỏ và cá nhân. AI làm những bước như ghi đơn, nhắc công nợ, trả lời khách, và một người bên bạn duyệt trước khi chạy.',
     headerCta: 'Gọi chúng tôi',
     availabilityLabel: 'Đang nhận dự án mới',
   },
@@ -19,8 +19,8 @@ export const viContent: ContentCopy = {
     },
     {
       slug: 'remoti',
-      tagline: 'Dùng iPhone điều khiển Android TV hoặc Google TV.',
-      summary: 'Có nút bấm, vùng vuốt và gõ chữ bằng bàn phím iPhone.',
+      tagline: 'Dùng iPhone làm điều khiển cho Android TV và Google TV.',
+      summary: 'Có phím bấm, vùng vuốt, và gõ chữ bằng bàn phím iPhone.',
       availability: 'Chỉ dành cho iPhone.',
     },
     {
@@ -33,51 +33,51 @@ export const viContent: ContentCopy = {
       slug: 'copycat-skills',
       tagline: 'Xem thị trường trước khi triển khai app.',
       summary:
-        'Phần mềm bổ sung cho trợ lý AI lập trình. Tìm đối thủ và nhu cầu, rồi gợi ý nên triển khai, nên dừng hay nên đổi hướng.',
+        'Phần mềm bổ sung cho trợ lý AI lập trình. Nó tìm đối thủ và nhu cầu thị trường, rồi gợi ý nên triển khai tiếp, dừng lại hay đổi hướng.',
       availability: 'Mã nguồn trên GitHub.',
     },
   ],
   offers: [
     {
       id: 'systems',
-      name: 'Hệ thống quản lý',
+      name: 'Phần mềm quản lý',
       detail:
-        'Nhập đơn một lần, kho và công nợ của khách cập nhật theo. Ai nghe điện thoại cũng thấy ngay khách từng mua gì và đang nợ bao nhiêu.',
+        'Nhập đơn một lần, kho và công nợ tự cập nhật theo. Khách gọi tới, ai nghe máy cũng thấy ngay khách từng mua gì, còn nợ bao nhiêu.',
       examples: ['ERP', 'CRM'],
     },
     {
       id: 'ai',
       name: 'AI agent và chatbot',
       detail:
-        'Khách hỏi giá hay còn hàng không trên tin nhắn, chatbot trả lời từ bảng giá của bạn. AI có thể đọc hóa đơn nhà cung cấp vào hệ thống để một người kiểm tra. Việc tốn tiền hoặc thay đổi đơn hàng và thông tin đã lưu đều do một người duyệt.',
-      examples: ['AI agent', 'chatbot trả lời khách', 'trả lời từ tài liệu của bạn'],
+        'Khách nhắn hỏi giá, hỏi còn hàng không, chatbot trả lời theo bảng giá bạn đưa. AI cũng đọc được hóa đơn nhà cung cấp và nhập sẵn vào phần mềm, người của bạn chỉ cần kiểm tra lại. Việc gì dính tới tiền, hay sửa đơn hàng, sổ sách, đều phải có người bấm duyệt.',
+      examples: ['AI agent', 'chatbot trả lời khách', 'trả lời theo tài liệu của bạn'],
     },
     {
       id: 'data',
       name: 'Số liệu và báo cáo',
       detail:
-        'Số liệu bán hàng, kho và khách từ các file và app bạn đang dùng, gom thành một báo cáo luôn cập nhật. Sáng thứ Hai bạn xem được tình hình mà không phải hỏi ai.',
-      examples: ['Bảng số liệu', 'dọn file Excel lộn xộn'],
+        'Số bán hàng, tồn kho và khách hàng từ file Excel và các app gom về một báo cáo luôn cập nhật. Sáng thứ Hai mở ra là biết tình hình, không cần đi hỏi từng người.',
+      examples: ['Bảng số liệu', 'sắp xếp lại file Excel'],
     },
     {
       id: 'web',
-      name: 'Website và ứng dụng',
+      name: 'Website và app',
       detail:
-        'Website cho khách đặt hàng hoặc đặt lịch, đơn về thẳng hệ thống của bạn. Cũng triển khai ứng dụng web và điện thoại cho ý tưởng riêng của bạn.',
+        'Website để khách đặt hàng, đặt lịch, đơn về thẳng phần mềm của bạn. Bạn có ý tưởng riêng thì chúng tôi triển khai thành app web hoặc app điện thoại.',
       examples: [],
     },
     {
       id: 'iot',
       name: 'Thiết bị kết nối (IoT)',
       detail:
-        'Cảm biến bán sẵn gửi nhiệt độ và độ ẩm về một màn hình, và bạn nhận cảnh báo khi số đo vượt mức bạn đặt. Số đo thường ngày, không có chứng nhận.',
+        'Cảm biến mua sẵn ngoài thị trường gửi nhiệt độ, độ ẩm về một màn hình. Số đo vượt ngưỡng bạn đặt là có cảnh báo. Số đo này dùng để theo dõi hằng ngày, không thay cho thiết bị đã kiểm định.',
       examples: [],
     },
     {
       id: 'team',
-      name: 'Thêm người cho đội của bạn',
+      name: 'Thêm người cho đội bạn',
       detail:
-        'Chúng tôi tham gia cùng đội của bạn một thời gian, hoặc nhận riêng một phần việc triển khai, như ứng dụng điện thoại hay phần nối hai hệ thống. Chúng tôi dùng hệ thống bạn đang có và theo cách đội bạn quen.',
+        'Chúng tôi vào làm cùng đội của bạn một thời gian, hoặc nhận trọn một phần việc, như app điện thoại hay phần kết nối hai phần mềm. Chúng tôi làm trên hệ thống bạn đang dùng, theo nếp làm việc của đội bạn.',
       examples: [],
     },
   ],
@@ -86,59 +86,59 @@ export const viContent: ContentCopy = {
       id: 'pricing',
       question: 'Chi phí bao nhiêu?',
       answer:
-        'Bạn xem bản chạy thử nhỏ trước, rồi chúng tôi mới đưa báo giá rõ ràng. Báo giá đi kèm kế hoạch có thời gian, cách bảo trì và hỗ trợ.',
+        'Bạn xem bản chạy thử trước. Thấy được việc rồi, chúng tôi mới gửi báo giá cụ thể, kèm kế hoạch, thời gian và cách bảo trì, hỗ trợ.',
     },
     {
       id: 'timeline',
-      question: 'Triển khai mất bao lâu?',
+      question: 'Bao lâu thì xong?',
       answer:
-        'Bản chạy thử nhỏ triển khai trước, nên bạn thấy nó chạy sớm. Kế hoạch đi kèm báo giá ghi thời gian từng phần.',
+        'Bản chạy thử có trước, nên bạn sớm thấy kết quả. Thời gian cho từng phần sau đó được ghi rõ trong kế hoạch đi kèm báo giá.',
     },
     {
       id: 'apps',
-      question: 'Các app tôi đang dùng có nối được không?',
+      question: 'Phần mềm tôi đang dùng có kết nối được không?',
       answer:
-        'Chúng tôi kiểm tra ngay từ lúc tìm hiểu vấn đề, rồi báo bạn chỗ nào nối được.',
+        'Lúc tìm hiểu vấn đề, chúng tôi xem luôn phần nào kết nối được rồi báo bạn.',
     },
     {
       id: 'agent',
-      question: 'Tôi cần AI agent, hay chỉ cần chatbot?',
+      question: 'Tôi cần AI agent hay chatbot là đủ?',
       answer:
-        'Chatbot trả lời câu hỏi. AI agent còn làm các bước trong hệ thống của bạn, có người duyệt. Nhiều khi chatbot là đủ.',
+        'Chatbot thì trả lời câu hỏi. AI agent làm thêm được các bước trong phần mềm của bạn, có người duyệt. Nhiều trường hợp chỉ cần chatbot.',
     },
     {
       id: 'wrong',
-      question: 'AI có thể sai. Ai kiểm tra?',
+      question: 'AI có lúc sai. Ai kiểm tra?',
       answer:
-        'Một người cụ thể, chốt từ đầu, duyệt mọi việc tốn tiền hoặc làm thay đổi đơn hàng và thông tin đã lưu.',
+        'Ngay từ đầu, hai bên thống nhất một người duyệt. Việc gì dính tới tiền, hay sửa đơn hàng, sổ sách, phải qua người đó bấm duyệt.',
     },
     {
       id: 'customers',
-      question: 'AI có nhắn tin với khách của tôi được không?',
+      question: 'AI nhắn tin với khách giúp tôi được không?',
       answer:
-        'Được, với những câu hỏi mà thông tin bạn đưa đã trả lời được. AI nói rõ đây là trả lời tự động, và chuyển cho nhân viên khi không chắc hoặc khi khách muốn.',
+        'Được, nếu câu trả lời có trong thông tin bạn cung cấp. AI nói rõ đây là tin nhắn tự động. Khi không chắc, hoặc khách muốn nói chuyện với người, AI chuyển cho nhân viên của bạn.',
     },
     {
       id: 'data',
       question: 'Thông tin khách hàng của tôi đi đâu khi dùng AI?',
       answer:
-        'Chúng tôi chỉ lấy thông tin dự án cần. Chúng tôi thống nhất trước dịch vụ AI nào nhận thông tin gì, và ai sở hữu thông tin đó. Chúng tôi không tư vấn pháp lý.',
+        'Chúng tôi chỉ lấy thông tin dự án cần. Trước khi bắt đầu, hai bên thống nhất dịch vụ AI nào nhận thông tin gì, và ai là chủ sở hữu. Đây không phải tư vấn pháp lý.',
     },
     {
       id: 'ownership',
-      question: 'Phần mềm triển khai xong là của ai?',
-      answer: 'Của bạn. Mọi thứ đứng tên bạn.',
+      question: 'Làm xong, phần mềm thuộc về ai?',
+      answer: 'Thuộc về bạn. Mọi thứ đều đứng tên bạn.',
     },
     {
       id: 'support',
-      question: 'Sau khi chạy rồi thì sao?',
+      question: 'Đưa vào dùng rồi thì sao?',
       answer:
-        'Cách chúng tôi bảo trì và hỗ trợ nằm trong báo giá, để bạn biết trước khi quyết định.',
+        'Bảo trì và hỗ trợ thế nào được ghi rõ trong báo giá, để bạn biết trước khi quyết định.',
     },
     {
       id: 'idea',
-      question: 'Tôi mới có ý tưởng thôi thì sao?',
-      answer: 'Vẫn được. Cho biết bạn muốn đạt được gì và ai sẽ dùng, chúng tôi cùng tính xem bản chạy thử nhỏ cần có gì.',
+      question: 'Tôi mới chỉ có ý tưởng thì sao?',
+      answer: 'Vẫn được. Bạn cho biết muốn đạt điều gì và ai sẽ dùng, hai bên cùng tính xem bản chạy thử cần những gì.',
     },
   ],
 }

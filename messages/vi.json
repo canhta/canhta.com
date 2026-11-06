@@ -16,16 +16,16 @@
     "primary": "Kể vấn đề của bạn",
     "secondary": "Xem dịch vụ",
     "visual": {
-      "label": "Zalo, Excel và giấy tờ gom về một màn hình. AI lo các bước lặp lại. Một người duyệt mọi việc tốn tiền hoặc thay đổi đơn hàng và thông tin đã lưu.",
+      "label": "Tin nhắn Zalo, file Excel và giấy tờ gom về một màn hình. AI làm các bước lặp lại. Việc gì dính tới tiền, hay sửa đơn hàng, sổ sách, đều có người duyệt.",
       "sources": [
         "Zalo",
         "Excel",
         "Giấy tờ"
       ],
-      "title": "Một chỗ",
+      "title": "Chung một chỗ",
       "rows": [
         "Đơn hàng",
-        "Hàng tồn",
+        "Tồn kho",
         "Khách hàng"
       ],
       "tag": "AI làm, có người duyệt"
@@ -36,7 +36,7 @@
     "servicesHeading": "Dịch vụ của chúng tôi",
     "servicesAll": "Tất cả dịch vụ",
     "appsHeading": "Vài sản phẩm của chúng tôi",
-    "appsAll": "Tất cả sản phẩm",
+    "appsAll": "Xem sản phẩm",
     "approve": "Duyệt",
     "scope": [
       "ERP",
@@ -48,64 +48,63 @@
       "AI agent"
     ],
     "scopePause": "Tạm dừng",
-    "questionsHeading": "Trả lời nhanh",
-    "questionsMore": "Thêm câu hỏi"
+    "questionsHeading": "Hỏi nhanh",
+    "questionsMore": "Xem thêm câu hỏi"
   },
   "services": {
     "h1": "Chuyển đổi số, phần mềm và AI cho doanh nghiệp nhỏ",
-    "intro": "Số hóa trước, AI agent sau. AI chỉ làm tốt khi thông tin trong hệ thống đã gọn và đúng, nên chúng tôi triển khai theo thứ tự này.",
-    "processHeading": "Cách chúng tôi đồng hành",
+    "intro": "Bước đầu là đưa Zalo, Excel, sổ sách về một hệ thống, số liệu đầy đủ và đúng. AI chỉ làm tốt trên số liệu như vậy, nên AI agent đến sau.",
+    "processHeading": "Các bước làm việc",
     "faqHeading": "Câu hỏi thường gặp"
   },
   "apps": {
     "h1": "Vài sản phẩm của chúng tôi",
-    "intro": "App, web và AI do chính chúng tôi triển khai.",
+    "intro": "Những app, trang web và dự án AI chúng tôi tự triển khai.",
     "publicHeading": "Dự án khác"
   },
   "contact": {
     "h1": "Bạn đang gặp vấn đề gì?",
-    "body": "Gọi điện hoặc viết cho chúng tôi, cứ kể theo cách của bạn. Chúng tôi trả lời trong một ngày làm việc, rồi cùng bạn tìm giải pháp.",
-    "helpHeading": "Nếu tiện, cho biết thêm",
+    "body": "Cứ gọi, nhắn tin hay gửi email, kể tự nhiên là được. Chúng tôi trả lời trong một ngày làm việc.",
+    "helpHeading": "Nếu được, cho biết thêm",
     "help": [
-      "Mất bao nhiêu thời gian hoặc tiền",
-      "Ai làm việc này hằng ngày",
-      "Bạn đang dùng gì"
+      "Việc này tốn bao nhiêu thời gian hay tiền",
+      "Ai đang làm việc này hằng ngày",
+      "Bạn đang dùng phần mềm hay sổ sách gì"
     ],
     "channels": "Liên hệ qua",
     "barLabel": "Liên hệ nhanh",
     "chatOn": "Gọi qua",
     "email": "Gửi email",
     "mailSubject": "Vấn đề tôi muốn giải quyết (từ canhta.com)",
-    "mailBody": "Xin chào,\n\nVấn đề tôi muốn giải quyết:\nMất bao nhiêu thời gian hoặc tiền:\nAi làm việc này hằng ngày:\nHiện đang dùng:\n",
+    "mailBody": "Xin chào,\n\nVấn đề tôi muốn giải quyết:\nTốn bao nhiêu thời gian hay tiền:\nAi đang làm việc này hằng ngày:\nĐang dùng phần mềm hay sổ sách gì:\n",
     "nextHeading": "Sau khi bạn liên hệ",
     "call": "Gọi điện",
-    "callAria": "Gọi điện thoại cho chúng tôi",
     "callShort": "Gọi",
-    "next": "Chúng tôi bắt đầu từ một bản chạy thử nhỏ trên việc thật của bạn. Báo giá và kế hoạch đến sau, khi bạn đã thấy nó chạy.",
-    "chatText": "Xin chào, tôi muốn kể vấn đề tôi cần giải quyết (từ canhta.com)."
+    "next": "Trước hết hai bên nói chuyện cho rõ vấn đề. Sau đó chúng tôi triển khai một bản chạy thử nhỏ, chạy trên công việc hằng ngày của bạn. Bạn thấy được việc rồi mới tới báo giá và kế hoạch.",
+    "chatText": "Xin chào, tôi có một vấn đề muốn nhờ giải quyết (từ canhta.com)."
   },
   "process": {
-    "rule": "Nếu phần mềm có sẵn làm được việc, chúng tôi sẽ chỉ bạn dùng nó.",
+    "rule": "Nếu đã có phần mềm làm được việc này, chúng tôi sẽ nói để bạn dùng luôn.",
     "steps": [
       {
         "id": "problem",
         "label": "Bạn kể vấn đề",
-        "detail": "Bắt đầu từ việc tốn nhiều thời gian hoặc tiền nhất."
+        "detail": "Bắt đầu từ việc đang tốn nhiều thời gian hay tiền nhất."
       },
       {
         "id": "map",
-        "label": "Chúng tôi xem việc đang diễn ra",
-        "detail": "Theo một đơn từ tin nhắn đến lúc thu tiền: ai làm, chỗ nào phải gõ lại."
+        "label": "Cùng xem việc thực tế",
+        "detail": "Ví dụ theo một đơn hàng từ lúc khách nhắn tới lúc thu tiền: ai làm bước nào, chỗ nào phải gõ lại."
       },
       {
         "id": "build",
-        "label": "Chúng tôi triển khai bản chạy thử",
-        "detail": "Chạy trên việc thật của bạn, để bạn thấy chúng tôi làm được gì và nó mang lại giá trị gì."
+        "label": "Triển khai bản chạy thử",
+        "detail": "Chạy trên công việc thật của bạn, để bạn thấy chúng tôi làm được gì và giúp bạn được ở đâu."
       },
       {
         "id": "plan",
-        "label": "Rồi báo giá rõ ràng",
-        "detail": "Khi bạn đã thấy nó chạy: báo giá cụ thể, kế hoạch có thời gian, cách bảo trì và hỗ trợ. Rồi mới bàn phần tiếp theo."
+        "label": "Rồi mới báo giá",
+        "detail": "Khi bạn đã thấy kết quả: báo giá cụ thể, kế hoạch có mốc thời gian, cách bảo trì và hỗ trợ. Xong rồi mới bàn tới phần tiếp theo."
       }
     ]
   },
@@ -115,11 +114,10 @@
   },
   "closing": {
     "heading": "Có vấn đề cần giải quyết?",
-    "body": "Chúng tôi nghe trước, rồi cùng bạn tìm giải pháp.",
-    "cta": "Kể vấn đề của bạn"
+    "body": "Kể chúng tôi nghe việc gì đang làm bạn mất thời gian."
   },
   "llms": {
-    "limitsHeading": "Những điều chúng tôi không nêu",
+    "limitsHeading": "Về giá và khách hàng",
     "limits": [
       "Chúng tôi không đăng giá. Bạn nhận báo giá sau khi đã thấy bản chạy thử nhỏ.",
       "Chúng tôi không nêu tên khách hàng và không đăng đánh giá, nhận xét hay lượt tải."
@@ -127,13 +125,13 @@
   },
   "footer": {
     "explore": "Các trang",
-    "write": "Gửi vấn đề của bạn qua email",
+    "write": "Gửi vấn đề qua email",
     "elsewhere": "Kênh khác"
   },
   "notFound": {
     "label": "Không tìm thấy",
-    "heading": "Không có trang nào ở địa chỉ này.",
-    "body": "Kiểm tra lại xem gõ sai không, hoặc quay về trang chủ.",
+    "heading": "Trang này không tồn tại.",
+    "body": "Có thể địa chỉ bị gõ sai. Bạn kiểm tra lại, hoặc về trang chủ.",
     "home": "Về trang chủ"
   },
   "products": {
@@ -163,7 +161,7 @@
   "metadata": {
     "home": {
       "title": "Dịch vụ chuyển đổi số và AI cho doanh nghiệp nhỏ | Canh Ta",
-      "description": "Dịch vụ cho cửa hàng, doanh nghiệp nhỏ: một hệ thống cho đơn hàng, kho và công nợ, rồi AI lo việc lặp lại, có người duyệt. Xem vài sản phẩm của chúng tôi."
+      "description": "Cho doanh nghiệp nhỏ và cá nhân: phần mềm quản lý, website, app, báo cáo và AI agent có người duyệt. Bạn kể vấn đề, chúng tôi cùng tìm cách giải quyết. Xem thêm vài sản phẩm của chúng tôi."
     },
     "services": {
       "title": "Phần mềm, ERP, CRM và AI cho doanh nghiệp nhỏ | Canh Ta",
@@ -171,13 +169,13 @@
     },
     "contact": {
       "title": "Liên hệ: kể vấn đề cần giải quyết | Canh Ta",
-      "description": "Gọi điện hoặc viết qua Zalo, WhatsApp hay email về vấn đề bạn muốn giải quyết. Chúng tôi trả lời trong một ngày làm việc, rồi cùng bạn tìm ra giải pháp."
+      "description": "Gọi điện, nhắn Zalo, WhatsApp hoặc gửi email kể vấn đề bạn muốn giải quyết. Chúng tôi trả lời trong một ngày làm việc, rồi cùng bạn tìm cách giải quyết."
     },
     "offerCatalog": "Dịch vụ của chúng tôi",
     "workList": "Một vài sản phẩm và dự án của chúng tôi",
     "products": {
       "title": "Scori, Remoti và các sản phẩm khác | Canh Ta",
-      "description": "Scori ghi điểm khi chơi bài và board game. Remoti biến iPhone thành điều khiển cho Android TV và Google TV. Cùng vài dự án web và AI khác của chúng tôi."
+      "description": "Scori ghi điểm khi chơi bài và board game. Remoti biến iPhone thành điều khiển cho Android TV và Google TV. Thêm vài dự án web và AI của chúng tôi."
     }
   }
 }

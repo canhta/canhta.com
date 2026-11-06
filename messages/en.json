@@ -16,10 +16,10 @@
     "primary": "Share your problem",
     "secondary": "See services",
     "visual": {
-      "label": "Chat, spreadsheet and paper gathered on one screen. AI does the routine steps. A person approves anything that costs money or changes an order or record.",
+      "label": "Chats, spreadsheets and paper gathered on one screen. AI does the repeat steps. Anything that touches money, or changes an order or your books, waits for a person.",
       "sources": [
-        "Chat",
-        "Spreadsheet",
+        "Chats",
+        "Spreadsheets",
         "Paper"
       ],
       "title": "One place",
@@ -36,7 +36,7 @@
     "servicesHeading": "Our services",
     "servicesAll": "All services",
     "appsHeading": "Some of our products",
-    "appsAll": "All products",
+    "appsAll": "See products",
     "approve": "Approve",
     "scope": [
       "ERP",
@@ -53,19 +53,19 @@
   },
   "services": {
     "h1": "Digital transformation, software and AI for small businesses",
-    "intro": "Digitise first, AI agents after. AI works well only when the information in your system is clean and correct, so we go in this order.",
+    "intro": "First we bring your chats, spreadsheets and paperwork into one system, with numbers that are complete and correct. AI only does well on numbers like that, so AI agents come after.",
     "processHeading": "How we work with you",
     "faqHeading": "Questions"
   },
   "apps": {
     "h1": "Some of our products",
-    "intro": "Apps, web and AI projects of our own.",
+    "intro": "Apps, websites and AI projects we built for ourselves.",
     "publicHeading": "Other projects"
   },
   "contact": {
     "h1": "What problem should we solve?",
-    "body": "Call or write to us in your own words. We reply within one working day, then work out the solution with you.",
-    "helpHeading": "If you can, mention",
+    "body": "Call, message or email us and tell us what is going on. We reply within one working day.",
+    "helpHeading": "It helps to mention",
     "help": [
       "Roughly what it costs you in time or money",
       "Who deals with it each day",
@@ -79,9 +79,8 @@
     "mailBody": "Hi,\n\nThe problem I want to solve:\nRoughly what it costs me in time or money:\nWho deals with it each day:\nWhat I use now:\n",
     "nextHeading": "What happens next",
     "call": "Call us",
-    "callAria": "Call us by phone",
     "callShort": "Call",
-    "next": "We start with a small working version on your real work. A quote and a plan come after you have seen it run.",
+    "next": "First we talk it through until the problem is clear. Then we build a small working version that runs on your everyday work. You see it do the job before any quote or plan.",
     "chatText": "Hi, I would like to talk about a problem I want to solve (from canhta.com)."
   },
   "process": {
@@ -94,18 +93,18 @@
       },
       {
         "id": "map",
-        "label": "We learn how it runs",
-        "detail": "We follow one order from first message to payment: who does each step, and where it is retyped."
+        "label": "We look at the real work",
+        "detail": "For example, we follow one order from first message to payment: who does each step, and where things get typed twice."
       },
       {
         "id": "build",
-        "label": "We build a small version",
-        "detail": "It is a working version that runs on your real work, so you see what we can do and the value it brings."
+        "label": "We build a working version",
+        "detail": "It runs on your real work, so you see what we can do and where it helps."
       },
       {
         "id": "plan",
         "label": "Then a quote and plan",
-        "detail": "Once you have seen it work: a specific quote, a plan with a timeline, and how we maintain and support it. Then we agree the next part."
+        "detail": "Once you have seen it work: a specific quote, a plan with a timeline, and how we maintain and support it. Then we agree on the next part."
       }
     ]
   },
@@ -115,11 +114,10 @@
   },
   "closing": {
     "heading": "Got a problem to solve?",
-    "body": "We listen first, then find the solution with you.",
-    "cta": "Share your problem"
+    "body": "Tell us what is slowing you down. We will look at it with you."
   },
   "llms": {
-    "limitsHeading": "What we do not state",
+    "limitsHeading": "Prices and clients",
     "limits": [
       "We publish no prices. You get a quote after you have seen a small working version.",
       "We name no clients and show no ratings, reviews or download counts."
@@ -163,7 +161,7 @@
   "metadata": {
     "home": {
       "title": "Digital transformation and AI services | Canh Ta",
-      "description": "Services for small businesses: one system for orders, stock and debts, then AI does the routine steps and a person approves. Plus some of our products."
+      "description": "For small businesses and individuals: business software, websites, apps, reports and AI agents with a person approving. Tell us the problem and we work it out with you. Plus some of our products."
     },
     "services": {
       "title": "ERP, CRM and AI for small businesses in Vietnam | Canh Ta",
