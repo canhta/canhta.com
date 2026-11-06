@@ -3,16 +3,14 @@ import { Logo } from './logo'
 import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
-import { mailContact } from '@/lib/contact'
 import { getPages } from '@/lib/pages'
 import { GitHubIcon, LinkedInIcon, XIcon } from './icons'
 import { LangSwitch } from './lang-switch'
 
 /**
- * The colophon, on the night ground. The email address is the headline action.
- * Under it, two columns: the pages, and where to check we are real. The call,
- * Zalo and WhatsApp rows live once, in the closing band or on the contact page,
- * not again here. The bottom bar
+ * The colophon, on the night ground: the pages, and where to check we are
+ * real. Every way to reach us (call, email, Zalo, WhatsApp) lives once, in the
+ * closing band or on the contact page, not again here. The bottom bar
  * carries the copyright on the left and the language switch on the right.
  */
 const ELSEWHERE = [
@@ -24,7 +22,6 @@ const ELSEWHERE = [
 export function SiteFooter({ locale }: { locale: Locale }) {
   const { profile, social } = getSiteContent(locale)
   const messages = getMessages(locale)
-  const mail = mailContact(locale)
   const elsewhere = ELSEWHERE.flatMap((e) => {
     const link = social.find((s) => s.network === e.network)
     return link ? [{ ...e, url: link.url }] : []
@@ -34,20 +31,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
   return (
     <footer data-no-bar className="sheet ground-night on-night pt-[calc(var(--space)*0.6)] pb-6 sm:pt-[calc(var(--space)*0.8)] sm:pb-8">
       <div className="shell">
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-          <div>
-            <p className="mb-3 text-[14px] font-bold text-dim">{messages.footer.write}</p>
-            <a
-              href={mail.href}
-              className="inline-block min-h-11 text-[clamp(1.25rem,1rem+0.8vw,1.75rem)] leading-[1.2] font-bold tracking-[-0.03em] break-all text-white underline decoration-accent decoration-[3px] underline-offset-[0.18em] transition-colors hover:decoration-white active:opacity-70 sm:break-normal"
-              translate="no"
-            >
-              {mail.address}
-            </a>
-          </div>
-        </div>
-
-        <div className="mt-8 grid grid-cols-2 gap-6 border-t border-white/25 pt-6 sm:mt-12 sm:gap-10 sm:pt-10">
+        <div className="grid grid-cols-2 gap-6 sm:gap-10">
           <nav aria-label={messages.footer.explore}>
             <p className="text-[14px] font-bold text-dim">{messages.footer.explore}</p>
             <ul className="mt-3 grid justify-items-start gap-0.5">
