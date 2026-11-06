@@ -16,27 +16,40 @@
     "primary": "Get advice",
     "secondary": "See services",
     "visual": {
-      "label": "Chats, spreadsheets, notebooks and app ideas come together in one system. The AI assistant prepares each task and you tap Approve.",
-      "sources": [
-        "Zalo chats",
-        "Spreadsheets",
-        "Notebooks",
-        "An app idea"
+      "label": "On the desk: a phone with an order on Zalo, a handwritten order book, a printed debt sheet. Lime threads pull them into one tablet: one system, where the AI assistant has drafted the order and a person taps Approve.",
+      "caller": "Ms Hoa",
+      "phoneMsg": "Same 2 boxes as last week, please",
+      "notebook": "Orders",
+      "notes": [
+        "2 boxes - Ms Hoa",
+        "5 packs - Mr Tam",
+        "1 box - Ms Lan",
+        "deliver Tuesday"
+      ],
+      "sheet": "Who owes",
+      "sheetRows": [
+        [
+          "Customer",
+          "Owes"
+        ],
+        [
+          "Mr Tam",
+          "2 orders"
+        ],
+        [
+          "Ms Lan",
+          "1 order"
+        ]
       ],
       "system": "One system",
-      "modules": [
+      "rows": [
         "Orders",
         "Customers",
-        "Bookings",
-        "Reports"
+        "Stock"
       ],
       "ai": "AI assistant",
-      "aiCount": "3 tasks to approve",
-      "tasks": [
-        "Draft an order from a chat",
-        "Remind a client of a 3pm booking",
-        "Enter a supplier invoice"
-      ]
+      "task": "Drafted 2 boxes for Ms Hoa",
+      "approved": "Approved"
     }
   },
   "home": {

@@ -575,6 +575,11 @@ article[id] {
   display: flex;
   flex-direction: column;
 }
+@media (min-width: 1024px) {
+  .first-screen {
+    min-height: clamp(34rem, calc(100svh - 9rem), 60rem);
+  }
+}
 
 .first-screen > .hero {
   flex: 1 0 auto;
@@ -597,7 +602,7 @@ article[id] {
 .hero-stage {
   position: relative;
   z-index: 1;
-  padding-inline: var(--gutter);
+  height: clamp(240px, 66vw, 520px);
 }
 
 @media (min-width: 1024px) {
@@ -613,10 +618,11 @@ article[id] {
   .hero-stage {
     position: absolute;
     z-index: 1;
+    height: auto;
     top: calc(var(--pill-top) + var(--pill-h));
     right: 0;
     bottom: 0;
-    width: 56%;
+    width: 52%;
     margin: 0;
   }
 }
@@ -631,6 +637,20 @@ article[id] {
   .hero-stage {
     width: calc(50vw - 40px);
   }
+}
+
+/* --- Hero desk scene: the canvas fills the stage. */
+.desk {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+}
+.desk-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
 /* =========================================================================

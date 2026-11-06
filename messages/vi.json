@@ -16,27 +16,40 @@
     "primary": "Nhận tư vấn",
     "secondary": "Xem dịch vụ",
     "visual": {
-      "label": "Tin nhắn Zalo, file Excel, sổ tay và ý tưởng app gom về một hệ thống. Trợ lý AI làm sẵn từng việc, bạn bấm Duyệt.",
-      "sources": [
-        "Tin nhắn Zalo",
-        "File Excel",
-        "Sổ tay",
-        "Ý tưởng app"
+      "label": "Trên bàn: điện thoại có đơn qua Zalo, sổ ghi đơn viết tay, tờ công nợ in ra. Sợi chỉ lime kéo tất cả vào một chiếc tablet: một hệ thống, nơi trợ lý AI đã soạn sẵn đơn và một người bấm Duyệt.",
+      "caller": "Chị Hoa",
+      "phoneMsg": "Lấy 2 thùng như tuần trước nhé",
+      "notebook": "Sổ đơn",
+      "notes": [
+        "2 thùng - chị Hoa",
+        "5 hộp - anh Tâm",
+        "1 thùng - cô Lan",
+        "giao thứ 3"
+      ],
+      "sheet": "Công nợ",
+      "sheetRows": [
+        [
+          "Khách",
+          "Còn nợ"
+        ],
+        [
+          "Anh Tâm",
+          "2 đơn"
+        ],
+        [
+          "Cô Lan",
+          "1 đơn"
+        ]
       ],
       "system": "Một hệ thống",
-      "modules": [
+      "rows": [
         "Đơn hàng",
         "Khách hàng",
-        "Lịch hẹn",
-        "Báo cáo"
+        "Tồn kho"
       ],
       "ai": "Trợ lý AI",
-      "aiCount": "3 việc chờ duyệt",
-      "tasks": [
-        "Soạn đơn từ tin nhắn Zalo",
-        "Nhắc khách lịch hẹn 15h",
-        "Nhập hóa đơn nhà cung cấp"
-      ]
+      "task": "Đã soạn đơn 2 thùng cho chị Hoa",
+      "approved": "Đã duyệt"
     }
   },
   "home": {
