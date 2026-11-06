@@ -4,9 +4,9 @@ import type { ContentCopy } from '../types'
 export const viContent: ContentCopy = {
   profile: {
     location: 'Việt Nam',
-    hook: 'Zalo, Excel, sổ\u00a0sách về chung một hệ thống.',
+    hook: 'Còn quản lý bằng Zalo và Excel?',
     supporting:
-      'Phần mềm, website, app và AI agent cho doanh nghiệp nhỏ và cá nhân. AI ghi đơn, trả lời khách, bạn duyệt.',
+      'Chúng tôi chuyển việc của bạn lên phần mềm, rồi để AI ghi đơn, trả lời khách, bạn duyệt.',
     headerCta: 'Gọi chúng tôi',
     availabilityLabel: 'Đang nhận dự án mới',
   },

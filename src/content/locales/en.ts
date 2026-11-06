@@ -4,9 +4,9 @@ import type { ContentCopy } from '../types'
 export const enContent: ContentCopy = {
   profile: {
     location: 'Vietnam',
-    hook: 'Chats, spreadsheets and paperwork in one system.',
+    hook: 'Still running the business on chats and spreadsheets?',
     supporting:
-      'Software, websites, apps and AI agents for small businesses and individuals. AI logs orders and answers customers. You approve.',
+      'We move your work onto software, then let AI log orders and answer customers while you approve.',
     headerCta: 'Call us',
     availabilityLabel: 'Taking on new projects',
   },
