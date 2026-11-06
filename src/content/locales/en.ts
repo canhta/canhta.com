@@ -77,7 +77,7 @@ export const enContent: ContentCopy = {
       id: 'team',
       name: 'Extra hands for your team',
       detail:
-        'We join your team, or take one piece such as a phone app. On your systems, your team\'s way.',
+        'Your team is building a product and needs more people? We join in, or take one piece such as the phone app.',
       examples: [],
     },
   ],
@@ -110,7 +110,7 @@ export const enContent: ContentCopy = {
       id: 'wrong',
       question: 'AI can be wrong. Who checks?',
       answer:
-        'We agree on one approver at the start. Anything touching money, orders or your books goes through them.',
+        'You pick one approver at the start. Anything touching money, orders or your books goes through them.',
     },
     {
       id: 'customers',
@@ -122,7 +122,7 @@ export const enContent: ContentCopy = {
       id: 'data',
       question: "What happens to my customers' information when AI is used?",
       answer:
-        'We take only what the project needs and agree up front which AI gets what. This is not legal advice.',
+        'We take only what the project needs and agree up front which AI gets what.',
     },
     {
       id: 'ownership',

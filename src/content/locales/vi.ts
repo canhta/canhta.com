@@ -70,14 +70,14 @@ export const viContent: ContentCopy = {
       id: 'iot',
       name: 'Cảm biến và cảnh báo',
       detail:
-        'Cảm biến mua sẵn báo nhiệt độ, độ ẩm về một màn hình, vượt ngưỡng là có cảnh báo. Dùng để theo dõi, không thay thiết bị kiểm định.',
+        'Cảm biến mua sẵn báo nhiệt độ, độ ẩm về một màn hình, vượt ngưỡng là có cảnh báo. Dùng để theo dõi hằng ngày, không dùng để kiểm định.',
       examples: [],
     },
     {
       id: 'team',
-      name: 'Làm cùng đội của bạn',
+      name: 'Bổ sung lập trình viên',
       detail:
-        'Chúng tôi vào làm cùng đội bạn, hoặc nhận trọn một phần như app điện thoại, theo cách đội bạn đang làm.',
+        'Đội bạn đang làm sản phẩm và cần thêm người? Chúng tôi vào làm cùng, hoặc nhận hẳn một phần như app điện thoại.',
       examples: [],
     },
   ],
@@ -110,7 +110,7 @@ export const viContent: ContentCopy = {
       id: 'wrong',
       question: 'AI có lúc sai. Ai kiểm tra?',
       answer:
-        'Hai bên chọn một người duyệt từ đầu. Việc dính tới tiền hay sửa đơn, sổ sách đều qua người đó.',
+        'Bên bạn chọn một người duyệt từ đầu. Việc dính tới tiền, đơn hàng hay sổ sách đều phải qua người đó.',
     },
     {
       id: 'customers',
@@ -122,7 +122,7 @@ export const viContent: ContentCopy = {
       id: 'data',
       question: 'Thông tin khách hàng của tôi đi đâu khi dùng AI?',
       answer:
-        'Chỉ lấy thông tin dự án cần, và thống nhất trước AI nào nhận gì. Đây không phải tư vấn pháp lý.',
+        'Chỉ lấy thông tin dự án cần, và thống nhất trước AI nào nhận gì.',
     },
     {
       id: 'ownership',

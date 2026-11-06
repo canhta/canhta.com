@@ -1086,7 +1086,7 @@ a.cell-link::after {
 /* systems: a chat becomes an order table, then an invoice and a stock count.
    Sized in em so the whole picture scales with the cell. Phone: two bubbles
    above the table. Tablet (cell is wide and short): left to right. Desktop
-   (cell is tall): top to bottom, and the dashed line takes the spare height. */
+   (cell is tall): top to bottom, centred, the dashed line capped so no hole opens. */
 .mv-sys {
   place-items: stretch;
 }
@@ -1305,6 +1305,8 @@ a.cell-link::after {
 @media (min-width: 1024px) {
   .mvs {
     font-size: clamp(11px, 2.7cqw, 18px);
+    grid-template-rows: auto minmax(2.6em, 6em) auto;
+    align-content: center;
   }
   .mvs-chat > :nth-child(3) {
     display: grid;
