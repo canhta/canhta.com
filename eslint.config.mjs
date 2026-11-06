@@ -21,7 +21,7 @@ import tseslint from 'typescript-eslint'
  *
  * SCOPE. This is deliberately close to the defaults. The repo already has a
  * stricter gate than any lint rule in `tsc --noEmit` with
- * `noUncheckedIndexedAccess`, and 153 tests that assert behaviour rather than
+ * `noUncheckedIndexedAccess`, and unit tests that assert behaviour rather than
  * shape. What ESLint adds on top is the Next-specific and a11y checks that a
  * type checker cannot see — a raw `<img>` where `next/image` belongs, a missing
  * hook dependency, an anchor with no accessible name. Those are the rules worth
@@ -63,20 +63,6 @@ export default tseslint.config(
           caughtErrors: 'none',
         },
       ],
-    },
-  },
-
-  {
-    /**
-     * Tests reach for the DOM and for module internals in ways application code
-     * should not. `no-explicit-any` in particular is load-bearing in
-     * `accessibility.spec.ts`, which re-types axe's results by hand because
-     * `axe-core` is a transitive dependency pnpm does not hoist.
-     */
-    files: ['tests/**/*.ts', 'tests/**/*.tsx'],
-    rules: {
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-non-null-assertion': 'off',
     },
   },
 )

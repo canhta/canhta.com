@@ -20,11 +20,5 @@ export default defineConfig({
     setupFiles: ['./tests/setup.ts'],
     // Unit tests live in `tests/unit`.
     include: ['tests/unit/**/*.test.{ts,tsx}'],
-    env: {
-      // `src/content/index.ts` refuses to load fixture content without this.
-      // The guard itself is exercised in tests/unit/content-guard.test.ts, which
-      // unsets this deliberately.
-      ALLOW_FIXTURES: '1',
-    },
   },
 })

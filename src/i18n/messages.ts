@@ -2,7 +2,7 @@ import en from '../../messages/en.json'
 import vi from '../../messages/vi.json'
 import type { Locale } from '@/content/types'
 
-export type AppMessages = typeof en
+type AppMessages = typeof en
 
 const catalogs: Record<Locale, AppMessages> = { en, vi }
 

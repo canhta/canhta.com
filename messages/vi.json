@@ -144,17 +144,7 @@
     }
   },
   "buildMeta": {
-    "kinds": {
-      "agent": "Tự động hóa",
-      "skill": "Phần mềm bổ sung cho trợ lý AI",
-      "mobile": "Ứng dụng điện thoại",
-      "web": "Sản phẩm web",
-      "saas": "Sản phẩm trả phí",
-      "tool": "Phần mềm cho lập trình viên"
-    },
     "links": {
-      "appstore": "App Store",
-      "playstore": "Google Play",
       "web": "Xem trang",
       "github": "Xem trên GitHub",
       "docs": "Tài liệu"

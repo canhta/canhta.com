@@ -1,8 +1,8 @@
 export type Locale = 'en' | 'vi'
 
-export type BuildKind = 'agent' | 'skill' | 'mobile' | 'web' | 'saas' | 'tool'
-export type BuildLinkKind = 'appstore' | 'playstore' | 'web' | 'github' | 'docs'
-export type BuildStatus = 'live' | 'shipped' | 'building' | 'acquired' | 'sunset'
+export type BuildKind = 'skill' | 'mobile' | 'web'
+export type BuildLinkKind = 'web' | 'github' | 'docs'
+type BuildStatus = 'live' | 'shipped' | 'building'
 
 export interface BuildLink {
   kind: BuildLinkKind
@@ -26,11 +26,11 @@ export interface BuildFacts {
   links: BuildLink[]
 }
 
-export interface BuildCopy {
+interface BuildCopy {
   slug: string
   tagline: string
   summary: string
-  /** Where it can be used today: platform, store status, compatibility. */
+  /** Where it can be used: platform and compatibility. */
   availability: string
 }
 
@@ -41,7 +41,7 @@ export interface OfferFacts {
   order: number
 }
 
-export interface OfferCopy {
+interface OfferCopy {
   id: OfferFacts['id']
   name: string
   detail: string
@@ -56,7 +56,7 @@ export interface FaqFacts {
   order: number
 }
 
-export interface FaqCopy {
+interface FaqCopy {
   id: string
   question: string
   answer: string
@@ -74,7 +74,7 @@ export interface ProfileFacts {
   available: boolean
 }
 
-export interface ProfileCopy {
+interface ProfileCopy {
   location: string
   hook: string
   supporting: string
@@ -83,7 +83,7 @@ export interface ProfileCopy {
   availabilityLabel: string
 }
 
-export interface Profile extends ProfileFacts, ProfileCopy {}
+interface Profile extends ProfileFacts, ProfileCopy {}
 
 export interface ContentCopy {
   profile: ProfileCopy
@@ -98,8 +98,4 @@ export interface SiteContent {
   offers: Offer[]
   faq: Faq[]
   social: SocialLink[]
-}
-
-export interface FixtureMarked {
-  readonly __fixture?: true
 }

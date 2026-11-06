@@ -53,5 +53,5 @@ These came from the owner during the 2026-10-31 redesign. Each one replaces any 
 - No browser (Playwright) end-to-end tests: the owner removed them as useless for a landing page. Gates are typecheck, lint, unit tests, build and a visual check in a real browser. Do not add them back.
 
 ### Copy files
-- User-facing copy lives in `src/content/locales/*.fixture.ts` and `messages/*.json`; never hardcode it in components.
+- User-facing copy lives in `src/content/locales/*.ts` and `messages/*.json`; never hardcode it in components.
 - Locale tests verify catalog completeness, parity, rendering and routing. Do not freeze exact prose in tests. Before finishing, read `/vi` top to bottom as a Vietnamese reader would.

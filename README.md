@@ -1,60 +1,38 @@
 # canhta.com
 
-Bilingual one-page site — English at `/`, Vietnamese at `/vi`.
+Site for our digital transformation, software and AI services for small
+businesses, plus some of our products.
 
 **Live:** [canhta.com](https://canhta.com)
 
 Next.js 16 · React 19 · TypeScript strict · Tailwind 4 · next-intl · pnpm
 
-## The direction
+## The site
 
-An argued page, not a brochure. There are no product screenshots and no metrics
-anyone could check, so the thing being sold is the writing and the
-reachability — and the design spends its best space on sentences rather than on
-image slots waiting to be filled.
-
-Three rules the whole system obeys, all of them enforced by tests:
-
-- **One accent.** Vermilion means "this is real and running", and it also means
-  "this is the action". Status is carried by words; colour is never the only
-  signal.
-- **Serif argues, sans organises.** Newsreader sets everything a visitor is meant
-  to read and believe; Be Vietnam Pro sets labels, controls and metadata.
-- **Nothing waits on JavaScript to become legible.** There is no
-  reveal-on-scroll and no motion library. Every resting state is the visible one.
-
-Sections are ranked rather than evenly spaced: `band-1` for the statement, the
-work and the close, `band-2` for process and engagements, `band-3` for scope and
-answers. The space between two sections belongs to the second one.
-
-## Status
-
-The projects are real. The profile, engagements and answers are still
-placeholder.
-
-A guard in `src/content/index.ts` refuses a production build while any
-`__fixture` marker is reachable. `vercel.json` holds `ALLOW_FIXTURES=1` to keep
-the deploy green — **delete that block when the last placeholder goes.**
+- Four pages in two languages: home, services, products and contact. English
+  at `/`, `/services`, `/products`, `/contact`; Vietnamese at `/vi`,
+  `/vi/dich-vu`, `/vi/san-pham`, `/vi/lien-he`.
+- Each page also has a Markdown copy (`/services.md`, `/vi/dich-vu.md`, ...),
+  plus `llms.txt` and `llms-full.txt`.
+- Type is Be Vietnam Pro. The palette is night (`#131517`) grounds with light
+  bands, and one lime accent (`#d1fe17`) for actions.
+- Copy lives in `src/content/locales/*.ts` and `messages/*.json`. Components
+  never hardcode it, and no client component imports `@/content`.
+- The owner's rules for content, voice and design are in `AGENTS.md`.
 
 ## Commands
 
 ```bash
-pnpm dev:fixtures   # develop against current content
-pnpm build          # production build; the guard applies
-pnpm lint           # ESLint (flat config)
-pnpm test           # Vitest + RTL          (102)
-pnpm test:e2e       # Playwright + axe      (51)
-pnpm test:all       # typecheck + both
+pnpm dev         # local server
+pnpm build       # production build
+pnpm typecheck   # tsc --noEmit
+pnpm lint        # ESLint
+pnpm test        # Vitest unit tests
+pnpm test:all    # typecheck + unit tests
 ```
 
-## Notes
+## Gates
 
-- `src/content/` is the only place copy lives; components never hardcode a
-  string, and no client component may import `@/content` — a unit test pins it.
-- The one interaction is the process panel: choose where the work goes live and
-  the steps past that point are marked running. It is a native radio group, so
-  one layout serves every width and the keyboard support is the platform's.
-- No claim ships without a link that proves it: no invented metrics, no
-  testimonials, no screenshots that are not real screenshots.
-- Copy is written plainly and in the first person. No em-dash codas, no
-  "not X, but Y", no sentences about the page itself.
+Typecheck, lint, unit tests and build must pass, then a visual check in a real
+browser at phone and desktop width, in both languages. There are no browser
+end-to-end tests.

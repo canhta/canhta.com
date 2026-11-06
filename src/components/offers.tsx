@@ -83,7 +83,7 @@ function Cell({
   )
 }
 
-export function OfferBento({ locale, mode }: { locale: Locale; mode: 'home' | 'page' }) {
+function OfferBento({ locale, mode }: { locale: Locale; mode: 'home' | 'page' }) {
   const { offers } = getSiteContent(locale)
   const approve = getMessages(locale).home.approve
   return (

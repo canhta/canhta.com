@@ -120,20 +120,6 @@ export const PhoneTile = ({
   )
 }
 
-/** Apple's mark, for an App Store destination. */
-export const AppleIcon = (props: SVGProps<SVGSVGElement>) => (
-  <svg {...base} {...props}>
-    <path d="M16.36 12.72c-.02-2.2 1.8-3.26 1.88-3.31-1.02-1.5-2.61-1.7-3.18-1.72-1.35-.14-2.64.79-3.33.79-.69 0-1.75-.77-2.87-.75-1.48.02-2.84.86-3.6 2.18-1.53 2.66-.39 6.6 1.1 8.76.73 1.06 1.6 2.25 2.74 2.2 1.1-.04 1.52-.71 2.85-.71 1.33 0 1.7.71 2.86.69 1.18-.02 1.93-1.08 2.65-2.14.83-1.23 1.18-2.42 1.2-2.48-.03-.01-2.3-.88-2.3-3.51ZM14.2 6.3c.61-.74 1.02-1.76.9-2.78-.88.04-1.94.59-2.57 1.32-.56.65-1.05 1.69-.92 2.69.98.08 1.98-.5 2.59-1.23Z" />
-  </svg>
-)
-
-/** Google Play's triangle, for a Play Store destination. */
-export const PlayStoreIcon = (props: SVGProps<SVGSVGElement>) => (
-  <svg {...base} {...props}>
-    <path d="M3.6 2.3c-.24.25-.38.64-.38 1.15v17.1c0 .5.14.9.38 1.15l.06.05 9.58-9.58v-.23L3.66 2.26l-.06.04Zm12.85 6.4L13.7 5.95 4.62 1.4l11.83 7.3ZM17.9 9.6l-2.5-1.55-2.9 2.9 2.9 2.9 2.53-1.57c.75-.47.75-1.7-.03-2.18l-.01-.5ZM4.62 22.6l9.08-4.55 2.75-2.75L4.62 22.6Z" />
-  </svg>
-)
-
 /** A globe, for a plain website. */
 export const GlobeIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg {...base} fill="none" stroke="currentColor" strokeWidth={1.8} {...props}>
@@ -147,11 +133,5 @@ export const DocsIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg {...base} fill="none" stroke="currentColor" strokeWidth={1.8} {...props}>
     <path d="M6 3h8l4 4v14H6V3Z" />
     <path d="M14 3v4h4M9 12h6M9 16h6" />
-  </svg>
-)
-
-export const ArrowIcon = (props: SVGProps<SVGSVGElement>) => (
-  <svg {...base} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" {...props}>
-    <path d="M5 12h14M13 6l6 6-6 6" />
   </svg>
 )

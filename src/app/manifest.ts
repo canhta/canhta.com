@@ -24,12 +24,11 @@ export default function manifest(): MetadataRoute.Manifest {
     /**
      * `browser`, not `standalone`.
      *
-     * Every affordance on this site leaves it: the CTA is a `mailto:`, and every
-     * project links out to app stores, docs and GitHub. `standalone` strips the URL
-     * bar and the back button, so each of those either dead-ends the window or
-     * hands off to a second browser with no way back. There is also nothing to
-     * return *to* — one page, no state — which is the thing an app shell exists
-     * to preserve.
+     * Most actions on this site leave it: email, Zalo and WhatsApp, and every
+     * product links out to its own site, docs or GitHub. `standalone` strips the
+     * URL bar and the back button, so each of those either dead-ends the window or
+     * hands off to a second browser with no way back. There is also no state to
+     * return to, which is the thing an app shell exists to preserve.
      */
     display: 'browser',
 

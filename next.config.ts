@@ -58,12 +58,6 @@ const publicAsset = `public, max-age=${DAY}, stale-while-revalidate=${30 * DAY}`
  */
 const generatedText = `public, max-age=0, s-maxage=${DAY}, stale-while-revalidate=${7 * DAY}`
 
-/**
- * The site icon is linked as `/icon.svg?icon.<content hash>.svg`, so a changed icon
- * is a new URL and the old one can be kept for ever.
- */
-const hashedAsset = 'public, max-age=31536000, immutable'
-
 export default withNextIntl({
   reactStrictMode: true,
   redirects: async () => redirects,
@@ -92,14 +86,12 @@ export default withNextIntl({
     // English products page and must keep its page headers.
     return [
       { source: '/products/:path+', headers: [{ key: 'Cache-Control', value: publicAsset }] },
-      { source: '/art/:path+', headers: [{ key: 'Cache-Control', value: publicAsset }] },
       { source: '/robots.txt', headers: [{ key: 'Cache-Control', value: generatedText }] },
       { source: '/sitemap.xml', headers: [{ key: 'Cache-Control', value: generatedText }] },
       { source: '/llms.txt', headers: [{ key: 'Cache-Control', value: generatedText }] },
       { source: '/llms-full.txt', headers: [{ key: 'Cache-Control', value: generatedText }] },
       ...markdownCopies.map(({ source }) => ({ source, headers: [{ key: 'Cache-Control', value: generatedText }] })),
       { source: '/manifest.webmanifest', headers: [{ key: 'Cache-Control', value: generatedText }] },
-      { source: '/icon.svg', headers: [{ key: 'Cache-Control', value: hashedAsset }] },
     ]
   },
 })
