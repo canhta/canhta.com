@@ -22,7 +22,7 @@ export function HomeQuestions({ locale }: { locale: Locale }) {
     <section aria-labelledby="hq-title" className="band sheet ground-white hq">
       <div className="shell">
         <div className="title-band reveal flex flex-wrap items-center justify-between gap-x-10 gap-y-6">
-          <h2 id="hq-title" className="headline max-w-[16ch]">
+          <h2 id="hq-title" className="section-title max-w-[16ch]">
             <Words text={copy.questionsHeading} />
           </h2>
           <Link href={{ pathname: '/services', hash: 'answers-title' }} className="hq-more">

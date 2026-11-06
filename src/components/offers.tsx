@@ -61,9 +61,6 @@ function Cell({
       ) : (
         <>
           <p className="cell-muted mt-3 text-[16px] leading-relaxed">{offer.detail}</p>
-          {offer.examples.length > 0 ? (
-            <p className="mt-3 text-[16px] leading-snug font-bold">{offer.examples.join(', ')}</p>
-          ) : null}
         </>
       )}
     </div>

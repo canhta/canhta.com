@@ -887,24 +887,15 @@ a.cell-link::after {
   }
 }
 
-/* Home on a phone: the services swipe sideways, so the page stays a few
-   screens long. Each card is most of the width, so the next one peeks in. */
+/* Home on a phone: every service is visible as a short stacked card, title and
+   one line, without its picture. The pictures and the detail live one tap away
+   on the services page, so the page stays a few screens long. */
 @media (max-width: 767px) {
   .bento-home {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-padding-inline: var(--gutter);
-    margin-inline: calc(var(--gutter) * -1);
-    padding: 4px var(--gutter) 16px;
-    scrollbar-width: none;
+    gap: 8px;
   }
-  .bento-home::-webkit-scrollbar {
+  .bento-home .mv {
     display: none;
-  }
-  .bento-home > * {
-    flex: 0 0 min(84%, 340px);
-    scroll-snap-align: start;
   }
 }
 

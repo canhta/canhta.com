@@ -6,7 +6,7 @@ export const enContent: ContentCopy = {
     location: 'Vietnam',
     hook: 'Digital transformation and AI for small businesses',
     supporting:
-      'We advise on and build business software, websites, apps and AI agents. AI logs orders and answers customers, with a person approving.',
+      'Chats, spreadsheets and paperwork in one system. AI enters orders and answers customers, and you approve.',
     headerCta: 'Call us',
     availabilityLabel: 'Taking on new projects',
   },

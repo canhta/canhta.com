@@ -105,7 +105,7 @@
     "chatText": "Xin chào, tôi có một vấn đề muốn nhờ giải quyết (từ canhta.com)."
   },
   "process": {
-    "rule": "Có phần mềm sẵn làm được, chúng tôi sẽ tư vấn bạn dùng.",
+    "rule": "Nếu KiotViet, MISA hay phần mềm có sẵn đã đủ dùng, chúng tôi sẽ tư vấn bạn dùng.",
     "steps": [
       {
         "id": "problem",

@@ -6,7 +6,7 @@ export const viContent: ContentCopy = {
     location: 'Việt Nam',
     hook: 'Chuyển đổi số và AI cho doanh\u00a0nghiệp nhỏ',
     supporting:
-      'Chúng tôi tư vấn và triển khai phần mềm quản lý, website, app và AI agent. AI ghi đơn, trả lời khách, có người duyệt.',
+      'Tin nhắn Zalo, file Excel, sổ sách về chung một phần mềm. AI nhập đơn, trả lời khách, bạn bấm duyệt.',
     headerCta: 'Gọi chúng tôi',
     availabilityLabel: 'Đang nhận dự án mới',
   },
