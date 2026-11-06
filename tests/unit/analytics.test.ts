@@ -3,18 +3,11 @@ import { resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
 
 /**
- * Measurement must not be gated on the content being finished.
- *
- * The layout used to read `NODE_ENV === 'production' && !CONTENT_IS_FIXTURE`.
- * The live site therefore shipped both Vercel scripts and reported nothing, for
- * as long as any placeholder remained — a measurement setup that silently
- * measures nothing, which you only find out about later, when the numbers you
- * wanted are already gone.
+ * Measurement is on in every deployment and off in development.
  *
  * This is asserted against the source rather than by rendering, because the
- * condition is evaluated once at module scope from `process.env` and the failure
- * it guards against is invisible at runtime by definition: the page renders
- * perfectly either way.
+ * condition is evaluated once at module scope from `process.env` and a wrong
+ * gate is invisible at runtime: the page renders perfectly either way.
  */
 const LAYOUT = resolve(process.cwd(), 'src/app/[locale]/layout.tsx')
 const MEASURE_FILE = resolve(process.cwd(), 'src/components/measure.tsx')
@@ -39,16 +32,6 @@ describe('measurement', () => {
 
   it('starts them after the page is idle, not on the way to first paint', () => {
     expect(code(MEASURE_FILE)).toContain('afterLoadAndIdle')
-  })
-
-  it('is gated on the environment alone, never on whether the content is real', () => {
-    const source = code()
-    const gate = source.match(/const MEASURE = (.+)/)?.[1] ?? ''
-    expect(gate, 'no MEASURE gate found in the layout').not.toBe('')
-    expect(gate).toContain("process.env.NODE_ENV === 'production'")
-    expect(gate, 'measurement is switched off while the content is fixture again').not.toContain(
-      'CONTENT_IS_FIXTURE',
-    )
   })
 
   it('stays off in development, where it is one person reloading', () => {

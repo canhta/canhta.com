@@ -5,12 +5,9 @@ import { describe, expect, it } from 'vitest'
 /**
  * A client component must never import `@/content`.
  *
- * This is not a style rule. `src/content/index.ts` runs a build-time guard at
- * module scope, and a single `'use client'` file importing it pulled that guard
- * into the browser bundle — where Next inlines NODE_ENV as 'production' but does
- * not inline ALLOW_FIXTURES, because only NEXT_PUBLIC_* variables reach the
- * client. The guard therefore read "production, flag missing" and threw on every
- * page load, taking down a deployment whose build had passed.
+ * `src/content/index.ts` resolves and checks both locales' copy at module scope.
+ * A single `'use client'` file importing it would ship every word of both
+ * languages, and that work, to the browser.
  *
  * Content is server data. It reaches a client component as a prop.
  */
@@ -37,7 +34,7 @@ describe('client boundary', () => {
       return /import\s+(?!type\b)[^;]*from\s+['"]@\/content['"]/.test(src)
     })
 
-    expect(offenders, `these ship the fixture guard to the browser: ${offenders.join(', ')}`).toEqual(
+    expect(offenders, `these ship the content module to the browser: ${offenders.join(', ')}`).toEqual(
       [],
     )
   })

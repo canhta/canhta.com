@@ -29,14 +29,13 @@ import { SITE } from '@/lib/site'
 /** Stated once, on the provider: each Service inherits it. */
 const AREA_SERVED = { '@type': 'Country', name: 'Vietnam' }
 
-export type GraphPage = 'home' | 'services' | 'products' | 'contact'
+type GraphPage = 'home' | 'services' | 'products' | 'contact'
 
 function appType(build: Build): string {
   switch (build.kind) {
     case 'mobile':
       return 'MobileApplication'
     case 'web':
-    case 'saas':
       return 'WebApplication'
     default:
       return 'SoftwareApplication'
@@ -112,7 +111,7 @@ export function buildGraph(locale: Locale, page: GraphPage = 'home') {
       // The platform is a fact on the build, not inferred from its kind: Remoti is
       // iPhone only, Scori is iOS and Android, a skill runs on neither.
       ...(b.os ? { operatingSystem: b.os } : {}),
-      ...(b.kind === 'web' || b.kind === 'saas' ? { operatingSystem: 'Web' } : {}),
+      ...(b.kind === 'web' ? { operatingSystem: 'Web' } : {}),
       // Only a product that is out has a publication date.
       ...(b.status === 'live' || b.status === 'shipped' ? { datePublished: b.year } : {}),
       author: { '@id': serviceId },

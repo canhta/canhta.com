@@ -17,20 +17,16 @@ export function PhoneShot({
   slug,
   shot,
   locale,
-  className = '',
-  preload = false,
   sizes,
 }: {
   slug: string
   shot: string
   locale: Locale
-  className?: string
-  preload?: boolean
   sizes: string
 }) {
   const alts = getMessages(locale).products.alts as Record<string, string>
   return (
-    <div className={`phone ${className}`}>
+    <div className="phone">
       <Image
         src={`/products/${slug}/${locale}/${shot}.webp`}
         alt={alts[shot] ?? ''}
@@ -38,7 +34,6 @@ export function PhoneShot({
         height={1434}
         sizes={sizes}
         quality={82}
-        preload={preload}
         className="block h-auto w-full"
       />
     </div>

@@ -101,7 +101,7 @@ describe.each(LOCALES)('buildGraph(%s)', (locale) => {
     expect(webpage).toMatchObject({ inLanguage: locale })
   })
 
-  it('lists one FAQ entry per fixture question', () => {
+  it('lists one FAQ entry per question', () => {
     const [faqPage] = nodesOfType(graph, 'FAQPage')
     const mainEntity = (faqPage as { mainEntity?: unknown[] } | undefined)?.mainEntity
     expect(mainEntity).toHaveLength(faq.length)

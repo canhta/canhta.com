@@ -1,18 +1,9 @@
-import { buildFacts, faqFacts, offerFacts, profileFacts, socialFacts } from './facts.fixture'
-import { enContent } from './locales/en.fixture'
-import { viContent } from './locales/vi.fixture'
-import type { Build, ContentCopy, Faq, Locale, Offer, SiteContent, SocialLink } from './types'
+import { buildFacts, faqFacts, offerFacts, profileFacts, socialFacts } from './facts'
+import { enContent } from './locales/en'
+import { viContent } from './locales/vi'
+import type { Build, ContentCopy, Faq, Locale, Offer, SiteContent } from './types'
 
 const copies: Record<Locale, ContentCopy> = { en: enContent, vi: viContent }
-
-function containsFixture(value: unknown, seen = new Set<unknown>()): boolean {
-  if (value === null || typeof value !== 'object') return false
-  if (seen.has(value)) return false
-  seen.add(value)
-  if (Array.isArray(value)) return value.some((item) => containsFixture(item, seen))
-  if ('__fixture' in value && (value as { __fixture?: unknown }).__fixture === true) return true
-  return Object.values(value).some((item) => containsFixture(item, seen))
-}
 
 function assertNaturalStrings(value: unknown, path: string): void {
   if (typeof value === 'string') {
@@ -115,37 +106,8 @@ function resolve(locale: Locale): SiteContent {
 
 const resolved: Record<Locale, SiteContent> = { en: resolve('en'), vi: resolve('vi') }
 
-export const CONTENT_IS_FIXTURE = containsFixture({
-  profileFacts,
-  buildFacts,
-  offerFacts,
-  faqFacts,
-  socialFacts,
-})
-
-if (
-  typeof window === 'undefined' &&
-  CONTENT_IS_FIXTURE &&
-  process.env.NODE_ENV === 'production' &&
-  process.env.ALLOW_FIXTURES !== '1'
-) {
-  throw new Error(
-    [
-      'Refusing to build: fixture content is still reachable from a rendered route.',
-      '',
-      'Every claim on canhta.com must be real. Replace the *.fixture.ts modules in',
-      'src/content/ with approved content, or set ALLOW_FIXTURES=1 for a preview',
-      'deploy that is never linked publicly.',
-    ].join('\n'),
-  )
-}
-
 export function getSiteContent(locale: Locale): SiteContent {
   return resolved[locale]
-}
-
-export function socialByNetwork(network: SocialLink['network']): SocialLink | undefined {
-  return socialFacts.find((item) => item.network === network)
 }
 
 export * from './types'

@@ -17,8 +17,7 @@ export function generateStaticParams() {
 }
 
 /**
- * The shared-link card, set in the same two voices as the page: Newsreader
- * argues, Be Vietnam Pro labels.
+ * The shared-link card, set in Be Vietnam Pro like the page.
  *
  * No photo and no people: AGENTS.md keeps both off the site, so the card is type
  * and a rule only, in the site palette.

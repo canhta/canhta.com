@@ -143,17 +143,7 @@
     }
   },
   "buildMeta": {
-    "kinds": {
-      "agent": "Automation",
-      "skill": "Add-on for AI assistants",
-      "mobile": "Phone app",
-      "web": "Web product",
-      "saas": "Paid product",
-      "tool": "For software teams"
-    },
     "links": {
-      "appstore": "App Store",
-      "playstore": "Google Play",
       "web": "Visit site",
       "github": "Source code",
       "docs": "Guide"

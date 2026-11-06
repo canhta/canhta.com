@@ -26,7 +26,7 @@
 
    A band with .on-night re-maps ink, muted, line and card for a dark ground,
    so type utilities written for light grounds work on both. A light object
-   sitting on a dark band (.on-light) maps them back.
+   sitting on a dark band maps them back.
 
    Motion is transform or position only, plays once, never hides content and
    stops for prefers-reduced-motion. Every scroll-linked effect sits behind
@@ -84,9 +84,8 @@
   --pill-top: 10px;
   /* 44px links plus 4px of air each side. */
   --pill-h: 52px;
-  /* Radii: card, small card, control inside a card. */
+  /* Radii: card, control inside a card. */
   --r-card: clamp(20px, 1.8vw, 24px);
-  --r-sm: 16px;
   --r-xs: 12px;
 
   /* Layered, soft. Three layers: contact, mid, ambient. */
@@ -187,7 +186,7 @@ article[id] {
 /* A dark band re-maps the light-ground tokens, so type utilities and component
    rules written once (text-ink, text-muted, var(--color-line), .lead, .step)
    work on both. Re-declared per scope, so it never leaks into a light object
-   that sits on the band: those use .on-light. */
+   that sits on the band: those are mapped back below. */
 .on-night {
   --color-ink: #f7f7f8;
   --color-muted: var(--color-on-dark);
@@ -196,7 +195,6 @@ article[id] {
   --color-card: var(--color-surface);
   color: var(--color-ink);
 }
-.on-light,
 .hv-chip,
 .hv-card,
 .on-night .row-link {
@@ -1035,7 +1033,6 @@ a.cell-link::after {
   margin-inline: calc(var(--gutter) * -1);
   padding: 8px var(--gutter) 24px;
   scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
 }
 .snap-row::-webkit-scrollbar {
   display: none;

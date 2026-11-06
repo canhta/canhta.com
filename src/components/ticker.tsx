@@ -4,9 +4,8 @@ import { useState } from 'react'
 
 /**
  * One strip of scope words (ERP, CRM, chatbots, ...) that slides sideways. It
- * exists to show breadth at a glance. It is the only looping animation on the
- * site, so it has every way out: it pauses on hover and focus, has a real
- * pause button, and with reduced motion it does not move at all and the words
+ * exists to show breadth at a glance. Because it loops, it has every way out:
+ * it pauses on hover and focus, has a real pause button, and with reduced motion it does not move at all and the words
  * simply wrap. The second copy of the list is hidden from screen readers.
  * Words arrive as props; this file never imports content.
  */

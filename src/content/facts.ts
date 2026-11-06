@@ -1,7 +1,6 @@
 import type {
   BuildFacts,
   FaqFacts,
-  FixtureMarked,
   OfferFacts,
   ProfileFacts,
   SocialLink,
@@ -11,17 +10,12 @@ import type {
  * Locale-neutral facts. Copy lives under `locales/` so each language can be
  * written as a complete page instead of sentence-by-sentence translation.
  */
-export const profileFacts: ProfileFacts & FixtureMarked = {
+export const profileFacts: ProfileFacts = {
   name: 'Canh Ta',
   available: true,
 }
 
-/**
- * These projects and their links are real, so they carry no fixture marker.
- * Scori and Remoti are not in any store yet (Scori's `store-links.json` is null,
- * Remoti's own site says "Coming soon"), so both stay `building` and link to
- * their sites. Add a store link here only when it exists.
- */
+/** Scori and Remoti link to their own sites. The site states no status for either. */
 export const buildFacts: BuildFacts[] = [
   {
     slug: 'scori',
@@ -77,7 +71,7 @@ export const buildFacts: BuildFacts[] = [
   },
 ]
 
-export const offerFacts: (OfferFacts & FixtureMarked)[] = [
+export const offerFacts: OfferFacts[] = [
   { id: 'systems', order: 1 },
   { id: 'ai', order: 2 },
   { id: 'data', order: 3 },
@@ -86,7 +80,7 @@ export const offerFacts: (OfferFacts & FixtureMarked)[] = [
   { id: 'team', order: 6 },
 ]
 
-export const faqFacts: (FaqFacts & FixtureMarked)[] = [
+export const faqFacts: FaqFacts[] = [
   { id: 'pricing', order: 1 },
   { id: 'timeline', order: 2 },
   { id: 'apps', order: 3 },
@@ -99,7 +93,7 @@ export const faqFacts: (FaqFacts & FixtureMarked)[] = [
   { id: 'idea', order: 10 },
 ]
 
-export const socialFacts: (SocialLink & FixtureMarked)[] = [
+export const socialFacts: SocialLink[] = [
   { network: 'github', url: 'https://github.com/canhta' },
   { network: 'x', url: 'https://x.com/canh_builds' },
   { network: 'linkedin', url: 'https://www.linkedin.com/in/canhta' },

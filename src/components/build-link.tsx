@@ -1,11 +1,9 @@
 import type { BuildLink, Locale } from '@/content/types'
 import { linkLabel } from '@/lib/build-meta'
-import { AppleIcon, DocsIcon, GitHubIcon, GlobeIcon, PlayStoreIcon } from './icons'
+import { DocsIcon, GitHubIcon, GlobeIcon } from './icons'
 
 /** One destination, wearing its own mark. No counts: the page carries no metrics. */
 const ICONS = {
-  appstore: AppleIcon,
-  playstore: PlayStoreIcon,
   web: GlobeIcon,
   github: GitHubIcon,
   docs: DocsIcon,
