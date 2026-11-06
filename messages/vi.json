@@ -80,11 +80,11 @@
     "nextHeading": "Sau khi bạn liên hệ",
     "call": "Gọi điện",
     "callShort": "Gọi",
-    "next": "Hiểu vấn đề, triển khai bản chạy thử, rồi mới báo giá.",
+    "next": "Chúng tôi tư vấn, triển khai bản chạy thử, rồi mới báo giá.",
     "chatText": "Xin chào, tôi có một vấn đề muốn nhờ giải quyết (từ canhta.com)."
   },
   "process": {
-    "rule": "Có phần mềm sẵn làm được, chúng tôi sẽ nói.",
+    "rule": "Có phần mềm sẵn làm được, chúng tôi sẽ tư vấn bạn dùng.",
     "steps": [
       {
         "id": "problem",
