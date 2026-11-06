@@ -4,6 +4,7 @@ import { getLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
+import { getSiteContent } from '@/content'
 import { getPathname } from '@/i18n/navigation'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
@@ -21,6 +22,7 @@ export default async function NotFound() {
 
   return (
     <>
+      <title>{`${copy.label} | ${getSiteContent(locale).profile.name}`}</title>
       <SiteHeader locale={locale} />
 
       {/* The layout's skip link targets `#main` on every route it wraps, this

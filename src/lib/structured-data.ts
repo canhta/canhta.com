@@ -157,7 +157,7 @@ export function buildGraph(locale: Locale, page: GraphPage = 'home') {
       },
       {
         '@type': 'WebPage',
-        '@id': `${url}#webpage`,
+        '@id': `${url === SITE ? `${SITE}/` : url}#webpage`,
         url,
         isPartOf: { '@id': siteId },
         about: { '@id': serviceId },

@@ -4,6 +4,7 @@ import { getMessages } from '@/i18n/messages'
 import { firstSentence } from '@/lib/first-sentence'
 import { PAGE_PATH, markdownUrl, pageUrl } from '@/lib/metadata'
 import { routing } from '@/i18n/routing'
+import { phoneContact } from '@/lib/contact'
 
 /**
  * The same pages as plain Markdown, for readers that are not browsers (llmstxt.org
@@ -24,7 +25,7 @@ function contactLines(locale: Locale): string[] {
   const messages = getMessages(locale)
   const url = (n: string) => social.find((s) => s.network === n)?.url
   const email = url('email')?.replace('mailto:', '')
-  const phone = url('phone')?.replace('tel:', '')
+  const phone = url('phone') ? phoneContact(locale).display : undefined
   return [
     email ? `- ${messages.contact.email}: ${email}` : null,
     phone ? `- ${messages.contact.call}: ${phone}` : null,
@@ -55,7 +56,7 @@ function offerLines(locale: Locale, level: string, full: boolean): string[] {
           '',
           ...(o.examples.length ? [o.examples.join(', '), ''] : []),
         ]
-      : [`- **${o.name}**: ${firstSentence(o.detail)}`],
+      : [`- ${o.name}: ${firstSentence(o.detail)}`],
   )
 }
 

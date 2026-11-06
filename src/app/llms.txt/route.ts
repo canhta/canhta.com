@@ -5,6 +5,7 @@ import { firstSentence } from '@/lib/first-sentence'
 import { MARKDOWN_PAGES } from '@/lib/markdown'
 import { markdownUrl, pageUrl } from '@/lib/metadata'
 import { SITE } from '@/lib/site'
+import { phoneContact } from '@/lib/contact'
 
 /**
  * /llms.txt: the llmstxt.org format (an H1, a blockquote, then H2 lists of links),
@@ -31,7 +32,7 @@ export function GET() {
   const messages = getMessages('en')
   const url = (n: string) => social.find((s) => s.network === n)?.url
   const email = url('email')?.replace('mailto:', '')
-  const phone = url('phone')?.replace('tel:', '')
+  const phone = url('phone') ? phoneContact('en').display : undefined
 
   const lines: string[] = [
     `# ${profile.name}`,
