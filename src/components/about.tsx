@@ -14,7 +14,7 @@ export function About({ locale }: { locale: Locale }) {
         <h2 id="about-title" className="subtitle lg:col-span-3">
           {copy.heading}
         </h2>
-        <p className="max-w-[26ch] text-[clamp(1.5rem,1rem+2.2vw,2.75rem)] leading-[1.22] font-bold tracking-[-0.03em] lg:col-span-9">
+        <p className="max-w-[40ch] text-[clamp(1.25rem,1rem+1vw,1.75rem)] leading-[1.3] font-bold tracking-[-0.02em] lg:col-span-9">
           {copy.proof}
         </p>
       </div>

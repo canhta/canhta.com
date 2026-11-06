@@ -6,8 +6,6 @@ import { Closing } from '@/components/closing'
 import { Hero } from '@/components/hero'
 import { OfferCards } from '@/components/offers'
 import { PageShell } from '@/components/page-shell'
-import { Ticker } from '@/components/ticker'
-import { getMessages } from '@/i18n/messages'
 import { AppsTeaser } from '@/components/products'
 import { pageMetadata } from '@/lib/metadata'
 import { buildGraph } from '@/lib/structured-data'
@@ -24,13 +22,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
 export default async function HomePage({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params
   setRequestLocale(locale)
-  const home = getMessages(locale).home
 
   return (
     <PageShell locale={locale} jsonLd={buildGraph(locale, 'home')}>
       <div className="first-screen">
         <Hero locale={locale} />
-        <Ticker words={home.scope} label={home.servicesHeading} pause={home.scopePause} />
       </div>
       <OfferCards locale={locale} />
       <HomeQuestions locale={locale} />
