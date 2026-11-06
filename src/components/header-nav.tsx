@@ -31,7 +31,7 @@ export function HeaderNav({
   cta: string
   ctaShort: string
   home: string
-  phone: { href: string; display: string }
+  phone: { href: string }
   pages: Page[]
   links: NavLink[]
   labels: { primary: string; language: string; menu: string; closeMenu: string }
@@ -94,11 +94,8 @@ export function HeaderNav({
           <LangSwitch locale={locale} label={labels.language} pages={pages} />
         </div>
 
-        <a href={phone.href} className="pill-cta min-[360px]:ml-1" aria-label={`${cta} ${phone.display}`}>
+        <a href={phone.href} className="pill-cta min-[360px]:ml-1" aria-label={cta}>
           <span className="max-[479px]:hidden">{cta}</span>
-          <span className="ml-1.5 hidden lg:inline" translate="no">
-            {phone.display}
-          </span>
           <span className="hidden max-[479px]:inline" aria-hidden="true">
             {ctaShort}
           </span>

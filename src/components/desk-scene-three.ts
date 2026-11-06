@@ -333,21 +333,54 @@ export function mountDesk(host: HTMLElement, labels: DeskLabels, still = false):
   sheet.rotation.y = 0.1
   scene.add(sheet)
 
-  // Lime threads from each source into the tablet, lying on the desk.
+  // Two arrangements. Wide stage: the sources in a column on the left, the
+  // tablet on the right. Phone: the sources in a row at the back, smaller, and
+  // the tablet large in front, so the whole desk fits with the tablet as the
+  // one thing to look at. Threads are rebuilt to match.
+  type Spot = { x: number; z: number; r: number; s: number }
+  const LAYOUTS: Record<'wide' | 'narrow', { tablet: Spot; phone: Spot; sheet: Spot; notebook: Spot; ends: number[][][] }> = {
+    wide: {
+      tablet: { x: 1.5, z: 0.4, r: -0.05, s: 1 },
+      phone: { x: -3.1, z: -2.4, r: 0.18, s: 1 },
+      sheet: { x: -4.5, z: 0.2, r: 0.1, s: 1 },
+      notebook: { x: -3.4, z: 2.9, r: -0.14, s: 1 },
+      ends: [
+        [[-2.2, -2.1], [-1.9, -1.1], [-1.6, -0.6]],
+        [[-3.3, 0.3], [-2.4, 0.4], [-1.6, 0.4]],
+        [[-2.2, 2.2], [-1.9, 1.6], [-1.6, 1.4]],
+      ],
+    },
+    narrow: {
+      tablet: { x: 0, z: 1.3, r: 0, s: 1 },
+      phone: { x: -2.4, z: -2.6, r: 0.1, s: 0.72 },
+      sheet: { x: 0.1, z: -2.7, r: -0.04, s: 0.72 },
+      notebook: { x: 2.5, z: -2.6, r: -0.1, s: 0.72 },
+      ends: [
+        [[-2.2, -1.3], [-1.9, -0.6], [-1.5, -0.3]],
+        [[0.1, -1.5], [0.1, -0.8], [0.1, -0.3]],
+        [[2.3, -1.4], [1.9, -0.6], [1.5, -0.3]],
+      ],
+    },
+  }
+  const placed = { tablet, phone, sheet, notebook }
+
   const lime = new THREE.MeshStandardMaterial({ color: LIME, roughness: 0.5 })
-  const ends = [
-    [new THREE.Vector3(-2.2, 0.04, -2.1), new THREE.Vector3(-1.9, 0.04, -1.1), new THREE.Vector3(-1.6, 0.04, -0.6)],
-    [new THREE.Vector3(-3.3, 0.04, 0.3), new THREE.Vector3(-2.4, 0.04, 0.4), new THREE.Vector3(-1.6, 0.04, 0.4)],
-    [new THREE.Vector3(-2.2, 0.04, 2.2), new THREE.Vector3(-1.9, 0.04, 1.6), new THREE.Vector3(-1.6, 0.04, 1.4)],
-  ]
-  const threads = ends.map((pts) => {
-    const geo = new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 80, 0.045, 8)
-    const mesh = new THREE.Mesh(geo, lime)
-    mesh.castShadow = true
-    geo.setDrawRange(0, 0)
-    scene.add(mesh)
-    return { geo, total: geo.index!.count }
-  })
+  let threads: { mesh: THREE.Mesh; geo: THREE.TubeGeometry; total: number }[] = []
+  const buildThreads = (ends: number[][][]) => {
+    for (const th of threads) {
+      scene.remove(th.mesh)
+      th.geo.dispose()
+    }
+    threads = ends.map((pts) => {
+      const curve = new THREE.CatmullRomCurve3(pts.map(([x, z]) => new THREE.Vector3(x, 0.04, z)))
+      const geo = new THREE.TubeGeometry(curve, 80, 0.045, 8)
+      const mesh = new THREE.Mesh(geo, lime)
+      mesh.castShadow = true
+      geo.setDrawRange(0, 0)
+      scene.add(mesh)
+      return { mesh, geo, total: geo.index!.count }
+    })
+  }
 
   const objects = [
     { o: phone, y: phone.position.y, at: 0.0 },
@@ -356,53 +389,58 @@ export function mountDesk(host: HTMLElement, labels: DeskLabels, still = false):
     { o: tablet, y: tablet.position.y, at: 0.4 },
   ]
 
-  // The camera keeps its angle and steps back until what it frames fits.
+  // The camera keeps its angle and steps back until every object's corners fit
+  // inside the frame with a margin, so nothing is cut at any stage shape.
   const dir = new THREE.Vector3(0.06, 0.82, 0.57).normalize()
-  // Each object's own corners (not one box around all of them, whose empty
-  // corners would make the camera step back too far).
-  scene.updateMatrixWorld(true)
-  const cornersOf = (o: THREE.Object3D, into: THREE.Vector3[], box: THREE.Box3) => {
-    const b = new THREE.Box3().setFromObject(o).expandByScalar(0.15)
-    box.union(b)
-    for (const x of [b.min.x, b.max.x]) for (const z of [b.min.z, b.max.z]) into.push(new THREE.Vector3(x, b.max.y, z))
-  }
-  const corners: THREE.Vector3[] = []
-  const all = new THREE.Box3()
-  for (const o of [tablet, phone, notebook, sheet]) cornersOf(o, corners, all)
-  const wide = all.getCenter(new THREE.Vector3()).setY(0)
-  // On a phone the tablet is the picture: framed close, with the sources
-  // reaching in from the left edge, so there is one thing to look at.
-  const tabletCorners: THREE.Vector3[] = []
-  const tabletBox = new THREE.Box3()
-  cornersOf(tablet, tabletCorners, tabletBox)
-  const close = tabletBox.getCenter(new THREE.Vector3()).setY(0).add(new THREE.Vector3(-0.9, 0, 0))
-  let look = wide
   const probe = new THREE.Vector3()
+  let look = new THREE.Vector3()
   let base = new THREE.Vector3()
+  let layout: 'wide' | 'narrow' | null = null
   const resize = () => {
     const w = host.clientWidth || 1
     const h = host.clientHeight || 1
     renderer.setSize(w, h, false)
     camera.aspect = w / h
-    const narrow = w < 640
-    look = narrow ? close : wide
-    const target = narrow ? tabletCorners : corners
-    // Step the camera back along its angle until every corner sits inside the
-    // frame with a margin, so nothing is ever cut at any stage shape.
-    for (let dist = 8; dist < 60; dist += 0.25) {
+    const next = w < 640 ? 'narrow' : 'wide'
+    if (next !== layout) {
+      layout = next
+      const L = LAYOUTS[next]
+      for (const key of ['tablet', 'phone', 'sheet', 'notebook'] as const) {
+        const spot = L[key]
+        placed[key].position.x = spot.x
+        placed[key].position.z = spot.z
+        placed[key].rotation.y = spot.r
+        placed[key].scale.setScalar(spot.s)
+      }
+      buildThreads(L.ends)
+    }
+    scene.updateMatrixWorld(true)
+    const corners: THREE.Vector3[] = []
+    const all = new THREE.Box3()
+    for (const o of [tablet, phone, notebook, sheet]) {
+      const b = new THREE.Box3().setFromObject(o).expandByScalar(0.15)
+      all.union(b)
+      for (const x of [b.min.x, b.max.x]) for (const z of [b.min.z, b.max.z]) corners.push(new THREE.Vector3(x, b.max.y, z))
+    }
+    look = all.getCenter(new THREE.Vector3()).setY(0)
+    for (let dist = 6; dist < 60; dist += 0.25) {
       camera.position.copy(look).addScaledVector(dir, dist)
       camera.lookAt(look)
       camera.updateProjectionMatrix()
       camera.updateMatrixWorld()
-      const fits = target.every((c) => {
+      const fits = corners.every((c) => {
         probe.copy(c).project(camera)
-        return Math.abs(probe.x) < 0.94 && probe.y < 0.92 && probe.y > -0.8
+        return Math.abs(probe.x) < 0.95 && probe.y < 0.92 && probe.y > -0.86
       })
       if (fits) break
     }
     base = camera.position.clone()
   }
-  const ro = new ResizeObserver(resize)
+  // A resize re-frames, and draws one frame so a resting scene is not left stale.
+  const ro = new ResizeObserver(() => {
+    resize()
+    start()
+  })
   ro.observe(host)
   resize()
 
