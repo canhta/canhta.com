@@ -376,7 +376,6 @@ a.cell-link:active {
 /* --- Mini visuals: small touches that answer the card being touched ---------
    Individual properties (scale, rotate, translate) so they compose with the
    `transform` animations the pictures already play on arrival. */
-.mv-bars i,
 .mvs-stock i,
 .mv-approve,
 .mv-avatar,
@@ -393,10 +392,6 @@ a.cell-link:active {
     background-color 200ms var(--ease-out-soft);
 }
 @media (prefers-reduced-motion: no-preference) and (hover: hover) {
-  /* data: the bars nearest the pointer rise. */
-  .cell:is(:hover, :has(:focus-visible)) .mv-bars i {
-    scale: 1 calc(1 + 0.3 * max(0, 1 - abs(var(--tx, 0) - (var(--i) - 2.5) / 6) * 4));
-  }
   .cell:is(:hover, :has(:focus-visible)) .mvs-stock i {
     scale: 1 calc(1 + 0.18 * max(0, 1 - abs(var(--tx, 0) - (var(--i) - 1.5) / 4) * 3));
   }

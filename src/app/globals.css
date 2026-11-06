@@ -200,6 +200,7 @@ article[id] {
 .mvs-sheet,
 .mv-agent,
 .mv-tile,
+.mv-report,
 .on-night .row-link {
   --color-ink: #131517;
   --color-muted: #565b62;
@@ -1463,15 +1464,13 @@ a.cell-link::after {
   font-size: 0.8em;
   color: var(--color-night);
 }
-.mvs-stock[data-label],
-.mv-bars[data-label] {
+.mvs-stock[data-label] {
   position: relative;
 }
 .mvs-stock[data-label] {
   padding-top: 2.2em;
 }
-.mvs-stock[data-label]::before,
-.mv-bars[data-label]::before {
+.mvs-stock[data-label]::before {
   content: attr(data-label);
   position: absolute;
   top: 0.7em;
@@ -1479,15 +1478,6 @@ a.cell-link::after {
   font-size: 0.8em;
   font-weight: 700;
   color: #fff;
-}
-.mv-bars[data-label] {
-  margin-top: 2em;
-}
-.mv-bars[data-label]::before {
-  top: -2em;
-  left: 0;
-  font-size: 1.15em;
-  color: var(--color-ink);
 }
 .mv-task {
   font-size: 0.95em;
@@ -1588,29 +1578,43 @@ a.cell-link::after {
   filter: drop-shadow(0 0.125em 0.125em rgb(0 0 0 / 0.35));
 }
 
-/* data: bars that rise */
-.mv-bars {
-  font-size: clamp(8px, 3.2cqw, 14px);
+/* data: the Monday-morning report, three lines anyone can read */
+.mv-report {
+  font-size: clamp(10px, 4.4cqw, 17px);
+  display: grid;
+  width: min(92%, 18em);
+  padding: 1em 1.2em 0.4em;
+  border-radius: 1.2em;
+  background: #fff;
+  color: var(--color-night);
+  box-shadow: inset 0 0 0 0.125em var(--color-line);
+}
+.mv-report-title {
+  font-size: 0.8em;
+  color: var(--color-muted);
+  padding-bottom: 0.6em;
+}
+.mv-report-row {
   display: flex;
-  align-items: flex-end;
-  gap: 0.8em;
-  width: 100%;
-  height: clamp(7rem, 42cqw, 13rem);
-  padding-bottom: 0.5em;
-  border-bottom: 0.25em solid var(--color-ink);
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1em;
+  padding-block: 0.6em;
+  border-top: 1px solid var(--color-line);
 }
-.mv-bars i {
-  flex: 1;
-  height: var(--h);
-  border-radius: 0.8em 0.8em 0 0;
-  background: #d3d6db;
-  transform-origin: bottom;
+.mv-report-row .mv-t {
+  font-size: 0.95em;
 }
-.mv-bars i:nth-child(odd) {
-  background: #b3b8bf;
+.mv-report-row b {
+  font-size: 1.6em;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
 }
-.mv-bars i:last-child {
-  background: var(--color-night);
+.mv-report-row:last-child b {
+  padding-inline: 0.3em;
+  border-radius: 0.3em;
+  background: var(--color-accent);
 }
 
 /* web: a browser and a phone */
@@ -1872,9 +1876,6 @@ a.cell-link::after {
   [data-play='armed'] .mvs-stock i {
     transform: scaleY(0.12);
   }
-  [data-play='armed'] .mv-bars i {
-    transform: scaleY(0.12);
-  }
   [data-play='armed'] .mv-browser-hero,
   [data-play='armed'] .mv-phone {
     transform: translateY(3.2em);
@@ -1922,8 +1923,11 @@ a.cell-link::after {
     animation: rise-y 800ms var(--ease-out-soft) both;
     animation-delay: calc(var(--t1, 2000ms) + var(--i) * 90ms);
   }
-  [data-play='play'] .mv-bars i {
-    animation: rise-y 800ms var(--ease-out-soft) both;
+  [data-play='armed'] .mv-report-row {
+    transform: translateY(0.8em);
+  }
+  [data-play='play'] .mv-report-row {
+    animation: slide-up-big 600ms var(--ease-out-soft) both;
     animation-delay: calc(var(--i) * 90ms);
   }
   [data-play='play'] .mv-browser-hero {

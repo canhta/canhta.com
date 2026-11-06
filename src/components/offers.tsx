@@ -112,9 +112,6 @@ export function OfferCards({ locale }: { locale: Locale }) {
         <div className="mt-8 sm:mt-10">
           <OfferBento locale={locale} mode="home" />
         </div>
-        <p className="mt-10 max-w-[34ch] text-[clamp(1.125rem,1rem+0.7vw,1.5rem)] leading-snug font-bold tracking-tight">
-          {messages.process.rule}
-        </p>
       </div>
     </section>
   )

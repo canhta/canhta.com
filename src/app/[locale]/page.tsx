@@ -30,8 +30,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
       </div>
       <OfferCards locale={locale} />
       <HomeQuestions locale={locale} />
-      <AppsTeaser locale={locale} />
       <About locale={locale} />
+      <AppsTeaser locale={locale} />
       <Closing locale={locale} />
     </PageShell>
   )

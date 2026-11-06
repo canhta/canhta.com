@@ -21,6 +21,7 @@ export type Pics = {
   task: string
   taskNote: string
   report: string
+  reportRows: { label: string; value: string }[]
   book: string
   sensor: string
   reading: string
@@ -143,9 +144,13 @@ export function Visual({ id, pics }: { id: string; pics: Pics }) {
     case 'data':
       return (
         <InView className="mv">
-          <div className="mv-bars" data-label={pics.report}>
-            {[38, 52, 44, 70, 62, 94].map((h, i) => (
-              <i key={i} style={{ '--h': `${h}%`, '--i': i } as CSSProperties} />
+          <div className="mv-report">
+            <span className="mv-t mv-report-title">{pics.report}</span>
+            {pics.reportRows.map((row, i) => (
+              <span key={row.label} className="mv-report-row" style={{ '--i': i } as CSSProperties}>
+                <span className="mv-t">{row.label}</span>
+                <b>{row.value}</b>
+              </span>
             ))}
           </div>
         </InView>

@@ -47,7 +47,7 @@ export const viContent: ContentCopy = {
     },
     {
       id: 'ai',
-      name: 'AI agent và chatbot',
+      name: 'Trợ lý AI và chatbot',
       detail:
         'Chatbot trả lời khách theo bảng giá của bạn. AI nhập sẵn hóa đơn, người của bạn duyệt.',
       examples: ['AI agent', 'chatbot trả lời khách', 'trả lời theo tài liệu của bạn'],
@@ -68,16 +68,16 @@ export const viContent: ContentCopy = {
     },
     {
       id: 'iot',
-      name: 'Thiết bị kết nối (IoT)',
+      name: 'Cảm biến và cảnh báo',
       detail:
         'Cảm biến mua sẵn báo nhiệt độ, độ ẩm về một màn hình, vượt ngưỡng là có cảnh báo. Dùng để theo dõi, không thay thiết bị kiểm định.',
       examples: [],
     },
     {
       id: 'team',
-      name: 'Thêm người cho đội bạn',
+      name: 'Làm cùng đội của bạn',
       detail:
-        'Chúng tôi vào làm cùng đội bạn, hoặc nhận trọn một phần như app điện thoại. Làm trên hệ thống và theo nếp của đội bạn.',
+        'Chúng tôi vào làm cùng đội bạn, hoặc nhận trọn một phần như app điện thoại, theo cách đội bạn đang làm.',
       examples: [],
     },
   ],
@@ -102,9 +102,9 @@ export const viContent: ContentCopy = {
     },
     {
       id: 'agent',
-      question: 'Tôi cần AI agent hay chatbot là đủ?',
+      question: 'Tôi cần trợ lý AI hay chatbot là đủ?',
       answer:
-        'Chatbot trả lời câu hỏi. AI agent làm thêm các bước trong phần mềm, có người duyệt. Thường chatbot là đủ.',
+        'Chatbot trả lời câu hỏi. Trợ lý AI làm thêm các bước trong phần mềm, có người duyệt. Thường chatbot là đủ.',
     },
     {
       id: 'wrong',
