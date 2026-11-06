@@ -270,6 +270,13 @@ article[id] {
 .on-accent .lead {
   color: var(--color-night);
 }
+/* The hero's plain sentence carries the concrete promise, so it reads at full
+   strength under the headline, not as muted fine print. */
+.hero .lead {
+  color: var(--color-ink);
+  font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+  line-height: 1.5;
+}
 /* Display type on a dark ground is the lime: the page title words. */
 .hero .display,
 .page-head.on-night .headline {
