@@ -36,7 +36,7 @@ const LIME_CSS = '#d1fe17'
 type Draw = (ctx: CanvasRenderingContext2D, w: number, h: number) => void
 
 /** The words of the static drawing, so the scene says the same thing. */
-export type SceneLabels = { sources: string[]; title: string; rows: string[]; tag: string }
+export type SceneLabels = { sources: string[]; title: string; rows: string[] }
 
 // The page's own face (Be Vietnam Pro), read from the body once fonts are in.
 let FONT = 'sans-serif'

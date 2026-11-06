@@ -126,7 +126,7 @@ export const viContent: ContentCopy = {
     },
     {
       id: 'ownership',
-      question: 'Làm xong, phần mềm thuộc về ai?',
+      question: 'Phần mềm triển khai xong là của ai?',
       answer: 'Thuộc về bạn. Mọi thứ đều đứng tên bạn.',
     },
     {

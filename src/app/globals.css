@@ -197,6 +197,10 @@ article[id] {
 }
 .hv-chip,
 .hv-card,
+.mvs-sheet,
+.mv-agent,
+.sc-agent,
+.mv-tile,
 .on-night .row-link {
   --color-ink: #131517;
   --color-muted: #565b62;

@@ -27,7 +27,7 @@ export function PageHeader({
         className={`shell ${side ? `grid gap-8 lg:grid-cols-12 lg:gap-12 ${children ? 'lg:items-end' : 'lg:items-center'}` : ''}`}
       >
         <div className={side ? 'lg:col-span-7' : ''}>
-          <h1 className="headline max-w-[16ch]">
+          <h1 className="headline max-w-[16ch]" aria-label={title}>
             <Words text={title} load />
           </h1>
           <p className="lead enter mt-5 max-w-[46ch]">{intro}</p>
