@@ -2,7 +2,6 @@ import { Link } from '@/i18n/navigation'
 import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
-import { HeroVisual } from './hero-visual'
 import { Words } from './words'
 
 /**
@@ -30,9 +29,6 @@ export function Hero({ locale }: { locale: Locale }) {
             {copy.secondary}
           </Link>
         </div>
-      </div>
-      <div className="hero-stage">
-        <HeroVisual locale={locale} />
       </div>
     </section>
   )
