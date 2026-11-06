@@ -87,6 +87,7 @@ export default withNextIntl({
     return [
       { source: '/products/:path+', headers: [{ key: 'Cache-Control', value: publicAsset }] },
       { source: '/robots.txt', headers: [{ key: 'Cache-Control', value: generatedText }] },
+      { source: '/app-ads.txt', headers: [{ key: 'Cache-Control', value: generatedText }] },
       { source: '/sitemap.xml', headers: [{ key: 'Cache-Control', value: generatedText }] },
       { source: '/llms.txt', headers: [{ key: 'Cache-Control', value: generatedText }] },
       { source: '/llms-full.txt', headers: [{ key: 'Cache-Control', value: generatedText }] },
