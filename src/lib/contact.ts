@@ -33,6 +33,7 @@ export function mailContact(locale: Locale) {
   const link = social.find((s) => s.network === 'email')?.url ?? 'mailto:hello@canhta.com'
   return {
     address: link.replace('mailto:', ''),
-    href: `${link}?subject=${encodeURIComponent(contact.mailSubject)}&body=${encodeURIComponent(contact.mailBody)}`,
+    // RFC 6068: a line break in a mailto body is CRLF (%0D%0A), not a bare %0A.
+    href: `${link}?subject=${encodeURIComponent(contact.mailSubject)}&body=${encodeURIComponent(contact.mailBody.replace(/\r?\n/g, '\r\n'))}`,
   }
 }
