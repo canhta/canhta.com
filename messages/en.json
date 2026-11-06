@@ -16,19 +16,27 @@
     "primary": "Get advice",
     "secondary": "See services",
     "visual": {
-      "label": "Chats, spreadsheets and paper on one screen. AI does the work, a person approves.",
+      "label": "Chats, spreadsheets, notebooks and app ideas come together in one system. The AI assistant prepares each task and you tap Approve.",
       "sources": [
-        "Chats",
+        "Zalo chats",
         "Spreadsheets",
-        "Paper"
+        "Notebooks",
+        "An app idea"
       ],
-      "title": "One place",
-      "rows": [
+      "system": "One system",
+      "modules": [
         "Orders",
-        "Stock",
-        "Customers"
+        "Customers",
+        "Bookings",
+        "Reports"
       ],
-      "tag": "AI does it, a person approves"
+      "ai": "AI assistant",
+      "aiCount": "3 tasks to approve",
+      "tasks": [
+        "Draft an order from a chat",
+        "Remind a client of a 3pm booking",
+        "Enter a supplier invoice"
+      ]
     }
   },
   "home": {

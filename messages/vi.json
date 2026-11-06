@@ -16,19 +16,27 @@
     "primary": "Nhận tư vấn",
     "secondary": "Xem dịch vụ",
     "visual": {
-      "label": "Zalo, Excel và giấy tờ gom về một màn hình. AI làm, có người duyệt.",
+      "label": "Tin nhắn Zalo, file Excel, sổ tay và ý tưởng app gom về một hệ thống. Trợ lý AI làm sẵn từng việc, bạn bấm Duyệt.",
       "sources": [
-        "Zalo",
-        "Excel",
-        "Giấy tờ"
+        "Tin nhắn Zalo",
+        "File Excel",
+        "Sổ tay",
+        "Ý tưởng app"
       ],
-      "title": "Chung một chỗ",
-      "rows": [
+      "system": "Một hệ thống",
+      "modules": [
         "Đơn hàng",
-        "Tồn kho",
-        "Khách hàng"
+        "Khách hàng",
+        "Lịch hẹn",
+        "Báo cáo"
       ],
-      "tag": "AI làm, có người duyệt"
+      "ai": "Trợ lý AI",
+      "aiCount": "3 việc chờ duyệt",
+      "tasks": [
+        "Soạn đơn từ tin nhắn Zalo",
+        "Nhắc khách lịch hẹn 15h",
+        "Nhập hóa đơn nhà cung cấp"
+      ]
     }
   },
   "home": {

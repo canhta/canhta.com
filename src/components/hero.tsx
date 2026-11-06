@@ -2,14 +2,13 @@ import { Link } from '@/i18n/navigation'
 import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
-import { HeroScene } from './hero-scene'
 import { HeroVisual } from './hero-visual'
 import { Words } from './words'
 
 /**
- * The hook and the next step on a night ground, with the 3D scene as the
- * main picture. On a desktop the scene fills the right of the band and bleeds to
- * its edges; on a phone it sits under the buttons. Text rises in once on load.
+ * The hook and the next step on a night ground, with the picture of the whole
+ * offer (scattered work into one system, AI tasks waiting for approval) on the
+ * right on a desktop and under the buttons on a phone. Text rises in once on load.
  * No product is promoted here: the services come first.
  */
 export function Hero({ locale }: { locale: Locale }) {
@@ -32,9 +31,9 @@ export function Hero({ locale }: { locale: Locale }) {
           </Link>
         </div>
       </div>
-      <HeroScene label={copy.visual.label} labels={copy.visual} className="hero-stage">
+      <div className="hero-stage">
         <HeroVisual locale={locale} />
-      </HeroScene>
+      </div>
     </section>
   )
 }
