@@ -86,7 +86,7 @@ export const viContent: ContentCopy = {
       id: 'pricing',
       question: 'Chi phí bao nhiêu?',
       answer:
-        'Bạn xem bản chạy thử trước. Rồi mới có báo giá, kèm kế hoạch và bảo trì.',
+        'Bản chạy thử không tính phí. Bạn thấy nó chạy rồi mới nhận báo giá, kèm kế hoạch và bảo trì.',
     },
     {
       id: 'timeline',
@@ -127,7 +127,7 @@ export const viContent: ContentCopy = {
     {
       id: 'ownership',
       question: 'Phần mềm triển khai xong là của ai?',
-      answer: 'Thuộc về bạn. Mọi thứ đều đứng tên bạn.',
+      answer: 'Thuộc về bạn, ghi rõ trong hợp đồng.',
     },
     {
       id: 'support',

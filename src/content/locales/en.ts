@@ -86,7 +86,7 @@ export const enContent: ContentCopy = {
       id: 'pricing',
       question: 'How much will it cost?',
       answer:
-        'You see a small working version first. Then a quote, with a plan and maintenance terms.',
+        'The small working version is free. You see it run before you get a quote, with a plan and maintenance terms.',
     },
     {
       id: 'timeline',
@@ -127,7 +127,7 @@ export const enContent: ContentCopy = {
     {
       id: 'ownership',
       question: 'Who owns what you build?',
-      answer: 'You do. Everything is in your name.',
+      answer: 'You do, and the contract says so.',
     },
     {
       id: 'support',

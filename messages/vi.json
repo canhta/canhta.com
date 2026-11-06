@@ -101,7 +101,7 @@
     "nextHeading": "Sau khi bạn liên hệ",
     "call": "Gọi điện",
     "callShort": "Gọi",
-    "next": "Chúng tôi tư vấn, triển khai bản chạy thử, rồi mới báo giá.",
+    "next": "Chúng tôi tư vấn và triển khai bản chạy thử không tính phí. Bạn thấy hợp rồi mới báo giá và ký hợp đồng.",
     "chatText": "Xin chào, tôi có một vấn đề muốn nhờ giải quyết (từ canhta.com)."
   },
   "process": {
@@ -120,12 +120,12 @@
       {
         "id": "build",
         "label": "Triển khai bản chạy thử",
-        "detail": "Chạy trên việc thật của bạn."
+        "detail": "Không tính phí. Chạy trên việc thật của bạn."
       },
       {
         "id": "plan",
         "label": "Rồi mới báo giá",
-        "detail": "Báo giá cụ thể, kèm kế hoạch, thời gian và bảo trì."
+        "detail": "Báo giá cụ thể, kế hoạch, thời gian và bảo trì, rồi ký hợp đồng."
       }
     ]
   },
@@ -135,7 +135,7 @@
   },
   "closing": {
     "heading": "Có vấn đề cần giải quyết?",
-    "body": "Việc gì đang làm bạn mất thời gian?"
+    "body": "Việc gì đang làm bạn mất thời gian? Bản chạy thử không tính phí."
   },
   "llms": {
     "limitsHeading": "Về giá và khách hàng",

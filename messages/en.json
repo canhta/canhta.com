@@ -101,7 +101,7 @@
     "nextHeading": "What happens next",
     "call": "Call us",
     "callShort": "Call",
-    "next": "We advise, build a working version, then quote.",
+    "next": "We advise and build a free working version. If it fits, we quote and sign a contract.",
     "chatText": "Hi, I would like to talk about a problem I want to solve (from canhta.com)."
   },
   "process": {
@@ -120,12 +120,12 @@
       {
         "id": "build",
         "label": "We build a working version",
-        "detail": "It runs on your real work."
+        "detail": "Free. It runs on your real work."
       },
       {
         "id": "plan",
         "label": "Then a quote and plan",
-        "detail": "A specific quote with a plan, timeline and maintenance."
+        "detail": "A specific quote, plan, timeline and maintenance, then a contract."
       }
     ]
   },
@@ -135,7 +135,7 @@
   },
   "closing": {
     "heading": "Got a problem to solve?",
-    "body": "What is eating your time?"
+    "body": "What is eating your time? The working version is free."
   },
   "llms": {
     "limitsHeading": "Prices and clients",
