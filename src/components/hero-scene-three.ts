@@ -273,6 +273,8 @@ export function mountScene(host: HTMLElement, onContext?: (lost: boolean) => voi
 
   const target = { x: 0, y: 0 }
   const onMove = (e: PointerEvent) => {
+    if (e.pointerType === 'touch') return
+    wake()
     const r = host.getBoundingClientRect()
     target.y = ((e.clientX - r.left) / r.width - 0.5) * 0.5
     target.x = ((e.clientY - r.top) / r.height - 0.5) * 0.28
@@ -293,21 +295,32 @@ export function mountScene(host: HTMLElement, onContext?: (lost: boolean) => voi
     if (e.button !== 0 || lost) return
     const i = cardAt(e)
     if (i < 0) return
-    const now = (performance.now() - t0) / 1000
-    sparks[i]!.start = now
-    pops[i] = now
-    start()
+    sparks[i]!.start = t
+    pops[i] = t
+    wake()
   }
   host.addEventListener('pointerdown', onDown)
 
   let visible = true
   let lost = false
   let raf = 0
-  const t0 = performance.now()
+  // The scene plays for a few seconds, then rests (WCAG 2.2.2: nothing moves
+  // for long on its own). A pointer over it or a tap on a card wakes it again.
+  // `t` is the scene's own clock and only runs while it plays, so a woken
+  // scene carries on from where it rested instead of jumping.
+  let t = 0
+  let last = 0
+  let awakeUntil = performance.now() + 6000
+  const wake = () => {
+    awakeUntil = Math.max(awakeUntil, performance.now() + 3000)
+    start()
+  }
   const frame = () => {
     raf = 0
     if (!visible || document.hidden || lost) return
-    const t = (performance.now() - t0) / 1000
+    const now = performance.now()
+    t += Math.min(now - (last || now), 50) / 1000
+    last = now
 
     root.rotation.y += (target.y - root.rotation.y) * 0.06
     root.rotation.x += (target.x - root.rotation.x) * 0.06
@@ -365,7 +378,9 @@ export function mountScene(host: HTMLElement, onContext?: (lost: boolean) => voi
     dots.instanceMatrix.needsUpdate = true
 
     renderer.render(scene, camera)
-    raf = requestAnimationFrame(frame)
+    const busy = sparks.some((sp) => sp.start >= 0) || pk < 1
+    if (now < awakeUntil || busy) raf = requestAnimationFrame(frame)
+    else last = 0
   }
   const start = () => {
     if (!raf && visible && !document.hidden && !lost) raf = requestAnimationFrame(frame)

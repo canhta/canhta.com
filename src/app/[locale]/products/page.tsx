@@ -1,6 +1,7 @@
 import { setRequestLocale } from 'next-intl/server'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
+import { Link } from '@/i18n/navigation'
 import { Closing } from '@/components/closing'
 import { PageHeader } from '@/components/page-header'
 import { PageShell } from '@/components/page-shell'
@@ -25,7 +26,11 @@ export default async function ProductsPage({ params }: { params: Promise<{ local
         title={copy.h1}
         intro={copy.intro}
         visual={<AppMarks locale={locale} />}
-      />
+      >
+        <Link href="/services" className="link inline-flex min-h-11 items-center font-bold">
+          {copy.servicesLink}
+        </Link>
+      </PageHeader>
       <AppsFull locale={locale} />
       <PublicProjects locale={locale} />
       <Closing locale={locale} />

@@ -87,7 +87,7 @@ export function OfferBento({ locale, mode }: { locale: Locale; mode: 'home' | 'p
   const { offers } = getSiteContent(locale)
   const approve = getMessages(locale).home.approve
   return (
-    <div className="bento">
+    <div className={mode === 'home' ? 'bento bento-home' : 'bento'}>
       {offers.map((offer) => (
         <Cell key={offer.id} offer={offer} mode={mode} approve={approve} Heading={mode === 'home' ? 'h3' : 'h2'} />
       ))}

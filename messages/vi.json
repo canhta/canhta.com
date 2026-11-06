@@ -60,7 +60,8 @@
   "apps": {
     "h1": "Vài sản phẩm của chúng tôi",
     "intro": "App và dự án chúng tôi tự triển khai.",
-    "publicHeading": "Dự án khác"
+    "publicHeading": "Dự án khác",
+    "servicesLink": "Xem dịch vụ cho doanh nghiệp"
   },
   "contact": {
     "h1": "Bạn đang gặp vấn đề gì?",

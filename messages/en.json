@@ -60,7 +60,8 @@
   "apps": {
     "h1": "Some of our products",
     "intro": "Apps and projects we built ourselves.",
-    "publicHeading": "Other projects"
+    "publicHeading": "Other projects",
+    "servicesLink": "See our services for businesses"
   },
   "contact": {
     "h1": "What problem should we solve?",

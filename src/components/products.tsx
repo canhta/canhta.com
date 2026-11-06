@@ -23,7 +23,7 @@ export function AppsTeaser({ locale }: { locale: Locale }) {
           <h2 id="apps-title" className="section-title max-w-[14ch]">
             <Words text={copy.appsHeading} />
           </h2>
-          <Link href="/products" className="btn-light">
+          <Link href="/products" className="link inline-flex min-h-11 items-center font-bold">
             {copy.appsAll}
           </Link>
         </div>

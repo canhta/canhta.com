@@ -31,11 +31,11 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
             <h2 id="help-title" className="section-title">
               {copy.helpHeading}
             </h2>
-            <ul className="mt-6 grid gap-3">
+            <ul className="mt-6 grid">
               {copy.help.map((item) => (
                 <li
                   key={item}
-                  className="rounded-[var(--r-card)] bg-white px-5 py-4 text-[clamp(1rem,0.95rem+0.3vw,1.1875rem)] leading-snug font-bold shadow-[var(--shadow-card)]"
+                  className="border-t border-black/15 py-4 text-[clamp(1rem,0.95rem+0.3vw,1.1875rem)] leading-snug font-bold last:border-b"
                 >
                   {item}
                 </li>

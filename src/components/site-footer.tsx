@@ -3,16 +3,16 @@ import { Logo } from './logo'
 import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
-import { mailContact, phoneContact, whatsappContact } from '@/lib/contact'
+import { mailContact } from '@/lib/contact'
 import { getPages } from '@/lib/pages'
-import { GitHubIcon, LinkedInIcon, MailTile, PhoneTile, WhatsAppTile, XIcon, ZaloTile } from './icons'
+import { GitHubIcon, LinkedInIcon, XIcon } from './icons'
 import { LangSwitch } from './lang-switch'
 
 /**
- * The colophon, on the night ground. The email address is the headline action
- * with the one button beside it. Under it, three columns that share a baseline:
- * the pages, the three ways to chat (email, Zalo, WhatsApp, each a brand logo
- * tile with its visible label), and where to check we are real. The bottom bar
+ * The colophon, on the night ground. The email address is the headline action.
+ * Under it, two columns: the pages, and where to check we are real. The call,
+ * Zalo and WhatsApp rows live once, in the closing band or on the contact page,
+ * not again here. The bottom bar
  * carries the copyright on the left and the language switch on the right.
  */
 const ELSEWHERE = [
@@ -25,9 +25,6 @@ export function SiteFooter({ locale }: { locale: Locale }) {
   const { profile, social } = getSiteContent(locale)
   const messages = getMessages(locale)
   const mail = mailContact(locale)
-  const phone = phoneContact(locale)
-  const zalo = social.find((s) => s.network === 'zalo')
-  const whatsapp = whatsappContact(locale)
   const elsewhere = ELSEWHERE.flatMap((e) => {
     const link = social.find((s) => s.network === e.network)
     return link ? [{ ...e, url: link.url }] : []
@@ -48,12 +45,9 @@ export function SiteFooter({ locale }: { locale: Locale }) {
               {mail.address}
             </a>
           </div>
-          <a href={phone.href} className="btn-accent self-start lg:mb-2 lg:self-auto">
-            {profile.headerCta}
-          </a>
         </div>
 
-        <div className="mt-14 grid gap-10 border-t border-white/25 pt-10 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid gap-10 border-t border-white/25 pt-10 sm:grid-cols-2">
           <nav aria-label={messages.footer.explore}>
             <p className="text-[14px] font-bold text-dim">{messages.footer.explore}</p>
             <ul className="mt-3 grid justify-items-start gap-0.5">
@@ -73,44 +67,6 @@ export function SiteFooter({ locale }: { locale: Locale }) {
               ))}
             </ul>
           </nav>
-
-          <div>
-            <p className="text-[14px] font-bold text-dim">{messages.contact.channels}</p>
-            <ul className="mt-3 grid justify-items-start gap-0.5">
-              <li>
-                <a href={phone.href} className="foot-row">
-                  <PhoneTile size={36} tone="light" />
-                  <span className="foot-label">{messages.contact.call}</span>
-                </a>
-              </li>
-              <li>
-                <a href={mail.href} className="foot-row">
-                  <MailTile size={36} tone="light" />
-                  <span className="foot-label">{messages.contact.email}</span>
-                </a>
-              </li>
-              {zalo ? (
-                <li>
-                  <a href={zalo.url} target="_blank" rel="noreferrer noopener" className="foot-row">
-                    <ZaloTile size={36} />
-                    <span className="foot-label">
-                      {messages.contact.chatOn} <span translate="no">Zalo</span>
-                    </span>
-                  </a>
-                </li>
-              ) : null}
-              {whatsapp ? (
-                <li>
-                  <a href={whatsapp.href} target="_blank" rel="noreferrer noopener" className="foot-row">
-                    <WhatsAppTile size={36} />
-                    <span className="foot-label">
-                      {messages.contact.chatOn} <span translate="no">WhatsApp</span>
-                    </span>
-                  </a>
-                </li>
-              ) : null}
-            </ul>
-          </div>
 
           <div>
             <p className="text-[14px] font-bold text-dim">{messages.footer.elsewhere}</p>

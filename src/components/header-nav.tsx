@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Logo } from './logo'
 import { LangSwitch } from './lang-switch'
 
@@ -31,7 +31,7 @@ export function HeaderNav({
   cta: string
   ctaShort: string
   home: string
-  phone: { href: string }
+  phone: { href: string; display: string }
   pages: Page[]
   links: NavLink[]
   labels: { primary: string; language: string; menu: string; closeMenu: string }
@@ -43,11 +43,24 @@ export function HeaderNav({
   const here = pages.find((p) => rest === p.key || p.en === rest || p.vi.replace(/^\/vi/, '') === rest)
   const current = (href: string) => here?.[locale] === href
   const [open, setOpen] = useState(false)
+  const toggle = useRef<HTMLButtonElement>(null)
 
   // The phone contact bar steps aside while the menu is open (see globals.css).
   useEffect(() => {
     document.documentElement.toggleAttribute('data-menu-open', open)
     return () => document.documentElement.removeAttribute('data-menu-open')
+  }, [open])
+
+  // Escape closes the phone menu and puts focus back on the toggle.
+  useEffect(() => {
+    if (!open) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return
+      setOpen(false)
+      toggle.current?.focus()
+    }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
   }, [open])
 
   return (
@@ -81,14 +94,19 @@ export function HeaderNav({
           <LangSwitch locale={locale} label={labels.language} pages={pages} />
         </div>
 
-        <a href={phone.href} className="pill-cta min-[360px]:ml-1" aria-label={cta}>
+        <a href={phone.href} className="pill-cta min-[360px]:ml-1" aria-label={`${cta} ${phone.display}`}>
           <span className="max-[479px]:hidden">{cta}</span>
+          <span className="hidden lg:inline" translate="no">
+            {' '}
+            {phone.display}
+          </span>
           <span className="hidden max-[479px]:inline" aria-hidden="true">
             {ctaShort}
           </span>
         </a>
 
         <button
+          ref={toggle}
           type="button"
           className="grid h-11 w-11 shrink-0 place-items-center rounded-full transition-[background-color,transform] hover:bg-wash active:scale-95 md:hidden"
           aria-expanded={open}
@@ -109,7 +127,15 @@ export function HeaderNav({
       </div>
 
       {open ? (
-        <div id="menu-panel" className="menu-panel md:hidden">
+        <nav
+          id="menu-panel"
+          aria-label={labels.primary}
+          className="menu-panel md:hidden"
+          onBlur={(e) => {
+            const next = e.relatedTarget as Node | null
+            if (next && !e.currentTarget.contains(next) && next !== toggle.current) setOpen(false)
+          }}
+        >
           <ul>
             {links.map((l) => (
               <li key={l.href}>
@@ -124,7 +150,7 @@ export function HeaderNav({
               </li>
             ))}
           </ul>
-        </div>
+        </nav>
       ) : null}
     </>
   )

@@ -1,19 +1,26 @@
 import { Fragment, type CSSProperties } from 'react'
 
 /**
- * A heading's words, each in its own span so CSS can settle them in one by one
- * (see `.sw` in fx.css). The text is the same string with the same spaces, so a
- * screen reader, search and copy-paste see exactly the original heading. `load`
- * is for the first screen of a page (plays once on arrival); without it the words
- * follow the heading as it scrolls into view.
+ * A page's first heading, its words rising into place once on arrival (see
+ * `.sw` in fx.css). Screen readers get the whole heading as one string; the
+ * moving word spans are hidden from them. Headings further down the page stay
+ * plain text: one motion per section is enough.
  */
 export function Words({ text, load = false }: { text: string; load?: boolean }) {
-  return text.split(' ').map((word, i) => (
-    <Fragment key={i}>
-      {i > 0 ? ' ' : null}
-      <span className={load ? 'sw sw-load' : 'sw'} style={{ '--i': i } as CSSProperties}>
-        {word}
+  if (!load) return text
+  return (
+    <>
+      <span className="sr-only">{text}</span>
+      <span aria-hidden="true">
+        {text.split(' ').map((word, i) => (
+          <Fragment key={i}>
+            {i > 0 ? ' ' : null}
+            <span className="sw" style={{ '--i': i } as CSSProperties}>
+              {word}
+            </span>
+          </Fragment>
+        ))}
       </span>
-    </Fragment>
-  ))
+    </>
+  )
 }

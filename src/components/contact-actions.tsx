@@ -45,6 +45,7 @@ export function ContactActions({ locale }: { locale: Locale }) {
               {messages.contact.chatOn} <span translate="no">Zalo</span>
             </span>
           </span>
+          <small translate="no">{phone.display}</small>
         </a>
       ) : null}
 

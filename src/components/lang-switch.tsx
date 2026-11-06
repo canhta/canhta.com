@@ -6,6 +6,7 @@ import { useState } from 'react'
 
 type Page = { key: string; en: string; vi: string }
 const CODES = ['en', 'vi'] as const
+const NAMES = { en: 'English', vi: 'Tiếng Việt' } as const
 
 /**
  * EN / VI. It has to know the current path to land on the same page in the
@@ -51,7 +52,10 @@ export function LangSwitch({
           key={code}
           href={here?.[code] ?? (code === 'en' ? '/' : '/vi')}
           prefetch={false}
-          aria-current={locale === code ? 'page' : undefined}
+          lang={code}
+          hrefLang={code}
+          aria-label={NAMES[code]}
+          aria-current={locale === code ? 'true' : undefined}
           onClick={() => setChosen({ from: locale, code })}
           className={`grid h-11 min-w-11 place-items-center rounded-full text-[13px] font-bold transition-[color,background-color,transform] active:scale-95 ${
             shown === code ? active : idle
