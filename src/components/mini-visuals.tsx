@@ -73,9 +73,9 @@ function AgentCard({ pics, className, cursor }: { pics: Pics; className: string;
 }
 
 /** A sensor's reading on one tile, with the alert it raised. */
-function SensorTile({ pics, className = '' }: { pics: Pics; className?: string }) {
+function SensorTile({ pics }: { pics: Pics }) {
   return (
-    <span className={`mv-tile ${className}`}>
+    <span className="mv-tile">
       <span className="mv-t mv-tile-name">{pics.sensor}</span>
       <span className="mv-tile-val">{pics.reading}</span>
       <span className="mv-t mv-tile-alert">{pics.alert}</span>
@@ -191,58 +191,4 @@ export function Visual({ id, pics }: { id: string; pics: Pics }) {
         </InView>
       )
   }
-}
-
-/**
- * The whole range on one picture, for the head of the services page: a chat, an
- * order table, an agent waiting for approval, a report and a website, all in the
- * same drawn language as the cells below it. Sizes are in em with 1em = 1% of the
- * picture's width, so the composition scales as one piece.
- */
-export function ServiceCollage({ pics }: { pics: Pics }) {
-  return (
-    <div className="sc-wrap">
-      <InView className="sc">
-        <div className="sc-chat">
-          <Chat pics={pics} />
-        </div>
-
-        <div className="mvs-sheet sc-sheet">
-          <span className="mvs-head">
-            {pics.cols.map((c) => (
-              <span key={c} className="mv-t">
-                {c}
-              </span>
-            ))}
-          </span>
-          {times(4).map((r) => (
-            <span key={r} className="mvs-row" style={{ '--r': r } as CSSProperties}>
-              <span className="mvs-u" />
-              <i />
-              <i />
-            </span>
-          ))}
-        </div>
-
-        <AgentCard pics={pics} className="sc-agent" />
-
-        <div className="mvs-stock sc-report">
-          {[38, 52, 44, 70, 62, 94].map((h, i) => (
-            <i key={i} style={{ '--h': `${h}%`, '--i': i } as CSSProperties} />
-          ))}
-        </div>
-
-        <SensorTile pics={pics} className="sc-sensor" />
-
-        <div className="sc-web">
-          <span className="sc-web-bar" />
-          <span className="sc-web-hero" />
-          <span className="sc-web-line" />
-          <span className="sc-web-phone">
-            <i />
-          </span>
-        </div>
-      </InView>
-    </div>
-  )
 }

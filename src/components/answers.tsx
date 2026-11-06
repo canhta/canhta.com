@@ -64,8 +64,8 @@ export function Answers({ locale }: { locale: Locale }) {
         </h2>
         <dl className="faq-list reveal lg:col-span-8">
           {faq.map((item) => (
-            <div key={item.id} id={`faq-${item.id}`} className="faq-item border-t-2 border-ink py-6 first:border-t-0 first:pt-0 lg:first:pt-2">
-              <dt className="title max-w-[26ch]">{item.question}</dt>
+            <div key={item.id} id={`faq-${item.id}`} className="faq-item border-t border-black/15 py-5 first:border-t-0 first:pt-0 lg:first:pt-2">
+              <dt className="subtitle max-w-[40ch]">{item.question}</dt>
               <dd className="lead mt-3 max-w-[52ch]">{item.answer}</dd>
             </div>
           ))}

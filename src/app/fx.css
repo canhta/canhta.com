@@ -385,10 +385,7 @@ a.cell-link:active {
 .mv-tile-alert,
 .mv-blocks i,
 .mvs-invoice,
-.mvs-sheet,
-.sc-agent,
-.sc-sheet,
-.sc-web {
+.mvs-sheet {
   transition:
     scale 420ms var(--spring),
     rotate 420ms var(--spring),
@@ -438,18 +435,6 @@ a.cell-link:active {
   }
   .cell:is(:hover, :has(:focus-visible)) .mvs-sheet {
     scale: 1.025;
-  }
-  /* services page head: the whole range shifts a little. */
-  .sc-wrap:hover .sc-agent {
-    translate: 0 -0.6em;
-    rotate: 3deg;
-  }
-  .sc-wrap:hover .sc-sheet {
-    translate: 0 0.4em;
-    rotate: 0.4deg;
-  }
-  .sc-wrap:hover .sc-web {
-    translate: 0 -0.5em;
   }
 }
 

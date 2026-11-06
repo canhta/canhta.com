@@ -199,7 +199,6 @@ article[id] {
 .hv-card,
 .mvs-sheet,
 .mv-agent,
-.sc-agent,
 .mv-tile,
 .on-night .row-link {
   --color-ink: #131517;
@@ -215,7 +214,7 @@ article[id] {
 @utility display {
   font-weight: 700;
   /* Capped by height too, so the headline and the buttons share a short laptop. */
-  font-size: clamp(2.5rem, min(1.2rem + 3.8vw, 10svh), 5rem);
+  font-size: clamp(2.5rem, min(1.6rem + 3.6vw, 9.5svh), 4.5rem);
   line-height: 1.06;
   letter-spacing: -0.035em;
 }
@@ -227,20 +226,20 @@ article[id] {
 }
 @utility headline {
   font-weight: 700;
-  font-size: clamp(2rem, 1.2rem + 2.6vw, 3.5rem);
+  font-size: clamp(2.25rem, 1.5rem + 2.6vw, 3.5rem);
   line-height: 1.08;
   letter-spacing: -0.032em;
 }
 /* A section's own heading: one step under the page title. */
 @utility section-title {
   font-weight: 700;
-  font-size: clamp(1.5rem, 1.1rem + 1.3vw, 2.25rem);
+  font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem);
   line-height: 1.12;
   letter-spacing: -0.03em;
 }
 @utility title {
   font-weight: 700;
-  font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2rem);
+  font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
   line-height: 1.18;
   letter-spacing: -0.024em;
 }
@@ -277,7 +276,7 @@ article[id] {
 
 @utility closing-title {
   font-weight: 700;
-  font-size: clamp(2.125rem, 1rem + 3.2vw, 3.75rem);
+  font-size: clamp(2rem, 1.5rem + 1.8vw, 3rem);
   line-height: 1.06;
   letter-spacing: -0.036em;
 }
@@ -1137,7 +1136,7 @@ a.cell-link::after {
 }
 .step-num {
   font-weight: 700;
-  font-size: clamp(3rem, 12vw, 4rem);
+  font-size: clamp(2.5rem, 2rem + 1.5vw, 3rem);
   line-height: 0.9;
   letter-spacing: -0.05em;
   color: var(--color-ink);
@@ -1151,19 +1150,6 @@ a.cell-link::after {
 .on-night .step-num {
   color: var(--color-accent);
   text-decoration: none;
-}
-.track {
-  height: 8px;
-  border-radius: 999px;
-  background: var(--color-line);
-  overflow: hidden;
-}
-.track::after {
-  content: '';
-  display: block;
-  height: 100%;
-  border-radius: 999px;
-  background: var(--color-accent);
 }
 @media (min-width: 1024px) {
   .process-grid {
@@ -1181,29 +1167,14 @@ a.cell-link::after {
     column-gap: 40px;
     padding-block: 32px;
   }
-  .step-num {
-    font-size: clamp(4.5rem, 7vw, 6.5rem);
-  }
 }
 @media (min-width: 1024px) and (min-height: 700px) {
   .process-side > .sticky-box {
     position: sticky;
     top: calc(var(--pill-top) + var(--pill-h) + 32px);
   }
-  .process .step {
-    min-height: 34svh;
-    align-content: center;
-  }
 }
 
-@keyframes fill-x {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
-}
 @keyframes step-in {
   from {
     transform: translateY(56px);
@@ -1224,12 +1195,6 @@ a.cell-link::after {
   @media (prefers-reduced-motion: no-preference) {
     .process {
       view-timeline-name: --process;
-    }
-    .track::after {
-      transform-origin: left;
-      animation: fill-x linear both;
-      animation-timeline: --process;
-      animation-range: contain 0% contain 100%;
     }
     .step > * {
       animation: step-in linear both;
@@ -1805,169 +1770,6 @@ a.cell-link::after {
   box-shadow: 0 0 0 0.25em #fff;
 }
 
-/* The services page head: the whole range on one picture, in the same language
-   as the cells. 1em is 2.4% of the picture's width, so it scales as one piece. */
-.sc-wrap {
-  container-type: inline-size;
-  width: 100%;
-  max-width: 38rem;
-  margin-inline: auto;
-}
-.sc {
-  --t0: 650ms;
-  --t1: 1000ms;
-  --t2: 900ms;
-  position: relative;
-  aspect-ratio: 100 / 86;
-  font-size: 2.4cqw;
-  color: var(--color-night);
-}
-.sc > * {
-  position: absolute;
-}
-.sc-chat {
-  left: 0;
-  top: 3%;
-  width: 46%;
-  display: grid;
-  gap: 0.8em;
-  rotate: -2deg;
-}
-.sc-chat .mvs-b {
-  width: 88%;
-}
-.sc-chat .mvs-b-out {
-  justify-self: end;
-}
-.sc-sheet {
-  left: 18%;
-  top: 35%;
-  width: 56%;
-  rotate: 1.2deg;
-  z-index: 2;
-}
-.sc-agent {
-  right: 0;
-  top: 0;
-  width: 46%;
-  padding: 1.2em;
-  border-radius: 1.5em;
-  background: #fff;
-  rotate: 2deg;
-  z-index: 3;
-  box-shadow: 0 2em 3em -1.6em rgb(0 0 0 / 0.6);
-}
-.sc-agent .mv-agent-head {
-  gap: 1em;
-}
-.sc-agent .mv-avatar {
-  width: 3em;
-  height: 3em;
-  border-radius: 0.9em;
-}
-.sc-agent .mv-agent-lines {
-  gap: 0.65em;
-}
-.sc-agent .mv-agent-foot {
-  gap: 1em;
-  margin-top: 1.2em;
-}
-.sc-agent .mv-approve {
-  min-height: 2.8em;
-  padding-inline: 1.4em;
-  font-size: 1em;
-}
-.sc-agent .mv-check {
-  width: 2.8em;
-  height: 2.8em;
-}
-.sc-report {
-  left: 0;
-  bottom: 0;
-  width: 27%;
-  height: 28%;
-  padding-top: 1.2em;
-}
-.sc-web {
-  right: 1%;
-  bottom: 0;
-  width: 38%;
-  padding: 1em;
-  border-radius: 1.4em;
-  background: #fff;
-  z-index: 3;
-  box-shadow: 0 2em 3em -1.6em rgb(0 0 0 / 0.6);
-}
-.sc-web-bar {
-  display: block;
-  width: 46%;
-  height: 0.7em;
-  margin-bottom: 0.9em;
-  border-radius: 0.35em;
-  background: #9aa0a8;
-}
-.sc-web-hero {
-  display: block;
-  height: 5.6em;
-  border-radius: 0.9em;
-  background: var(--color-night);
-}
-.sc-web-line {
-  display: block;
-  width: 68%;
-  height: 0.6em;
-  margin-top: 0.9em;
-  border-radius: 0.3em;
-  background: #d3d6db;
-}
-.sc-web-phone {
-  position: absolute;
-  right: -0.9em;
-  bottom: -1.2em;
-  width: 4.6em;
-  height: 7.8em;
-  padding: 0.6em;
-  border-radius: 1.2em;
-  background: var(--color-night);
-  box-shadow: 0 1em 1.6em -0.6em rgb(0 0 0 / 0.6), 0 0 0 0.2em #fff;
-}
-.sc-web-phone i {
-  display: block;
-  height: 100%;
-  border-radius: 0.7em;
-  background: var(--color-accent);
-}
-.sc-sensor {
-  position: absolute;
-  right: 3%;
-  top: 31%;
-  width: 22%;
-  font-size: 1em;
-  padding: 0.9em 1em;
-}
-@media (max-width: 639px) {
-  .sc-wrap {
-    display: none;
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  [data-play='armed'] .sc-sheet,
-  [data-play='armed'] .sc-agent,
-  [data-play='armed'] .sc-web {
-    transform: translateY(3em);
-  }
-  [data-play='play'] .sc-sheet {
-    animation: slide-up-big 800ms var(--ease-out-soft) 450ms both;
-  }
-  [data-play='play'] .sc-agent {
-    animation: slide-up-big 800ms var(--ease-out-soft) 150ms both;
-  }
-  [data-play='play'] .sc-web {
-    animation: slide-up-big 800ms var(--ease-out-soft) 900ms both;
-  }
-}
-
 @keyframes draw-x {
   from {
     transform: scaleX(0);
@@ -2318,18 +2120,6 @@ a.cell-link::after {
   }
 }
 
-/* A page head with a picture beside it gives the text a little less room, so the
-   title is set a size down to stay at four lines or fewer. */
-@media (min-width: 1024px) {
-  .page-head:has(.sc-wrap) .headline {
-    font-size: clamp(2rem, 1.1rem + 2.3vw, 3.25rem);
-  }
-  .sc-wrap {
-    width: calc(100% + 2.5rem);
-    max-width: none;
-    margin-right: -2.5rem;
-  }
-}
 
 /* =========================================================================
    Phone contact bar: email, Zalo and WhatsApp pinned to the bottom edge.

@@ -22,7 +22,6 @@ export function Process({ locale }: { locale: Locale }) {
             <h2 id="process-title" className="title-band section-title max-w-[12ch]">
               <Words text={heading} />
             </h2>
-            <div className="track mt-8 max-w-sm" aria-hidden="true" />
             <p className="mt-6 max-w-[30ch] text-[clamp(1rem,0.95rem+0.3vw,1.1875rem)] leading-snug font-bold">{copy.rule}</p>
             <p className="mt-6">
               <Link href="/contact" className="btn-accent">

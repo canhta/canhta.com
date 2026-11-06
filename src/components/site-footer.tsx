@@ -39,7 +39,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
             <p className="mb-3 text-[14px] font-bold text-dim">{messages.footer.write}</p>
             <a
               href={mail.href}
-              className="inline-block min-h-11 text-[clamp(1.5rem,0.6rem+2.6vw,3rem)] leading-[1.12] font-bold tracking-[-0.03em] break-all text-white underline decoration-accent decoration-[3px] underline-offset-[0.18em] transition-colors hover:decoration-white active:opacity-70 sm:break-normal"
+              className="inline-block min-h-11 text-[clamp(1.25rem,1rem+0.8vw,1.75rem)] leading-[1.2] font-bold tracking-[-0.03em] break-all text-white underline decoration-accent decoration-[3px] underline-offset-[0.18em] transition-colors hover:decoration-white active:opacity-70 sm:break-normal"
               translate="no"
             >
               {mail.address}

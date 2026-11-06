@@ -23,8 +23,8 @@ const GROUND: Record<string, Ground> = {
   systems: 'night',
   ai: 'lime',
   data: 'white',
-  web: 'wash',
-  iot: 'night',
+  web: 'white',
+  iot: 'white',
   team: 'white',
 }
 

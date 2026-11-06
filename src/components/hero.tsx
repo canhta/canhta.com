@@ -21,7 +21,7 @@ export function Hero({ locale }: { locale: Locale }) {
   return (
     <section className="hero on-night">
       <div className="shell hero-text">
-        <h1 className="display max-w-[12ch] sm:max-w-[13ch]" aria-label={profile.hook}>
+        <h1 className={`display max-w-[12ch] ${locale === 'en' ? 'sm:max-w-[17ch]' : 'sm:max-w-[13ch]'}`} aria-label={profile.hook}>
           <Words text={profile.hook} load />
         </h1>
         <p className="lead enter mt-5 max-w-[40ch]">{profile.supporting}</p>
