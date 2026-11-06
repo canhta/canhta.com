@@ -105,7 +105,7 @@
     "chatText": "Hi, I would like to talk about a problem I want to solve (from canhta.com)."
   },
   "process": {
-    "rule": "If KiotViet, MISA or other ready-made software is enough, we will advise you to use it.",
+    "rule": "We start with the smallest change that shows results.",
     "steps": [
       {
         "id": "problem",
