@@ -32,7 +32,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
   const year = new Date().getFullYear()
 
   return (
-    <footer data-no-bar className="sheet ground-night on-night pt-[calc(var(--space)*0.8)] pb-8">
+    <footer data-no-bar className="sheet ground-night on-night pt-[calc(var(--space)*0.6)] pb-6 sm:pt-[calc(var(--space)*0.8)] sm:pb-8">
       <div className="shell">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div>
@@ -47,7 +47,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
           </div>
         </div>
 
-        <div className="mt-14 grid gap-10 border-t border-white/25 pt-10 sm:grid-cols-2">
+        <div className="mt-8 grid grid-cols-2 gap-6 border-t border-white/25 pt-6 sm:mt-12 sm:gap-10 sm:pt-10">
           <nav aria-label={messages.footer.explore}>
             <p className="text-[14px] font-bold text-dim">{messages.footer.explore}</p>
             <ul className="mt-3 grid justify-items-start gap-0.5">
@@ -85,7 +85,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
           </div>
         </div>
 
-        <div className="mt-10 flex items-center justify-between gap-4">
+        <div className="mt-6 flex items-center justify-between gap-4 sm:mt-10">
           <p className="flex items-center gap-3 text-[14px] text-dim">
             <Logo size={32} />
             <span>
