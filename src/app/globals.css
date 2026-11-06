@@ -178,6 +178,9 @@ article[id] {
 .ground-white {
   background: #fff;
 }
+.ground-wash {
+  background: var(--color-wash);
+}
 .ground-accent {
   background: var(--color-accent);
   color: var(--color-night);

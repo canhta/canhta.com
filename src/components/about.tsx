@@ -9,7 +9,7 @@ export function About({ locale }: { locale: Locale }) {
   const copy = getMessages(locale).about
 
   return (
-    <section aria-labelledby="about-title" className="band sheet ground-white">
+    <section aria-labelledby="about-title" className="band sheet ground-wash">
       <div className="shell grid gap-6 lg:grid-cols-12 lg:gap-14">
         <h2 id="about-title" className="subtitle lg:col-span-3">
           {copy.heading}
