@@ -6,7 +6,7 @@ export const enContent: ContentCopy = {
     location: 'Vietnam',
     hook: 'Chats, spreadsheets and paperwork in one system.',
     supporting:
-      'We build business software, websites, apps and AI agents for small businesses and individuals in Vietnam. AI takes steps like logging orders, chasing payments and answering customers, and someone on your side approves before anything goes out.',
+      'Software, websites, apps and AI agents for small businesses and individuals. AI logs orders and answers customers. You approve.',
     headerCta: 'Call us',
     availabilityLabel: 'Taking on new projects',
   },
@@ -42,42 +42,42 @@ export const enContent: ContentCopy = {
       id: 'systems',
       name: 'Business systems',
       detail:
-        "Enter an order once and the stock and the customer's balance update with it. Whoever answers the phone sees what that customer has bought and what they still owe.",
+        'Enter an order once and stock and balances update. Whoever answers the phone sees what the customer bought and owes.',
       examples: ['ERP', 'CRM'],
     },
     {
       id: 'ai',
       name: 'AI agents and chatbots',
       detail:
-        'A customer asks about price or stock in chat, and the chatbot answers from your own price list. AI can also read supplier invoices and fill them in for someone on your side to check. Anything that touches money, or changes an order or your books, waits for a person to approve it.',
+        'A chatbot answers customers from your price list. AI fills in supplier invoices for your team to approve.',
       examples: ['AI agents', 'customer chatbots', 'answers from your own documents'],
     },
     {
       id: 'data',
       name: 'Reports and dashboards',
       detail:
-        'Sales, stock and customer numbers from your spreadsheets and apps, pulled into one report that stays up to date. On Monday morning you know where you stand without asking around.',
+        'Sales, stock and customer numbers in one report. On Monday morning you know where you stand.',
       examples: ['Dashboards', 'tidying messy spreadsheets'],
     },
     {
       id: 'web',
       name: 'Websites and apps',
       detail:
-        'A website where customers order or book, with each order going straight into your system. If you have an idea of your own, we build the web or phone app for it.',
+        'A website where customers order or book, straight into your system. Got your own idea? We build the app.',
       examples: [],
     },
     {
       id: 'iot',
       name: 'Connected devices (IoT)',
       detail:
-        'Off-the-shelf sensors send temperature and humidity to one screen, and you get an alert when a reading crosses your limit. The readings are for day-to-day checks. They are not certified measurements.',
+        'Off-the-shelf sensors send temperature and humidity to one screen and alert you past your limit. For monitoring, not certified measurement.',
       examples: [],
     },
     {
       id: 'team',
       name: 'Extra hands for your team',
       detail:
-        'We join your team for a while, or take on one piece of the work, such as a phone app or a connection between two systems. We use the systems you already have and fit the way your team works.',
+        'We join your team, or take one piece such as a phone app. On your systems, your team\'s way.',
       examples: [],
     },
   ],
@@ -86,43 +86,43 @@ export const enContent: ContentCopy = {
       id: 'pricing',
       question: 'How much will it cost?',
       answer:
-        'You see a small working version first. Once you have seen it do the job, we send a clear quote with a plan, a timeline and how we maintain and support it.',
+        'You see a small working version first. Then a quote, with a plan and maintenance terms.',
     },
     {
       id: 'timeline',
       question: 'How long will it take?',
       answer:
-        'The small working version comes first, so you see results early. The plan that comes with the quote sets out the time for each part after that.',
+        'The working version comes early. The plan sets the time for the rest.',
     },
     {
       id: 'apps',
       question: 'Can you connect the apps I already use?',
       answer:
-        'We check this while we look into the problem, and tell you which ones we can connect.',
+        'We check what can connect while we look into the problem.',
     },
     {
       id: 'agent',
       question: 'Do I need an AI agent, or is a chatbot enough?',
       answer:
-        'A chatbot answers questions. An agent can also carry out steps in your systems, with a person approving. Often a chatbot is all you need.',
+        'A chatbot answers questions. An agent also does steps in your systems, with a person approving. Often a chatbot is enough.',
     },
     {
       id: 'wrong',
       question: 'AI can be wrong. Who checks?',
       answer:
-        'At the start we agree on one person who approves. Anything that touches money, or changes an order or your books, goes through them.',
+        'We agree on one approver at the start. Anything touching money, orders or your books goes through them.',
     },
     {
       id: 'customers',
       question: 'Can AI chat with my customers?',
       answer:
-        'Yes, when the answer is in the information you gave it. It tells customers it is automated, and it passes the chat to a person when it is unsure or when the customer asks.',
+        'Yes, when the answer is in what you gave it. It says it is automated and hands over to a person when unsure.',
     },
     {
       id: 'data',
       question: "What happens to my customers' information when AI is used?",
       answer:
-        'We take only what the project needs. Before we start, we agree which AI service gets which information and who owns it. This is not legal advice.',
+        'We take only what the project needs and agree up front which AI gets what. This is not legal advice.',
     },
     {
       id: 'ownership',
@@ -133,13 +133,13 @@ export const enContent: ContentCopy = {
       id: 'support',
       question: 'What happens once it is running?',
       answer:
-        'How we maintain and support it is written into the quote, so you know before you decide.',
+        'Maintenance and support are written into the quote.',
     },
     {
       id: 'idea',
       question: 'What if I only have an idea?',
       answer:
-        'That is fine. Tell us what you want to achieve and who will use it, and we will work out together what the small working version needs.',
+        'That works. Tell us the goal and who will use it, and we plan the working version together.',
     },
   ],
 }

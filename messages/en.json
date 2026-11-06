@@ -16,7 +16,7 @@
     "primary": "Share your problem",
     "secondary": "See services",
     "visual": {
-      "label": "Chats, spreadsheets and paper gathered on one screen. AI does the repeat steps. Anything that touches money, or changes an order or your books, waits for a person.",
+      "label": "Chats, spreadsheets and paper on one screen. AI does the work, a person approves.",
       "sources": [
         "Chats",
         "Spreadsheets",
@@ -53,18 +53,18 @@
   },
   "services": {
     "h1": "Digital transformation, software and AI for small businesses",
-    "intro": "First we bring your chats, spreadsheets and paperwork into one system, with numbers that are complete and correct. AI only does well on numbers like that, so AI agents come after.",
+    "intro": "One system first. AI comes after, once the numbers are right.",
     "processHeading": "How we work with you",
     "faqHeading": "Questions"
   },
   "apps": {
     "h1": "Some of our products",
-    "intro": "Apps, websites and AI projects we built for ourselves.",
+    "intro": "Apps and projects we built ourselves.",
     "publicHeading": "Other projects"
   },
   "contact": {
     "h1": "What problem should we solve?",
-    "body": "Call, message or email us and tell us what is going on. We reply within one working day.",
+    "body": "Call, message or email. We reply within one working day.",
     "helpHeading": "It helps to mention",
     "help": [
       "Roughly what it costs you in time or money",
@@ -80,31 +80,31 @@
     "nextHeading": "What happens next",
     "call": "Call us",
     "callShort": "Call",
-    "next": "First we talk it through until the problem is clear. Then we build a small working version that runs on your everyday work. You see it do the job before any quote or plan.",
+    "next": "We understand the problem, build a working version, then quote.",
     "chatText": "Hi, I would like to talk about a problem I want to solve (from canhta.com)."
   },
   "process": {
-    "rule": "If existing software does the job, we will point you to it.",
+    "rule": "If existing software does the job, we will say so.",
     "steps": [
       {
         "id": "problem",
         "label": "You tell us the problem",
-        "detail": "Start with the one that costs you the most time or money."
+        "detail": "The one costing you the most time or money."
       },
       {
         "id": "map",
         "label": "We look at the real work",
-        "detail": "For example, we follow one order from first message to payment: who does each step, and where things get typed twice."
+        "detail": "Say, one order: who does what, and what gets typed twice."
       },
       {
         "id": "build",
         "label": "We build a working version",
-        "detail": "It runs on your real work, so you see what we can do and where it helps."
+        "detail": "It runs on your real work."
       },
       {
         "id": "plan",
         "label": "Then a quote and plan",
-        "detail": "Once you have seen it work: a specific quote, a plan with a timeline, and how we maintain and support it. Then we agree on the next part."
+        "detail": "A specific quote with a plan, timeline and maintenance."
       }
     ]
   },
@@ -114,7 +114,7 @@
   },
   "closing": {
     "heading": "Got a problem to solve?",
-    "body": "Tell us what is slowing you down. We will look at it with you."
+    "body": "What is eating your time?"
   },
   "llms": {
     "limitsHeading": "Prices and clients",
@@ -131,7 +131,7 @@
   "notFound": {
     "label": "Not found",
     "heading": "There is no page at this address.",
-    "body": "Check the address for a typo, or go back to the home page.",
+    "body": "Check the address, or go home.",
     "home": "Go to the home page"
   },
   "products": {

@@ -6,7 +6,7 @@ export const viContent: ContentCopy = {
     location: 'Việt Nam',
     hook: 'Zalo, Excel, sổ\u00a0sách về chung một hệ thống.',
     supporting:
-      'Chúng tôi triển khai phần mềm quản lý, website, app và AI agent cho doanh nghiệp nhỏ và cá nhân. AI làm những bước như ghi đơn, nhắc công nợ, trả lời khách, và một người bên bạn duyệt trước khi chạy.',
+      'Phần mềm, website, app và AI agent cho doanh nghiệp nhỏ và cá nhân. AI ghi đơn, trả lời khách, bạn duyệt.',
     headerCta: 'Gọi chúng tôi',
     availabilityLabel: 'Đang nhận dự án mới',
   },
@@ -42,42 +42,42 @@ export const viContent: ContentCopy = {
       id: 'systems',
       name: 'Phần mềm quản lý',
       detail:
-        'Nhập đơn một lần, kho và công nợ tự cập nhật theo. Khách gọi tới, ai nghe máy cũng thấy ngay khách từng mua gì, còn nợ bao nhiêu.',
+        'Nhập đơn một lần, kho và công nợ tự cập nhật. Ai nghe máy cũng thấy khách từng mua gì, còn nợ bao nhiêu.',
       examples: ['ERP', 'CRM'],
     },
     {
       id: 'ai',
       name: 'AI agent và chatbot',
       detail:
-        'Khách nhắn hỏi giá, hỏi còn hàng không, chatbot trả lời theo bảng giá bạn đưa. AI cũng đọc được hóa đơn nhà cung cấp và nhập sẵn vào phần mềm, người của bạn chỉ cần kiểm tra lại. Việc gì dính tới tiền, hay sửa đơn hàng, sổ sách, đều phải có người bấm duyệt.',
+        'Chatbot trả lời khách theo bảng giá của bạn. AI nhập sẵn hóa đơn, người của bạn duyệt.',
       examples: ['AI agent', 'chatbot trả lời khách', 'trả lời theo tài liệu của bạn'],
     },
     {
       id: 'data',
       name: 'Số liệu và báo cáo',
       detail:
-        'Số bán hàng, tồn kho và khách hàng từ file Excel và các app gom về một báo cáo luôn cập nhật. Sáng thứ Hai mở ra là biết tình hình, không cần đi hỏi từng người.',
+        'Số bán hàng, kho và khách hàng gom về một báo cáo. Sáng thứ Hai mở ra là biết tình hình.',
       examples: ['Bảng số liệu', 'sắp xếp lại file Excel'],
     },
     {
       id: 'web',
       name: 'Website và app',
       detail:
-        'Website để khách đặt hàng, đặt lịch, đơn về thẳng phần mềm của bạn. Bạn có ý tưởng riêng thì chúng tôi triển khai thành app web hoặc app điện thoại.',
+        'Website cho khách đặt hàng, đặt lịch, đơn về thẳng phần mềm. Có ý tưởng riêng thì chúng tôi triển khai thành app.',
       examples: [],
     },
     {
       id: 'iot',
       name: 'Thiết bị kết nối (IoT)',
       detail:
-        'Cảm biến mua sẵn ngoài thị trường gửi nhiệt độ, độ ẩm về một màn hình. Số đo vượt ngưỡng bạn đặt là có cảnh báo. Số đo này dùng để theo dõi hằng ngày, không thay cho thiết bị đã kiểm định.',
+        'Cảm biến mua sẵn báo nhiệt độ, độ ẩm về một màn hình, vượt ngưỡng là có cảnh báo. Dùng để theo dõi, không thay thiết bị kiểm định.',
       examples: [],
     },
     {
       id: 'team',
       name: 'Thêm người cho đội bạn',
       detail:
-        'Chúng tôi vào làm cùng đội của bạn một thời gian, hoặc nhận trọn một phần việc, như app điện thoại hay phần kết nối hai phần mềm. Chúng tôi làm trên hệ thống bạn đang dùng, theo nếp làm việc của đội bạn.',
+        'Chúng tôi vào làm cùng đội bạn, hoặc nhận trọn một phần như app điện thoại. Làm trên hệ thống và theo nếp của đội bạn.',
       examples: [],
     },
   ],
@@ -86,43 +86,43 @@ export const viContent: ContentCopy = {
       id: 'pricing',
       question: 'Chi phí bao nhiêu?',
       answer:
-        'Bạn xem bản chạy thử trước. Thấy được việc rồi, chúng tôi mới gửi báo giá cụ thể, kèm kế hoạch, thời gian và cách bảo trì, hỗ trợ.',
+        'Bạn xem bản chạy thử trước. Rồi mới có báo giá, kèm kế hoạch và bảo trì.',
     },
     {
       id: 'timeline',
       question: 'Bao lâu thì xong?',
       answer:
-        'Bản chạy thử có trước, nên bạn sớm thấy kết quả. Thời gian cho từng phần sau đó được ghi rõ trong kế hoạch đi kèm báo giá.',
+        'Bản chạy thử có sớm. Thời gian các phần sau ghi trong kế hoạch.',
     },
     {
       id: 'apps',
       question: 'Phần mềm tôi đang dùng có kết nối được không?',
       answer:
-        'Lúc tìm hiểu vấn đề, chúng tôi xem luôn phần nào kết nối được rồi báo bạn.',
+        'Lúc tìm hiểu vấn đề, chúng tôi xem phần nào kết nối được.',
     },
     {
       id: 'agent',
       question: 'Tôi cần AI agent hay chatbot là đủ?',
       answer:
-        'Chatbot thì trả lời câu hỏi. AI agent làm thêm được các bước trong phần mềm của bạn, có người duyệt. Nhiều trường hợp chỉ cần chatbot.',
+        'Chatbot trả lời câu hỏi. AI agent làm thêm các bước trong phần mềm, có người duyệt. Thường chatbot là đủ.',
     },
     {
       id: 'wrong',
       question: 'AI có lúc sai. Ai kiểm tra?',
       answer:
-        'Ngay từ đầu, hai bên thống nhất một người duyệt. Việc gì dính tới tiền, hay sửa đơn hàng, sổ sách, phải qua người đó bấm duyệt.',
+        'Hai bên chọn một người duyệt từ đầu. Việc dính tới tiền hay sửa đơn, sổ sách đều qua người đó.',
     },
     {
       id: 'customers',
       question: 'AI nhắn tin với khách giúp tôi được không?',
       answer:
-        'Được, nếu câu trả lời có trong thông tin bạn cung cấp. AI nói rõ đây là tin nhắn tự động. Khi không chắc, hoặc khách muốn nói chuyện với người, AI chuyển cho nhân viên của bạn.',
+        'Được, nếu câu trả lời có trong thông tin bạn đưa. AI báo đây là tin tự động, không chắc thì chuyển cho người.',
     },
     {
       id: 'data',
       question: 'Thông tin khách hàng của tôi đi đâu khi dùng AI?',
       answer:
-        'Chúng tôi chỉ lấy thông tin dự án cần. Trước khi bắt đầu, hai bên thống nhất dịch vụ AI nào nhận thông tin gì, và ai là chủ sở hữu. Đây không phải tư vấn pháp lý.',
+        'Chỉ lấy thông tin dự án cần, và thống nhất trước AI nào nhận gì. Đây không phải tư vấn pháp lý.',
     },
     {
       id: 'ownership',
@@ -133,12 +133,12 @@ export const viContent: ContentCopy = {
       id: 'support',
       question: 'Đưa vào dùng rồi thì sao?',
       answer:
-        'Bảo trì và hỗ trợ thế nào được ghi rõ trong báo giá, để bạn biết trước khi quyết định.',
+        'Bảo trì và hỗ trợ ghi rõ trong báo giá.',
     },
     {
       id: 'idea',
       question: 'Tôi mới chỉ có ý tưởng thì sao?',
-      answer: 'Vẫn được. Bạn cho biết muốn đạt điều gì và ai sẽ dùng, hai bên cùng tính xem bản chạy thử cần những gì.',
+      answer: 'Vẫn được. Kể bạn muốn đạt gì, ai sẽ dùng, rồi cùng tính bản chạy thử.',
     },
   ],
 }
