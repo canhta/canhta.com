@@ -602,7 +602,7 @@ article[id] {
 .hero-stage {
   position: relative;
   z-index: 1;
-  height: clamp(240px, 66vw, 520px);
+  height: clamp(260px, 78vw, 520px);
 }
 
 @media (min-width: 1024px) {

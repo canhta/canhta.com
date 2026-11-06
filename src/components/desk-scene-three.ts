@@ -356,21 +356,27 @@ export function mountDesk(host: HTMLElement, labels: DeskLabels, still = false):
     { o: tablet, y: tablet.position.y, at: 0.4 },
   ]
 
-  // The whole desk (about 10 by 9 units) stays in frame at any stage shape: the
-  // camera keeps its angle and steps back when the stage is narrow.
+  // The camera keeps its angle and steps back until what it frames fits.
   const dir = new THREE.Vector3(0.06, 0.82, 0.57).normalize()
   // Each object's own corners (not one box around all of them, whose empty
   // corners would make the camera step back too far).
   scene.updateMatrixWorld(true)
+  const cornersOf = (o: THREE.Object3D, into: THREE.Vector3[], box: THREE.Box3) => {
+    const b = new THREE.Box3().setFromObject(o).expandByScalar(0.15)
+    box.union(b)
+    for (const x of [b.min.x, b.max.x]) for (const z of [b.min.z, b.max.z]) into.push(new THREE.Vector3(x, b.max.y, z))
+  }
   const corners: THREE.Vector3[] = []
   const all = new THREE.Box3()
-  for (const o of [tablet, phone, notebook, sheet]) {
-    const b = new THREE.Box3().setFromObject(o).expandByScalar(0.15)
-    all.union(b)
-    for (const x of [b.min.x, b.max.x]) for (const z of [b.min.z, b.max.z]) corners.push(new THREE.Vector3(x, b.max.y, z))
-  }
-  const look = all.getCenter(new THREE.Vector3())
-  look.y = 0
+  for (const o of [tablet, phone, notebook, sheet]) cornersOf(o, corners, all)
+  const wide = all.getCenter(new THREE.Vector3()).setY(0)
+  // On a phone the tablet is the picture: framed close, with the sources
+  // reaching in from the left edge, so there is one thing to look at.
+  const tabletCorners: THREE.Vector3[] = []
+  const tabletBox = new THREE.Box3()
+  cornersOf(tablet, tabletCorners, tabletBox)
+  const close = tabletBox.getCenter(new THREE.Vector3()).setY(0).add(new THREE.Vector3(-0.9, 0, 0))
+  let look = wide
   const probe = new THREE.Vector3()
   let base = new THREE.Vector3()
   const resize = () => {
@@ -378,6 +384,9 @@ export function mountDesk(host: HTMLElement, labels: DeskLabels, still = false):
     const h = host.clientHeight || 1
     renderer.setSize(w, h, false)
     camera.aspect = w / h
+    const narrow = w < 640
+    look = narrow ? close : wide
+    const target = narrow ? tabletCorners : corners
     // Step the camera back along its angle until every corner sits inside the
     // frame with a margin, so nothing is ever cut at any stage shape.
     for (let dist = 8; dist < 60; dist += 0.25) {
@@ -385,7 +394,7 @@ export function mountDesk(host: HTMLElement, labels: DeskLabels, still = false):
       camera.lookAt(look)
       camera.updateProjectionMatrix()
       camera.updateMatrixWorld()
-      const fits = corners.every((c) => {
+      const fits = target.every((c) => {
         probe.copy(c).project(camera)
         return Math.abs(probe.x) < 0.94 && probe.y < 0.92 && probe.y > -0.8
       })
