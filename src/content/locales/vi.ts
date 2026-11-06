@@ -138,7 +138,7 @@ export const viContent: ContentCopy = {
     {
       id: 'idea',
       question: 'Tôi mới chỉ có ý tưởng thì sao?',
-      answer: 'Vẫn được. Kể bạn muốn đạt gì, ai sẽ dùng, rồi cùng tính bản chạy thử.',
+      answer: 'Vẫn được. Cho biết bạn muốn đạt gì, ai sẽ dùng, rồi cùng tính bản chạy thử.',
     },
   ],
 }

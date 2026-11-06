@@ -13,7 +13,7 @@
     "products": "Sản phẩm"
   },
   "hero": {
-    "primary": "Kể vấn đề của bạn",
+    "primary": "Nhận tư vấn",
     "secondary": "Xem dịch vụ",
     "visual": {
       "label": "Zalo, Excel và giấy tờ gom về một màn hình. AI làm, có người duyệt.",
@@ -110,7 +110,7 @@
     "steps": [
       {
         "id": "problem",
-        "label": "Bạn kể vấn đề",
+        "label": "Bạn nêu vấn đề",
         "detail": "Việc tốn thời gian hay tiền nhất."
       },
       {
@@ -173,15 +173,15 @@
   "metadata": {
     "home": {
       "title": "Dịch vụ chuyển đổi số và AI cho doanh nghiệp nhỏ | Canh Ta",
-      "description": "Cho doanh nghiệp nhỏ và cá nhân: phần mềm quản lý, website, app, báo cáo và AI agent có người duyệt. Bạn kể vấn đề, chúng tôi cùng tìm cách giải quyết. Xem thêm vài sản phẩm của chúng tôi."
+      "description": "Cho doanh nghiệp nhỏ và cá nhân: phần mềm quản lý, website, app, báo cáo và AI agent có người duyệt. Bạn nêu vấn đề, chúng tôi tư vấn cách giải quyết. Xem thêm vài sản phẩm của chúng tôi."
     },
     "services": {
       "title": "Phần mềm, ERP, CRM và AI cho doanh nghiệp nhỏ | Canh Ta",
       "description": "ERP, CRM, chatbot, AI agent, báo cáo, website và IoT cho cửa hàng, doanh nghiệp nhỏ và cá nhân. Bạn xem bản chạy thử nhỏ trước, rồi mới có báo giá cụ thể."
     },
     "contact": {
-      "title": "Liên hệ: kể vấn đề cần giải quyết | Canh Ta",
-      "description": "Gọi điện, nhắn Zalo, WhatsApp hoặc gửi email kể vấn đề bạn muốn giải quyết. Chúng tôi trả lời trong một ngày làm việc, rồi cùng bạn tìm cách giải quyết."
+      "title": "Liên hệ tư vấn phần mềm và AI | Canh Ta",
+      "description": "Gọi điện, nhắn Zalo, WhatsApp hoặc gửi email để được tư vấn về vấn đề bạn đang gặp. Chúng tôi trả lời trong một ngày làm việc."
     },
     "offerCatalog": "Dịch vụ của chúng tôi",
     "workList": "Một vài sản phẩm và dự án của chúng tôi",

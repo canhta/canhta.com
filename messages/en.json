@@ -13,7 +13,7 @@
     "products": "Products"
   },
   "hero": {
-    "primary": "Share your problem",
+    "primary": "Get advice",
     "secondary": "See services",
     "visual": {
       "label": "Chats, spreadsheets and paper on one screen. AI does the work, a person approves.",
@@ -110,7 +110,7 @@
     "steps": [
       {
         "id": "problem",
-        "label": "You tell us the problem",
+        "label": "You describe the problem",
         "detail": "The one costing you the most time or money."
       },
       {
@@ -173,14 +173,14 @@
   "metadata": {
     "home": {
       "title": "Digital transformation and AI services | Canh Ta",
-      "description": "For small businesses and individuals: business software, websites, apps, reports and AI agents with a person approving. Tell us the problem and we work it out with you. Plus some of our products."
+      "description": "For small businesses and individuals: business software, websites, apps, reports and AI agents with a person approving. Tell us the problem and we advise on the fix. Plus some of our products."
     },
     "services": {
       "title": "ERP, CRM and AI for small businesses in Vietnam | Canh Ta",
       "description": "ERP, CRM, chatbots, AI agents, reports, websites and sensors for small businesses in Vietnam. You see a small working version before any quote or plan."
     },
     "contact": {
-      "title": "Contact us: tell us the problem | Canh Ta",
+      "title": "Get advice on software and AI | Canh Ta",
       "description": "Call us, or write on Zalo, WhatsApp or email, about the problem you want to solve. We reply within one working day and work out the solution with you."
     },
     "offerCatalog": "Our services",
