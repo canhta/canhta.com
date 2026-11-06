@@ -423,14 +423,17 @@ export function mountDesk(host: HTMLElement, labels: DeskLabels, still = false):
       for (const x of [b.min.x, b.max.x]) for (const z of [b.min.z, b.max.z]) corners.push(new THREE.Vector3(x, b.max.y, z))
     }
     look = all.getCenter(new THREE.Vector3()).setY(0)
-    for (let dist = 6; dist < 60; dist += 0.25) {
+    for (let dist = 6; dist < 60; dist += 0.1) {
       camera.position.copy(look).addScaledVector(dir, dist)
       camera.lookAt(look)
       camera.updateProjectionMatrix()
       camera.updateMatrixWorld()
       const fits = corners.every((c) => {
         probe.copy(c).project(camera)
-        return Math.abs(probe.x) < 0.95 && probe.y < 0.92 && probe.y > -0.86
+        // A phone frames tighter: the desk fills the stage edge to edge.
+        return next === 'narrow'
+          ? Math.abs(probe.x) < 1.0 && probe.y < 1.0 && probe.y > -0.98
+          : Math.abs(probe.x) < 0.95 && probe.y < 0.92 && probe.y > -0.86
       })
       if (fits) break
     }
