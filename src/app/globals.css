@@ -2185,6 +2185,16 @@ a.cell-link::after {
     visibility: visible;
     transition-delay: 0s;
   }
+  /* The header steps away while the visitor scrolls down and the bar is up. */
+  .pill-wrap {
+    transition: transform 300ms var(--ease-out-soft);
+  }
+  html[data-scroll='down']:not([data-menu-open]) .pill-wrap {
+    transform: translateY(calc(-100% - var(--pill-top) - 8px));
+  }
+  html[data-scroll='down'] .pill-wrap:focus-within {
+    transform: none;
+  }
   html[data-menu-open] .contact-bar {
     transform: translateY(calc(100% + 28px));
     visibility: hidden;
@@ -2500,4 +2510,10 @@ a.cell-link::after {
 }
 .faq-item[open] > .faq-q::after {
   content: '\2212';
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pill-wrap {
+    transition: none;
+  }
 }
