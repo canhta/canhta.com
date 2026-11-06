@@ -86,13 +86,13 @@ export const viContent: ContentCopy = {
       id: 'pricing',
       question: 'Chi phí bao nhiêu?',
       answer:
-        'Bản chạy thử không tính phí. Bạn thấy nó chạy rồi mới nhận báo giá, kèm kế hoạch và bảo trì.',
+        'Tùy việc, nên chúng tôi báo giá cụ thể sau khi bạn xem bản chạy thử. Bản chạy thử không tính phí.',
     },
     {
       id: 'timeline',
       question: 'Bao lâu thì xong?',
       answer:
-        'Bản chạy thử có sớm. Thời gian các phần sau ghi trong kế hoạch.',
+        'Bản chạy thử có trước. Thời gian từng phần sau ghi rõ trong kế hoạch, trước khi ký hợp đồng.',
     },
     {
       id: 'apps',

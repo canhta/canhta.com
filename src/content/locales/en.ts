@@ -86,13 +86,13 @@ export const enContent: ContentCopy = {
       id: 'pricing',
       question: 'How much will it cost?',
       answer:
-        'The small working version is free. You see it run before you get a quote, with a plan and maintenance terms.',
+        'It depends on the work, so we quote once you have seen the working version. The working version is free.',
     },
     {
       id: 'timeline',
       question: 'How long will it take?',
       answer:
-        'The working version comes early. The plan sets the time for the rest.',
+        'The working version comes first. The plan gives the time for each later part before you sign.',
     },
     {
       id: 'apps',

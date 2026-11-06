@@ -565,13 +565,18 @@ article[id] {
    Hero: night, the 3D scene as the main picture, bleeding to the edge.
    ========================================================================= */
 
-/* The first screen is the hero and nothing else: one viewport tall (svh, so a
-   phone's address bar cannot cut it), never shorter than a small laptop needs
-   and never taller than a huge monitor wants. On a phone it simply grows. */
+/* The first screen is the hero. On a laptop it stops short of the fold by
+   enough that the next band's heading shows whole, so the fold never cuts a
+   line in half and the reader sees there is more. On a phone it is as tall as
+   its content. */
 .first-screen {
   display: flex;
   flex-direction: column;
-  min-height: clamp(36rem, 100svh, 68rem);
+}
+@media (min-width: 1024px) {
+  .first-screen {
+    min-height: clamp(34rem, calc(100svh - 9rem), 60rem);
+  }
 }
 .first-screen > .hero {
   flex: 1 0 auto;
@@ -583,8 +588,8 @@ article[id] {
   background: var(--color-night);
   /* Header clearance, then the text. The hero grows with its content. */
   padding-top: calc(var(--pill-top) + var(--pill-h) + clamp(28px, 6vh, 64px));
-  /* The next band overlaps by --sheet-r. */
-  padding-bottom: calc(8px + var(--sheet-r));
+  /* The next band overlaps by --sheet-r; keep the picture clear of it. */
+  padding-bottom: calc(32px + var(--sheet-r));
 }
 .hero-text {
   position: relative;
@@ -595,13 +600,13 @@ article[id] {
   position: relative;
   z-index: 1;
   /* The next band overlaps by --sheet-r; keep the picture clear of it. */
-  height: clamp(380px, 86vw, 660px);
+  height: clamp(300px, 80vw, 520px);
 }
 /* .hero-scene (below) says height: 100%, which would win over the line above
    and leave the stage as short as its min-height. The composition is almost as
    tall as it is wide, so on a tablet it needs the height to fill the width. */
 .hero-scene.hero-stage {
-  height: clamp(380px, 86vw, 660px);
+  height: clamp(300px, 80vw, 520px);
 }
 
 @media (min-width: 1024px) {
@@ -644,7 +649,7 @@ article[id] {
 
 .hero-scene {
   display: grid;
-  align-items: end;
+  align-items: center;
   height: 100%;
   min-height: 19rem;
 }

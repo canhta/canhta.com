@@ -2,7 +2,6 @@ import { Link } from '@/i18n/navigation'
 import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
-import { phoneContact } from '@/lib/contact'
 import { HeroScene } from './hero-scene'
 import { HeroVisual } from './hero-visual'
 import { Words } from './words'
@@ -16,7 +15,6 @@ import { Words } from './words'
 export function Hero({ locale }: { locale: Locale }) {
   const { profile } = getSiteContent(locale)
   const copy = getMessages(locale).hero
-  const phone = phoneContact(locale)
 
   return (
     <section className="hero on-night">
@@ -33,11 +31,6 @@ export function Hero({ locale }: { locale: Locale }) {
             {copy.secondary}
           </Link>
         </div>
-        <p className="enter mt-1">
-          <a href={phone.href} className="link inline-block py-3 font-bold">
-            {copy.orCall} <span translate="no">{phone.display}</span>
-          </a>
-        </p>
       </div>
       <HeroScene label={copy.visual.label} labels={copy.visual} className="hero-stage">
         <HeroVisual locale={locale} />
