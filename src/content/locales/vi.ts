@@ -4,7 +4,7 @@ import type { ContentCopy } from '../types'
 export const viContent: ContentCopy = {
   profile: {
     location: 'Việt Nam',
-    hook: 'Chuyển đổi số và AI cho doanh nghiệp nhỏ',
+    hook: 'Chuyển đổi số và AI cho doanh\u00a0nghiệp nhỏ',
     supporting:
       'Chúng tôi tư vấn và triển khai phần mềm quản lý, website, app và AI agent. AI ghi đơn, trả lời khách, có người duyệt.',
     headerCta: 'Gọi chúng tôi',
