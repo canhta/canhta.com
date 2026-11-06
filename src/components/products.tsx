@@ -4,12 +4,13 @@ import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
 import { AppCard } from './app-card'
+import { BuildLinkButton } from './build-link'
 import { Words } from './words'
 
 /**
- * Home: the two apps as a compact dark band after the services. On a phone the
- * panels swipe; from tablet up they sit side by side. Never pushed: one heading,
- * one link to the rest.
+ * Home: the two apps as short rows (icon, name, one line, their site) after
+ * the services. Never pushed: no screenshots here; those live on the products
+ * page, one link away.
  */
 export function AppsTeaser({ locale }: { locale: Locale }) {
   const featured = getSiteContent(locale).builds.filter((b) => b.shots?.length)
@@ -27,10 +28,26 @@ export function AppsTeaser({ locale }: { locale: Locale }) {
             {copy.appsAll}
           </Link>
         </div>
-        <ul className="snap-row mt-8">
+        <ul className="mt-8 grid gap-3 md:grid-cols-2">
           {featured.map((build) => (
-            <li key={build.slug}>
-              <AppCard build={build} locale={locale} variant="compact" />
+            <li key={build.slug} className="app-row">
+              {build.logo ? (
+                <Image
+                  src={build.logo}
+                  alt=""
+                  width={48}
+                  height={48}
+                  className="size-12 shrink-0 rounded-xl"
+                  unoptimized={build.logo.endsWith('.svg')}
+                />
+              ) : null}
+              <div className="min-w-0 flex-1">
+                <h3 className="subtitle" translate="no">
+                  {build.name}
+                </h3>
+                <p className="cell-muted mt-1 text-[15px] leading-snug">{build.tagline}</p>
+              </div>
+              {build.links[0] ? <BuildLinkButton link={build.links[0]} locale={locale} /> : null}
             </li>
           ))}
         </ul>
@@ -49,7 +66,7 @@ export function AppsFull({ locale }: { locale: Locale }) {
         <ul className="grid gap-4 md:grid-cols-2 md:gap-5">
           {featured.map((build) => (
             <li key={build.slug} className="reveal">
-              <AppCard build={build} locale={locale} variant="full" />
+              <AppCard build={build} locale={locale} />
             </li>
           ))}
         </ul>

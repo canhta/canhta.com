@@ -7,37 +7,25 @@ import { Tilt } from './tilt'
 /**
  * One app, as a rounded panel on the dark band. The app's own colour sits
  * behind two overlapping phone screens that lean toward the pointer; the text
- * is light on a dark card below. The compact version (home) leaves out the long
- * summary; the products page carries it. Status and platform are text, never only a
- * colour or an image.
+ * is light on a dark card below. Used on the products page, where the card
+ * name follows the h1, so it is an h2. Platform is text, never only a colour or
+ * an image.
  */
-export function AppCard({
-  build,
-  locale,
-  variant,
-}: {
-  build: Build
-  locale: Locale
-  variant: 'compact' | 'full'
-}) {
+export function AppCard({ build, locale }: { build: Build; locale: Locale }) {
   const shown = (build.shots ?? []).slice(0, 2)
-  // Under the home page's section heading a card name is an h3; on the products
-  // page it follows the h1 directly, so it is an h2 (no skipped level).
-  const Heading = variant === 'full' ? 'h2' : 'h3'
-  const phoneWidth = variant === 'compact' ? 'w-[40%] max-w-[124px]' : 'w-[40%] max-w-[210px]'
 
   return (
-    <article id={variant === 'full' ? build.slug : undefined} data-theme={build.slug} data-tilt="" className="app-card on-night">
+    <article id={build.slug} data-theme={build.slug} data-tilt="" className="app-card on-night">
       {shown.length > 0 ? (
         <div className="app-media">
           {shown.map((shot) => (
-            <div key={shot} className={`phone-slot ${phoneWidth}`}>
+            <div key={shot} className="phone-slot w-[40%] max-w-[210px]">
               <Tilt>
                 <PhoneShot
                   slug={build.slug}
                   shot={shot}
                   locale={locale}
-                  sizes={variant === 'compact' ? '124px' : '(min-width: 540px) 210px, 36vw'}
+                  sizes="(min-width: 540px) 210px, 36vw"
                 />
               </Tilt>
             </div>
@@ -57,12 +45,12 @@ export function AppCard({
               className="h-12 w-12 rounded-[14px]"
             />
           ) : null}
-          <Heading className="title" translate="no">
+          <h2 className="title" translate="no">
             {build.name}
-          </Heading>
+          </h2>
         </div>
         <p className="subtitle mt-4">{build.tagline}</p>
-        {variant === 'full' ? <p className="cell-muted mt-2 text-[14px] leading-relaxed">{build.summary}</p> : null}
+        <p className="cell-muted mt-2 text-[14px] leading-relaxed">{build.summary}</p>
 
         <p className="mt-5 text-[14px] leading-snug">
           <span className="cell-muted">{build.availability}</span>

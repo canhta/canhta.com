@@ -478,27 +478,20 @@ a.cell-link:active {
       animation-timeline: view();
       animation-range: entry calc(var(--n, 0) * 7%) entry calc(55% + var(--n, 0) * 7%);
     }
-    :is(.bento, .snap-row, .hq-list, .rows, .faq-list) > :nth-child(2) {
+    :is(.bento, .hq-list, .rows, .faq-list) > :nth-child(2) {
       --n: 1;
     }
-    :is(.bento, .snap-row, .hq-list, .rows, .faq-list) > :nth-child(3) {
+    :is(.bento, .hq-list, .rows, .faq-list) > :nth-child(3) {
       --n: 2;
     }
-    :is(.bento, .snap-row, .hq-list, .rows, .faq-list) > :nth-child(4) {
+    :is(.bento, .hq-list, .rows, .faq-list) > :nth-child(4) {
       --n: 3;
     }
-    :is(.bento, .snap-row, .hq-list, .rows, .faq-list) > :nth-child(5) {
+    :is(.bento, .hq-list, .rows, .faq-list) > :nth-child(5) {
       --n: 4;
     }
-    :is(.bento, .snap-row, .hq-list, .rows, .faq-list) > :nth-child(n + 6) {
+    :is(.bento, .hq-list, .rows, .faq-list) > :nth-child(n + 6) {
       --n: 5;
-    }
-    @media (min-width: 768px) {
-      .snap-row > li {
-        animation: arrive linear both;
-        animation-timeline: view();
-        animation-range: entry calc(var(--n, 0) * 7%) entry calc(55% + var(--n, 0) * 7%);
-      }
     }
     /* A hover lift on the same element must not fight the arrival. */
     .hq-item:hover,
