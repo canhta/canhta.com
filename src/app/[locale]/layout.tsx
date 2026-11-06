@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import localFont from 'next/font/local'
 import { notFound } from 'next/navigation'
+import { preload } from 'react-dom'
 import { hasLocale } from 'next-intl'
 import { setRequestLocale } from 'next-intl/server'
 import { routing } from '@/i18n/routing'
@@ -22,7 +23,8 @@ import { SITE } from '@/lib/site'
 // where ranges overlap the browser uses the one declared last. So a Vietnamese
 // page fetched three more files after first paint, just for those letters, and
 // showed them in the fallback font until they arrived. Declared by hand, each
-// letter has exactly one file, and both subsets are preloaded.
+// letter has exactly one file. The Latin subset is preloaded on every page, the
+// Vietnamese one on Vietnamese pages only (below).
 //
 // Two families, chained in `--font-sans`: a letter outside one family's
 // unicode-range falls through to the next. `Be Vietnam Pro Fallback` (globals.css)
@@ -45,23 +47,26 @@ const bvp = localFont({
     },
   ],
 })
-const bvpVietnamese = localFont({
-  src: [
-    { path: '../../assets/fonts/bvp-vietnamese-400.woff2', weight: '400', style: 'normal' },
-    { path: '../../assets/fonts/bvp-vietnamese-700.woff2', weight: '700', style: 'normal' },
-    { path: '../../assets/fonts/bvp-vietnamese-800.woff2', weight: '800', style: 'normal' },
-  ],
-  variable: '--font-bvp-vi',
-  display: 'swap',
-  adjustFontFallback: false,
-  declarations: [
-    {
-      prop: 'unicode-range',
-      value:
-        'U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB',
-    },
-  ],
-})
+// The Vietnamese subset is written by hand rather than through next/font, because
+// next/font's `preload` is fixed per call and the English and Vietnamese pages
+// share this layout: it would preload all six files on every page. An English
+// page only needs the three Latin files. Here the Vietnamese files are preloaded
+// only on Vietnamese pages, and an English page that shows a Vietnamese word (the
+// language switch) still fetches them on demand through the unicode-range.
+// `new URL(..., import.meta.url)` gives each file's hashed /_next/static URL, so
+// the preload and the @font-face name the same file.
+const VI_FONTS = [
+  { weight: 400, url: new URL('../../assets/fonts/bvp-vietnamese-400.woff2', import.meta.url).pathname },
+  { weight: 700, url: new URL('../../assets/fonts/bvp-vietnamese-700.woff2', import.meta.url).pathname },
+  { weight: 800, url: new URL('../../assets/fonts/bvp-vietnamese-800.woff2', import.meta.url).pathname },
+]
+const VI_RANGE =
+  'U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB'
+const viFontCss =
+  VI_FONTS.map(
+    ({ weight, url }) =>
+      `@font-face{font-family:bvpVietnamese;src:url(${url}) format("woff2");font-display:swap;font-weight:${weight};font-style:normal;unicode-range:${VI_RANGE}}`,
+  ).join('') + ':root{--font-bvp-vi:bvpVietnamese}'
 
 /**
  * Measurement is on for every deployment, and off in development. A local
@@ -111,9 +116,15 @@ export default async function LocaleLayout({
   if (!hasLocale(routing.locales, locale)) notFound()
   setRequestLocale(locale)
   const messages = getMessages(locale)
+  if (locale === 'vi') {
+    for (const { url } of VI_FONTS) preload(url, { as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' })
+  }
 
   return (
-    <html lang={locale} dir="ltr" data-scroll-behavior="smooth" className={`${bvp.variable} ${bvpVietnamese.variable}`}>
+    <html lang={locale} dir="ltr" data-scroll-behavior="smooth" className={bvp.variable}>
+      <head>
+        <style dangerouslySetInnerHTML={{ __html: viFontCss }} />
+      </head>
       <body>
         <div aria-hidden="true" className="scroll-line" />
         <a href="#main" className="skip-link">

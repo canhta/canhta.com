@@ -1,12 +1,22 @@
 import NextLink from 'next/link'
 import { hasLocale } from 'next-intl'
-import { createNavigation } from 'next-intl/navigation'
 import { getLocale } from 'next-intl/server'
 import type { ComponentProps } from 'react'
-import { routing, type AppPathname } from './routing'
+import { routing, type AppLocale, type AppPathname } from './routing'
 
-/** Path helper for the server (metadata, sitemap, header, footer). */
-export const { getPathname } = createNavigation(routing)
+/**
+ * Path helper for the server (metadata, sitemap, header, footer): the page's slug
+ * in that language, with `/vi` in front for Vietnamese and no prefix for English
+ * (`localePrefix: 'as-needed'`). Written here instead of taken from next-intl's
+ * `createNavigation`, whose return value carries next-intl's client `Link` and so
+ * shipped its runtime (message parser, plural rules) to every page.
+ */
+export function getPathname({ locale, href }: { locale: AppLocale; href: AppPathname }): string {
+  const entry = routing.pathnames[href]
+  const path = typeof entry === 'string' ? entry : entry[locale]
+  if (locale === routing.defaultLocale) return path
+  return path === '/' ? `/${locale}` : `/${locale}${path}`
+}
 
 type Href = AppPathname | { pathname: AppPathname; hash?: string }
 

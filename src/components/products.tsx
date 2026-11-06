@@ -61,6 +61,8 @@ export function AppsFull({ locale }: { locale: Locale }) {
 /**
  * The head of the products page: the two apps' own icons, large, on the colour
  * each app already wears on its panel below. Decorative, so no text and no alt.
+ * They are the largest thing on the first screen (the LCP), so they are preloaded
+ * and fetched at high priority.
  */
 export function AppMarks({ locale }: { locale: Locale }) {
   const marks = getSiteContent(locale).builds.filter((b) => b.shots?.length && b.logo)
@@ -76,6 +78,7 @@ export function AppMarks({ locale }: { locale: Locale }) {
             width={144}
             height={144}
             preload
+            fetchPriority="high"
             unoptimized={build.logo!.endsWith('.svg')}
           />
         </span>
