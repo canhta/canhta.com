@@ -2,6 +2,7 @@ import { getSiteContent } from '@/content'
 import type { Build, Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
 import { firstSentence } from '@/lib/first-sentence'
+import { getPageCopy, type DocLink, type DocSection } from '@/content/pages'
 import { PAGE_PATH, markdownUrl, pageUrl } from '@/lib/metadata'
 import { routing } from '@/i18n/routing'
 import { phoneContact } from '@/lib/contact'
@@ -63,6 +64,22 @@ function offerLines(locale: Locale, level: string, full: boolean): string[] {
 function closingLines(locale: Locale): string[] {
   const { closing } = getMessages(locale)
   return ['## ' + closing.heading, '', closing.body, '', ...contactLines(locale), '']
+}
+
+function linkLine(locale: Locale, links: DocLink[]): string {
+  return links
+    .map((l) => `[${l.label}](${'page' in l ? pageUrl(locale, l.page) : l.url})`)
+    .join(' · ')
+}
+
+function sectionLines(locale: Locale, sections: DocSection[]): string[] {
+  return sections.flatMap((s) => [
+    `## ${s.heading}`,
+    '',
+    ...s.paragraphs.flatMap((p) => [p, '']),
+    ...(s.items?.length ? [...s.items.map((i) => `- ${i}`), ''] : []),
+    ...(s.links?.length ? [linkLine(locale, s.links), ''] : []),
+  ])
 }
 
 /** What we state and what we leave out, so an answer built from this page stays inside it. */
@@ -131,10 +148,10 @@ export function pageMarkdown(locale: Locale, page: MarkdownPage): string {
     case 'products':
       body = [
         ...head(messages.apps.h1, messages.apps.intro),
-        ...builds.filter((b) => b.shots?.length).flatMap((b) => buildLines(b, locale, '##')),
+        ...builds.filter((b) => b.detail).flatMap((b) => buildLines(b, locale, '##')),
         `## ${messages.apps.publicHeading}`,
         '',
-        ...builds.filter((b) => !b.shots?.length).flatMap((b) => buildLines(b, locale, '###')),
+        ...builds.filter((b) => !b.detail).flatMap((b) => buildLines(b, locale, '###')),
         ...closingLines(locale),
       ]
       break
@@ -155,6 +172,46 @@ export function pageMarkdown(locale: Locale, page: MarkdownPage): string {
         '',
       ]
       break
+    case 'about':
+    case 'privacy':
+    case 'terms': {
+      const doc = getPageCopy(locale)[page]
+      body = [
+        ...head(doc.h1, doc.intro),
+        ...(doc.updated ? [doc.updated, ''] : []),
+        ...sectionLines(locale, doc.sections),
+        ...(page === 'about' ? closingLines(locale) : []),
+      ]
+      break
+    }
+    case 'scori':
+    case 'remoti':
+    case 'piggo': {
+      const app = getPageCopy(locale).apps[page]
+      const labels = messages.appPage
+      body = [
+        ...head(app.h1, app.intro),
+        `## ${labels.featuresHeading}`,
+        '',
+        ...app.features.map((f) => `- ${f.name}: ${f.detail}`),
+        '',
+        `## ${labels.audienceHeading}`,
+        '',
+        app.audience,
+        '',
+        `## ${labels.platformsHeading}`,
+        '',
+        app.platforms,
+        '',
+        `## ${labels.linksHeading}`,
+        '',
+        linkLine(locale, app.links),
+        '',
+        ...sectionLines(locale, app.notes),
+        ...closingLines(locale),
+      ]
+      break
+    }
   }
 
   // The same page in the other language, as the HTML head's hreflang says.

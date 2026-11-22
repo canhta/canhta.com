@@ -19,6 +19,15 @@ export const routing = defineRouting({
     '/services': { en: '/services', vi: '/dich-vu' },
     '/products': { en: '/products', vi: '/san-pham' },
     '/contact': { en: '/contact', vi: '/lien-he' },
+    '/about': { en: '/about', vi: '/gioi-thieu' },
+    '/privacy': { en: '/privacy', vi: '/quyen-rieng-tu' },
+    '/terms': { en: '/terms', vi: '/dieu-khoan' },
+    // One page per app, under the products page. Written out (not `[slug]`) so
+    // every helper keeps working with plain string paths; the folder is
+    // `products/[slug]`, which these rewrite to.
+    '/products/scori': { en: '/products/scori', vi: '/san-pham/scori' },
+    '/products/remoti': { en: '/products/remoti', vi: '/san-pham/remoti' },
+    '/products/piggo': { en: '/products/piggo', vi: '/san-pham/piggo' },
   },
 })
 

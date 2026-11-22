@@ -2247,6 +2247,55 @@ a.cell-link::after {
 .mark[data-theme='remoti'] {
   --app-bg: #dce2ec;
 }
+/* Piggo has no screens in the repo: its name, large, on a pale sand panel. */
+.app-card[data-theme='piggo'],
+.app-hero[data-theme='piggo'] {
+  --app-bg: #efe6d2;
+}
+.app-hero[data-theme='scori'] {
+  --app-bg: #ffe9a6;
+}
+.app-hero[data-theme='remoti'] {
+  --app-bg: #dce2ec;
+}
+.app-word {
+  align-items: center;
+  min-height: 200px;
+  padding: 32px 24px;
+  color: #131517;
+  font-weight: 800;
+  font-size: clamp(3rem, 2rem + 4vw, 5rem);
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+@media (min-width: 768px) {
+  .app-card-wide {
+    flex-direction: row;
+  }
+  .app-card-wide .app-word {
+    flex: 0 0 42%;
+  }
+}
+
+/* --- App page head: the same panel as on the products page, on its own --- */
+
+.app-hero {
+  border-radius: var(--r-card);
+}
+.app-hero.app-media {
+  padding-top: 28px;
+}
+
+/* --- Long text: about, privacy, terms ------------------------------------ */
+
+.doc-section + .doc-section {
+  margin-top: clamp(40px, 5vw, 64px);
+  padding-top: clamp(40px, 5vw, 64px);
+  border-top: 1px solid var(--color-line);
+}
+.doc-section p + p {
+  margin-top: 1em;
+}
 
 /* --- Hover, focus and pressed states for what was left without one -------- */
 

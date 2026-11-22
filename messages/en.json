@@ -10,7 +10,13 @@
     "menu": "Menu",
     "closeMenu": "Close menu",
     "home": "Home",
-    "products": "Products"
+    "products": "Products",
+    "about": "About",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "scori": "Scori",
+    "remoti": "Remoti",
+    "piggo": "Piggo"
   },
   "hero": {
     "primary": "Get advice",
@@ -120,7 +126,8 @@
     "h1": "Some of our products",
     "intro": "Apps and projects we built ourselves.",
     "publicHeading": "Other projects",
-    "servicesLink": "See our services for businesses"
+    "servicesLink": "See our services for businesses",
+    "detailLink": "More about {name}"
   },
   "contact": {
     "h1": "What problem should we solve?",
@@ -191,7 +198,8 @@
   },
   "footer": {
     "explore": "Pages",
-    "elsewhere": "Elsewhere"
+    "elsewhere": "Elsewhere",
+    "legal": "Site information"
   },
   "notFound": {
     "label": "Not found",
@@ -231,6 +239,37 @@
     "products": {
       "title": "Scori, Remoti and more: some of our products | Canh Ta",
       "description": "Scori keeps score at card and board games. Remoti turns an iPhone into a remote for Android TV and Google TV. Plus a few web and AI projects of our own."
+    },
+    "about": {
+      "title": "About us: software and AI for small businesses | Canh Ta",
+      "description": "Who we are, what we build and how we work: one system for your business first, AI with a person approving after, a free working version before any quote."
+    },
+    "privacy": {
+      "title": "Privacy policy | Canh Ta",
+      "description": "What canhta.com collects when you visit or contact us, how Google AdSense uses cookies to show ads, and how to turn personalised ads off."
+    },
+    "terms": {
+      "title": "Terms of use | Canh Ta",
+      "description": "The rules for using canhta.com: what the site is for, who owns its content, links, advertising and which law applies."
+    },
+    "scori": {
+      "title": "Scori: score keeper for card and board games | Canh Ta",
+      "description": "Scori is one scoreboard for any card or board game. Works offline, friends join with a QR code, fix mistakes from the history. iPhone and Android."
+    },
+    "remoti": {
+      "title": "Remoti: iPhone remote for Android TV and Google TV | Canh Ta",
+      "description": "Remoti turns your iPhone into a remote for Android TV and Google TV: four layouts, a touch pad and typing from the iPhone keyboard."
+    },
+    "piggo": {
+      "title": "Piggo: gold prices in Vietnam today | Canh Ta",
+      "description": "Piggo shows gold prices from 13 Vietnamese brands with charts, world gold, exchange and savings rates, calculators, price alerts and a list of what you hold."
     }
+  },
+  "appPage": {
+    "featuresHeading": "What it does",
+    "audienceHeading": "Who it is for",
+    "platformsHeading": "Where it works",
+    "linksHeading": "Links",
+    "allProducts": "All our products"
   }
 }

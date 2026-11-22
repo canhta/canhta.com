@@ -8,8 +8,8 @@ import { GitHubIcon, LinkedInIcon, XIcon } from './icons'
 import { LangSwitch } from './lang-switch'
 
 /**
- * The colophon, on the night ground: the pages, and where to check we are
- * real. Every way to reach us (call, email, Zalo, WhatsApp) lives once, in the
+ * The colophon, on the night ground: the pages, the pages about the site
+ * (about, privacy, terms), and where to check we are real. Every way to reach us (call, email, Zalo, WhatsApp) lives once, in the
  * closing band or on the contact page, not again here. The bottom bar
  * carries the copyright on the left and the language switch on the right.
  */
@@ -31,7 +31,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
   return (
     <footer data-no-bar className="sheet ground-night on-night pt-[calc(var(--space)*0.6)] pb-6 sm:pt-[calc(var(--space)*0.8)] sm:pb-8">
       <div className="shell">
-        <div className="grid grid-cols-2 gap-6 sm:gap-10">
+        <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 sm:gap-10">
           <nav aria-label={messages.footer.explore}>
             <p className="text-[14px] font-bold text-dim">{messages.footer.explore}</p>
             <ul className="mt-3 grid justify-items-start gap-0.5">
@@ -41,6 +41,25 @@ export function SiteFooter({ locale }: { locale: Locale }) {
                   ['/services', messages.nav.services],
                   ['/products', messages.nav.products],
                   ['/contact', messages.nav.contact],
+                ] as const
+              ).map(([href, label]) => (
+                <li key={href}>
+                  <Link href={href} className="foot-row">
+                    <span className="foot-label">{label}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <nav aria-label={messages.footer.legal}>
+            <p className="text-[14px] font-bold text-dim">{messages.footer.legal}</p>
+            <ul className="mt-3 grid justify-items-start gap-0.5">
+              {(
+                [
+                  ['/about', messages.nav.about],
+                  ['/privacy', messages.nav.privacy],
+                  ['/terms', messages.nav.terms],
                 ] as const
               ).map(([href, label]) => (
                 <li key={href}>

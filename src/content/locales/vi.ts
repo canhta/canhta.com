@@ -24,6 +24,12 @@ export const viContent: ContentCopy = {
       availability: 'Chỉ dành cho iPhone.',
     },
     {
+      slug: 'piggo',
+      tagline: 'Giá vàng Việt Nam, gom về một chỗ.',
+      summary: 'Giá của 13 thương hiệu vàng, biểu đồ, công cụ tính và báo khi giá chạm mức bạn đặt.',
+      availability: 'Trang web, iPhone và Android.',
+    },
+    {
       slug: 'ai-engineering-atlas',
       tagline: 'Lộ trình học AI cho lập trình viên.',
       summary: 'Làm một bài kiểm tra ngắn, rồi học theo lộ trình lấp chỗ thiếu.',

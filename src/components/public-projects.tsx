@@ -6,7 +6,7 @@ import { Words } from './words'
 
 /** The other public projects, as wide rows on a dark band. */
 export function PublicProjects({ locale }: { locale: Locale }) {
-  const others = getSiteContent(locale).builds.filter((b) => !b.shots?.length)
+  const others = getSiteContent(locale).builds.filter((b) => !b.detail)
   if (others.length === 0) return null
   const copy = getMessages(locale).apps
 

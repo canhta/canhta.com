@@ -24,6 +24,12 @@ export const enContent: ContentCopy = {
       availability: 'iPhone only.',
     },
     {
+      slug: 'piggo',
+      tagline: 'Gold prices in Vietnam, in one place.',
+      summary: 'Prices from 13 gold brands, charts, calculators and alerts when a price reaches your level.',
+      availability: 'Website, iPhone and Android.',
+    },
+    {
       slug: 'ai-engineering-atlas',
       tagline: 'A learning roadmap for engineers moving into AI.',
       summary: 'Take a short test, then follow a route that fills the gaps.',

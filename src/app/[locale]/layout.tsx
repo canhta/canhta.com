@@ -97,13 +97,28 @@ export const viewport: Viewport = {
 }
 
 /**
+ * Google AdSense. Only the loader is placed: which ads appear, and where, is
+ * Auto ads, set in the AdSense console, so there are no manual ad units in the
+ * pages. A plain async tag in <head>, so it is in the server HTML (AdSense's
+ * crawler and `curl` see it) and never blocks rendering. It is left out of local
+ * development, like the measurement scripts. The consent message for the EEA,
+ * UK and Switzerland is Google's own and is set in the console (Privacy &
+ * messaging), as the privacy page describes.
+ */
+const ADSENSE_CLIENT = 'ca-pub-5857472797802587'
+const ADSENSE_SRC = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`
+
+/**
  * Site-wide defaults only. Each page sets its own title, description, canonical
  * and hreflang in its own `generateMetadata` (see `src/lib/metadata.ts`): one
  * page, one search intent, one set of tags.
  */
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
+  // Verifies the site to the AdSense account. Rendered in the server HTML.
+  other: { 'google-adsense-account': ADSENSE_CLIENT },
 }
+
 
 export default async function LocaleLayout({
   children,
@@ -124,6 +139,7 @@ export default async function LocaleLayout({
     <html lang={locale} dir="ltr" data-scroll-behavior="smooth" className={bvp.variable}>
       <head>
         <style dangerouslySetInnerHTML={{ __html: viFontCss }} />
+        {MEASURE ? <script async src={ADSENSE_SRC} crossOrigin="anonymous" /> : null}
       </head>
       <body>
         <div aria-hidden="true" className="scroll-line" />

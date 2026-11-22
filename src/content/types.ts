@@ -23,6 +23,8 @@ export interface BuildFacts {
   logo?: string
   /** File stems under `/products/<slug>/<locale>/`. Present only on a featured product. */
   shots?: string[]
+  /** The product has its own page under the products page (`/products/<slug>`). */
+  detail?: boolean
   links: BuildLink[]
 }
 

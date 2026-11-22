@@ -1,5 +1,8 @@
 import Image from 'next/image'
 import type { Build, Locale } from '@/content/types'
+import { getMessages } from '@/i18n/messages'
+import { Link } from '@/i18n/navigation'
+import type { AppPathname } from '@/i18n/routing'
 import { BuildLinkButton } from './build-link'
 import { PhoneShot } from './phone-shot'
 import { Tilt } from './tilt'
@@ -9,13 +12,20 @@ import { Tilt } from './tilt'
  * behind two overlapping phone screens that lean toward the pointer; the text
  * is light on a dark card below. Used on the products page, where the card
  * name follows the h1, so it is an h2. Platform is text, never only a colour or
- * an image.
+ * an image. An app with no screens in the repo shows its name on its colour
+ * instead, and the panel lies on its side (`app-card-wide`).
  */
 export function AppCard({ build, locale }: { build: Build; locale: Locale }) {
   const shown = (build.shots ?? []).slice(0, 2)
+  const copy = getMessages(locale).apps
 
   return (
-    <article id={build.slug} data-theme={build.slug} data-tilt="" className="app-card on-night">
+    <article
+      id={build.slug}
+      data-theme={build.slug}
+      data-tilt=""
+      className={`app-card on-night ${shown.length ? '' : 'app-card-wide'}`}
+    >
       {shown.length > 0 ? (
         <div className="app-media">
           {shown.map((shot) => (
@@ -31,7 +41,11 @@ export function AppCard({ build, locale }: { build: Build; locale: Locale }) {
             </div>
           ))}
         </div>
-      ) : null}
+      ) : (
+        <div className="app-media app-word" aria-hidden="true">
+          <span translate="no">{build.name}</span>
+        </div>
+      )}
 
       <div className="flex flex-1 flex-col p-5 sm:p-6">
         <div className="flex items-center gap-3">
@@ -55,7 +69,17 @@ export function AppCard({ build, locale }: { build: Build; locale: Locale }) {
         <p className="mt-5 text-[14px] leading-snug">
           <span className="cell-muted">{build.availability}</span>
         </p>
-        <ul data-no-bar className="mt-5 flex flex-wrap gap-2">
+        <ul data-no-bar className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
+          {build.detail ? (
+            <li>
+              <Link
+                href={`/products/${build.slug}` as AppPathname}
+                className="link inline-flex min-h-11 items-center font-bold"
+              >
+                {copy.detailLink.replace('{name}', build.name)}
+              </Link>
+            </li>
+          ) : null}
           {build.links.map((link) => (
             <li key={link.kind}>
               <BuildLinkButton link={link} locale={locale} />
