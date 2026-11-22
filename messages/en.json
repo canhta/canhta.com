@@ -237,12 +237,12 @@
     "offerCatalog": "Our services",
     "workList": "Some of our products and projects",
     "products": {
-      "title": "Scori, Remoti and more: some of our products | Canh Ta",
-      "description": "Scori keeps score at card and board games. Remoti turns an iPhone into a remote for Android TV and Google TV. Plus a few web and AI projects of our own."
+      "title": "Scori, Remoti, Piggo and more: some of our products | Canh Ta",
+      "description": "Scori keeps score at card and board games. Remoti turns an iPhone into a remote for Android TV and Google TV. Piggo follows gold prices in Vietnam. Plus a few web and AI projects."
     },
     "about": {
       "title": "About us: software and AI for small businesses | Canh Ta",
-      "description": "Who we are, what we build and how we work: one system for your business first, AI with a person approving after, a free working version before any quote."
+      "description": "How we work: one system for your business first, then AI for the routine steps with a person approving. A free working version comes before any quote."
     },
     "privacy": {
       "title": "Privacy policy | Canh Ta",
@@ -261,7 +261,7 @@
       "description": "Remoti turns your iPhone into a remote for Android TV and Google TV: four layouts, a touch pad and typing from the iPhone keyboard."
     },
     "piggo": {
-      "title": "Piggo: gold prices in Vietnam today | Canh Ta",
+      "title": "Piggo: an app to follow gold prices in Vietnam | Canh Ta",
       "description": "Piggo shows gold prices from 13 Vietnamese brands with charts, world gold, exchange and savings rates, calculators, price alerts and a list of what you hold."
     }
   },

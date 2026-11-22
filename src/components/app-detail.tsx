@@ -36,7 +36,10 @@ export function AppDetail({ locale, slug }: { locale: Locale; slug: AppPage }) {
     </div>
   ) : (
     <div className="app-hero app-media app-word" data-theme={slug} aria-hidden="true">
-      <span translate="no">{build.name}</span>
+      <span translate="no" className="app-word-name">
+            {build.name.slice(0, -1)}
+            <span className="app-word-end">{build.name.slice(-1)}</span>
+          </span>
     </div>
   )
 

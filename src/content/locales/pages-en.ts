@@ -40,7 +40,7 @@ export const enPages: PagesCopy = {
         id: 'products',
         heading: 'Apps we make ourselves',
         paragraphs: [
-          'Between projects we build and look after our own apps. They are how we keep our skills sharp, and they let you see the care we put into small details.',
+          'Between projects we build and look after our own apps. They keep our skills sharp, and they show how we build.',
         ],
         items: [
           'Scori keeps score at card and board games, on iPhone and Android.',
@@ -65,19 +65,21 @@ export const enPages: PagesCopy = {
           'Every project has a signed contract.',
           'The software we build for you is yours.',
           'We tell you what customer information an AI service receives.',
-          'We reply within one working day.',
         ],
       },
       {
         id: 'reach',
         heading: 'Where to find us',
         paragraphs: [
-          'Write to us by email, or message us on Zalo or WhatsApp. Our public code and notes are on GitHub, X and LinkedIn.',
+          'Write to us by email, or message us on Zalo or WhatsApp. We reply within one working day. Our public code and notes are on GitHub, X and LinkedIn.',
         ],
         links: [
           EMAIL,
+          { label: 'Zalo', url: 'https://zalo.me/84825252599' },
+          { label: 'WhatsApp', url: 'https://wa.me/84825252599' },
           { label: 'Get advice', page: 'contact' },
           { label: 'GitHub', url: 'https://github.com/canhta' },
+          { label: 'X', url: 'https://x.com/canh_builds' },
           { label: 'LinkedIn', url: 'https://www.linkedin.com/in/canhta' },
         ],
       },
@@ -94,7 +96,7 @@ export const enPages: PagesCopy = {
         id: 'scope',
         heading: 'Who this covers',
         paragraphs: [
-          'This policy covers the website www.canhta.com, run by Canh Ta. In this policy "we" means us, and "you" means anyone who visits the site.',
+          'This policy covers the website www.canhta.com, run by Canh Ta. In this policy "we" means Canh Ta, and "you" means anyone who visits the site.',
           'Our apps Scori, Remoti and Piggo each have their own privacy policy on their own website. That policy applies when you use the app.',
         ],
         links: [
@@ -128,9 +130,11 @@ export const enPages: PagesCopy = {
           'This site shows ads served by Google AdSense. Google, not us, chooses which ad you see.',
           'Third-party vendors, including Google, use cookies to serve ads based on your earlier visits to this website or to other websites.',
           "Google's advertising cookies let Google and its partners serve ads to you based on your visits to this site and other sites on the internet. To show and measure ads and to stop fraud, Google may also receive your IP address, details of your device and browser, and how you interact with an ad.",
+          'Google may also let other certified ad vendors show ads on this site, and they may use cookies in the same way. Google lists these vendors, with a link to each one\'s privacy policy, on its page of certified vendors.',
           'We do not pass Google your name, email address or messages, and we never see the cookies Google sets.',
         ],
         links: [
+          { label: 'Certified ad vendors', url: 'https://support.google.com/adsense/answer/94149' },
           { label: 'How Google uses cookies in advertising', url: 'https://policies.google.com/technologies/ads' },
           {
             label: "How Google uses information from sites that use its services",
@@ -301,7 +305,7 @@ export const enPages: PagesCopy = {
         },
         {
           name: 'Fix a mistake',
-          detail: 'Open the game history, pick the round and correct it. Undo brings back the latest change.',
+          detail: 'Open the game history, pick the round and correct it. Undo reverses the latest change.',
         },
         {
           name: 'Share the result',
@@ -315,6 +319,23 @@ export const enPages: PagesCopy = {
       ],
       platforms: 'iPhone and Android. For ages 13 and over.',
       notes: [
+        {
+          id: 'how',
+          heading: 'How a game goes',
+          paragraphs: [
+            'Start a game and add the players. After each round, enter each player\'s points, and Scori adds them up and shows who leads.',
+            'To let others watch, open the invite. It shows a QR code and a link. Friends scan it or open the link, and the score updates on their phones as you enter it.',
+            'When the game ends, send the final scores to the group as an image. Every game stays in the history, so you can look back or fix a round later.',
+          ],
+        },
+        {
+          id: 'questions',
+          heading: 'Common questions',
+          paragraphs: [
+            'Do I need an account? No. Games on one phone need no account and no internet. An account is only used when you share a game.',
+            'Which language will it use? The language of your phone, if it is one of the ten. Otherwise English.',
+          ],
+        },
         {
           id: 'privacy',
           heading: 'Your information',
@@ -341,12 +362,12 @@ export const enPages: PagesCopy = {
           detail: 'Classic Pad, Large Controls, Touch Pad and Hybrid Pad. The keys are the ones you know, and Remoti remembers the layout you pick.',
         },
         {
-          name: 'Touch pad',
+          name: 'Swipe area',
           detail: 'Swipe and tap to move around the TV menus.',
         },
         {
           name: 'Type from your iPhone',
-          detail: 'Type into supported text fields on the TV with your iPhone keyboard, in English or Vietnamese.',
+          detail: 'Type into supported text fields on the TV with your iPhone keyboard, in English or Vietnamese. Typing is part of Remoti Plus.',
         },
         {
           name: 'Your TVs, saved',
@@ -359,6 +380,22 @@ export const enPages: PagesCopy = {
       ],
       platforms: 'iPhone with iOS 17 or later. Works with Android TV and Google TV.',
       notes: [
+        {
+          id: 'start',
+          heading: 'Getting started',
+          paragraphs: [
+            'Turn on the TV and keep it awake. Connect the iPhone to the same home network as the TV. Open Remoti, choose your TV from the list, then type the pairing code that appears on the TV screen.',
+            'After that, Remoti remembers the TV. Next time it reconnects to the last TV you used.',
+          ],
+        },
+        {
+          id: 'not-found',
+          heading: 'If your TV does not show up',
+          paragraphs: [
+            'Check that the iPhone is on Wi-Fi, not only mobile data, and that both are on the same network. Guest Wi-Fi often keeps devices apart.',
+            'In the iPhone settings, open Privacy & Security, then Local Network, and allow Remoti. Wake the TV with its own remote, then search again.',
+          ],
+        },
         {
           id: 'privacy',
           heading: 'Your information',
@@ -402,7 +439,7 @@ export const enPages: PagesCopy = {
           detail: 'Get a notification when a price reaches the level you set. No account needed.',
         },
         {
-          name: 'What you hold',
+          name: 'Your gold and savings',
           detail:
             'Keep a list of your gold and savings. Sign in with Google or Apple to sync it, export it as a CSV file, and lock the app with your face or fingerprint.',
         },
@@ -410,10 +447,26 @@ export const enPages: PagesCopy = {
       platforms: 'A website at piggo.canhta.com, in Vietnamese and English, and an app for iPhone and Android.',
       notes: [
         {
+          id: 'sources',
+          heading: 'Where the prices come from',
+          paragraphs: [
+            'Each price is the one the gold shop or bank lists, shown with the shop\'s name and the time it was listed. When a shop has not updated for a while, Piggo shows the day of the price, so you know it is not today\'s.',
+            'Prices are given per chỉ or per lượng, and you can switch between the two.',
+          ],
+        },
+        {
+          id: 'questions',
+          heading: 'Common questions',
+          paragraphs: [
+            'Do I need an account? No. Prices, charts, calculators and price alerts work without one. Signing in is only for syncing your gold and savings.',
+            'Can I take my list with me? Yes. Export it as a CSV file at any time. Deleting your account removes the synced list.',
+          ],
+        },
+        {
           id: 'privacy',
           heading: 'Your information',
           paragraphs: [
-            'Prices, charts, watch lists and settings stay on your device. Piggo does not collect your phone number, name or email. Signing in is only needed to sync the list of what you hold, and you can export or delete it at any time.',
+            'Your watch lists and settings stay on your device. Piggo does not collect your phone number, name or email. Signing in is only needed to sync the list of what you hold, and you can export or delete it at any time.',
           ],
         },
       ],

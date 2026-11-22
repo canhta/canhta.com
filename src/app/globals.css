@@ -2247,10 +2247,13 @@ a.cell-link::after {
 .mark[data-theme='remoti'] {
   --app-bg: #dce2ec;
 }
-/* Piggo has no screens in the repo: its name, large, on a pale sand panel. */
+/* Piggo has no screens in the repo, and no app icon yet: its brand is the
+   wordmark ("Pigg" with a gold "o") on the dark warm ink of its hero card, with
+   the Đông Sơn drum face behind it, as canhta/piggo design/THEME.md draws them.
+   Flat colour, the drum static and faint: no gradient, no turning. */
 .app-card[data-theme='piggo'],
 .app-hero[data-theme='piggo'] {
-  --app-bg: #efe6d2;
+  --app-bg: #33260f;
 }
 .app-hero[data-theme='scori'] {
   --app-bg: #ffe9a6;
@@ -2259,14 +2262,33 @@ a.cell-link::after {
   --app-bg: #dce2ec;
 }
 .app-word {
+  position: relative;
   align-items: center;
   min-height: 200px;
   padding: 32px 24px;
-  color: #131517;
-  font-weight: 800;
+  color: #fbf8f0;
+  isolation: isolate;
+}
+.app-card[data-theme='piggo'] .app-word::before,
+.app-hero[data-theme='piggo']::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: -35%;
+  right: -25%;
+  width: 95%;
+  aspect-ratio: 1;
+  background: url('/products/piggo/drum.webp') center / contain no-repeat;
+  opacity: 0.22;
+}
+.app-word-name {
+  font-weight: 700;
   font-size: clamp(3rem, 2rem + 4vw, 5rem);
-  letter-spacing: -0.04em;
+  letter-spacing: -0.03em;
   line-height: 1.1;
+}
+.app-word-end {
+  color: #c99a2e;
 }
 @media (min-width: 768px) {
   .app-card-wide {
@@ -2284,6 +2306,10 @@ a.cell-link::after {
 }
 .app-hero.app-media {
   padding-top: 28px;
+}
+.app-hero.app-word {
+  min-height: 260px;
+  padding: 40px 24px;
 }
 
 /* --- Long text: about, privacy, terms ------------------------------------ */

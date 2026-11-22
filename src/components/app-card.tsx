@@ -43,7 +43,10 @@ export function AppCard({ build, locale }: { build: Build; locale: Locale }) {
         </div>
       ) : (
         <div className="app-media app-word" aria-hidden="true">
-          <span translate="no">{build.name}</span>
+          <span translate="no" className="app-word-name">
+            {build.name.slice(0, -1)}
+            <span className="app-word-end">{build.name.slice(-1)}</span>
+          </span>
         </div>
       )}
 

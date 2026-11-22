@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
+import type { AppPathname } from '@/i18n/routing'
 import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
@@ -43,7 +44,13 @@ export function AppsTeaser({ locale }: { locale: Locale }) {
               ) : null}
               <div className="min-w-0 flex-1">
                 <h3 className="subtitle" translate="no">
-                  {build.name}
+                  {build.detail ? (
+                    <Link href={`/products/${build.slug}` as AppPathname} className="link">
+                      {build.name}
+                    </Link>
+                  ) : (
+                    build.name
+                  )}
                 </h3>
                 <p className="cell-muted mt-1 text-[15px] leading-snug">{build.tagline}</p>
               </div>

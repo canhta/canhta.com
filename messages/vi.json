@@ -237,12 +237,12 @@
     "offerCatalog": "Dịch vụ của chúng tôi",
     "workList": "Một vài sản phẩm và dự án của chúng tôi",
     "products": {
-      "title": "Scori, Remoti và các sản phẩm khác | Canh Ta",
-      "description": "Scori ghi điểm khi chơi bài và board game. Remoti biến iPhone thành điều khiển cho Android TV và Google TV. Thêm vài dự án web và AI của chúng tôi."
+      "title": "Scori, Remoti, Piggo và các sản phẩm khác | Canh Ta",
+      "description": "Scori ghi điểm khi chơi bài và board game. Remoti biến iPhone thành điều khiển cho Android TV và Google TV. Piggo theo dõi giá vàng ở Việt Nam. Thêm vài dự án web và AI."
     },
     "about": {
       "title": "Giới thiệu: phần mềm và AI cho doanh nghiệp nhỏ | Canh Ta",
-      "description": "Chúng tôi là ai, làm gì và làm thế nào: gom công việc về một phần mềm trước, AI có người duyệt sau, bản chạy thử không tính phí trước khi báo giá."
+      "description": "Chúng tôi là ai và làm việc thế nào: gom công việc về một phần mềm trước, sau đó AI làm việc lặp lại, có người duyệt. Bản chạy thử không tính phí trước khi báo giá."
     },
     "privacy": {
       "title": "Chính sách quyền riêng tư | Canh Ta",
@@ -254,14 +254,14 @@
     },
     "scori": {
       "title": "Scori: app ghi điểm khi chơi bài, board game | Canh Ta",
-      "description": "Scori là bảng điểm cho mọi ván bài và board game. Không cần mạng, bạn bè vào xem bằng mã QR, sửa điểm từ lịch sử. Có trên iPhone và Android."
+      "description": "Scori là bảng điểm cho mọi ván bài và board game. Không cần mạng, bạn bè vào xem bằng mã QR, sửa điểm từ lịch sử. Dùng trên iPhone và Android."
     },
     "remoti": {
       "title": "Remoti: điều khiển Android TV, Google TV bằng iPhone | Canh Ta",
-      "description": "Remoti biến iPhone thành điều khiển cho Android TV và Google TV: bốn kiểu phím, vùng vuốt và gõ chữ bằng bàn phím iPhone."
+      "description": "Remoti biến iPhone thành điều khiển cho Android TV và Google TV: bốn kiểu bố trí phím, vùng vuốt và gõ chữ bằng bàn phím iPhone."
     },
     "piggo": {
-      "title": "Piggo: giá vàng hôm nay ở Việt Nam | Canh Ta",
+      "title": "Piggo: app theo dõi giá vàng ở Việt Nam | Canh Ta",
       "description": "Piggo cập nhật giá vàng 13 thương hiệu, có biểu đồ, vàng thế giới, tỷ giá, lãi suất tiết kiệm, công cụ tính lãi lỗ, cảnh báo giá và sổ tài sản."
     }
   },

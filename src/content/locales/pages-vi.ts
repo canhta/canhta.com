@@ -15,7 +15,7 @@ export const viPages: PagesCopy = {
         paragraphs: [
           'Nhiều cửa hàng vẫn chạy bằng tin nhắn Zalo, sổ tay và file Excel. Khách nhắn đơn qua Zalo, người bán ghi vào sổ, cuối ngày lại gõ vào Excel. Chúng tôi gom việc đó về một phần mềm. Đơn nhập một lần, kho và công nợ tự cập nhật theo.',
           'Khi phần mềm đã có số liệu thật, AI mới phát huy tác dụng. Chatbot trả lời khách theo đúng bảng giá của bạn. Trợ lý AI soạn sẵn đơn hay nhập hóa đơn nhà cung cấp, rồi người bạn chọn bấm duyệt những gì liên quan đến tiền hoặc đơn hàng.',
-          'Việc chúng tôi nhận rất rộng: ERP, CRM, chatbot, website, app trên web và điện thoại, báo cáo số liệu, AI agent, thiết bị cảm biến kết nối mạng, và thêm người cho nhóm đang triển khai sản phẩm.',
+          'Chúng tôi nhận nhiều loại việc: ERP, CRM, chatbot, website, app trên web và điện thoại, báo cáo số liệu, AI agent, thiết bị cảm biến kết nối mạng, và thêm người cho nhóm đang triển khai sản phẩm.',
         ],
         links: [{ label: 'Xem các dịch vụ', page: 'services' }],
       },
@@ -32,22 +32,22 @@ export const viPages: PagesCopy = {
         id: 'who',
         heading: 'Chúng tôi là ai',
         paragraphs: [
-          'Canh Ta là tên chúng tôi dùng khi làm việc, tại canhta.com. Chúng tôi ở Việt Nam, làm việc bằng tiếng Việt và tiếng Anh.',
+          'Chúng tôi làm việc dưới tên Canh Ta, tại canhta.com. Chúng tôi ở Việt Nam, làm việc bằng tiếng Việt và tiếng Anh.',
           'Chúng tôi từng làm các sản phẩm có hàng trăm nghìn người dùng, ở vai trò lập trình, xử lý dữ liệu và quản lý sản phẩm.',
         ],
       },
       {
         id: 'products',
-        heading: 'App chúng tôi tự làm',
+        heading: 'App chúng tôi tự triển khai',
         paragraphs: [
-          'Ngoài dự án cho khách, chúng tôi tự triển khai và chăm chút vài app của riêng mình. Đó là cách chúng tôi giữ tay nghề, và cũng để bạn thấy chúng tôi kỹ đến từng chi tiết nhỏ.',
+          'Ngoài dự án cho khách, chúng tôi tự triển khai và chăm chút vài app của riêng mình. Đó là cách chúng tôi giữ tay nghề, và để bạn xem cách chúng tôi triển khai.',
         ],
         items: [
-          'Scori ghi điểm khi chơi bài và board game, có trên iPhone và Android.',
+          'Scori ghi điểm khi chơi bài và board game, dùng trên iPhone và Android.',
           'Remoti biến iPhone thành điều khiển cho Android TV và Google TV.',
           'Piggo cập nhật giá vàng của các tiệm vàng lớn ở Việt Nam.',
           'AI Engineering Atlas là lộ trình học mở cho lập trình viên chuyển sang AI.',
-          'copycat-skills giúp xem thị trường trước khi bắt tay làm app.',
+          'copycat-skills giúp xem thị trường trước khi triển khai app.',
         ],
         links: [
           { label: 'Scori', page: 'scori' },
@@ -58,26 +58,28 @@ export const viPages: PagesCopy = {
       },
       {
         id: 'promises',
-        heading: 'Những điều chắc chắn',
-        paragraphs: ['Dự án lớn hay nhỏ cũng vậy.'],
+        heading: 'Cam kết của chúng tôi',
+        paragraphs: ['Dự án lớn hay nhỏ đều như nhau:'],
         items: [
           'Bản chạy thử không tính phí.',
           'Dự án nào cũng có hợp đồng ký kết.',
           'Phần mềm làm cho bạn thuộc về bạn.',
           'Chúng tôi nói rõ dịch vụ AI nhận những thông tin khách hàng nào.',
-          'Chúng tôi trả lời trong một ngày làm việc.',
         ],
       },
       {
         id: 'reach',
         heading: 'Liên hệ',
         paragraphs: [
-          'Gửi email, hoặc nhắn Zalo hay WhatsApp cho chúng tôi. Mã nguồn công khai và các ghi chép của chúng tôi có trên GitHub, X và LinkedIn.',
+          'Gửi email, hoặc nhắn Zalo hay WhatsApp cho chúng tôi. Chúng tôi trả lời trong một ngày làm việc. Mã nguồn công khai và các ghi chép của chúng tôi có trên GitHub, X và LinkedIn.',
         ],
         links: [
           EMAIL,
+          { label: 'Zalo', url: 'https://zalo.me/84825252599' },
+          { label: 'WhatsApp', url: 'https://wa.me/84825252599' },
           { label: 'Nhận tư vấn', page: 'contact' },
           { label: 'GitHub', url: 'https://github.com/canhta' },
+          { label: 'X', url: 'https://x.com/canh_builds' },
           { label: 'LinkedIn', url: 'https://www.linkedin.com/in/canhta' },
         ],
       },
@@ -94,7 +96,7 @@ export const viPages: PagesCopy = {
         id: 'scope',
         heading: 'Phạm vi',
         paragraphs: [
-          'Chính sách này áp dụng cho trang web www.canhta.com do Canh Ta vận hành. "Chúng tôi" là chúng tôi, "bạn" là bất kỳ ai ghé thăm trang.',
+          'Chính sách này áp dụng cho trang web www.canhta.com do Canh Ta vận hành. "Chúng tôi" là Canh Ta, "bạn" là bất kỳ ai ghé thăm trang.',
           'Các app Scori, Remoti và Piggo có chính sách quyền riêng tư riêng trên trang web của từng app. Khi bạn dùng app, chính sách của app đó được áp dụng.',
         ],
         links: [
@@ -109,7 +111,7 @@ export const viPages: PagesCopy = {
         paragraphs: [
           'Trang không có biểu mẫu và không cần đăng ký tài khoản. Muốn liên hệ, bạn bấm vào đường dẫn để mở ứng dụng email, Zalo, WhatsApp hoặc gọi điện. Bạn tự bấm gửi thì chúng tôi mới nhận được.',
           'Chúng tôi nhận những gì bạn chọn gửi. Thường là tên, email hoặc số điện thoại, và nội dung bạn kể về vấn đề muốn giải quyết.',
-          'Chúng tôi dùng thông tin đó để trả lời, tư vấn, và nếu hai bên hợp tác thì để triển khai dự án. Chúng tôi không bán thông tin của bạn và không tự thêm bạn vào danh sách gửi thư. Tin nhắn qua Zalo, WhatsApp hay email đi theo chính sách riêng của từng dịch vụ đó.',
+          'Chúng tôi dùng thông tin đó để trả lời, tư vấn, và nếu hai bên hợp tác thì để triển khai dự án. Chúng tôi không bán thông tin của bạn và không tự thêm bạn vào danh sách gửi thư. Tin nhắn qua Zalo, WhatsApp hay email tuân theo chính sách riêng của từng dịch vụ đó.',
         ],
       },
       {
@@ -118,7 +120,7 @@ export const viPages: PagesCopy = {
         paragraphs: [
           'Trang được đặt trên máy chủ của Vercel. Như mọi máy chủ web, Vercel nhận địa chỉ IP, địa chỉ trang bạn mở, thời gian và loại trình duyệt, để gửi trang cho bạn và chặn truy cập phá hoại.',
           'Chúng tôi đếm lượt xem bằng Vercel Web Analytics và đo tốc độ trang bằng Vercel Speed Insights. Cả hai không dùng cookie. Chúng chỉ cho biết con số tổng, ví dụ bao nhiêu người mở trang dịch vụ, không cho biết bạn là ai.',
-          'Phông chữ được lưu ngay trên máy chủ của chúng tôi, nên mở trang không kết nối tới Google Fonts. Bản thân trang không đặt cookie nào. Quảng cáo nói ở phần dưới thì có.',
+          'Phông chữ được lưu ngay trên máy chủ của chúng tôi, nên mở trang không kết nối tới Google Fonts. Bản thân trang không đặt cookie nào. Riêng quảng cáo ở phần dưới có dùng cookie.',
         ],
       },
       {
@@ -128,9 +130,11 @@ export const viPages: PagesCopy = {
           'Trang hiện quảng cáo do Google AdSense cung cấp. Google chọn quảng cáo bạn thấy, không phải chúng tôi.',
           'Các nhà cung cấp bên thứ ba, trong đó có Google, dùng cookie để hiện quảng cáo dựa trên những lần bạn đã vào trang này hoặc các trang web khác.',
           'Cookie quảng cáo của Google cho phép Google và đối tác hiện quảng cáo cho bạn dựa trên lượt bạn ghé trang này và các trang khác trên internet. Để hiện quảng cáo, đo hiệu quả và chống gian lận, Google cũng có thể nhận địa chỉ IP, thông tin thiết bị, trình duyệt và cách bạn tương tác với quảng cáo.',
+          'Google cũng có thể cho các nhà cung cấp quảng cáo khác đã được chứng nhận hiện quảng cáo trên trang, và họ cũng có thể dùng cookie theo cách tương tự. Google công bố danh sách các nhà cung cấp này, kèm đường dẫn tới chính sách quyền riêng tư của từng bên.',
           'Chúng tôi không gửi cho Google tên, email hay tin nhắn của bạn, và không xem được cookie mà Google đặt.',
         ],
         links: [
+          { label: 'Danh sách nhà cung cấp được chứng nhận', url: 'https://support.google.com/adsense/answer/94149?hl=vi' },
           { label: 'Cách Google dùng cookie trong quảng cáo', url: 'https://policies.google.com/technologies/ads?hl=vi' },
           {
             label: 'Cách Google dùng thông tin từ các trang đối tác',
@@ -211,7 +215,7 @@ export const viPages: PagesCopy = {
         heading: 'Trang dùng để làm gì',
         paragraphs: [
           'Trang giới thiệu dịch vụ và một vài sản phẩm của chúng tôi. Đây là thông tin chung, không phải lời chào bán, báo giá hay tư vấn thuế, pháp lý.',
-          'Chúng tôi chỉ đưa giá trong báo giá bằng văn bản, sau khi bạn đã xem bản chạy thử. Công việc hai bên làm cùng nhau theo hợp đồng ký kết. Chỗ nào hợp đồng khác với trang này thì theo hợp đồng.',
+          'Chúng tôi chỉ đưa giá trong báo giá bằng văn bản, sau khi bạn đã xem bản chạy thử. Công việc hai bên hợp tác được thực hiện theo hợp đồng đã ký. Chỗ nào hợp đồng khác với trang này thì theo hợp đồng.',
         ],
       },
       {
@@ -260,7 +264,7 @@ export const viPages: PagesCopy = {
         id: 'warranty',
         heading: 'Không bảo đảm tuyệt đối',
         paragraphs: [
-          'Chúng tôi cố giữ trang chính xác và luôn chạy, nhưng không thể hứa trang lúc nào cũng truy cập được hay không có sai sót. Trang được cung cấp đúng như hiện có.',
+          'Chúng tôi cố giữ trang chính xác và luôn chạy, nhưng không thể hứa trang lúc nào cũng truy cập được hay không có sai sót. Trang được cung cấp theo nguyên trạng.',
           'Trong phạm vi pháp luật cho phép, chúng tôi không chịu trách nhiệm về thiệt hại phát sinh từ việc dùng trang hay dựa vào nội dung trên trang. Điều này không làm mất những quyền mà pháp luật bảo vệ cho bạn.',
         ],
       },
@@ -282,8 +286,8 @@ export const viPages: PagesCopy = {
 
   apps: {
     scori: {
-      h1: 'Scori giữ điểm giúp bạn',
-      intro: 'Một bảng điểm cho mọi ván bài và board game. Cả bàn cùng thấy một con số.',
+      h1: 'Scori ghi điểm giúp bạn',
+      intro: 'Một bảng điểm cho mọi ván bài và board game. Cả bàn cùng xem một bảng điểm.',
       audience:
         'Cho nhóm bạn và gia đình hay chơi bài, board game hay trò chơi tập thể, ngại ghi điểm ra giấy rồi cộng nhầm. Một người ghi điểm, những người khác xem ngay trên điện thoại của mình.',
       features: [
@@ -301,7 +305,7 @@ export const viPages: PagesCopy = {
         },
         {
           name: 'Sửa khi ghi nhầm',
-          detail: 'Mở lịch sử ván, chọn lượt cần sửa rồi xác nhận. Nút hoàn tác đưa lại thay đổi gần nhất.',
+          detail: 'Mở lịch sử ván, chọn lượt cần sửa rồi xác nhận. Nút hoàn tác bỏ thay đổi gần nhất.',
         },
         {
           name: 'Chia sẻ kết quả',
@@ -315,6 +319,23 @@ export const viPages: PagesCopy = {
       ],
       platforms: 'iPhone và Android. Dành cho người từ 13 tuổi.',
       notes: [
+        {
+          id: 'how',
+          heading: 'Một ván diễn ra thế nào',
+          paragraphs: [
+            'Tạo ván mới và thêm người chơi. Hết mỗi lượt, bạn nhập điểm của từng người, Scori tự cộng và cho biết ai đang dẫn.',
+            'Muốn cả bàn cùng xem, bạn mở phần mời. Ở đó có mã QR và đường dẫn. Bạn bè quét mã hoặc mở đường dẫn, điểm trên điện thoại của họ cập nhật ngay khi bạn nhập.',
+            'Chơi xong, gửi bảng điểm cuối cho cả nhóm dưới dạng ảnh. Mọi ván đều nằm trong lịch sử, để xem lại hay sửa một lượt sau này.',
+          ],
+        },
+        {
+          id: 'questions',
+          heading: 'Câu hỏi thường gặp',
+          paragraphs: [
+            'Có cần tài khoản không? Không. Chơi trên một máy thì không cần tài khoản, cũng không cần mạng. Tài khoản chỉ dùng khi bạn chia sẻ ván.',
+            'App dùng ngôn ngữ nào? Ngôn ngữ của điện thoại, nếu nằm trong mười ngôn ngữ app hỗ trợ. Nếu không thì dùng tiếng Anh.',
+          ],
+        },
         {
           id: 'privacy',
           heading: 'Thông tin của bạn',
@@ -334,7 +355,7 @@ export const viPages: PagesCopy = {
       h1: 'iPhone thành điều khiển TV',
       intro: 'Remoti điều khiển Android TV và Google TV ngay trên iPhone, qua Wi-Fi ở nhà.',
       audience:
-        'Cho người dùng Android TV hay Google TV hay để lạc điều khiển, hết pin giữa chừng, hoặc ngại bấm từng chữ bằng phím mũi tên.',
+        'Cho người dùng Android TV hay Google TV hay lạc mất điều khiển, hết pin giữa chừng, hoặc ngại bấm từng chữ bằng phím mũi tên.',
       features: [
         {
           name: 'Bốn kiểu bố trí',
@@ -346,7 +367,7 @@ export const viPages: PagesCopy = {
         },
         {
           name: 'Gõ chữ bằng iPhone',
-          detail: 'Gõ vào ô nhập chữ trên TV bằng bàn phím iPhone, tiếng Việt hoặc tiếng Anh, ở những ô TV hỗ trợ.',
+          detail: 'Gõ vào ô nhập chữ trên TV bằng bàn phím iPhone, tiếng Việt hoặc tiếng Anh, ở những ô TV hỗ trợ. Tính năng này thuộc gói Remoti Plus.',
         },
         {
           name: 'Lưu nhiều TV',
@@ -359,6 +380,22 @@ export const viPages: PagesCopy = {
       ],
       platforms: 'iPhone chạy iOS 17 trở lên. Dùng với Android TV và Google TV.',
       notes: [
+        {
+          id: 'start',
+          heading: 'Bắt đầu thế nào',
+          paragraphs: [
+            'Bật TV và để TV không ngủ. Cho iPhone vào cùng mạng Wi-Fi với TV. Mở Remoti, chọn TV trong danh sách, rồi nhập mã ghép nối hiện trên màn hình TV.',
+            'Từ lần sau, Remoti nhớ TV đó và tự kết nối lại với TV dùng gần nhất.',
+          ],
+        },
+        {
+          id: 'not-found',
+          heading: 'Khi không thấy TV',
+          paragraphs: [
+            'Kiểm tra iPhone đang dùng Wi-Fi chứ không chỉ dùng 4G, và hai máy cùng một mạng. Wi-Fi dành cho khách thường tách các thiết bị ra.',
+            'Trong Cài đặt của iPhone, mở Quyền riêng tư & Bảo mật, chọn Mạng cục bộ và bật cho Remoti. Đánh thức TV bằng điều khiển của TV rồi tìm lại.',
+          ],
+        },
         {
           id: 'privacy',
           heading: 'Thông tin của bạn',
@@ -409,10 +446,26 @@ export const viPages: PagesCopy = {
       platforms: 'Trang web piggo.canhta.com bằng tiếng Việt và tiếng Anh, cùng app cho iPhone và Android.',
       notes: [
         {
+          id: 'sources',
+          heading: 'Giá lấy từ đâu',
+          paragraphs: [
+            'Mỗi giá là giá do tiệm vàng hay ngân hàng niêm yết, ghi kèm tên nơi niêm yết và giờ niêm yết. Nếu một tiệm lâu chưa cập nhật, Piggo ghi rõ ngày của giá đó để bạn biết đó không phải giá hôm nay.',
+            'Giá có thể xem theo chỉ hoặc theo lượng, chuyển qua lại tùy bạn.',
+          ],
+        },
+        {
+          id: 'questions',
+          heading: 'Câu hỏi thường gặp',
+          paragraphs: [
+            'Có cần tài khoản không? Không. Xem giá, biểu đồ, công cụ tính và cảnh báo giá đều không cần. Chỉ cần đăng nhập khi muốn đồng bộ sổ tài sản.',
+            'Có mang sổ đi được không? Được. Xuất sổ ra tệp CSV bất cứ lúc nào. Xóa tài khoản thì sổ đã đồng bộ cũng bị xóa.',
+          ],
+        },
+        {
           id: 'privacy',
           heading: 'Thông tin của bạn',
           paragraphs: [
-            'Giá, biểu đồ, danh sách theo dõi và cài đặt nằm trên máy của bạn. Piggo không thu số điện thoại, tên hay email. Chỉ cần đăng nhập khi muốn đồng bộ sổ tài sản, và bạn xuất hay xóa sổ lúc nào cũng được.',
+            'Danh sách theo dõi và cài đặt nằm trên máy của bạn. Piggo không thu thập số điện thoại, tên hay email. Chỉ cần đăng nhập khi muốn đồng bộ sổ tài sản, và bạn xuất hay xóa sổ lúc nào cũng được.',
           ],
         },
       ],

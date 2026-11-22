@@ -115,6 +115,9 @@ export function buildGraph(locale: Locale, page: GraphPage = 'home') {
       // Only a product that is out has a publication date.
       ...(b.status === 'live' || b.status === 'shipped' ? { datePublished: b.year } : {}),
       author: { '@id': serviceId },
+      // An app with its own page here points to it, so the list on the products
+      // page and the app page describe the same thing.
+      ...(b.detail ? { mainEntityOfPage: pageUrl(locale, b.slug as PageKey) } : {}),
       ...(b.links.length > 1 ? { sameAs: b.links.slice(1).map((l) => l.url) } : {}),
     }))
 
