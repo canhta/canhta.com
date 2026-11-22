@@ -15,7 +15,10 @@ export const profileFacts: ProfileFacts = {
   available: true,
 }
 
-/** Scori and Remoti link to their own sites. The site states no status for either. */
+/**
+ * Scori, Remoti and Piggo link to their own sites and each has a page here. The
+ * site states no status for any of them (no "coming soon", no store badges).
+ */
 export const buildFacts: BuildFacts[] = [
   {
     slug: 'scori',
@@ -28,6 +31,7 @@ export const buildFacts: BuildFacts[] = [
     os: 'iOS, Android',
     logo: '/products/scori/icon.webp',
     shots: ['score', 'invite'],
+    detail: true,
     links: [{ kind: 'web', url: 'https://scori.canhta.com' }],
   },
   {
@@ -41,11 +45,24 @@ export const buildFacts: BuildFacts[] = [
     os: 'iOS',
     logo: '/products/remoti/icon.svg',
     shots: ['remote-classic'],
+    detail: true,
     links: [{ kind: 'web', url: 'https://remoti.canhta.com' }],
   },
   {
-    slug: 'ai-engineering-atlas',
+    slug: 'piggo',
     order: 3,
+    name: 'Piggo',
+    year: '2026',
+    kind: 'mobile',
+    appCategory: 'FinanceApplication',
+    status: 'building',
+    os: 'iOS, Android',
+    detail: true,
+    links: [{ kind: 'web', url: 'https://piggo.canhta.com' }],
+  },
+  {
+    slug: 'ai-engineering-atlas',
+    order: 4,
     name: 'AI Engineering Atlas',
     year: '2026',
     kind: 'web',
@@ -58,7 +75,7 @@ export const buildFacts: BuildFacts[] = [
   },
   {
     slug: 'copycat-skills',
-    order: 4,
+    order: 5,
     name: 'copycat-skills',
     year: '2026',
     kind: 'skill',

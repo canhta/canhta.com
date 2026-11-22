@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
+import type { AppPathname } from '@/i18n/routing'
 import { getSiteContent } from '@/content'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
@@ -43,7 +44,13 @@ export function AppsTeaser({ locale }: { locale: Locale }) {
               ) : null}
               <div className="min-w-0 flex-1">
                 <h3 className="subtitle" translate="no">
-                  {build.name}
+                  {build.detail ? (
+                    <Link href={`/products/${build.slug}` as AppPathname} className="link">
+                      {build.name}
+                    </Link>
+                  ) : (
+                    build.name
+                  )}
                 </h3>
                 <p className="cell-muted mt-1 text-[15px] leading-snug">{build.tagline}</p>
               </div>
@@ -56,16 +63,19 @@ export function AppsTeaser({ locale }: { locale: Locale }) {
   )
 }
 
-/** Apps page: the same panels, larger phones. */
+/**
+ * Apps page: one panel per app that has its own page. An app without screens
+ * (Piggo) spans the row, its name on its colour beside the text.
+ */
 export function AppsFull({ locale }: { locale: Locale }) {
-  const featured = getSiteContent(locale).builds.filter((b) => b.shots?.length)
+  const featured = getSiteContent(locale).builds.filter((b) => b.detail)
 
   return (
     <section className="band sheet ground-tint" aria-label={getMessages(locale).apps.h1}>
       <div className="shell">
         <ul className="grid gap-4 md:grid-cols-2 md:gap-5">
           {featured.map((build) => (
-            <li key={build.slug} className="reveal">
+            <li key={build.slug} className={`reveal ${build.shots?.length ? '' : 'md:col-span-2'}`}>
               <AppCard build={build} locale={locale} />
             </li>
           ))}

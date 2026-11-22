@@ -5,14 +5,33 @@ import { routing, type AppPathname } from '@/i18n/routing'
 import { getMessages } from '@/i18n/messages'
 import { SITE } from '@/lib/site'
 
+export type PageKey =
+  | 'home'
+  | 'services'
+  | 'products'
+  | 'contact'
+  | 'about'
+  | 'privacy'
+  | 'terms'
+  | 'scori'
+  | 'remoti'
+  | 'piggo'
 
-type PageKey = 'home' | 'services' | 'products' | 'contact'
+/** The app pages, each one level under the products page. */
+export const APP_PAGES = ['scori', 'remoti', 'piggo'] as const
+export type AppPage = (typeof APP_PAGES)[number]
 
 export const PAGE_PATH: Record<PageKey, AppPathname> = {
   home: '/',
   services: '/services',
   products: '/products',
   contact: '/contact',
+  about: '/about',
+  privacy: '/privacy',
+  terms: '/terms',
+  scori: '/products/scori',
+  remoti: '/products/remoti',
+  piggo: '/products/piggo',
 }
 
 /** Absolute URL of a page in one locale, with the localized slug. */

@@ -1,7 +1,7 @@
 import { getSiteContent } from '@/content'
 import type { Build, Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
-import { ogImageUrl, pageUrl } from '@/lib/metadata'
+import { APP_PAGES, ogImageUrl, pageUrl, type PageKey } from '@/lib/metadata'
 import { SITE } from '@/lib/site'
 
 /**
@@ -29,7 +29,7 @@ import { SITE } from '@/lib/site'
 /** Stated once, on the provider: each Service inherits it. */
 const AREA_SERVED = { '@type': 'Country', name: 'Vietnam' }
 
-type GraphPage = 'home' | 'services' | 'products' | 'contact'
+type GraphPage = PageKey
 
 function appType(build: Build): string {
   switch (build.kind) {
@@ -115,20 +115,28 @@ export function buildGraph(locale: Locale, page: GraphPage = 'home') {
       // Only a product that is out has a publication date.
       ...(b.status === 'live' || b.status === 'shipped' ? { datePublished: b.year } : {}),
       author: { '@id': serviceId },
+      // An app with its own page here points to it, so the list on the products
+      // page and the app page describe the same thing.
+      ...(b.detail ? { mainEntityOfPage: pageUrl(locale, b.slug as PageKey) } : {}),
       ...(b.links.length > 1 ? { sameAs: b.links.slice(1).map((l) => l.url) } : {}),
     }))
 
+  // An app page sits under the products page, so its trail has three steps.
+  const isApp = (APP_PAGES as readonly string[]).includes(page)
+  const trail: { name: string; item: string }[] = [
+    { name: messages.nav.home, item: pageUrl(locale, 'home') },
+    ...(isApp ? [{ name: messages.nav.products, item: pageUrl(locale, 'products') }] : []),
+    { name: messages.nav[page], item: url },
+  ]
   const breadcrumb =
     page === 'home'
       ? null
       : {
           '@type': 'BreadcrumbList',
           '@id': `${url}#breadcrumb`,
-          itemListElement: [
-            { '@type': 'ListItem', position: 1, name: messages.nav.home, item: pageUrl(locale, 'home') },
-            { '@type': 'ListItem', position: 2, name: messages.nav[page], item: url },
-          ],
+          itemListElement: trail.map((t, i) => ({ '@type': 'ListItem', position: i + 1, ...t })),
         }
+  const appEntity = isApp ? apps.find((a) => a.name === builds.find((b) => b.slug === page)?.name) : undefined
 
   const faqPage =
     page === 'services' && faq.length > 0
@@ -156,7 +164,7 @@ export function buildGraph(locale: Locale, page: GraphPage = 'home') {
         publisher: { '@id': serviceId },
       },
       {
-        '@type': 'WebPage',
+        '@type': page === 'about' ? 'AboutPage' : 'WebPage',
         '@id': `${url === SITE ? `${SITE}/` : url}#webpage`,
         url,
         isPartOf: { '@id': siteId },
@@ -166,6 +174,7 @@ export function buildGraph(locale: Locale, page: GraphPage = 'home') {
         description: meta.description,
         primaryImageOfPage: { '@type': 'ImageObject', url: ogImageUrl(locale, page), width: 1200, height: 630 },
         ...(breadcrumb ? { breadcrumb: { '@id': `${url}#breadcrumb` } } : {}),
+        ...(appEntity ? { mainEntity: appEntity } : {}),
       },
       ...(breadcrumb ? [breadcrumb] : []),
       ...(page === 'products' && apps.length

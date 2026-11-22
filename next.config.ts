@@ -9,13 +9,19 @@ const withNextIntl = createNextIntlPlugin()
  * run before the proxy, so they win. Specific pages first, then the bare prefix.
  */
 const slugs = [
-  ['services', 'dich-vu'],
-  ['products', 'san-pham'],
-  ['contact', 'lien-he'],
+  ['services', 'services', 'dich-vu'],
+  ['products', 'products', 'san-pham'],
+  ['contact', 'contact', 'lien-he'],
+  ['about', 'about', 'gioi-thieu'],
+  ['privacy', 'privacy', 'quyen-rieng-tu'],
+  ['terms', 'terms', 'dieu-khoan'],
+  ['scori', 'products/scori', 'san-pham/scori'],
+  ['remoti', 'products/remoti', 'san-pham/remoti'],
+  ['piggo', 'products/piggo', 'san-pham/piggo'],
 ] as const
 
 const redirects = [
-  ...slugs.flatMap(([en, vi]) => [
+  ...slugs.flatMap(([, en, vi]) => [
     { source: `/en/${en}`, destination: `/${en}` },
     { source: `/en/${vi}`, destination: `/${en}` },
     { source: `/${vi}`, destination: `/${en}` },
@@ -33,9 +39,9 @@ const redirects = [
 const markdownCopies = [
   { source: '/index.md', destination: '/md/en/home' },
   { source: '/vi/index.md', destination: '/md/vi/home' },
-  ...slugs.flatMap(([en, vi]) => [
-    { source: `/${en}.md`, destination: `/md/en/${en}` },
-    { source: `/vi/${vi}.md`, destination: `/md/vi/${en}` },
+  ...slugs.flatMap(([key, en, vi]) => [
+    { source: `/${en}.md`, destination: `/md/en/${key}` },
+    { source: `/vi/${vi}.md`, destination: `/md/vi/${key}` },
   ]),
 ]
 
@@ -82,10 +88,11 @@ export default withNextIntl({
     minimumCacheTTL: 31 * DAY,
   },
   async headers() {
-    // `:path+` (one or more segments), not `:path*`: `/products` itself is the
-    // English products page and must keep its page headers.
+    // Two or more segments: `/products` and `/products/scori` are pages and keep
+    // their page headers; `/products/scori/icon.webp` and the screens below it
+    // are the files in /public.
     return [
-      { source: '/products/:path+', headers: [{ key: 'Cache-Control', value: publicAsset }] },
+      { source: '/products/:slug/:path+', headers: [{ key: 'Cache-Control', value: publicAsset }] },
       { source: '/robots.txt', headers: [{ key: 'Cache-Control', value: generatedText }] },
       { source: '/ads.txt', headers: [{ key: 'Cache-Control', value: generatedText }] },
       { source: '/app-ads.txt', headers: [{ key: 'Cache-Control', value: generatedText }] },

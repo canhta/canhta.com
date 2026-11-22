@@ -2,6 +2,7 @@ import { ImageResponse } from 'next/og'
 import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { getSiteContent } from '@/content'
+import { getPageCopy } from '@/content/pages'
 import { routing } from '@/i18n/routing'
 import type { Locale } from '@/content/types'
 import { getMessages } from '@/i18n/messages'
@@ -64,6 +65,14 @@ function lines(l: Locale, page: OgPage): { headline: string; second: string } {
   if (page === 'services') return { headline: messages.services.h1, second: firstSentence(messages.services.intro) }
   if (page === 'products') return { headline: messages.apps.h1, second: firstSentence(messages.apps.intro) }
   if (page === 'contact') return { headline: messages.contact.h1, second: firstSentence(messages.contact.body) }
+  if (page === 'about' || page === 'privacy' || page === 'terms') {
+    const doc = getPageCopy(l)[page]
+    return { headline: doc.h1, second: firstSentence(doc.intro) }
+  }
+  if (page === 'scori' || page === 'remoti' || page === 'piggo') {
+    const app = getPageCopy(l).apps[page]
+    return { headline: app.h1, second: firstSentence(app.intro) }
+  }
   return { headline: profile.hook, second: firstSentence(profile.supporting) }
 }
 
